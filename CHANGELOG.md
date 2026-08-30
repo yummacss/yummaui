@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- add `yummaui prune`, which lists component files nothing in the project
+  reaches. Pass `--write` to delete them.
+
 ## [0.1.0] - 2026-08-20
 
 ### Added

@@ -54,6 +54,26 @@ pnpm dlx yummaui list
 pnpm dlx yummaui list button
 ```
 
+### `prune`
+
+Finds component files nothing in your project reaches, and only ever considers
+files `add` wrote — your own components in the same folder are left alone.
+
+```bash
+pnpm dlx yummaui prune           # list them
+pnpm dlx yummaui prune --write   # delete them, after confirming
+```
+
+| Option      |                                     |
+|-------------|-------------------------------------|
+| `--write`   | Delete, instead of only listing     |
+| `-y, --yes` | Skip the confirmation               |
+
+A block imports the component it is built on, so "is anything importing this
+file" would keep a whole unused chain alive. `prune` asks whether a file is
+reachable from outside `componentsDir` instead: adding `dialog-sign-in` and
+never using it makes `dialog`, `checkbox` and `field` unused too.
+
 ## Registry
 
 The CLI reads a static JSON registry published by the docs site:
