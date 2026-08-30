@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `prune` no longer skips `dist`, `.next` and similar directories by name.
+  Guessing which folders hold build output made it delete more readily, and a
+  stale build naming a component is a reason to keep it.
+
 ## [0.2.0] - 2026-08-30
 
 ### Added
