@@ -264,15 +264,27 @@ describe("findUnused", () => {
 		]);
 	});
 
-	it("does not read build output or node_modules", () => {
+	it("never reads node_modules", () => {
 		const root = project({
 			"package.json": "{}",
 			"app/page.tsx": `export default function Page() { return null; }`,
-			".next/server/chunk.js": `require("../components/ui/button");`,
 			"node_modules/pkg/index.js": `require("../../components/ui/button");`,
 			"components/ui/button.tsx": "export const Button = () => null;",
 		});
 		expect(findUnused(shape(root), INSTALLABLE).unused).toHaveLength(1);
+	});
+
+	// Build output is read rather than guessed at by directory name. If it does
+	// still name a component, that counts as a use and the file stays - which is
+	// the direction to err in.
+	it("lets a reference in build output keep a file", () => {
+		const root = project({
+			"package.json": "{}",
+			"app/page.tsx": `export default function Page() { return null; }`,
+			"dist/chunk.js": `require("../components/ui/button");`,
+			"components/ui/button.tsx": "export const Button = () => null;",
+		});
+		expect(findUnused(shape(root), INSTALLABLE).unused).toEqual([]);
 	});
 
 	it("reports files whose imports are built at runtime", () => {
