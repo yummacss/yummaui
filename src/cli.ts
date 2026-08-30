@@ -8,6 +8,7 @@ import { version as VERSION } from "../package.json";
 import { add } from "./commands/add";
 import { init } from "./commands/init";
 import { list } from "./commands/list";
+import { prune } from "./commands/prune";
 
 const HELP = `
 ${c.bold("yummaui")} ${c.dim(`v${VERSION}`)}
@@ -21,10 +22,12 @@ ${c.bold("Commands")}
   init                     Set up yummaui.json in this project
   add <component...>       Copy a component in
   list [component]         Browse what is available
+  prune                    Find components nothing uses
 
 ${c.bold("Options")}
   -a, --all                Add every component
       --overwrite          Replace files that already exist
+      --write              prune: delete, instead of only listing
   -y, --yes                Skip prompts, take the defaults
   -h, --help               Show this
       --version            Show the version
@@ -34,6 +37,7 @@ ${c.bold("Examples")}
   npx yummaui add dialog tooltip
   npx yummaui add --all
   npx yummaui list button
+  npx yummaui prune
 `;
 
 async function main(): Promise<number> {
@@ -59,6 +63,8 @@ async function main(): Promise<number> {
 		case "list":
 		case "ls":
 			return list(rest);
+		case "prune":
+			return prune(rest);
 		default:
 			console.error(c.red(`Unknown command "${command}".`));
 			console.log(HELP);
