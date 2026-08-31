@@ -9,14 +9,22 @@ import { add } from "./commands/add";
 import { init } from "./commands/init";
 import { list } from "./commands/list";
 import { prune } from "./commands/prune";
+import { runner } from "./project";
 
-const HELP = `
+/**
+ * Built per invocation rather than as a constant, so every example names the
+ * package manager the reader's project actually uses. A hardcoded `npx` in a
+ * pnpm project is the exact thing `runner` exists to avoid.
+ */
+const help = () => {
+	const run = runner();
+	return `
 ${c.bold("yummaui")} ${c.dim(`v${VERSION}`)}
 
   Copies Yumma UI components into your project. Never a dependency.
 
 ${c.bold("Usage")}
-  npx yummaui <command> [options]
+  ${run} <command> [options]
 
 ${c.bold("Commands")}
   init                     Set up yummaui.json in this project
@@ -33,19 +41,20 @@ ${c.bold("Options")}
       --version            Show the version
 
 ${c.bold("Examples")}
-  npx yummaui add button
-  npx yummaui add dialog tooltip
-  npx yummaui add --all
-  npx yummaui list button
-  npx yummaui prune
+  ${run} add button
+  ${run} add dialog tooltip
+  ${run} add --all
+  ${run} list button
+  ${run} prune
 `;
+};
 
 async function main(): Promise<number> {
 	const argv = process.argv.slice(2);
 	const command = argv[0];
 
 	if (!command || command === "-h" || command === "--help") {
-		console.log(HELP);
+		console.log(help());
 		return 0;
 	}
 	if (command === "--version" || command === "-V") {
@@ -67,7 +76,7 @@ async function main(): Promise<number> {
 			return prune(rest);
 		default:
 			console.error(c.red(`Unknown command "${command}".`));
-			console.log(HELP);
+			console.log(help());
 			return 1;
 	}
 }
