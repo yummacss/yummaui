@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- `--help` now names the package manager the project uses, instead of always
+  saying `npx`. Every other hint the CLI prints already did.
+
 ## [0.2.1] - 2026-08-30
 
 ### Changed
