@@ -13,6 +13,7 @@ import {
 	writeConfig,
 } from "../project";
 import { DEFAULT_REGISTRY } from "../registry";
+import { warnStyling } from "../styling";
 
 export async function init(argv: string[]): Promise<number> {
 	const force = argv.includes("--force");
@@ -67,6 +68,10 @@ export async function init(argv: string[]): Promise<number> {
 	writeConfig(root, config);
 
 	p.log.success(`Wrote ${c.bold(configPath(root))}`);
+
+	// Cheaper to hear now than after the first component looks wrong.
+	warnStyling(root);
+
 	p.outro(`Next: ${c.cyan(`${runner(root)} add button`)}`);
 	return 0;
 }
