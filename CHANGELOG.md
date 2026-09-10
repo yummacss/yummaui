@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `init` and `add` now say when Yumma CSS is not set up in the project, naming
+  what is missing: `yummacss`, the plugin for the detected framework
+  (`@yummacss/postcss` for Next.js, `@yummacss/vite` otherwise), and
+  `yumma.config.mjs`. A component that lands without it renders unstyled, which
+  looks like a broken component rather than a missing step.
+
 ### Changed
 
 - `--help` now names the package manager the project uses, instead of always
