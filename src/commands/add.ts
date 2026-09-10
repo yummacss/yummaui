@@ -18,6 +18,7 @@ import {
 	RegistryError,
 	type RegistryIndex,
 } from "../registry";
+import { warnStyling } from "../styling";
 
 interface Options {
 	all: boolean;
@@ -294,6 +295,11 @@ export async function add(argv: string[]): Promise<number> {
 			);
 		}
 	}
+
+	// Last, so it is the line still on screen: a component that landed fine but
+	// has nothing generating its classes looks broken in a way the file list
+	// above does not explain.
+	warnStyling(root);
 
 	p.outro("Done.");
 	return 0;

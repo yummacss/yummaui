@@ -31,7 +31,8 @@ function project(files: Record<string, string | object>): string {
 }
 
 afterEach(() => {
-	for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true });
+	for (const dir of dirs.splice(0))
+		rmSync(dir, { recursive: true, force: true });
 });
 
 describe("detectPackageManager", () => {
@@ -93,7 +94,11 @@ describe("missingDependencies", () => {
 	];
 
 	it("counts a package as present wherever it is declared", () => {
-		for (const field of ["dependencies", "devDependencies", "peerDependencies"]) {
+		for (const field of [
+			"dependencies",
+			"devDependencies",
+			"peerDependencies",
+		]) {
 			const dir = project({
 				"package.json": { [field]: { "@base-ui/react": "^1.0.0" } },
 			});
@@ -158,7 +163,9 @@ describe("detectAlias", () => {
 
 describe("detectFramework", () => {
 	it("separates the Next routers by directory, since both ship the same package", () => {
-		const pages = project({ "package.json": { dependencies: { next: "^15" } } });
+		const pages = project({
+			"package.json": { dependencies: { next: "^15" } },
+		});
 		expect(detectFramework(pages)).toBe("Next.js (Pages Router)");
 
 		const app = project({
