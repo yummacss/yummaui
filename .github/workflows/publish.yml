@@ -44,6 +44,21 @@ jobs:
       - name: Build package
         run: pnpm build
 
+      # npm mints the provenance attestation from this run's OIDC token and
+      # then refuses the upload unless `repository.url` matches the repo's
+      # canonical name. A GitHub rename redirect does not count, so a rename
+      # breaks publishing silently until the next release. Two seconds here
+      # beats finding out after the install, the build and the signature.
+      - name: Check repository.url matches this repo
+        run: |
+          declared=$(node -p "require('./package.json').repository.url")
+          expected="git+https://github.com/$GITHUB_REPOSITORY.git"
+          if [ "$declared" != "$expected" ]; then
+            echo "::error::package.json repository.url is '$declared', but this repo is '$GITHUB_REPOSITORY'. npm provenance needs '$expected'."
+            exit 1
+          fi
+          echo "repository.url matches $GITHUB_REPOSITORY"
+
       - name: Publish to npm
         run: pnpm publish --no-git-checks
         env:
