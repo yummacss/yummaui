@@ -13,6 +13,17 @@
 - No em dashes.
 - Never name another framework to explain a Yumma decision.
 
+# Copy
+
+- The prose rules live in `src/copywriting.test.ts` and run over the strings
+  `yummaui` prints. US spelling, no contractions, no em dashes, `cannot` as one
+  word, one ellipsis character, never Tailwind, and focus draws an outline
+  rather than a ring.
+- Each repo owns its copy of the rules rather than importing them. The docs
+  site holds the same ones over its pages.
+- This repo has no icons, so it has no icons module. That half of the rollout
+  is the playground's and the docs site's.
+
 # Working
 
 - PRs, never direct commits to `main`.
