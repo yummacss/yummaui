@@ -175,7 +175,7 @@ describe("detectFramework", () => {
 		expect(detectFramework(app)).toBe("Next.js (App Router)");
 	});
 
-	it("returns null when nothing is recognised", () => {
+	it("returns null when nothing is recognized", () => {
 		expect(detectFramework(project({ "package.json": {} }))).toBeNull();
 	});
 });
