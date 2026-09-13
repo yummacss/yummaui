@@ -109,7 +109,7 @@ export interface ProjectShape {
  * `componentKey`, or null when it points anywhere else.
  *
  * `alias` is the whole prefix rather than just `@`, which is what `init`
- * stores, so no tsconfig `paths` resolution is needed to recognise one.
+ * stores, so no tsconfig `paths` resolution is needed to recognize one.
  */
 export function resolveToComponent(
 	specifier: string,
