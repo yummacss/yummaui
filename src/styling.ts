@@ -14,7 +14,7 @@ export const DOCS = "https://yummacss.com/docs/installation";
  *
  * Next.js goes through PostCSS, which covers both Turbopack and Webpack.
  * Everything else here is Vite underneath - Astro and React Router included -
- * so it gets the Vite plugin. An unrecognised project gets neither: there is
+ * so it gets the Vite plugin. An unrecognized project gets neither: there is
  * no honest guess, and naming the wrong package is worse than naming none.
  */
 function pluginFor(framework: string | null): string | null {
