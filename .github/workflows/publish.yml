@@ -59,6 +59,12 @@ jobs:
           fi
           echo "repository.url matches $GITHUB_REPOSITORY"
 
+      # `pnpm publish` packs, then hands the tarball to whatever `npm` is on
+      # PATH. Node 22 ships npm 10, which has no OIDC, so a trusted publisher
+      # is ignored and the token is used instead.
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Publish to npm
         run: pnpm publish --no-git-checks
         env:
