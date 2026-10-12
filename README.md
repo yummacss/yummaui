@@ -26,7 +26,7 @@ Detects your framework, package manager and import alias, then writes a `yummaui
 {
 	"componentsDir": "components/ui",
 	"alias": "@/components/ui",
-	"registry": "https://yummacss.com/ui/r"
+	"registry": "https://yummacss.com/ui/registry"
 }
 ```
 
@@ -91,10 +91,10 @@ outside `componentsDir` instead.
 The CLI reads a static JSON registry published by the docs site:
 
 ```
-https://yummacss.com/ui/r/index.json      every component
-https://yummacss.com/ui/r/<id>.json       one component's source and dependencies
-https://yummacss.com/ui/r/styles.json     the styles and the radius steps each takes
-https://yummacss.com/ui/r/<style>-<radius>/<id>.json   the same, rewritten for a style
+https://yummacss.com/ui/registry/index.json      every component
+https://yummacss.com/ui/registry/<id>.json       one component's source and dependencies
+https://yummacss.com/ui/registry/styles.json     the styles and the radius steps each takes
+https://yummacss.com/ui/registry/<style>-<radius>/<id>.json   the same, rewritten for a style
 ```
 
 ## License
