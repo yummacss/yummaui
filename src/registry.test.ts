@@ -57,7 +57,7 @@ describe("nearest", () => {
 describe("registry fetching", () => {
 	it("reads the index", async () => {
 		respond(JSON.stringify({ components: [], generated: 0 }));
-		await expect(fetchIndex("http://x/ui/r")).resolves.toEqual({
+		await expect(fetchIndex("http://x/ui/registry")).resolves.toEqual({
 			components: [],
 			generated: 0,
 		});
@@ -66,31 +66,33 @@ describe("registry fetching", () => {
 	it("requests the id it was given", async () => {
 		const spy = vi.fn(async () => new Response("{}", { status: 200 }));
 		vi.stubGlobal("fetch", spy);
-		await fetchItem("http://x/ui/r", "button-pill");
+		await fetchItem("http://x/ui/registry", "button-pill");
 		expect(spy).toHaveBeenCalledWith(
-			"http://x/ui/r/button-pill.json",
+			"http://x/ui/registry/button-pill.json",
 			expect.anything(),
 		);
 	});
 
 	it("reports a 404 as not found rather than parsing the HTML error page", async () => {
 		respond("<!DOCTYPE html><html>404</html>", { status: 404 });
-		await expect(fetchItem("http://x/ui/r", "nope")).rejects.toThrow(
+		await expect(fetchItem("http://x/ui/registry", "nope")).rejects.toThrow(
 			RegistryError,
 		);
-		await expect(fetchItem("http://x/ui/r", "nope")).rejects.toThrow(
+		await expect(fetchItem("http://x/ui/registry", "nope")).rejects.toThrow(
 			/Not found/,
 		);
 	});
 
 	it("surfaces other error statuses", async () => {
 		respond("upstream is unwell", { status: 503 });
-		await expect(fetchIndex("http://x/ui/r")).rejects.toThrow(/503/);
+		await expect(fetchIndex("http://x/ui/registry")).rejects.toThrow(/503/);
 	});
 
 	it("explains malformed JSON on a 200", async () => {
 		respond("{ truncated");
-		await expect(fetchIndex("http://x/ui/r")).rejects.toThrow(/invalid JSON/);
+		await expect(fetchIndex("http://x/ui/registry")).rejects.toThrow(
+			/invalid JSON/,
+		);
 	});
 
 	it("explains a network failure instead of leaking the fetch error", async () => {
@@ -100,7 +102,7 @@ describe("registry fetching", () => {
 				throw new TypeError("fetch failed");
 			}),
 		);
-		await expect(fetchIndex("http://x/ui/r")).rejects.toThrow(
+		await expect(fetchIndex("http://x/ui/registry")).rejects.toThrow(
 			/Could not reach the registry/,
 		);
 	});
@@ -213,9 +215,11 @@ describe("styles", () => {
 
 	it("fetches styles.json from the registry root", async () => {
 		respond(JSON.stringify(table));
-		await expect(fetchStyles("https://x.test/ui/r")).resolves.toEqual(table);
+		await expect(fetchStyles("https://x.test/ui/registry")).resolves.toEqual(
+			table,
+		);
 		expect(fetch).toHaveBeenCalledWith(
-			"https://x.test/ui/r/styles.json",
+			"https://x.test/ui/registry/styles.json",
 			expect.anything(),
 		);
 	});

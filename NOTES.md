@@ -67,3 +67,12 @@ as dev dependencies, the way the installation page has them.
 
 The registry's `index.json` still carries an empty `blocks` array, which the
 CLI ignores: blocks never shipped.
+
+## The registry address, 2026-10-12
+
+0.6 reads `https://yummacss.com/ui/registry` and the `registryDeps` field;
+the docs site serves both from the same deploy and redirects `/ui/r/` there.
+A config that stored the old address reads as the new one, so nobody edits
+`yummaui.json`. 0.5 and earlier cannot read `registryDeps`, so `add` with an
+old CLI fails between the docs deploy and this publish: ship the two back to
+back, docs first.

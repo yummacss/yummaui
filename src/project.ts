@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import { DEFAULT_REGISTRY } from "./registry";
+import { registryUrl } from "./registry";
 
 export const CONFIG_FILE = "yummaui.json";
 export const CSS_CONFIG_FILE = "yumma.config.mjs";
@@ -109,7 +109,7 @@ export function readConfig(root: string): Config | null {
 		return {
 			componentsDir: parsed.componentsDir ?? "components/ui",
 			alias: parsed.alias ?? null,
-			registry: parsed.registry ?? DEFAULT_REGISTRY,
+			registry: registryUrl(parsed.registry),
 			...(parsed.style ? { style: parsed.style } : {}),
 			...(parsed.radius ? { radius: parsed.radius } : {}),
 		};

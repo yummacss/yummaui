@@ -182,17 +182,31 @@ describe("config", () => {
 		writeConfig(dir, {
 			componentsDir: "src/ui",
 			alias: "@/ui",
-			registry: "http://localhost:3000/ui/r",
+			registry: "http://localhost:3000/ui/registry",
 		});
 		expect(readConfig(dir)).toEqual({
 			componentsDir: "src/ui",
 			alias: "@/ui",
-			registry: "http://localhost:3000/ui/r",
+			registry: "http://localhost:3000/ui/registry",
 		});
 
 		const partial = project({ "package.json": {}, "yummaui.json": {} });
-		expect(readConfig(partial)?.registry).toBe("https://yummacss.com/ui/r");
+		expect(readConfig(partial)?.registry).toBe(
+			"https://yummacss.com/ui/registry",
+		);
 		expect(readConfig(partial)?.componentsDir).toBe("components/ui");
+	});
+
+	it("reads the pre-0.6 registry address as the default", () => {
+		for (const registry of [
+			"https://yummacss.com/ui/r",
+			"https://www.yummacss.com/ui/r/",
+		]) {
+			const dir = project({ "package.json": {}, "yummaui.json": { registry } });
+			expect(readConfig(dir)?.registry).toBe(
+				"https://yummacss.com/ui/registry",
+			);
+		}
 	});
 
 	it("returns null rather than throwing on a corrupt config", () => {
