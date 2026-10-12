@@ -130,7 +130,7 @@ export async function add(names: string[], flags: Flags): Promise<number> {
 		if (seen.has(id)) return;
 		seen.add(id);
 		const item = await fetchItem(registry, id);
-		for (const dep of item.registryDependencies) await collect(dep);
+		for (const dep of item.registryDeps) await collect(dep);
 		items.push(item);
 	}
 	try {
