@@ -1,4 +1,12 @@
-export const DEFAULT_REGISTRY = "https://yummacss.com/ui/r";
+export const DEFAULT_REGISTRY = "https://yummacss.com/ui/registry";
+
+// where the registry lived before 0.6; a config that stored it reads as the default
+const LEGACY_REGISTRY = /^https:\/\/(www\.)?yummacss\.com\/ui\/r\/?$/;
+
+/** The registry a config names, with the pre-0.6 address read as today's. */
+export function registryUrl(stored: string | undefined): string {
+	return !stored || LEGACY_REGISTRY.test(stored) ? DEFAULT_REGISTRY : stored;
+}
 
 export interface RegistryDependency {
 	name: string;
@@ -11,7 +19,7 @@ export interface RegistryFile {
 	content: string;
 }
 
-export type RegistryKind = "component" | "example";
+export type RegistryKind = "component";
 
 export interface RegistryItem {
 	id: string;
@@ -20,7 +28,7 @@ export interface RegistryItem {
 	kind: RegistryKind;
 	useClient: boolean;
 	dependencies: RegistryDependency[];
-	registryDependencies: string[];
+	registryDeps: string[];
 	files: RegistryFile[];
 }
 
