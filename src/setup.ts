@@ -94,16 +94,24 @@ export function stylesheet(root: string, bundler: Bundler): string | null {
 	]);
 }
 
+// a name with a dash, such as out-quart, is a quoted key
+const quoted = (key: string) =>
+	/^[a-z]+$/.test(key) ? key : JSON.stringify(key);
+
 const block = (name: string, table: Record<string, string>) =>
 	Object.keys(table).length
 		? `    ${name}: {\n${Object.entries(table)
-				.map(([key, value]) => `      ${key}: ${JSON.stringify(value)},`)
+				.map(
+					([key, value]) => `      ${quoted(key)}: ${JSON.stringify(value)},`,
+				)
 				.join("\n")}\n    },\n`
 		: "";
 
 export function configSource(globs: string[], theme?: RegistryTheme): string {
 	const body = theme
-		? block("states", theme.states) + block("keyframes", theme.keyframes)
+		? block("states", theme.states) +
+			block("easings", theme.easings ?? {}) +
+			block("keyframes", theme.keyframes)
 		: "";
 	return `import { defineConfig } from "yummacss";
 
@@ -115,8 +123,12 @@ ${body ? `  theme: {\n${body}  },\n` : ""}});
 
 // the names a config does not define yet
 export function missingTheme(source: string, theme?: RegistryTheme): string[] {
-	return Object.keys({ ...theme?.states, ...theme?.keyframes }).filter(
-		(name) => !new RegExp(`\\b${name}\\s*:`).test(source),
+	return Object.keys({
+		...theme?.states,
+		...theme?.easings,
+		...theme?.keyframes,
+	}).filter(
+		(name) => !new RegExp(`(?<![\\w-])["']?${name}["']?\\s*:`).test(source),
 	);
 }
 

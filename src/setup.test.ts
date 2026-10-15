@@ -8,7 +8,13 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { missingTheme, planSetup, sources, stylesheet } from "./setup";
+import {
+	configSource,
+	missingTheme,
+	planSetup,
+	sources,
+	stylesheet,
+} from "./setup";
 
 const dirs: string[] = [];
 
@@ -144,21 +150,32 @@ describe("sources", () => {
 describe("theme", () => {
 	const theme = {
 		states: { opening: "[data-starting-style]" },
+		easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" },
 		keyframes: { spin: "to { rotate: 360deg; }" },
 	};
 
-	it("writes the components' states and keyframes into a new config", async () => {
+	it("writes the components' states, easings and keyframes into a new config", async () => {
 		const dir = project({ "package.json": {}, "src/main.ts": "" });
 		for (const step of planSetup(dir, "components/ui", theme).steps)
 			await step.apply();
 		const config = read(dir, "yumma.config.mjs");
 		expect(config).toContain(`opening: "[data-starting-style]",`);
 		expect(config).toContain(`spin: "to { rotate: 360deg; }",`);
+		expect(config).toContain(`"out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",`);
 	});
 
 	it("names what an existing config lacks", () => {
 		expect(missingTheme(`theme: { states: { opening: "x" } }`, theme)).toEqual([
+			"out-quart",
 			"spin",
 		]);
+		expect(
+			missingTheme(`opening: "x", "out-quart": "y", 'spin': "z"`, theme),
+		).toEqual([]);
+	});
+
+	it("reads an index published before easings existed", () => {
+		const { easings: _, ...older } = theme;
+		expect(configSource(["./src/**/*.tsx"], older)).not.toContain("easings");
 	});
 });

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `init` and `add` write the easings the components use into a new config, and
+  name the ones an existing config lacks.
+
 ## [0.6.0] - 2026-10-12
 
 ### Changed
