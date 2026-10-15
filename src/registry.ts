@@ -38,9 +38,11 @@ export interface RegistryComponent {
 	base: string;
 }
 
-// the states and keyframes the components animate with
+// the states, easings and keyframes the components animate with
 export interface RegistryTheme {
 	states: Record<string, string>;
+	// absent from an index published before easings existed
+	easings?: Record<string, string>;
 	keyframes: Record<string, string>;
 }
 
