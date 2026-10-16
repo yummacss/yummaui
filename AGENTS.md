@@ -3,7 +3,8 @@
 - **PR bodies**: one short block per topic under a bold heading, then the
   checks line. Say **what changed**, and nothing else. No cause, no history,
   no justification: a reader outside the project does not care why a thing was
-  renamed from A to B. The why goes in NOTES.md.
+  renamed from A to B. The why goes in the notes, the private `yummacss/notes`
+  repo.
 - **Commit messages**: a subject and a couple of lines. No essays.
 - **Code comments**: one or two lines. A comment earns its length only where
   the code is genuinely surprising, and never by repeating the same paragraph
@@ -20,7 +21,7 @@
 
 - The prose rules live in `src/copywriting.test.ts` and run over the strings
   `yummaui` prints. US spelling, no contractions, no em dashes, `cannot` as one
-  word, one ellipsis character, never Tailwind, and focus draws an outline
+  word, one ellipsis character, never another framework's name, and focus draws an outline
   rather than a ring.
 - Each repo owns its copy of the rules rather than importing them. The docs
   site holds the same ones over its pages.
