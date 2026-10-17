@@ -39,11 +39,16 @@ export interface RegistryComponent {
 }
 
 // the states, easings and keyframes the components animate with
+/** A theme color: one value, or a `{ light, dark }` pair for both schemes. */
+export type ThemeColor = string | { light: string; dark: string };
+
 export interface RegistryTheme {
 	states: Record<string, string>;
 	// absent from an index published before easings existed
 	easings?: Record<string, string>;
 	keyframes: Record<string, string>;
+	// absent from an index published before colors existed
+	colors?: Record<string, ThemeColor>;
 }
 
 export interface RegistryIndex {

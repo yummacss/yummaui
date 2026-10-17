@@ -16,7 +16,7 @@ import {
 	MARKER,
 	readPackageJson,
 } from "./project";
-import type { RegistryTheme } from "./registry";
+import type { RegistryTheme, ThemeColor } from "./registry";
 import { cancelled, say, tag } from "./ui";
 
 const EXTENSIONS = "{js,jsx,ts,tsx,mdx}";
@@ -35,6 +35,11 @@ export interface Plan {
 	steps: Step[];
 	// what the CLI cannot do here, said in a line each
 	manual: string[];
+	// worth knowing, nothing to do
+	notes: string[];
+	// what an existing config lacks for the components; added without asking,
+	// the same way the component files are, and said by hand if the edit fails
+	theme: (Step & { fallback: string }) | null;
 }
 
 const first = (root: string, paths: string[]) =>
@@ -98,20 +103,24 @@ export function stylesheet(root: string, bundler: Bundler): string | null {
 const quoted = (key: string) =>
 	/^[a-z]+$/.test(key) ? key : JSON.stringify(key);
 
-const block = (name: string, table: Record<string, string>) =>
+// a pair is written as an object, so the config reads like the docs
+const literal = (value: ThemeColor) =>
+	typeof value === "string"
+		? JSON.stringify(value)
+		: `{ light: ${JSON.stringify(value.light)}, dark: ${JSON.stringify(value.dark)} }`;
+
+const block = (name: string, table: Record<string, ThemeColor>) =>
 	Object.keys(table).length
 		? `    ${name}: {\n${Object.entries(table)
-				.map(
-					([key, value]) => `      ${quoted(key)}: ${JSON.stringify(value)},`,
-				)
+				.map(([key, value]) => `      ${quoted(key)}: ${literal(value)},`)
 				.join("\n")}\n    },\n`
 		: "";
 
+const KINDS = ["states", "easings", "keyframes", "colors"] as const;
+
 export function configSource(globs: string[], theme?: RegistryTheme): string {
 	const body = theme
-		? block("states", theme.states) +
-			block("easings", theme.easings ?? {}) +
-			block("keyframes", theme.keyframes)
+		? KINDS.map((kind) => block(kind, theme[kind] ?? {})).join("")
 		: "";
 	return `import { defineConfig } from "yummacss";
 
@@ -127,6 +136,7 @@ export function missingTheme(source: string, theme?: RegistryTheme): string[] {
 		...theme?.states,
 		...theme?.easings,
 		...theme?.keyframes,
+		...theme?.colors,
 	}).filter(
 		(name) => !new RegExp(`(?<![\\w-])["']?${name}["']?\\s*:`).test(source),
 	);
@@ -136,24 +146,53 @@ export function missingTheme(source: string, theme?: RegistryTheme): string[] {
 const save = (mod: ProxifiedModule, path: string) =>
 	writeFileSync(path, generateCode(mod).code);
 
-// `export default { plugins }`, or `const config = { plugins }` exported by name
-function addPostcssPlugin(mod: ProxifiedModule): void {
-	let options = getDefaultExportOptions(mod);
+// `export default { ... }`, `defineConfig({ ... })`, or `const config = { ... }`
+// exported by name
+function editExport(
+	mod: ProxifiedModule,
+	change: (options: ReturnType<typeof getDefaultExportOptions>) => void,
+): void {
+	const options = getDefaultExportOptions(mod);
 	const named = (options.$type as string) === "identifier";
 	const { config, declaration } = named
 		? getConfigFromVariableDeclaration(mod)
 		: { config: options, declaration: null };
 	if (!config) throw new Error("no config object");
-	options = config;
-	options.plugins ??= {};
-	options.plugins["@yummacss/postcss"] = {};
+	change(config);
 	if (declaration) {
 		if (declaration.init?.type !== "ObjectExpression") {
 			throw new Error("config is not an object literal");
 		}
 		// a variable's object is a copy; write it back
-		declaration.init = generateCode(options).code as never;
+		declaration.init = generateCode(config).code as never;
 	}
+}
+
+function addPostcssPlugin(mod: ProxifiedModule): void {
+	editExport(mod, (options) => {
+		options.plugins ??= {};
+		options.plugins["@yummacss/postcss"] = {};
+	});
+}
+
+// adds what the theme lacks and never replaces what the config has
+export function addTheme(mod: ProxifiedModule, theme: RegistryTheme): string[] {
+	const added: string[] = [];
+	editExport(mod, (options) => {
+		options.theme ??= {};
+		for (const kind of KINDS) {
+			const entries = Object.entries(theme[kind] ?? {});
+			if (!entries.length) continue;
+			options.theme[kind] ??= {};
+			const table = options.theme[kind];
+			for (const [name, value] of entries) {
+				if (table[name] !== undefined) continue;
+				table[name] = value;
+				added.push(name);
+			}
+		}
+	});
+	return added;
 }
 
 export function planSetup(
@@ -169,7 +208,13 @@ export function planSetup(
 	const bundler = bundlerFor(detectFramework(root));
 	const plugin = bundler && `@yummacss/${bundler}`;
 
-	const plan: Plan = { packages: [], steps: [], manual: [] };
+	const plan: Plan = {
+		packages: [],
+		steps: [],
+		manual: [],
+		notes: [],
+		theme: null,
+	};
 	if (!deps.has("yummacss")) plan.packages.push("yummacss");
 	if (plugin && !deps.has(plugin)) plan.packages.push(plugin);
 
@@ -230,11 +275,26 @@ export function planSetup(
 	}
 
 	if (existsSync(join(root, CSS_CONFIG_FILE))) {
-		const missing = missingTheme(
-			readFileSync(join(root, CSS_CONFIG_FILE), "utf8"),
-			theme,
+		const source = readFileSync(join(root, CSS_CONFIG_FILE), "utf8");
+		const missing = missingTheme(source, theme);
+		const own = Object.keys(theme?.colors ?? {}).filter(
+			(name) => !missing.includes(name),
 		);
-		if (missing.length) plan.manual.push(m.setup.missingTheme(missing));
+		if (own.length) plan.notes.push(m.setup.ownColors(own));
+		if (missing.length && theme) {
+			plan.theme = {
+				stage: "edit",
+				file: CSS_CONFIG_FILE,
+				apply: async () => {
+					const path = join(root, CSS_CONFIG_FILE);
+					const mod = await loadFile(path);
+					const added = addTheme(mod, theme);
+					save(mod, path);
+					return m.setup.themeAdded(CSS_CONFIG_FILE, added);
+				},
+				fallback: m.setup.missingTheme(missing),
+			};
+		}
 	} else {
 		plan.steps.push({
 			stage: "write",
@@ -275,6 +335,14 @@ export async function setUpStyling(
 	theme?: RegistryTheme,
 ): Promise<boolean> {
 	const plan = planSetup(root, componentsDir, theme);
+	if (plan.theme) {
+		try {
+			say.done(plan.theme.stage, await plan.theme.apply());
+		} catch {
+			say.warn("manual", plan.theme.fallback);
+		}
+	}
+	for (const line of plan.notes) say.info("theme", line);
 	if (!plan.packages.length && !plan.steps.length) {
 		// set up already; anything left is a line to add, not a question
 		for (const line of plan.manual) say.warn("check", line);

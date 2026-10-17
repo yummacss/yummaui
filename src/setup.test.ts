@@ -88,6 +88,8 @@ describe("planSetup on Vite", () => {
 			packages: [],
 			steps: [],
 			manual: [],
+			notes: [],
+			theme: null,
 		});
 	});
 });
@@ -174,8 +176,96 @@ describe("theme", () => {
 		).toEqual([]);
 	});
 
+	it("writes colors into a new config, a pair as light and dark", () => {
+		const source = configSource(["./src/**/*.tsx"], {
+			...theme,
+			colors: {
+				ink: "#1e232a",
+				surface: { light: "#ffffff", dark: "#2d2f33" },
+			},
+		});
+		expect(source).toContain(`ink: "#1e232a",`);
+		expect(source).toContain(`surface: { light: "#ffffff", dark: "#2d2f33" },`);
+	});
+
 	it("reads an index published before easings existed", () => {
 		const { easings: _, ...older } = theme;
 		expect(configSource(["./src/**/*.tsx"], older)).not.toContain("easings");
+	});
+});
+
+describe("theme in an existing config", () => {
+	const theme = {
+		states: {
+			opening: "[data-starting-style]",
+			closing: "[data-ending-style]",
+		},
+		keyframes: { spin: "to { rotate: 360deg; }" },
+		colors: {
+			surface: { light: "#ffffff", dark: "#2d2f33" },
+			ink: { light: "#1e232a", dark: "#ececee" },
+		},
+	};
+	const configured = (config: string) =>
+		project({
+			"package.json": { dependencies: { yummacss: "4" } },
+			"src/main.ts": "",
+			"yumma.config.mjs": config,
+		});
+	const apply = async (dir: string) => {
+		const plan = planSetup(dir, "components/ui", theme);
+		await plan.theme?.apply();
+		return plan;
+	};
+
+	it("adds only what it lacks and keeps the project's own colors", async () => {
+		const dir = configured(
+			`import { defineConfig } from "yummacss";\n\nexport default defineConfig({\n  source: ["./src/**/*.tsx"],\n  theme: {\n    states: { opening: "[data-open]" },\n    colors: { surface: "#fafafa" },\n  },\n});\n`,
+		);
+		const plan = await apply(dir);
+		const config = read(dir, "yumma.config.mjs");
+		expect(config).toContain(`opening: "[data-open]"`);
+		expect(config).toContain(`surface: "#fafafa"`);
+		expect(config).toContain(`closing: "[data-ending-style]"`);
+		expect(config).toContain(`spin: "to { rotate: 360deg; }"`);
+		expect(config).toMatch(
+			/ink: \{\s*light: "#1e232a",\s*dark: "#ececee",?\s*\}/,
+		);
+		expect(plan.notes).toEqual([
+			"yumma.config.mjs already defines surface, so components use your colors",
+		]);
+		expect(planSetup(dir, "components/ui", theme).theme).toBeNull();
+	});
+
+	it("adds a theme to a config that has none", async () => {
+		const dir = configured(
+			`export default {\n  source: ["./src/**/*.tsx"],\n};\n`,
+		);
+		await apply(dir);
+		const config = read(dir, "yumma.config.mjs");
+		expect(config).toContain(`closing: "[data-ending-style]"`);
+		expect(config).toMatch(/surface: \{\s*light: "#ffffff"/);
+	});
+
+	it("edits a config exported through a variable", async () => {
+		const dir = configured(
+			`const config = {\n  source: ["./src/**/*.tsx"],\n};\n\nexport default config;\n`,
+		);
+		await apply(dir);
+		expect(read(dir, "yumma.config.mjs")).toContain(
+			`opening: "[data-starting-style]"`,
+		);
+	});
+
+	it("falls back to a line to add when the config is not an object", async () => {
+		const dir = configured(`export default makeConfig();\n`);
+		const plan = planSetup(dir, "components/ui", theme);
+		await expect(plan.theme?.apply()).rejects.toThrow();
+		expect(plan.theme?.fallback).toContain(
+			"opening, closing, spin, surface, ink",
+		);
+		expect(read(dir, "yumma.config.mjs")).toBe(
+			`export default makeConfig();\n`,
+		);
 	});
 });

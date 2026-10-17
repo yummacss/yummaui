@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `init` and `add` write the colors the components use into a new config, a
+  light and dark pair where a color has both.
+
+### Changed
+
+- `init` and `add` add what an existing config lacks for the components, in
+  place, and keep any state, easing, keyframe or color it already defines.
+
 ## [0.7.0] - 2026-10-15
 
 ### Added
