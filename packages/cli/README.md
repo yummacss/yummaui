@@ -1,8 +1,8 @@
-[![Yumma UI](https://yummacss.com/ui-og.png)](https://yummacss.com/ui)
+[![Yumma UI](https://www.yummaui.com/og.png)](https://www.yummaui.com)
 
 # Yumma UI
 
-Add [Yumma UI](https://yummacss.com/ui) components to your project, from the terminal.
+Add [Yumma UI](https://www.yummaui.com) components to your project, from the terminal.
 
 ## Usage
 
@@ -26,7 +26,7 @@ Detects your framework, package manager and import alias, then writes a `yummaui
 {
 	"componentsDir": "components/ui",
 	"alias": "@/components/ui",
-	"registry": "https://yummacss.com/ui/registry"
+	"registry": "https://www.yummaui.com/ui/registry"
 }
 ```
 
@@ -88,13 +88,13 @@ outside `componentsDir` instead.
 
 ## Registry
 
-The CLI reads a static JSON registry published by the docs site:
+The CLI reads a static JSON registry published by yummaui.com:
 
 ```
-https://yummacss.com/ui/registry/index.json      every component
-https://yummacss.com/ui/registry/<id>.json       one component's source and dependencies
-https://yummacss.com/ui/registry/styles.json     the styles and the radius steps each takes
-https://yummacss.com/ui/registry/<style>-<radius>/<id>.json   the same, rewritten for a style
+https://www.yummaui.com/ui/registry/index.json      every component
+https://www.yummaui.com/ui/registry/<id>.json       one component's source and dependencies
+https://www.yummaui.com/ui/registry/styles.json     the styles and the radius steps each takes
+https://www.yummaui.com/ui/registry/<style>-<radius>/<id>.json   the same, rewritten for a style
 ```
 
 ## License

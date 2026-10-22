@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The registry is `https://www.yummaui.com/ui/registry`. A `yummaui.json`
+  that names the registry on yummacss.com reads as the new one.
+- The links `yummaui` prints point at yummaui.com.
 - `init` and `add` add what an existing config lacks for the components, in
   place, and keep any state, easing, keyframe or color it already defines.
 

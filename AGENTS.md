@@ -62,7 +62,7 @@
 
 ## Content model
 
-What the examples are *about*, which is a separate question from how the copy
+What the examples are _about_, which is a separate question from how the copy
 is written.
 
 - One world: a person looking after their own files and settings. Files,
@@ -86,7 +86,7 @@ is written.
 - `pill` appears only where a smaller `rounded` also makes sense, so a
   component offering both keeps them different. Never add `pill` as a synonym.
 - Shape is not a style axis where it is the affordance. A radio is round
-  because round means *one of these* and square means *any of these*, so it
+  because round means _one of these_ and square means _any of these_, so it
   has no `shape` prop at all. Ask that question before adding one.
 - `tests/registry.test.ts` holds the mechanical half.
 

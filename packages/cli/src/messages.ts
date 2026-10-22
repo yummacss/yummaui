@@ -111,7 +111,7 @@ ${c.bold("Examples")}
 
 	list: {
 		next: (run: string) =>
-			`${c.accent(`${run} add <component>`)}  ${c.dim("yummacss.com/ui")}`,
+			`${c.accent(`${run} add <component>`)}  ${c.dim("yummaui.com")}`,
 	},
 
 	prune: {
