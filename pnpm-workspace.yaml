@@ -11,3 +11,12 @@ peerDependencyRules:
     - vite
   allowedVersions:
     vite: "*"
+# pnpm refuses to finish an install while a dependency's build script is
+# neither allowed nor denied
+allowBuilds:
+  esbuild: true
+  sharp: true
+# our own packages, so the release-age wait buys nothing
+minimumReleaseAgeExclude:
+  - "@yummacss/*"
+  - yummacss

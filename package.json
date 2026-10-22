@@ -4,10 +4,12 @@
 	"type": "module",
 	"scripts": {
 		"build": "vp run --filter yummaui build",
+		"build:site": "vp run --filter yummaui.com build",
 		"check": "vp check",
 		"dev": "vp run --filter yummaui dev",
+		"dev:site": "vp run --filter yummaui.com dev",
 		"lint": "vp check --fix",
-		"test": "vp run --filter yummaui test"
+		"test": "vp run -r test"
 	},
 	"devDependencies": {
 		"typescript": "^5.9.3",
