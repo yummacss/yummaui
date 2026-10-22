@@ -192,19 +192,21 @@ describe("config", () => {
 
 		const partial = project({ "package.json": {}, "yummaui.json": {} });
 		expect(readConfig(partial)?.registry).toBe(
-			"https://yummacss.com/ui/registry",
+			"https://www.yummaui.com/ui/registry",
 		);
 		expect(readConfig(partial)?.componentsDir).toBe("components/ui");
 	});
 
-	it("reads the pre-0.6 registry address as the default", () => {
+	it("reads a registry address on yummacss.com as the default", () => {
 		for (const registry of [
 			"https://yummacss.com/ui/r",
 			"https://www.yummacss.com/ui/r/",
+			"https://yummacss.com/ui/registry",
+			"https://www.yummacss.com/ui/registry/",
 		]) {
 			const dir = project({ "package.json": {}, "yummaui.json": { registry } });
 			expect(readConfig(dir)?.registry).toBe(
-				"https://yummacss.com/ui/registry",
+				"https://www.yummaui.com/ui/registry",
 			);
 		}
 	});

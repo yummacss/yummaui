@@ -1,9 +1,10 @@
-export const DEFAULT_REGISTRY = "https://yummacss.com/ui/registry";
+export const DEFAULT_REGISTRY = "https://www.yummaui.com/ui/registry";
 
-// where the registry lived before 0.6; a config that stored it reads as the default
-const LEGACY_REGISTRY = /^https:\/\/(www\.)?yummacss\.com\/ui\/r\/?$/;
+// where the registry lived on yummacss.com; a config that stored it reads as the default
+const LEGACY_REGISTRY =
+	/^https:\/\/(www\.)?yummacss\.com\/ui\/(r|registry)\/?$/;
 
-/** The registry a config names, with the pre-0.6 address read as today's. */
+/** The registry a config names, with an earlier default read as today's. */
 export function registryUrl(stored: string | undefined): string {
 	return !stored || LEGACY_REGISTRY.test(stored) ? DEFAULT_REGISTRY : stored;
 }
