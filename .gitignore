@@ -3,3 +3,9 @@ dist/
 *.log
 .DS_Store
 .vitest/
+.next/
+.content-collections/
+next-env.d.ts
+*.tsbuildinfo
+.env*
+apps/yummaui.com/public/ui/registry/
