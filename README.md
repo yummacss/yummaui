@@ -47,13 +47,13 @@ pnpm dlx yummaui add
 pnpm dlx yummaui add button --style compact --radius small
 ```
 
-| Option             |                                                   |
-|--------------------|---------------------------------------------------|
-| `-a, --all`        | Add every component                               |
-| `--style <name>`   | `soft`, `compact` or `squircle`                   |
-| `--radius <step>`  | `none`, `small`, `medium`, `large` or `extra`     |
-| `--overwrite`      | Replace files that already exist                  |
-| `-y, --yes`        | Skip prompts and take the defaults                |
+| Option            |                                               |
+| ----------------- | --------------------------------------------- |
+| `-a, --all`       | Add every component                           |
+| `--style <name>`  | `soft`, `compact` or `squircle`               |
+| `--radius <step>` | `none`, `small`, `medium`, `large` or `extra` |
+| `--overwrite`     | Replace files that already exist              |
+| `-y, --yes`       | Skip prompts and take the defaults            |
 
 With no names, `add` opens a list to search and pick from.
 
@@ -77,10 +77,10 @@ pnpm dlx yummaui prune           # list them
 pnpm dlx yummaui prune --write   # delete them, after confirming
 ```
 
-| Option      |                                     |
-|-------------|-------------------------------------|
-| `--write`   | Delete, instead of only listing     |
-| `-y, --yes` | Skip the confirmation               |
+| Option      |                                 |
+| ----------- | ------------------------------- |
+| `--write`   | Delete, instead of only listing |
+| `-y, --yes` | Skip the confirmation           |
 
 A component can import another, so "is anything importing this file" would
 keep a whole unused chain alive. `prune` asks whether a file is reachable from

@@ -3,36 +3,37 @@
 	"version": "0.7.0",
 	"description": "Add Yumma UI components to your project.",
 	"keywords": [
-		"yummacss",
-		"yumma-ui",
-		"components",
 		"base-ui",
-		"cli"
+		"cli",
+		"components",
+		"yumma-ui",
+		"yummacss"
 	],
 	"homepage": "https://yummacss.com/ui",
+	"license": "MIT",
+	"author": "Renildo Pereira",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/yummacss/yummaui.git"
 	},
-	"license": "MIT",
-	"author": "Renildo Pereira",
-	"type": "module",
 	"bin": {
 		"yummaui": "./dist/cli.mjs"
-	},
-	"engines": {
-		"node": ">=20.12"
 	},
 	"files": [
 		"dist"
 	],
+	"type": "module",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
 	"scripts": {
-		"build": "tsdown",
-		"check-types": "tsc --noEmit",
-		"dev": "tsdown --watch",
-		"lint": "biome check --write",
-		"test": "vitest run",
-		"test:watch": "vitest"
+		"build": "vp pack",
+		"check": "vp check",
+		"dev": "vp pack --watch",
+		"lint": "vp check --fix",
+		"test": "vp test run",
+		"test:watch": "vp test"
 	},
 	"dependencies": {
 		"@clack/prompts": "^1.8.1",
@@ -40,15 +41,12 @@
 		"magicast": "^0.5.5"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.1",
 		"@types/node": "^26.1.2",
-		"tsdown": "^0.16.5",
 		"typescript": "^5.9.3",
-		"vitest": "^4.1.10"
+		"vite-plus": "catalog:"
 	},
-	"packageManager": "pnpm@12.3.4+sha512.961aa41fb077da3a04a441d9f8e15ebc0c96da8ef710b2eb67bf9ee7cb0610eabd48f1fd85f51cffe73846785fa0f87c56a3a872a1d893f8446741b5cce45457",
-	"publishConfig": {
-		"access": "public",
-		"provenance": true
-	}
+	"engines": {
+		"node": ">=20.12"
+	},
+	"packageManager": "pnpm@12.3.4+sha512.961aa41fb077da3a04a441d9f8e15ebc0c96da8ef710b2eb67bf9ee7cb0610eabd48f1fd85f51cffe73846785fa0f87c56a3a872a1d893f8446741b5cce45457"
 }

@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 import { nearest, resolveNames, targetFileName } from "./commands/add";
 import {
 	fetchIndex,
@@ -38,7 +38,11 @@ describe("targetFileName", () => {
 describe("nearest", () => {
 	const index = {
 		components: ["button", "button-group", "accordion", "dialog"].map(
-			(component) => ({ component, title: component, base: component }),
+			(component) => ({
+				component,
+				title: component,
+				base: component,
+			}),
 		),
 		generated: 0,
 	};

@@ -1,7 +1,7 @@
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vite-plus/test";
 import { targetFileName } from "./commands/add";
 import {
 	extractSpecifiers,
@@ -83,7 +83,6 @@ describe("extractSpecifiers", () => {
 
 describe("hasComputedSpecifier", () => {
 	it("spots a runtime-built specifier", () => {
-		// biome-ignore lint/suspicious/noTemplateCurlyInString: the literal is the input
 		expect(hasComputedSpecifier("const m = import(`./${name}`);")).toBe(true);
 		expect(hasComputedSpecifier('import x from "./button";')).toBe(false);
 	});
@@ -178,10 +177,11 @@ describe("findUnused", () => {
 			"components/ui/button-group.tsx": `import { Button } from "./button";`,
 		});
 		const result = findUnused(shape(root), INSTALLABLE);
-		expect(result.unused.map((f) => f.split(/[\\/]/).pop()).sort()).toEqual([
-			"button-group.tsx",
-			"button.tsx",
-		]);
+		expect(
+			result.unused
+				.map((f) => f.split(/[\\/]/).pop() ?? "")
+				.sort((a, b) => a.localeCompare(b)),
+		).toEqual(["button-group.tsx", "button.tsx"]);
 	});
 
 	it("keeps a component that a used component imports", () => {
@@ -271,7 +271,6 @@ describe("findUnused", () => {
 	it("reports files whose imports are built at runtime", () => {
 		const root = project({
 			"package.json": "{}",
-			// biome-ignore lint/suspicious/noTemplateCurlyInString: the literal is the input
 			"app/page.tsx": "const load = (n) => import(`../components/ui/${n}`);",
 			"components/ui/button.tsx": "export const Button = () => null;",
 		});
