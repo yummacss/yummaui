@@ -51,7 +51,7 @@ jobs:
       # beats finding out after the install, the build and the signature.
       - name: Check repository.url matches this repo
         run: |
-          declared=$(node -p "require('./package.json').repository.url")
+          declared=$(node -p "require('./packages/cli/package.json').repository.url")
           expected="git+https://github.com/$GITHUB_REPOSITORY.git"
           if [ "$declared" != "$expected" ]; then
             echo "::error::package.json repository.url is '$declared', but this repo is '$GITHUB_REPOSITORY'. npm provenance needs '$expected'."
@@ -67,5 +67,6 @@ jobs:
 
       - name: Publish to npm
         run: pnpm publish --no-git-checks
+        working-directory: packages/cli
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

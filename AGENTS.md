@@ -19,7 +19,7 @@
 
 # Copy
 
-- The prose rules live in `src/copywriting.test.ts` and run over the strings
+- The prose rules live in `packages/cli/src/copywriting.test.ts` and run over the strings
   `yummaui` prints. US spelling, no contractions, no em dashes, `cannot` as one
   word, one ellipsis character, never another framework's name, and focus draws an outline
   rather than a ring.
