@@ -62,7 +62,7 @@ export default function LandingHeader() {
 					</a>
 					<Link
 						href="/docs/installation"
-						className="d:none ai:c h:9 px:4 bg:accent c:page fs:sm td:none bbw:2 bc:black/20 fv:oc:ink fv:ow:2 @sm:d:f"
+						className="d:none ai:c h:9 px:4 bg:brand c:white fs:sm td:none bbw:2 bc:black/20 fv:oc:ink fv:ow:2 @sm:d:f"
 					>
 						Install
 					</Link>

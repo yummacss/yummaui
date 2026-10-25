@@ -65,7 +65,7 @@ export default function Home() {
 					<div className="d:f fd:c g:2 @sm:fd:r">
 						<Link
 							href="/components/accordion"
-							className={`${BUTTON} bg:accent c:page bbw:2 bc:black/20`}
+							className={`${BUTTON} bg:brand c:white bbw:2 bc:black/20`}
 						>
 							Browse components
 						</Link>
