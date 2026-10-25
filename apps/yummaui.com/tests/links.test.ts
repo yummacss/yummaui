@@ -8,6 +8,7 @@ import { contentPages, rootDir, tsxFilesIn } from "./helpers";
 // a section name is not a route: `/components/overlays` is a sidebar
 // heading, and only the pages under it exist
 const routes = new Set([
+	"/",
 	"/llms.txt",
 	"/robots.txt",
 	"/sitemap.xml",

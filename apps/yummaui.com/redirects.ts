@@ -96,11 +96,6 @@ const removedComponents = [
 
 export const redirects = [
 	{
-		source: "/",
-		destination: "/docs/installation",
-		permanent: false,
-	},
-	{
 		source: "/docs",
 		destination: "/docs/installation",
 		permanent: true,
