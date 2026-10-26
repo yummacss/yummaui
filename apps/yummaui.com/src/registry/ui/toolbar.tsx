@@ -126,7 +126,7 @@ export interface ToolbarProps {
  */
 export default function ToolbarBase({
   items,
-  shape = "rounded",
+  shape = "squircle",
   animated = true,
   className,
   focus = true,

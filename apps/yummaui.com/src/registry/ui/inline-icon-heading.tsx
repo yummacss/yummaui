@@ -96,7 +96,7 @@ function Chip({
  */
 export default function InlineIconHeading({
   size = "md",
-  shape = "rounded",
+  shape = "pill",
   animated = true,
   className,
 }: InlineIconHeadingProps) {

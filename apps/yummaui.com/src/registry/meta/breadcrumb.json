@@ -52,7 +52,7 @@
       "name": "shape",
       "type": "enum",
       "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "default": "squircle",
       "description": "Corner radius. Only visible when `bordered` is set.",
       "conflictsWith": [
         {

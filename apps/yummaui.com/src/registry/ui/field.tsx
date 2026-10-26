@@ -12,7 +12,7 @@ import { type ComponentProps, type ReactNode, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
 type Status = "default" | "error" | "success";
 
@@ -26,6 +26,7 @@ const SHAPES: Record<Shape, string> = {
   rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
 const ICON_PADDING: Record<IconSide, string> = {
@@ -37,8 +38,7 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 const FOCUS_WITHIN = "fw:os:s fw:ow:3 fw:oo:0 fw:oc:focus/40 fw:bc:focus";
 
 const STATUS_BORDER: Record<Status, string> = {
-  // recessed: the top edge darker than the bottom
-  default: "btc:shadow blc:line brc:line bbc:rim",
+  default: "bc:rim",
   error: "bc:red-5",
   success: "bc:green-5",
 };
@@ -156,7 +156,7 @@ export default function FieldBase({
   error,
   success,
   size = "md",
-  shape = "rounded",
+  shape = "pill",
   icon,
   iconPosition = "leading",
   iconInteractive = false,

@@ -26,8 +26,7 @@ ${row("prune", "Find components nothing uses")}
 
 ${c.bold("Options")}
 ${row("-a, --all", "add: every component")}
-${row("--style <name>", "add: soft, compact or squircle")}
-${row("--radius <step>", "add: none, small, medium, large or extra")}
+${row("--shape <name>", "add: none, rounded, squircle or pill")}
 ${row("--overwrite", "add: replace files that exist")}
 ${row("--write", "prune: delete what it finds")}
 ${row("--force", "init: replace yummaui.json")}
@@ -35,7 +34,7 @@ ${row("-y, --yes", "Skip prompts and take the defaults")}
 
 ${c.bold("Examples")}
   ${run} add button tooltip
-  ${run} add button --style compact --radius small
+  ${run} add button --shape squircle
   ${run} prune --write
 `;
 	},

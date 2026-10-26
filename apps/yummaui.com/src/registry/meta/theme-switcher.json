@@ -45,7 +45,7 @@
       "name": "shape",
       "type": "enum",
       "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "default": "squircle",
       "description": "Corner radius of the track. The options nest one step inside it. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {

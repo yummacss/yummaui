@@ -22,16 +22,15 @@ const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 
 const MOTION = "tp:a tdu:150 ttf:io a:s:95";
 
-// a bevel names all four sides: Yumma sorts rules by name, so bc: would beat bbc:
 const VARIANTS: Record<Variant, string> = {
   primary:
-    "bg:fill h:o:90 btc:white/20 blc:black/40 brc:black/40 bbc:black/60 c:on-fill bs-o:sm",
+    "bg:fill bc:fill h:o:90 c:on-fill",
   secondary:
-    "bg:raised btc:rim blc:rim brc:rim bbc:shadow c:label h:bg:well bs-o:xs",
+    "bg:raised bc:rim c:label h:bg:well",
   subtle: "bg:well bc:transparent c:hint h:bg:rim",
   ghost: "bg:transparent bc:transparent c:label h:bg:well",
   danger:
-    "bg:red h:bg:red-8 btc:red-5 blc:red-8 brc:red-8 bbc:red-9 c:white bs-o:sm",
+    "bg:red bc:red h:bg:red-8 h:bc:red-8 c:white",
   link: "bg:transparent bc:transparent c:label tuo:2 h:td:u",
 };
 
@@ -145,7 +144,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
 export default function ButtonBase({
   variant = "primary",
   size = "md",
-  shape = "rounded",
+  shape = "pill",
   loading = false,
   icon,
   iconPosition = "leading",

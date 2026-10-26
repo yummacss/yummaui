@@ -13,10 +13,9 @@ import {
 } from "../project";
 import {
 	fetchItem,
-	fetchStyles,
 	type RegistryIndex,
 	type RegistryItem,
-	resolveStyle,
+	resolveShape,
 } from "../registry";
 import { setUpStyling } from "../setup";
 import {
@@ -106,21 +105,12 @@ export async function add(names: string[], flags: Flags): Promise<number> {
 	}
 
 	let registry = config.registry;
-	const style = flags.style ?? config.style ?? null;
-	const radius = flags.radius ?? config.radius ?? null;
-	if (style || radius) {
-		try {
-			const styled = resolveStyle(
-				await fetchStyles(config.registry),
-				style,
-				radius,
-			);
-			if ("error" in styled) return fail(styled.error);
-			registry = `${config.registry}/${styled.folder}`;
-			say.info("style", styled.folder);
-		} catch (error) {
-			return fail(error);
-		}
+	const shape = flags.shape ?? config.shape;
+	if (shape) {
+		const shaped = resolveShape(shape);
+		if ("error" in shaped) return fail(shaped.error);
+		registry = `${config.registry}/${shaped.folder}`;
+		say.info("shape", shaped.folder);
 	}
 
 	// every item the request needs, its registry dependencies first

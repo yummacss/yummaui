@@ -93,40 +93,16 @@ export function fetchItem(registry: string, id: string): Promise<RegistryItem> {
 	return getJson<RegistryItem>(`${registry}/${id}.json`);
 }
 
-export interface StyleSpec {
-	name: string;
-	radius: string;
-	allow: string[];
-	refused: Record<string, string>;
-}
+/** The shapes a component can be added in. */
+export const SHAPES = ["none", "rounded", "squircle", "pill"];
 
-export interface StylesTable {
-	default: string;
-	styles: Record<string, StyleSpec>;
-}
-
-export function fetchStyles(registry: string): Promise<StylesTable> {
-	return getJson<StylesTable>(`${registry}/styles.json`);
-}
-
-// the registry folder for a style and radius, or why the pair is refused
-export function resolveStyle(
-	table: StylesTable,
-	style: string | null,
-	radius: string | null,
+// the registry folder for a shape, or why there is none
+export function resolveShape(
+	shape: string,
 ): { folder: string } | { error: string } {
-	const name = style ?? table.default;
-	const spec = table.styles[name];
-	if (!spec) {
-		const known = Object.keys(table.styles).join(", ");
-		return { error: `There is no ${name} style. Try one of: ${known}.` };
-	}
-	const step = radius ?? spec.radius;
-	if (!spec.allow.includes(step)) {
-		const reason = spec.refused[step] ?? `${spec.name} does not take ${step}.`;
-		return {
-			error: `${reason} ${spec.name} takes: ${spec.allow.join(", ")}.`,
-		};
-	}
-	return { folder: `${name}-${step}` };
+	return SHAPES.includes(shape)
+		? { folder: shape }
+		: {
+				error: `There is no ${shape} shape. Try one of: ${SHAPES.join(", ")}.`,
+			};
 }
