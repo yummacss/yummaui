@@ -19,6 +19,7 @@ import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { STYLE_OWNED, typeOf } from "@/utils/props";
 import { SCHEMES, type Scheme } from "@/utils/scheme";
 import { RADIUS, STYLES } from "@/utils/styles.mjs";
+import { NavbarCrossing } from "@/components/ui/frame-mark";
 
 export default function PlaygroundRail({
 	primitives,
@@ -43,6 +44,7 @@ export default function PlaygroundRail({
 
 	return (
 		<aside className="bc:border btw:1 @lg:btw:0 @lg:blw:1 @lg:gc-s:3">
+			<NavbarCrossing />
 			<Scroller className="@lg:p:st @lg:t:20 @lg:max-h:calc(100dvh-5rem)">
 				<div className="pt:8 pb:12 @lg:pt:0 @lg:px:8">
 					{playground && <Look />}
