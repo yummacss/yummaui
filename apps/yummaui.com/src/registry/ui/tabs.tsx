@@ -110,7 +110,7 @@ export default function TabsBase({
   onValueChange,
   orientation = "horizontal",
   size = "md",
-  shape = "pill",
+  shape = "squircle",
   icon = true,
   iconPosition = "leading",
   animated = true,

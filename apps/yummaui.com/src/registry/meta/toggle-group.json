@@ -40,7 +40,7 @@
       "name": "shape",
       "type": "enum",
       "values": ["rounded", "square", "squircle", "pill"],
-      "default": "pill",
+      "default": "squircle",
       "description": "Corner radius of the container. The toggles inside carry their own `shape`."
     },
     {

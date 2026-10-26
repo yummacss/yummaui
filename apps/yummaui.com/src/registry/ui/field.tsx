@@ -156,7 +156,7 @@ export default function FieldBase({
   error,
   success,
   size = "md",
-  shape = "pill",
+  shape = "squircle",
   icon,
   iconPosition = "leading",
   iconInteractive = false,

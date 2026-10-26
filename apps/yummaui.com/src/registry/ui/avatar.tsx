@@ -44,12 +44,6 @@ const BADGE_SIZES: Record<Size, string> = {
 // lit at the top and shaded below, on whatever the tint is
 const BEVEL = "bw:1 btc:white/20 blc:black/30 brc:black/30 bbc:black/50";
 
-// the same light over dark across the face; Yumma CSS has no background-image utility
-const SHADE = {
-  backgroundImage:
-    "linear-gradient(oklch(1 0 0 / 0.18), oklch(0 0 0 / 0.14))",
-};
-
 const SHAPES: Record<Shape, string> = {
   circle: "br:9999",
   square: "br:0",
@@ -127,7 +121,7 @@ export default function AvatarBase({
   src,
   name,
   size = "md",
-  shape = "circle",
+  shape = "squircle",
   status = "none",
   badge = false,
   badgeIcon,
@@ -155,7 +149,7 @@ export default function AvatarBase({
 
   return (
     <span className="d:if p:r w:fc va:m">
-      <Avatar.Root className={classes} style={tint ? SHADE : undefined}>
+      <Avatar.Root className={classes}>
         {src && (
           <Avatar.Image
             src={src}
