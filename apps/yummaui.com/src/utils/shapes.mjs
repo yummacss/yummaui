@@ -9,12 +9,16 @@ const NEAREST = {
 	none: ["square"],
 	rounded: ["rounded"],
 	squircle: ["squircle", "rounded"],
-	pill: ["pill", "squircle", "rounded"],
+	pill: ["pill", "circle", "squircle", "rounded"],
 };
 
 /** The value a component with `values` takes for `shape`, if any. */
 export function pickShape(values, shape) {
-	return (NEAREST[shape] ?? []).find((value) => values.includes(value)) ?? null;
+	// circle is a radius only beside squircle; Skeleton's circle is a size too
+	const radii = values.includes("squircle")
+		? values
+		: values.filter((value) => value !== "circle");
+	return (NEAREST[shape] ?? []).find((value) => radii.includes(value)) ?? null;
 }
 
 function unionOf(source, type) {

@@ -11,10 +11,10 @@ type Tint = "blue" | "mint" | "indigo" | "slate";
 const ROOT = "d:if o:h ai:c jc:c va:m us:none";
 
 const TINTS: Record<Tint, { bg: string; fg: string }> = {
-  blue: { bg: "bg:blue-9 bc:blue-8", fg: "c:white" },
-  mint: { bg: "bg:mint-8 bc:mint-7", fg: "c:white" },
-  indigo: { bg: "bg:indigo-8 bc:indigo-7", fg: "c:white" },
-  slate: { bg: "bg:slate-10 bc:slate-9", fg: "c:white" },
+  blue: { bg: "bg:blue-9", fg: "c:white" },
+  mint: { bg: "bg:mint-8", fg: "c:white" },
+  indigo: { bg: "bg:indigo-8", fg: "c:white" },
+  slate: { bg: "bg:slate-10", fg: "c:white" },
 };
 
 const SIZES: Record<Size, string> = {
@@ -39,6 +39,15 @@ const BADGE_SIZES: Record<Size, string> = {
   sm: "w:3 h:3",
   md: "w:4 h:4",
   lg: "w:4 h:4",
+};
+
+// lit at the top and shaded below, on whatever the tint is
+const BEVEL = "bw:1 btc:white/20 blc:black/30 brc:black/30 bbc:black/50";
+
+// the same light over dark across the face; Yumma CSS has no background-image utility
+const SHADE = {
+  backgroundImage:
+    "linear-gradient(oklch(1 0 0 / 0.18), oklch(0 0 0 / 0.14))",
 };
 
 const SHAPES: Record<Shape, string> = {
@@ -118,7 +127,7 @@ export default function AvatarBase({
   src,
   name,
   size = "md",
-  shape = "squircle",
+  shape = "circle",
   status = "none",
   badge = false,
   badgeIcon,
@@ -132,7 +141,7 @@ export default function AvatarBase({
     ROOT,
     SIZES[size],
     shape === "squircle" ? `cs:s ${SQUIRCLE_RADII[size]}` : SHAPES[shape],
-    tint ? `${TINTS[tint].bg} bw:1` : "bg:well bc:raised bw:1",
+    tint ? `${TINTS[tint].bg} ${BEVEL}` : "bg:well bc:raised bw:1",
     className,
   );
 
@@ -146,7 +155,7 @@ export default function AvatarBase({
 
   return (
     <span className="d:if p:r w:fc va:m">
-      <Avatar.Root className={classes}>
+      <Avatar.Root className={classes} style={tint ? SHADE : undefined}>
         {src && (
           <Avatar.Image
             src={src}
