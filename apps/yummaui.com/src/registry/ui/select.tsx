@@ -191,7 +191,7 @@ export default function SelectBase({
   value,
   onValueChange,
   size = "md",
-  shape = "rounded",
+  shape = "squircle",
   icon,
   iconPosition = "leading",
   disabled = false,

@@ -54,7 +54,7 @@ import { type ComponentType, Fragment, type ReactNode } from "react";
 import { type ChildExample, getRegistryMeta } from "@/registry";
 import { EXAMPLE_ICON_STYLE, type IconStyle } from "@/utils/icon-style";
 import { componentId, iconMarker } from "@/utils/snippet";
-import { styleProps } from "@/utils/styles.mjs";
+import { shapeProps } from "@/utils/shapes.mjs";
 
 export type DemoProps = Record<string, unknown>;
 
@@ -154,12 +154,11 @@ export function sceneIds(scene: ChildExample[]): string[] {
 	return [...ids];
 }
 
-/** The Example view, with the rail's style & radius on every component in it. */
+/** The Example view, with the rail's shape on every component in it. */
 export function renderScene(
 	scene: ChildExample[],
 	components: Record<string, ComponentType<DemoProps>>,
-	style: string,
-	radius: string,
+	shape: string,
 	container: unknown,
 	state: SceneState,
 ): ReactNode {
@@ -170,7 +169,7 @@ export function renderScene(
 			if (!meta) return {};
 			const portals = meta.props.some((prop) => prop.name === "container");
 			return {
-				...styleProps(meta.props, style, radius),
+				...shapeProps(meta.props, shape),
 				...(portals ? { container } : {}),
 			};
 		},

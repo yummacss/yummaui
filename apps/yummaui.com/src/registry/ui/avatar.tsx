@@ -118,7 +118,7 @@ export default function AvatarBase({
   src,
   name,
   size = "md",
-  shape = "circle",
+  shape = "squircle",
   status = "none",
   badge = false,
   badgeIcon,

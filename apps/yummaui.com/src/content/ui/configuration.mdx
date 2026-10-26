@@ -25,16 +25,15 @@ pnpm dlx yummaui add button
 pnpm dlx yummaui add dialog tooltip
 pnpm dlx yummaui add
 pnpm dlx yummaui add --all
-pnpm dlx yummaui add button --style compact --radius small
+pnpm dlx yummaui add button --shape squircle
 ```
 
-| Option            |                                               |
-| ----------------- | --------------------------------------------- |
-| `-a, --all`       | Add every component                           |
-| `--style <name>`  | `soft`, `compact` or `squircle`               |
-| `--radius <step>` | `none`, `small`, `medium`, `large` or `extra` |
-| `--overwrite`     | Replace files that already exist              |
-| `-y, --yes`       | Skip prompts & take the defaults              |
+| Option           |                                         |
+| ---------------- | --------------------------------------- |
+| `-a, --all`      | Add every component                     |
+| `--shape <name>` | `none`, `rounded`, `squircle` or `pill` |
+| `--overwrite`    | Replace files that already exist        |
+| `-y, --yes`      | Skip prompts & take the defaults        |
 
 It asks before installing what a component needs from npm, and offers the same Yumma CSS setup as `init` when it is missing.
 
@@ -75,18 +74,16 @@ pnpm dlx yummaui prune --write
 | `componentsDir` | Where components are written, relative to the project root              |
 | `alias`         | The import prefix for that directory, or `null` to use relative imports |
 | `registry`      | Where components are fetched from                                       |
-| `style`         | The style `add` uses when `--style` is not given                        |
-| `radius`        | The radius `add` uses when `--radius` is not given                      |
+| `shape`         | The shape `add` uses when `--shape` is not given                        |
 
 ## Registry
 
 The registry is static JSON published by this site.
 
 ```
-https://yummacss.com/ui/registry/index.json                     every component, and the theme they animate with
-https://yummacss.com/ui/registry/<id>.json                      one component's source and dependencies
-https://yummacss.com/ui/registry/styles.json                    the styles and the radius steps each takes
-https://yummacss.com/ui/registry/<style>-<radius>/<id>.json     the same, rewritten for a style
+https://www.yummaui.com/ui/registry/index.json          every component, and the theme they animate with
+https://www.yummaui.com/ui/registry/<id>.json           one component's source and dependencies
+https://www.yummaui.com/ui/registry/<shape>/<id>.json   the same, rewritten for a shape
 ```
 
 Point `registry` at your own copy to serve components from somewhere else.

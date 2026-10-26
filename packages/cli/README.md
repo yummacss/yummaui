@@ -44,22 +44,21 @@ pnpm dlx yummaui add button
 pnpm dlx yummaui add dialog tooltip
 pnpm dlx yummaui add --all
 pnpm dlx yummaui add
-pnpm dlx yummaui add button --style compact --radius small
+pnpm dlx yummaui add button --shape squircle
 ```
 
-| Option            |                                               |
-| ----------------- | --------------------------------------------- |
-| `-a, --all`       | Add every component                           |
-| `--style <name>`  | `soft`, `compact` or `squircle`               |
-| `--radius <step>` | `none`, `small`, `medium`, `large` or `extra` |
-| `--overwrite`     | Replace files that already exist              |
-| `-y, --yes`       | Skip prompts and take the defaults            |
+| Option           |                                         |
+| ---------------- | --------------------------------------- |
+| `-a, --all`      | Add every component                     |
+| `--shape <name>` | `none`, `rounded`, `squircle` or `pill` |
+| `--overwrite`    | Replace files that already exist        |
+| `-y, --yes`      | Skip prompts and take the defaults      |
 
 With no names, `add` opens a list to search and pick from.
 
-A style and radius set as `style` and `radius` in `yummaui.json` apply to
-every `add`; the flags win over them. Each style takes some radius steps and
-refuses the rest, and `add` says why.
+A `shape` set in `yummaui.json` applies to every `add`; the flag wins over it.
+A component without the shape takes the nearest it has: under `pill`, a dialog
+is a squircle.
 
 ### `list`
 
@@ -93,8 +92,7 @@ The CLI reads a static JSON registry published by yummaui.com:
 ```
 https://www.yummaui.com/ui/registry/index.json      every component
 https://www.yummaui.com/ui/registry/<id>.json       one component's source and dependencies
-https://www.yummaui.com/ui/registry/styles.json     the styles and the radius steps each takes
-https://www.yummaui.com/ui/registry/<style>-<radius>/<id>.json   the same, rewritten for a style
+https://www.yummaui.com/ui/registry/<shape>/<id>.json   the same, rewritten for a shape
 ```
 
 ## License

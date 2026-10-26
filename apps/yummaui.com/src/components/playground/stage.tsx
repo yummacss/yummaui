@@ -20,7 +20,7 @@ import {
 } from "@/utils/prefetch-registry";
 import { schemeCss } from "@/utils/scheme";
 import { buildConfig, buildScene } from "@/utils/snippet";
-import { DEFAULT_STYLE, radiusCss, STYLES } from "@/utils/styles.mjs";
+import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
 
@@ -41,10 +41,9 @@ export default function ComponentPlayground() {
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
 	if (!id || !scene) return null;
-	const style = playground?.style ?? DEFAULT_STYLE;
+	const shape = playground?.shape ?? DEFAULT_SHAPE;
 	const accent = playground?.accent ?? DEFAULT_ACCENT;
 	const scheme = playground?.scheme ?? "light";
-	const radius = playground?.radius ?? STYLES[DEFAULT_STYLE].radius;
 	const usage = buildScene(scene);
 
 	const config = registryConfig[getRegistryTarget(id).install];
@@ -69,13 +68,9 @@ export default function ComponentPlayground() {
 						className="f:1 min-h:0"
 						minHeight={0}
 						fill
-						accentCss={[
-							accentCss(accent),
-							radiusCss(style, radius),
-							schemeCss(scheme),
-						].join("\n")}
+						accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
 					>
-						<Scene scene={scene} style={style} radius={radius} />
+						<Scene scene={scene} shape={shape} />
 					</PreviewFrame>
 				</TabsPanel>
 
@@ -125,12 +120,10 @@ function loaded(ids: string[]) {
 
 function Scene({
 	scene,
-	style,
-	radius,
+	shape,
 }: {
 	scene: NonNullable<RegistryMeta["scene"]>;
-	style: string;
-	radius: string;
+	shape: string;
 }) {
 	const container = usePreviewContainer();
 	const playground = usePlayground();
@@ -152,8 +145,7 @@ function Scene({
 	return renderScene(
 		scene,
 		components as Record<string, ComponentType<DemoProps>>,
-		style,
-		radius,
+		shape,
 		container,
 		{
 			values: playground?.sceneValues ?? {},

@@ -12,8 +12,7 @@ export interface Config {
 	componentsDir: string;
 	alias: string | null;
 	registry: string;
-	style?: string;
-	radius?: string;
+	shape?: string;
 }
 
 export type PackageManager = "pnpm" | "npm" | "yarn" | "bun";
@@ -110,8 +109,7 @@ export function readConfig(root: string): Config | null {
 			componentsDir: parsed.componentsDir ?? "components/ui",
 			alias: parsed.alias ?? null,
 			registry: registryUrl(parsed.registry),
-			...(parsed.style ? { style: parsed.style } : {}),
-			...(parsed.radius ? { radius: parsed.radius } : {}),
+			...(parsed.shape ? { shape: parsed.shape } : {}),
 		};
 	} catch {
 		return null;

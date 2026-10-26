@@ -193,7 +193,7 @@ export default function ComboboxBase({
   description,
   placeholder = "Search",
   size = "md",
-  shape = "rounded",
+  shape = "squircle",
   multiple = false,
   defaultValue,
   clearable = true,

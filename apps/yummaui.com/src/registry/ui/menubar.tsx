@@ -134,7 +134,7 @@ export interface MenubarProps {
  */
 export default function MenubarBase({
   menus,
-  shape = "rounded",
+  shape = "squircle",
   icon = true,
   iconPosition = "leading",
   animated = true,

@@ -54,7 +54,7 @@
       "name": "shape",
       "type": "enum",
       "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "default": "squircle",
       "description": "Corner radius on the tree and on each row."
     },
     {

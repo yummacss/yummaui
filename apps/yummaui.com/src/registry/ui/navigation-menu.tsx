@@ -92,7 +92,7 @@ export interface NavigationMenuProps {
 export default function NavigationMenuBase({
   items,
   label = "Main",
-  shape = "rounded",
+  shape = "squircle",
   animated = true,
   className,
   focus = true,

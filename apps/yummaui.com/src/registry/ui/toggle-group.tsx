@@ -52,7 +52,7 @@ export default function ToggleGroupBase({
   label,
   className,
   children,
-  shape = "rounded",
+  shape = "pill",
   orientation = "horizontal",
   multiple = false,
   disabled = false,

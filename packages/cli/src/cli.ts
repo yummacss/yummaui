@@ -10,8 +10,7 @@ import { c, repaint } from "./ui";
 
 const options = {
 	all: { type: "boolean", short: "a" },
-	style: { type: "string" },
-	radius: { type: "string" },
+	shape: { type: "string" },
 	overwrite: { type: "boolean" },
 	write: { type: "boolean" },
 	force: { type: "boolean" },

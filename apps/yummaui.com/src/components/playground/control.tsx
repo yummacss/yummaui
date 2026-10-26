@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@base-ui/react";
 import { Select } from "@base-ui/react/select";
 import { useState } from "react";
 import { NavArrowDown } from "@/icons";
@@ -77,55 +76,6 @@ export function EnumSelect({
 				</Select.Positioner>
 			</Select.Portal>
 		</Select.Root>
-	);
-}
-
-/** Steps through named values, as the stepper does for numbers. */
-export function StepSelect({
-	name,
-	values,
-	value,
-	min = 0,
-	max = values.length - 1,
-	onChange,
-}: {
-	name: string;
-	values: string[];
-	value: string;
-	min?: number;
-	max?: number;
-	onChange: (value: string) => void;
-}) {
-	const index = values.indexOf(value);
-	const button = (spent: boolean) =>
-		`d:f fs:0 ai:c jc:c w:6 h:6 bw:0 bg:transparent ff:m fs:xs fv:oo:-1 fv:oc:accent ${
-			spent ? "c:ink/25 c:na" : "c:ink/50 h:c:ink a:bg:press c:p"
-		}`;
-
-	return (
-		<div className="d:f fs:0 ai:c jc:sb w:32 bc:border bg:surface bw:1">
-			<Button
-				type="button"
-				aria-label={`Smaller ${name}`}
-				disabled={index <= min}
-				onClick={() => onChange(values[index - 1])}
-				className={button(index <= min)}
-			>
-				&minus;
-			</Button>
-			<span aria-live="polite" className="ff:m fs:xs c:ink">
-				{value}
-			</span>
-			<Button
-				type="button"
-				aria-label={`Larger ${name}`}
-				disabled={index >= max}
-				onClick={() => onChange(values[index + 1])}
-				className={button(index >= max)}
-			>
-				+
-			</Button>
-		</div>
 	);
 }
 

@@ -5,11 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { BaseUI } from "@/components/icons/icons";
 import { usePlayground } from "@/components/playground/context";
-import {
-	EnumSelect,
-	StepSelect,
-	SwatchSelect,
-} from "@/components/playground/control";
+import { EnumSelect, SwatchSelect } from "@/components/playground/control";
 import PropDescription from "@/components/prop-description";
 import Scroller from "@/components/ui/scroller";
 import { NavArrowDown } from "@/icons";
@@ -18,7 +14,7 @@ import { ACCENTS, accentBars } from "@/utils/accent";
 import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { STYLE_OWNED, typeOf } from "@/utils/props";
 import { SCHEMES, type Scheme } from "@/utils/scheme";
-import { RADIUS, STYLES } from "@/utils/styles.mjs";
+import { SHAPES } from "@/utils/shapes.mjs";
 import { NavbarCrossing } from "@/components/ui/frame-mark";
 
 export default function PlaygroundRail({
@@ -139,19 +135,15 @@ function Row({
 	);
 }
 
-const SPECS: Record<string, { allow: string[] }> = STYLES;
-
 const SWATCHES = ACCENTS.map((family) => ({
 	value: family,
 	colors: accentBars(family),
 }));
 
-/** Style, Radius, Accent and Scheme, as rows like the Component API's. */
+/** Shape, Accent and Scheme, as rows like the Component API's. */
 function Look() {
 	const playground = usePlayground();
 	if (!playground) return null;
-	const spec = SPECS[playground.style];
-	const allowed = RADIUS.map((step) => spec.allow.includes(step));
 	const line = (name: string, control: React.ReactNode) => (
 		<div className="d:f fw:w ai:c jc:sb g:2 py:2 bc:border bbw:1">
 			<code className="c:code fs:xs ff:m">{name}</code>
@@ -163,26 +155,15 @@ function Look() {
 		<div className="d:f fd:c pb:4 mb:4">
 			<h3 className="ff:system mb:1 c:silver-8 fs:xs fw:600 ls:2 tt:u">Look</h3>
 			<p className="m:0 mb:1 c:ink/60 fs:xs lh:4">
-				The accent & scheme tint the preview only.
+				The shape, accent & scheme set the preview only.
 			</p>
 			{line(
-				"style",
+				"shape",
 				<EnumSelect
-					name="style"
-					values={Object.keys(STYLES)}
-					value={playground.style}
-					onChange={(value) => playground.setStyle(String(value))}
-				/>,
-			)}
-			{line(
-				"radius",
-				<StepSelect
-					name="radius"
-					values={RADIUS}
-					value={playground.radius}
-					min={allowed.indexOf(true)}
-					max={allowed.lastIndexOf(true)}
-					onChange={playground.setRadius}
+					name="shape"
+					values={SHAPES}
+					value={playground.shape}
+					onChange={(value) => playground.setShape(String(value))}
 				/>,
 			)}
 			{line(

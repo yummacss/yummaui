@@ -144,7 +144,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
 export default function ButtonBase({
   variant = "primary",
   size = "md",
-  shape = "squircle",
+  shape = "pill",
   loading = false,
   icon,
   iconPosition = "leading",

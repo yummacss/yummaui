@@ -165,7 +165,7 @@ export default function BadgeBase({
   children,
   tone = "outline",
   intent = "neutral",
-  shape = "squircle",
+  shape = "pill",
   size = "md",
   icon,
   iconPosition = "leading",

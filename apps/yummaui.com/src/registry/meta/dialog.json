@@ -104,7 +104,7 @@
       "name": "shape",
       "type": "enum",
       "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "default": "squircle",
       "description": "Corner radius on the popup and its buttons."
     },
     {

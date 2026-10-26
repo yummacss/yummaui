@@ -163,7 +163,7 @@ export default function DrawerBase({
   handle = true,
   showClose = false,
   size = "md",
-  shape = "rounded",
+  shape = "squircle",
   animated = true,
   className,
   focus = true,

@@ -1,11 +1,6 @@
 "use client";
 
-import {
-	parseAsJson,
-	parseAsStringLiteral,
-	useQueryState,
-	useQueryStates,
-} from "nuqs";
+import { parseAsJson, parseAsStringLiteral, useQueryState } from "nuqs";
 import {
 	createContext,
 	type ReactNode,
@@ -21,29 +16,19 @@ import { getRegistryMeta, type RegistryMeta } from "@/registry";
 import { DEFAULT_ACCENT, readAccent, writeAccent } from "@/utils/accent";
 import { prefetchRegistry } from "@/utils/prefetch-registry";
 import { readScheme, type Scheme, writeScheme } from "@/utils/scheme";
-import {
-	DEFAULT_STYLE,
-	nearestRadius,
-	RADIUS,
-	STYLES,
-} from "@/utils/styles.mjs";
+import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
 
-const SPECS: Record<string, { radius: string }> = STYLES;
-const STYLE_IDS = Object.keys(STYLES) as [string, ...string[]];
-const STYLE_KEYS = {
-	style: parseAsStringLiteral(STYLE_IDS).withDefault(DEFAULT_STYLE),
-	radius: parseAsStringLiteral(RADIUS as [string, ...string[]]),
-};
-const STYLE_STORE = "yui:style";
+const SHAPE_QUERY = parseAsStringLiteral(SHAPES as [string, ...string[]])
+	.withDefault(DEFAULT_SHAPE)
+	.withOptions({ history: "replace", clearOnDefault: true, shallow: true });
+const SHAPE_STORE = "yui:shape";
 
-function readStyle(): { style?: string; radius?: string } {
+function readShape(): string | null {
 	try {
-		const parsed: unknown = JSON.parse(
-			window.localStorage.getItem(STYLE_STORE) ?? "null",
-		);
-		return parsed && typeof parsed === "object" ? parsed : {};
+		const stored = window.localStorage.getItem(SHAPE_STORE);
+		return stored && SHAPES.includes(stored) ? stored : null;
 	} catch {
-		return {};
+		return null;
 	}
 }
 
@@ -70,10 +55,8 @@ interface Playground {
 	setAccent: (family: string) => void;
 	scheme: Scheme;
 	setScheme: (scheme: Scheme) => void;
-	style: string;
-	radius: string;
-	setStyle: (style: string) => void;
-	setRadius: (radius: string) => void;
+	shape: string;
+	setShape: (shape: string) => void;
 }
 
 const PlaygroundContext = createContext<Playground | null>(null);
@@ -109,55 +92,27 @@ export function PlaygroundProvider({
 		writeScheme(next);
 	}, []);
 
-	const [styleQuery, setStyleQuery] = useQueryStates(STYLE_KEYS, {
-		history: "replace",
-		clearOnDefault: true,
-		shallow: true,
-	});
-	const style = styleQuery.style;
-	const radius = nearestRadius(style, styleQuery.radius ?? SPECS[style].radius);
+	const [shape, setShapeQuery] = useQueryState("shape", SHAPE_QUERY);
 
-	const commitStyle = useCallback(
-		(next: string, step: string) => {
-			const resolved = nearestRadius(next, step);
-			const radiusParam = resolved === SPECS[next].radius ? null : resolved;
-			void setStyleQuery({ style: next, radius: radiusParam });
+	const setShape = useCallback(
+		(next: string) => {
+			void setShapeQuery(next);
 			try {
-				window.localStorage.setItem(
-					STYLE_STORE,
-					JSON.stringify({ style: next, radius: resolved }),
-				);
+				window.localStorage.setItem(SHAPE_STORE, next);
 			} catch {}
 		},
-		[setStyleQuery],
+		[setShapeQuery],
 	);
 
-	// the address wins; otherwise the style carried from the last page
+	// the address wins; otherwise the shape carried from the last page
 	const arrived = useRef(false);
 	useEffect(() => {
 		if (arrived.current) return;
 		arrived.current = true;
-		const named = new URLSearchParams(window.location.search);
-		if (named.has("style") || named.has("radius")) {
-			if (styleQuery.radius && styleQuery.radius !== radius) {
-				commitStyle(style, radius);
-			}
-			return;
-		}
-		const stored = readStyle();
-		if (stored.style && stored.style in SPECS) {
-			commitStyle(stored.style, stored.radius ?? SPECS[stored.style].radius);
-		}
-	}, [commitStyle, style, radius, styleQuery.radius]);
-
-	const setStyle = useCallback(
-		(next: string) => commitStyle(next, SPECS[next].radius),
-		[commitStyle],
-	);
-	const setRadius = useCallback(
-		(step: string) => commitStyle(style, step),
-		[commitStyle, style],
-	);
+		if (new URLSearchParams(window.location.search).has("shape")) return;
+		const stored = readShape();
+		if (stored) void setShapeQuery(stored);
+	}, [setShapeQuery]);
 
 	// the neighbours too, so the pagination arrows land on a component that is ready
 	useEffect(() => {
@@ -201,10 +156,8 @@ export function PlaygroundProvider({
 			setAccent,
 			scheme,
 			setScheme,
-			style,
-			radius,
-			setStyle,
-			setRadius,
+			shape,
+			setShape,
 		}),
 		[
 			id,
@@ -215,10 +168,8 @@ export function PlaygroundProvider({
 			setAccent,
 			scheme,
 			setScheme,
-			style,
-			radius,
-			setStyle,
-			setRadius,
+			shape,
+			setShape,
 		],
 	);
 
@@ -249,10 +200,8 @@ export function StaticPlayground({
 			setAccent: ignore,
 			scheme: "light" as Scheme,
 			setScheme: ignore,
-			style: DEFAULT_STYLE,
-			radius: SPECS[DEFAULT_STYLE].radius,
-			setStyle: ignore,
-			setRadius: ignore,
+			shape: DEFAULT_SHAPE,
+			setShape: ignore,
 		};
 	}, [id]);
 

@@ -146,7 +146,7 @@ export default function ToastBase({
   timeout = 5000,
   limit = 3,
   triggerTone = "neutral",
-  shape = "rounded",
+  shape = "squircle",
   animated = true,
   className,
   focus = true,

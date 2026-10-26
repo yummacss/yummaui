@@ -140,7 +140,7 @@ export default function ContextMenuBase({
   trigger,
   triggerIcon,
   items,
-  shape = "rounded",
+  shape = "squircle",
   icon = true,
   iconPosition = "leading",
   disabled = false,

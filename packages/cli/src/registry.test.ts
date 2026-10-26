@@ -1,13 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vite-plus/test";
 import { nearest, resolveNames, targetFileName } from "./commands/add";
-import {
-	fetchIndex,
-	fetchItem,
-	fetchStyles,
-	RegistryError,
-	resolveStyle,
-	type StylesTable,
-} from "./registry";
+import { fetchIndex, fetchItem, RegistryError, resolveShape } from "./registry";
 
 afterEach(() => {
 	vi.unstubAllGlobals();
@@ -175,56 +168,15 @@ describe("resolveNames with --all", () => {
 	});
 });
 
-describe("styles", () => {
-	const table: StylesTable = {
-		default: "soft",
-		styles: {
-			soft: {
-				name: "Soft",
-				radius: "large",
-				allow: ["small", "medium", "large", "extra"],
-				refused: { none: "Soft is rounded. No radius is a square." },
-			},
-			squircle: {
-				name: "Squircle",
-				radius: "large",
-				allow: ["medium", "large"],
-				refused: { none: "A squircle with no radius is a square." },
-			},
-		},
-	};
-
-	it("picks the folder for a style and its default radius", () => {
-		expect(resolveStyle(table, "squircle", null)).toEqual({
-			folder: "squircle-large",
-		});
-		expect(resolveStyle(table, null, "small")).toEqual({
-			folder: "soft-small",
-		});
+describe("shapes", () => {
+	it("picks the folder for a shape", () => {
+		expect(resolveShape("squircle")).toEqual({ folder: "squircle" });
 	});
 
-	it("refuses a blocked pair with the reason", () => {
-		const result = resolveStyle(table, "squircle", "none");
-		expect(result).toEqual({
+	it("names the shapes that exist", () => {
+		expect(resolveShape("glass")).toEqual({
 			error:
-				"A squircle with no radius is a square. Squircle takes: medium, large.",
+				"There is no glass shape. Try one of: none, rounded, squircle, pill.",
 		});
-	});
-
-	it("names the styles that exist", () => {
-		expect(resolveStyle(table, "glass", null)).toEqual({
-			error: "There is no glass style. Try one of: soft, squircle.",
-		});
-	});
-
-	it("fetches styles.json from the registry root", async () => {
-		respond(JSON.stringify(table));
-		await expect(fetchStyles("https://x.test/ui/registry")).resolves.toEqual(
-			table,
-		);
-		expect(fetch).toHaveBeenCalledWith(
-			"https://x.test/ui/registry/styles.json",
-			expect.anything(),
-		);
 	});
 });

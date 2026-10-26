@@ -11,7 +11,7 @@ import {
 import { basename, join } from "node:path";
 import { targetPath } from "../src/utils/install.mjs";
 import { ROLES } from "../src/utils/roles.mjs";
-import { applyStyle, DEFAULT_STYLE, STYLES } from "../src/utils/styles.mjs";
+import { applyShape, SHAPES } from "../src/utils/shapes.mjs";
 import config from "../yumma.config.mjs";
 import { componentSlugs, splitId } from "./lib/registry-ids.mjs";
 
@@ -182,22 +182,18 @@ for (const id of published) {
 		`${JSON.stringify(entry, null, 2)}\n`,
 	);
 
-	// one folder per style and radius, so the CLI only swaps its base URL
-	for (const [style, spec] of Object.entries(STYLES)) {
-		for (const radius of spec.allow) {
-			const dir = join(outDir, `${style}-${radius}`);
-			mkdirSync(dir, { recursive: true });
-			const styled = {
-				...entry,
-				files: [
-					{ ...entry.files[0], content: applyStyle(source, style, radius) },
-				],
-			};
-			writeFileSync(
-				join(dir, `${id}.json`),
-				`${JSON.stringify(styled, null, 2)}\n`,
-			);
-		}
+	// one folder per shape, so the CLI only swaps its base URL
+	for (const shape of SHAPES) {
+		const dir = join(outDir, shape);
+		mkdirSync(dir, { recursive: true });
+		const shaped = {
+			...entry,
+			files: [{ ...entry.files[0], content: applyShape(source, shape) }],
+		};
+		writeFileSync(
+			join(dir, `${id}.json`),
+			`${JSON.stringify(shaped, null, 2)}\n`,
+		);
 	}
 }
 
@@ -216,19 +212,10 @@ writeFileSync(
 	)}\n`,
 );
 
-writeFileSync(
-	join(outDir, "styles.json"),
-	`${JSON.stringify({ default: DEFAULT_STYLE, styles: STYLES }, null, 2)}\n`,
-);
-
 const missingBase = index.filter((g) => !g.base).length;
 const unpublished = ids.length - published.size;
-const builds = Object.values(STYLES).reduce(
-	(n, spec) => n + spec.allow.length,
-	0,
-);
 console.log(
-	`registry json: ${index.length} components, ${published.size} items (${unpublished} kept to the site), ${builds} style builds -> public/ui/registry/`,
+	`registry json: ${index.length} components, ${published.size} items (${unpublished} kept to the site), ${SHAPES.length} shape builds -> public/ui/registry/`,
 );
 if (orphans) console.log(`  ${orphans} file(s) match no /ui page`);
 if (missingBase) console.log(`  ${missingBase} component(s) have no base`);
