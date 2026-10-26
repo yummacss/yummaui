@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
-import { applyShape, SHAPES } from "../src/utils/shapes.mjs";
+import { applyShape, DEFAULT_SHAPE, SHAPES } from "../src/utils/shapes.mjs";
 import { rootDir } from "./helpers";
 
 const out = join(rootDir, "public/ui/registry");
@@ -26,7 +26,9 @@ describe("registry json", () => {
 				const base = read(`${id}.json`);
 				const shaped = read(`${shape}/${id}.json`);
 				expect(shaped.files[0].content, `${shape}/${id}`).toBe(
-					applyShape(base.files[0].content, shape),
+					shape === DEFAULT_SHAPE
+						? base.files[0].content
+						: applyShape(base.files[0].content, shape),
 				);
 				expect({ ...shaped, files: [] }).toEqual({ ...base, files: [] });
 			}

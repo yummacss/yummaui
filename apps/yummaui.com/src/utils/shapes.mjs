@@ -39,6 +39,8 @@ export function applyShape(source, shape) {
 /** The shape props a component needs to look like `shape`, past its defaults. */
 export function shapeProps(props, shape) {
 	const out = {};
+	// the default keeps each component's own, so an avatar stays round
+	if (shape === DEFAULT_SHAPE) return out;
 	for (const prop of props) {
 		if (prop.name !== "shape" && prop.name !== "iconShape") continue;
 		const target = pickShape(prop.values ?? [], shape);
