@@ -184,12 +184,9 @@ describe("styles", () => {
 				readFileSync(join(rootDir, "src/registry/meta", `${id}.json`), "utf8"),
 			).props;
 		expect(styleProps(read("button"), "compact", "small")).toEqual({
-			shape: "rounded",
 			size: "sm",
 		});
-		expect(styleProps(read("button"), "squircle", "large")).toEqual({
-			shape: "squircle",
-		});
+		expect(styleProps(read("button"), "squircle", "large")).toEqual({});
 		expect(styleProps(read("button"), "compact", "none")).toEqual({
 			shape: "square",
 			size: "sm",

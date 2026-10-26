@@ -25,6 +25,7 @@ const SIZES: Record<Size, { pad: string; text: string; icon: string }> = {
 
 interface ColorSet {
   subtleBg: string;
+  subtleBorder: string;
   subtleText: string;
   subtleHover: string;
   solidBg: string;
@@ -37,6 +38,7 @@ interface ColorSet {
 const INTENTS = {
   neutral: {
     subtleBg: "bg:well",
+    subtleBorder: "bc:rim",
     subtleText: "c:hint",
     subtleHover: "h:bg:rim",
     solidBg: "bg:fill",
@@ -47,6 +49,7 @@ const INTENTS = {
   },
   info: {
     subtleBg: "bg:blue-1",
+    subtleBorder: "bc:blue-3",
     subtleText: "c:blue-7",
     subtleHover: "h:bg:blue-2",
     solidBg: "bg:blue",
@@ -57,6 +60,7 @@ const INTENTS = {
   },
   success: {
     subtleBg: "bg:green-1",
+    subtleBorder: "bc:green-3",
     subtleText: "c:green-7",
     subtleHover: "h:bg:green-2",
     solidBg: "bg:green",
@@ -67,6 +71,7 @@ const INTENTS = {
   },
   warning: {
     subtleBg: "bg:orange-1",
+    subtleBorder: "bc:orange-3",
     subtleText: "c:orange-7",
     subtleHover: "h:bg:orange-2",
     solidBg: "bg:orange",
@@ -77,6 +82,7 @@ const INTENTS = {
   },
   danger: {
     subtleBg: "bg:red-1",
+    subtleBorder: "bc:red-3",
     subtleText: "c:red-7",
     subtleHover: "h:bg:red-2",
     solidBg: "bg:red",
@@ -89,8 +95,6 @@ const INTENTS = {
 
 type Intent = keyof typeof INTENTS;
 
-const SOLID_BEVEL =
-  "bw:1 btc:white/25 blc:black/15 brc:black/15 bbc:black/30 bs-o:xs";
 
 export interface BadgeProps {
   /** The badge's label. */
@@ -161,7 +165,7 @@ export default function BadgeBase({
   children,
   tone = "outline",
   intent = "neutral",
-  shape = "rounded",
+  shape = "squircle",
   size = "md",
   icon,
   iconPosition = "leading",
@@ -180,10 +184,10 @@ export default function BadgeBase({
     pad,
     SHAPES[shape],
     tone === "outline"
-      ? "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs bw:1"
+      ? "bg:raised bc:rim bw:1"
       : tone === "subtle"
-        ? [INTENTS[intent].subtleBg, "bw:0"].join(" ")
-        : [INTENTS[intent].solidBg, SOLID_BEVEL].join(" "),
+        ? [INTENTS[intent].subtleBg, INTENTS[intent].subtleBorder, "bw:1"].join(" ")
+        : [INTENTS[intent].solidBg, "bw:1 bc:transparent"].join(" "),
     className,
   );
 

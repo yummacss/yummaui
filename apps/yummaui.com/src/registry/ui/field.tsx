@@ -37,8 +37,7 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 const FOCUS_WITHIN = "fw:os:s fw:ow:3 fw:oo:0 fw:oc:focus/40 fw:bc:focus";
 
 const STATUS_BORDER: Record<Status, string> = {
-  // recessed: the top edge darker than the bottom
-  default: "btc:shadow blc:line brc:line bbc:rim",
+  default: "bc:rim",
   error: "bc:red-5",
   success: "bc:green-5",
 };
@@ -156,7 +155,7 @@ export default function FieldBase({
   error,
   success,
   size = "md",
-  shape = "rounded",
+  shape = "squircle",
   icon,
   iconPosition = "leading",
   iconInteractive = false,

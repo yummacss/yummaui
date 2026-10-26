@@ -97,9 +97,13 @@ export function applyStyle(source, style, radius) {
 	const shapes = unionOf(source, "Shape");
 	const shape = radius === "none" ? "square" : (entry.shape ?? "rounded");
 	if (shapes.includes(shape)) {
+		// a squircle default is the house look: only no radius squares it
 		out = out.replace(
-			/^(\s*)(shape|iconShape) = "rounded",$/gm,
-			`$1$2 = "${shape}",`,
+			/^(\s*)(shape|iconShape) = "(rounded|squircle)",$/gm,
+			(line, indent, name, current) =>
+				current === "squircle" && radius !== "none"
+					? line
+					: `${indent}${name} = "${shape}",`,
 		);
 	}
 
@@ -133,7 +137,9 @@ export function styleProps(props, style, radius) {
 		const values = prop.values ?? [];
 		if (
 			(prop.name === "shape" || prop.name === "iconShape") &&
-			prop.default === "rounded" &&
+			(prop.default === "rounded" ||
+				(prop.default === "squircle" && radius === "none")) &&
+			prop.default !== shape &&
 			values.includes(shape)
 		) {
 			out[prop.name] = shape;

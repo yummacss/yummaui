@@ -90,7 +90,7 @@ export default function SwitchBase({
   onCheckedChange,
   icon,
   size = "md",
-  shape = "rounded",
+  shape = "squircle",
   disabled = false,
   animated = true,
   className,
@@ -122,7 +122,7 @@ export default function SwitchBase({
   );
 
   const thumbClasses = [
-    "bg:knob bw:1 btc:white blc:black/10 brc:black/10 bbc:black/20 bs-o:sm",
+    "bg:knob",
     thumb,
     SHAPES[shape],
   ].join(" ");
