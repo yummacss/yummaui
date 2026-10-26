@@ -11,10 +11,10 @@ type Tint = "blue" | "mint" | "indigo" | "slate";
 const ROOT = "d:if o:h ai:c jc:c va:m us:none";
 
 const TINTS: Record<Tint, { bg: string; fg: string }> = {
-  blue: { bg: "bg:blue-9 bc:blue-8", fg: "c:white" },
-  mint: { bg: "bg:mint-8 bc:mint-7", fg: "c:white" },
-  indigo: { bg: "bg:indigo-8 bc:indigo-7", fg: "c:white" },
-  slate: { bg: "bg:slate-10 bc:slate-9", fg: "c:white" },
+  blue: { bg: "bg:blue-9 bc:blue-9", fg: "c:white" },
+  mint: { bg: "bg:mint-8 bc:mint-8", fg: "c:white" },
+  indigo: { bg: "bg:indigo-8 bc:indigo-8", fg: "c:white" },
+  slate: { bg: "bg:slate-10 bc:slate-10", fg: "c:white" },
 };
 
 const SIZES: Record<Size, string> = {
@@ -118,7 +118,7 @@ export default function AvatarBase({
   src,
   name,
   size = "md",
-  shape = "squircle",
+  shape = "circle",
   status = "none",
   badge = false,
   badgeIcon,

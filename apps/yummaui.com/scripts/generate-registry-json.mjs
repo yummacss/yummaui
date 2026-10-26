@@ -11,7 +11,7 @@ import {
 import { basename, join } from "node:path";
 import { targetPath } from "../src/utils/install.mjs";
 import { ROLES } from "../src/utils/roles.mjs";
-import { applyShape, SHAPES } from "../src/utils/shapes.mjs";
+import { applyShape, DEFAULT_SHAPE, SHAPES } from "../src/utils/shapes.mjs";
 import config from "../yumma.config.mjs";
 import { componentSlugs, splitId } from "./lib/registry-ids.mjs";
 
@@ -188,7 +188,13 @@ for (const id of published) {
 		mkdirSync(dir, { recursive: true });
 		const shaped = {
 			...entry,
-			files: [{ ...entry.files[0], content: applyShape(source, shape) }],
+			files: [
+				{
+					...entry.files[0],
+					// the default keeps each component's own, as the site does
+					content: shape === DEFAULT_SHAPE ? source : applyShape(source, shape),
+				},
+			],
 		};
 		writeFileSync(
 			join(dir, `${id}.json`),

@@ -3,18 +3,22 @@
 
 export const SHAPES = ["none", "rounded", "squircle", "pill"];
 
-export const DEFAULT_SHAPE = "pill";
+export const DEFAULT_SHAPE = "squircle";
 
 const NEAREST = {
 	none: ["square"],
 	rounded: ["rounded"],
 	squircle: ["squircle", "rounded"],
-	pill: ["pill", "squircle", "rounded"],
+	pill: ["pill", "circle", "squircle", "rounded"],
 };
 
 /** The value a component with `values` takes for `shape`, if any. */
 export function pickShape(values, shape) {
-	return (NEAREST[shape] ?? []).find((value) => values.includes(value)) ?? null;
+	// circle is a radius only beside squircle; Skeleton's circle is a size too
+	const radii = values.includes("squircle")
+		? values
+		: values.filter((value) => value !== "circle");
+	return (NEAREST[shape] ?? []).find((value) => radii.includes(value)) ?? null;
 }
 
 function unionOf(source, type) {
@@ -35,6 +39,8 @@ export function applyShape(source, shape) {
 /** The shape props a component needs to look like `shape`, past its defaults. */
 export function shapeProps(props, shape) {
 	const out = {};
+	// the default keeps each component's own, so an avatar stays round
+	if (shape === DEFAULT_SHAPE) return out;
 	for (const prop of props) {
 		if (prop.name !== "shape" && prop.name !== "iconShape") continue;
 		const target = pickShape(prop.values ?? [], shape);
