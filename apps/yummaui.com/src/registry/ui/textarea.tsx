@@ -19,7 +19,7 @@ const SHAPES: Record<Shape, string> = {
 };
 
 const STATUS_BORDER: Record<Status, string> = {
-  default: "btc:shadow blc:line brc:line bbc:rim",
+  default: "bc:rim",
   error: "bc:red-5",
   success: "bc:green-5",
 };

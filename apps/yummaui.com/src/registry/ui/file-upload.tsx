@@ -321,7 +321,7 @@ export default function FileUploadBase({
         <div
           key={row.id}
           className={merge(
-            "d:f ai:c g:3 px:2 py:2 bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs",
+            "d:f ai:c g:3 px:2 py:2 bw:1 bg:raised bc:rim",
             ROW_SHAPES[shape],
           )}
         >
@@ -364,7 +364,7 @@ export default function FileUploadBase({
               onClick={() => remove(row.id)}
               className={merge(
                 outline,
-                "d:f ai:c jc:c w:8 h:8 p:0 bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label c:p h:bg:well",
+                "d:f ai:c jc:c w:8 h:8 p:0 bw:1 bg:raised bc:rim c:label c:p h:bg:well",
                 TILE_SHAPES[shape],
               )}
             >

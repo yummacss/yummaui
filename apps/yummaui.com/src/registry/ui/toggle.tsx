@@ -38,13 +38,13 @@ const LABELLED: Record<Size, string> = {
 const DISABLED = "bw:1 bc:line bg:well c:hint o:60";
 
 // pressed sinks in: the one place an inset shadow belongs
-const PRESSED = "bg:well bs-i:md btc:shadow blc:line brc:line bbc:rim c:check";
+const PRESSED = "bg:well bc:rim c:check";
 const UNPRESSED =
-  "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well";
+  "bg:raised bc:rim c:label h:bg:well";
 
 // in a group, picking one of several: the selected tab's raised chip on the track
 const GROUP_PRESSED =
-  "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label";
+  "bg:raised bc:rim c:label";
 const GROUP_UNPRESSED = "bg:transparent bc:transparent c:hint h:c:label";
 
 export interface ToggleProps

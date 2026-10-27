@@ -25,7 +25,7 @@ export interface ComboboxGroup {
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const INPUT =
-  "pl:4 pr:16 bg:field btc:shadow blc:line brc:line bbc:rim c:label bw:1 fs:sm";
+  "pl:4 pr:16 bg:field bc:rim c:label bw:1 fs:sm";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8 w:56",
@@ -155,7 +155,7 @@ function renderItem(item: ComboboxItem, shape: Shape) {
       className={(state) =>
         `d:f ai:c g:2 py:2 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[shape]} fs:sm fw:500 us:none c:p ${
           state.highlighted
-            ? "bg:check c:white btc:white/25 blc:black/15 brc:black/15 bbc:black/30"
+            ? "bg:check c:white bc:transparent"
             : "bg:transparent"
         }`
       }
@@ -215,7 +215,7 @@ export default function ComboboxBase({
   const id = useId();
 
   const chipsClasses = merge(
-    "d:f fw:w ai:c g:1 py:1 pl:2 pr:16 bg:field btc:shadow blc:line brc:line bbc:rim c:label bw:1",
+    "d:f fw:w ai:c g:1 py:1 pl:2 pr:16 bg:field bc:rim c:label bw:1",
     CHIPS_SIZES[size],
     SHAPES[shape],
     className,
@@ -297,7 +297,7 @@ export default function ComboboxBase({
                     {toChips(selected).map((chip) => (
                       <Combobox.Chip
                         key={chip}
-                        className="d:f ai:c g:1 px:2 py:0 h:6 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label bw:1 fs:xs fw:500"
+                        className="d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500"
                       >
                         {chip}
                         <Combobox.ChipRemove

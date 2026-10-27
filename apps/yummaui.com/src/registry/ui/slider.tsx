@@ -17,7 +17,7 @@ const FOCUS = "os:s ow:3 oo:0 oc:focus/40";
 
 // the knob, centered on the value and overhanging the bar, as a switch thumb
 const THUMB =
-  "w:5 h:5 bg:knob bw:1 btc:white blc:black/10 brc:black/10 bbc:black/20 bs-o:sm";
+  "w:5 h:5 bg:knob bw:1 bc:rim";
 
 function defaultFormat(value: Value): ReactNode {
   return Array.isArray(value) ? `${value[0]} - ${value[1]}` : `${value}%`;
