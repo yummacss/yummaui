@@ -26,7 +26,7 @@ export interface SelectGroup {
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const TRIGGER =
-  "d:f ai:c jc:sb bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label us:none c:p";
+  "d:f ai:c jc:sb bw:1 bg:raised bc:rim c:label us:none c:p";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8 w:56 px:3 fs:sm",
@@ -72,7 +72,7 @@ function renderOption(option: SelectOption, shape: Shape) {
       className={(state) =>
         `d:f ai:c g:3 py:2 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[shape]} fs:sm fw:500 us:none c:p c:label ${
           state.highlighted
-            ? "bg:check c:white btc:white/25 blc:black/15 brc:black/15 bbc:black/30"
+            ? "bg:check c:white bc:transparent"
             : "bg:transparent"
         }`
       }

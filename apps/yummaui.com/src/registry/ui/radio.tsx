@@ -44,10 +44,9 @@ const LINE: Record<Size, string> = {
 
 const ROUND = "br:9999";
 
-// a picked circle is raised and bevelled, an empty one sits recessed
 const PICKED =
-  "bw:1 bg:check btc:white/25 blc:black/15 brc:black/15 bbc:black/30";
-const UNPICKED = "bw:1 bg:field btc:shadow blc:line brc:line bbc:rim";
+  "bw:1 bg:check bc:transparent";
+const UNPICKED = "bw:1 bg:field bc:rim";
 
 export interface RadioProps {
   /**
@@ -116,7 +115,7 @@ export default function RadioBase({
 
   const dotClasses = (checked: boolean) =>
     checked
-      ? `${DOT_SIZES[size]} ${ROUND} bg:white bs-o:xs ${animated ? "tp:t tdu:350 ttf:out-back @st:s:0 @prm:tp:none" : ""}`
+      ? `${DOT_SIZES[size]} ${ROUND} bg:white ${animated ? "tp:t tdu:350 ttf:out-back @st:s:0 @prm:tp:none" : ""}`
       : "d:none";
 
   return (

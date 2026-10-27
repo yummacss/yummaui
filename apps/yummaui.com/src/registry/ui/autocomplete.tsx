@@ -24,7 +24,7 @@ export interface AutocompleteGroup {
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const INPUT =
-  "bg:field btc:shadow blc:line brc:line bbc:rim c:label bw:1 fs:sm";
+  "bg:field bc:rim c:label bw:1 fs:sm";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8 w:56",
@@ -164,7 +164,7 @@ function renderItem(item: AutocompleteItem, shape: Shape, query: string) {
           {...props}
           className={`d:f ai:c g:3 py:2 px:3 mx:1 bw:1 bc:transparent c:label ${ITEM_SHAPES[shape]} fs:sm us:none c:p ${
             state.highlighted
-              ? "bg:check c:white btc:white/25 blc:black/15 brc:black/15 bbc:black/30"
+              ? "bg:check c:white bc:transparent"
               : "bg:transparent"
           }`}
         >

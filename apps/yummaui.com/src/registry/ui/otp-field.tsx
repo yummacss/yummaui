@@ -12,9 +12,8 @@ type ValidationType = "numeric" | "alpha" | "alphanumeric";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
-// each slot sits recessed
 const SLOT =
-  "p:0 bw:1 bg:field btc:shadow blc:line brc:line bbc:rim c:label ta:c fw:600 tp:c tdu:150 ttf:io";
+  "p:0 bw:1 bg:field bc:rim c:label ta:c fw:600 tp:c tdu:150 ttf:io";
 
 const SLOT_SIZES: Record<Size, string> = {
   sm: "w:8 h:9 fs:md",

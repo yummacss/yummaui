@@ -44,10 +44,9 @@ const SHAPES: Record<Shape, string> = {
   squircle: "br:xxl cs:s",
 };
 
-// a ticked box is raised and bevelled, an empty one sits recessed
 const CHECKED =
-  "bw:1 bg:check btc:white/25 blc:black/15 brc:black/15 bbc:black/30";
-const UNCHECKED = "bw:1 bg:field btc:shadow blc:line brc:line bbc:rim";
+  "bw:1 bg:check bc:transparent";
+const UNCHECKED = "bw:1 bg:field bc:rim";
 
 export interface CheckboxProps
   extends Omit<ComponentProps<typeof Checkbox.Root>, "className"> {
@@ -165,7 +164,7 @@ export default function CheckboxBase({
             "d:f ai:c g:3 w:100% px:2 py:2 bw:1 br:lg us:none tp:c tdu:150 ttf:io",
             disabled ? "o:60 c:na" : "c:p",
             state.checked
-              ? "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs"
+              ? "bg:raised bc:rim"
               : "bg:transparent bc:transparent",
             className,
           )

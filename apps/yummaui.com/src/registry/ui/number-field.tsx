@@ -14,10 +14,9 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 // the box draws focus for its input, so the outline wraps the value
 const BOX_FOCUS = "fw:os:s fw:ow:3 fw:oo:0 fw:oc:focus/40 fw:bc:focus";
 
-// minus and plus are raised, the value between them sits recessed
 const STEP =
-  "d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label us:none c:p h:bg:well";
-const BOX = "d:f bw:1 bg:field btc:shadow blc:line brc:line bbc:rim";
+  "d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bc:rim c:label us:none c:p h:bg:well";
+const BOX = "d:f bw:1 bg:field bc:rim";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8",
