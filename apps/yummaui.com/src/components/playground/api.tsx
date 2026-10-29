@@ -1,12 +1,13 @@
 "use client";
 
-import { Button } from "@base-ui/react";
+import { Collapsible } from "@base-ui/react/collapsible";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { BaseUI } from "@/components/icons/icons";
 import { usePlayground } from "@/components/playground/context";
 import { EnumSelect, SwatchSelect } from "@/components/playground/control";
 import PropDescription from "@/components/prop-description";
+import { NavArrowDown } from "@/icons";
 import { getRegistryTarget } from "@/registry";
 import { ACCENTS, accentBars } from "@/utils/accent";
 import { type Primitives, primitiveSlug } from "@/utils/primitive";
@@ -14,32 +15,31 @@ import { inTableOrder, typeOf } from "@/utils/props";
 import { SCHEMES, type Scheme } from "@/utils/scheme";
 import { SHAPES } from "@/utils/shapes.mjs";
 
-/** A description's first sentence, with the rest a press away. */
+/** A description's first sentence, opening on a press to the rest. */
 function Summary({ text }: { text?: string }) {
 	const [open, setOpen] = useState(false);
 	if (!text) return null;
 	const [lead, ...rest] = text.split(/(?<=\.)\s+(?=[A-Z`])/);
 	const more = rest.join(" ");
+	if (!more) return <PropDescription text={lead} />;
 
 	return (
-		<>
-			<PropDescription text={lead} />
-			{open && (
-				<>
-					{" "}
+		<Collapsible.Root open={open} onOpenChange={setOpen}>
+			<Collapsible.Trigger className="d:f ai:fs jc:sb g:3 w:100% p:0 bw:0 bg:transparent c:ink/80 ta:l c:p fv:os:s fv:ow:2 fv:oo:2 fv:oc:accent">
+				<span>
+					<PropDescription text={lead} />
+				</span>
+				<NavArrowDown
+					aria-hidden
+					className={`fs:0 w:3 h:3 mt:1 tp:t tdu:150 @prm:tp:none ${open ? "ro:36 c:accent" : "c:ink/40"}`}
+				/>
+			</Collapsible.Trigger>
+			<Collapsible.Panel className="h:var(--collapsible-panel-height) o:h tp:a tdu:250 ttf:out-quart opening:h:0 opening:o:0 closing:h:0 closing:o:0 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none">
+				<p className="m:0 pt:1">
 					<PropDescription text={more} />
-				</>
-			)}
-			{more && (
-				<Button
-					onClick={() => setOpen(!open)}
-					aria-expanded={open}
-					className="ml:2 p:0 bw:0 bg:transparent c:accent fs:sm c:p h:td:u fv:os:s fv:ow:2 fv:oc:accent"
-				>
-					{open ? "Less" : "More"}
-				</Button>
-			)}
-		</>
+				</p>
+			</Collapsible.Panel>
+		</Collapsible.Root>
 	);
 }
 
