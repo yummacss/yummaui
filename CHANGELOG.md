@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-10-29
+
+### Added
+
+- `add --shape` takes `none`, `rounded`, `squircle` or `pill`, and a `shape`
+  field in `yummaui.json` sets it for every `add`.
+
+### Changed
+
+- Components are flat, with squircle corners by default.
+
+### Removed
+
+- `--style` and `--radius`, and the `style` and `radius` fields in
+  `yummaui.json`.
+
 ## [0.8.0] - 2026-10-26
 
 ### Added
@@ -122,7 +138,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/yummacss/yummaui/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/yummacss/yummaui/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/yummacss/yummaui/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/yummacss/yummaui/compare/v0.5.1...v0.6.0
