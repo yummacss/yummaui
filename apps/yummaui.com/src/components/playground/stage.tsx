@@ -1,15 +1,15 @@
 "use client";
 
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
-import { Toggle } from "@base-ui/react/toggle";
-import { ToggleGroup } from "@base-ui/react/toggle-group";
+import { Dialog } from "@base-ui/react/dialog";
+import { Resizable } from "re-resizable";
 import type { ComponentType, ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
-import { Desktop, Phone, Tablet } from "@/icons";
+import { Sliders } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -37,29 +37,24 @@ const LANGUAGE: Record<string, string> = {
 	config: "JavaScript",
 };
 
-// a block previews at a device's width, its frame centered in the stage
-const WIDTHS = [
-	{ value: "desktop", label: "Desktop", Icon: Desktop, className: "w:100%" },
-	{
-		value: "tablet",
-		label: "Tablet",
-		Icon: Tablet,
-		className: "w:100% max-w:192",
-	},
-	{ value: "phone", label: "Phone", Icon: Phone, className: "w:100% max-w:98" },
-];
+// a block's frame drags narrower from its right edge, snapping to phone & tablet
+const SNAP = [390, 768];
 
-const WIDTH_BUTTON =
-	"d:f ai:c jc:c w:8 h:8 p:0 bw:0 c:p h:c:ink fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
+const TOOL =
+	"d:f ai:c g:2 h:8 px:3 bw:0 bg:transparent c:ink/60 fs:xs ff:m c:p h:c:ink fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
 
 export default function ComponentPlayground({
 	block = false,
+	api,
 }: {
 	block?: boolean;
+	/** A block's Look & Component API, opened in a drawer from the toolbar. */
+	api?: ReactNode;
 }) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
-	const [width, setWidth] = useState("desktop");
+	const [width, setWidth] = useState<number | null>(null);
+	const [resizing, setResizing] = useState(false);
 
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
@@ -90,46 +85,88 @@ export default function ComponentPlayground({
 						{config && <FileTab value="config">yumma.config.mjs</FileTab>}
 					</BaseTabs.List>
 					<div className="d:f ai:c jc:fe f:1 pr:1 bbw:1 bc:border">
-						{block && active === "preview" && (
-							<ToggleGroup
-								value={[width]}
-								onValueChange={(next) => next[0] && setWidth(next[0])}
-								aria-label="Preview width"
-								className="d:f g:1"
-							>
-								{WIDTHS.map(({ value, label, Icon }) => (
-									<Toggle
-										key={value}
-										value={value}
-										aria-label={label}
-										className={(state) =>
-											`${WIDTH_BUTTON} ${state.pressed ? "c:ink bg:ink/5" : "c:ink/50 bg:transparent"}`
-										}
-									>
-										<Icon className="w:4 h:4" />
-									</Toggle>
-								))}
-							</ToggleGroup>
+						{block && active === "preview" && width !== null && (
+							<span className="px:2 c:ink/50 fs:xs ff:m fvn:tn">{width}px</span>
+						)}
+						{block && api && (
+							<Dialog.Root>
+								<Dialog.Trigger className={TOOL}>
+									<Sliders className="w:4 h:4" />
+									Component API
+								</Dialog.Trigger>
+								<Dialog.Portal>
+									<Dialog.Backdrop className="p:f i:0 zi:40 bg:ink/20" />
+									<Dialog.Popup className="p:f t:0 r:0 b:0 zi:50 d:f fd:c g:4 w:104 max-w:100% p:6 oy:auto bg:page blw:1 bc:border">
+										<div className="d:f ai:c jc:sb">
+											<Dialog.Title className="m:0 ff:display fs:xl fw:400 c:ink">
+												Component API
+											</Dialog.Title>
+											<Dialog.Close className={TOOL}>Close</Dialog.Close>
+										</div>
+										{api}
+									</Dialog.Popup>
+								</Dialog.Portal>
+							</Dialog.Root>
 						)}
 					</div>
 				</div>
 
 				<TabsPanel
 					value="preview"
-					className={block ? `${FILL} ai:c bg:ink/3` : FILL}
+					className={block ? `${FILL} bg:ink/3` : FILL}
 				>
-					<PreviewFrame
-						className={
-							block
-								? `f:1 min-h:0 bg:page ${WIDTHS.find((entry) => entry.value === width)?.className}`
-								: "f:1 min-h:0"
-						}
-						minHeight={0}
-						fill
-						accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
-					>
-						<Scene scene={scene} shape={shape} />
-					</PreviewFrame>
+					{block ? (
+						<Resizable
+							defaultSize={{ width: "100%", height: "100%" }}
+							minWidth={320}
+							maxWidth="100%"
+							enable={{ right: true }}
+							snap={{ x: SNAP }}
+							snapGap={32}
+							onResizeStart={() => setResizing(true)}
+							onResize={(_event, _direction, element) =>
+								setWidth(element.offsetWidth)
+							}
+							onResizeStop={(_event, _direction, element) => {
+								setResizing(false);
+								setWidth(element.offsetWidth);
+							}}
+							handleComponent={{
+								right: (
+									<span className="d:f ai:c jc:c w:100% h:100% c:er">
+										<span className="w:1 h:10 br:9999 bg:ink/30" />
+									</span>
+								),
+							}}
+							className="d:f fd:c brw:1 bc:border"
+						>
+							<PreviewFrame
+								className={
+									block
+										? `f:1 min-h:0 bg:page ${resizing ? "pe:none" : ""}`
+										: "f:1 min-h:0"
+								}
+								minHeight={0}
+								fill
+								accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
+							>
+								<Scene scene={scene} shape={shape} />
+							</PreviewFrame>
+						</Resizable>
+					) : (
+						<PreviewFrame
+							className={
+								block
+									? `f:1 min-h:0 bg:page ${resizing ? "pe:none" : ""}`
+									: "f:1 min-h:0"
+							}
+							minHeight={0}
+							fill
+							accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
+						>
+							<Scene scene={scene} shape={shape} />
+						</PreviewFrame>
+					)}
 				</TabsPanel>
 
 				<TabsPanel value="code" className={FILL}>

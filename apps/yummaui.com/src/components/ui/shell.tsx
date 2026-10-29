@@ -56,8 +56,16 @@ export default function UIShell({
 			>
 				<article className="d:f fd:c f:1 min-h:0">
 					{children}
-					{playground && <ComponentPlayground block={block} />}
-					{block && <PlaygroundRail primitives={primitives} inline />}
+					{playground && (
+						<ComponentPlayground
+							block={block}
+							api={
+								block ? (
+									<PlaygroundRail primitives={primitives} inline />
+								) : undefined
+							}
+						/>
+					)}
 				</article>
 			</div>
 

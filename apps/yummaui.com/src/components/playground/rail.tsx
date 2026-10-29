@@ -79,7 +79,7 @@ export default function PlaygroundRail({
 
 	if (inline) {
 		return (
-			<div className="d:g gtc:1 g:10 mt:10 @lg:gtc:2">
+			<div className="d:f fd:c g:8">
 				{playground && <Look />}
 				{api}
 			</div>
