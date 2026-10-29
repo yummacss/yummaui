@@ -1,7 +1,8 @@
 "use client";
 
+import { Button } from "@base-ui/react";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { BaseUI } from "@/components/icons/icons";
 import { usePlayground } from "@/components/playground/context";
 import { EnumSelect, SwatchSelect } from "@/components/playground/control";
@@ -12,6 +13,35 @@ import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { inTableOrder, typeOf } from "@/utils/props";
 import { SCHEMES, type Scheme } from "@/utils/scheme";
 import { SHAPES } from "@/utils/shapes.mjs";
+
+/** A description's first sentence, with the rest a press away. */
+function Summary({ text }: { text?: string }) {
+	const [open, setOpen] = useState(false);
+	if (!text) return null;
+	const [lead, ...rest] = text.split(/(?<=\.)\s+(?=[A-Z`])/);
+	const more = rest.join(" ");
+
+	return (
+		<>
+			<PropDescription text={lead} />
+			{open && (
+				<>
+					{" "}
+					<PropDescription text={more} />
+				</>
+			)}
+			{more && (
+				<Button
+					onClick={() => setOpen(!open)}
+					aria-expanded={open}
+					className="ml:2 p:0 bw:0 bg:transparent c:accent fs:sm c:p h:td:u fv:os:s fv:ow:2 fv:oc:accent"
+				>
+					{open ? "Less" : "More"}
+				</Button>
+			)}
+		</>
+	);
+}
 
 /** A component's whole Component API, as a table below its preview. */
 export function ApiTable({ primitives }: { primitives: Primitives }) {
@@ -83,13 +113,13 @@ export function ApiTable({ primitives }: { primitives: Primitives }) {
 										)}
 									</td>
 									<td className={`${td} d:none @md:d:tc`}>
-										<PropDescription text={prop.description} />
+										<Summary text={prop.description} />
 									</td>
 								</tr>
 								{/* below @md the description takes a row of its own */}
 								<tr className="@md:d:none">
 									<td colSpan={3} className={td}>
-										<PropDescription text={prop.description} />
+										<Summary text={prop.description} />
 									</td>
 								</tr>
 							</Fragment>
