@@ -33,12 +33,12 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 const BUTTON =
   "d:if ai:c jc:c g:2 px:4 py:2 bw:1 fs:sm fw:600 tp:c tdu:150 ttf:io us:none c:p";
 const RAISED =
-  "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well";
+  "bg:raised bc:rim c:label h:bg:well";
 const FILLED =
-  "bg:fill btc:white/20 blc:black/40 brc:black/40 bbc:black/60 bs-o:sm h:o:90 c:on-fill";
+  "bg:fill bc:fill h:o:90 c:on-fill";
 
 // a picked choice sinks in, like a pressed toggle
-const PICKED = "bg:well bs-i:md btc:shadow blc:line brc:line bbc:rim c:check";
+const PICKED = "bg:well bc:rim c:check";
 
 export interface OnboardingChoice {
   id: string;

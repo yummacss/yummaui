@@ -90,42 +90,38 @@ is written.
   has no `shape` prop at all. Ask that question before adding one.
 - `tests/registry.test.ts` holds the mechanical half.
 
-## Tactile
+## Look
 
+- Flat: one border, no bevel, no gradient. Squircle is the default shape;
+  a component can keep its own, as Avatar keeps `circle`.
 - Colors are roles, not palette shades: `raised`, `well`, `field`, `fill`,
-  `on-fill`, `label`, `hint`, `rim`, `shadow`, `line`, `check`, `on`,
-  `knob`, `groove`, `glint` and `focus`, each a light and a Graphite pair in `src/utils/roles.mjs`. A
-  reworked component names roles only, so dark mode follows `color-scheme`
-  with no class of its own. Role values are opaque: a pair drops hex alpha.
-- Ticked and picked are `check` with `btc:white/25 blc:black/15 brc:black/15
-  bbc:black/30`. An on switch is `on`, its thumb `knob`.
-- Raised things (buttons, triggers, tiles, bars) are lighter on top and darker
-  below: `bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs`. Filled ones:
-  `bg:fill c:on-fill btc:white/20 blc:black/40 brc:black/40 bbc:black/60
-  bs-o:sm`, so the bevel works on any accent.
-- Recessed things (inputs, wells) reverse it: `bg:field btc:shadow blc:line
-  brc:line bbc:rim`.
-- Popups float on `bg:raised bc:line bs-o:xl`. A highlighted row is
-  `check` with its bevel and `c:white`, on a `bw:1 bc:transparent` row.
-  Icons and shortcuts in a row are `o:70` of its color, so they turn white
-  with it.
+  `on-fill`, `label`, `hint`, `rim`, `shadow`, `line`, `check`, `on`, `knob`
+  and `focus`, each a light and a Graphite pair in `src/utils/roles.mjs`. A
+  component names roles only, so dark mode follows `color-scheme` with no
+  class of its own. Role values are opaque: a pair drops hex alpha.
+- Surfaces and controls are `bg:raised bw:1 bc:rim`; fields are
+  `bg:field bw:1 bc:rim`. Filled ones are `bg:fill bc:fill c:on-fill`, so the
+  border disappears into any accent.
+- Ticked, picked and highlighted are `check` on `bw:1 bc:transparent`, with
+  `c:white`. An on switch is `on`, its thumb `knob`. Icons and shortcuts in a
+  row are `o:70` of its color, so they turn white with it.
+- Pressed in is an on/off that stays on by itself (Toggle, Toolbar): `bg:well`
+  with `bc:rim`, no inset shadow. Picking one of several is a `raised` chip on
+  a `well` track (Tabs, Toggle Group).
+- Only popups cast a shadow: `bg:raised bc:line bs-o:xl`, `bs-o:md` for a
+  tooltip. A scrim behind a dialog is `bg:shadow/30`. No `shadow` prop.
+- A divider is one line: `h:0 btw:1 bc:line`, or `w:0 blw:1 bc:line`
+  standing up.
 - Focus is `fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus`: a soft
   outline and a darker border, both from the one role.
-- A divider is a groove, a dark line over a lit one: the two borders of an
-  element with no height, `h:0 btw:1 bbw:1 btc:groove bbc:glint`, or
-  `w:0 blw:1 brw:1 blc:groove brc:glint` standing up.
-  Popups stay white, so in light mode the lit line only shows on a well.
-- No inset shadow, except a pressed toggle (Toggle, Toolbar). No `shadow` prop.
-- Pressed in is an on/off that stays on by itself (Toggle, Toolbar). Picking
-  one of several is a raised chip on a track (Tabs, Toggle Group).
-- A bevel names all four sides and never mixes in `bc:` or `bw:`. Yumma sorts
-  its rules by name, so `bc:` would beat `bbc:` and `bw:` would beat `bbw:`.
 - Numbers that change in place (counters, values, sizes) are `fvn:tn`.
 - A shortcut in a row (menus, tooltips) is an outlined keycap in the row's
   color, so it turns white with a highlighted row: `px:1 br:sm bw:1
-  bc:current fs:xs fw:400 lh:4 ff:d`, at `o:70`. In running text, Kbd draws
-  a raised key: the raised bevel on `btw:1 blw:1 brw:1 bbw:3`. `tests/registry.test.ts`
-  holds both.
+  bc:current fs:xs fw:400 lh:4 ff:d`, at `o:70`. In running text, Kbd draws a
+  key 2px deep at the bottom: `btw:1 blw:1 brw:1 bbw:2 bc:rim`.
+  `tests/registry.test.ts` holds both.
+- Yumma sorts its rules by name, so `bw:` beats `bbw:` and `bc:` beats `bbc:`.
+  A border that differs by side names every side.
 
 ## Prop order
 

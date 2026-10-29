@@ -82,7 +82,7 @@ const HANDLE_SHAPES: Record<Shape, string> = {
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const BUTTON =
-  "d:if ai:c jc:c g:2 bw:1 fw:500 tp:c tdu:150 ttf:io us:none bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well";
+  "d:if ai:c jc:c g:2 bw:1 fw:500 tp:c tdu:150 ttf:io us:none bg:raised bc:rim c:label h:bg:well";
 
 const SIZES: Record<Size, string> = {
   sm: "px:3 py:1 fs:xs",
@@ -234,7 +234,7 @@ export default function DrawerBase({
                   <Button
                     className={merge(
                       outline,
-                      "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well",
+                      "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bc:rim c:label h:bg:well",
                       CLOSE_SHAPES[shape],
                     )}
                   />

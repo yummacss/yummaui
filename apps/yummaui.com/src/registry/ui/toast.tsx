@@ -36,14 +36,14 @@ const CLOSE_SHAPES: Record<Shape, string> = {
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const RAISED =
-  "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well";
+  "bg:raised bc:rim c:label h:bg:well";
 
 const DANGER_OUTLINE = "fv:oc:red-2/60 fv:bc:red-3";
 
 const TRIGGER_TONES: Record<TriggerTone, string> = {
   neutral: RAISED,
   danger:
-    "bg:red h:bg:red-8 btc:red-5 blc:red-8 brc:red-8 bbc:red-9 c:white bs-o:sm",
+    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
 };
 
 const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none c:p";

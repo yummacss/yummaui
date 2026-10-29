@@ -114,7 +114,7 @@ export default function EmptyStateBase({
               className={merge(
                 outline,
                 BUTTON_BASE,
-                "g:2 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well",
+                "g:2 bg:raised bc:rim c:label h:bg:well",
               )}
             >
               {secondaryIcon}
@@ -127,7 +127,7 @@ export default function EmptyStateBase({
               className={merge(
                 outline,
                 BUTTON_BASE,
-                "g:2 bg:fill btc:white/20 blc:black/40 brc:black/40 bbc:black/60 bs-o:sm h:o:90 c:on-fill",
+                "g:2 bg:fill bc:fill h:o:90 c:on-fill",
               )}
             >
               {primaryIcon}

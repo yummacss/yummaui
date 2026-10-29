@@ -160,7 +160,7 @@ export default function PopoverBase({
 
   const triggerClasses = merge(
     outline,
-    "d:f ai:c jc:c bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label us:none c:p h:bg:well",
+    "d:f ai:c jc:c bw:1 bg:raised bc:rim c:label us:none c:p h:bg:well",
     TRIGGER_VARIANTS[triggerVariant],
     TRIGGER_SHAPES[shape],
     open ? "bg:well" : "",
