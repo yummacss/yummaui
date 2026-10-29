@@ -1,7 +1,7 @@
 "use client";
 
 import { Collapsible } from "@base-ui/react/collapsible";
-import { IconArchiveFilled, IconChevronRight, IconFileFilled, IconFileTextFilled, IconFolderFilled, IconFolderOpenFilled, IconPhotoFilled, IconTableFilled, IconVideoFilled } from "@tabler/icons-react";
+import { IconChevronRight, IconFile, IconFileTypeCsv, IconFileTypeDoc, IconFileTypePdf, IconFileTypeTxt, IconFileTypeXls, IconFileZip, IconFolder, IconFolderOpen, IconMarkdown, IconMovie, IconPhoto } from "@tabler/icons-react";
 import type { KeyboardEvent } from "react";
 import { useMemo, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -27,15 +27,19 @@ const PICKED =
 
 // a file's icon and tint come from its extension
 const KINDS = [
-  { match: /\.(pdf|txt|md|docx?)$/i, Icon: IconFileTextFilled, tint: "c:blue" },
-  { match: /\.(xlsx?|csv)$/i, Icon: IconTableFilled, tint: "c:mint" },
+  { match: /\.pdf$/i, Icon: IconFileTypePdf, tint: "c:red" },
+  { match: /\.docx?$/i, Icon: IconFileTypeDoc, tint: "c:blue" },
+  { match: /\.txt$/i, Icon: IconFileTypeTxt, tint: "c:blue" },
+  { match: /\.mdx?$/i, Icon: IconMarkdown, tint: "c:blue" },
+  { match: /\.csv$/i, Icon: IconFileTypeCsv, tint: "c:mint" },
+  { match: /\.xlsx?$/i, Icon: IconFileTypeXls, tint: "c:mint" },
   {
     match: /\.(png|jpe?g|gif|webp|svg)$/i,
-    Icon: IconPhotoFilled,
+    Icon: IconPhoto,
     tint: "c:mint",
   },
-  { match: /\.(mov|mp4|webm)$/i, Icon: IconVideoFilled, tint: "c:red" },
-  { match: /\.(zip|gz|7z)$/i, Icon: IconArchiveFilled, tint: "c:yellow" },
+  { match: /\.(mov|mp4|webm)$/i, Icon: IconMovie, tint: "c:red" },
+  { match: /\.(zip|gz|7z)$/i, Icon: IconFileZip, tint: "c:yellow" },
 ];
 
 interface Node {
@@ -204,9 +208,9 @@ export default function FileTree({
       const kind = KINDS.find((entry) => entry.match.test(node.name));
       const Glyph = node.children
         ? isOpen
-          ? IconFolderOpenFilled
-          : IconFolderFilled
-        : (kind?.Icon ?? IconFileFilled);
+          ? IconFolderOpen
+          : IconFolder
+        : (kind?.Icon ?? IconFile);
       const tint = isPicked
         ? "c:white"
         : node.children
