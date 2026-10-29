@@ -9,12 +9,15 @@ import {
 	CaretRightIcon,
 	CaretUpIcon,
 	CheckIcon,
+	CodeIcon,
 	CopyIcon,
 	CubeIcon,
 	DiamondIcon,
+	EyeIcon,
 	FileIcon,
 	FileMdIcon,
 	FolderIcon,
+	GearSixIcon,
 	GithubLogoIcon,
 	MagnifyingGlassIcon,
 	PlusIcon,
@@ -23,6 +26,7 @@ import {
 	TerminalWindowIcon,
 	TextTIcon,
 	TwitterLogoIcon,
+	XIcon,
 } from "@phosphor-icons/react/ssr";
 
 type Props = Omit<IconProps, "weight">;
@@ -36,11 +40,15 @@ const regular = (Glyph: Icon) => {
 
 export const ArrowUpRight = regular(ArrowUpRightIcon);
 export const Check = regular(CheckIcon);
+export const Close = regular(XIcon);
+export const Code = regular(CodeIcon);
 export const ComponentSolid = regular(CubeIcon);
 export const Copy = regular(CopyIcon);
 export const Diamond = regular(DiamondIcon);
+export const Eye = regular(EyeIcon);
 export const FileMd = regular(FileMdIcon);
 export const Folder = regular(FolderIcon);
+export const Gear = regular(GearSixIcon);
 export const GitHub = regular(GithubLogoIcon);
 export const LogOut = regular(SignOutIcon);
 export const LongArrowDownLeftSolid = regular(ArrowElbowDownLeftIcon);

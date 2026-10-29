@@ -1,15 +1,15 @@
 "use client";
 
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
-import { Dialog } from "@base-ui/react/dialog";
+import { Drawer } from "@base-ui/react/drawer";
 import { Resizable } from "re-resizable";
-import type { ComponentType, ReactNode } from "react";
+import type { ComponentType, CSSProperties, ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
-import { Sliders } from "@/icons";
+import { Close, Code, Eye, Gear, Sliders } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -80,33 +80,58 @@ export default function ComponentPlayground({
 			<Tabs value={active} onValueChange={setTab} className={FILL}>
 				<div className="d:f bg:page">
 					<BaseTabs.List className="d:f min-w:0 ox:auto">
-						<FileTab value="preview">Preview</FileTab>
-						<FileTab value="code">page.tsx</FileTab>
-						{config && <FileTab value="config">yumma.config.mjs</FileTab>}
+						<FileTab value="preview" icon={<Eye className="w:4 h:4" />}>
+							Preview
+						</FileTab>
+						<FileTab value="code" icon={<Code className="w:4 h:4" />}>
+							page.tsx
+						</FileTab>
+						{config && (
+							<FileTab value="config" icon={<Gear className="w:4 h:4" />}>
+								yumma.config.mjs
+							</FileTab>
+						)}
 					</BaseTabs.List>
 					<div className="d:f ai:c jc:fe f:1 pr:1 bbw:1 bc:border">
 						{block && active === "preview" && width !== null && (
 							<span className="px:2 c:ink/50 fs:xs ff:m fvn:tn">{width}px</span>
 						)}
 						{block && api && (
-							<Dialog.Root>
-								<Dialog.Trigger className={TOOL}>
+							<Drawer.Root swipeDirection="right">
+								<Drawer.Trigger className={TOOL}>
 									<Sliders className="w:4 h:4" />
 									Component API
-								</Dialog.Trigger>
-								<Dialog.Portal>
-									<Dialog.Backdrop className="p:f i:0 zi:40 bg:ink/20" />
-									<Dialog.Popup className="p:f t:0 r:0 b:0 zi:50 d:f fd:c g:4 w:104 max-w:100% p:6 oy:auto bg:page blw:1 bc:border">
-										<div className="d:f ai:c jc:sb">
-											<Dialog.Title className="m:0 ff:display fs:xl fw:400 c:ink">
-												Component API
-											</Dialog.Title>
-											<Dialog.Close className={TOOL}>Close</Dialog.Close>
-										</div>
-										{api}
-									</Dialog.Popup>
-								</Dialog.Portal>
-							</Dialog.Root>
+								</Drawer.Trigger>
+								<Drawer.Portal>
+									{/* the search dialog's backdrop, so every overlay on the site dims alike */}
+									<Drawer.Backdrop
+										data-chrome
+										className="tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none p:f zi:10 i:0 bg:black/60 bf-b:sm fgr:90"
+									/>
+									<Drawer.Viewport className="d:f p:f i:0 zi:20 jc:fe">
+										<Drawer.Popup
+											data-chrome
+											className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto bg:page blw:1 bc:border os:none tr:var(--drawer-travel) opening:tr:var(--drawer-offstage) closing:tr:var(--drawer-offstage) tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
+											style={
+												{
+													"--drawer-travel": "var(--drawer-swipe-movement-x) 0",
+													"--drawer-offstage": "calc(100% + 2px) 0",
+												} as CSSProperties
+											}
+										>
+											<div className="d:f ai:c jc:sb">
+												<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">
+													Component API
+												</Drawer.Title>
+												<Drawer.Close aria-label="Close" className={TOOL}>
+													<Close className="w:4 h:4" />
+												</Drawer.Close>
+											</div>
+											{api}
+										</Drawer.Popup>
+									</Drawer.Viewport>
+								</Drawer.Portal>
+							</Drawer.Root>
 						)}
 					</div>
 				</div>
@@ -121,6 +146,7 @@ export default function ComponentPlayground({
 							minWidth={320}
 							maxWidth="100%"
 							enable={{ right: true }}
+							handleStyles={{ right: { width: 16, right: -8 } }}
 							snap={{ x: SNAP }}
 							snapGap={32}
 							onResizeStart={() => setResizing(true)}
@@ -133,8 +159,12 @@ export default function ComponentPlayground({
 							}}
 							handleComponent={{
 								right: (
-									<span className="d:f ai:c jc:c w:100% h:100% c:er">
-										<span className="w:1 h:10 br:9999 bg:ink/30" />
+									<span className="d:f ai:c jc:c w:100% h:100% c:er tp:c tdu:150 h:bg:accent/5">
+										<span
+											className={`w:1 h:14 br:9999 tp:a tdu:150 ttf:out-quart ${
+												resizing ? "bg:accent h:20" : "bg:ink/25"
+											}`}
+										/>
 									</span>
 								),
 							}}
@@ -193,7 +223,15 @@ export default function ComponentPlayground({
 	);
 }
 
-function FileTab({ value, children }: { value: string; children: ReactNode }) {
+function FileTab({
+	value,
+	icon,
+	children,
+}: {
+	value: string;
+	icon: ReactNode;
+	children: ReactNode;
+}) {
 	return (
 		<BaseTabs.Tab
 			value={value}
@@ -202,7 +240,10 @@ function FileTab({ value, children }: { value: string; children: ReactNode }) {
 			}
 			style={{ fontFamily: "inherit" }}
 		>
-			{children}
+			<span className="d:f ai:c g:2">
+				{icon}
+				{children}
+			</span>
 		</BaseTabs.Tab>
 	);
 }
