@@ -4,7 +4,7 @@ import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 import { Drawer } from "@base-ui/react/drawer";
 import { Resizable } from "re-resizable";
 import type { ComponentType, ReactNode } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
@@ -59,6 +59,21 @@ export default function ComponentPlayground({
 	const [tab, setTab] = useState("preview");
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
+	// the snap point the edge just landed on, lit for a moment
+	const [flash, setFlash] = useState<number | null>(null);
+	const snapped = useRef<number | null>(null);
+	const flashTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+	const track = (next: number) => {
+		setWidth(next);
+		const point = SNAP.find((snap) => snap.width === next)?.width ?? null;
+		if (point !== null && point !== snapped.current) {
+			setFlash(point);
+			clearTimeout(flashTimer.current);
+			flashTimer.current = setTimeout(() => setFlash(null), 120);
+		}
+		snapped.current = point;
+	};
 
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
@@ -179,6 +194,14 @@ export default function ComponentPlayground({
 											near ? "bc:accent" : "bc:ink/10"
 										}`}
 									>
+										{/* lights at once on a snap, then fades */}
+										<span
+											className={`p:a t:0 b:0 w:2 ml:-1 bg:accent tp:o @prm:tp:none ${
+												flash === point.width
+													? "o:60"
+													: "o:0 tdu:500 ttf:out-quart"
+											}`}
+										/>
 										<span
 											className={`p:a t:2 l:2 fs:xs ff:m ws:nw tp:c tdu:150 ${
 												near ? "c:accent" : "c:ink/40"
@@ -201,12 +224,14 @@ export default function ComponentPlayground({
 							snapGap={SNAP_GAP}
 							onResizeStart={() => setResizing(true)}
 							onResize={(_event, _direction, element) =>
-								setWidth(element.offsetWidth)
+								track(element.offsetWidth)
 							}
 							onResizeStop={(_event, _direction, element) => {
 								setResizing(false);
-								setWidth(element.offsetWidth);
+								track(element.offsetWidth);
 							}}
+							// a phone has no room to drag, so the handle is a tablet & desktop thing
+							handleClasses={{ right: "d:none @md:d:b" }}
 							// the grip alone resizes, inset from the frame's edge
 							handleStyles={{
 								right: {
