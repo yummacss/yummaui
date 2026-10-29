@@ -32,7 +32,10 @@ describe("preview accent", () => {
 			expect(shade).toBeGreaterThanOrEqual(6);
 			expect(shade).toBeLessThan(12);
 		}
-		expect(accentCss("indigo")).toContain("background-color: #5558cf;");
+		const indigo = generateShades(colorTheme.indigo);
+		expect(accentCss("indigo")).toContain(
+			`background-color: ${indigo[accentShade(indigo)]};`,
+		);
 	});
 
 	it("covers every family Yumma ships", () => {
@@ -43,7 +46,7 @@ describe("preview accent", () => {
 			if (family === DEFAULT_ACCENT) continue;
 			const css = accentCss(family);
 			expect(css.split("\n")).toHaveLength(ACCENT_CLASSES.length);
-			expect(css).toMatch(/#[0-9a-f]{6}/i);
+			expect(css).toMatch(/oklch\(/);
 			const selectors = css
 				.split("\n")
 				.map((rule) => rule.slice(0, rule.indexOf(" {")));

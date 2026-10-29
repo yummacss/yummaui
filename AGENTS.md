@@ -98,7 +98,7 @@ is written.
   `on-fill`, `label`, `hint`, `rim`, `shadow`, `line`, `check`, `on`, `knob`
   and `focus`, each a light and a Graphite pair in `src/utils/roles.mjs`. A
   component names roles only, so dark mode follows `color-scheme` with no
-  class of its own. Role values are opaque: a pair drops hex alpha.
+  class of its own. Role values are `oklch()`, which needs Yumma CSS 4.9.
 - Surfaces and controls are `bg:raised bw:1 bc:rim`; fields are
   `bg:field bw:1 bc:rim`. Filled ones are `bg:fill bc:fill c:on-fill`, so the
   border disappears into any accent.

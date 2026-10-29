@@ -1,6 +1,18 @@
 "use client";
 
 import { colorTheme, generateShades } from "@yummacss/core";
+import {
+	formatCss,
+	modeLrgb,
+	modeOklch,
+	modeRgb,
+	parse,
+	useMode,
+	wcagContrast,
+} from "culori/fn";
+
+// the shades are oklch(); contrast needs linear RGB
+for (const mode of [modeRgb, modeLrgb, modeOklch]) useMode(mode);
 
 const SURFACE: {
 	name: string;
@@ -73,8 +85,8 @@ export function accentCss(family: string): string {
 	const base = accentShade(shades);
 
 	return SURFACE.map(({ name, property, darker, shade, alpha }) => {
-		const hex = shades[shade ?? (darker ? base + 1 : base)];
-		const value = alpha ? hex + Math.round(alpha * 255).toString(16) : hex;
+		const color = shades[shade ?? (darker ? base + 1 : base)];
+		const value = alpha ? withAlpha(color, alpha) : color;
 		return `${selectorOf(name)} { ${property}: ${value}; }`;
 	}).join("\n");
 }
@@ -92,12 +104,13 @@ export function accentShade(shades: string[]): number {
 	return shade;
 }
 
-function contrastOnWhite(hex: string): number {
-	const [r, g, b] = [1, 3, 5].map((i) => {
-		const c = Number.parseInt(hex.slice(i, i + 2), 16) / 255;
-		return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
-	});
-	return 1.05 / (0.2126 * r + 0.7152 * g + 0.0722 * b + 0.05);
+function contrastOnWhite(color: string): number {
+	return wcagContrast(color, "white");
+}
+
+function withAlpha(color: string, alpha: number): string {
+	const parsed = parse(color);
+	return parsed ? (formatCss({ ...parsed, alpha }) ?? color) : color;
 }
 
 export function readAccent(): string {
