@@ -1,0 +1,59 @@
+{
+  "summary": "An app's sidebar: a workspace switcher, grouped links with badges and the signed-in user's menu at the bottom.",
+  "props": [
+    {
+      "name": "groups",
+      "type": "none",
+      "typeName": "SidebarGroup[]",
+      "description": "The navigation, in groups."
+    },
+    {
+      "name": "current",
+      "type": "string",
+      "default": "#files",
+      "description": "The `href` of the page being shown, marked as current."
+    },
+    {
+      "name": "workspaces",
+      "type": "none",
+      "typeName": "SidebarWorkspace[]",
+      "description": "The workspaces the switcher at the top lists; the first is the active one."
+    },
+    {
+      "name": "onWorkspaceChange",
+      "type": "none",
+      "typeName": "(name: string) => void",
+      "description": "Called with a workspace's name when it is picked from the switcher."
+    },
+    {
+      "name": "user",
+      "type": "none",
+      "typeName": "{ name: string; email: string }",
+      "description": "Who is signed in, shown at the bottom with their menu."
+    },
+    {
+      "name": "onSignOut",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called when Sign out is picked from the user menu."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the menus are portalled. Leave unset to portal into `document.body`; pass an element to keep them inside a scrolling frame."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "d:f h:150",
+      "children": [
+        {
+          "component": "Sidebar",
+          "props": {}
+        }
+      ]
+    }
+  ]
+}
