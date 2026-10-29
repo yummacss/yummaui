@@ -1,0 +1,75 @@
+{
+  "summary": "A sign-in card: email, password with a show toggle, an optional passkey and the links around them. A mistake shakes the form instead of only printing a message.",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "default": "Sign in",
+      "description": "The heading."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "example": "Welcome back. Your files are where you left them.",
+      "description": "A line under the heading."
+    },
+    {
+      "name": "onSignIn",
+      "type": "none",
+      "typeName": "(values: SignInValues) => string | undefined | Promise<string | undefined>",
+      "description": "Called with the email and password once both are filled in and the email reads as one. Return or resolve a message to show it under the password and shake the form."
+    },
+    {
+      "name": "passkeyLabel",
+      "type": "string",
+      "example": "Sign in with a passkey",
+      "description": "The label of a second way in under the form. No button renders without it."
+    },
+    {
+      "name": "onPasskey",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called when the passkey button is pressed."
+    },
+    {
+      "name": "forgotHref",
+      "type": "string",
+      "example": "#",
+      "description": "Where \"Forgot password?\" leads. No link renders without it."
+    },
+    {
+      "name": "signUpHref",
+      "type": "string",
+      "example": "#",
+      "description": "Where \"Create an account\" leads. No line renders without it."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "squircle",
+      "description": "Corner radius of the card. Its fields and buttons keep their own."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The form shakes when it is sent with a mistake. Turn it off for a form that stays still; it is off anyway when the user has asked for reduced motion."
+    }
+  ],
+  "scene": [
+    {
+      "component": "SignIn",
+      "props": {
+        "description": "Welcome back. Your files are where you left them.",
+        "passkeyLabel": "Sign in with a passkey",
+        "forgotHref": "#",
+        "signUpHref": "#"
+      }
+    }
+  ]
+}
