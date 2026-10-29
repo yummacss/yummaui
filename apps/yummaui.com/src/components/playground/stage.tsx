@@ -39,7 +39,7 @@ const SNAP = [
 	{ width: 768, label: "Tablet", left: "l:192" },
 ];
 // how close the edge comes before a guide lights up, and before it snaps
-const NEAR = 64;
+const NEAR = 48;
 const SNAP_GAP = 24;
 
 const TOOL =
@@ -59,17 +59,30 @@ export default function ComponentPlayground({
 	const [tab, setTab] = useState("preview");
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
-	const nearSnap =
-		resizing &&
-		width !== null &&
-		SNAP.some((point) => Math.abs(width - point.width) <= NEAR);
 
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
-	if (!id || !scene) return null;
 	const shape = playground?.shape ?? DEFAULT_SHAPE;
 	const accent = playground?.accent ?? DEFAULT_ACCENT;
 	const scheme = playground?.scheme ?? "light";
+
+	// a drag re-renders the stage on every move, so the frame is built once per look
+	const frame = useMemo(
+		() =>
+			scene ? (
+				<PreviewFrame
+					className={`f:1 min-h:0 ${block ? "bg:page" : ""}`}
+					minHeight={0}
+					fill
+					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
+				>
+					<Scene scene={scene} shape={shape} />
+				</PreviewFrame>
+			) : null,
+		[scene, shape, accent, scheme, block],
+	);
+
+	if (!id || !scene) return null;
 	const usage = buildScene(scene);
 
 	const config = registryConfig[getRegistryTarget(id).install];
@@ -198,54 +211,35 @@ export default function ComponentPlayground({
 							handleStyles={{
 								right: {
 									top: "50%",
-									right: 8,
-									width: 12,
-									height: 48,
-									marginTop: -24,
+									right: 4,
+									width: 16,
+									height: 72,
+									marginTop: -36,
 									zIndex: 20,
 								},
 							}}
 							handleComponent={{
+								// the mobile navigation sheet's handle, stood upright
 								right: (
-									<span
-										className={`d:f ai:c jc:c g:1 w:100% h:100% c:er bw:1 tp:c tdu:150 ${
-											resizing
-												? "bg:accent bc:accent"
-												: "bg:surface bc:border h:bc:ink/40"
-										}`}
-									>
+									<span className="d:f ai:c jc:c w:100% h:100% c:er">
 										<span
-											className={`w:0 h:5 blw:1 ${resizing ? "bc:white/80" : "bc:ink/40"}`}
-										/>
-										<span
-											className={`w:0 h:5 blw:1 ${resizing ? "bc:white/80" : "bc:ink/40"}`}
+											className={`w:1 h:14 tp:c tdu:150 ${
+												resizing ? "bg:ink/40" : "bg:border"
+											}`}
 										/>
 									</span>
 								),
 							}}
-							// near a snap point the width eases, so the snap glides in; elsewhere it tracks the pointer
-							className={`d:f fd:c brw:1 bc:border ${
-								nearSnap ? "tp:w tdu:150 ttf:out-quart @prm:tp:none" : ""
-							}`}
+							className="d:f fd:c brw:1 bc:border"
 						>
-							<PreviewFrame
-								className={`f:1 min-h:0 bg:page ${resizing ? "pe:none" : ""}`}
-								minHeight={0}
-								fill
-								accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
+							<div
+								className={`d:f fd:c f:1 min-h:0 ${resizing ? "pe:none" : ""}`}
 							>
-								<Scene scene={scene} shape={shape} />
-							</PreviewFrame>
+								{frame}
+							</div>
 						</Resizable>
 					) : (
-						<PreviewFrame
-							className="f:1 min-h:0"
-							minHeight={0}
-							fill
-							accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
-						>
-							<Scene scene={scene} shape={shape} />
-						</PreviewFrame>
+						frame
 					)}
 				</TabsPanel>
 
