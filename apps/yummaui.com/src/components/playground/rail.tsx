@@ -12,18 +12,15 @@ import { NavArrowDown } from "@/icons";
 import { getRegistryTarget, type RegistryProp } from "@/registry";
 import { ACCENTS, accentBars } from "@/utils/accent";
 import { type Primitives, primitiveSlug } from "@/utils/primitive";
-import { STYLE_OWNED, typeOf } from "@/utils/props";
+import { inTableOrder, STYLE_OWNED, typeOf } from "@/utils/props";
 import { SCHEMES, type Scheme } from "@/utils/scheme";
 import { SHAPES } from "@/utils/shapes.mjs";
 import { NavbarCrossing } from "@/components/ui/frame-mark";
 
 export default function PlaygroundRail({
 	primitives,
-	inline = false,
 }: {
 	primitives: Primitives;
-	/** Under a block's preview, in the page, rather than a sticky column beside it. */
-	inline?: boolean;
 }) {
 	const playground = usePlayground();
 	const [open, setOpen] = useState<string | null>(null);
@@ -76,15 +73,6 @@ export default function PlaygroundRail({
 			))}
 		</div>
 	);
-
-	if (inline) {
-		return (
-			<div className="d:f fd:c g:8">
-				{playground && <Look />}
-				{api}
-			</div>
-		);
-	}
 
 	return (
 		<aside className="bc:border btw:1 @lg:btw:0 @lg:blw:1 @lg:gc-s:3">
@@ -152,13 +140,87 @@ function Row({
 	);
 }
 
+/** A block's whole Component API, as a table above its preview. */
+export function ApiTable({ primitives }: { primitives: Primitives }) {
+	const playground = usePlayground();
+	const props = inTableOrder(playground?.meta?.props ?? []);
+	if (!playground || props.length === 0) return null;
+
+	const target = getRegistryTarget(playground.id);
+	const primitive = primitiveSlug(primitives, target.component, target.install);
+	const cell = "py:3 pr:4 bc:border bbw:1 ta:l va:t";
+
+	return (
+		<section className="mt:10">
+			<div className="d:f ai:c jc:sb g:2 mb:3">
+				<h2 className="m:0 ff:display fs:xl fw:400 c:ink">Component API</h2>
+				{primitive && (
+					<Link
+						href={`https://base-ui.com/react/components/${primitive}`}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Base UI reference"
+						className="d:f ai:c jc:c fs:0 c:ink/70 td:none h:c:ink fv:oc:accent fv:ow:2"
+					>
+						<BaseUI className="w:4 h:4" />
+					</Link>
+				)}
+			</div>
+			<table className="w:100% bc:c fs:sm">
+				<thead>
+					<tr className="c:ink/50 fs:xs ff:m">
+						<th className={`${cell} fw:400`}>Prop</th>
+						<th className={`${cell} fw:400`}>Type</th>
+						<th className={`${cell} fw:400`}>Default</th>
+						<th className={`${cell} fw:400 d:none @md:d:tc`}>Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{props.map((prop) => (
+						<tr key={prop.name}>
+							<td className={cell}>
+								<code className="c:code fs:xs ff:m">{prop.name}</code>
+								{/* below @md the description sits under the name */}
+								<div className="mt:1 c:ink/60 lh:4 @md:d:none">
+									<PropDescription text={prop.description} />
+								</div>
+							</td>
+							<td className={cell}>
+								<code className="c:ink/70 fs:xs ff:m">
+									{/* an enum wraps between its values, never inside one */}
+									{typeOf(prop)
+										.split(" | ")
+										.map((value, index) => (
+											<span key={value}>
+												{index > 0 && " | "}
+												<span className="ws:nw">{value}</span>
+											</span>
+										))}
+								</code>
+							</td>
+							<td className={cell}>
+								<code className="c:ink/70 fs:xs ff:m">
+									{prop.default === undefined ? "-" : String(prop.default)}
+								</code>
+							</td>
+							<td className={`${cell} c:ink/60 lh:4 d:none @md:d:tc`}>
+								<PropDescription text={prop.description} />
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</section>
+	);
+}
+
 const SWATCHES = ACCENTS.map((family) => ({
 	value: family,
 	colors: accentBars(family),
 }));
 
 /** Shape, Accent and Scheme, as rows like the Component API's. */
-function Look() {
+export function Look({ heading = true }: { heading?: boolean }) {
 	const playground = usePlayground();
 	if (!playground) return null;
 	const line = (name: string, control: React.ReactNode) => (
@@ -170,7 +232,11 @@ function Look() {
 
 	return (
 		<div className="d:f fd:c pb:4 mb:4">
-			<h3 className="ff:system mb:1 c:silver-8 fs:xs fw:600 ls:2 tt:u">Look</h3>
+			{heading && (
+				<h3 className="ff:system mb:1 c:silver-8 fs:xs fw:600 ls:2 tt:u">
+					Look
+				</h3>
+			)}
 			<p className="m:0 mb:1 c:ink/60 fs:xs lh:4">
 				The shape, accent & scheme set the preview only.
 			</p>

@@ -3,7 +3,7 @@
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 import { Drawer } from "@base-ui/react/drawer";
 import { Resizable } from "re-resizable";
-import type { ComponentType, CSSProperties, ReactNode } from "react";
+import type { ComponentType, ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
@@ -27,10 +27,6 @@ import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
 
-// the markdown code tabs' own classes (code-tabs.tsx): the open tab has no bottom edge
-const FILE_TAB =
-	"d:f ai:c px:4 py:2 @sm:px:6 m:0 brw:1 bc:border fs:sm ff:m ws:nw c:p a:none fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
-
 const LANGUAGE: Record<string, string> = {
 	preview: "Preview",
 	code: "TSX",
@@ -38,23 +34,35 @@ const LANGUAGE: Record<string, string> = {
 };
 
 // a block's frame drags narrower from its right edge, snapping to phone & tablet
-const SNAP = [390, 768];
+const SNAP = [
+	{ width: 390, label: "Phone" },
+	{ width: 768, label: "Tablet" },
+];
+// how close the edge comes before a guide lights up, and before it snaps
+const NEAR = 64;
+const SNAP_GAP = 24;
 
 const TOOL =
-	"d:f ai:c g:2 h:8 px:3 bw:0 bg:transparent c:ink/60 fs:xs ff:m c:p h:c:ink fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
+	"d:f ai:c g:2 h:9 px:3 bw:0 bg:transparent fs:xs ff:m ws:nw c:p h:c:ink fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
+
+const DIVIDER = <span aria-hidden className="fs:0 w:0 h:4 blw:1 bc:border" />;
 
 export default function ComponentPlayground({
 	block = false,
 	api,
 }: {
 	block?: boolean;
-	/** A block's Look & Component API, opened in a drawer from the toolbar. */
+	/** A block's styling controls, opened in a drawer from the toolbar. */
 	api?: ReactNode;
 }) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
+	const nearSnap =
+		resizing &&
+		width !== null &&
+		SNAP.some((point) => Math.abs(width - point.width) <= NEAR);
 
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
@@ -78,29 +86,33 @@ export default function ComponentPlayground({
 			}
 		>
 			<Tabs value={active} onValueChange={setTab} className={FILL}>
-				<div className="d:f bg:page">
-					<BaseTabs.List className="d:f min-w:0 ox:auto">
+				<div className="d:f ai:c bbw:1 bc:border bg:page">
+					<BaseTabs.List className="d:f ai:c min-w:0 ox:auto">
 						<FileTab value="preview" icon={<Eye className="w:4 h:4" />}>
 							Preview
 						</FileTab>
+						{DIVIDER}
 						<FileTab value="code" icon={<Code className="w:4 h:4" />}>
 							page.tsx
 						</FileTab>
 						{config && (
-							<FileTab value="config" icon={<Gear className="w:4 h:4" />}>
-								yumma.config.mjs
-							</FileTab>
+							<>
+								{DIVIDER}
+								<FileTab value="config" icon={<Gear className="w:4 h:4" />}>
+									yumma.config.mjs
+								</FileTab>
+							</>
 						)}
 					</BaseTabs.List>
-					<div className="d:f ai:c jc:fe f:1 pr:1 bbw:1 bc:border">
+					<div className="d:f ai:c jc:fe f:1">
 						{block && active === "preview" && width !== null && (
 							<span className="px:2 c:ink/50 fs:xs ff:m fvn:tn">{width}px</span>
 						)}
 						{block && api && (
 							<Drawer.Root swipeDirection="right">
-								<Drawer.Trigger className={TOOL}>
+								<Drawer.Trigger className={`${TOOL} c:ink/60`}>
 									<Sliders className="w:4 h:4" />
-									Component API
+									Styling
 								</Drawer.Trigger>
 								<Drawer.Portal>
 									{/* the search dialog's backdrop, so every overlay on the site dims alike */}
@@ -111,19 +123,21 @@ export default function ComponentPlayground({
 									<Drawer.Viewport className="d:f p:f i:0 zi:20 jc:fe">
 										<Drawer.Popup
 											data-chrome
-											className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto bg:page blw:1 bc:border os:none tr:var(--drawer-travel) opening:tr:var(--drawer-offstage) closing:tr:var(--drawer-offstage) tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
-											style={
-												{
-													"--drawer-travel": "var(--drawer-swipe-movement-x) 0",
-													"--drawer-offstage": "calc(100% + 2px) 0",
-												} as CSSProperties
-											}
+											className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto bg:page blw:1 bc:border os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
 										>
 											<div className="d:f ai:c jc:sb">
-												<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">
-													Component API
-												</Drawer.Title>
-												<Drawer.Close aria-label="Close" className={TOOL}>
+												<div className="d:f fd:c g:1">
+													<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">
+														Styling
+													</Drawer.Title>
+													<Drawer.Description className="m:0 c:ink/60 fs:sm">
+														Suit your style.
+													</Drawer.Description>
+												</div>
+												<Drawer.Close
+													aria-label="Close"
+													className={`${TOOL} c:ink/60`}
+												>
 													<Close className="w:4 h:4" />
 												</Drawer.Close>
 											</div>
@@ -138,17 +152,41 @@ export default function ComponentPlayground({
 
 				<TabsPanel
 					value="preview"
-					className={block ? `${FILL} bg:ink/3` : FILL}
+					className={block ? `${FILL} p:r bg:ink/3` : FILL}
 				>
+					{block && resizing && (
+						<div aria-hidden className="p:a i:0 pe:none zi:10">
+							{SNAP.map((point) => {
+								const near =
+									width !== null && Math.abs(width - point.width) <= NEAR;
+								return (
+									<span
+										key={point.width}
+										className={`d:f p:a t:0 b:0 w:0 blw:1 tp:c tdu:150 ${
+											near ? "bc:accent" : "bc:ink/10"
+										}`}
+										style={{ left: point.width }}
+									>
+										<span
+											className={`p:a t:2 l:2 fs:xs ff:m ws:nw tp:c tdu:150 ${
+												near ? "c:accent" : "c:ink/40"
+											}`}
+										>
+											{point.label} {point.width}
+										</span>
+									</span>
+								);
+							})}
+						</div>
+					)}
 					{block ? (
 						<Resizable
 							defaultSize={{ width: "100%", height: "100%" }}
 							minWidth={320}
 							maxWidth="100%"
 							enable={{ right: true }}
-							handleStyles={{ right: { width: 16, right: -8 } }}
-							snap={{ x: SNAP }}
-							snapGap={32}
+							snap={{ x: SNAP.map((point) => point.width) }}
+							snapGap={SNAP_GAP}
 							onResizeStart={() => setResizing(true)}
 							onResize={(_event, _direction, element) =>
 								setWidth(element.offsetWidth)
@@ -157,25 +195,42 @@ export default function ComponentPlayground({
 								setResizing(false);
 								setWidth(element.offsetWidth);
 							}}
+							// the grip alone resizes, inset from the frame's edge
+							handleStyles={{
+								right: {
+									top: "50%",
+									right: 8,
+									width: 12,
+									height: 48,
+									marginTop: -24,
+									zIndex: 20,
+								},
+							}}
 							handleComponent={{
 								right: (
-									<span className="d:f ai:c jc:c w:100% h:100% c:er tp:c tdu:150 h:bg:accent/5">
+									<span
+										className={`d:f ai:c jc:c g:1 w:100% h:100% c:er bw:1 tp:c tdu:150 ${
+											resizing
+												? "bg:accent bc:accent"
+												: "bg:surface bc:border h:bc:ink/40"
+										}`}
+									>
 										<span
-											className={`w:1 h:14 br:9999 tp:a tdu:150 ttf:out-quart ${
-												resizing ? "bg:accent h:20" : "bg:ink/25"
-											}`}
+											className={`w:0 h:5 blw:1 ${resizing ? "bc:white/80" : "bc:ink/40"}`}
+										/>
+										<span
+											className={`w:0 h:5 blw:1 ${resizing ? "bc:white/80" : "bc:ink/40"}`}
 										/>
 									</span>
 								),
 							}}
-							className="d:f fd:c brw:1 bc:border"
+							// near a snap point the width eases, so the snap glides in; elsewhere it tracks the pointer
+							className={`d:f fd:c brw:1 bc:border ${
+								nearSnap ? "tp:w tdu:150 ttf:out-quart @prm:tp:none" : ""
+							}`}
 						>
 							<PreviewFrame
-								className={
-									block
-										? `f:1 min-h:0 bg:page ${resizing ? "pe:none" : ""}`
-										: "f:1 min-h:0"
-								}
+								className={`f:1 min-h:0 bg:page ${resizing ? "pe:none" : ""}`}
 								minHeight={0}
 								fill
 								accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
@@ -185,11 +240,7 @@ export default function ComponentPlayground({
 						</Resizable>
 					) : (
 						<PreviewFrame
-							className={
-								block
-									? `f:1 min-h:0 bg:page ${resizing ? "pe:none" : ""}`
-									: "f:1 min-h:0"
-							}
+							className="f:1 min-h:0"
 							minHeight={0}
 							fill
 							accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
@@ -235,15 +286,11 @@ function FileTab({
 	return (
 		<BaseTabs.Tab
 			value={value}
-			className={(state) =>
-				`${FILE_TAB} ${state.active ? "c:accent bg:surface" : "c:accent-dim bg:transparent bbw:1"}`
-			}
+			className={(state) => `${TOOL} ${state.active ? "c:ink" : "c:ink/50"}`}
 			style={{ fontFamily: "inherit" }}
 		>
-			<span className="d:f ai:c g:2">
-				{icon}
-				{children}
-			</span>
+			{icon}
+			{children}
 		</BaseTabs.Tab>
 	);
 }

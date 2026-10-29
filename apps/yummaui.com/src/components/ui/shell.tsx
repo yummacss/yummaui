@@ -6,7 +6,7 @@ import {
 	PlaygroundProvider,
 	StaticPlayground,
 } from "@/components/playground/context";
-import PlaygroundRail from "@/components/playground/rail";
+import PlaygroundRail, { ApiTable, Look } from "@/components/playground/rail";
 import ComponentPlayground from "@/components/playground/stage";
 import TableOfContents from "@/components/ui/toc";
 import { registryMeta } from "@/registry";
@@ -56,14 +56,11 @@ export default function UIShell({
 			>
 				<article className="d:f fd:c f:1 min-h:0">
 					{children}
+					{block && <ApiTable primitives={primitives} />}
 					{playground && (
 						<ComponentPlayground
 							block={block}
-							api={
-								block ? (
-									<PlaygroundRail primitives={primitives} inline />
-								) : undefined
-							}
+							api={block ? <Look heading={false} /> : undefined}
 						/>
 					)}
 				</article>
