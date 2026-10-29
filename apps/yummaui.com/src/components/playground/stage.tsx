@@ -1,12 +1,15 @@
 "use client";
 
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
+import { Drawer } from "@base-ui/react/drawer";
+import { Resizable } from "re-resizable";
 import type { ComponentType, ReactNode } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
+import { Close, Code, Gear, Globe, Sliders } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -24,26 +27,82 @@ import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
 
-// the markdown code tabs' own classes (code-tabs.tsx): the open tab has no bottom edge
-const FILE_TAB =
-	"d:f ai:c px:4 py:2 @sm:px:6 m:0 brw:1 bc:border fs:sm ff:m ws:nw c:p a:none fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
-
 const LANGUAGE: Record<string, string> = {
 	preview: "Preview",
 	code: "TSX",
-	config: "JavaScript",
+	config: "JavaScript module",
 };
 
-export default function ComponentPlayground() {
+// a resizable frame drags narrower from its right edge, snapping to phone & tablet
+const SNAP = [
+	{ width: 392, label: "Phone", left: "l:98" },
+	{ width: 768, label: "Tablet", left: "l:192" },
+];
+// how close the edge comes before a guide lights up, and before it snaps
+const NEAR = 48;
+const SNAP_GAP = 24;
+
+const TOOL =
+	"d:f ai:c g:2 h:9 px:3 bw:0 bg:transparent fs:xs ff:m ws:nw c:p h:c:ink fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
+
+const DIVIDER = <span aria-hidden className="fs:0 w:0 h:4 blw:1 bc:border" />;
+
+export default function ComponentPlayground({
+	resizable = false,
+	styling,
+}: {
+	/** The frame drags narrower, for a whole screen region rather than one control. */
+	resizable?: boolean;
+	/** The styling controls, opened in a drawer from the toolbar. */
+	styling?: ReactNode;
+}) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
+	const [width, setWidth] = useState<number | null>(null);
+	const [resizing, setResizing] = useState(false);
+	// the snap point the edge just landed on, lit for a moment
+	// at full width the panel's border is the frame's, so the frame draws its own only when narrower
+	const [narrowed, setNarrowed] = useState(false);
+	const [flash, setFlash] = useState<number | null>(null);
+	const snapped = useRef<number | null>(null);
+	const flashTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+	const track = (element: HTMLElement) => {
+		const next = element.offsetWidth;
+		setWidth(next);
+		setNarrowed(next < (element.parentElement?.clientWidth ?? next));
+		const point = SNAP.find((snap) => snap.width === next)?.width ?? null;
+		if (point !== null && point !== snapped.current) {
+			setFlash(point);
+			clearTimeout(flashTimer.current);
+			flashTimer.current = setTimeout(() => setFlash(null), 120);
+		}
+		snapped.current = point;
+	};
 
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
-	if (!id || !scene) return null;
 	const shape = playground?.shape ?? DEFAULT_SHAPE;
 	const accent = playground?.accent ?? DEFAULT_ACCENT;
 	const scheme = playground?.scheme ?? "light";
+
+	// a drag re-renders the stage on every move, so the frame is built once per look
+	const frame = useMemo(
+		() =>
+			scene ? (
+				<PreviewFrame
+					className="f:1 min-h:0 bg:page"
+					minHeight={0}
+					fill
+					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
+				>
+					<Scene scene={scene} shape={shape} />
+				</PreviewFrame>
+			) : null,
+		[scene, shape, accent, scheme],
+	);
+
+	if (!id || !scene) return null;
 	const usage = buildScene(scene);
 
 	const config = registryConfig[getRegistryTarget(id).install];
@@ -51,27 +110,158 @@ export default function ComponentPlayground() {
 	const active = tab === "config" && !config ? "code" : tab;
 
 	return (
-		// below @lg: the stage fills the screen under the navbar, so a popup fits it
-		<div className="d:f fd:c h:calc(100svh-5rem) mt:6 bg:page @lg:f:1 @lg:min-h:0 @lg:h:auto @lg:mt:0">
+		<div className={`d:f fd:c mt:6 bg:page ${resizable ? "h:180" : "h:150"}`}>
 			<Tabs value={active} onValueChange={setTab} className={FILL}>
-				<div className="d:f bg:page">
-					<BaseTabs.List className="d:f min-w:0 ox:auto">
-						<FileTab value="preview">Preview</FileTab>
-						<FileTab value="code">page.tsx</FileTab>
-						{config && <FileTab value="config">yumma.config.mjs</FileTab>}
+				<div className="d:f ai:c bbw:1 bc:border bg:page">
+					<BaseTabs.List className="d:f ai:c min-w:0 ox:auto">
+						<FileTab value="preview" icon={<Globe className="w:4 h:4" />}>
+							Preview
+						</FileTab>
+						{DIVIDER}
+						<FileTab value="code" icon={<Code className="w:4 h:4" />}>
+							Code
+						</FileTab>
+						{config && (
+							<>
+								{DIVIDER}
+								<FileTab value="config" icon={<Gear className="w:4 h:4" />}>
+									Configuration
+								</FileTab>
+							</>
+						)}
 					</BaseTabs.List>
-					<div className="f:1 bbw:1 bc:border" />
+					<div className="d:f ai:c jc:fe f:1">
+						{resizable && active === "preview" && width !== null && (
+							<span className="px:2 c:ink/50 fs:xs ff:m fvn:tn">{width}px</span>
+						)}
+						{styling && (
+							<Drawer.Root swipeDirection="right">
+								<Drawer.Trigger className={`${TOOL} c:ink/60`}>
+									<Sliders className="w:4 h:4" />
+									Styling
+								</Drawer.Trigger>
+								<Drawer.Portal>
+									{/* the search dialog's backdrop, so every overlay on the site dims alike */}
+									<Drawer.Backdrop
+										data-chrome
+										className="tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none p:f zi:10 i:0 bg:black/60 bf-b:sm fgr:90"
+									/>
+									<Drawer.Viewport className="d:f p:f i:0 zi:20 jc:fe">
+										<Drawer.Popup
+											data-chrome
+											className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto bg:page blw:1 bc:border os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
+										>
+											<div className="d:f ai:c jc:sb">
+												<div className="d:f fd:c g:1">
+													<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">
+														Styling
+													</Drawer.Title>
+													<Drawer.Description className="m:0 c:ink/60 fs:sm">
+														Suit your style.
+													</Drawer.Description>
+												</div>
+												<Drawer.Close
+													aria-label="Close"
+													className={`${TOOL} c:ink/60`}
+												>
+													<Close className="w:4 h:4" />
+												</Drawer.Close>
+											</div>
+											{styling}
+										</Drawer.Popup>
+									</Drawer.Viewport>
+								</Drawer.Portal>
+							</Drawer.Root>
+						)}
+					</div>
 				</div>
 
-				<TabsPanel value="preview" className={FILL}>
-					<PreviewFrame
-						className="f:1 min-h:0"
-						minHeight={0}
-						fill
-						accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
-					>
-						<Scene scene={scene} shape={shape} />
-					</PreviewFrame>
+				<TabsPanel
+					value="preview"
+					className={resizable ? `${FILL} p:r bg:press` : FILL}
+				>
+					{resizable && resizing && (
+						<div aria-hidden className="p:a i:0 pe:none zi:10">
+							{SNAP.map((point) => {
+								const near =
+									width !== null && Math.abs(width - point.width) <= NEAR;
+								return (
+									<span
+										key={point.width}
+										className={`d:f p:a t:0 b:0 w:0 blw:1 tp:c tdu:150 ${point.left} ${
+											near ? "bc:accent" : "bc:ink/10"
+										}`}
+									>
+										{/* lights at once on a snap, then fades */}
+										<span
+											className={`p:a t:0 b:0 w:2 ml:-1 bg:accent tp:o @prm:tp:none ${
+												flash === point.width
+													? "o:60"
+													: "o:0 tdu:500 ttf:out-quart"
+											}`}
+										/>
+										<span
+											className={`p:a t:2 l:2 fs:xs ff:m ws:nw tp:c tdu:150 ${
+												near ? "c:accent" : "c:ink/40"
+											}`}
+										>
+											{point.label} {point.width}
+										</span>
+									</span>
+								);
+							})}
+						</div>
+					)}
+					{resizable ? (
+						<Resizable
+							defaultSize={{ width: "100%", height: "100%" }}
+							minWidth={320}
+							maxWidth="100%"
+							enable={{ right: true }}
+							snap={{ x: SNAP.map((point) => point.width) }}
+							snapGap={SNAP_GAP}
+							onResizeStart={() => setResizing(true)}
+							onResize={(_event, _direction, element) => track(element)}
+							onResizeStop={(_event, _direction, element) => {
+								setResizing(false);
+								track(element);
+							}}
+							// a phone has no room to drag, so the handle is a tablet & desktop thing
+							handleClasses={{ right: "d:none @md:d:b" }}
+							// the grip alone resizes, inset from the frame's edge
+							handleStyles={{
+								right: {
+									top: "50%",
+									right: 4,
+									width: 16,
+									height: 72,
+									marginTop: -36,
+									zIndex: 20,
+								},
+							}}
+							handleComponent={{
+								// the mobile navigation sheet's handle, stood upright
+								right: (
+									<span className="d:f ai:c jc:c w:100% h:100% c:er">
+										<span
+											className={`w:1 h:14 tp:c tdu:150 ${
+												resizing ? "bg:ink/40" : "bg:border"
+											}`}
+										/>
+									</span>
+								),
+							}}
+							className={`d:f fd:c bc:border ${narrowed ? "brw:1" : ""}`}
+						>
+							<div
+								className={`d:f fd:c f:1 min-h:0 ${resizing ? "pe:none" : ""}`}
+							>
+								{frame}
+							</div>
+						</Resizable>
+					) : (
+						frame
+					)}
 				</TabsPanel>
 
 				<TabsPanel value="code" className={FILL}>
@@ -98,15 +288,22 @@ export default function ComponentPlayground() {
 	);
 }
 
-function FileTab({ value, children }: { value: string; children: ReactNode }) {
+function FileTab({
+	value,
+	icon,
+	children,
+}: {
+	value: string;
+	icon: ReactNode;
+	children: ReactNode;
+}) {
 	return (
 		<BaseTabs.Tab
 			value={value}
-			className={(state) =>
-				`${FILE_TAB} ${state.active ? "c:accent bg:surface" : "c:accent-dim bg:transparent bbw:1"}`
-			}
+			className={(state) => `${TOOL} ${state.active ? "c:ink" : "c:ink/50"}`}
 			style={{ fontFamily: "inherit" }}
 		>
+			{icon}
 			{children}
 		</BaseTabs.Tab>
 	);

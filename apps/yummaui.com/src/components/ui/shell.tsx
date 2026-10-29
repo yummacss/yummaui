@@ -6,7 +6,7 @@ import {
 	PlaygroundProvider,
 	StaticPlayground,
 } from "@/components/playground/context";
-import PlaygroundRail from "@/components/playground/rail";
+import { ApiTable, Look } from "@/components/playground/api";
 import ComponentPlayground from "@/components/playground/stage";
 import TableOfContents from "@/components/ui/toc";
 import { registryMeta } from "@/registry";
@@ -18,6 +18,8 @@ interface Props {
 	sidebar: ReactNode;
 	/** Slugs of the pages with `playground: true`. */
 	playgrounds: string[];
+	/** Slugs of the pages with `resizable: true`, whose preview drags narrower. */
+	resizable: string[];
 	primitives: Primitives;
 }
 
@@ -25,6 +27,7 @@ export default function UIShell({
 	children,
 	sidebar,
 	playgrounds,
+	resizable,
 	primitives,
 }: Props) {
 	const pathname = usePathname();
@@ -41,21 +44,23 @@ export default function UIShell({
 			{sidebar}
 
 			<div
-				className={`d:f fd:c @lg:gc-s:6 ${
-					playground ? "pt:12 @lg:h:dvh @lg:pb:6 @lg:o:h" : "pt:12"
+				className={`d:f fd:c ${
+					playground ? "pt:12 pb:16 @lg:gc-s:9" : "pt:12 @lg:gc-s:6"
 				}`}
 			>
 				<article className="d:f fd:c f:1 min-h:0">
 					{children}
-					{playground && <ComponentPlayground />}
+					{playground && (
+						<ComponentPlayground
+							resizable={resizable.includes(playground)}
+							styling={<Look />}
+						/>
+					)}
+					{playground && <ApiTable primitives={primitives} />}
 				</article>
 			</div>
 
-			{playground ? (
-				<PlaygroundRail primitives={primitives} />
-			) : (
-				<TableOfContents />
-			)}
+			{playground ? null : <TableOfContents />}
 		</div>
 	);
 
