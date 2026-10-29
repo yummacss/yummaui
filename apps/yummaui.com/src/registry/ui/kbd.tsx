@@ -18,7 +18,7 @@ export default function Kbd({ keys, className }: KbdProps) {
         <kbd
           key={key}
           className={merge(
-            "d:if ai:c jc:c min-w:6 h:6 px:1 br:md bg:raised c:label btw:1 blw:1 brw:1 bbw:3 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs fs:xs fw:500 lh:1 ff:d",
+            "d:if ai:c jc:c min-w:6 h:6 px:1 br:md bg:raised c:label btw:1 blw:1 brw:1 bbw:2 bc:rim fs:xs fw:500 lh:1 ff:d",
             className,
           )}
         >

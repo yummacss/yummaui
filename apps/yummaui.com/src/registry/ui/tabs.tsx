@@ -148,7 +148,7 @@ export default function TabsBase({
   );
 
   const indicatorClasses = merge(
-    "p:a l:0 t:0 zi:0 bg:raised bw:1 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs",
+    "p:a l:0 t:0 zi:0 bg:raised bw:1 bc:rim",
     TAB_SHAPES[shape],
     animated && "tp:a tdu:300 ttf:out-quart @prm:tp:none",
   );
@@ -224,7 +224,7 @@ export default function TabsBase({
           <Tabs.Panel
             key={item.value}
             value={item.value}
-            className="f:1 p:4 br:xl bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:hint fs:sm os:none"
+            className="f:1 p:4 br:xl bw:1 bg:raised bc:rim c:hint fs:sm os:none"
           >
             {item.panel}
           </Tabs.Panel>

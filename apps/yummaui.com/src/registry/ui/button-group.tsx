@@ -13,7 +13,7 @@ const SHAPES: Record<Shape, string> = {
 };
 
 const BASE =
-  "d:f ai:c o:h w:fc bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs bw:1";
+  "d:f ai:c o:h w:fc bg:raised bc:rim bw:1";
 
 export interface ButtonGroupProps {
   /** Merged with the group's own classes, so a utility you pass wins. */

@@ -82,7 +82,7 @@ export default function BreadcrumbBase({
   const navClasses = merge(
     "d:f ai:c g:2",
     bordered
-      ? "px:3 py:2 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs bw:1"
+      ? "px:3 py:2 bg:raised bc:rim bw:1"
       : "",
     bordered ? SHAPES[shape] : "",
     className,
@@ -92,7 +92,7 @@ export default function BreadcrumbBase({
   // the current page sits in a raised chip
   const currentClasses = [
     SIZES[size],
-    "px:2 py:1 br:md bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs fw:600 c:label",
+    "px:2 py:1 br:md bw:1 bg:raised bc:rim fw:600 c:label",
   ]
     .filter(Boolean)
     .join(" ");

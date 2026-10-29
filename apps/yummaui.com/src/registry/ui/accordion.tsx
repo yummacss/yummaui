@@ -134,7 +134,7 @@ export default function AccordionBase({
     "d:f fd:c w:100% max-w:96",
     variant === "bordered" || variant === "subtle" ? "g:2" : "",
     isCard
-      ? "bg:raised bw:1 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs br:lg"
+      ? "bg:raised bw:1 bc:rim br:lg"
       : "",
     className,
   );
@@ -152,7 +152,7 @@ export default function AccordionBase({
 
         const itemClasses =
           variant === "bordered"
-            ? `bg:raised bw:1 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs ${SHAPES[shape].item}`
+            ? `bg:raised bw:1 bc:rim ${SHAPES[shape].item}`
             : variant === "ghost"
               ? [
                   "blw:2 pl:4",

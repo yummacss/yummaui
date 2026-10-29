@@ -33,7 +33,7 @@ const ROW_SHAPES: Record<Shape, string> = {
 };
 
 const PICKED =
-  "bg:check c:white btc:white/25 blc:black/15 brc:black/15 bbc:black/30";
+  "bg:check c:white bc:transparent";
 
 // a file's icon and tint come from its extension
 const KINDS = [
@@ -290,7 +290,7 @@ export default function FileTree({
       role="tree"
       aria-label={label}
       className={merge(
-        "d:f fd:c g:px w:64 max-w:100% p:1 bg:raised c:label bw:1 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs",
+        "d:f fd:c g:px w:64 max-w:100% p:1 bg:raised c:label bw:1 bc:rim",
         TREE_SHAPES[shape],
         className,
       )}
