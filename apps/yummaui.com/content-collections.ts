@@ -28,6 +28,8 @@ const ui = defineCollection({
 		since: z.string().optional(),
 		added: z.string().optional(),
 		playground: z.boolean().optional(),
+		// a whole screen region: the preview takes the full width, the props sit under it
+		block: z.boolean().optional(),
 		content: z.string().optional(),
 	}),
 	transform: (doc) => ({

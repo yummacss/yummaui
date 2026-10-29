@@ -18,6 +18,8 @@ interface Props {
 	sidebar: ReactNode;
 	/** Slugs of the pages with `playground: true`. */
 	playgrounds: string[];
+	/** Slugs of the pages with `block: true`, which have no rail. */
+	blocks: string[];
 	primitives: Primitives;
 }
 
@@ -25,6 +27,7 @@ export default function UIShell({
 	children,
 	sidebar,
 	playgrounds,
+	blocks,
 	primitives,
 }: Props) {
 	const pathname = usePathname();
@@ -36,22 +39,29 @@ export default function UIShell({
 			? slug
 			: null;
 
+	const block = playground !== null && blocks.includes(playground);
+
 	const grid = (
 		<div className="d:g gtc:1 g:8 @lg:gtc:12">
 			{sidebar}
 
 			<div
-				className={`d:f fd:c @lg:gc-s:6 ${
-					playground ? "pt:12 @lg:h:dvh @lg:pb:6 @lg:o:h" : "pt:12"
+				className={`d:f fd:c ${
+					block
+						? "pt:12 pb:16 @lg:gc-s:9"
+						: playground
+							? "pt:12 @lg:gc-s:6 @lg:h:dvh @lg:pb:6 @lg:o:h"
+							: "pt:12 @lg:gc-s:6"
 				}`}
 			>
 				<article className="d:f fd:c f:1 min-h:0">
 					{children}
-					{playground && <ComponentPlayground />}
+					{playground && <ComponentPlayground block={block} />}
+					{block && <PlaygroundRail primitives={primitives} inline />}
 				</article>
 			</div>
 
-			{playground ? (
+			{block ? null : playground ? (
 				<PlaygroundRail primitives={primitives} />
 			) : (
 				<TableOfContents />

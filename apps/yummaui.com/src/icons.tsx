@@ -11,12 +11,15 @@ import {
 	CheckIcon,
 	CopyIcon,
 	CubeIcon,
+	DeviceMobileIcon,
+	DeviceTabletIcon,
 	DiamondIcon,
 	FileIcon,
 	FileMdIcon,
 	FolderIcon,
 	GithubLogoIcon,
 	MagnifyingGlassIcon,
+	MonitorIcon,
 	PlusIcon,
 	SignOutIcon,
 	SlidersHorizontalIcon,
@@ -38,6 +41,7 @@ export const ArrowUpRight = regular(ArrowUpRightIcon);
 export const Check = regular(CheckIcon);
 export const ComponentSolid = regular(CubeIcon);
 export const Copy = regular(CopyIcon);
+export const Desktop = regular(MonitorIcon);
 export const Diamond = regular(DiamondIcon);
 export const FileMd = regular(FileMdIcon);
 export const Folder = regular(FolderIcon);
@@ -49,6 +53,8 @@ export const NavArrowLeft = regular(CaretLeftIcon);
 export const NavArrowRight = regular(CaretRightIcon);
 export const NavArrowUp = regular(CaretUpIcon);
 export const OpenBook = regular(BookOpenIcon);
+export const Phone = regular(DeviceMobileIcon);
+export const Tablet = regular(DeviceTabletIcon);
 export const Page = regular(FileIcon);
 export const Plus = regular(PlusIcon);
 export const Search = regular(MagnifyingGlassIcon);

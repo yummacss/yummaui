@@ -1,12 +1,15 @@
 "use client";
 
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
+import { Toggle } from "@base-ui/react/toggle";
+import { ToggleGroup } from "@base-ui/react/toggle-group";
 import type { ComponentType, ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
+import { Desktop, Phone, Tablet } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -34,9 +37,29 @@ const LANGUAGE: Record<string, string> = {
 	config: "JavaScript",
 };
 
-export default function ComponentPlayground() {
+// a block previews at a device's width, its frame centered in the stage
+const WIDTHS = [
+	{ value: "desktop", label: "Desktop", Icon: Desktop, className: "w:100%" },
+	{
+		value: "tablet",
+		label: "Tablet",
+		Icon: Tablet,
+		className: "w:100% max-w:192",
+	},
+	{ value: "phone", label: "Phone", Icon: Phone, className: "w:100% max-w:98" },
+];
+
+const WIDTH_BUTTON =
+	"d:f ai:c jc:c w:8 h:8 p:0 bw:0 c:p h:c:ink fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
+
+export default function ComponentPlayground({
+	block = false,
+}: {
+	block?: boolean;
+}) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
+	const [width, setWidth] = useState("desktop");
 
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
@@ -52,7 +75,13 @@ export default function ComponentPlayground() {
 
 	return (
 		// below @lg: the stage fills the screen under the navbar, so a popup fits it
-		<div className="d:f fd:c h:calc(100svh-5rem) mt:6 bg:page @lg:f:1 @lg:min-h:0 @lg:h:auto @lg:mt:0">
+		<div
+			className={
+				block
+					? "d:f fd:c h:180 mt:6 bg:page"
+					: "d:f fd:c h:calc(100svh-5rem) mt:6 bg:page @lg:f:1 @lg:min-h:0 @lg:h:auto @lg:mt:0"
+			}
+		>
 			<Tabs value={active} onValueChange={setTab} className={FILL}>
 				<div className="d:f bg:page">
 					<BaseTabs.List className="d:f min-w:0 ox:auto">
@@ -60,12 +89,41 @@ export default function ComponentPlayground() {
 						<FileTab value="code">page.tsx</FileTab>
 						{config && <FileTab value="config">yumma.config.mjs</FileTab>}
 					</BaseTabs.List>
-					<div className="f:1 bbw:1 bc:border" />
+					<div className="d:f ai:c jc:fe f:1 pr:1 bbw:1 bc:border">
+						{block && active === "preview" && (
+							<ToggleGroup
+								value={[width]}
+								onValueChange={(next) => next[0] && setWidth(next[0])}
+								aria-label="Preview width"
+								className="d:f g:1"
+							>
+								{WIDTHS.map(({ value, label, Icon }) => (
+									<Toggle
+										key={value}
+										value={value}
+										aria-label={label}
+										className={(state) =>
+											`${WIDTH_BUTTON} ${state.pressed ? "c:ink bg:ink/5" : "c:ink/50 bg:transparent"}`
+										}
+									>
+										<Icon className="w:4 h:4" />
+									</Toggle>
+								))}
+							</ToggleGroup>
+						)}
+					</div>
 				</div>
 
-				<TabsPanel value="preview" className={FILL}>
+				<TabsPanel
+					value="preview"
+					className={block ? `${FILL} ai:c bg:ink/3` : FILL}
+				>
 					<PreviewFrame
-						className="f:1 min-h:0"
+						className={
+							block
+								? `f:1 min-h:0 bg:page ${WIDTHS.find((entry) => entry.value === width)?.className}`
+								: "f:1 min-h:0"
+						}
 						minHeight={0}
 						fill
 						accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}

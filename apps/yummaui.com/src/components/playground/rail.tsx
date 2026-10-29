@@ -19,8 +19,11 @@ import { NavbarCrossing } from "@/components/ui/frame-mark";
 
 export default function PlaygroundRail({
 	primitives,
+	inline = false,
 }: {
 	primitives: Primitives;
+	/** Under a block's preview, in the page, rather than a sticky column beside it. */
+	inline?: boolean;
 }) {
 	const playground = usePlayground();
 	const [open, setOpen] = useState<string | null>(null);
@@ -38,44 +41,58 @@ export default function PlaygroundRail({
 	// the Example shows the props in use, so the rail lists them
 	const listed = props.filter((prop) => !STYLE_OWNED.includes(prop.name));
 
+	const api = (
+		<div>
+			<div className="d:f ai:c jc:sb g:2 mb:3">
+				<h3 className="ff:system c:silver-8 fs:xs fw:600 ls:2 tt:u">
+					Component API
+				</h3>
+				{primitive && (
+					<Link
+						href={`https://base-ui.com/react/components/${primitive}`}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Base UI reference"
+						className="d:f ai:c jc:c fs:0 c:ink/70 td:none h:c:ink fv:oc:accent fv:ow:2"
+					>
+						<BaseUI className="w:4 h:4" />
+					</Link>
+				)}
+			</div>
+
+			<p className="m:0 mb:3 c:ink/60 fs:xs lh:4">
+				The file you copy is yours. Change anything in it.
+			</p>
+
+			{listed.map((prop) => (
+				<Row
+					key={prop.name}
+					prop={prop}
+					open={open === prop.name}
+					onToggle={() => toggle(prop.name)}
+				>
+					<code className="fs:0 c:ink/70 fs:xs ff:m">{typeOf(prop)}</code>
+				</Row>
+			))}
+		</div>
+	);
+
+	if (inline) {
+		return (
+			<div className="d:g gtc:1 g:10 mt:10 @lg:gtc:2">
+				{playground && <Look />}
+				{api}
+			</div>
+		);
+	}
+
 	return (
 		<aside className="bc:border btw:1 @lg:btw:0 @lg:blw:1 @lg:gc-s:3">
 			<NavbarCrossing />
 			<Scroller className="@lg:p:st @lg:t:20 @lg:max-h:calc(100dvh-5rem)">
 				<div className="pt:8 pb:12 @lg:pt:0 @lg:px:8">
 					{playground && <Look />}
-
-					<div className="d:f ai:c jc:sb g:2 mb:3">
-						<h3 className="ff:system c:silver-8 fs:xs fw:600 ls:2 tt:u">
-							Component API
-						</h3>
-						{primitive && (
-							<Link
-								href={`https://base-ui.com/react/components/${primitive}`}
-								target="_blank"
-								rel="noopener noreferrer"
-								aria-label="Base UI reference"
-								className="d:f ai:c jc:c fs:0 c:ink/70 td:none h:c:ink fv:oc:accent fv:ow:2"
-							>
-								<BaseUI className="w:4 h:4" />
-							</Link>
-						)}
-					</div>
-
-					<p className="m:0 mb:3 c:ink/60 fs:xs lh:4">
-						The file you copy is yours. Change anything in it.
-					</p>
-
-					{listed.map((prop) => (
-						<Row
-							key={prop.name}
-							prop={prop}
-							open={open === prop.name}
-							onToggle={() => toggle(prop.name)}
-						>
-							<code className="fs:0 c:ink/70 fs:xs ff:m">{typeOf(prop)}</code>
-						</Row>
-					))}
+					{api}
 				</div>
 			</Scroller>
 		</aside>
