@@ -13,7 +13,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "description": "Renders as a clickable button in the middle, sized & shaped to match. Wins over `label` if both are set.",
-      "exampleIcon": "AddIcon",
+      "exampleIcon": "IconPlus",
       "example": null
     },
     {
@@ -67,7 +67,7 @@
           "children": [
             {
               "icon": {
-                "$icon": "DocumentIcon",
+                "$icon": "IconFileFilled",
                 "size": "w:4 h:4 c:blue"
               }
             },
@@ -92,7 +92,7 @@
           "children": [
             {
               "icon": {
-                "$icon": "GalleryIcon",
+                "$icon": "IconPhotoFilled",
                 "size": "w:4 h:4 c:mint"
               }
             },
@@ -111,7 +111,7 @@
           "children": [
             {
               "icon": {
-                "$icon": "VideoFrameIcon",
+                "$icon": "IconVideoFilled",
                 "size": "w:4 h:4 c:red"
               }
             },

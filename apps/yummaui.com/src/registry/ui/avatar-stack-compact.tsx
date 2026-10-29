@@ -1,8 +1,4 @@
-import {
-  LaptopIcon,
-  SmartphoneIcon,
-  TabletIcon,
-} from "@solar-icons/react/bold";
+import { IconDeviceLaptop, IconDeviceMobile, IconDeviceTablet } from "@tabler/icons-react";
 import Avatar from "./avatar";
 
 export default function AvatarStackCompact() {
@@ -23,9 +19,9 @@ export default function AvatarStackCompact() {
 }
 
 const devices = [
-  { name: "This laptop", icon: LaptopIcon },
-  { name: "Phone", icon: SmartphoneIcon },
-  { name: "Tablet", icon: TabletIcon },
+  { name: "This laptop", icon: IconDeviceLaptop },
+  { name: "Phone", icon: IconDeviceMobile },
+  { name: "Tablet", icon: IconDeviceTablet },
 ];
 
 const extraCount = 1;

@@ -1,17 +1,7 @@
 "use client";
 
 import { Collapsible } from "@base-ui/react/collapsible";
-import {
-  FileIcon,
-  FileImageIcon,
-  FileSpreadsheetIcon,
-  FileTextIcon,
-  FileVideoCameraIcon,
-  FileZipIcon,
-  FolderIcon,
-  FolderOpenIcon,
-} from "@solar-icons/react/bold";
-import { AltArrowRightIcon } from "@solar-icons/react/outline";
+import { IconArchiveFilled, IconChevronRight, IconFileFilled, IconFileTextFilled, IconFolderFilled, IconFolderOpenFilled, IconPhotoFilled, IconTableFilled, IconVideoFilled } from "@tabler/icons-react";
 import type { KeyboardEvent } from "react";
 import { useMemo, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -37,15 +27,15 @@ const PICKED =
 
 // a file's icon and tint come from its extension
 const KINDS = [
-  { match: /\.(pdf|txt|md|docx?)$/i, Icon: FileTextIcon, tint: "c:blue" },
-  { match: /\.(xlsx?|csv)$/i, Icon: FileSpreadsheetIcon, tint: "c:mint" },
+  { match: /\.(pdf|txt|md|docx?)$/i, Icon: IconFileTextFilled, tint: "c:blue" },
+  { match: /\.(xlsx?|csv)$/i, Icon: IconTableFilled, tint: "c:mint" },
   {
     match: /\.(png|jpe?g|gif|webp|svg)$/i,
-    Icon: FileImageIcon,
+    Icon: IconPhotoFilled,
     tint: "c:mint",
   },
-  { match: /\.(mov|mp4|webm)$/i, Icon: FileVideoCameraIcon, tint: "c:red" },
-  { match: /\.(zip|gz|7z)$/i, Icon: FileZipIcon, tint: "c:yellow" },
+  { match: /\.(mov|mp4|webm)$/i, Icon: IconVideoFilled, tint: "c:red" },
+  { match: /\.(zip|gz|7z)$/i, Icon: IconArchiveFilled, tint: "c:yellow" },
 ];
 
 interface Node {
@@ -214,9 +204,9 @@ export default function FileTree({
       const kind = KINDS.find((entry) => entry.match.test(node.name));
       const Glyph = node.children
         ? isOpen
-          ? FolderOpenIcon
-          : FolderIcon
-        : (kind?.Icon ?? FileIcon);
+          ? IconFolderOpenFilled
+          : IconFolderFilled
+        : (kind?.Icon ?? IconFileFilled);
       const tint = isPicked
         ? "c:white"
         : node.children
@@ -252,7 +242,7 @@ export default function FileTree({
         >
           <span aria-hidden className="d:f ai:c jc:c fs:0 w:4 h:4">
             {node.children && (
-              <AltArrowRightIcon
+              <IconChevronRight
                 className={merge(
                   "w:3 h:3 o:70",
                   isOpen && "ro:18",

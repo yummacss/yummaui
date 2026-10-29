@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Components draw their icons from Tabler, `@tabler/icons-react`, in place of Solar.
+
 ## [0.9.0] - 2026-10-29
 
 ### Added

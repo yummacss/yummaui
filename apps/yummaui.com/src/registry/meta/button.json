@@ -6,7 +6,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "example": null,
-      "exampleIcon": "DocumentAddIcon",
+      "exampleIcon": "IconFilePlus",
       "description": "A glyph beside the label. Pass the icon and nothing else; the base gap spaces it for you. With `iconOnly` it becomes the whole button, so give that one an `aria-label`."
     },
     {
@@ -107,7 +107,7 @@
               "component": "Button",
               "props": {
                 "icon": {
-                  "$icon": "MoveToFolderIcon",
+                  "$icon": "IconFolderSymlink",
                   "size": "w:4 h:4"
                 }
               },
@@ -133,7 +133,7 @@
                 "hold": true,
                 "holdLabel": "Deleted",
                 "icon": {
-                  "$icon": "TrashBinTrashIcon",
+                  "$icon": "IconTrashFilled",
                   "size": "w:4 h:4"
                 }
               },
@@ -144,7 +144,7 @@
               "props": {
                 "variant": "secondary",
                 "icon": {
-                  "$icon": "MenuDotsIcon",
+                  "$icon": "IconDots",
                   "size": "w:4 h:4"
                 },
                 "iconOnly": true

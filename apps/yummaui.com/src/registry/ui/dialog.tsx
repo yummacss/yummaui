@@ -2,7 +2,7 @@
 
 import { Button } from "@base-ui/react/button";
 import { Dialog } from "@base-ui/react/dialog";
-import { CloseIcon } from "@solar-icons/react/outline";
+import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -237,7 +237,7 @@ export default function DialogBase({
               }
               aria-label="Close"
             >
-              <CloseIcon aria-hidden className="w:4 h:4" />
+              <IconX aria-hidden className="w:4 h:4" />
             </Dialog.Close>
           )}
 

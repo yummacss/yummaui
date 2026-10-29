@@ -1,5 +1,5 @@
 import { Avatar } from "@base-ui/react/avatar";
-import { UserIcon, VerifiedCheckIcon } from "@solar-icons/react/bold";
+import { IconRosetteDiscountCheckFilled, IconUserFilled } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -156,7 +156,7 @@ export default function AvatarBase({
         )}
         <Avatar.Fallback className={fallbackClasses}>
           {fallback ??
-            (name ? initials(name) : <UserIcon className={ICON_SIZES[size]} />)}
+            (name ? initials(name) : <IconUserFilled className={ICON_SIZES[size]} />)}
         </Avatar.Fallback>
       </Avatar.Root>
 
@@ -174,7 +174,7 @@ export default function AvatarBase({
           aria-label={badgeLabel}
           className={`d:f p:a t:0 r:0 ai:c jc:c bg:raised bc:raised br:9999 bw:1 ${BADGE_SIZES[size]}`}
         >
-          {badgeIcon ?? <VerifiedCheckIcon className="w:100% h:100% c:label" />}
+          {badgeIcon ?? <IconRosetteDiscountCheckFilled className="w:100% h:100% c:label" />}
         </span>
       )}
 

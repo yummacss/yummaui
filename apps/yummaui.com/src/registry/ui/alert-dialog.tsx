@@ -2,7 +2,7 @@
 
 import { AlertDialog } from "@base-ui/react/alert-dialog";
 import { Button } from "@base-ui/react/button";
-import { CloseIcon } from "@solar-icons/react/outline";
+import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -229,7 +229,7 @@ export default function AlertDialogBase({
               }
               aria-label="Close"
             >
-              <CloseIcon aria-hidden className="w:4 h:4" />
+              <IconX aria-hidden className="w:4 h:4" />
             </AlertDialog.Close>
           )}
 

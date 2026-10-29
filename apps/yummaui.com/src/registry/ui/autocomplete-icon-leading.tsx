@@ -1,12 +1,4 @@
-import {
-  BellIcon,
-  GlobeIcon,
-  KeyIcon,
-  QuestionCircleIcon,
-  SettingsIcon,
-  UserCrossIcon,
-} from "@solar-icons/react/bold";
-import { MagnifierIcon } from "@solar-icons/react/outline";
+import { IconBell, IconHelpCircle, IconKey, IconSearch, IconSettings, IconUserX, IconWorld } from "@tabler/icons-react";
 import Autocomplete, { type AutocompleteItem } from "./autocomplete";
 
 export default function AutocompleteIconLeading() {
@@ -15,7 +7,7 @@ export default function AutocompleteIconLeading() {
       items={settings}
       label="Search settings"
       placeholder="Account, Privacy, & more"
-      icon={<MagnifierIcon className="w:4 h:4" />}
+      icon={<IconSearch className="w:4 h:4" />}
       iconPosition="leading"
       emptyMessage="No settings found."
     />
@@ -23,13 +15,13 @@ export default function AutocompleteIconLeading() {
 }
 
 const settings: AutocompleteItem[] = [
-  { label: "Account Settings", icon: <SettingsIcon className="w:4 h:4" /> },
-  { label: "Privacy & Security", icon: <KeyIcon className="w:4 h:4" /> },
+  { label: "Account Settings", icon: <IconSettings className="w:4 h:4" /> },
+  { label: "Privacy & Security", icon: <IconKey className="w:4 h:4" /> },
   {
     label: "Notifications",
-    icon: <BellIcon className="w:4 h:4" />,
+    icon: <IconBell className="w:4 h:4" />,
   },
-  { label: "Language & Region", icon: <GlobeIcon className="w:4 h:4" /> },
-  { label: "Blocked Accounts", icon: <UserCrossIcon className="w:4 h:4" /> },
-  { label: "Help Center", icon: <QuestionCircleIcon className="w:4 h:4" /> },
+  { label: "Language & Region", icon: <IconWorld className="w:4 h:4" /> },
+  { label: "Blocked Accounts", icon: <IconUserX className="w:4 h:4" /> },
+  { label: "Help Center", icon: <IconHelpCircle className="w:4 h:4" /> },
 ];

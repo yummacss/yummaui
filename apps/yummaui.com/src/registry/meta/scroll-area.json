@@ -71,7 +71,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "DocumentIcon",
+                        "$icon": "IconFileFilled",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -91,7 +91,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "DocumentIcon",
+                        "$icon": "IconFileFilled",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -111,7 +111,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "GalleryIcon",
+                        "$icon": "IconPhotoFilled",
                         "size": "w:4 h:4 c:mint"
                       }
                     },
@@ -131,7 +131,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "GalleryIcon",
+                        "$icon": "IconPhotoFilled",
                         "size": "w:4 h:4 c:mint"
                       }
                     },
@@ -151,7 +151,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "VideoFrameIcon",
+                        "$icon": "IconVideoFilled",
                         "size": "w:4 h:4 c:red"
                       }
                     },
@@ -171,7 +171,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "DocumentIcon",
+                        "$icon": "IconFileFilled",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -191,7 +191,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "ArchiveIcon",
+                        "$icon": "IconArchiveFilled",
                         "size": "w:4 h:4 c:yellow"
                       }
                     },
@@ -211,7 +211,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "DocumentIcon",
+                        "$icon": "IconFileFilled",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -231,7 +231,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "GalleryIcon",
+                        "$icon": "IconPhotoFilled",
                         "size": "w:4 h:4 c:mint"
                       }
                     },
@@ -251,7 +251,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "DocumentIcon",
+                        "$icon": "IconFileFilled",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -271,7 +271,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "VideoFrameIcon",
+                        "$icon": "IconVideoFilled",
                         "size": "w:4 h:4 c:red"
                       }
                     },
@@ -291,7 +291,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "ArchiveIcon",
+                        "$icon": "IconArchiveFilled",
                         "size": "w:4 h:4 c:yellow"
                       }
                     },
@@ -311,7 +311,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "DocumentIcon",
+                        "$icon": "IconFileFilled",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -331,7 +331,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "GalleryIcon",
+                        "$icon": "IconPhotoFilled",
                         "size": "w:4 h:4 c:mint"
                       }
                     },

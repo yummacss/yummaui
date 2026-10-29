@@ -7,7 +7,7 @@
       "typeName": "ReactNode",
       "description": "The glyph in the badge. No badge renders without one.",
       "example": {
-        "$icon": "FolderIcon",
+        "$icon": "IconFolderFilled",
         "size": "w:6 h:6 c:yellow"
       }
     },
@@ -35,9 +35,8 @@
       "typeName": "ReactNode",
       "description": "A glyph before the primary label.",
       "example": {
-        "$icon": "AddIcon",
-        "size": "w:4 h:4",
-        "style": "outline"
+        "$icon": "IconPlus",
+        "size": "w:4 h:4"
       }
     },
     {
@@ -58,7 +57,7 @@
       "typeName": "ReactNode",
       "description": "A glyph before the secondary action's label.",
       "example": {
-        "$icon": "CloudIcon",
+        "$icon": "IconCloudFilled",
         "size": "w:4 h:4"
       }
     },
@@ -95,20 +94,19 @@
       "component": "EmptyState",
       "props": {
         "icon": {
-          "$icon": "FolderIcon",
+          "$icon": "IconFolderFilled",
           "size": "w:6 h:6 c:yellow"
         },
         "title": "This folder is empty",
         "description": "Drop files here, or start a new document. Everything you add syncs to your other devices.",
         "primaryLabel": "New document",
         "primaryIcon": {
-          "$icon": "AddIcon",
-          "size": "w:4 h:4",
-          "style": "outline"
+          "$icon": "IconPlus",
+          "size": "w:4 h:4"
         },
         "secondaryLabel": "Upload",
         "secondaryIcon": {
-          "$icon": "CloudIcon",
+          "$icon": "IconCloudFilled",
           "size": "w:4 h:4"
         }
       }

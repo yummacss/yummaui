@@ -1,7 +1,7 @@
 "use client";
 
 import { ContextMenu } from "@base-ui/react/context-menu";
-import { AltArrowRightIcon, CheckIcon } from "@solar-icons/react/outline";
+import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -238,7 +238,7 @@ export default function ContextMenuBase({
           >
             <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim br:sm bw:1">
               <ContextMenu.CheckboxItemIndicator>
-                <CheckIcon className="w:3 h:3" />
+                <IconCheck className="w:3 h:3" />
               </ContextMenu.CheckboxItemIndicator>
             </span>
             {item.label}
@@ -276,7 +276,7 @@ export default function ContextMenuBase({
           <ContextMenu.SubmenuRoot key={key}>
             <ContextMenu.SubmenuTrigger className={itemClasses(false, true)}>
               <span className="fg:1">{item.label}</span>
-              <AltArrowRightIcon className="fs:0 w:4 h:4 o:70" />
+              <IconChevronRight className="fs:0 w:4 h:4 o:70" />
             </ContextMenu.SubmenuTrigger>
 
             <ContextMenu.Portal container={container}>

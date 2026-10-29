@@ -14,7 +14,7 @@
       "typeName": "ReactNode",
       "description": "A glyph in a well above the label, such as the file's type.",
       "example": {
-        "$icon": "GalleryIcon",
+        "$icon": "IconPhotoFilled",
         "size": "w:5 h:5 c:mint"
       }
     },
@@ -118,7 +118,7 @@
       "props": {
         "trigger": "scan.png",
         "triggerIcon": {
-          "$icon": "GalleryIcon",
+          "$icon": "IconPhotoFilled",
           "size": "w:5 h:5 c:mint"
         },
         "items": [

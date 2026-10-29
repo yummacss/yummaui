@@ -5,7 +5,7 @@ import { NumberField } from "@base-ui/react/number-field";
 import { Toggle } from "@base-ui/react/toggle";
 import { ToggleGroup } from "@base-ui/react/toggle-group";
 import { Toolbar } from "@base-ui/react/toolbar";
-import { AddIcon, MinusIcon } from "@solar-icons/react/outline";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -210,7 +210,7 @@ export default function ToolbarBase({
                       : stepClasses
                   }
                 >
-                  <MinusIcon className="w:5 h:5" />
+                  <IconMinus className="w:5 h:5" />
                 </NumberField.Decrement>
                 <Toolbar.Input
                   render={<NumberField.Input />}
@@ -226,7 +226,7 @@ export default function ToolbarBase({
                       : stepClasses
                   }
                 >
-                  <AddIcon className="w:5 h:5" />
+                  <IconPlus className="w:5 h:5" />
                 </NumberField.Increment>
               </NumberField.Group>
             </NumberField.Root>

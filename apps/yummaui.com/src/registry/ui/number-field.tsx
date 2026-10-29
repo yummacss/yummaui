@@ -1,7 +1,7 @@
 "use client";
 
 import { NumberField } from "@base-ui/react/number-field";
-import { AddIcon, MinusIcon } from "@solar-icons/react/outline";
+import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ComponentProps } from "react";
 import { useId } from "react";
 import { merge } from "yummacss/merge";
@@ -138,7 +138,7 @@ export default function NumberFieldBase({
 
       <NumberField.Group className="d:f">
         <NumberField.Decrement className={stepClasses(START_SHAPES[shape])}>
-          <MinusIcon className={ICON_SIZES[size]} />
+          <IconMinus className={ICON_SIZES[size]} />
         </NumberField.Decrement>
         <span className={merge(BOX, "blw:0 brw:0", SIZES[size], boxOutline)}>
           <NumberField.Input
@@ -151,7 +151,7 @@ export default function NumberFieldBase({
           />
         </span>
         <NumberField.Increment className={stepClasses(END_SHAPES[shape])}>
-          <AddIcon className={ICON_SIZES[size]} />
+          <IconPlus className={ICON_SIZES[size]} />
         </NumberField.Increment>
       </NumberField.Group>
 

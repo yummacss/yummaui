@@ -2,7 +2,7 @@
 
 import { Button } from "@base-ui/react/button";
 import { Drawer } from "@base-ui/react/drawer";
-import { CloseIcon } from "@solar-icons/react/outline";
+import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -241,7 +241,7 @@ export default function DrawerBase({
                 }
                 aria-label="Close"
               >
-                <CloseIcon aria-hidden className="w:4 h:4" />
+                <IconX aria-hidden className="w:4 h:4" />
               </Drawer.Close>
             )}
 

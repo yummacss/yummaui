@@ -3,7 +3,7 @@
 import { Avatar } from "@base-ui/react/avatar";
 import { Field } from "@base-ui/react/field";
 import { Select } from "@base-ui/react/select";
-import { AltArrowDownIcon, CheckIcon } from "@solar-icons/react/outline";
+import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 
@@ -79,7 +79,7 @@ function renderOption(option: SelectOption, shape: Shape) {
     >
       <span className="d:f ai:c w:4 h:4 fs:0">
         <Select.ItemIndicator className="d:f ai:c">
-          <CheckIcon className="w:4 h:4" />
+          <IconCheck className="w:4 h:4" />
         </Select.ItemIndicator>
       </span>
       {option.avatar && (
@@ -240,7 +240,7 @@ export default function SelectBase({
 
   const arrow = (
     <Select.Icon className="d:f c:hint">
-      <AltArrowDownIcon className="w:4 h:4" />
+      <IconChevronDown className="w:4 h:4" />
     </Select.Icon>
   );
 

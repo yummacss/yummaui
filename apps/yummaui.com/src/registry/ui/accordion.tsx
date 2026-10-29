@@ -1,12 +1,7 @@
 "use client";
 
 import { Accordion } from "@base-ui/react/accordion";
-import { LockIcon } from "@solar-icons/react/bold";
-import {
-  AddIcon,
-  AltArrowDownIcon,
-  MinusIcon,
-} from "@solar-icons/react/outline";
+import { IconChevronDown, IconLockFilled, IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -246,7 +241,7 @@ export default function AccordionBase({
                     {item.title}
                   </span>
                   {item.disabled && (
-                    <LockIcon className="w:3 h:3 c:hint" aria-hidden />
+                    <IconLockFilled className="w:3 h:3 c:hint" aria-hidden />
                   )}
                 </div>
                 {indicator === "chevron" ? (
@@ -294,7 +289,7 @@ function ChevronGlyph({
 }) {
   if (!animated) {
     return (
-      <AltArrowDownIcon
+      <IconChevronDown
         className={merge("fs:0 w:4 h:4", isOpen ? "ro:36" : "ro:0", className)}
         aria-hidden
       />
@@ -303,7 +298,7 @@ function ChevronGlyph({
 
   return (
     <span className={`d:f ${TURN} ${isOpen ? "ro:36" : "ro:0"}`}>
-      <AltArrowDownIcon
+      <IconChevronDown
         className={merge("fs:0 w:4 h:4", className)}
         aria-hidden
       />
@@ -322,9 +317,9 @@ function PlusMinusGlyph({
 }) {
   const glyphClasses = merge("fs:0 w:4 h:4", className);
   const icon = isOpen ? (
-    <MinusIcon className={glyphClasses} aria-hidden />
+    <IconMinus className={glyphClasses} aria-hidden />
   ) : (
-    <AddIcon className={glyphClasses} aria-hidden />
+    <IconPlus className={glyphClasses} aria-hidden />
   );
 
   if (!animated) {

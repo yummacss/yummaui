@@ -65,7 +65,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "example": null,
-      "exampleIcon": "SortIcon",
+      "exampleIcon": "IconArrowsSort",
       "description": "A single icon fixed on the trigger, not per option. For the per-option kind, give an option an `avatar` instead."
     },
     {

@@ -16,7 +16,7 @@
         {
           "label": "Rename",
           "icon": {
-            "$icon": "PenIcon",
+            "$icon": "IconPencilFilled",
             "size": "w:4 h:4"
           },
           "shortcut": "F2"
@@ -24,7 +24,7 @@
         {
           "label": "Duplicate",
           "icon": {
-            "$icon": "CopyIcon",
+            "$icon": "IconCopyFilled",
             "size": "w:4 h:4"
           },
           "shortcut": "Ctrl D"
@@ -32,14 +32,14 @@
         {
           "label": "Add to favorites",
           "icon": {
-            "$icon": "StarIcon",
+            "$icon": "IconStarFilled",
             "size": "w:4 h:4"
           }
         },
         {
           "label": "Lock",
           "icon": {
-            "$icon": "LockIcon",
+            "$icon": "IconLockFilled",
             "size": "w:4 h:4"
           }
         },
@@ -49,7 +49,7 @@
         {
           "label": "Move to Trash",
           "icon": {
-            "$icon": "TrashBinTrashIcon",
+            "$icon": "IconTrashFilled",
             "size": "w:4 h:4"
           },
           "destructive": true,
@@ -139,7 +139,7 @@
           {
             "label": "Rename",
             "icon": {
-              "$icon": "PenIcon",
+              "$icon": "IconPencilFilled",
               "size": "w:4 h:4"
             },
             "shortcut": "F2"
@@ -147,7 +147,7 @@
           {
             "label": "Duplicate",
             "icon": {
-              "$icon": "CopyIcon",
+              "$icon": "IconCopyFilled",
               "size": "w:4 h:4"
             },
             "shortcut": "Ctrl D"
@@ -155,14 +155,14 @@
           {
             "label": "Add to favorites",
             "icon": {
-              "$icon": "StarIcon",
+              "$icon": "IconStarFilled",
               "size": "w:4 h:4"
             }
           },
           {
             "label": "Lock",
             "icon": {
-              "$icon": "LockIcon",
+              "$icon": "IconLockFilled",
               "size": "w:4 h:4"
             }
           },
@@ -172,7 +172,7 @@
           {
             "label": "Move to Trash",
             "icon": {
-              "$icon": "TrashBinTrashIcon",
+              "$icon": "IconTrashFilled",
               "size": "w:4 h:4"
             },
             "destructive": true,

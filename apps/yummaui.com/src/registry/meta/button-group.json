@@ -69,7 +69,7 @@
               "component": "Button",
               "props": {
                 "icon": {
-                  "$icon": "DownloadIcon",
+                  "$icon": "IconDownload",
                   "size": "w:4 h:4"
                 }
               },
@@ -79,7 +79,7 @@
               "component": "Button",
               "props": {
                 "icon": {
-                  "$icon": "AltArrowDownIcon",
+                  "$icon": "IconChevronDown",
                   "size": "w:4 h:4"
                 },
                 "iconOnly": true
@@ -96,7 +96,7 @@
               "props": {
                 "variant": "secondary",
                 "icon": {
-                  "$icon": "UndoLeftIcon",
+                  "$icon": "IconArrowBackUp",
                   "size": "w:4 h:4"
                 }
               },
@@ -107,7 +107,7 @@
               "props": {
                 "variant": "secondary",
                 "icon": {
-                  "$icon": "UndoRightIcon",
+                  "$icon": "IconArrowForwardUp",
                   "size": "w:4 h:4"
                 }
               },

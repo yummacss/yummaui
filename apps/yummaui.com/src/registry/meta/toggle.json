@@ -6,14 +6,14 @@
       "type": "none",
       "typeName": "ReactNode",
       "description": "Shown while not pressed.",
-      "exampleIcon": "SunIcon"
+      "exampleIcon": "IconSunFilled"
     },
     {
       "name": "pressedIcon",
       "type": "none",
       "typeName": "ReactNode",
       "description": "Shown while pressed.",
-      "exampleIcon": "MoonIcon"
+      "exampleIcon": "IconMoonFilled"
     },
     {
       "name": "label",
@@ -95,7 +95,7 @@
           "props": {
             "aria-label": "Favorite",
             "icon": {
-              "$icon": "StarIcon",
+              "$icon": "IconStarFilled",
               "size": "w:5 h:5"
             },
             "defaultPressed": true
@@ -106,7 +106,7 @@
           "props": {
             "aria-label": "Pin to sidebar",
             "icon": {
-              "$icon": "PinIcon",
+              "$icon": "IconPinFilled",
               "size": "w:5 h:5"
             }
           }
@@ -116,7 +116,7 @@
           "props": {
             "aria-label": "Keep offline",
             "icon": {
-              "$icon": "CloudIcon",
+              "$icon": "IconCloudFilled",
               "size": "w:5 h:5"
             }
           }

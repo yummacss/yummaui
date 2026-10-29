@@ -15,7 +15,7 @@
               "value": "bold",
               "label": "Bold",
               "icon": {
-                "$icon": "TextBoldIcon",
+                "$icon": "IconBold",
                 "size": "w:4 h:4"
               }
             },
@@ -23,7 +23,7 @@
               "value": "italic",
               "label": "Italic",
               "icon": {
-                "$icon": "TextItalicIcon",
+                "$icon": "IconItalic",
                 "size": "w:4 h:4"
               }
             },
@@ -31,7 +31,7 @@
               "value": "underline",
               "label": "Underline",
               "icon": {
-                "$icon": "TextUnderlineIcon",
+                "$icon": "IconUnderline",
                 "size": "w:4 h:4"
               }
             }
@@ -48,18 +48,16 @@
               "value": "bullets",
               "label": "Bulleted list",
               "icon": {
-                "$icon": "ListIcon",
-                "size": "w:4 h:4",
-                "style": "outline"
+                "$icon": "IconList",
+                "size": "w:4 h:4"
               }
             },
             {
               "value": "numbers",
               "label": "Numbered list",
               "icon": {
-                "$icon": "ListOrderedIcon",
-                "size": "w:4 h:4",
-                "style": "outline"
+                "$icon": "IconListNumbers",
+                "size": "w:4 h:4"
               }
             }
           ]
@@ -74,7 +72,7 @@
               "value": "link",
               "label": "Link",
               "icon": {
-                "$icon": "LinkIcon",
+                "$icon": "IconLink",
                 "size": "w:4 h:4"
               }
             }
@@ -118,7 +116,7 @@
                 "value": "bold",
                 "label": "Bold",
                 "icon": {
-                  "$icon": "TextBoldIcon",
+                  "$icon": "IconBold",
                   "size": "w:4 h:4"
                 }
               },
@@ -126,7 +124,7 @@
                 "value": "italic",
                 "label": "Italic",
                 "icon": {
-                  "$icon": "TextItalicIcon",
+                  "$icon": "IconItalic",
                   "size": "w:4 h:4"
                 }
               },
@@ -134,7 +132,7 @@
                 "value": "underline",
                 "label": "Underline",
                 "icon": {
-                  "$icon": "TextUnderlineIcon",
+                  "$icon": "IconUnderline",
                   "size": "w:4 h:4"
                 }
               }
@@ -151,18 +149,16 @@
                 "value": "bullets",
                 "label": "Bulleted list",
                 "icon": {
-                  "$icon": "ListIcon",
-                  "size": "w:4 h:4",
-                  "style": "outline"
+                  "$icon": "IconList",
+                  "size": "w:4 h:4"
                 }
               },
               {
                 "value": "numbers",
                 "label": "Numbered list",
                 "icon": {
-                  "$icon": "ListOrderedIcon",
-                  "size": "w:4 h:4",
-                  "style": "outline"
+                  "$icon": "IconListNumbers",
+                  "size": "w:4 h:4"
                 }
               }
             ]
@@ -177,7 +173,7 @@
                 "value": "link",
                 "label": "Link",
                 "icon": {
-                  "$icon": "LinkIcon",
+                  "$icon": "IconLink",
                   "size": "w:4 h:4"
                 }
               }

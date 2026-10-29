@@ -1,7 +1,7 @@
 "use client";
 
 import { Checkbox } from "@base-ui/react/checkbox";
-import { CheckIcon, MinusIcon } from "@solar-icons/react/outline";
+import { IconCheck, IconMinus } from "@tabler/icons-react";
 import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -142,9 +142,9 @@ export default function CheckboxBase({
       render={(indicatorProps, state) => (
         <span {...indicatorProps}>
           {state.indeterminate ? (
-            <MinusIcon className={ICON_SIZES[size]} />
+            <IconMinus className={ICON_SIZES[size]} />
           ) : (
-            <CheckIcon className={ICON_SIZES[size]} />
+            <IconCheck className={ICON_SIZES[size]} />
           )}
         </span>
       )}

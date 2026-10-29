@@ -31,7 +31,7 @@
           "detail": "1.4 of 2.2 GB",
           "progress": 0.64,
           "icon": {
-            "$icon": "VideoFrameIcon",
+            "$icon": "IconVideoFilled",
             "size": "w:5 h:5 c:red"
           }
         },
@@ -41,7 +41,7 @@
           "detail": "Uploaded, 12 KB",
           "done": true,
           "icon": {
-            "$icon": "DocumentIcon",
+            "$icon": "IconFileFilled",
             "size": "w:5 h:5 c:blue"
           }
         }
@@ -129,7 +129,7 @@
             "detail": "1.4 of 2.2 GB",
             "progress": 0.64,
             "icon": {
-              "$icon": "VideoFrameIcon",
+              "$icon": "IconVideoFilled",
               "size": "w:5 h:5 c:red"
             }
           },
@@ -139,7 +139,7 @@
             "detail": "Uploaded, 12 KB",
             "done": true,
             "icon": {
-              "$icon": "DocumentIcon",
+              "$icon": "IconFileFilled",
               "size": "w:5 h:5 c:blue"
             }
           }

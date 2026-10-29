@@ -1,4 +1,4 @@
-import { AltArrowRightIcon } from "@solar-icons/react/outline";
+import { IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -132,7 +132,7 @@ export default function BreadcrumbBase({
             )}
             {!isLast &&
               (separator === "chevron" ? (
-                <AltArrowRightIcon
+                <IconChevronRight
                   className={`c:hint ${SEPARATOR_SIZES[size]}`}
                   aria-hidden="true"
                 />

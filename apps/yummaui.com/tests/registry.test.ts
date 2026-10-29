@@ -2,9 +2,8 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { type Config, validateClasses } from "@yummacss/nitro";
 import { describe, expect, it } from "vite-plus/test";
-import { EXAMPLE_ICON_STYLE } from "../src/utils/icon-style";
 import { SHARED_PROP_ORDER } from "../src/utils/props";
-import { rootDir } from "./helpers";
+import { rootDir, exampleIconNames } from "./helpers";
 
 const registryDir = join(rootDir, "src/registry/ui");
 const indexPath = join(rootDir, "src/registry/index.ts");
@@ -187,7 +186,7 @@ describe("Yumma UI registry", () => {
 	});
 
 	it("resolves every icon a schema names", () => {
-		const known = new Set(Object.keys(EXAMPLE_ICON_STYLE));
+		const known = exampleIconNames();
 
 		expect(known.size).toBeGreaterThan(0);
 

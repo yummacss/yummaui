@@ -2,7 +2,7 @@
 
 import { Toggle } from "@base-ui/react/toggle";
 import { ToggleGroup } from "@base-ui/react/toggle-group";
-import { MonitorIcon, MoonIcon, SunIcon } from "@solar-icons/react/bold";
+import { IconDeviceDesktopFilled, IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
 import { type ComponentType, useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 
@@ -15,9 +15,9 @@ const THEMES: {
   label: string;
   icon: ComponentType<{ className?: string }>;
 }[] = [
-  { value: "light", label: "Light", icon: SunIcon },
-  { value: "dark", label: "Dark", icon: MoonIcon },
-  { value: "system", label: "System", icon: MonitorIcon },
+  { value: "light", label: "Light", icon: IconSunFilled },
+  { value: "dark", label: "Dark", icon: IconMoonFilled },
+  { value: "system", label: "System", icon: IconDeviceDesktopFilled },
 ];
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";

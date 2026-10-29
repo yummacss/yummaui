@@ -30,3 +30,11 @@ export function contentPages() {
 			source: readFileSync(join(dir, file), "utf-8").replace(/\r\n/g, "\n"),
 		}));
 }
+
+/** The icons a schema can name, read from the demo's `EXAMPLE_ICONS` map. */
+export function exampleIconNames(): Set<string> {
+	const source = readFileSync(join(rootDir, "src/utils/demo.tsx"), "utf-8");
+	const block =
+		source.match(/export const EXAMPLE_ICONS[^{]*\{([^}]*)\}/)?.[1] ?? "";
+	return new Set(block.match(/\bIcon[A-Za-z0-9]+\b/g) ?? []);
+}

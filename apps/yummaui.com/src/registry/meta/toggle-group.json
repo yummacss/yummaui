@@ -68,9 +68,8 @@
           "props": {
             "value": "list",
             "icon": {
-              "$icon": "ListIcon",
-              "size": "w:4 h:4",
-              "style": "outline"
+              "$icon": "IconList",
+              "size": "w:4 h:4"
             },
             "label": "List"
           }
@@ -80,9 +79,8 @@
           "props": {
             "value": "grid",
             "icon": {
-              "$icon": "Grid2x2Icon",
-              "size": "w:4 h:4",
-              "style": "outline"
+              "$icon": "IconLayoutGrid",
+              "size": "w:4 h:4"
             },
             "label": "Grid"
           }
@@ -92,9 +90,8 @@
           "props": {
             "value": "columns",
             "icon": {
-              "$icon": "Columns3Icon",
-              "size": "w:4 h:4",
-              "style": "outline"
+              "$icon": "IconColumns3",
+              "size": "w:4 h:4"
             },
             "label": "Columns"
           }
