@@ -7,7 +7,7 @@ import Avatar from "./avatar";
 
 export default function AvatarStackCompact() {
   return (
-    <div className="d:f ai:c p:px bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs br:9999 bw:1">
+    <div className="d:f ai:c p:px bg:raised bc:rim br:9999 bw:1">
       {devices.map((device, index) => (
         <Avatar
           key={device.name}

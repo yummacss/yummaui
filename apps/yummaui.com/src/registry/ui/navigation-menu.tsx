@@ -114,7 +114,7 @@ export default function NavigationMenuBase({
     >
       <NavigationMenu.List
         className={merge(
-          "p:r d:f ai:c g:1 m:0 p:1 bg:raised bw:1 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs",
+          "p:r d:f ai:c g:1 m:0 p:1 bg:raised bw:1 bc:rim",
           BAR_SHAPES[shape],
         )}
       >

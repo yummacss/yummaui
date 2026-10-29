@@ -71,27 +71,26 @@ export default function SeparatorBase({
   // a percentage height beats align-self: stretch, so a vertical rule in a row
   // that sizes to its content measures zero
   const rule = vertical ? "w:0 as:s" : "h:0 w:100%";
-  // a groove: a dark line with a lit one beside it, cut into the surface
-  const groove = vertical
-    ? "blw:1 brw:1 blc:groove brc:glint"
-    : "btw:1 bbw:1 btc:groove bbc:glint";
+  const line = vertical
+    ? "blw:1 bc:line"
+    : "btw:1 bc:line";
 
   if (!icon && !label) {
     return (
       <Separator
         orientation={orientation}
-        className={merge(rule, groove, className)}
+        className={merge(rule, line, className)}
       />
     );
   }
 
   const buttonClasses = merge(
     outline,
-    "d:if ai:c jc:c w:8 h:8 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label bw:1 tp:c tdu:150 ttf:io us:none c:p h:bg:well",
+    "d:if ai:c jc:c w:8 h:8 bg:raised bc:rim c:label bw:1 tp:c tdu:150 ttf:io us:none c:p h:bg:well",
     SHAPES[iconShape],
   );
 
-  const half = `fg:1 ${vertical ? "w:0" : "h:0"} ${groove}`;
+  const half = `fg:1 ${vertical ? "w:0" : "h:0"} ${line}`;
 
   return (
     <div

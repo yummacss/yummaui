@@ -214,7 +214,7 @@ export default function MenuBase({
   const spec = SIZES[size];
   const triggerClasses = merge(
     outline,
-    "d:f ai:c g:2 h:fc bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs bw:1 fw:500 us:none",
+    "d:f ai:c g:2 h:fc bg:raised bc:rim bw:1 fw:500 us:none",
     spec.trigger,
     spec.text,
     TRIGGER_SHAPES[shape],
@@ -243,8 +243,8 @@ export default function MenuBase({
         destructive ? "c:red" : "",
         state.highlighted
           ? destructive
-            ? "bg:red c:white btc:red-5 blc:red-8 brc:red-8 bbc:red-9"
-            : "bg:check c:white btc:white/25 blc:black/15 brc:black/15 bbc:black/30"
+            ? "bg:red c:white bc:transparent"
+            : "bg:check c:white bc:transparent"
           : "bg:transparent",
       ]
         .filter(Boolean)
@@ -258,7 +258,7 @@ export default function MenuBase({
         return (
           <Menu.Separator
             key={key}
-            className="my:1 w:100% h:0 btw:1 bbw:1 btc:groove bbc:glint"
+            className="my:1 w:100% h:0 btw:1 bc:line"
           />
         );
       }

@@ -134,7 +134,7 @@ export default function ToolbarBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const rootClasses = merge(
-    "d:f fw:w ai:c g:1 p:2 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs bw:1",
+    "d:f fw:w ai:c g:1 p:2 bg:raised bc:rim bw:1",
     ROOT_SHAPES[shape],
     className,
   );
@@ -150,7 +150,7 @@ export default function ToolbarBase({
           return (
             <Toolbar.Separator
               key={key}
-              className="w:0 h:5 mx:1 blw:1 brw:1 blc:groove brc:glint"
+              className="w:0 h:5 mx:1 blw:1 bc:line"
             />
           );
         }
@@ -321,7 +321,7 @@ function ToolbarToggles({
       "d:f w:9 h:9 ai:c jc:c bw:0 us:none c:p",
       control,
       pressed
-        ? "bg:well bs-i:md bw:1 btc:shadow blc:line brc:line bbc:rim c:check"
+        ? "bg:well bw:1 bc:rim c:check"
         : "bg:transparent bw:1 bc:transparent c:hint h:bg:well h:c:label",
     );
 
