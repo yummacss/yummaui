@@ -9,7 +9,9 @@ const playgrounds = allUis
 	.filter((ui) => ui.playground)
 	.map((ui) => ui._meta.path);
 
-const blocks = allUis.filter((ui) => ui.block).map((ui) => ui._meta.path);
+const resizable = allUis
+	.filter((ui) => ui.resizable)
+	.map((ui) => ui._meta.path);
 
 const primitives: Primitives = Object.fromEntries(
 	allUis.flatMap((ui) => (ui.primitive ? [[ui._meta.path, ui.primitive]] : [])),
@@ -32,7 +34,7 @@ export default function SectionLayout({
 				<UIShell
 					sidebar={<Sidebar />}
 					playgrounds={playgrounds}
-					blocks={blocks}
+					resizable={resizable}
 					primitives={primitives}
 				>
 					{children}

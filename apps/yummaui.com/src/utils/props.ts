@@ -6,9 +6,6 @@ export function typeOf(prop: RegistryProp): string {
 	return prop.type;
 }
 
-// the style writes these defaults, so the rail lists them and never sets them
-export const STYLE_OWNED = ["shape", "iconShape", "size"];
-
 export const SHARED_PROP_ORDER = [
 	"variant",
 	"triggerVariant",

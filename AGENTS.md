@@ -139,11 +139,10 @@ is written.
   `style` and `radius` in the URL, remembered in `localStorage` for the next
   page, and the address wins. `src/utils/styles.mjs` owns them. A blocked
   pair in an address falls back to the nearest allowed radius.
-- `size`, `shape` and `iconShape` belong to the style: the rail
-  never shows or sets them.
-- Every component page shows its Example, a `scene` in its meta, and the
-  rail lists the props without setting them. `tests/registry.test.ts` fails a
-  meta without one.
+- Every component page shows its Example, a `scene` in its meta, with the
+  Component API table under it listing every prop. `tests/registry.test.ts`
+  fails a meta without one. `resizable: true` in a page's frontmatter lets
+  the preview drag to phone & tablet widths, for whole screen regions.
 
 ## Accent
 
