@@ -1,0 +1,41 @@
+{
+  "summary": "An account settings page in three sections, profile, notifications and preferences, with a save bar that appears once anything changes.",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "default": "Settings",
+      "description": "The page heading."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "default": "Your profile and how Files keeps in touch.",
+      "description": "A line under the heading."
+    },
+    {
+      "name": "defaultValues",
+      "type": "none",
+      "typeName": "Partial<SettingsValues>",
+      "description": "What the form starts with, and what Discard goes back to."
+    },
+    {
+      "name": "onSave",
+      "type": "none",
+      "typeName": "(values: SettingsValues) => void | Promise<void>",
+      "description": "Called with every value when Save is pressed. The save bar shows a spinner until the promise settles, then goes away."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the selects' menus are portalled. Leave unset to portal into `document.body`; pass an element to keep them inside a scrolling frame."
+    }
+  ],
+  "scene": [
+    {
+      "component": "SettingsPage",
+      "props": {}
+    }
+  ]
+}

@@ -38,6 +38,7 @@ import meta_rating from "./meta/rating.json";
 import meta_scroll_area from "./meta/scroll-area.json";
 import meta_select from "./meta/select.json";
 import meta_separator from "./meta/separator.json";
+import meta_settings_page from "./meta/settings-page.json";
 import meta_sign_in from "./meta/sign-in.json";
 import meta_skeleton from "./meta/skeleton.json";
 import meta_slider from "./meta/slider.json";
@@ -101,6 +102,7 @@ export const registry = {
   "select-grouped": () => import("./ui/select-grouped"),
   "select": () => import("./ui/select"),
   "separator": () => import("./ui/separator"),
+  "settings-page": () => import("./ui/settings-page"),
   "sign-in": () => import("./ui/sign-in"),
   "skeleton-activity": () => import("./ui/skeleton-activity"),
   "skeleton-filters": () => import("./ui/skeleton-filters"),
@@ -207,6 +209,7 @@ export const registryMeta = {
   "scroll-area": meta_scroll_area,
   "select": meta_select,
   "separator": meta_separator,
+  "settings-page": meta_settings_page,
   "sign-in": meta_sign_in,
   "skeleton": meta_skeleton,
   "slider": meta_slider,
@@ -282,6 +285,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "select-grouped": { component: "select", variant: "grouped", kind: "example", install: "select" },
   "select": { component: "select", variant: "base", kind: "component", install: "select" },
   "separator": { component: "separator", variant: "base", kind: "component", install: "separator" },
+  "settings-page": { component: "settings-page", variant: "base", kind: "component", install: "settings-page" },
   "sign-in": { component: "sign-in", variant: "base", kind: "component", install: "sign-in" },
   "skeleton-activity": { component: "skeleton", variant: "activity", kind: "example", install: "skeleton" },
   "skeleton-filters": { component: "skeleton", variant: "filters", kind: "example", install: "skeleton" },
