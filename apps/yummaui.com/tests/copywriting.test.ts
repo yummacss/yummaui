@@ -90,7 +90,7 @@ describe("copywriting", () => {
 	// titles, the word before "utilities", names & acronyms
 	it("writes headings in sentence case", () => {
 		const names = new Set(
-			"Yumma Vite Next.js Oxlint ESLint Claude Code Solar React PostCSS Turbopack Webpack Graphite Tactile Base Linux Windows PowerShell".split(
+			"Yumma Vite Next.js Oxlint ESLint Claude Code Tabler React PostCSS Turbopack Webpack Graphite Tactile Base Linux Windows PowerShell".split(
 				" ",
 			),
 		);

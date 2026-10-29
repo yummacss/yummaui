@@ -1,7 +1,7 @@
 "use client";
 
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
-import { AltArrowDownIcon } from "@solar-icons/react/outline";
+import { IconChevronDown } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -135,7 +135,7 @@ export default function NavigationMenuBase({
                       )
                     }
                   >
-                    <AltArrowDownIcon className="w:3 h:3" />
+                    <IconChevronDown className="w:3 h:3" />
                   </NavigationMenu.Icon>
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content

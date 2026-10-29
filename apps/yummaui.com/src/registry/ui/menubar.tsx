@@ -2,7 +2,7 @@
 
 import { Menu } from "@base-ui/react/menu";
 import { Menubar } from "@base-ui/react/menubar";
-import { AltArrowRightIcon, CheckIcon } from "@solar-icons/react/outline";
+import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -218,7 +218,7 @@ export default function MenubarBase({
           >
             <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim br:sm bw:1">
               <Menu.CheckboxItemIndicator>
-                <CheckIcon className="w:3 h:3" />
+                <IconCheck className="w:3 h:3" />
               </Menu.CheckboxItemIndicator>
             </span>
             {item.label}
@@ -259,7 +259,7 @@ export default function MenubarBase({
                 <span className="d:f fs:0 o:70">{item.icon}</span>
               )}
               <span className="fg:1">{item.label}</span>
-              <AltArrowRightIcon className="fs:0 w:4 h:4 o:70" />
+              <IconChevronRight className="fs:0 w:4 h:4 o:70" />
             </Menu.SubmenuTrigger>
 
             <Menu.Portal container={container}>

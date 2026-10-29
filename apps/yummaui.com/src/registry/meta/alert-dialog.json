@@ -13,7 +13,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "example": null,
-      "exampleIcon": "TrashBinTrashIcon",
+      "exampleIcon": "IconTrashFilled",
       "description": "A glyph beside the trigger's label."
     },
     {
@@ -29,7 +29,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "description": "The glyph in the badge above the title. No badge renders without one.",
-      "exampleIcon": "TrashBinTrashIcon"
+      "exampleIcon": "IconTrashFilled"
     },
     {
       "name": "title",
@@ -122,7 +122,7 @@
       "props": {
         "trigger": "Delete 12 files",
         "icon": {
-          "$icon": "TrashBinTrashIcon",
+          "$icon": "IconTrashFilled",
           "size": "w:5 h:5"
         },
         "title": "Delete 12 files?",

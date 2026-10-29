@@ -5,7 +5,7 @@
       "name": "trigger",
       "type": "none",
       "typeName": "ReactNode",
-      "exampleIcon": "TrashBinTrashIcon",
+      "exampleIcon": "IconTrashFilled",
       "description": "The trigger's content, an icon usually. Pair it with `triggerLabel` when there is no text."
     },
     {
@@ -102,7 +102,7 @@
           "component": "Tooltip",
           "props": {
             "trigger": {
-              "$icon": "PenIcon",
+              "$icon": "IconPencilFilled",
               "size": "w:4 h:4"
             },
             "triggerLabel": "Rename",
@@ -115,7 +115,7 @@
           "component": "Tooltip",
           "props": {
             "trigger": {
-              "$icon": "CopyIcon",
+              "$icon": "IconCopyFilled",
               "size": "w:4 h:4"
             },
             "triggerLabel": "Duplicate",
@@ -128,7 +128,7 @@
           "component": "Tooltip",
           "props": {
             "trigger": {
-              "$icon": "TrashBinTrashIcon",
+              "$icon": "IconTrashFilled",
               "size": "w:4 h:4"
             },
             "triggerLabel": "Move to Trash",

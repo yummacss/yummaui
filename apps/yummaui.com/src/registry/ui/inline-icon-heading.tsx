@@ -1,8 +1,4 @@
-import {
-  MicrophoneIcon,
-  PenIcon,
-  VideocameraIcon,
-} from "@solar-icons/react/bold";
+import { IconMicrophoneFilled, IconPencilFilled, IconVideoFilled } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -111,7 +107,7 @@ export default function InlineIconHeading({
     >
       Everything you have{" "}
       <Chip
-        icon={<PenIcon className={icon} />}
+        icon={<IconPencilFilled className={icon} />}
         index={0}
         shape={shape}
         animated={animated}
@@ -120,7 +116,7 @@ export default function InlineIconHeading({
         written
       </Chip>{" "}
       <Chip
-        icon={<VideocameraIcon className={icon} />}
+        icon={<IconVideoFilled className={icon} />}
         index={1}
         shape={shape}
         animated={animated}
@@ -129,7 +125,7 @@ export default function InlineIconHeading({
       </Chip>{" "}
       &amp;{" "}
       <Chip
-        icon={<MicrophoneIcon className={icon} />}
+        icon={<IconMicrophoneFilled className={icon} />}
         index={2}
         shape={shape}
         animated={animated}

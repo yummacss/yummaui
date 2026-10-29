@@ -76,7 +76,7 @@
               "children": [
                 {
                   "icon": {
-                    "$icon": "ClockCircleIcon",
+                    "$icon": "IconClockFilled",
                     "size": "w:4 h:4"
                   }
                 },

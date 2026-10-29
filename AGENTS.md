@@ -172,8 +172,9 @@ is written.
   grows to its content and never scrolls.
 - The scrollbar is 12px and square, sits above sticky headers (`zi:20`), and
   fades with `hovering:` and `scrolling:`, two states in `yumma.config.mjs`.
-- Registry icons are Solar: Bold for objects, Outline for marks, arrows and
-  operators. Never Duotone.
+- Registry icons are Tabler, from `@tabler/icons-react`: filled for objects,
+  outline for marks, arrows and operators. A component whose objects lack a
+  filled half draws them all outline. `tests/icons.test.ts` holds it.
 - Site icons come from `src/icons.tsx`, Phosphor regular. Duotone blurs at
   16px; the notes, "Icons at 16px", have the measurements.
 

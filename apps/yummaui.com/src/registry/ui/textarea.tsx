@@ -1,8 +1,7 @@
 "use client";
 
 import { Field } from "@base-ui/react/field";
-import { DangerTriangleIcon } from "@solar-icons/react/bold";
-import { CheckIcon } from "@solar-icons/react/outline";
+import { IconAlertTriangleFilled, IconCheck } from "@tabler/icons-react";
 import type { ChangeEvent, ComponentProps } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -189,9 +188,9 @@ export default function TextareaBase({
         {status !== "default" && (
           <span className={`d:f p:a r:3 t:3 ai:c jc:c ${STATUS_ICON[status]}`}>
             {status === "error" ? (
-              <DangerTriangleIcon className="w:4 h:4" />
+              <IconAlertTriangleFilled className="w:4 h:4" />
             ) : (
-              <CheckIcon className="w:4 h:4" />
+              <IconCheck className="w:4 h:4" />
             )}
           </span>
         )}

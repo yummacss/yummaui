@@ -2,7 +2,7 @@
 
 import { Button } from "@base-ui/react/button";
 import { Toast } from "@base-ui/react/toast";
-import { CloseIcon } from "@solar-icons/react/outline";
+import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -283,7 +283,7 @@ function Stack({
             />
           }
         >
-          <CloseIcon aria-hidden className="w:4 h:4" />
+          <IconX aria-hidden className="w:4 h:4" />
         </Toast.Close>
       </Toast.Content>
     </Toast.Root>

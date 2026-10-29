@@ -1,7 +1,7 @@
 "use client";
 
 import { Popover } from "@base-ui/react/popover";
-import { CloseIcon } from "@solar-icons/react/outline";
+import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -205,7 +205,7 @@ export default function PopoverBase({
             )}
             aria-label="Close"
           >
-            <CloseIcon aria-hidden className="w:5 h:5" />
+            <IconX aria-hidden className="w:5 h:5" />
           </Popover.Close>
         )}
       </div>

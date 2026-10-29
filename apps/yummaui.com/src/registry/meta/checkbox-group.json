@@ -76,7 +76,7 @@
             "row": true,
             "aside": "1.2 GB",
             "icon": {
-              "$icon": "FolderIcon",
+              "$icon": "IconFolderFilled",
               "size": "w:4 h:4 c:blue"
             }
           }
@@ -89,7 +89,7 @@
             "row": true,
             "aside": "8.4 GB",
             "icon": {
-              "$icon": "FolderIcon",
+              "$icon": "IconFolderFilled",
               "size": "w:4 h:4 c:mint"
             }
           }
@@ -102,7 +102,7 @@
             "row": true,
             "aside": "3.1 GB",
             "icon": {
-              "$icon": "FolderIcon",
+              "$icon": "IconFolderFilled",
               "size": "w:4 h:4 c:yellow"
             }
           }

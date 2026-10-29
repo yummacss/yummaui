@@ -3,8 +3,7 @@
 import { Button } from "@base-ui/react/button";
 import { Fieldset } from "@base-ui/react/fieldset";
 import { Input } from "@base-ui/react/input";
-import { CloudUploadIcon, DocumentIcon } from "@solar-icons/react/bold";
-import { CheckIcon, CloseIcon } from "@solar-icons/react/outline";
+import { IconCheck, IconCloudUpload, IconFile, IconX } from "@tabler/icons-react";
 import type { ChangeEvent, DragEvent, ReactNode } from "react";
 import { useId, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -284,7 +283,7 @@ export default function FileUploadBase({
               error ? "bg:red-1/50 c:red-5" : "bg:well c:check",
             )}
           >
-            {icon ?? <CloudUploadIcon className="w:5 h:5" />}
+            {icon ?? <IconCloudUpload className="w:5 h:5" />}
           </div>
           <div className="d:f fd:c ai:c g:1">
             <span className={`fs:sm fw:600 ${error ? "c:red-5" : "c:label"}`}>
@@ -331,7 +330,7 @@ export default function FileUploadBase({
               TILE_SHAPES[shape],
             )}
           >
-            {row.icon ?? <DocumentIcon className="w:5 h:5" />}
+            {row.icon ?? <IconFile className="w:5 h:5" />}
           </span>
           <div className="d:f fd:c g:1 f:1 min-w:0">
             <div className="d:f ai:c jc:sb g:2">
@@ -356,7 +355,7 @@ export default function FileUploadBase({
             )}
           </div>
           {row.done ? (
-            <CheckIcon aria-label="Uploaded" className="w:4 h:4 c:on" />
+            <IconCheck aria-label="Uploaded" className="w:4 h:4 c:on" />
           ) : (
             <Button
               aria-label={`${items ? "Cancel" : "Remove"} ${row.name}`}
@@ -368,7 +367,7 @@ export default function FileUploadBase({
                 TILE_SHAPES[shape],
               )}
             >
-              <CloseIcon className="w:4 h:4" />
+              <IconX className="w:4 h:4" />
             </Button>
           )}
         </div>

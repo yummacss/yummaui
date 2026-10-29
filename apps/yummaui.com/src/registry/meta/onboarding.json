@@ -12,7 +12,7 @@
       "name": "triggerIcon",
       "type": "none",
       "typeName": "ReactNode",
-      "exampleIcon": "StarsIcon",
+      "exampleIcon": "IconSparklesFilled",
       "description": "A glyph beside the trigger's label."
     },
     {
@@ -39,7 +39,7 @@
               "id": "documents",
               "label": "Documents",
               "icon": {
-                "$icon": "FolderIcon",
+                "$icon": "IconFolderFilled",
                 "size": "w:4 h:4"
               },
               "picked": true
@@ -48,7 +48,7 @@
               "id": "photos",
               "label": "Photos",
               "icon": {
-                "$icon": "FolderIcon",
+                "$icon": "IconFolderFilled",
                 "size": "w:4 h:4"
               },
               "picked": true
@@ -57,7 +57,7 @@
               "id": "downloads",
               "label": "Downloads",
               "icon": {
-                "$icon": "FolderIcon",
+                "$icon": "IconFolderFilled",
                 "size": "w:4 h:4"
               }
             },
@@ -65,7 +65,7 @@
               "id": "desktop",
               "label": "Desktop",
               "icon": {
-                "$icon": "FolderIcon",
+                "$icon": "IconFolderFilled",
                 "size": "w:4 h:4"
               }
             }
@@ -129,7 +129,7 @@
       "props": {
         "trigger": "Take the tour",
         "triggerIcon": {
-          "$icon": "StarsIcon",
+          "$icon": "IconSparklesFilled",
           "size": "w:5 h:5"
         },
         "steps": [
@@ -145,7 +145,7 @@
                 "id": "documents",
                 "label": "Documents",
                 "icon": {
-                  "$icon": "FolderIcon",
+                  "$icon": "IconFolderFilled",
                   "size": "w:4 h:4"
                 },
                 "picked": true
@@ -154,7 +154,7 @@
                 "id": "photos",
                 "label": "Photos",
                 "icon": {
-                  "$icon": "FolderIcon",
+                  "$icon": "IconFolderFilled",
                   "size": "w:4 h:4"
                 },
                 "picked": true
@@ -163,7 +163,7 @@
                 "id": "downloads",
                 "label": "Downloads",
                 "icon": {
-                  "$icon": "FolderIcon",
+                  "$icon": "IconFolderFilled",
                   "size": "w:4 h:4"
                 }
               },
@@ -171,7 +171,7 @@
                 "id": "desktop",
                 "label": "Desktop",
                 "icon": {
-                  "$icon": "FolderIcon",
+                  "$icon": "IconFolderFilled",
                   "size": "w:4 h:4"
                 }
               }

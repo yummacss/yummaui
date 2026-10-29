@@ -6,7 +6,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "description": "The trigger's content, an icon usually. Pair it with `triggerLabel` when there is no text.",
-      "exampleIcon": "PaletteIcon"
+      "exampleIcon": "IconPaletteFilled"
     },
     {
       "name": "triggerLabel",
@@ -129,7 +129,7 @@
       "component": "Popover",
       "props": {
         "trigger": {
-          "$icon": "PaletteIcon",
+          "$icon": "IconPaletteFilled",
           "size": "w:4 h:4 c:yellow"
         },
         "triggerLabel": "Folder color",

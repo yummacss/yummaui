@@ -1,8 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
-import { EXAMPLE_ICON_STYLE } from "../src/utils/icon-style";
-import { rootDir } from "./helpers";
+import { rootDir, exampleIconNames } from "./helpers";
 
 const ORG =
 	/\b(?:teams?|members?|invitations?|invites?|invited|sprints?|invoices?|subscriptions?|billing|collaborat\w*|assignees?|reassign\w*|workspaces?|onboard(?:ing)? your team)\b/i;
@@ -93,7 +92,7 @@ describe("content model", () => {
 	});
 
 	it("names icons the demo can render", () => {
-		const known = new Set(Object.keys(EXAMPLE_ICON_STYLE));
+		const known = exampleIconNames();
 
 		expect(known.size).toBeGreaterThan(15);
 

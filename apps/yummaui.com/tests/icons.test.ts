@@ -1,10 +1,9 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
-import { EXAMPLE_ICON_STYLE } from "../src/utils/icon-style";
-import { rootDir } from "./helpers";
+import { exampleIconNames, rootDir } from "./helpers";
 
-const DIRECT = /from\s+["']@solar-icons\/react/;
+const DIRECT = /from\s+["']@tabler\/icons-react["']/;
 const SHARED = /from\s+["']@\/icons["']/;
 
 function sources(dir: string): string[] {
@@ -72,57 +71,49 @@ describe("icons", () => {
 		expect(wanted.size).toBeGreaterThan(10);
 	});
 
-	it("gives each Solar icon one style within a file", () => {
-		const clashes: string[] = [];
-		for (const file of [...registry, demos]) {
-			const styleOf = new Map<string, string>();
-			const source = readFileSync(file, "utf8");
-			for (const [, block, style] of source.matchAll(
-				/import\s*\{([^}]*)\}\s*from\s*["']@solar-icons\/react\/([a-z-]+)["']/g,
-			)) {
-				expect(["outline", "bold"]).toContain(style);
-				for (const entry of block.split(",").map((n) => n.trim())) {
-					// an alias is a deliberate second style
-					if (!entry || entry.includes(" as ")) continue;
-					const seen = styleOf.get(entry);
-					if (seen && seen !== style)
-						clashes.push(`${relative(rootDir, file)}: ${entry}`);
-					styleOf.set(entry, style);
-				}
-			}
-		}
-		expect(clashes).toEqual([]);
+	it("draws the registry and demos from Tabler alone", () => {
+		const solar = [...registry, demos]
+			.filter((file) => readFileSync(file, "utf8").includes("@solar-icons"))
+			.map((file) => relative(rootDir, file));
+		expect(solar).toEqual([]);
 	});
 
-	it("resolves every demo icon in the style it asks for", () => {
-		const demoSource = readFileSync(demos, "utf8");
-		const imported = (style: string) => {
+	it("gives a component filled or outline objects, never both", () => {
+		const mixed: string[] = [];
+		for (const file of registry) {
+			const source = readFileSync(file, "utf8");
 			const block =
-				demoSource.match(
-					new RegExp(`import \\{([^}]*)\\} from "@solar-icons/react/${style}"`),
-				)?.[1] ?? "";
-			return new Set(
-				block
-					.split(",")
-					.map((entry) => entry.trim().split(" as ")[0])
-					.filter(Boolean),
+				source.match(/import \{([^}]*)\} from "@tabler\/icons-react"/)?.[1] ??
+				"";
+			const names = block.split(",").map((name) => name.trim());
+			const filled = names.filter((name) => name.endsWith("Filled"));
+			// marks (check, x, chevrons, plus, minus, search, selector) stay outline
+			const objects = names.filter(
+				(name) =>
+					name &&
+					!name.endsWith("Filled") &&
+					!/^Icon(Check|X|Chevron\w+|Plus|Minus|Search|Selector|AlertTriangle)$/.test(
+						name,
+					),
 			);
-		};
-		const missing: string[] = [];
-		for (const [name, style] of Object.entries(EXAMPLE_ICON_STYLE)) {
-			if (!imported(style).has(name)) missing.push(`${name} (${style})`);
+			if (filled.length && objects.length)
+				mixed.push(`${relative(rootDir, file)}: ${objects.join(", ")}`);
 		}
+		expect(mixed).toEqual([]);
+	});
+
+	it("resolves every icon a schema names", () => {
+		const known = exampleIconNames();
+		const missing: string[] = [];
 		for (const file of readdirSync(join(rootDir, "src/registry/meta"))) {
 			const text = readFileSync(
 				join(rootDir, "src/registry/meta", file),
 				"utf8",
 			);
-			for (const [, name, style] of text.matchAll(
-				/"\$icon": "([A-Za-z0-9]+)",(?:\s*"style": "([a-z-]+)",)?/g,
+			for (const [, name] of text.matchAll(
+				/"(?:\$icon|exampleIcon)": "([A-Za-z0-9]+)"/g,
 			)) {
-				const wanted = style ?? EXAMPLE_ICON_STYLE[name];
-				if (!wanted || !imported(wanted).has(name))
-					missing.push(`${file}: ${name} (${wanted})`);
+				if (!known.has(name)) missing.push(`${file}: ${name}`);
 			}
 		}
 		expect(missing).toEqual([]);

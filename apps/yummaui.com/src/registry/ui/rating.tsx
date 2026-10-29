@@ -1,7 +1,7 @@
 "use client";
 
 import { Toggle } from "@base-ui/react/toggle";
-import { StarIcon } from "@solar-icons/react/bold";
+import { IconStarFilled } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -173,7 +173,7 @@ export default function RatingBase({
             : Array.from({ length: max }, (_, index) => index + 1).map(
                 (star) => {
                   const filled = star <= value;
-                  const mark = <StarIcon className="fs:0 w:6 h:6" />;
+                  const mark = <IconStarFilled className="fs:0 w:6 h:6" />;
                   const icon = animated ? <Pop on={filled}>{mark}</Pop> : mark;
 
                   if (readOnly) {
