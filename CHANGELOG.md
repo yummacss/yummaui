@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Four blocks: App Shell, Settings Page, Sidebar and Sign In.
+
 ### Changed
 
 - The colors `init` and `add` write are `oklch()`, which needs Yumma CSS 4.9 or later.

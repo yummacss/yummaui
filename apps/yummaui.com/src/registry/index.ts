@@ -4,6 +4,7 @@
  */
 import meta_accordion from "./meta/accordion.json";
 import meta_alert_dialog from "./meta/alert-dialog.json";
+import meta_app_shell from "./meta/app-shell.json";
 import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
 import meta_avatar from "./meta/avatar.json";
@@ -57,6 +58,7 @@ import meta_tooltip from "./meta/tooltip.json";
 export const registry = {
   "accordion": () => import("./ui/accordion"),
   "alert-dialog": () => import("./ui/alert-dialog"),
+  "app-shell": () => import("./ui/app-shell"),
   "autocomplete-grouped": () => import("./ui/autocomplete-grouped"),
   "autocomplete-helper": () => import("./ui/autocomplete-helper"),
   "autocomplete-icon-leading": () => import("./ui/autocomplete-icon-leading"),
@@ -177,6 +179,7 @@ export interface ChildExample {
 export const registryMeta = {
   "accordion": meta_accordion,
   "alert-dialog": meta_alert_dialog,
+  "app-shell": meta_app_shell,
   "autocomplete": meta_autocomplete,
   "avatar-stack": meta_avatar_stack,
   "avatar": meta_avatar,
@@ -242,6 +245,7 @@ export interface RegistryTarget {
 export const registryTargets: Record<string, RegistryTarget> = {
   "accordion": { component: "accordion", variant: "base", kind: "component", install: "accordion" },
   "alert-dialog": { component: "alert-dialog", variant: "base", kind: "component", install: "alert-dialog" },
+  "app-shell": { component: "app-shell", variant: "base", kind: "component", install: "app-shell" },
   "autocomplete-grouped": { component: "autocomplete", variant: "grouped", kind: "example", install: "autocomplete" },
   "autocomplete-helper": { component: "autocomplete", variant: "helper", kind: "example", install: "autocomplete" },
   "autocomplete-icon-leading": { component: "autocomplete", variant: "icon-leading", kind: "example", install: "autocomplete" },

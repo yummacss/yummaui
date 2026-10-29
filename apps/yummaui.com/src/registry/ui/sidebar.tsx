@@ -170,7 +170,7 @@ export default function Sidebar({
                   key={link.href}
                   href={link.href}
                   aria-current={here ? "page" : undefined}
-                  className={`${LINK} ${here ? CURRENT : ""}`}
+                  className={merge(LINK, here ? CURRENT : "")}
                 >
                   {link.icon && (
                     <span className="d:f fs:0" aria-hidden>
