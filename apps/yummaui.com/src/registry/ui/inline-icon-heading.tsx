@@ -70,11 +70,11 @@ function Chip({
   return (
     <span className="ws:nw">
       <span
-        className={`d:if ai:c g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs bw:1 c:label lh:1 ws:nw va:m ${CHIP_SHAPES[shape]}`}
+        className={`d:if ai:c g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised bc:rim bw:1 c:label lh:1 ws:nw va:m ${CHIP_SHAPES[shape]}`}
       >
         <span
           aria-hidden
-          className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check btc:white/25 blc:black/15 brc:black/15 bbc:black/30 bw:1 c:white ${TILE_SHAPES[shape]} ${
+          className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:transparent bw:1 c:white ${TILE_SHAPES[shape]} ${
             animated
               ? `tp:a tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index]}`
               : ""

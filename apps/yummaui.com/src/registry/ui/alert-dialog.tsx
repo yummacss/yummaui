@@ -48,13 +48,13 @@ const DANGER_OUTLINE = "fv:oc:red-2/60 fv:bc:red-3";
 
 const TONE_BUTTON: Record<Tone, string> = {
   danger:
-    "bg:red h:bg:red-8 btc:red-5 blc:red-8 brc:red-8 bbc:red-9 c:white bs-o:sm",
+    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
   neutral:
-    "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well",
+    "bg:raised bc:rim c:label h:bg:well",
 };
 
 const TONE_BADGE: Record<Tone, string> = {
-  danger: "bw:1 bg:red btc:red-5 blc:red-8 brc:red-8 bbc:red-9 bs-o:sm c:white",
+  danger: "bw:1 bg:red bc:red c:white",
   neutral: "bg:well c:hint",
 };
 
@@ -222,7 +222,7 @@ export default function AlertDialogBase({
                 <Button
                   className={merge(
                     outline,
-                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well",
+                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bc:rim c:label h:bg:well",
                     CLOSE_SHAPES[shape],
                   )}
                 />

@@ -36,23 +36,23 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none";
 
 const NEUTRAL_BUTTON =
-  "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well";
+  "bg:raised bc:rim c:label h:bg:well";
 
 const PRIMARY_BUTTON =
-  "bg:fill btc:white/20 blc:black/40 brc:black/40 bbc:black/60 bs-o:sm h:o:90 c:on-fill";
+  "bg:fill bc:fill h:o:90 c:on-fill";
 
 const DANGER_OUTLINE = "fv:oc:red-2/60 fv:bc:red-3";
 
 const TRIGGER_TONES: Record<TriggerTone, string> = {
   neutral: NEUTRAL_BUTTON,
   danger:
-    "bg:red h:bg:red-8 btc:red-5 blc:red-8 brc:red-8 bbc:red-9 c:white bs-o:sm",
+    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
 };
 
 const CONFIRM_TONES: Record<ConfirmTone, string> = {
   primary: PRIMARY_BUTTON,
   danger:
-    "bg:red h:bg:red-8 btc:red-5 blc:red-8 brc:red-8 bbc:red-9 c:white bs-o:sm",
+    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
 };
 
 const SIZES: Record<Size, string> = {
@@ -230,7 +230,7 @@ export default function DialogBase({
                 <Button
                   className={merge(
                     outline,
-                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label h:bg:well",
+                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bc:rim c:label h:bg:well",
                     CLOSE_SHAPES[shape],
                   )}
                 />

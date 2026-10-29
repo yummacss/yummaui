@@ -46,7 +46,7 @@ const ICON_ONLY: Record<Size, string> = {
 };
 
 // picking one of several: the selected tab's raised chip on the track
-const PICKED = "bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label";
+const PICKED = "bg:raised bc:rim c:label";
 const UNPICKED = "bg:transparent bc:transparent c:hint h:c:label";
 
 function isTheme(value: unknown): value is Theme {
