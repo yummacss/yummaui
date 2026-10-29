@@ -27,6 +27,14 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "app-shell",
+		title: "App Shell",
+		description:
+			"An app's frame with the Sidebar, a top bar & the page, moving the sidebar into a drawer on phones.",
+		added: "2026-10-29",
+		resizable: true,
+	},
+	{
 		slug: "autocomplete",
 		title: "Autocomplete",
 		description: "Display suggestions as users type, built on Base UI.",
@@ -238,6 +246,30 @@ export const COMPONENT_PAGES = [
 		title: "Separator",
 		description: "Divide content with visual separators, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "settings-page",
+		title: "Settings Page",
+		description:
+			"An account settings page in sections, with a save bar that appears once anything changes.",
+		added: "2026-10-29",
+		resizable: true,
+	},
+	{
+		slug: "sidebar",
+		title: "Sidebar",
+		description:
+			"An app's sidebar with a workspace switcher, grouped links with badges & the user's menu.",
+		added: "2026-10-29",
+		resizable: true,
+	},
+	{
+		slug: "sign-in",
+		title: "Sign In",
+		description:
+			"A sign-in card with email, password, an optional passkey & a form that shakes on a mistake.",
+		added: "2026-10-29",
+		resizable: true,
 	},
 	{
 		slug: "skeleton",
