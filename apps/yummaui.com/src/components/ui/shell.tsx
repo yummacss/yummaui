@@ -56,13 +56,13 @@ export default function UIShell({
 			>
 				<article className="d:f fd:c f:1 min-h:0">
 					{children}
-					{block && <ApiTable primitives={primitives} />}
 					{playground && (
 						<ComponentPlayground
 							block={block}
 							api={block ? <Look heading={false} /> : undefined}
 						/>
 					)}
+					{block && <ApiTable primitives={primitives} />}
 				</article>
 			</div>
 
