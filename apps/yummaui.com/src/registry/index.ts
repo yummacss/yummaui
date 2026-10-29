@@ -38,6 +38,7 @@ import meta_rating from "./meta/rating.json";
 import meta_scroll_area from "./meta/scroll-area.json";
 import meta_select from "./meta/select.json";
 import meta_separator from "./meta/separator.json";
+import meta_sign_in from "./meta/sign-in.json";
 import meta_skeleton from "./meta/skeleton.json";
 import meta_slider from "./meta/slider.json";
 import meta_storage_bar from "./meta/storage-bar.json";
@@ -100,6 +101,7 @@ export const registry = {
   "select-grouped": () => import("./ui/select-grouped"),
   "select": () => import("./ui/select"),
   "separator": () => import("./ui/separator"),
+  "sign-in": () => import("./ui/sign-in"),
   "skeleton-activity": () => import("./ui/skeleton-activity"),
   "skeleton-filters": () => import("./ui/skeleton-filters"),
   "skeleton-list": () => import("./ui/skeleton-list"),
@@ -205,6 +207,7 @@ export const registryMeta = {
   "scroll-area": meta_scroll_area,
   "select": meta_select,
   "separator": meta_separator,
+  "sign-in": meta_sign_in,
   "skeleton": meta_skeleton,
   "slider": meta_slider,
   "storage-bar": meta_storage_bar,
@@ -279,6 +282,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "select-grouped": { component: "select", variant: "grouped", kind: "example", install: "select" },
   "select": { component: "select", variant: "base", kind: "component", install: "select" },
   "separator": { component: "separator", variant: "base", kind: "component", install: "separator" },
+  "sign-in": { component: "sign-in", variant: "base", kind: "component", install: "sign-in" },
   "skeleton-activity": { component: "skeleton", variant: "activity", kind: "example", install: "skeleton" },
   "skeleton-filters": { component: "skeleton", variant: "filters", kind: "example", install: "skeleton" },
   "skeleton-list": { component: "skeleton", variant: "list", kind: "example", install: "skeleton" },
@@ -327,6 +331,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "rating": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "scroll-area": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: {}, keyframes: {} },
   "select": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "sign-in": { states: {}, easings: {}, keyframes: { "shake": "25%, 75% { translate: -4px 0; } 50% { translate: 4px 0; }" } },
   "skeleton": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
   "switch": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "tabs": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

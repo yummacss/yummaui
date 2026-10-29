@@ -72,6 +72,6 @@ export const sidebarConfig: SidebarSection[] = [
 	},
 	{
 		title: "Blocks",
-		items: ["inline-icon-heading"],
+		items: ["inline-icon-heading", "sign-in"],
 	},
 ];
