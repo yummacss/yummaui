@@ -35,8 +35,8 @@ const LANGUAGE: Record<string, string> = {
 
 // a block's frame drags narrower from its right edge, snapping to phone & tablet
 const SNAP = [
-	{ width: 390, label: "Phone" },
-	{ width: 768, label: "Tablet" },
+	{ width: 392, label: "Phone", left: "l:98" },
+	{ width: 768, label: "Tablet", left: "l:192" },
 ];
 // how close the edge comes before a guide lights up, and before it snaps
 const NEAR = 64;
@@ -162,10 +162,9 @@ export default function ComponentPlayground({
 								return (
 									<span
 										key={point.width}
-										className={`d:f p:a t:0 b:0 w:0 blw:1 tp:c tdu:150 ${
+										className={`d:f p:a t:0 b:0 w:0 blw:1 tp:c tdu:150 ${point.left} ${
 											near ? "bc:accent" : "bc:ink/10"
 										}`}
-										style={{ left: point.width }}
 									>
 										<span
 											className={`p:a t:2 l:2 fs:xs ff:m ws:nw tp:c tdu:150 ${
