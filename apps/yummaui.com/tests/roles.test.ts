@@ -15,7 +15,7 @@ function installed(): Record<string, { light: string; dark: string }> {
 	return Object.fromEntries(
 		[
 			...block.matchAll(
-				/^\s*"?([a-z][a-z-]*)"?: \{ light: "([^"]+)", dark: "([^"]+)" \},$/gm,
+				/^\s*"?([a-z][a-z-]*)"?: \{\s*light: "([^"]+)",\s*dark: "([^"]+)",?\s*\},$/gm,
 			),
 		].map(([, name, light, dark]) => [name, { light, dark }]),
 	);
