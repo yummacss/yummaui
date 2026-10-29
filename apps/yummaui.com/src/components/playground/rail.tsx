@@ -140,7 +140,7 @@ function Row({
 	);
 }
 
-/** A block's whole Component API, as a table above its preview. */
+/** A block's whole Component API, as a table below its preview. */
 export function ApiTable({ primitives }: { primitives: Primitives }) {
 	const playground = usePlayground();
 	const props = inTableOrder(playground?.meta?.props ?? []);
@@ -148,12 +148,16 @@ export function ApiTable({ primitives }: { primitives: Primitives }) {
 
 	const target = getRegistryTarget(playground.id);
 	const primitive = primitiveSlug(primitives, target.component, target.install);
-	const cell = "py:3 pr:4 bc:border bbw:1 ta:l va:t";
+	// the docs' own table, so the API reads like every other table on the site
+	const th = "px:4 py:2 bc:border c:ink bw:1 ta:l fw:500";
+	const td = "px:4 py:2 bc:border c:ink/80 bw:1 va:t";
 
 	return (
-		<section className="mt:10">
-			<div className="d:f ai:c jc:sb g:2 mb:3">
-				<h2 className="m:0 ff:display fs:xl fw:400 c:ink">Component API</h2>
+		<section>
+			<div className="d:f ai:c jc:sb g:2 mt:12 mb:4">
+				<h2 className="m:0 ff:display c:ink fs:xxl fw:400 lh:1">
+					Component API
+				</h2>
 				{primitive && (
 					<Link
 						href={`https://base-ui.com/react/components/${primitive}`}
@@ -166,50 +170,52 @@ export function ApiTable({ primitives }: { primitives: Primitives }) {
 					</Link>
 				)}
 			</div>
-			<table className="w:100% bc:c fs:sm">
-				<thead>
-					<tr className="c:ink/50 fs:xs ff:m">
-						<th className={`${cell} fw:400`}>Prop</th>
-						<th className={`${cell} fw:400`}>Type</th>
-						<th className={`${cell} fw:400`}>Default</th>
-						<th className={`${cell} fw:400 d:none @md:d:tc`}>Description</th>
-					</tr>
-				</thead>
-				<tbody>
-					{props.map((prop) => (
-						<tr key={prop.name}>
-							<td className={cell}>
-								<code className="c:code fs:xs ff:m">{prop.name}</code>
-								{/* below @md the description sits under the name */}
-								<div className="mt:1 c:ink/60 lh:4 @md:d:none">
-									<PropDescription text={prop.description} />
-								</div>
-							</td>
-							<td className={cell}>
-								<code className="c:ink/70 fs:xs ff:m">
-									{/* an enum wraps between its values, never inside one */}
-									{typeOf(prop)
-										.split(" | ")
-										.map((value, index) => (
-											<span key={value}>
-												{index > 0 && " | "}
-												<span className="ws:nw">{value}</span>
-											</span>
-										))}
-								</code>
-							</td>
-							<td className={cell}>
-								<code className="c:ink/70 fs:xs ff:m">
-									{prop.default === undefined ? "-" : String(prop.default)}
-								</code>
-							</td>
-							<td className={`${cell} c:ink/60 lh:4 d:none @md:d:tc`}>
-								<PropDescription text={prop.description} />
-							</td>
+			<div className="ox:auto">
+				<table className="w:100% bc:border bg:transparent bc:c">
+					<thead className="bg:surface">
+						<tr>
+							<th className={th}>Prop</th>
+							<th className={th}>Type</th>
+							<th className={th}>Default</th>
+							<th className={th}>Description</th>
 						</tr>
-					))}
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						{props.map((prop) => (
+							<tr key={prop.name}>
+								<td className={td}>
+									<code className="c:code ff:m ws:nw">{prop.name}</code>
+								</td>
+								<td className={td}>
+									<code className="c:code ff:m">
+										{/* an enum wraps between its values, never inside one */}
+										{typeOf(prop)
+											.split(" | ")
+											.map((value, index) => (
+												<span key={value}>
+													{index > 0 && " | "}
+													<span className="ws:nw">{value}</span>
+												</span>
+											))}
+									</code>
+								</td>
+								<td className={td}>
+									{prop.default === undefined ? (
+										"-"
+									) : (
+										<code className="c:code ff:m ws:nw">
+											{String(prop.default)}
+										</code>
+									)}
+								</td>
+								<td className={`${td} min-w:64`}>
+									<PropDescription text={prop.description} />
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			</div>
 		</section>
 	);
 }

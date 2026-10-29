@@ -9,7 +9,7 @@ import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
-import { Close, Code, Eye, Gear, Sliders } from "@/icons";
+import { Close, Code, Gear, Globe, Sliders } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -88,18 +88,18 @@ export default function ComponentPlayground({
 			<Tabs value={active} onValueChange={setTab} className={FILL}>
 				<div className="d:f ai:c bbw:1 bc:border bg:page">
 					<BaseTabs.List className="d:f ai:c min-w:0 ox:auto">
-						<FileTab value="preview" icon={<Eye className="w:4 h:4" />}>
+						<FileTab value="preview" icon={<Globe className="w:4 h:4" />}>
 							Preview
 						</FileTab>
 						{DIVIDER}
 						<FileTab value="code" icon={<Code className="w:4 h:4" />}>
-							page.tsx
+							Code
 						</FileTab>
 						{config && (
 							<>
 								{DIVIDER}
 								<FileTab value="config" icon={<Gear className="w:4 h:4" />}>
-									yumma.config.mjs
+									Configuration
 								</FileTab>
 							</>
 						)}
