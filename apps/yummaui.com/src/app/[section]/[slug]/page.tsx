@@ -1,4 +1,4 @@
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/json-ld";
@@ -14,7 +14,7 @@ export async function generateMetadata({
 	params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
 	const { slug } = await params;
-	const ui = allUis.find((u) => u._meta.path === slug);
+	const ui = uis.find((u) => u._meta.path === slug);
 	const url = `${UI_ORIGIN}${pagePath(slug)}`;
 
 	return {
@@ -49,7 +49,7 @@ export default async function Page({
 	params: Promise<{ slug: string }>;
 }) {
 	const { slug } = await params;
-	const ui = allUis.find((u) => u._meta.path === slug);
+	const ui = uis.find((u) => u._meta.path === slug);
 	if (!ui) notFound();
 	const MDXContent = ui.mdx;
 	const navigation = getNavigation(slug);

@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import { ImageResponse } from "next/og";
 import OgImage, { type OgSpec, type OgTheme } from "@/components/og-image";
 
@@ -16,7 +16,7 @@ export const HOME_OG: OgSpec = {
 const SHOTS = join(process.cwd(), "public/og/ui");
 
 export async function uiOg(slug: string): Promise<OgSpec | null> {
-	const ui = allUis.find((u) => u._meta.path === slug);
+	const ui = uis.find((u) => u._meta.path === slug);
 	if (!ui) return null;
 	const file = join(SHOTS, `${slug}.png`);
 	if (!existsSync(file)) {

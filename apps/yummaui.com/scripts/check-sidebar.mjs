@@ -1,14 +1,12 @@
-import { readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { sidebarConfig } from "../src/config/sidebar.ts";
+import { pageSlugs } from "./lib/registry-ids.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dir = "src/content/ui";
 
-const pages = readdirSync(join(root, dir))
-	.filter((file) => file.endsWith(".mdx"))
-	.map((file) => file.replace(/\.mdx$/, ""));
+const pages = pageSlugs(join(root, dir));
 const slugs = sidebarConfig.flatMap((section) => section.items);
 const listed = new Set(slugs);
 
@@ -16,7 +14,7 @@ const problems = [];
 
 for (const page of pages) {
 	if (!listed.has(page)) {
-		problems.push(`"${page}" exists in ${dir} but is not in the sidebar.`);
+		problems.push(`"${page}" is a page but is not in the sidebar.`);
 	}
 }
 

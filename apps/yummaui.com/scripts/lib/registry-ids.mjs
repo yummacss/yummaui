@@ -1,11 +1,15 @@
 import { readdirSync } from "node:fs";
 import { basename } from "node:path";
+import { COMPONENT_PAGES } from "../../src/utils/component-pages.mjs";
 
-export function componentSlugs(contentDir) {
-	return readdirSync(contentDir)
-		.filter((file) => file.endsWith(".mdx"))
-		.map((file) => basename(file, ".mdx"))
-		.sort((a, b) => b.length - a.length);
+/** Every page's slug, the MDX files & the component rows, longest first. */
+export function pageSlugs(contentDir) {
+	return [
+		...readdirSync(contentDir)
+			.filter((file) => file.endsWith(".mdx"))
+			.map((file) => basename(file, ".mdx")),
+		...COMPONENT_PAGES.map((page) => page.slug),
+	].sort((a, b) => b.length - a.length);
 }
 
 export function splitId(id, slugs) {

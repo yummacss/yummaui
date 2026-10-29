@@ -2,8 +2,9 @@
 // at twice its size, for the link previews. Run it against a running site:
 //   pnpm og:components [http://localhost:3000] [slug ...]
 // The notes, "OG images".
-import { mkdir, readdir } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { chromium } from "playwright";
+import { pageSlugs } from "./lib/registry-ids.mjs";
 
 const [BASE = "http://localhost:3000", ...ONLY] = process.argv.slice(2);
 const OUT = "public/og/ui";
@@ -42,10 +43,9 @@ const ACTIONS = {
 // the title layout
 const SKIP = new Set(["separator", "skeleton", "toolbar"]);
 
-const slugs = (await readdir("src/content/ui"))
-	.filter((file) => file.endsWith(".mdx"))
-	.map((file) => file.replace(/\.mdx$/, ""))
-	.filter((slug) => !SKIP.has(slug) && (!ONLY.length || ONLY.includes(slug)));
+const slugs = pageSlugs("src/content/ui").filter(
+	(slug) => !SKIP.has(slug) && (!ONLY.length || ONLY.includes(slug)),
+);
 
 await mkdir(OUT, { recursive: true });
 const browser = await chromium.launch({

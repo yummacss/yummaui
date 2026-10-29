@@ -139,10 +139,13 @@ is written.
   `style` and `radius` in the URL, remembered in `localStorage` for the next
   page, and the address wins. `src/utils/styles.mjs` owns them. A blocked
   pair in an address falls back to the nearest allowed radius.
+- **Component pages are rows**, not files: `src/utils/component-pages.mjs`
+  holds one per page and `src/utils/uis.ts` merges them with the MDX pages.
+  A page with prose of its own is an MDX file instead.
 - Every component page shows its Example, a `scene` in its meta, with the
   Component API table under it listing every prop. `tests/registry.test.ts`
-  fails a meta without one. `resizable: true` in a page's frontmatter lets
-  the preview drag to phone & tablet widths, for whole screen regions.
+  fails a meta without one. `resizable: true` on a row lets the preview drag
+  to phone & tablet widths, for whole screen regions.
 
 ## Accent
 
