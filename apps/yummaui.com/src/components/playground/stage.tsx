@@ -30,10 +30,10 @@ const FILL = "d:f fd:c f:1 min-h:0";
 const LANGUAGE: Record<string, string> = {
 	preview: "Preview",
 	code: "TSX",
-	config: "JavaScript",
+	config: "JavaScript module",
 };
 
-// a block's frame drags narrower from its right edge, snapping to phone & tablet
+// a resizable frame drags narrower from its right edge, snapping to phone & tablet
 const SNAP = [
 	{ width: 392, label: "Phone", left: "l:98" },
 	{ width: 768, label: "Tablet", left: "l:192" },
@@ -48,24 +48,29 @@ const TOOL =
 const DIVIDER = <span aria-hidden className="fs:0 w:0 h:4 blw:1 bc:border" />;
 
 export default function ComponentPlayground({
-	block = false,
-	api,
+	resizable = false,
+	styling,
 }: {
-	block?: boolean;
-	/** A block's styling controls, opened in a drawer from the toolbar. */
-	api?: ReactNode;
+	/** The frame drags narrower, for a whole screen region rather than one control. */
+	resizable?: boolean;
+	/** The styling controls, opened in a drawer from the toolbar. */
+	styling?: ReactNode;
 }) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
 	// the snap point the edge just landed on, lit for a moment
+	// at full width the panel's border is the frame's, so the frame draws its own only when narrower
+	const [narrowed, setNarrowed] = useState(false);
 	const [flash, setFlash] = useState<number | null>(null);
 	const snapped = useRef<number | null>(null);
 	const flashTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
 
-	const track = (next: number) => {
+	const track = (element: HTMLElement) => {
+		const next = element.offsetWidth;
 		setWidth(next);
+		setNarrowed(next < (element.parentElement?.clientWidth ?? next));
 		const point = SNAP.find((snap) => snap.width === next)?.width ?? null;
 		if (point !== null && point !== snapped.current) {
 			setFlash(point);
@@ -86,7 +91,7 @@ export default function ComponentPlayground({
 		() =>
 			scene ? (
 				<PreviewFrame
-					className={`f:1 min-h:0 ${block ? "bg:page" : ""}`}
+					className="f:1 min-h:0 bg:page"
 					minHeight={0}
 					fill
 					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
@@ -94,7 +99,7 @@ export default function ComponentPlayground({
 					<Scene scene={scene} shape={shape} />
 				</PreviewFrame>
 			) : null,
-		[scene, shape, accent, scheme, block],
+		[scene, shape, accent, scheme],
 	);
 
 	if (!id || !scene) return null;
@@ -105,14 +110,7 @@ export default function ComponentPlayground({
 	const active = tab === "config" && !config ? "code" : tab;
 
 	return (
-		// below @lg: the stage fills the screen under the navbar, so a popup fits it
-		<div
-			className={
-				block
-					? "d:f fd:c h:180 mt:6 bg:page"
-					: "d:f fd:c h:calc(100svh-5rem) mt:6 bg:page @lg:f:1 @lg:min-h:0 @lg:h:auto @lg:mt:0"
-			}
-		>
+		<div className={`d:f fd:c mt:6 bg:page ${resizable ? "h:180" : "h:150"}`}>
 			<Tabs value={active} onValueChange={setTab} className={FILL}>
 				<div className="d:f ai:c bbw:1 bc:border bg:page">
 					<BaseTabs.List className="d:f ai:c min-w:0 ox:auto">
@@ -133,10 +131,10 @@ export default function ComponentPlayground({
 						)}
 					</BaseTabs.List>
 					<div className="d:f ai:c jc:fe f:1">
-						{block && active === "preview" && width !== null && (
+						{resizable && active === "preview" && width !== null && (
 							<span className="px:2 c:ink/50 fs:xs ff:m fvn:tn">{width}px</span>
 						)}
-						{block && api && (
+						{styling && (
 							<Drawer.Root swipeDirection="right">
 								<Drawer.Trigger className={`${TOOL} c:ink/60`}>
 									<Sliders className="w:4 h:4" />
@@ -169,7 +167,7 @@ export default function ComponentPlayground({
 													<Close className="w:4 h:4" />
 												</Drawer.Close>
 											</div>
-											{api}
+											{styling}
 										</Drawer.Popup>
 									</Drawer.Viewport>
 								</Drawer.Portal>
@@ -180,9 +178,9 @@ export default function ComponentPlayground({
 
 				<TabsPanel
 					value="preview"
-					className={block ? `${FILL} p:r bg:ink/3` : FILL}
+					className={resizable ? `${FILL} p:r bg:press` : FILL}
 				>
-					{block && resizing && (
+					{resizable && resizing && (
 						<div aria-hidden className="p:a i:0 pe:none zi:10">
 							{SNAP.map((point) => {
 								const near =
@@ -214,7 +212,7 @@ export default function ComponentPlayground({
 							})}
 						</div>
 					)}
-					{block ? (
+					{resizable ? (
 						<Resizable
 							defaultSize={{ width: "100%", height: "100%" }}
 							minWidth={320}
@@ -223,12 +221,10 @@ export default function ComponentPlayground({
 							snap={{ x: SNAP.map((point) => point.width) }}
 							snapGap={SNAP_GAP}
 							onResizeStart={() => setResizing(true)}
-							onResize={(_event, _direction, element) =>
-								track(element.offsetWidth)
-							}
+							onResize={(_event, _direction, element) => track(element)}
 							onResizeStop={(_event, _direction, element) => {
 								setResizing(false);
-								track(element.offsetWidth);
+								track(element);
 							}}
 							// a phone has no room to drag, so the handle is a tablet & desktop thing
 							handleClasses={{ right: "d:none @md:d:b" }}
@@ -255,7 +251,7 @@ export default function ComponentPlayground({
 									</span>
 								),
 							}}
-							className="d:f fd:c brw:1 bc:border"
+							className={`d:f fd:c bc:border ${narrowed ? "brw:1" : ""}`}
 						>
 							<div
 								className={`d:f fd:c f:1 min-h:0 ${resizing ? "pe:none" : ""}`}
