@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { join } from "node:path";
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import { pagePath } from "@/utils/hosts";
 import type { SearchIndex } from "@/utils/search-data";
 
@@ -8,7 +8,7 @@ export const dynamic = "force-static";
 
 export function GET() {
 	const index: SearchIndex = {
-		pages: allUis.map((ui) => ({
+		pages: uis.map((ui) => ({
 			title: ui.title,
 			description: ui.description,
 			path: pagePath(ui._meta.path),
@@ -22,7 +22,7 @@ export function GET() {
 		})),
 		// one row per component that has the prop, matched on the name alone so that
 		// typing a component's name does not list every prop it has
-		props: allUis.flatMap((ui) =>
+		props: uis.flatMap((ui) =>
 			ui.props.map((name) => ({
 				title: name,
 				description: ui.title,
@@ -31,7 +31,7 @@ export function GET() {
 				terms: name,
 			})),
 		),
-		reference: allUis.flatMap((doc) =>
+		reference: uis.flatMap((doc) =>
 			doc.reference.map((entry) => {
 				const base = pagePath(doc._meta.path);
 				return {

@@ -1,4 +1,4 @@
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import { mdxToMarkdown } from "@/utils/mdx-markdown";
 import {
 	resolveRegistryMeta,
@@ -30,9 +30,7 @@ export async function GET(
 ) {
 	const { slug } = await params;
 	const ui =
-		slug === "components"
-			? undefined
-			: allUis.find((u) => u._meta.path === slug);
+		slug === "components" ? undefined : uis.find((u) => u._meta.path === slug);
 
 	if (!ui) {
 		return new Response("Not found", { status: 404 });

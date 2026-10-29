@@ -1,20 +1,18 @@
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import Navbar from "@/components/ui/navbar";
 import UIShell from "@/components/ui/shell";
 import Sidebar, { menu } from "@/components/ui/sidebar";
 import SkipLink from "@/components/ui/skip-link";
 import type { Primitives } from "@/utils/primitive";
 
-const playgrounds = allUis
+const playgrounds = uis
 	.filter((ui) => ui.playground)
 	.map((ui) => ui._meta.path);
 
-const resizable = allUis
-	.filter((ui) => ui.resizable)
-	.map((ui) => ui._meta.path);
+const resizable = uis.filter((ui) => ui.resizable).map((ui) => ui._meta.path);
 
 const primitives: Primitives = Object.fromEntries(
-	allUis.flatMap((ui) => (ui.primitive ? [[ui._meta.path, ui.primitive]] : [])),
+	uis.flatMap((ui) => (ui.primitive ? [[ui._meta.path, ui.primitive]] : [])),
 );
 
 export default function SectionLayout({

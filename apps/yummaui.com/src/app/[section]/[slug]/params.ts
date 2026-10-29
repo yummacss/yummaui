@@ -1,9 +1,9 @@
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import { pagePath } from "@/utils/hosts";
 
 /** Every page as its two segments: `/docs/installation`, `/components/button`. */
 export function pageParams() {
-	return allUis.map((ui) => {
+	return uis.map((ui) => {
 		const [, section, slug] = pagePath(ui._meta.path).split("/");
 		return { section, slug };
 	});

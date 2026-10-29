@@ -1,4 +1,4 @@
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import { sidebarConfig } from "@/config/sidebar";
 
 function inSidebarOrder<T extends { _meta: { path: string }; title: string }>(
@@ -12,7 +12,7 @@ function inSidebarOrder<T extends { _meta: { path: string }; title: string }>(
 }
 
 const sorted = inSidebarOrder(
-	allUis,
+	uis,
 	sidebarConfig.flatMap((section) => section.items),
 );
 

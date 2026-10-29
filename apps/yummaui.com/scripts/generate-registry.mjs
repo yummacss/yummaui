@@ -3,7 +3,7 @@
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import config from "../yumma.config.mjs";
-import { componentSlugs, splitId } from "./lib/registry-ids.mjs";
+import { pageSlugs, splitId } from "./lib/registry-ids.mjs";
 
 const cwd = process.cwd();
 const uiDir = join(cwd, "src/registry/ui");
@@ -37,7 +37,7 @@ const metaImports = metaIds
 	.join("\n");
 const metaLines = metaIds.map((id) => `  "${id}": ${metaName(id)},`).join("\n");
 
-const slugs = componentSlugs(contentDir);
+const slugs = pageSlugs(contentDir);
 const targetLines = uiIds
 	.map((id) => {
 		const { component, variant } = splitId(id, slugs);

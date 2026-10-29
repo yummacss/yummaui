@@ -13,7 +13,8 @@ import { targetPath } from "../src/utils/install.mjs";
 import { ROLES } from "../src/utils/roles.mjs";
 import { applyShape, DEFAULT_SHAPE, SHAPES } from "../src/utils/shapes.mjs";
 import config from "../yumma.config.mjs";
-import { componentSlugs, splitId } from "./lib/registry-ids.mjs";
+import { COMPONENT_PAGES } from "../src/utils/component-pages.mjs";
+import { pageSlugs, splitId } from "./lib/registry-ids.mjs";
 
 const cwd = process.cwd();
 const uiDir = join(cwd, "src/registry/ui");
@@ -89,7 +90,7 @@ function themeOf(sources) {
 	};
 }
 
-const slugs = componentSlugs(contentDir);
+const slugs = pageSlugs(contentDir);
 
 function metaOf(id) {
 	const file = join(metaDir, `${id}.json`);
@@ -102,6 +103,8 @@ function metaOf(id) {
 }
 
 function titleOf(slug) {
+	const row = COMPONENT_PAGES.find((page) => page.slug === slug);
+	if (row) return row.title;
 	const raw = readFileSync(join(contentDir, `${slug}.mdx`), "utf8");
 	return raw.match(/^title:\s*["']?(.+?)["']?\s*$/m)?.[1] ?? slug;
 }

@@ -1,11 +1,11 @@
-import { allUis } from "content-collections";
+import { uis } from "@/utils/uis";
 import { sidebarConfig } from "@/config/sidebar";
 import { CSS_ORIGIN, pagePath, UI_ORIGIN } from "@/utils/hosts";
 
 export const dynamic = "force-static";
 
 export function GET() {
-	const uiMap = new Map(allUis.map((u) => [u._meta.path, u]));
+	const uiMap = new Map(uis.map((u) => [u._meta.path, u]));
 
 	const lines: string[] = [
 		"# Yumma UI",

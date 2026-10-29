@@ -1,6 +1,10 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+	COMPONENT_PAGES,
+	componentSource,
+} from "../src/utils/component-pages.mjs";
 
 export const rootDir = join(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -19,16 +23,22 @@ export function tsxFilesIn(dir: string): string[] {
 	return out;
 }
 
-/** Every page, as its slug and source. */
+/** Every page, the MDX files & the component rows, as its slug and source. */
 export function contentPages() {
 	const dir = join(rootDir, "src/content/ui");
 
-	return readdirSync(dir)
-		.filter((file) => file.endsWith(".mdx"))
-		.map((file) => ({
-			slug: file.replace(/\.mdx$/, ""),
-			source: readFileSync(join(dir, file), "utf-8").replace(/\r\n/g, "\n"),
-		}));
+	return [
+		...readdirSync(dir)
+			.filter((file) => file.endsWith(".mdx"))
+			.map((file) => ({
+				slug: file.replace(/\.mdx$/, ""),
+				source: readFileSync(join(dir, file), "utf-8").replace(/\r\n/g, "\n"),
+			})),
+		...COMPONENT_PAGES.map((page) => ({
+			slug: page.slug,
+			source: componentSource(page),
+		})),
+	];
 }
 
 /** The icons a schema can name, read from the demo's `EXAMPLE_ICONS` map. */
