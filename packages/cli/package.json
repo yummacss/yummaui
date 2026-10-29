@@ -1,7 +1,7 @@
 {
 	"name": "yummaui",
 	"version": "0.9.0",
-	"description": "Add Yumma UI components to your project.",
+	"description": "Yumma UI for React.",
 	"keywords": [
 		"base-ui",
 		"cli",
