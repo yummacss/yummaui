@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The colors `init` and `add` write are `oklch()`, which needs Yumma CSS 4.9 or later.
 - Components draw their icons from Tabler, `@tabler/icons-react`, in place of Solar.
+- Spinners and skeletons use `aic:i`, and pressed controls `wc:s`, which need Yumma CSS 4.10 or later.
 
 ## [0.9.0] - 2026-10-29
 

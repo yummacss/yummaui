@@ -176,11 +176,11 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(next@16.3.8(@types/node@26.6.5)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
       '@yummacss/core':
-        specifier: ^4.9.0
-        version: 4.9.0
+        specifier: ^4.10.0
+        version: 4.10.0
       '@yummacss/nitro':
-        specifier: ^4.9.0
-        version: 4.9.0
+        specifier: ^4.10.0
+        version: 4.10.0
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -230,8 +230,8 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0
       yummacss:
-        specifier: ^4.9.0
-        version: 4.9.0
+        specifier: ^4.10.0
+        version: 4.10.0
     devDependencies:
       '@content-collections/cli':
         specifier: ^0.1.9
@@ -267,8 +267,8 @@ importers:
         specifier: ^0.186.0
         version: 0.186.0
       '@yummacss/postcss':
-        specifier: ^4.9.0
-        version: 4.9.0(postcss@8.5.31)
+        specifier: ^4.10.0
+        version: 4.10.0(postcss@8.5.31)
       mdast-util-mdx-jsx:
         specifier: ^3.2.0
         version: 3.2.0
@@ -2020,14 +2020,14 @@ packages:
   '@yuku-toolchain/types@0.19.0':
     resolution: {integrity: sha512-tFkNbsP4WXX9UMUC5syJGdK9dPMLK0PPaIuXCcCYH75sZ8MrebfBZ2XvCILRTw8AgLivSSCfDa4R67iYBDa4Kg==}
 
-  '@yummacss/core@4.9.0':
-    resolution: {integrity: sha512-wKzNdoeU8xEkn9WBt0maAeW0AAlPnzTax1+IBFwzuQ8FkYN6lTDQdhuX1YmMrSG0duT8Kb9neKQ2RXMRmIEYsw==}
+  '@yummacss/core@4.10.0':
+    resolution: {integrity: sha512-WbVkCVjivxef2veO99hz2aIwllb11z3kHNUFpo6UOreXxBN95pS9NO7eZVZZqsPPBnMEGZg4OFiEo8KQFLEuxg==}
 
-  '@yummacss/nitro@4.9.0':
-    resolution: {integrity: sha512-POzIyOKEmFP2O6tuksLr4gm22sAK2NVBnzTAt0EfF5lvyquqh+MrDclHuYPV8SCzSNhk3NClH5MJOwPyBBtjBQ==}
+  '@yummacss/nitro@4.10.0':
+    resolution: {integrity: sha512-OzHFw5sSB/v1Td+Y69oI8q279CgSlIqg9oqeZ1SLs8f4wrDcFtkvHOwMRRicUZUqlMcnBbiCRTJT723kk+xD9Q==}
 
-  '@yummacss/postcss@4.9.0':
-    resolution: {integrity: sha512-o6KHgCYWzQA0qclczyIpWPz02WEKDd3PkfGdzRyrQMLZAv80nIp78akizCGG4SxFty0Jas0TKp1bpdR8N7aQrw==}
+  '@yummacss/postcss@4.10.0':
+    resolution: {integrity: sha512-q4PN9SRFjNEt9iD5MJbfhB2jnYf+eotoZihP78fBdE1yWtmpa2VHb7y0TnhCsIcfTJJFDV48B7m37ueoEkmW4g==}
     peerDependencies:
       postcss: ^8.0.0
 
@@ -3128,8 +3128,8 @@ packages:
     resolution: {integrity: sha512-XrBh9ZiQK5mJVRxZBAvD6LwRyAYrK3MFtH3+onyuxFL5hFD44EC3QOmIC1FjTj6H2MMwq46/NAI+NZxLZPZgxg==}
     engines: {node: '>=14.18.0'}
 
-  yummacss@4.9.0:
-    resolution: {integrity: sha512-D/FurXDcaiPOJ6A7UYSf2qapSUz0AuWWgXy/mXCO5PvbF2sKrsfbFUYRG3K/l0rdURZp/DyNN2ZsXRQyjFKzwA==}
+  yummacss@4.10.0:
+    resolution: {integrity: sha512-Bs66PrzwdZ0sLAxMi3feOIRxFCfrLKtFuPOsAL0oN5wrVIgYJ8zWiXOgGHasXPWliAg3f7yIXkEI+1v9hF3bcw==}
     hasBin: true
 
   zod@4.6.7:
@@ -4362,18 +4362,18 @@ snapshots:
 
   '@yuku-toolchain/types@0.19.0': {}
 
-  '@yummacss/core@4.9.0': {}
+  '@yummacss/core@4.10.0': {}
 
-  '@yummacss/nitro@4.9.0':
+  '@yummacss/nitro@4.10.0':
     dependencies:
-      '@yummacss/core': 4.9.0
+      '@yummacss/core': 4.10.0
       fastest-levenshtein: 1.0.16
       tinyglobby: 0.2.17
       zod: 4.6.7
 
-  '@yummacss/postcss@4.9.0(postcss@8.5.31)':
+  '@yummacss/postcss@4.10.0(postcss@8.5.31)':
     dependencies:
-      '@yummacss/nitro': 4.9.0
+      '@yummacss/nitro': 4.10.0
       postcss: 8.5.31
 
   acorn-jsx@5.3.2(acorn@8.19.0):
@@ -6083,10 +6083,10 @@ snapshots:
       '@yuku-toolchain/types': 0.19.0
       yuku-core: 0.19.0
 
-  yummacss@4.9.0:
+  yummacss@4.10.0:
     dependencies:
-      '@yummacss/core': 4.9.0
-      '@yummacss/nitro': 4.9.0
+      '@yummacss/core': 4.10.0
+      '@yummacss/nitro': 4.10.0
 
   zod@4.6.7: {}
 

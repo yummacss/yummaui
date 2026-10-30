@@ -255,7 +255,7 @@ export default function AutocompleteBase({
           <span
             aria-hidden
             className={`d:b w:4 h:4 bc:rim btc:hint bw:2 br:9999 ${
-              animated ? "an:spin adu:700 atf:l aic:inf" : ""
+              animated ? "an:spin adu:700 atf:l aic:i" : ""
             }`}
           />
           Loading

@@ -177,7 +177,7 @@ export default function ToggleBase({
           className,
         ) +
         (animated && !disabled
-          ? " tp:t tdu:200 ttf:eo a:s:90 @prm:tp:none"
+          ? " tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none"
           : "")
       }
       render={(renderProps, state) => (
