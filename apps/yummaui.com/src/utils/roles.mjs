@@ -11,6 +11,7 @@ export const ROLES = {
 	hint: { light: "oklch(0.56 0.01 286)", dark: "oklch(0.69 0.01 286)" },
 	rim: { light: "oklch(0.905 0.006 286)", dark: "oklch(0.12 0.005 290)" },
 	shadow: { light: "oklch(0.708 0.008 286)", dark: "oklch(0.145 0.006 290)" },
+	chip: { light: "oklch(0.958 0.003 286)", dark: "oklch(0.3 0.008 290)" },
 	line: { light: "oklch(0.925 0.005 286)", dark: "oklch(0.3 0.008 290)" },
 	check: { light: "oklch(0.27 0.009 286)", dark: "oklch(0.93 0.005 286)" },
 	on: { light: "oklch(0.27 0.009 286)", dark: "oklch(0.93 0.005 286)" },

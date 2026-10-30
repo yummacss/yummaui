@@ -184,7 +184,7 @@ export default function BadgeBase({
     pad,
     SHAPES[shape],
     tone === "outline"
-      ? "bg:line bs-o:key bc:rim bw:1"
+      ? "bg:chip bs-o:key bc:rim bw:1"
       : tone === "subtle"
         ? [INTENTS[intent].subtleBg, INTENTS[intent].subtleBorder, "bw:1"].join(" ")
         : [INTENTS[intent].solidBg, "bw:1 bc:black/20 bs-o:key-fill"].join(" "),

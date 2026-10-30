@@ -147,7 +147,7 @@
           "props": {
             "tone": "outline",
             "icon": {
-              "$icon": "IconStar",
+              "$icon": "IconStarFilled",
               "size": "w:3 h:3 c:yellow"
             }
           },
