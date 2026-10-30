@@ -285,7 +285,7 @@ export default function MenuBase({
             disabled={item.disabled}
             className={itemClasses(false, false)}
           >
-            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim br:sm bw:1">
+            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim bw:1">
               <Menu.CheckboxItemIndicator>
                 <IconCheck className="w:3 h:3" />
               </Menu.CheckboxItemIndicator>

@@ -119,7 +119,7 @@ export default function RatingBase({
 
   const starClasses = (pressed: boolean) =>
     merge(
-      "d:f ai:c jc:c p:0 w:9 h:9 br:lg us:none",
+      "d:f ai:c jc:c p:0 w:9 h:9 us:none",
       "bw:0 bg:transparent",
       disabled ? "c:na o:60" : "",
       !disabled && !readOnly ? `c:p ${outline}` : "",
@@ -132,7 +132,7 @@ export default function RatingBase({
 
   const iconClasses = (option: RatingIcon, active: boolean) =>
     merge(
-      "d:f ai:c jc:c p:0 w:12 h:12 bw:0 br:lg us:none",
+      "d:f ai:c jc:c p:0 w:12 h:12 bw:0 us:none",
       disabled ? "c:na o:60" : `c:p ${outline}`,
       active ? (option.activeClassName ?? "c:yellow") : "c:rim",
       !disabled && !active ? "h:c:hint" : "",

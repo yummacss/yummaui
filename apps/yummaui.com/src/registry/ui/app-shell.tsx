@@ -37,13 +37,13 @@ function Recent() {
   return (
     <div className="d:f fd:c g:2">
       <h2 className="m:0 tw:b fs:xs fw:500 c:hint">Recent</h2>
-      <ul className="m:0 p:0 bw:1 bc:rim br:lg o:h">
+      <ul className="m:0 p:0 bw:1 bc:rim o:h">
         {RECENT.map((file) => (
           <li
             key={file.name}
             className="d:f ai:c g:3 h:12 px:3 bg:raised btw:1 bc:line fc:btw:0"
           >
-            <span className="d:f fs:0 ai:c jc:c w:7 h:7 br:md bg:well">
+            <span className="d:f fs:0 ai:c jc:c w:7 h:7 bg:well">
               {file.icon}
             </span>
             <span className="f:1 min-w:0 fs:sm fw:500 o:h to:e ws:nw">

@@ -92,7 +92,7 @@ export default function BreadcrumbBase({
   // the current page sits in a raised chip
   const currentClasses = [
     SIZES[size],
-    "px:2 py:1 br:md bw:1 bg:raised bc:rim fw:500 c:label",
+    "px:2 py:1 bw:1 bg:raised bc:rim fw:500 c:label",
   ]
     .filter(Boolean)
     .join(" ");

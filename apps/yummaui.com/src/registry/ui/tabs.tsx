@@ -224,7 +224,7 @@ export default function TabsBase({
           <Tabs.Panel
             key={item.value}
             value={item.value}
-            className="f:1 p:4 br:xl bw:1 bg:raised bc:rim c:hint fs:sm os:none"
+            className={`f:1 p:4 bw:1 bg:raised bc:rim c:hint fs:sm os:none ${LIST_SHAPES[shape]}`}
           >
             {item.panel}
           </Tabs.Panel>

@@ -91,7 +91,7 @@ export default function CheckboxGroupBase({
       {parentLabel && (
         <Checkbox name={name} parent label={parentLabel} description={count} />
       )}
-      <div className="d:f fd:c g:1 p:1 br:xl bg:well">{children}</div>
+      <div className="d:f fd:c g:1 p:1 bg:well">{children}</div>
     </CheckboxGroup>
   );
 }

@@ -76,7 +76,7 @@ const WORKSPACES: SidebarWorkspace[] = [
 ];
 
 const LINK =
-  "d:f ai:c g:2 h:8 px:2 br:md fs:sm td:none c:hint tp:c tdu:100 h:bg:well h:c:label fv:os:s fv:ow:2 fv:oo:0 fv:oc:focus/40";
+  "d:f ai:c g:2 h:8 px:2 fs:sm td:none c:hint tp:c tdu:100 h:bg:well h:c:label fv:os:s fv:ow:2 fv:oo:0 fv:oc:focus/40";
 const CURRENT = "bg:well c:label fw:500";
 
 export interface SidebarProps {
@@ -142,7 +142,7 @@ export default function Sidebar({
           className="w:100%"
           trigger={
             <span className="d:f ai:c g:2 w:100% ta:l">
-              <span className="d:f fs:0 ai:c jc:c w:7 h:7 br:md bg:fill c:on-fill fs:xs fw:500">
+              <span className="d:f fs:0 ai:c jc:c w:7 h:7 bg:fill c:on-fill fs:xs fw:500">
                 {active.name.charAt(0)}
               </span>
               <span className="d:f fd:c f:1 min-w:0">

@@ -144,7 +144,7 @@ export default function TooltipBase({
 
   const triggerClasses = merge(
     outline,
-    "d:f ai:c jc:c w:8 h:8 br:md bg:transparent bw:0 c:p h:bg:well",
+    "d:f ai:c jc:c w:8 h:8 bg:transparent bw:0 c:p h:bg:well",
     TRIGGER_TONES[tone],
     className,
   );

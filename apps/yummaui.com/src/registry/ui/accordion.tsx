@@ -128,9 +128,7 @@ export default function AccordionBase({
   const rootClasses = merge(
     "d:f fd:c w:100% max-w:96",
     variant === "bordered" || variant === "subtle" ? "g:2" : "",
-    isCard
-      ? "bg:raised bw:1 bc:rim br:lg"
-      : "",
+    isCard ? `bg:raised bw:1 bc:rim ${SHAPES[shape].item}` : "",
     className,
   );
 
@@ -165,7 +163,7 @@ export default function AccordionBase({
                   : "";
 
         const triggerRadius =
-          variant === "bordered" ? SHAPES[shape].trigger : "br:sm";
+          variant === "bordered" || isCard ? SHAPES[shape].trigger : "";
         const inset = variant === "bordered" || variant === "subtle" || isCard;
         const triggerPadX = inset ? "px:4" : "px:0";
         const triggerPadY =

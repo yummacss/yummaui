@@ -201,7 +201,7 @@ export default function SettingsPage({
       {dirty && (
         <div
           role="status"
-          className="p:st b:4 d:f fw:w ai:c jc:sb g:3 mt:4 px:3 py:2 bg:raised bw:1 bc:rim br:lg bs-o:xl"
+          className="p:st b:4 d:f fw:w ai:c jc:sb g:3 mt:4 px:3 py:2 bg:raised bw:1 bc:rim bs-o:xl"
         >
           <span className="fs:sm fw:500">You have unsaved changes</span>
           <div className="d:f g:2">
