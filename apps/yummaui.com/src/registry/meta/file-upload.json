@@ -24,28 +24,6 @@
       "name": "items",
       "type": "none",
       "typeName": "FileUploadItem[]",
-      "example": [
-        {
-          "id": "holiday",
-          "name": "holiday-2026.mov",
-          "detail": "1.4 of 2.2 GB",
-          "progress": 0.64,
-          "icon": {
-            "$icon": "IconVideoFilled",
-            "size": "w:5 h:5 c:red"
-          }
-        },
-        {
-          "id": "notes",
-          "name": "notes.md",
-          "detail": "Uploaded, 12 KB",
-          "done": true,
-          "icon": {
-            "$icon": "IconFileFilled",
-            "size": "w:5 h:5 c:blue"
-          }
-        }
-      ],
       "description": "Files your app is uploading, each with its own progress, listed under the zone in place of the picked ones. Pair with `onCancel`."
     },
     {
@@ -130,28 +108,6 @@
       "props": {
         "label": "Drop files to upload",
         "hint": "up to 2 GB each",
-        "items": [
-          {
-            "id": "holiday",
-            "name": "holiday-2026.mov",
-            "detail": "1.4 of 2.2 GB",
-            "progress": 0.64,
-            "icon": {
-              "$icon": "IconVideoFilled",
-              "size": "w:5 h:5 c:red"
-            }
-          },
-          {
-            "id": "notes",
-            "name": "notes.md",
-            "detail": "Uploaded, 12 KB",
-            "done": true,
-            "icon": {
-              "$icon": "IconFileFilled",
-              "size": "w:5 h:5 c:blue"
-            }
-          }
-        ],
         "multiple": true
       }
     }

@@ -29,6 +29,7 @@ const KNOWN_UNLISTED: string[] = [
 	"combobox-helper",
 	"field-prefix",
 	"field-suffix",
+	"progress-upload",
 	"select-grouped",
 	"skeleton-activity",
 	"skeleton-filters",

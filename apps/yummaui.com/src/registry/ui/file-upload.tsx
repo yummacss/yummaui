@@ -146,6 +146,12 @@ export interface FileUploadProps {
  * A drop zone for files, in three shapes, dashed or solid, that picks by click
  * or by drop and lists what it holds.
  */
+// the type a reader recognises, from the name: "PDF" for report.pdf
+function extension(name: string): string {
+  const dot = name.lastIndexOf(".");
+  return dot > 0 ? name.slice(dot + 1).toUpperCase() : "";
+}
+
 export default function FileUploadBase({
   label = "Drop files to upload",
   browseLabel = "choose from your computer",
@@ -247,7 +253,9 @@ export default function FileUploadBase({
     files.map((file) => ({
       id: identity(file),
       name: file.name,
-      detail: formatSize(file.size),
+      detail: [extension(file.name), formatSize(file.size)]
+        .filter(Boolean)
+        .join(", "),
     }));
 
   const remove = (id: string) => {
