@@ -6,7 +6,7 @@ import { extractClasses } from "../scripts/extract-classes.mjs";
 import { ROLES } from "../src/utils/roles.mjs";
 import { rootDir, tsxFilesIn } from "./helpers";
 
-const config = (await import("../yumma.config.mjs")).default as Config;
+const config = (await import("../yummacss.config.mjs")).default as Config;
 
 const registryDir = join(rootDir, "src/registry");
 const registryFiles = tsxFilesIn(registryDir);

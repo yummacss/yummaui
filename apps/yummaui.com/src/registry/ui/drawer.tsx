@@ -78,7 +78,7 @@ const HANDLE_SHAPES: Record<Shape, string> = {
   squircle: "br:9999 cs:s",
 };
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BUTTON =
   "d:if ai:c jc:c g:2 bw:1 fw:500 tp:c tdu:150 ttf:io us:none bg:raised bc:rim c:label h:bg:well";

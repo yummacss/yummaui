@@ -19,7 +19,7 @@ const CARD_SHAPES: Record<Card, string> = {
 };
 
 const LINK =
-  "c:label fw:500 tuo:2 td:u h:c:hint fv:os:s fv:ow:2 fv:oc:focus/40 br:sm";
+  "c:label fw:500 tuo:2 td:u h:c:hint ow:0 oc:focus/40 fv:os:s fv:ow:2 br:sm";
 
 export interface SignInValues {
   email: string;

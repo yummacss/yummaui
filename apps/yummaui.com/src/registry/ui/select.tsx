@@ -26,7 +26,7 @@ export interface SelectGroup {
   items: SelectOption[];
 }
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const TRIGGER =
   "d:f ai:c jc:sb bw:1 bg:raised bc:rim c:label us:none c:p";

@@ -100,12 +100,12 @@ ${c.bold("Examples")}
 		noStylesheet: `Add ${MARKER} to the stylesheet your app loads`,
 		failed: (file: string) =>
 			`Could not change ${file}. The docs have the line to add.`,
-		missingTheme: (names: string[]) =>
-			`Add these to the theme in yumma.config.mjs\n${names.join(", ")}\n${c.accent(UI_DOCS)}`,
+		missingTheme: (file: string, names: string[]) =>
+			`Add these to the theme in ${file}\n${names.join(", ")}\n${c.accent(UI_DOCS)}`,
 		themeAdded: (file: string, names: string[]) =>
 			`${file} adds ${names.join(", ")}`,
-		ownColors: (names: string[]) =>
-			`yumma.config.mjs already defines ${names.join(", ")}, so components use your colors`,
+		ownColors: (file: string, names: string[]) =>
+			`${file} already defines ${names.join(", ")}, so components use your colors`,
 	},
 
 	list: {

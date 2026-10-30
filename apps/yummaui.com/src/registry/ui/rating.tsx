@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 export interface RatingIcon {
   icon: ReactNode;
@@ -162,7 +162,7 @@ export default function RatingBase({
                     className={
                       iconClasses(option, active) +
                       (animated && !disabled
-                        ? " tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none"
+                        ? " tp:t tdu:200 ttf:eo a:s:97 wc:s @prm:tp:none"
                         : "")
                     }
                   >
@@ -202,7 +202,7 @@ export default function RatingBase({
                       className={
                         starClasses(lit) +
                         (animated && !disabled
-                          ? " tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none"
+                          ? " tp:t tdu:200 ttf:eo a:s:97 wc:s @prm:tp:none"
                           : "")
                       }
                     >

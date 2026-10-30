@@ -4,7 +4,7 @@ import { type Config, validateClasses } from "@yummacss/nitro";
 import { describe, expect, it } from "vite-plus/test";
 import { rootDir } from "./helpers";
 
-const config = (await import("../yumma.config.mjs")).default as Config;
+const config = (await import("../yummacss.config.mjs")).default as Config;
 
 // the docs describe 4.x
 const files = readdirSync(join(rootDir, "src/content/ui"), { recursive: true })

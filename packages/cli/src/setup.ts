@@ -10,7 +10,8 @@ import {
 import { installPackages } from "./install";
 import { m } from "./messages";
 import {
-	CSS_CONFIG_FILE,
+	existingCssConfig,
+	newCssConfig,
 	detectFramework,
 	detectPackageManager,
 	MARKER,
@@ -274,37 +275,39 @@ export function planSetup(
 		plan.manual.push(m.setup.noBuild);
 	}
 
-	if (existsSync(join(root, CSS_CONFIG_FILE))) {
-		const source = readFileSync(join(root, CSS_CONFIG_FILE), "utf8");
+	const existing = existingCssConfig(root);
+	if (existing) {
+		const source = readFileSync(join(root, existing), "utf8");
 		const missing = missingTheme(source, theme);
 		const own = Object.keys(theme?.colors ?? {}).filter(
 			(name) => !missing.includes(name),
 		);
-		if (own.length) plan.notes.push(m.setup.ownColors(own));
+		if (own.length) plan.notes.push(m.setup.ownColors(existing, own));
 		if (missing.length && theme) {
 			plan.theme = {
 				stage: "edit",
-				file: CSS_CONFIG_FILE,
+				file: existing,
 				apply: async () => {
-					const path = join(root, CSS_CONFIG_FILE);
+					const path = join(root, existing);
 					const mod = await loadFile(path);
 					const added = addTheme(mod, theme);
 					save(mod, path);
-					return m.setup.themeAdded(CSS_CONFIG_FILE, added);
+					return m.setup.themeAdded(existing, added);
 				},
-				fallback: m.setup.missingTheme(missing),
+				fallback: m.setup.missingTheme(existing, missing),
 			};
 		}
 	} else {
+		const file = newCssConfig(pkg);
 		plan.steps.push({
 			stage: "write",
-			file: CSS_CONFIG_FILE,
+			file,
 			apply: async () => {
 				writeFileSync(
-					join(root, CSS_CONFIG_FILE),
+					join(root, file),
 					configSource(sources(root, componentsDir), theme),
 				);
-				return CSS_CONFIG_FILE;
+				return file;
 			},
 		});
 	}

@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
 import { ROLES } from "../src/utils/roles.mjs";
-import config from "../yumma.config.mjs";
+import config from "../yummacss.config.mjs";
 import { rootDir } from "./helpers";
 
 // the colors the Yumma UI installation page tells people to add

@@ -10,7 +10,7 @@ type Size = "sm" | "md" | "lg";
 type Shape = "rounded" | "square" | "squircle";
 type ValidationType = "numeric" | "alpha" | "alphanumeric";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SLOT =
   "p:0 bw:1 bg:field bc:rim c:label ta:c fw:500 tp:c tdu:150 ttf:io";

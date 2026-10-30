@@ -14,7 +14,7 @@ const SHAPES: Record<Shape, string> = {
 
 type Orientation = "horizontal" | "vertical";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 export interface SeparatorProps {
   /**
@@ -89,7 +89,7 @@ export default function SeparatorBase({
 
   const buttonClasses = merge(
     outline,
-    "d:if ai:c jc:c w:8 h:8 bg:raised bc:rim c:label bw:1 tp:a tdu:150 ttf:io a:s:95 wc:s @prm:tp:none us:none c:p h:bg:well",
+    "d:if ai:c jc:c w:8 h:8 bg:raised bc:rim c:label bw:1 tp:a tdu:150 ttf:io a:s:97 wc:s @prm:tp:none us:none c:p h:bg:well",
     SHAPES[iconShape],
   );
 

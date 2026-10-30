@@ -34,12 +34,12 @@ const CLOSE_SHAPES: Record<Shape, string> = {
   squircle: "br:lg cs:s",
 };
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const RAISED =
   "bg:raised bc:rim c:label h:bg:well";
 
-const DANGER_OUTLINE = "fv:oc:red-2/60 fv:bc:red-3";
+const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
 const TRIGGER_TONES: Record<TriggerTone, string> = {
   neutral: RAISED,

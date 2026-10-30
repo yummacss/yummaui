@@ -2,7 +2,7 @@
 
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
-import config from "../yumma.config.mjs";
+import config from "../yummacss.config.mjs";
 import { pageSlugs, splitId } from "./lib/registry-ids.mjs";
 
 const cwd = process.cwd();

@@ -12,7 +12,7 @@ import { basename, join } from "node:path";
 import { targetPath } from "../src/utils/install.mjs";
 import { ROLES } from "../src/utils/roles.mjs";
 import { applyShape, DEFAULT_SHAPE, SHAPES } from "../src/utils/shapes.mjs";
-import config from "../yumma.config.mjs";
+import config from "../yummacss.config.mjs";
 import { COMPONENT_PAGES } from "../src/utils/component-pages.mjs";
 import { pageSlugs, splitId } from "./lib/registry-ids.mjs";
 

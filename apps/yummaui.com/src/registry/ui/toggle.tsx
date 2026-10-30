@@ -9,7 +9,7 @@ import { merge } from "yummacss/merge";
 type Shape = "rounded" | "square" | "squircle";
 type Size = "sm" | "md";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
   rounded: "br:md",
@@ -177,7 +177,7 @@ export default function ToggleBase({
           className,
         ) +
         (animated && !disabled
-          ? " tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none"
+          ? " tp:t tdu:200 ttf:eo a:s:97 wc:s @prm:tp:none"
           : "")
       }
       render={(renderProps, state) => (
