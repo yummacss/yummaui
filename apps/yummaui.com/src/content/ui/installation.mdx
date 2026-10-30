@@ -54,14 +54,14 @@ Components are copied in, not installed, and `init` sets up Yumma CSS in a Vite 
 
 ## Default configuration
 
-`yumma.config.mjs` holds the states, curves & keyframes the components animate with, and the colors they paint with, light & dark.
+`yummacss.config.mjs` holds the states, curves & keyframes the components animate with, and the colors they paint with, light & dark.
 
 <Note>
-	A project that already has a `yumma.config.mjs` keeps it. `init` & `add` add
-	what it lacks and leave what it defines, its own colors included.
+	A project that already has a `yummacss.config.mjs` keeps it. `init` & `add`
+	add what it lacks and leave what it defines, its own colors included.
 </Note>
 
-```js title="yumma.config.mjs"
+```js title="yummacss.config.mjs"
 import { defineConfig } from "yummacss";
 
 export default defineConfig({

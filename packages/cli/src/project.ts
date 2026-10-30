@@ -3,7 +3,9 @@ import { dirname, join, resolve } from "node:path";
 import { registryUrl } from "./registry";
 
 export const CONFIG_FILE = "yummaui.json";
-export const CSS_CONFIG_FILE = "yumma.config.mjs";
+export const CSS_CONFIG_FILE = "yummacss.config.mjs";
+// the name Yumma CSS read before 4.11, and still reads until 5.0
+export const LEGACY_CSS_CONFIG_FILE = "yumma.config.mjs";
 export const DOCS = "https://yummacss.com/docs/installation";
 export const UI_DOCS = "https://www.yummaui.com/docs/installation";
 export const MARKER = "@yummacss;";
@@ -158,4 +160,28 @@ export function runner(root: string | null = findProjectRoot()): string {
 		default:
 			return "npx yummaui";
 	}
+}
+
+/** The Yumma CSS config a project already has, under either name. */
+export function existingCssConfig(root: string): string | null {
+	return (
+		[CSS_CONFIG_FILE, LEGACY_CSS_CONFIG_FILE].find((name) =>
+			existsSync(join(root, name)),
+		) ?? null
+	);
+}
+
+/** The name to write: the legacy one when an installed Yumma CSS predates 4.11. */
+export function newCssConfig(pkg: Record<string, unknown>): string {
+	const range = {
+		...(pkg.devDependencies as Record<string, string>),
+		...(pkg.dependencies as Record<string, string>),
+	}.yummacss;
+	const [major, minor] = (/(\d+)\.(\d+)/.exec(range ?? "") ?? [])
+		.slice(1)
+		.map(Number);
+	if (major === undefined || minor === undefined) return CSS_CONFIG_FILE;
+	return major < 4 || (major === 4 && minor < 11)
+		? LEGACY_CSS_CONFIG_FILE
+		: CSS_CONFIG_FILE;
 }

@@ -176,7 +176,7 @@ is written.
   `f-1 min-h-0`, because a viewport on `h-100%` under a `max-height` parent
   grows to its content and never scrolls.
 - The scrollbar is 12px and square, sits above sticky headers (`zi:20`), and
-  fades with `hovering:` and `scrolling:`, two states in `yumma.config.mjs`.
+  fades with `hovering:` and `scrolling:`, two states in `yummacss.config.mjs`.
 - Registry icons are Tabler, from `@tabler/icons-react`: filled for objects,
   outline for marks, arrows and operators. A component whose objects lack a
   filled half draws them all outline. `tests/icons.test.ts` holds it.

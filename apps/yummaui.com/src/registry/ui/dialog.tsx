@@ -36,7 +36,7 @@ const CLOSE_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
 };
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none";
 
@@ -46,7 +46,7 @@ const NEUTRAL_BUTTON =
 const PRIMARY_BUTTON =
   "bg:fill bc:fill h:o:90 c:on-fill";
 
-const DANGER_OUTLINE = "fv:oc:red-2/60 fv:bc:red-3";
+const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
 const TRIGGER_TONES: Record<TriggerTone, string> = {
   neutral: NEUTRAL_BUTTON,

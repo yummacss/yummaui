@@ -29,7 +29,7 @@ const STEP_SHAPES: Record<Shape, string> = {
   squircle: "br:xxl cs:s",
 };
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const RAISED =
   "bg:raised bc:rim c:label h:bg:well";

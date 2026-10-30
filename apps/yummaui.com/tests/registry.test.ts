@@ -627,7 +627,7 @@ describe("Yumma UI registry", () => {
 		}
 		expect(sizes.size).toBeGreaterThan(0);
 		// the roles come from the config the CLI installs
-		const config = (await import("../yumma.config.mjs")).default as Config;
+		const config = (await import("../yummacss.config.mjs")).default as Config;
 		const { invalid } = validateClasses([...sizes], config);
 		expect(invalid).toEqual([]);
 	});

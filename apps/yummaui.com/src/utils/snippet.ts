@@ -91,7 +91,7 @@ export function tokensToText(tokens: Token[]): string {
 	return tokens.map((token) => token.text).join("");
 }
 
-/** The `yumma.config.mjs` a component needs: its states, easings and keyframes, nothing else. */
+/** The `yummacss.config.mjs` a component needs: its states, easings and keyframes, nothing else. */
 export function buildConfig(config: {
 	states: Record<string, string>;
 	easings: Record<string, string>;

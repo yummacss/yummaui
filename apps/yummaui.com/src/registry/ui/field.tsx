@@ -29,8 +29,8 @@ const ICON_PADDING: Record<IconSide, string> = {
   trailing: "pl:3 pr:9",
 };
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
-const FOCUS_WITHIN = "fw:os:s fw:ow:3 fw:oo:0 fw:oc:focus/40 fw:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
+const FOCUS_WITHIN = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
 
 const STATUS_BORDER: Record<Status, string> = {
   default: "bc:rim",
@@ -40,8 +40,8 @@ const STATUS_BORDER: Record<Status, string> = {
 
 const STATUS_OUTLINE: Record<Status, string> = {
   default: "",
-  error: "fv:oc:red-2/60 fv:bc:red-3",
-  success: "fv:oc:green-2/60 fv:bc:green-3",
+  error: "oc:red-2/60 fv:bc:red-3",
+  success: "oc:green-2/60 fv:bc:green-3",
 };
 
 const STATUS_OUTLINE_WITHIN: Record<Status, string> = {

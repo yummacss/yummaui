@@ -16,11 +16,11 @@ type Size = "sm" | "md" | "lg";
 type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 
-const MOTION = "tp:a tdu:150 ttf:io a:s:95 wc:s";
+const MOTION = "tp:a tdu:150 ttf:io a:s:97 wc:s";
 
 const VARIANTS: Record<Variant, string> = {
   primary: "bg:fill bc:fill c:on-fill",
@@ -42,7 +42,7 @@ const HOVERS: Record<Variant, string> = {
 };
 
 const VARIANT_OUTLINE: Partial<Record<Variant, string>> = {
-  danger: "fv:oc:red-2/60 fv:bc:red-3",
+  danger: "oc:red-2/60 fv:bc:red-3",
 };
 
 // held, the button's content again in a stronger color sweeps across it

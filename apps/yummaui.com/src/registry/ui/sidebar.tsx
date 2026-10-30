@@ -93,7 +93,7 @@ const WORKSPACES: SidebarWorkspace[] = [
 ];
 
 const LINK =
-  "d:f ai:c g:2 h:8 px:2 fs:sm td:none c:hint tp:c tdu:100 h:bg:well h:c:label fv:os:s fv:ow:2 fv:oo:0 fv:oc:focus/40";
+  "d:f ai:c g:2 h:8 px:2 fs:sm td:none c:hint tp:c tdu:100 h:bg:well h:c:label ow:0 oc:focus/40 fv:os:s fv:ow:2 fv:oo:0";
 const CURRENT = "bg:well c:label fw:500";
 
 export interface SidebarProps {

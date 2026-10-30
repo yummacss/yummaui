@@ -9,10 +9,10 @@ import { merge } from "yummacss/merge";
 type Size = "sm" | "md" | "lg";
 type Shape = "rounded" | "square" | "squircle";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus fv:zi:10";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus fv:zi:10";
 
 // the box draws focus for its input, so the outline wraps the value
-const BOX_FOCUS = "fw:os:s fw:ow:3 fw:oo:0 fw:oc:focus/40 fw:bc:focus fw:zi:10";
+const BOX_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus fw:zi:10";
 
 // the focused part rises above its neighbours, so no stepper covers its outline
 const STEP =

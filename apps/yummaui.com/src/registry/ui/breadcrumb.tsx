@@ -5,7 +5,7 @@ import { merge } from "yummacss/merge";
 type Shape = "rounded" | "square" | "squircle" | "pill";
 type Size = "sm" | "md" | "lg";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 type Separator = "chevron" | "slash";
 
 const SIZES: Record<Size, string> = {

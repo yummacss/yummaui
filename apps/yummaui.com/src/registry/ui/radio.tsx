@@ -13,7 +13,7 @@ export interface RadioOption {
   description?: string;
 }
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BASE = "d:f ai:c jc:c p:0 m:0";
 

@@ -11,7 +11,7 @@ import { merge } from "yummacss/merge";
 type Shape = "rounded" | "square" | "squircle";
 type Border = "dashed" | "solid" | "none";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const ZONE = "d:f fd:c ai:c g:3 m:0 p:0 w:100% min-w:0 bg:transparent";
 
@@ -179,7 +179,7 @@ export default function FileUploadBase({
     ? merge(
         FOCUS,
         "fv:oo:1",
-        error ? "fv:oc:red-2/60" : "",
+        error ? "oc:red-2/60" : "",
         focus === true ? "" : focus,
       )
     : "";

@@ -37,7 +37,7 @@ describe("registry json", () => {
 
 	it("publishes the states and keyframes the components use, as the site defines them", async () => {
 		const { theme } = read("index.json");
-		const config = (await import("../yumma.config.mjs")).default;
+		const config = (await import("../yummacss.config.mjs")).default;
 		expect(Object.keys(theme.states).length).toBeGreaterThan(0);
 		expect(Object.keys(theme.keyframes).length).toBeGreaterThan(0);
 		for (const [name, value] of Object.entries(theme.states))

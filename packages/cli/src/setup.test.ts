@@ -68,7 +68,7 @@ describe("planSetup on Vite", () => {
 	it("writes the config and marks the stylesheet the entry imports", async () => {
 		const dir = vite();
 		await run(dir);
-		expect(read(dir, "yumma.config.mjs")).toContain(
+		expect(read(dir, "yummacss.config.mjs")).toContain(
 			`source: ["./src/**/*.{js,jsx,ts,tsx,mdx}", "./components/**/*.{js,jsx,ts,tsx,mdx}"]`,
 		);
 		expect(read(dir, "src/index.css")).toBe(
@@ -160,7 +160,7 @@ describe("theme", () => {
 		const dir = project({ "package.json": {}, "src/main.ts": "" });
 		for (const step of planSetup(dir, "components/ui", theme).steps)
 			await step.apply();
-		const config = read(dir, "yumma.config.mjs");
+		const config = read(dir, "yummacss.config.mjs");
 		expect(config).toContain(`opening: "[data-starting-style]",`);
 		expect(config).toContain(`spin: "to { rotate: 360deg; }",`);
 		expect(config).toContain(`"out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",`);
@@ -210,7 +210,7 @@ describe("theme in an existing config", () => {
 		project({
 			"package.json": { dependencies: { yummacss: "4" } },
 			"src/main.ts": "",
-			"yumma.config.mjs": config,
+			"yummacss.config.mjs": config,
 		});
 	const apply = async (dir: string) => {
 		const plan = planSetup(dir, "components/ui", theme);
@@ -223,7 +223,7 @@ describe("theme in an existing config", () => {
 			`import { defineConfig } from "yummacss";\n\nexport default defineConfig({\n  source: ["./src/**/*.tsx"],\n  theme: {\n    states: { opening: "[data-open]" },\n    colors: { surface: "#fafafa" },\n  },\n});\n`,
 		);
 		const plan = await apply(dir);
-		const config = read(dir, "yumma.config.mjs");
+		const config = read(dir, "yummacss.config.mjs");
 		expect(config).toContain(`opening: "[data-open]"`);
 		expect(config).toContain(`surface: "#fafafa"`);
 		expect(config).toContain(`closing: "[data-ending-style]"`);
@@ -232,7 +232,7 @@ describe("theme in an existing config", () => {
 			/ink: \{\s*light: "#1e232a",\s*dark: "#ececee",?\s*\}/,
 		);
 		expect(plan.notes).toEqual([
-			"yumma.config.mjs already defines surface, so components use your colors",
+			"yummacss.config.mjs already defines surface, so components use your colors",
 		]);
 		expect(planSetup(dir, "components/ui", theme).theme).toBeNull();
 	});
@@ -242,7 +242,7 @@ describe("theme in an existing config", () => {
 			`export default {\n  source: ["./src/**/*.tsx"],\n};\n`,
 		);
 		await apply(dir);
-		const config = read(dir, "yumma.config.mjs");
+		const config = read(dir, "yummacss.config.mjs");
 		expect(config).toContain(`closing: "[data-ending-style]"`);
 		expect(config).toMatch(/surface: \{\s*light: "#ffffff"/);
 	});
@@ -252,7 +252,7 @@ describe("theme in an existing config", () => {
 			`const config = {\n  source: ["./src/**/*.tsx"],\n};\n\nexport default config;\n`,
 		);
 		await apply(dir);
-		expect(read(dir, "yumma.config.mjs")).toContain(
+		expect(read(dir, "yummacss.config.mjs")).toContain(
 			`opening: "[data-starting-style]"`,
 		);
 	});
@@ -264,8 +264,43 @@ describe("theme in an existing config", () => {
 		expect(plan.theme?.fallback).toContain(
 			"opening, closing, spin, surface, ink",
 		);
-		expect(read(dir, "yumma.config.mjs")).toBe(
+		expect(read(dir, "yummacss.config.mjs")).toBe(
 			`export default makeConfig();\n`,
 		);
+	});
+});
+
+describe("the legacy config name", () => {
+	const theme = {
+		states: { opening: "[data-starting-style]" },
+		keyframes: {},
+	};
+
+	it("edits a yumma.config.mjs under its own name", async () => {
+		const dir = project({
+			"package.json": { dependencies: { yummacss: "^4.10.0" } },
+			"src/main.ts": "",
+			"yumma.config.mjs": `export default {\n  source: ["./src/**/*.tsx"],\n};\n`,
+		});
+		const plan = planSetup(dir, "components/ui", theme);
+		await plan.theme?.apply();
+		expect(plan.steps.map((step) => step.file)).not.toContain(
+			"yummacss.config.mjs",
+		);
+		expect(read(dir, "yumma.config.mjs")).toContain(
+			`opening: "[data-starting-style]"`,
+		);
+	});
+
+	it("writes yumma.config.mjs for a Yumma CSS older than 4.11", () => {
+		const dir = project({
+			"package.json": { dependencies: { yummacss: "^4.10.0" } },
+			"src/main.ts": "",
+		});
+		const files = planSetup(dir, "components/ui", theme).steps.map(
+			(step) => step.file,
+		);
+		expect(files).toContain("yumma.config.mjs");
+		expect(files).not.toContain("yummacss.config.mjs");
 	});
 });

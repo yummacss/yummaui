@@ -13,7 +13,7 @@ type Card = Exclude<Shape, "pill">;
 const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconPosition = "leading" | "trailing";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 interface SizeSpec {
   trigger: string;

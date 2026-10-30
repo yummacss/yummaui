@@ -7,7 +7,7 @@ type Tone = "outline" | "subtle" | "solid";
 type Shape = "square" | "rounded" | "pill" | "squircle";
 type Size = "sm" | "md" | "lg";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 type IconPosition = "leading" | "trailing";
 
 const SHAPES: Record<Shape, string> = {

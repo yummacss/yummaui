@@ -48,9 +48,9 @@ const CLOSE_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
 };
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
-const DANGER_OUTLINE = "fv:oc:red-2/60 fv:bc:red-3";
+const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
 const TONE_BUTTON: Record<Tone, string> = {
   danger:
