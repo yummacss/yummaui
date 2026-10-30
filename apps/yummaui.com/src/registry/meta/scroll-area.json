@@ -48,7 +48,7 @@
           "children": [
             {
               "text": "Downloads",
-              "className": "fs:sm fw:600"
+              "className": "fs:sm fw:500"
             },
             {
               "text": "14 files",

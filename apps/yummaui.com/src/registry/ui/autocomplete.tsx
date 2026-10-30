@@ -148,7 +148,7 @@ function marked(label: string, query: string): ReactNode {
   return (
     <>
       {label.slice(0, at)}
-      <span className="fw:700">{label.slice(at, at + query.length)}</span>
+      <span className="fw:600">{label.slice(at, at + query.length)}</span>
       {label.slice(at + query.length)}
     </>
   );
@@ -301,7 +301,7 @@ export default function AutocompleteBase({
     >
       <div className={`d:f fd:c g:2 ${disabled ? "o:60 c:na" : ""}`}>
         {label && (
-          <label htmlFor={id} className="c:label fs:sm fw:600 us:none">
+          <label htmlFor={id} className="c:label fs:sm fw:500 us:none">
             {label}
           </label>
         )}

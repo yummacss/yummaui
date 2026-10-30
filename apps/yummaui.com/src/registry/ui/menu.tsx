@@ -267,7 +267,7 @@ export default function MenuBase({
         return (
           <Menu.Group key={key}>
             {item.label && (
-              <div className="px:3 py:1 fs:xs fw:600 c:hint us:none">
+              <div className="px:3 py:1 fs:xs fw:500 c:hint us:none">
                 {item.label}
               </div>
             )}

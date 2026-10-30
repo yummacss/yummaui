@@ -235,10 +235,10 @@ export default function AlertDialogBase({
 
           <div className="d:f fd:c ai:fs g:2 pt:5 pb:4 px:5">
             {icon && <span className={`mb:2 ${badgeClasses}`}>{icon}</span>}
-            <AlertDialog.Title className="m:0 c:label fs:md fw:600">
+            <AlertDialog.Title className="m:0 tw:b c:label fs:md fw:500">
               {title}
             </AlertDialog.Title>
-            <AlertDialog.Description className="m:0 c:hint fs:sm lh:4">
+            <AlertDialog.Description className="m:0 tw:p c:hint fs:sm lh:4">
               {description}
             </AlertDialog.Description>
           </div>

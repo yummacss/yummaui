@@ -247,13 +247,13 @@ export default function DialogBase({
 
           <div className={`d:f fd:c g:3 px:5 pb:4 ${header ? "pt:3" : "pt:5"}`}>
             <Dialog.Title
-              className={`m:0 c:label fs:md fw:600 ${showClose ? "pr:10" : ""}`}
+              className={`m:0 tw:b c:label fs:md fw:500 ${showClose ? "pr:10" : ""}`}
             >
               {title}
             </Dialog.Title>
 
             {description && (
-              <Dialog.Description className="m:0 c:hint fs:sm lh:4">
+              <Dialog.Description className="m:0 tw:p c:hint fs:sm lh:4">
                 {description}
               </Dialog.Description>
             )}

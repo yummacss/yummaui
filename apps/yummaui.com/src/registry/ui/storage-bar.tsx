@@ -127,11 +127,11 @@ export default function StorageBar({
       )}
     >
       <div className="d:f fd:c g:1">
-        <Meter.Label className="c:hint fs:xs fw:600 ls:2 tt:u">
+        <Meter.Label className="c:hint fs:xs fw:500 ls:2 tt:u">
           {label}
         </Meter.Label>
         <div className="d:f ai:b g:2">
-          <span className="fs:3xl fw:700 lh:1">{amount(used * progress)}</span>
+          <span className="fs:3xl fw:600 lh:1">{amount(used * progress)}</span>
           <span className="c:hint fs:sm">
             of {amount(max)} {unit} used
           </span>

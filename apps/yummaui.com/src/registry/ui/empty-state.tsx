@@ -91,7 +91,7 @@ export default function EmptyStateBase({
       {icon && <div className={badgeClasses}>{icon}</div>}
 
       <div className="d:f fd:c ai:c g:1 ta:c">
-        <span className="c:label fs:md fw:600">{title}</span>
+        <span className="c:label fs:md fw:500">{title}</span>
         {description && <span className="c:hint fs:sm">{description}</span>}
       </div>
 

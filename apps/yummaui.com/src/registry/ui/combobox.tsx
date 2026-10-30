@@ -291,7 +291,7 @@ export default function ComboboxBase({
         className={`d:f p:r fd:c g:2 c:label fs:sm ${disabled ? "o:60 c:na" : ""}`}
       >
         {label && (
-          <label htmlFor={id} className="c:label fs:sm fw:600 us:none">
+          <label htmlFor={id} className="c:label fs:sm fw:500 us:none">
             {label}
           </label>
         )}

@@ -218,7 +218,7 @@ export default function CheckboxBase({
         </Checkbox.Root>
       </span>
       <span className="d:f fd:c">
-        <span className={`c:label fw:600 ${LABEL_SIZES[size]}`}>{label}</span>
+        <span className={`c:label fw:500 ${LABEL_SIZES[size]}`}>{label}</span>
         {description && <span className="c:hint fs:xs">{description}</span>}
       </span>
     </label>

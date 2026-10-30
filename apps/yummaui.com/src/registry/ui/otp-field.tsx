@@ -13,7 +13,7 @@ type ValidationType = "numeric" | "alpha" | "alphanumeric";
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const SLOT =
-  "p:0 bw:1 bg:field bc:rim c:label ta:c fw:600 tp:c tdu:150 ttf:io";
+  "p:0 bw:1 bg:field bc:rim c:label ta:c fw:500 tp:c tdu:150 ttf:io";
 
 const SLOT_SIZES: Record<Size, string> = {
   sm: "w:8 h:9 fs:md",
@@ -107,7 +107,7 @@ export default function OTPFieldBase({
       className={`d:f fd:c ai:c g:2 ${disabled ? "o:60 c:na" : ""}`}
     >
       {label && (
-        <Field.Label className="c:label fs:sm fw:600">
+        <Field.Label className="c:label fs:sm fw:500">
           {label}
           {required && <span className="c:red-5"> *</span>}
         </Field.Label>
@@ -140,7 +140,7 @@ export default function OTPFieldBase({
       </OTPField.Root>
 
       {description && (
-        <Field.Description className="m:0 c:hint fs:xs">
+        <Field.Description className="m:0 tw:p c:hint fs:xs">
           {description}
         </Field.Description>
       )}

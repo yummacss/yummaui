@@ -100,7 +100,7 @@ export default function InlineIconHeading({
   return (
     <h2
       className={merge(
-        "m:0 mx:auto max-w:md ta:c tw:b c:label fw:600 lh:3",
+        "m:0 mx:auto max-w:md ta:c tw:b c:label fw:500 lh:3",
         SIZES[size],
         className,
       )}

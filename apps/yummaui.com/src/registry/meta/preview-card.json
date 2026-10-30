@@ -96,7 +96,7 @@
                   "children": [
                     {
                       "text": "Ada Lovelace",
-                      "className": "c:label fw:600"
+                      "className": "c:label fw:500"
                     },
                     {
                       "text": "ada@lovelace.dev",
@@ -119,7 +119,7 @@
                   "children": [
                     {
                       "text": "214",
-                      "className": "c:label fw:600"
+                      "className": "c:label fw:500"
                     },
                     {
                       "text": " files"
@@ -131,7 +131,7 @@
                   "children": [
                     {
                       "text": "6",
-                      "className": "c:label fw:600"
+                      "className": "c:label fw:500"
                     },
                     {
                       "text": " folders"

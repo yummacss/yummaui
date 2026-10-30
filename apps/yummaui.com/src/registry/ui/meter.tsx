@@ -104,7 +104,7 @@ export default function MeterBase({
   const reading = unit
     ? (_: string, current: number) => (
         <>
-          <span className="c:label fw:600">{amount(current)}</span> of{" "}
+          <span className="c:label fw:500">{amount(current)}</span> of{" "}
           {amount(high)} {unit}
         </>
       )
@@ -144,13 +144,13 @@ export default function MeterBase({
             {icon}
           </span>
           <div className="d:f fd:c">
-            <Meter.Label className="c:label fs:sm fw:600">{label}</Meter.Label>
+            <Meter.Label className="c:label fs:sm fw:500">{label}</Meter.Label>
             {description && <span className="c:hint fs:xs">{description}</span>}
           </div>
         </div>
       ) : (
         <div className="d:f jc:sb ai:c">
-          <Meter.Label className="c:label fs:sm fw:600">{label}</Meter.Label>
+          <Meter.Label className="c:label fs:sm fw:500">{label}</Meter.Label>
           <Meter.Value className="c:hint fs:sm fvn:tn">{reading}</Meter.Value>
         </div>
       )}

@@ -259,8 +259,8 @@ function Stack({
         }
       >
         <div className="d:f fd:c g:1 f:1 min-w:0">
-          <Toast.Title className="m:0 c:label fs:sm fw:600" />
-          <Toast.Description className="m:0 c:hint fs:sm" />
+          <Toast.Title className="m:0 tw:b c:label fs:sm fw:500" />
+          <Toast.Description className="m:0 tw:p c:hint fs:sm" />
         </div>
         <Toast.Action
           className={merge(

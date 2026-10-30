@@ -85,7 +85,7 @@ export default function ToggleGroupBase({
 
   return (
     <div className="d:f fd:c ai:c g:2">
-      <span id={labelId} className="c:label fs:sm fw:600 us:none">
+      <span id={labelId} className="c:label fs:sm fw:500 us:none">
         {label}
       </span>
       {group}

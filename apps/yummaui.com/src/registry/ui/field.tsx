@@ -233,7 +233,7 @@ export default function FieldBase({
       className={`d:f fd:c g:2 c:label fs:sm ${disabled ? "o:60 c:na" : ""}`}
     >
       {label && (
-        <Field.Label className="fw:600">
+        <Field.Label className="fw:500">
           {label}
           {required && <span className="c:red-5"> *</span>}
         </Field.Label>

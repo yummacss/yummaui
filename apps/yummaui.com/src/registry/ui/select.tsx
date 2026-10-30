@@ -266,7 +266,7 @@ export default function SelectBase({
   return (
     <Field.Root className={`d:f fd:c g:2 ${disabled ? "o:60 c:na" : ""}`}>
       {label && (
-        <label htmlFor={id} className="c:label fs:sm fw:600 us:none">
+        <label htmlFor={id} className="c:label fs:sm fw:500 us:none">
           {label}
           {required && <span className="c:red-5"> *</span>}
         </label>

@@ -14,7 +14,7 @@ type TriggerVariant = "icon" | "label";
 
 const TRIGGER_VARIANTS: Record<TriggerVariant, string> = {
   icon: "w:10 h:10",
-  label: "px:3 py:2 g:2 fs:sm fw:600",
+  label: "px:3 py:2 g:2 fs:sm fw:500",
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
@@ -194,7 +194,7 @@ export default function PopoverBase({
       )}
 
       <div className="d:f ai:s jc:sb g:3">
-        <Popover.Title className="m:0 mb:1 c:label fs:sm fw:500">
+        <Popover.Title className="m:0 tw:b mb:1 c:label fs:sm fw:500">
           {title}
         </Popover.Title>
         {showClose && (
@@ -211,7 +211,7 @@ export default function PopoverBase({
       </div>
 
       {description && (
-        <Popover.Description className="m:0 c:hint fs:xs">
+        <Popover.Description className="m:0 tw:p c:hint fs:xs">
           {description}
         </Popover.Description>
       )}

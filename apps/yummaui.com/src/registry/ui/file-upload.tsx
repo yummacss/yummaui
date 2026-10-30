@@ -294,7 +294,7 @@ export default function FileUploadBase({
             {icon ?? <IconCloudUpload className="w:5 h:5" />}
           </div>
           <div className="d:f fd:c ai:c g:1">
-            <span className={`fs:sm fw:600 ${error ? "c:red-5" : "c:label"}`}>
+            <span className={`fs:sm fw:500 ${error ? "c:red-5" : "c:label"}`}>
               {label}
             </span>
             <span className={`fs:xs ${error ? "c:red-5" : "c:hint"}`}>
@@ -342,7 +342,7 @@ export default function FileUploadBase({
           </span>
           <div className="d:f fd:c g:1 f:1 min-w:0">
             <div className="d:f ai:c jc:sb g:2">
-              <span className="o:h fs:sm fw:600 c:label to:e ws:nw">
+              <span className="o:h fs:sm fw:500 c:label to:e ws:nw">
                 {row.name}
               </span>
               {row.progress !== undefined && !row.done && row.detail && (

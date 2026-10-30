@@ -84,7 +84,7 @@ export default function CheckboxGroupBase({
       className={merge("d:f fd:c g:2 w:100 max-w:100% c:label", className)}
     >
       {label && (
-        <div className="c:label fs:sm fw:600 us:none" id={labelId}>
+        <div className="c:label fs:sm fw:500 us:none" id={labelId}>
           {label}
         </div>
       )}

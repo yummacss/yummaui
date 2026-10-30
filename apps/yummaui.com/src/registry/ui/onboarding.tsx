@@ -31,7 +31,7 @@ const STEP_SHAPES: Record<Shape, string> = {
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const BUTTON =
-  "d:if ai:c jc:c g:2 px:4 py:2 bw:1 fs:sm fw:600 tp:c tdu:150 ttf:io us:none c:p";
+  "d:if ai:c jc:c g:2 px:4 py:2 bw:1 fs:sm fw:500 tp:c tdu:150 ttf:io us:none c:p";
 const RAISED =
   "bg:raised bc:rim c:label h:bg:well";
 const FILLED =
@@ -162,10 +162,10 @@ export default function OnboardingBase({
 
   const slide = (
     <div className="d:f fd:c g:2">
-      <AlertDialog.Title className="m:0 c:label fs:md fw:700">
+      <AlertDialog.Title className="m:0 tw:b c:label fs:md fw:500">
         {step.title}
       </AlertDialog.Title>
-      <AlertDialog.Description className="m:0 c:hint fs:sm">
+      <AlertDialog.Description className="m:0 tw:p c:hint fs:sm">
         {step.description}
       </AlertDialog.Description>
       {step.choices && step.choices.length > 0 && (

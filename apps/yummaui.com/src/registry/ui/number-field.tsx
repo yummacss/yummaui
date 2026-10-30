@@ -130,7 +130,7 @@ export default function NumberFieldBase({
     >
       {label && (
         <NumberField.ScrubArea className="c:er">
-          <label htmlFor={id} className="c:label fs:sm fw:600 c:er">
+          <label htmlFor={id} className="c:label fs:sm fw:500 c:er">
             {label}
             {required && <span className="c:red-5"> *</span>}
           </label>
@@ -145,7 +145,7 @@ export default function NumberFieldBase({
           <NumberField.Input
             required={required}
             className={merge(
-              "os:none p:0 bw:0 bg:transparent c:label fw:600 ta:c fvn:tn",
+              "os:none p:0 bw:0 bg:transparent c:label fw:500 ta:c fvn:tn",
               INPUT_SIZES[size],
               className,
             )}

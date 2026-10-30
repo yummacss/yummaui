@@ -138,7 +138,7 @@ export default function SliderBase({
     <div className={merge("d:f fd:c g:2 w:64", disabled && "o:60", className)}>
       <div className="d:f ai:c jc:sb">
         {label && (
-          <label className="c:label fs:sm fw:600 us:none">
+          <label className="c:label fs:sm fw:500 us:none">
             {label}
             {required && <span className="c:red-5"> *</span>}
           </label>
@@ -148,7 +148,7 @@ export default function SliderBase({
             formatValue(value)
           ) : unit ? (
             <>
-              <span className="c:label fw:600">
+              <span className="c:label fw:500">
                 {Array.isArray(value) ? value.join(" - ") : value}
               </span>{" "}
               {unit}

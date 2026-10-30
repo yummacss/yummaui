@@ -155,13 +155,13 @@ export default function SwitchBase({
           {label && (
             <Field.Label
               htmlFor={id}
-              className={`c:label fs:sm fw:600 us:none ${disabled ? "" : "c:p"}`}
+              className={`c:label fs:sm fw:500 us:none ${disabled ? "" : "c:p"}`}
             >
               {label}
             </Field.Label>
           )}
           {description && (
-            <Field.Description className="m:0 c:hint fs:xs">
+            <Field.Description className="m:0 tw:p c:hint fs:xs">
               {description}
             </Field.Description>
           )}

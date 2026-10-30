@@ -239,12 +239,12 @@ export default function DrawerBase({
             )}
 
             <Drawer.Content className="d:f fd:c g:3 p:6 f:1">
-              <Drawer.Title className="m:0 c:label fs:md fw:500">
+              <Drawer.Title className="m:0 tw:b c:label fs:md fw:500">
                 {title}
               </Drawer.Title>
 
               {description && (
-                <Drawer.Description className="m:0 c:hint fs:sm lh:4">
+                <Drawer.Description className="m:0 tw:p c:hint fs:sm lh:4">
                   {description}
                 </Drawer.Description>
               )}

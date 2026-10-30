@@ -36,7 +36,7 @@ const RECENT = [
 function Recent() {
   return (
     <div className="d:f fd:c g:2">
-      <h2 className="m:0 fs:xs fw:500 c:hint">Recent</h2>
+      <h2 className="m:0 tw:b fs:xs fw:500 c:hint">Recent</h2>
       <ul className="m:0 p:0 bw:1 bc:rim br:lg o:h">
         {RECENT.map((file) => (
           <li
@@ -123,7 +123,7 @@ export default function AppShell({
               />
             </Drawer>
           </div>
-          <h1 className="m:0 fs:sm fw:600 o:h to:e ws:nw">{title}</h1>
+          <h1 className="m:0 tw:b fs:sm fw:500 o:h to:e ws:nw">{title}</h1>
           <div className="d:none f:1 jc:c @lg:d:f">
             <Field
               aria-label="Search files"

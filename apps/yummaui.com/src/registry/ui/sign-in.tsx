@@ -119,8 +119,8 @@ export default function SignIn({
       )}
     >
       <div className="d:f fd:c g:1">
-        <h2 className="m:0 fs:xl fw:600">{title}</h2>
-        {description && <p className="m:0 fs:sm c:hint">{description}</p>}
+        <h2 className="m:0 tw:b fs:xl fw:500">{title}</h2>
+        {description && <p className="m:0 tw:p fs:sm c:hint">{description}</p>}
       </div>
 
       <Form onSubmit={submit} noValidate className="d:f fd:c g:5">

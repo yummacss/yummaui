@@ -142,11 +142,11 @@ export default function Sidebar({
           className="w:100%"
           trigger={
             <span className="d:f ai:c g:2 w:100% ta:l">
-              <span className="d:f fs:0 ai:c jc:c w:7 h:7 br:md bg:fill c:on-fill fs:xs fw:600">
+              <span className="d:f fs:0 ai:c jc:c w:7 h:7 br:md bg:fill c:on-fill fs:xs fw:500">
                 {active.name.charAt(0)}
               </span>
               <span className="d:f fd:c f:1 min-w:0">
-                <span className="fs:sm fw:600 o:h to:e ws:nw">{active.name}</span>
+                <span className="fs:sm fw:500 o:h to:e ws:nw">{active.name}</span>
                 {active.detail && (
                   <span className="fs:xs c:hint o:h to:e ws:nw">
                     {active.detail}

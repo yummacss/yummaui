@@ -115,14 +115,14 @@ export default function SettingsPage({
       className={merge("d:f fd:c w:100% max-w:180 mx:auto c:label", className)}
     >
       <header className="d:f fd:c g:1 pb:6">
-        <h1 className="m:0 fs:xl fw:600">{title}</h1>
-        {description && <p className="m:0 fs:sm c:hint">{description}</p>}
+        <h1 className="m:0 tw:b fs:xl fw:500">{title}</h1>
+        {description && <p className="m:0 tw:p fs:sm c:hint">{description}</p>}
       </header>
 
       <section className={SECTION}>
         <div className={SECTION_HEAD}>
-          <h2 className="m:0 fs:sm fw:600">Profile</h2>
-          <p className="m:0 fs:sm c:hint">
+          <h2 className="m:0 tw:b fs:sm fw:500">Profile</h2>
+          <p className="m:0 tw:p fs:sm c:hint">
             How you appear on files you share.
           </p>
         </div>
@@ -148,8 +148,8 @@ export default function SettingsPage({
 
       <section className={SECTION}>
         <div className={SECTION_HEAD}>
-          <h2 className="m:0 fs:sm fw:600">Notifications</h2>
-          <p className="m:0 fs:sm c:hint">Emails, never more than one a day.</p>
+          <h2 className="m:0 tw:b fs:sm fw:500">Notifications</h2>
+          <p className="m:0 tw:p fs:sm c:hint">Emails, never more than one a day.</p>
         </div>
         <div className={SECTION_BODY}>
           <Switch
@@ -175,8 +175,8 @@ export default function SettingsPage({
 
       <section className={SECTION}>
         <div className={SECTION_HEAD}>
-          <h2 className="m:0 fs:sm fw:600">Preferences</h2>
-          <p className="m:0 fs:sm c:hint">Language and calendar.</p>
+          <h2 className="m:0 tw:b fs:sm fw:500">Preferences</h2>
+          <p className="m:0 tw:p fs:sm c:hint">Language and calendar.</p>
         </div>
         <div className={SECTION_BODY}>
           <Select

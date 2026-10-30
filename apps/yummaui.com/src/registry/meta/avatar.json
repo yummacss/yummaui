@@ -89,7 +89,7 @@
           "children": [
             {
               "text": "Ada Lovelace",
-              "className": "fw:600"
+              "className": "fw:500"
             },
             {
               "text": "Signed in on this Mac",

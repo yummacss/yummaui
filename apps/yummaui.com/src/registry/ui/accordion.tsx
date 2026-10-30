@@ -234,7 +234,7 @@ export default function AccordionBase({
                   )}
                 <div className="d:f ai:c g:3">
                   <span
-                    className={["fs:sm fw:600", titleColor]
+                    className={["fs:sm fw:500", titleColor]
                       .filter(Boolean)
                       .join(" ")}
                   >
