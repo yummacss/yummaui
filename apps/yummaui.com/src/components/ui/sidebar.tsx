@@ -6,10 +6,10 @@ import SidebarNav from "./sidebar-nav";
 
 function page(slug: string) {
 	const ui = uis.find((c) => c._meta.path === slug);
-	return { href: pagePath(slug), title: ui?.title ?? slug, since: ui?.badge };
+	return { href: pagePath(slug), title: ui?.title ?? slug };
 }
 
-/** The sidebar's sections, built on the server so the client gets titles and badges, not the collection. */
+/** The sidebar's sections, built on the server so the client gets titles, not the collection. */
 export function menu(): NavSection[] {
 	return sidebarConfig.map((section) => ({
 		title: section.title,

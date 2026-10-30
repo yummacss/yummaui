@@ -7,7 +7,6 @@ import {
 import type { ComponentType } from "react";
 import { z } from "zod";
 import { extractReference } from "./src/utils/search-reference";
-import { badgeFor } from "./src/utils/since";
 
 // prop names only, so search carries a short list rather than the whole meta
 const propsOf = (id: string): string[] => {
@@ -25,8 +24,6 @@ const ui = defineCollection({
 		title: z.string(),
 		description: z.string().optional(),
 		primitive: z.union([z.boolean(), z.string()]).optional(),
-		since: z.string().optional(),
-		added: z.string().optional(),
 		playground: z.boolean().optional(),
 		// a whole screen region, so the preview drags narrower to phone & tablet widths
 		resizable: z.boolean().optional(),
@@ -39,7 +36,6 @@ const ui = defineCollection({
 		),
 		slug: doc._meta.path,
 		wordCount: doc.content?.split(/\s+/).length ?? 0,
-		badge: badgeFor(doc),
 		reference: extractReference(doc.content ?? ""),
 		props: propsOf(doc._meta.path),
 	}),
