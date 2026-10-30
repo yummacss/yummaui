@@ -211,9 +211,9 @@ const cursor = (c: Palette) => (
 	</svg>
 );
 
-// Esteban's average advance is about half its size, so a title fits by length
+// Geist Serif's average advance is about half its size, so a title fits by length
 const titleSize = (text: string, width: number, max: number) =>
-	Math.min(max, Math.floor(width / (text.length * 0.52)));
+	Math.min(max, Math.floor(width / (text.length * 0.53)));
 
 function Home({
 	c,
@@ -230,7 +230,7 @@ function Home({
 				top: 306,
 				display: "flex",
 				flexDirection: "column",
-				fontFamily: "Esteban",
+				fontFamily: "Geist Serif",
 				fontSize: 124,
 				lineHeight: 1.02,
 				color: c.ink,
@@ -281,7 +281,7 @@ function Title({
 				<Selected c={c} tag={spec.title} pad={14}>
 					<span
 						style={{
-							fontFamily: "Esteban",
+							fontFamily: "Geist Serif",
 							fontSize: titleSize(spec.title, 960, 124),
 							lineHeight: 1,
 							color: c.ink,
@@ -334,7 +334,7 @@ function Component({
 			>
 				<span
 					style={{
-						fontFamily: "Esteban",
+						fontFamily: "Geist Serif",
 						fontSize: titleSize(spec.title, 560, 104),
 						lineHeight: 1.1,
 						color: c.ink,
