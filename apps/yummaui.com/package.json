@@ -57,6 +57,7 @@
 		"remark-stringify": "^11.0.0",
 		"unified": "^11.0.5",
 		"unist-util-visit": "^5.1.0",
+		"usehooks-ts": "^3.1.1",
 		"yummacss": "^4.10.0"
 	},
 	"devDependencies": {

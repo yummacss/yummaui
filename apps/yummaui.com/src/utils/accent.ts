@@ -72,8 +72,6 @@ export const ACCENTS = Object.keys(colorTheme);
 
 export const DEFAULT_ACCENT = "slate";
 
-const KEY = "yui:accent";
-
 export function isAccent(value: unknown): value is string {
 	return typeof value === "string" && ACCENTS.includes(value);
 }
@@ -111,19 +109,4 @@ function contrastOnWhite(color: string): number {
 function withAlpha(color: string, alpha: number): string {
 	const parsed = parse(color);
 	return parsed ? (formatCss({ ...parsed, alpha }) ?? color) : color;
-}
-
-export function readAccent(): string {
-	try {
-		const stored = window.localStorage.getItem(KEY);
-		return isAccent(stored) ? stored : DEFAULT_ACCENT;
-	} catch {
-		return DEFAULT_ACCENT;
-	}
-}
-
-export function writeAccent(family: string): void {
-	try {
-		window.localStorage.setItem(KEY, family);
-	} catch {}
 }

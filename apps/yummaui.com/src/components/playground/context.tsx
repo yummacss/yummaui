@@ -1,6 +1,7 @@
 "use client";
 
 import { parseAsJson, parseAsStringLiteral, useQueryState } from "nuqs";
+import { useLocalStorage } from "usehooks-ts";
 import {
 	createContext,
 	type ReactNode,
@@ -8,28 +9,25 @@ import {
 	useContext,
 	useEffect,
 	useMemo,
-	useState,
 } from "react";
 import { sidebarConfig } from "@/config/sidebar";
 import { getRegistryMeta, type RegistryMeta } from "@/registry";
-import { DEFAULT_ACCENT, readAccent, writeAccent } from "@/utils/accent";
+import { DEFAULT_ACCENT, isAccent } from "@/utils/accent";
 import { prefetchRegistry } from "@/utils/prefetch-registry";
-import { readScheme, type Scheme, writeScheme } from "@/utils/scheme";
+import type { Scheme } from "@/utils/scheme";
 import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
 
 const SHAPE_QUERY = parseAsStringLiteral(SHAPES as [string, ...string[]])
 	.withDefault(DEFAULT_SHAPE)
 	.withOptions({ history: "replace", clearOnDefault: true, shallow: true });
-const SHAPE_STORE = "yui:shape";
 
-function readShape(): string | null {
-	try {
-		const stored = window.localStorage.getItem(SHAPE_STORE);
-		return stored && SHAPES.includes(stored) ? stored : null;
-	} catch {
-		return null;
-	}
-}
+// the reader's own picks, carried from page to page. Stored as bare strings, and
+// read after hydration, so the server and the first render agree
+const STORED = {
+	serializer: (value: string) => value,
+	deserializer: (value: string) => value,
+	initializeWithValue: false,
+};
 
 export type SceneValues = Record<string, string | number | boolean>;
 
@@ -73,46 +71,45 @@ export function PlaygroundProvider({
 }) {
 	// synchronous, so the server renders the Component API and a switch never empties it
 	const meta = useMemo(() => getRegistryMeta(id), [id]);
-	const [accent, setAccentState] = useState(DEFAULT_ACCENT);
+	const [storedAccent, setAccent] = useLocalStorage(
+		"yui:accent",
+		DEFAULT_ACCENT,
+		STORED,
+	);
+	const accent = isAccent(storedAccent) ? storedAccent : DEFAULT_ACCENT;
 
-	useEffect(() => setAccentState(readAccent()), []);
+	const [storedScheme, setStoredScheme] = useLocalStorage<string>(
+		"yui:scheme",
+		"light",
+		STORED,
+	);
+	const scheme: Scheme = storedScheme === "dark" ? "dark" : "light";
+	const setScheme = useCallback(
+		(next: Scheme) => setStoredScheme(next),
+		[setStoredScheme],
+	);
 
-	const setAccent = useCallback((family: string) => {
-		setAccentState(family);
-		writeAccent(family);
-	}, []);
-
-	const [scheme, setSchemeState] = useState<Scheme>("light");
-
-	useEffect(() => setSchemeState(readScheme()), []);
-
-	const setScheme = useCallback((next: Scheme) => {
-		setSchemeState(next);
-		writeScheme(next);
-	}, []);
-
-	// held in state, so a page without ?shape= in its address keeps the last one
-	const [shape, setShapeState] = useState(DEFAULT_SHAPE);
+	const [storedShape, setStoredShape] = useLocalStorage(
+		"yui:shape",
+		DEFAULT_SHAPE,
+		STORED,
+	);
+	const shape = SHAPES.includes(storedShape) ? storedShape : DEFAULT_SHAPE;
 	const [, setShapeQuery] = useQueryState("shape", SHAPE_QUERY);
 
 	const setShape = useCallback(
 		(next: string) => {
-			setShapeState(next);
+			setStoredShape(next);
 			void setShapeQuery(next);
-			try {
-				window.localStorage.setItem(SHAPE_STORE, next);
-			} catch {}
 		},
-		[setShapeQuery],
+		[setStoredShape, setShapeQuery],
 	);
 
-	// the address wins; otherwise the shape carried from the last page
+	// a shape in the address wins, and is kept for the pages after it
 	useEffect(() => {
 		const asked = new URLSearchParams(window.location.search).get("shape");
-		setShapeState(
-			asked && SHAPES.includes(asked) ? asked : (readShape() ?? DEFAULT_SHAPE),
-		);
-	}, [id]);
+		if (asked && SHAPES.includes(asked)) setStoredShape(asked);
+	}, [id, setStoredShape]);
 
 	// the neighbours too, so the pagination arrows land on a component that is ready
 	useEffect(() => {
