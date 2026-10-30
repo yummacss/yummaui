@@ -325,7 +325,7 @@ export default function ContextMenuBase({
           )}
           {action.shortcut && (
             <kbd
-              className={`ml:4 px:1 br:sm bw:1 bc:current fs:xs fw:400 lh:4 ff:d ${destructive ? "" : "o:70"}`}
+              className="ml:auto pl:6 fs:xs fw:400 lh:4 ff:d o:60"
             >
               {action.shortcut}
             </kbd>
@@ -354,7 +354,7 @@ export default function ContextMenuBase({
     >
       <ContextMenu.Trigger className={triggerClasses}>
         {triggerIcon && (
-          <span className="d:f ai:c jc:c w:12 h:12 br:lg bg:well">
+          <span className="d:f ai:c jc:c">
             {triggerIcon}
           </span>
         )}

@@ -159,7 +159,7 @@ export default function StorageBar({
             <span
               aria-hidden
               className={merge(
-                "d:f ai:c jc:c fs:0 w:7 h:7 bg:well",
+                "d:f ai:c jc:c fs:0 w:4 h:4",
                 TILE_SHAPES[shape],
                 tone(index).ink,
               )}
@@ -178,7 +178,7 @@ export default function StorageBar({
           <span
             aria-hidden
             className={merge(
-              "d:f ai:c jc:c fs:0 w:7 h:7 bg:well",
+              "d:f ai:c jc:c fs:0 w:4 h:4",
               TILE_SHAPES[shape],
             )}
           >

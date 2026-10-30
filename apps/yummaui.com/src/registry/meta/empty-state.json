@@ -78,17 +78,6 @@
       "description": "`accent` for an invitation to act, `neutral` for a plain absence: nothing found, nothing to do."
     },
     {
-      "name": "iconShape",
-      "type": "enum",
-      "values": [
-        "rounded",
-        "square",
-        "squircle"
-      ],
-      "default": "square",
-      "description": "Corner radius on the badge."
-    },
-    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

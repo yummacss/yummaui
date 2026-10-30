@@ -115,9 +115,9 @@ is written.
 - Focus is `fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus`: a soft
   outline and a darker border, both from the one role.
 - Numbers that change in place (counters, values, sizes) are `fvn:tn`.
-- A shortcut in a row (menus, tooltips) is an outlined keycap in the row's
-  color, so it turns white with a highlighted row: `px:1 br:sm bw:1
-  bc:current fs:xs fw:400 lh:4 ff:d`, at `o:70`. In running text, Kbd draws a
+- A shortcut in a row (menus, tooltips) is plain text in the row's color,
+  so it turns with a highlighted row: `fs:xs fw:400 lh:4 ff:d o:60`, pushed
+  to the row's end in menus. In running text, Kbd draws a
   key 2px deep at the bottom: `btw:1 blw:1 brw:1 bbw:2 bc:rim`.
   `tests/registry.test.ts` holds both.
 - Yumma sorts its rules by name, so `bw:` beats `bbw:` and `bc:` beats `bbc:`.

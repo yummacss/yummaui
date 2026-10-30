@@ -280,7 +280,7 @@ export default function FileUploadBase({
           <div
             className={merge(
               "d:f ai:c jc:c w:10 h:10 br:9999",
-              error ? "bg:red-1/50 c:red-5" : "bg:well c:check",
+              error ? "c:red-5" : "c:hint",
             )}
           >
             {icon ?? <IconCloudUpload className="w:5 h:5" />}
@@ -326,7 +326,7 @@ export default function FileUploadBase({
         >
           <span
             className={merge(
-              "d:f ai:c jc:c fs:0 w:9 h:9 bg:well c:hint",
+              "d:f ai:c jc:c fs:0 w:5 h:5 c:hint",
               TILE_SHAPES[shape],
             )}
           >

@@ -405,8 +405,8 @@ describe("Yumma UI registry", () => {
 	});
 
 	it("draws every shortcut as one of the two keycaps", () => {
-		// a row's keycap takes the row's color; Kbd's is a key, deeper at the bottom
-		const IN_ROW = "px:1 br:sm bw:1 bc:current fs:xs fw:400 lh:4 ff:d";
+		// a row's shortcut is plain text in the row's color; Kbd's is a key, deeper at the bottom
+		const IN_ROW = "fs:xs fw:400 lh:4 ff:d o:60";
 		const RAISED = "bg:raised c:label btw:1 blw:1 brw:1 bbw:2 bc:rim";
 		const uiDir = join(rootDir, "src/registry/ui");
 		const wrong: string[] = [];

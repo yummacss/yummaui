@@ -167,7 +167,7 @@ export default function NavigationMenuBase({
                           <span
                             aria-hidden
                             className={merge(
-                              "d:f ai:c jc:c fs:0 w:8 h:8 bg:well",
+                              "d:f ai:c jc:c fs:0 w:5 h:5",
                               TILE_SHAPES[shape],
                             )}
                           >

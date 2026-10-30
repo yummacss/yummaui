@@ -208,7 +208,6 @@ export default function AutocompleteBase({
   items,
   label,
   description,
-  placeholder = "Search",
   size = "md",
   shape = "square",
   icon,
@@ -218,7 +217,8 @@ export default function AutocompleteBase({
   autoHighlight = false,
   limit = 0,
   animated = true,
-  emptyMessage = "No results found.",
+  placeholder,
+  emptyMessage,
   onQueryChange,
   className,
   focus = true,
@@ -276,9 +276,11 @@ export default function AutocompleteBase({
               )
             }
           </Autocomplete.List>
+          {emptyMessage && (
           <Autocomplete.Empty className="c:hint fs:sm">
             <div className="pt:2 pb:3 px:4 us:none">{emptyMessage}</div>
           </Autocomplete.Empty>
+          )}
         </>
       )}
     </Autocomplete.Popup>

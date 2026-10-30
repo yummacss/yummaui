@@ -56,6 +56,13 @@ const ACTION_HEIGHTS: Record<Size, string> = {
   lg: "h:11",
 };
 
+// a chip sits inside the field, so it rounds one step less
+const CHIP_SHAPES: Record<Shape, string> = {
+  rounded: "br:sm",
+  square: "",
+  squircle: "br:md cs:s",
+};
+
 const SHAPES: Record<Shape, string> = {
   rounded: "br:lg",
   square: "br:0",
@@ -190,7 +197,6 @@ export default function ComboboxBase({
   items,
   label,
   description,
-  placeholder = "Search",
   size = "md",
   shape = "square",
   multiple = false,
@@ -199,7 +205,8 @@ export default function ComboboxBase({
   disabled = false,
   loading = false,
   animated = true,
-  emptyMessage = "No results found.",
+  placeholder,
+  emptyMessage,
   className,
   focus = true,
   container,
@@ -261,9 +268,11 @@ export default function ComboboxBase({
               )
             }
           </Combobox.List>
+          {emptyMessage && (
           <Combobox.Empty className="c:hint fs:sm">
             <div className="py:4 px:4">{emptyMessage}</div>
           </Combobox.Empty>
+          )}
         </>
       )}
     </Combobox.Popup>
@@ -296,7 +305,12 @@ export default function ComboboxBase({
                     {toChips(selected).map((chip) => (
                       <Combobox.Chip
                         key={chip}
-                        className="d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500"
+                        className={merge(
+                          "d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500",
+                          CHIP_SHAPES[shape],
+                          // a new chip fades in
+                          animated && "tp:o tdu:150 ttf:eo @st:o:0 @prm:tp:none",
+                        )}
                       >
                         {chip}
                         <Combobox.ChipRemove

@@ -3,13 +3,6 @@ import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
 type IconTone = "accent" | "neutral";
-type Shape = "rounded" | "square" | "squircle";
-
-const BADGE_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
 
 const ICON_TONES: Record<IconTone, string> = {
   accent: "c:label",
@@ -45,8 +38,6 @@ export interface EmptyStateProps {
   secondaryIcon?: ReactNode;
   /** Called when the secondary button is pressed. */
   onSecondary?: () => void;
-  /** Corner radius on the badge. */
-  iconShape?: Shape;
   /**
    * Extra classes. `merge` folds them in last, so one here replaces the
    * component's own class for the same utility.
@@ -77,7 +68,6 @@ export default function EmptyStateBase({
   onPrimary,
   secondaryLabel,
   onSecondary,
-  iconShape = "square",
   className,
   focus = true,
 }: EmptyStateProps) {
@@ -90,9 +80,8 @@ export default function EmptyStateBase({
   const rootClasses = merge("d:f fd:c ai:c jc:c p:8", gap, className);
 
   const badgeClasses = [
-    "d:f ai:c jc:c w:12 h:12 bg:well",
+    "d:f ai:c jc:c",
     ICON_TONES[iconTone],
-    BADGE_SHAPES[iconShape],
   ]
     .filter(Boolean)
     .join(" ");

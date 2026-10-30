@@ -44,8 +44,8 @@
     {
       "name": "placeholder",
       "type": "string",
-      "default": "Search",
-      "description": "Placeholder text."
+      "description": "Placeholder text.",
+      "example": "Search tags"
     },
     {
       "name": "multiple",
@@ -73,8 +73,8 @@
     {
       "name": "emptyMessage",
       "type": "string",
-      "default": "No results found.",
-      "description": "Shown when nothing matches."
+      "description": "Shown when nothing matches.",
+      "example": "No tags match."
     },
     {
       "name": "size",
@@ -161,7 +161,9 @@
         "defaultValue": [
           "taxes",
           "2026"
-        ]
+        ],
+        "placeholder": "Search tags",
+        "emptyMessage": "No tags match."
       }
     }
   ]
