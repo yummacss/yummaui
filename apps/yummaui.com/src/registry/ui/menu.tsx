@@ -3,7 +3,7 @@
 import { Menu } from "@base-ui/react/menu";
 import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { cloneElement, isValidElement, useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
@@ -122,7 +122,8 @@ export interface MenuProps {
   /**
    * The button's content. Pass a chevron yourself if you want one. It is not
    * added for you, so an avatar, a name and an icon compose as freely as a
-   * plain string.
+   * plain string. An element, such as a `Button`, is the trigger itself and
+   * keeps its own look, with `className` merged onto it.
    */
   trigger: ReactNode;
   /**
@@ -403,7 +404,15 @@ export default function MenuBase({
 
   return (
     <Menu.Root open={open} onOpenChange={handleOpenChange} disabled={disabled}>
-      <Menu.Trigger className={triggerClasses}>{trigger}</Menu.Trigger>
+      {isValidElement<{ className?: string }>(trigger) ? (
+        <Menu.Trigger
+          render={cloneElement(trigger, {
+            className: merge(trigger.props.className, className),
+          })}
+        />
+      ) : (
+        <Menu.Trigger className={triggerClasses}>{trigger}</Menu.Trigger>
+      )}
 
       {popup}
     </Menu.Root>

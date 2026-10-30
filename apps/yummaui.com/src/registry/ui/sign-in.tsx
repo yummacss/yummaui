@@ -163,7 +163,7 @@ export default function SignIn({
               className="w:100%"
             />
             {forgotHref && (
-              <a href={forgotHref} className={`as:fe fs:sm ${LINK}`}>
+              <a href={forgotHref} className={`as:fe fs:sm lh:6 ${LINK}`}>
                 Forgot password?
               </a>
             )}

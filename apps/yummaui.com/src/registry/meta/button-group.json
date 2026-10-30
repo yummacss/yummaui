@@ -71,30 +71,7 @@
       "className": "d:g g:3 ji:c",
       "children": [
         {
-          "component": "ButtonGroup",
-          "children": [
-            {
-              "component": "Button",
-              "props": {
-                "icon": {
-                  "$icon": "IconDownload",
-                  "size": "w:4 h:4"
-                }
-              },
-              "children": "Download"
-            },
-            {
-              "component": "Button",
-              "props": {
-                "icon": {
-                  "$icon": "IconChevronDown",
-                  "size": "w:4 h:4"
-                },
-                "iconOnly": true
-              },
-              "children": "Download options"
-            }
-          ]
+          "component": "ButtonGroupSplit"
         },
         {
           "component": "ButtonGroup",

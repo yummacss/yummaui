@@ -105,7 +105,8 @@ export default function BreadcrumbBase({
 
         const linkClasses = merge(
           outline,
-          item.icon ? "d:f ai:c g:2" : "",
+          "d:f ai:c min-h:6",
+          item.icon ? "g:2" : "",
           "c:hint h:c:label",
         );
 

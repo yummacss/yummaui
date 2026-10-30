@@ -144,7 +144,8 @@ export default function AvatarBase({
       : shape === "rounded"
         ? ROUNDED_RADII[size]
         : SHAPES[shape],
-    tint ? `${TINTS[tint].bg} bi-lg:b bw:1` : "bg:well bc:raised bw:1",
+    tint ? `${TINTS[tint].bg} bw:1` : "bg:well bc:raised bw:1",
+    "bi-lg:b",
     className,
   );
 
