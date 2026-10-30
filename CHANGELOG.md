@@ -13,9 +13,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- A plain look: neutral colors, white surfaces, light borders and medium weights.
+- Every component is square by default; `shape` rounds it.
+- Shortcuts in menus and tooltips are plain text.
+- Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.
+- Sidebar marks the link you pick, and `onNavigate` reports it.
+- Drawer slides in, out and with a swipe on every side.
 - The colors `init` and `add` write are `oklch()`, which needs Yumma CSS 4.9 or later.
 - Components draw their icons from Tabler, `@tabler/icons-react`, in place of Solar.
 - Spinners and skeletons use `aic:i`, and pressed controls `wc:s`, which need Yumma CSS 4.10 or later.
+
+### Removed
+
+- Empty State's `iconShape`.
 
 ## [0.9.0] - 2026-10-29
 
