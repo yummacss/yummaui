@@ -3,7 +3,7 @@
 import { Button } from "@base-ui/react/button";
 import { Drawer } from "@base-ui/react/drawer";
 import { IconX } from "@tabler/icons-react";
-import type { CSSProperties, ReactNode } from "react";
+import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
 type Side = "bottom" | "top" | "left" | "right";
@@ -32,24 +32,23 @@ const PLACEMENTS: Record<Side, string> = {
   right: "h:100% w:80",
 };
 
-// `translate` needs both axes, which no class can spell with a percentage, so the
-// popup carries them in two variables; the notes, "Drawer", has the measurements
+// the popup follows a swipe, and rests offstage while it opens & closes
 const TRAVEL: Record<Side, { swipe: string; offstage: string }> = {
   bottom: {
-    swipe: "0 var(--drawer-swipe-movement-y)",
-    offstage: "0 calc(100% + 2px)",
+    swipe: "tty:var(--drawer-swipe-movement-y)",
+    offstage: "opening:tty:full closing:tty:full",
   },
   top: {
-    swipe: "0 var(--drawer-swipe-movement-y)",
-    offstage: "0 calc(-100% - 2px)",
+    swipe: "tty:var(--drawer-swipe-movement-y)",
+    offstage: "opening:tty:-full closing:tty:-full",
   },
   left: {
-    swipe: "var(--drawer-swipe-movement-x) 0",
-    offstage: "calc(-100% - 2px) 0",
+    swipe: "ttx:var(--drawer-swipe-movement-x)",
+    offstage: "opening:ttx:-full closing:ttx:-full",
   },
   right: {
-    swipe: "var(--drawer-swipe-movement-x) 0",
-    offstage: "calc(100% + 2px) 0",
+    swipe: "ttx:var(--drawer-swipe-movement-x)",
+    offstage: "opening:ttx:full closing:ttx:full",
   },
 };
 
@@ -183,9 +182,9 @@ export default function DrawerBase({
     "p:r d:f fd:c bg:raised bc:line c:label bw:1 os:none bs-o:xl",
     PLACEMENTS[side],
     EDGE_SHAPES[side][shape],
-    "tr:var(--drawer-travel)",
+    TRAVEL[side].swipe,
     animated
-      ? "opening:tr:var(--drawer-offstage) closing:tr:var(--drawer-offstage) tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
+      ? `${TRAVEL[side].offstage} tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none`
       : "",
   ]
     .filter(Boolean)
@@ -219,12 +218,6 @@ export default function DrawerBase({
         <Drawer.Viewport className={VIEWPORTS[side]}>
           <Drawer.Popup
             className={popupClasses}
-            style={
-              {
-                "--drawer-travel": TRAVEL[side].swipe,
-                "--drawer-offstage": TRAVEL[side].offstage,
-              } as CSSProperties
-            }
           >
             {side === "bottom" && <div className="pt:3">{grip}</div>}
 

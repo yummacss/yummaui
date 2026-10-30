@@ -40,7 +40,7 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:f fd:c w:80 max-w:100% br:xl bg:raised bw:1 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label o:h",
+      "className": "d:f fd:c w:80 max-w:100% bg:raised bw:1 bc:rim c:label o:h",
       "children": [
         {
           "tag": "div",
@@ -58,7 +58,7 @@
         },
         {
           "tag": "div",
-          "className": "h:0 btw:1 bbw:1 btc:groove bbc:glint"
+          "className": "h:0 btw:1 bc:line"
         },
         {
           "component": "ScrollArea",

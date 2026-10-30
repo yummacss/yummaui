@@ -109,7 +109,7 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:f g:1 p:1 br:lg bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs",
+      "className": "d:f g:1 p:1 bw:1 bg:raised bc:rim",
       "children": [
         {
           "component": "Tooltip",

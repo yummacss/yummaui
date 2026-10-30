@@ -12,8 +12,18 @@ const SHAPES: Record<Shape, string> = {
   pill: "p:1 br:9999",
 };
 
-const BASE =
-  "d:f ai:c o:h w:fc bg:raised bc:rim bw:1";
+const BASE = "d:f ai:c o:h w:fc";
+
+// a pill insets its buttons inside a border of its own
+const PILL = "bg:raised bc:rim bw:1";
+
+// joined buttons share edges: square inner corners, no border where they meet
+function joined(index: number, count: number): string {
+  if (count < 2) return "br:0";
+  if (index === 0) return "br:0 brw:0";
+  if (index === count - 1) return "br:0 blw:0";
+  return "br:0 blw:0 brw:0";
+}
 
 export interface ButtonGroupProps {
   /** Merged with the group's own classes, so a utility you pass wins. */
@@ -74,9 +84,14 @@ export default function ButtonGroup({
   iconOnly,
 }: ButtonGroupProps) {
   // a button with an icon takes the group's icon props; one it sets itself wins
-  const items = Children.toArray(children).map((child) => {
+  const all = Children.toArray(children);
+  const items = all.map((child, index) => {
     if (!isValidElement<IconProps>(child)) return child;
-    const className = merge(INSET, child.props.className);
+    const className = merge(
+      INSET,
+      shape === "pill" ? "" : joined(index, all.length),
+      child.props.className,
+    );
     if (!child.props.icon) return cloneElement(child, { className });
     if (!icon)
       return cloneElement(child, {
@@ -92,7 +107,15 @@ export default function ButtonGroup({
   });
 
   return (
-    <div className={merge(BASE, SHAPES[shape], stretch && "w:100%", className)}>
+    <div
+      className={merge(
+        BASE,
+        SHAPES[shape],
+        shape === "pill" && PILL,
+        stretch && "w:100%",
+        className,
+      )}
+    >
       {items.map((child, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: position is the identity here
         <div key={index} className={stretch ? "d:f fg:1" : "d:f"}>

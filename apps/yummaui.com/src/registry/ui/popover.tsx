@@ -168,7 +168,7 @@ export default function PopoverBase({
   );
 
   const popupClasses = [
-    "px:4 py:3 w:56 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "px:4 py:3 w:max max-w:80 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
     POPUP_SHAPES[shape],
     arrow ? "p:r" : "",
   ]

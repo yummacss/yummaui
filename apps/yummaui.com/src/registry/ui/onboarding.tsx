@@ -35,7 +35,7 @@ const BUTTON =
 const RAISED =
   "bg:raised bc:rim c:label h:bg:well";
 const FILLED =
-  "bg:fill bc:fill h:o:90 c:on-fill";
+  "bg:fill bc:fill h:o:90 c:on-fill d:o:50 d:c:na";
 
 // a picked choice sinks in, like a pressed toggle
 const PICKED = "bg:well bc:rim c:check";
@@ -141,6 +141,9 @@ export default function OnboardingBase({
   const step = steps[page];
   const isFirst = page === 0;
   const isLast = page === steps.length - 1;
+  // a step with choices needs one picked before it moves on
+  const chosen =
+    !step?.choices?.length || step.choices.some((choice) => picked.has(choice.id));
 
   const go = (next: number) => {
     setDirection(next > page ? 1 : -1);
@@ -270,6 +273,7 @@ export default function OnboardingBase({
               ) : (
                 <Button
                   onClick={() => go(page + 1)}
+                  disabled={!chosen}
                   className={merge(control, FILLED)}
                 >
                   Continue
