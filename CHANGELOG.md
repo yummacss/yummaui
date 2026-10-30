@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The rounded shape is one step larger: 8px controls and 12px menus and cards.
 - Components draw Tabler's outline icons.
 - Menus, listboxes and File Tree highlight in a soft gray.
-- Badges in the examples are white with a status dot.
+- Badge is a pill by default, and its outline tone is a gray key whose dot carries a soft halo.
 - Every component is rounded by default, at 6px for controls and 8px for menus and cards; Avatar stays a circle.
 - Shortcuts in menus and tooltips are plain text.
 - Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.

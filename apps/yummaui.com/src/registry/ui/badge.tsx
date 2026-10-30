@@ -44,7 +44,7 @@ const INTENTS = {
     solidBg: "bg:fill",
     solidText: "c:fill",
     solidHover: "h:o:90",
-    dotOutline: "bg:hint",
+    dotOutline: "bg:hint os:s ow:2 oo:0 oc:hint/25",
     dotSubtle: "bg:hint",
   },
   info: {
@@ -55,7 +55,7 @@ const INTENTS = {
     solidBg: "bg:blue",
     solidText: "c:blue",
     solidHover: "h:bg:blue-8",
-    dotOutline: "bg:blue-5",
+    dotOutline: "bg:blue-5 os:s ow:2 oo:0 oc:blue-5/25",
     dotSubtle: "bg:blue-7",
   },
   success: {
@@ -66,7 +66,7 @@ const INTENTS = {
     solidBg: "bg:green",
     solidText: "c:green",
     solidHover: "h:bg:green-8",
-    dotOutline: "bg:green-5",
+    dotOutline: "bg:green-5 os:s ow:2 oo:0 oc:green-5/25",
     dotSubtle: "bg:green-7",
   },
   warning: {
@@ -77,7 +77,7 @@ const INTENTS = {
     solidBg: "bg:orange",
     solidText: "c:orange",
     solidHover: "h:bg:orange-8",
-    dotOutline: "bg:orange-5",
+    dotOutline: "bg:orange-5 os:s ow:2 oo:0 oc:orange-5/25",
     dotSubtle: "bg:orange-7",
   },
   danger: {
@@ -88,7 +88,7 @@ const INTENTS = {
     solidBg: "bg:red",
     solidText: "c:red",
     solidHover: "h:bg:red-8",
-    dotOutline: "bg:red-5",
+    dotOutline: "bg:red-5 os:s ow:2 oo:0 oc:red-5/25",
     dotSubtle: "bg:red-7",
   },
 } satisfies Record<string, ColorSet>;
@@ -165,7 +165,7 @@ export default function BadgeBase({
   children,
   tone = "outline",
   intent = "neutral",
-  shape = "rounded",
+  shape = "pill",
   size = "md",
   icon,
   iconPosition = "leading",
@@ -184,7 +184,7 @@ export default function BadgeBase({
     pad,
     SHAPES[shape],
     tone === "outline"
-      ? "bg:raised bs-o:key bc:rim bw:1"
+      ? "bg:line bs-o:key bc:rim bw:1"
       : tone === "subtle"
         ? [INTENTS[intent].subtleBg, INTENTS[intent].subtleBorder, "bw:1"].join(" ")
         : [INTENTS[intent].solidBg, "bw:1 bc:black/20 bs-o:key-fill"].join(" "),
