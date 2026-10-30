@@ -23,7 +23,7 @@ export interface AccordionItem {
 }
 
 const SHAPES: Record<Shape, { item: string; trigger: string }> = {
-  rounded: { item: "br:lg", trigger: "br:sm" },
+  rounded: { item: "br:md", trigger: "br:xs" },
   square: { item: "", trigger: "" },
   squircle: { item: "br:xxl cs:s", trigger: "br:xxl cs:s" },
 };
@@ -99,7 +99,7 @@ export interface AccordionProps {
 export default function AccordionBase({
   items,
   variant = "default",
-  shape = "squircle",
+  shape = "rounded",
   separated = true,
   indicator = "chevron",
   indicatorPosition = "trailing",
@@ -128,9 +128,7 @@ export default function AccordionBase({
   const rootClasses = merge(
     "d:f fd:c w:100% max-w:96",
     variant === "bordered" || variant === "subtle" ? "g:2" : "",
-    isCard
-      ? "bg:raised bw:1 bc:rim br:lg"
-      : "",
+    isCard ? `bg:raised bw:1 bc:rim ${SHAPES[shape].item}` : "",
     className,
   );
 
@@ -165,7 +163,7 @@ export default function AccordionBase({
                   : "";
 
         const triggerRadius =
-          variant === "bordered" ? SHAPES[shape].trigger : "br:sm";
+          variant === "bordered" || isCard ? SHAPES[shape].trigger : "";
         const inset = variant === "bordered" || variant === "subtle" || isCard;
         const triggerPadX = inset ? "px:4" : "px:0";
         const triggerPadY =
@@ -234,7 +232,7 @@ export default function AccordionBase({
                   )}
                 <div className="d:f ai:c g:3">
                   <span
-                    className={["fs:sm fw:600", titleColor]
+                    className={["fs:sm fw:500", titleColor]
                       .filter(Boolean)
                       .join(" ")}
                   >

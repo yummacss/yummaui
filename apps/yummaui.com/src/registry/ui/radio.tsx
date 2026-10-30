@@ -121,7 +121,7 @@ export default function RadioBase({
   return (
     <div className="d:f fd:c g:2">
       {label && (
-        <div id={labelId} className="c:label fs:sm fw:600 us:none">
+        <div id={labelId} className="c:label fs:sm fw:500 us:none">
           {label}
         </div>
       )}
@@ -164,7 +164,7 @@ export default function RadioBase({
                 </Radio.Root>
               </span>
               <span className="d:f fd:c">
-                <span className={`c:label fw:600 ${LABEL_SIZES[size]}`}>
+                <span className={`c:label fw:500 ${LABEL_SIZES[size]}`}>
                   {option.label}
                 </span>
                 {option.description && (

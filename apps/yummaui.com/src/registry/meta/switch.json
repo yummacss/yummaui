@@ -43,15 +43,24 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Track and thumb together."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
       "description": "Corner radius, applied to the track and the thumb together. `squircle` uses `corner-shape`."
     },
     {

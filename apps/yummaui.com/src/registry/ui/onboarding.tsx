@@ -6,18 +6,19 @@ import { Toggle } from "@base-ui/react/toggle";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import Action from "./button";
 
 type IconPosition = "leading" | "trailing";
 type Shape = "rounded" | "square" | "squircle";
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const CONTROL_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -30,12 +31,8 @@ const STEP_SHAPES: Record<Shape, string> = {
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
-const BUTTON =
-  "d:if ai:c jc:c g:2 px:4 py:2 bw:1 fs:sm fw:600 tp:c tdu:150 ttf:io us:none c:p";
 const RAISED =
   "bg:raised bc:rim c:label h:bg:well";
-const FILLED =
-  "bg:fill bc:fill h:o:90 c:on-fill";
 
 // a picked choice sinks in, like a pressed toggle
 const PICKED = "bg:well bc:rim c:check";
@@ -124,7 +121,7 @@ export default function OnboardingBase({
   onFinish,
   finishLabel = "Done",
   closeOnEscape = true,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,
@@ -141,6 +138,9 @@ export default function OnboardingBase({
   const step = steps[page];
   const isFirst = page === 0;
   const isLast = page === steps.length - 1;
+  // a step with choices needs one picked before it moves on
+  const chosen =
+    !step?.choices?.length || step.choices.some((choice) => picked.has(choice.id));
 
   const go = (next: number) => {
     setDirection(next > page ? 1 : -1);
@@ -155,14 +155,13 @@ export default function OnboardingBase({
       return next;
     });
 
-  const control = merge(outline, BUTTON, CONTROL_SHAPES[shape]);
 
   const slide = (
     <div className="d:f fd:c g:2">
-      <AlertDialog.Title className="m:0 c:label fs:md fw:700">
+      <AlertDialog.Title className="m:0 tw:b c:label fs:md fw:500">
         {step.title}
       </AlertDialog.Title>
-      <AlertDialog.Description className="m:0 c:hint fs:sm">
+      <AlertDialog.Description className="m:0 tw:p c:hint fs:sm">
         {step.description}
       </AlertDialog.Description>
       {step.choices && step.choices.length > 0 && (
@@ -248,32 +247,34 @@ export default function OnboardingBase({
             <div className="d:f ai:c jc:sb g:2 pt:2">
               {isFirst ? (
                 <AlertDialog.Close
-                  render={<Button className={merge(control, RAISED)} />}
+                  render={<Action variant="secondary" shape={shape} />}
                 >
                   Skip
                 </AlertDialog.Close>
               ) : (
-                <Button
+                <Action
+                  variant="secondary"
+                  shape={shape}
                   onClick={() => go(page - 1)}
-                  className={merge(control, RAISED)}
                 >
                   Back
-                </Button>
+                </Action>
               )}
               {isLast ? (
                 <AlertDialog.Close
-                  render={<Button className={merge(control, FILLED)} />}
+                  render={<Action shape={shape} />}
                   onClick={() => onFinish?.([...picked])}
                 >
                   {finishLabel}
                 </AlertDialog.Close>
               ) : (
-                <Button
+                <Action
+                  shape={shape}
+                  disabled={!chosen}
                   onClick={() => go(page + 1)}
-                  className={merge(control, FILLED)}
                 >
                   Continue
-                </Button>
+                </Action>
               )}
             </div>
           </div>

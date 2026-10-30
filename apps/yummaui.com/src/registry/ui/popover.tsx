@@ -14,11 +14,11 @@ type TriggerVariant = "icon" | "label";
 
 const TRIGGER_VARIANTS: Record<TriggerVariant, string> = {
   icon: "w:10 h:10",
-  label: "px:3 py:2 g:2 fs:sm fw:600",
+  label: "px:3 py:2 g:2 fs:sm fw:500",
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -143,7 +143,7 @@ export default function PopoverBase({
   open: controlledOpen,
   onOpenChange,
   showClose = false,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,
@@ -168,7 +168,7 @@ export default function PopoverBase({
   );
 
   const popupClasses = [
-    "px:4 py:3 w:56 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "px:4 py:3 w:max max-w:80 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
     POPUP_SHAPES[shape],
     arrow ? "p:r" : "",
   ]
@@ -194,7 +194,7 @@ export default function PopoverBase({
       )}
 
       <div className="d:f ai:s jc:sb g:3">
-        <Popover.Title className="m:0 mb:1 c:label fs:sm fw:500">
+        <Popover.Title className="m:0 tw:b mb:1 c:label fs:sm fw:500">
           {title}
         </Popover.Title>
         {showClose && (
@@ -211,7 +211,7 @@ export default function PopoverBase({
       </div>
 
       {description && (
-        <Popover.Description className="m:0 c:hint fs:xs">
+        <Popover.Description className="m:0 tw:p c:hint fs:xs">
           {description}
         </Popover.Description>
       )}

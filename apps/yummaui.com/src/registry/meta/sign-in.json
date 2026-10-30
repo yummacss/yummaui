@@ -49,10 +49,11 @@
       "values": [
         "rounded",
         "square",
-        "squircle"
+        "squircle",
+        "pill"
       ],
-      "default": "squircle",
-      "description": "Corner radius of the card. Its fields and buttons keep their own."
+      "default": "rounded",
+      "description": "Corner radius of the card, its fields and its buttons."
     },
     {
       "name": "animated",

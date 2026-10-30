@@ -8,7 +8,10 @@ import { useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
+// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 
 export interface ComboboxItem {
   label: string;
@@ -38,8 +41,8 @@ const CHIPS_SIZES: Record<Size, string> = {
   lg: "min-h:11 w:72 fs:md",
 };
 
-const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+const ITEM_SHAPES: Record<Card, string> = {
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -56,7 +59,22 @@ const ACTION_HEIGHTS: Record<Size, string> = {
   lg: "h:11",
 };
 
+// a chip sits inside the field, so it rounds one step less
+const CHIP_SHAPES: Record<Shape, string> = {
+  rounded: "br:xs",
+  square: "",
+  squircle: "br:md cs:s",
+  pill: "br:9999",
+};
+
 const SHAPES: Record<Shape, string> = {
+  rounded: "br:md",
+  square: "br:0",
+  squircle: "br:xxl cs:s",
+  pill: "br:9999",
+};
+
+const POPUP_SHAPES: Record<Card, string> = {
   rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
@@ -152,7 +170,7 @@ function renderItem(item: ComboboxItem, shape: Shape) {
       key={item.label}
       value={item.label}
       className={(state) =>
-        `d:f ai:c g:2 py:2 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[shape]} fs:sm fw:500 us:none c:p ${
+        `d:f ai:c g:2 py:2 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[cardOf(shape)]} fs:sm fw:500 us:none c:p ${
           state.highlighted
             ? "bg:check c:white bc:transparent"
             : "bg:transparent"
@@ -190,16 +208,16 @@ export default function ComboboxBase({
   items,
   label,
   description,
-  placeholder = "Search",
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   multiple = false,
   defaultValue,
   clearable = true,
   disabled = false,
   loading = false,
   animated = true,
-  emptyMessage = "No results found.",
+  placeholder,
+  emptyMessage,
   className,
   focus = true,
   container,
@@ -214,7 +232,7 @@ export default function ComboboxBase({
   const id = useId();
 
   const chipsClasses = merge(
-    "d:f fw:w ai:c g:1 py:1 pl:2 pr:16 bg:field bc:rim c:label bw:1",
+    "d:f fw:w ai:c g:1 py:1 pl:1 pr:16 bg:field bc:rim c:label bw:1",
     CHIPS_SIZES[size],
     SHAPES[shape],
     className,
@@ -230,7 +248,7 @@ export default function ComboboxBase({
 
   const popup = (
     <Combobox.Popup
-      className={`o:h bg:raised bc:line bs-o:xl c:label bw:1 ${POPUP_SIZES[size]} ${SHAPES[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`o:h bg:raised bc:line bs-o:xl c:label bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       {loading ? (
         <div
@@ -261,9 +279,11 @@ export default function ComboboxBase({
               )
             }
           </Combobox.List>
+          {emptyMessage && (
           <Combobox.Empty className="c:hint fs:sm">
             <div className="py:4 px:4">{emptyMessage}</div>
           </Combobox.Empty>
+          )}
         </>
       )}
     </Combobox.Popup>
@@ -282,7 +302,7 @@ export default function ComboboxBase({
         className={`d:f p:r fd:c g:2 c:label fs:sm ${disabled ? "o:60 c:na" : ""}`}
       >
         {label && (
-          <label htmlFor={id} className="c:label fs:sm fw:600 us:none">
+          <label htmlFor={id} className="c:label fs:sm fw:500 us:none">
             {label}
           </label>
         )}
@@ -296,7 +316,12 @@ export default function ComboboxBase({
                     {toChips(selected).map((chip) => (
                       <Combobox.Chip
                         key={chip}
-                        className="d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500"
+                        className={merge(
+                          "d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500",
+                          CHIP_SHAPES[shape],
+                          // a new chip fades in
+                          animated && "tp:o tdu:150 ttf:eo @st:o:0 @prm:tp:none",
+                        )}
                       >
                         {chip}
                         <Combobox.ChipRemove
@@ -315,7 +340,7 @@ export default function ComboboxBase({
                 placeholder={placeholder}
                 className={merge(
                   outline,
-                  "fg:1 w:24 min-w:24 bg:transparent c:label bw:0",
+                  "fg:1 w:24 min-w:24 pl:1 bg:transparent c:label bw:0",
                 )}
               />
             </Combobox.Chips>

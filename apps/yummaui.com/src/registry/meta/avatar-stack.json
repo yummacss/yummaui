@@ -4,7 +4,12 @@
     {
       "name": "overlap",
       "type": "enum",
-      "values": ["none", "sm", "md", "lg"],
+      "values": [
+        "none",
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "How far each avatar sits over the one before it. `none` spaces them normally."
     },
@@ -20,9 +25,25 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "sm",
       "description": "Size of the `+N` avatar only. The avatars you pass carry their own `size`."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "circle",
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "circle",
+      "description": "Every avatar's shape, the `+N` one included. One an avatar sets itself wins."
     },
     {
       "name": "className",

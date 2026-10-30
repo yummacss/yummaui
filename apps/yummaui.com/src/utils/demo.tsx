@@ -148,6 +148,14 @@ export function sceneIds(scene: ChildExample[]): string[] {
 }
 
 /** The Example view, with the rail's shape on every component in it. */
+// system follows the reader's own setting
+function schemeOf(theme: string): "light" | "dark" {
+	if (theme === "light" || theme === "dark") return theme;
+	return window.matchMedia("(prefers-color-scheme: dark)").matches
+		? "dark"
+		: "light";
+}
+
 export function renderScene(
 	scene: ChildExample[],
 	components: Record<string, ComponentType<DemoProps>>,
@@ -159,7 +167,8 @@ export function renderScene(
 		components,
 		styled: (component) => {
 			const meta = getRegistryMeta(componentId(component));
-			if (!meta) return {};
+			// an example has no meta; it takes the container for the popups it holds
+			if (!meta) return { container };
 			const portals = meta.props.some((prop) => prop.name === "container");
 			return {
 				...shapeProps(meta.props, shape),
@@ -181,7 +190,13 @@ export function renderScene(
 				const key = `${path}.${prop.name}`;
 				out[prop.name] = key in state.values ? state.values[key] : fallback;
 				out[initial] = undefined;
-				out[prop.handler] = (value: unknown) => state.set(key, value, fallback);
+				// a Theme Switcher in the preview sets the preview's scheme too
+				const themes =
+					componentId(component) === "theme-switcher" && prop.name === "value";
+				out[prop.handler] = (value: unknown) => {
+					state.set(key, value, fallback);
+					if (themes) state.setScheme?.(schemeOf(String(value)));
+				};
 			}
 			return out;
 		},
@@ -192,6 +207,8 @@ export function renderScene(
 export interface SceneState {
 	values: Record<string, unknown>;
 	set: (key: string, value: unknown, fallback: unknown) => void;
+	/** Sets the preview's own scheme, so a Theme Switcher in it does what it says. */
+	setScheme?: (scheme: "light" | "dark") => void;
 }
 
 interface SceneContext {

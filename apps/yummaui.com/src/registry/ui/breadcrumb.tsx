@@ -2,7 +2,7 @@ import { IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 type Size = "sm" | "md" | "lg";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
@@ -21,9 +21,10 @@ const SEPARATOR_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
 export interface BreadcrumbItem {
@@ -71,7 +72,7 @@ export interface BreadcrumbProps {
 export default function BreadcrumbBase({
   items,
   bordered = false,
-  shape = "squircle",
+  shape = "rounded",
   size = "md",
   separator = "chevron",
   className,
@@ -92,7 +93,7 @@ export default function BreadcrumbBase({
   // the current page sits in a raised chip
   const currentClasses = [
     SIZES[size],
-    "px:2 py:1 br:md bw:1 bg:raised bc:rim fw:600 c:label",
+    "px:2 py:1 bw:1 bg:raised bc:rim fw:500 c:label",
   ]
     .filter(Boolean)
     .join(" ");

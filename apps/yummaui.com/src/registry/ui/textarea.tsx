@@ -12,7 +12,7 @@ type Status = "default" | "error" | "success";
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -109,7 +109,7 @@ export default function TextareaBase({
   error,
   success,
   maxLength,
-  shape = "squircle",
+  shape = "rounded",
   disabled,
   className,
   focus = true,
@@ -155,7 +155,7 @@ export default function TextareaBase({
       {(label || showCounter) && (
         <div className="d:f ai:c jc:sb g:2">
           {label && (
-            <Field.Label className="c:label fs:sm fw:600">
+            <Field.Label className="c:label fs:sm fw:500">
               {label}
               {required && <span className="c:red-5"> *</span>}
             </Field.Label>
@@ -163,7 +163,7 @@ export default function TextareaBase({
           {showCounter && (
             <span
               aria-live="polite"
-              className={`ml:auto fs:xs ${warn ? "c:red fw:600" : "c:hint"}`}
+              className={`ml:auto fs:xs ${warn ? "c:red fw:500" : "c:hint"}`}
             >
               {value.length} / {maxLength}
             </span>

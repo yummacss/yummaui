@@ -5,14 +5,22 @@
       "name": "value",
       "type": "enum",
       "description": "The picked theme, controlled. Pair it with `onValueChange`.",
-      "values": ["light", "dark", "system"],
+      "values": [
+        "light",
+        "dark",
+        "system"
+      ],
       "controlled": true,
       "handler": "onValueChange"
     },
     {
       "name": "defaultValue",
       "type": "enum",
-      "values": ["light", "dark", "system"],
+      "values": [
+        "light",
+        "dark",
+        "system"
+      ],
       "default": "system",
       "description": "The theme picked on first render, uncontrolled.",
       "controlled": true
@@ -37,15 +45,22 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md"],
+      "values": [
+        "sm",
+        "md"
+      ],
       "default": "md",
       "description": "Height of the track and its options."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "rounded",
       "description": "Corner radius of the track. The options nest one step inside it. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {

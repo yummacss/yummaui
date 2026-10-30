@@ -16,8 +16,8 @@ const RESET = `
   body {
     margin: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: safe center;
+    justify-content: safe center;
     background: light-dark(#fff, #1f2023);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
       Arial, sans-serif;
@@ -30,13 +30,15 @@ const RESET = `
     width: 100%;
     padding: 2.5rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: safe center;
+    justify-content: safe center;
   }
   /* Height is the same story but only safe on a frame that has one of its own.
      An auto-height frame is sized *from* this element, so handing a percentage
      back would be the loop described above. */
   #root[data-fill] { height: 100%; }
+  /* a block fills the frame to its edges, as it would a page */
+  #root[data-bleed] { padding: 0; }
 `;
 
 let sheet: string | null = null;
@@ -65,6 +67,8 @@ interface Props {
 	children: ReactNode;
 	minHeight?: number | string;
 	fill?: boolean;
+	/** No padding round the scene, so a block such as a sidebar meets the edges. */
+	bleed?: boolean;
 	accentCss?: string;
 	className?: string;
 }
@@ -73,6 +77,7 @@ export default function PreviewFrame({
 	children,
 	minHeight = 240,
 	fill = false,
+	bleed = false,
 	accentCss = "",
 	className = "",
 }: Props) {
@@ -156,6 +161,7 @@ export default function PreviewFrame({
 			const root = target.createElement("div");
 			root.id = "root";
 			if (fill) root.dataset.fill = "";
+			if (bleed) root.dataset.bleed = "";
 			target.body.append(root);
 
 			setBody(root);
@@ -164,7 +170,7 @@ export default function PreviewFrame({
 		attach();
 		element.addEventListener("load", attach);
 		return () => element.removeEventListener("load", attach);
-	}, [near, fill]);
+	}, [near, fill, bleed]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: `body` is the remount signal, not a value read
 	useEffect(() => {

@@ -8,7 +8,7 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 type Orientation = "horizontal" | "vertical";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -52,7 +52,7 @@ export default function ToggleGroupBase({
   label,
   className,
   children,
-  shape = "squircle",
+  shape = "rounded",
   orientation = "horizontal",
   multiple = false,
   disabled = false,
@@ -85,7 +85,7 @@ export default function ToggleGroupBase({
 
   return (
     <div className="d:f fd:c ai:c g:2">
-      <span id={labelId} className="c:label fs:sm fw:600 us:none">
+      <span id={labelId} className="c:label fs:sm fw:500 us:none">
         {label}
       </span>
       {group}

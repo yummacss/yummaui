@@ -7,28 +7,33 @@ import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
+// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconPosition = "leading" | "trailing";
 type TriggerTone = "neutral" | "danger";
 type Size = "sm" | "md" | "lg";
 type ConfirmTone = "primary" | "danger";
 
-const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+const POPUP_SHAPES: Record<Card, string> = {
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
+  pill: "br:9999",
 };
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
@@ -160,7 +165,7 @@ export default function DialogBase({
   onConfirm,
   confirmTone = "primary",
   showClose = true,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,
@@ -187,7 +192,7 @@ export default function DialogBase({
 
   const popupClasses = [
     "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
-    POPUP_SHAPES[shape],
+    POPUP_SHAPES[cardOf(shape)],
   ]
     .filter(Boolean)
     .join(" ");
@@ -247,13 +252,13 @@ export default function DialogBase({
 
           <div className={`d:f fd:c g:3 px:5 pb:4 ${header ? "pt:3" : "pt:5"}`}>
             <Dialog.Title
-              className={`m:0 c:label fs:md fw:600 ${showClose ? "pr:10" : ""}`}
+              className={`m:0 tw:b c:label fs:md fw:500 ${showClose ? "pr:10" : ""}`}
             >
               {title}
             </Dialog.Title>
 
             {description && (
-              <Dialog.Description className="m:0 c:hint fs:sm lh:4">
+              <Dialog.Description className="m:0 tw:p c:hint fs:sm lh:4">
                 {description}
               </Dialog.Description>
             )}

@@ -12,7 +12,7 @@ type IconPosition = "leading" | "trailing";
 
 const SHAPES: Record<Shape, string> = {
   square: "",
-  rounded: "br:sm",
+  rounded: "br:xs",
   pill: "br:9999",
   squircle: "br:xxl cs:s",
 };
@@ -165,7 +165,7 @@ export default function BadgeBase({
   children,
   tone = "outline",
   intent = "neutral",
-  shape = "squircle",
+  shape = "rounded",
   size = "md",
   icon,
   iconPosition = "leading",

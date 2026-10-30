@@ -5,8 +5,22 @@
       "name": "keys",
       "type": "none",
       "typeName": "string[]",
-      "example": ["Ctrl", "K"],
+      "example": [
+        "Ctrl",
+        "K"
+      ],
       "description": "The keys to press together, each drawn as its own keycap."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "description": "Corner radius of each keycap."
     },
     {
       "name": "className",
@@ -29,7 +43,10 @@
             {
               "component": "Kbd",
               "props": {
-                "keys": ["Ctrl", "K"]
+                "keys": [
+                  "Ctrl",
+                  "K"
+                ]
               }
             },
             {
@@ -47,7 +64,9 @@
             {
               "component": "Kbd",
               "props": {
-                "keys": ["F2"]
+                "keys": [
+                  "F2"
+                ]
               }
             },
             {
@@ -56,7 +75,10 @@
             {
               "component": "Kbd",
               "props": {
-                "keys": ["Ctrl", "Z"]
+                "keys": [
+                  "Ctrl",
+                  "Z"
+                ]
               }
             }
           ]

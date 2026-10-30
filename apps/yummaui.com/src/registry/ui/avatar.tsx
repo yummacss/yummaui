@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "circle" | "square" | "squircle";
+type Shape = "circle" | "rounded" | "square" | "squircle";
 type Status = "none" | "online" | "offline" | "busy";
 type Tint = "blue" | "mint" | "indigo" | "slate";
 
@@ -43,8 +43,16 @@ const BADGE_SIZES: Record<Size, string> = {
 
 const SHAPES: Record<Shape, string> = {
   circle: "br:9999",
+  rounded: "",
   square: "br:0",
   squircle: "cs:s",
+};
+
+// a radius scales with the avatar, so rounded never reads as a circle
+const ROUNDED_RADII: Record<Size, string> = {
+  sm: "br:sm",
+  md: "br:md",
+  lg: "br:lg",
 };
 
 const SQUIRCLE_RADII: Record<Size, string> = {
@@ -131,7 +139,11 @@ export default function AvatarBase({
   const classes = merge(
     ROOT,
     SIZES[size],
-    shape === "squircle" ? `cs:s ${SQUIRCLE_RADII[size]}` : SHAPES[shape],
+    shape === "squircle"
+      ? `cs:s ${SQUIRCLE_RADII[size]}`
+      : shape === "rounded"
+        ? ROUNDED_RADII[size]
+        : SHAPES[shape],
     tint ? `${TINTS[tint].bg} bw:1` : "bg:well bc:raised bw:1",
     className,
   );

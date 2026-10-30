@@ -6,14 +6,24 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "p:1 br:9999",
 };
 
-const BASE =
-  "d:f ai:c o:h w:fc bg:raised bc:rim bw:1";
+const BASE = "d:f ai:c o:h w:fc";
+
+// a pill insets its buttons inside a border of its own
+const PILL = "bg:raised bc:rim bw:1";
+
+// joined buttons overlap by their border, so two edges draw one line; a filled
+// button's shared edge takes the rim's color, or the line would vanish into it.
+// they keep still when pressed, so the group moves as one control
+function joined(index: number, separated: boolean): string {
+  const shared = index > 0 ? `ml:-px ${separated ? "blc:rim" : ""}` : "";
+  return `br:0 a:s:100 ${shared}`;
+}
 
 export interface ButtonGroupProps {
   /** Merged with the group's own classes, so a utility you pass wins. */
@@ -66,7 +76,7 @@ const INSET = "fv:oo:-3";
 export default function ButtonGroup({
   className,
   children,
-  shape = "squircle",
+  shape = "rounded",
   separated = true,
   stretch = false,
   icon = true,
@@ -74,9 +84,14 @@ export default function ButtonGroup({
   iconOnly,
 }: ButtonGroupProps) {
   // a button with an icon takes the group's icon props; one it sets itself wins
-  const items = Children.toArray(children).map((child) => {
+  const all = Children.toArray(children);
+  const items = all.map((child, index) => {
     if (!isValidElement<IconProps>(child)) return child;
-    const className = merge(INSET, child.props.className);
+    const className = merge(
+      INSET,
+      shape === "pill" ? "" : joined(index, separated),
+      child.props.className,
+    );
     if (!child.props.icon) return cloneElement(child, { className });
     if (!icon)
       return cloneElement(child, {
@@ -92,11 +107,19 @@ export default function ButtonGroup({
   });
 
   return (
-    <div className={merge(BASE, SHAPES[shape], stretch && "w:100%", className)}>
+    <div
+      className={merge(
+        BASE,
+        SHAPES[shape],
+        shape === "pill" && PILL,
+        stretch && "w:100%",
+        className,
+      )}
+    >
       {items.map((child, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: position is the identity here
         <div key={index} className={stretch ? "d:f fg:1" : "d:f"}>
-          {index > 0 && separated && (
+          {index > 0 && separated && shape === "pill" && (
             <Separator
               orientation="vertical"
               className={shape === "pill" ? "mx:1 my:1" : undefined}

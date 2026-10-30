@@ -129,7 +129,10 @@
     {
       "name": "iconPosition",
       "type": "enum",
-      "values": ["leading", "trailing"],
+      "values": [
+        "leading",
+        "trailing"
+      ],
       "default": "leading",
       "description": "Which end of an item its `icon` sits at. A `shortcut` always trails regardless.",
       "conflictsWith": [
@@ -142,8 +145,12 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "rounded",
       "description": "Corner radius on the bar, its buttons, the popups and their items together."
     },
     {

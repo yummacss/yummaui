@@ -11,7 +11,13 @@
       "name": "current",
       "type": "string",
       "default": "#files",
-      "description": "The `href` of the page being shown, marked as current."
+      "description": "The `href` of the page shown first, marked as current until a link is picked."
+    },
+    {
+      "name": "onNavigate",
+      "type": "none",
+      "typeName": "(href: string) => void",
+      "description": "Called with a link's `href` when it is picked."
     },
     {
       "name": "workspaces",
@@ -38,6 +44,18 @@
       "description": "Called when Sign out is picked from the user menu."
     },
     {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the links, menus, badges & avatar."
+    },
+    {
       "name": "container",
       "type": "none",
       "typeName": "HTMLElement | null",
@@ -47,11 +65,20 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:f h:150",
+      "className": "d:f w:100% h:100%",
       "children": [
         {
           "component": "Sidebar",
           "props": {}
+        },
+        {
+          "tag": "div",
+          "className": "d:f f:1 ai:c jc:c m:4 bw:2 bs:d bc:rim c:hint fs:sm us:none",
+          "children": [
+            {
+              "text": "Page content"
+            }
+          ]
         }
       ]
     }

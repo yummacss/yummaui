@@ -30,7 +30,12 @@
     {
       "name": "side",
       "type": "enum",
-      "values": ["top", "right", "bottom", "left"],
+      "values": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
       "default": "top",
       "description": "Which side of the trigger the tooltip opens on. It flips automatically if there is no room."
     },
@@ -61,7 +66,11 @@
     {
       "name": "tone",
       "type": "enum",
-      "values": ["light", "dark", "danger"],
+      "values": [
+        "light",
+        "dark",
+        "danger"
+      ],
       "default": "light",
       "description": "The tooltip's surface and its trigger together. `light` and `dark` are the two neutral surfaces; `danger` reads red at both ends, for a destructive action.",
       "example": "dark"
@@ -69,8 +78,13 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
       "description": "Corner radius on the tooltip."
     },
     {
@@ -96,7 +110,7 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:f g:1 p:1 br:lg bw:1 bg:raised btc:rim blc:rim brc:rim bbc:shadow bs-o:xs",
+      "className": "d:f g:1 p:1 bw:1 bg:raised bc:rim",
       "children": [
         {
           "component": "Tooltip",

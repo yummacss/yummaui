@@ -8,6 +8,9 @@ import { merge } from "yummacss/merge";
 type Orientation = "horizontal" | "vertical";
 type Size = "sm" | "md" | "lg";
 type Shape = "pill" | "rounded" | "square" | "squircle";
+// a panel cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 type IconPosition = "leading" | "trailing";
@@ -20,14 +23,20 @@ const SIZES: Record<Size, { tab: string; text: string }> = {
 
 const LIST_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
-  rounded: "br:xl",
+  rounded: "br:lg",
+  square: "",
+  squircle: "br:3xl cs:s",
+};
+
+const PANEL_SHAPES: Record<Card, string> = {
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TAB_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -110,7 +119,7 @@ export default function TabsBase({
   onValueChange,
   orientation = "horizontal",
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   animated = true,
@@ -224,7 +233,7 @@ export default function TabsBase({
           <Tabs.Panel
             key={item.value}
             value={item.value}
-            className="f:1 p:4 br:xl bw:1 bg:raised bc:rim c:hint fs:sm os:none"
+            className={`f:1 p:4 bw:1 bg:raised bc:rim c:hint fs:sm os:none ${PANEL_SHAPES[cardOf(shape)]}`}
           >
             {item.panel}
           </Tabs.Panel>

@@ -23,15 +23,22 @@ const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 const MOTION = "tp:a tdu:150 ttf:io a:s:95 wc:s";
 
 const VARIANTS: Record<Variant, string> = {
-  primary:
-    "bg:fill bc:fill h:o:90 c:on-fill",
-  secondary:
-    "bg:raised bc:rim c:label h:bg:well",
-  subtle: "bg:well bc:transparent c:hint h:bg:rim",
-  ghost: "bg:transparent bc:transparent c:label h:bg:well",
-  danger:
-    "bg:red bc:red h:bg:red-8 h:bc:red-8 c:white",
-  link: "bg:transparent bc:transparent c:label tuo:2 h:td:u",
+  primary: "bg:fill bc:fill c:on-fill",
+  secondary: "bg:raised bc:rim c:label",
+  subtle: "bg:well bc:transparent c:hint",
+  ghost: "bg:transparent bc:transparent c:label",
+  danger: "bg:red bc:red c:white",
+  link: "bg:transparent bc:transparent c:label tuo:2",
+};
+
+// apart, so a disabled button keeps no hover that says it can be pressed
+const HOVERS: Record<Variant, string> = {
+  primary: "h:o:90",
+  secondary: "h:bg:well",
+  subtle: "h:bg:rim",
+  ghost: "h:bg:well",
+  danger: "h:bg:red-8 h:bc:red-8",
+  link: "h:td:u",
 };
 
 const VARIANT_OUTLINE: Partial<Record<Variant, string>> = {
@@ -62,7 +69,7 @@ const ICON_ONLY: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -144,7 +151,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
 export default function ButtonBase({
   variant = "primary",
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   loading = false,
   icon,
   iconPosition = "leading",
@@ -186,10 +193,13 @@ export default function ButtonBase({
 
   const held = useHold(hold, onHold, transition);
   const label =
-    holdLabel && held.done ? (
-      <Swap shown={holdLabel} hidden={children} />
-    ) : holdLabel ? (
-      <Swap shown={children} hidden={holdLabel} />
+    holdLabel ? (
+      <Swap
+        first={children}
+        second={holdLabel}
+        swapped={held.done}
+        animated={transition}
+      />
     ) : (
       children
     );
@@ -198,8 +208,9 @@ export default function ButtonBase({
     outline,
     BASE,
     hold ? "p:r o:h ta:none" : "",
-    transition ? MOTION : "",
+    transition && !inactive ? MOTION : "",
     VARIANTS[variant],
+    inactive ? "" : HOVERS[variant],
     iconOnlyActive ? ICON_ONLY[size] : SIZES[size],
     SHAPES[shape],
     inactive ? "o:60 c:na" : "c:p",
@@ -255,12 +266,33 @@ export default function ButtonBase({
 }
 
 // both labels share one grid cell, so the button keeps the wider one's width
-function Swap({ shown, hidden }: { shown: ReactNode; hidden: ReactNode }) {
+// both labels share one cell, so the button keeps the wider one's width; the
+// incoming one rises in as the outgoing one rises out
+function Swap({
+  first,
+  second,
+  swapped,
+  animated,
+}: {
+  first: ReactNode;
+  second: ReactNode;
+  swapped: boolean;
+  animated: boolean;
+}) {
+  const motion = animated ? "tp:a tdu:200 ttf:eo @prm:tp:none" : "";
   return (
-    <span className="d:ig ji:c">
-      <span className="gcs:1 grs:1">{shown}</span>
-      <span aria-hidden className="gcs:1 grs:1 v:h">
-        {hidden}
+    <span className="d:ig ji:c o:h">
+      <span
+        aria-hidden={swapped || undefined}
+        className={`gcs:1 grs:1 ${motion} ${swapped ? "o:0 tty:-full" : ""}`}
+      >
+        {first}
+      </span>
+      <span
+        aria-hidden={!swapped || undefined}
+        className={`gcs:1 grs:1 ${motion} ${swapped ? "" : "o:0 tty:full"}`}
+      >
+        {second}
       </span>
     </span>
   );

@@ -4,7 +4,7 @@ import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 import { Drawer } from "@base-ui/react/drawer";
 import { Resizable } from "re-resizable";
 import type { ComponentType, ReactNode } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
@@ -33,13 +33,10 @@ const LANGUAGE: Record<string, string> = {
 	config: "JavaScript module",
 };
 
-// a resizable frame drags narrower from its right edge, snapping to phone & tablet
-const SNAP = [
-	{ width: 392, label: "Phone", left: "l:98" },
-	{ width: 768, label: "Tablet", left: "l:192" },
-];
-// how close the edge comes before a guide lights up, and before it snaps
-const NEAR = 48;
+// a resizable frame drags narrower from its right edge, down to a phone, and
+// snaps to a tablet
+const PHONE = 392;
+const SNAP = [768];
 const SNAP_GAP = 24;
 
 const TOOL =
@@ -60,24 +57,12 @@ export default function ComponentPlayground({
 	const [tab, setTab] = useState("preview");
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
-	// the snap point the edge just landed on, lit for a moment
 	// at full width the panel's border is the frame's, so the frame draws its own only when narrower
 	const [narrowed, setNarrowed] = useState(false);
-	const [flash, setFlash] = useState<number | null>(null);
-	const snapped = useRef<number | null>(null);
-	const flashTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
-
 	const track = (element: HTMLElement) => {
 		const next = element.offsetWidth;
 		setWidth(next);
 		setNarrowed(next < (element.parentElement?.clientWidth ?? next));
-		const point = SNAP.find((snap) => snap.width === next)?.width ?? null;
-		if (point !== null && point !== snapped.current) {
-			setFlash(point);
-			clearTimeout(flashTimer.current);
-			flashTimer.current = setTimeout(() => setFlash(null), 120);
-		}
-		snapped.current = point;
 	};
 
 	const id = playground?.id ?? "";
@@ -94,12 +79,13 @@ export default function ComponentPlayground({
 					className="f:1 min-h:0 bg:page"
 					minHeight={0}
 					fill
+					bleed={resizable}
 					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
 				>
 					<Scene scene={scene} shape={shape} />
 				</PreviewFrame>
 			) : null,
-		[scene, shape, accent, scheme],
+		[scene, shape, accent, scheme, resizable],
 	);
 
 	if (!id || !scene) return null;
@@ -180,45 +166,13 @@ export default function ComponentPlayground({
 					value="preview"
 					className={resizable ? `${FILL} p:r bg:press` : FILL}
 				>
-					{resizable && resizing && (
-						<div aria-hidden className="p:a i:0 pe:none zi:10">
-							{SNAP.map((point) => {
-								const near =
-									width !== null && Math.abs(width - point.width) <= NEAR;
-								return (
-									<span
-										key={point.width}
-										className={`d:f p:a t:0 b:0 w:0 blw:1 tp:c tdu:150 ${point.left} ${
-											near ? "bc:accent" : "bc:ink/10"
-										}`}
-									>
-										{/* lights at once on a snap, then fades */}
-										<span
-											className={`p:a t:0 b:0 w:2 ml:-1 bg:accent tp:o @prm:tp:none ${
-												flash === point.width
-													? "o:60"
-													: "o:0 tdu:500 ttf:out-quart"
-											}`}
-										/>
-										<span
-											className={`p:a t:2 l:2 fs:xs ff:m ws:nw tp:c tdu:150 ${
-												near ? "c:accent" : "c:ink/40"
-											}`}
-										>
-											{point.label} {point.width}
-										</span>
-									</span>
-								);
-							})}
-						</div>
-					)}
 					{resizable ? (
 						<Resizable
 							defaultSize={{ width: "100%", height: "100%" }}
-							minWidth={320}
+							minWidth={PHONE}
 							maxWidth="100%"
 							enable={{ right: true }}
-							snap={{ x: SNAP.map((point) => point.width) }}
+							snap={{ x: SNAP }}
 							snapGap={SNAP_GAP}
 							onResizeStart={() => setResizing(true)}
 							onResize={(_event, _direction, element) => track(element)}
@@ -347,6 +301,7 @@ function Scene({
 		{
 			values: playground?.sceneValues ?? {},
 			set: playground?.setSceneValue ?? (() => {}),
+			setScheme: playground?.setScheme,
 		},
 	);
 }

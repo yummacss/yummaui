@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
+// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconPosition = "leading" | "trailing";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
@@ -23,37 +26,38 @@ const SIZES: Record<Size, SizeSpec> = {
   sm: {
     trigger: "px:2 py:1",
     popup: "min-w:44",
-    item: "py:1 px:2",
+    item: "h:7 px:2",
     text: "fs:xs",
   },
   md: {
     trigger: "px:3 py:2",
     popup: "min-w:52",
-    item: "py:2 pl:2 pr:3",
+    item: "h:8 pl:2 pr:3",
     text: "fs:sm",
   },
   lg: {
     trigger: "px:4 py:3",
     popup: "min-w:60",
-    item: "py:3 px:4",
+    item: "h:10 px:3",
     text: "fs:md",
   },
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
-const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+const POPUP_SHAPES: Record<Card, string> = {
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
-const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+const ITEM_SHAPES: Record<Card, string> = {
+  rounded: "br:sm",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -184,7 +188,7 @@ export default function MenuBase({
   trigger,
   items,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   disabled = false,
@@ -226,7 +230,7 @@ export default function MenuBase({
   const popupClasses = [
     "py:1 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:xl",
     spec.popup,
-    POPUP_SHAPES[shape],
+    POPUP_SHAPES[cardOf(shape)],
   ]
     .filter(Boolean)
     .join(" ");
@@ -235,11 +239,11 @@ export default function MenuBase({
     (destructive: boolean, spread: boolean) =>
     (state: { highlighted: boolean }) =>
       [
-        "d:f ai:c g:2 us:none c:p mx:1 fw:500 os:none bw:1 bc:transparent",
+        "d:f ai:c g:2 us:none c:p mx:1 fw:400 os:none bw:1 bc:transparent",
         spec.item,
         spec.text,
         spread ? "jc:sb" : "",
-        ITEM_SHAPES[shape],
+        ITEM_SHAPES[cardOf(shape)],
         destructive ? "c:red" : "",
         state.highlighted
           ? destructive
@@ -267,7 +271,7 @@ export default function MenuBase({
         return (
           <Menu.Group key={key}>
             {item.label && (
-              <div className="px:3 py:1 fs:xs fw:600 c:hint us:none">
+              <div className="px:3 py:1 fs:xs fw:500 c:hint us:none">
                 {item.label}
               </div>
             )}
@@ -285,7 +289,7 @@ export default function MenuBase({
             disabled={item.disabled}
             className={itemClasses(false, false)}
           >
-            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim br:sm bw:1">
+            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim bw:1">
               <Menu.CheckboxItemIndicator>
                 <IconCheck className="w:3 h:3" />
               </Menu.CheckboxItemIndicator>
@@ -376,7 +380,7 @@ export default function MenuBase({
           )}
           {action.shortcut && (
             <kbd
-              className={`ml:4 px:1 br:sm bw:1 bc:current fs:xs fw:400 lh:4 ff:d ${destructive ? "" : "o:70"}`}
+              className="ml:auto pl:6 fs:xs fw:400 lh:4 ff:d o:60"
             >
               {action.shortcut}
             </kbd>

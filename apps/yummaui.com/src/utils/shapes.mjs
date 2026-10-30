@@ -3,7 +3,7 @@
 
 export const SHAPES = ["none", "rounded", "squircle", "pill"];
 
-export const DEFAULT_SHAPE = "squircle";
+export const DEFAULT_SHAPE = "rounded";
 
 const NEAREST = {
 	none: ["square"],
@@ -11,6 +11,21 @@ const NEAREST = {
 	squircle: ["squircle", "rounded"],
 	pill: ["pill", "circle", "squircle", "rounded"],
 };
+
+// the component value each shape stands for, exactly
+const EXACT = {
+	none: ["square"],
+	rounded: ["rounded"],
+	squircle: ["squircle"],
+	pill: ["pill", "circle"],
+};
+
+/** The shapes a component with `values` can take as they are, none borrowed. */
+export function shapesFor(values) {
+	return SHAPES.filter((shape) =>
+		EXACT[shape].some((value) => values.includes(value)),
+	);
+}
 
 /** The value a component with `values` takes for `shape`, if any. */
 export function pickShape(values, shape) {

@@ -10,20 +10,22 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
 
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const ROOT_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
+  pill: "br:9999",
 };
 
 const CONTROL_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
 export interface ToolbarButtonItem {
@@ -126,7 +128,7 @@ export interface ToolbarProps {
  */
 export default function ToolbarBase({
   items,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,
@@ -206,7 +208,7 @@ export default function ToolbarBase({
                 <NumberField.Decrement
                   className={
                     animated
-                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none`
+                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none`
                       : stepClasses
                   }
                 >
@@ -222,7 +224,7 @@ export default function ToolbarBase({
                 <NumberField.Increment
                   className={
                     animated
-                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none`
+                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none`
                       : stepClasses
                   }
                 >
@@ -267,7 +269,7 @@ export default function ToolbarBase({
             aria-label={button.iconOnly ? button.label : undefined}
             className={
               animated && !button.disabled
-                ? `${buttonClasses} tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none`
+                ? `${buttonClasses} tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none`
                 : buttonClasses
             }
           >
@@ -343,7 +345,7 @@ function ToolbarToggles({
               {...props}
               className={
                 animated
-                  ? `${toggleClasses(state.pressed)} tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none`
+                  ? `${toggleClasses(state.pressed)} tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none`
                   : toggleClasses(state.pressed)
               }
             >

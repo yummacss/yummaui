@@ -23,13 +23,23 @@
     {
       "name": "tint",
       "type": "enum",
-      "values": ["blue", "mint", "indigo", "slate"],
+      "values": [
+        "blue",
+        "mint",
+        "indigo",
+        "slate"
+      ],
       "description": "Fills the fallback with a solid color and white initials or icon. It never reaches an image."
     },
     {
       "name": "status",
       "type": "enum",
-      "values": ["none", "online", "offline", "busy"],
+      "values": [
+        "none",
+        "online",
+        "offline",
+        "busy"
+      ],
       "default": "none",
       "example": "online",
       "description": "A presence dot in the bottom right corner. It carries meaning, so it is labelled for screen readers rather than left decorative."
@@ -58,14 +68,23 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Diameter, and the size of the initials or icon inside it."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["circle", "square", "squircle"],
+      "values": [
+        "circle",
+        "rounded",
+        "square",
+        "squircle"
+      ],
       "default": "circle",
       "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     }
@@ -89,7 +108,7 @@
           "children": [
             {
               "text": "Ada Lovelace",
-              "className": "fw:600"
+              "className": "fw:500"
             },
             {
               "text": "Signed in on this Mac",

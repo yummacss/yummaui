@@ -6,7 +6,7 @@ import { type ReactNode, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
@@ -23,9 +23,10 @@ const SIZES: Record<Size, SizeSpec> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:9999",
+  rounded: "br:sm",
   square: "",
-  squircle: "br:xxl cs:s",
+  squircle: "br:xl cs:s",
+  pill: "br:9999",
 };
 
 export interface SwitchProps {
@@ -90,7 +91,7 @@ export default function SwitchBase({
   onCheckedChange,
   icon,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   disabled = false,
   animated = true,
   className,
@@ -155,13 +156,13 @@ export default function SwitchBase({
           {label && (
             <Field.Label
               htmlFor={id}
-              className={`c:label fs:sm fw:600 us:none ${disabled ? "" : "c:p"}`}
+              className={`c:label fs:sm fw:500 us:none ${disabled ? "" : "c:p"}`}
             >
               {label}
             </Field.Label>
           )}
           {description && (
-            <Field.Description className="m:0 c:hint fs:xs">
+            <Field.Description className="m:0 tw:p c:hint fs:xs">
               {description}
             </Field.Description>
           )}

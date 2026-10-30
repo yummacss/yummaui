@@ -1,6 +1,7 @@
 "use client";
 
 import { Meter } from "@base-ui/react/meter";
+import { IconCircleDashed } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -17,13 +18,13 @@ const TONES = [
 ];
 
 const CARD_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -106,7 +107,7 @@ export default function StorageBar({
   unit = "GB",
   label = "Storage",
   rest = "Free",
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
 }: StorageBarProps) {
@@ -127,11 +128,11 @@ export default function StorageBar({
       )}
     >
       <div className="d:f fd:c g:1">
-        <Meter.Label className="c:hint fs:xs fw:600 ls:2 tt:u">
+        <Meter.Label className="c:hint fs:xs fw:500 ls:2 tt:u">
           {label}
         </Meter.Label>
         <div className="d:f ai:b g:2">
-          <span className="fs:3xl fw:700 lh:1">{amount(used * progress)}</span>
+          <span className="fs:3xl fw:600 lh:1">{amount(used * progress)}</span>
           <span className="c:hint fs:sm">
             of {amount(max)} {unit} used
           </span>
@@ -159,7 +160,7 @@ export default function StorageBar({
             <span
               aria-hidden
               className={merge(
-                "d:f ai:c jc:c fs:0 w:7 h:7 bg:well",
+                "d:f ai:c jc:c fs:0 w:4 h:4",
                 TILE_SHAPES[shape],
                 tone(index).ink,
               )}
@@ -178,11 +179,11 @@ export default function StorageBar({
           <span
             aria-hidden
             className={merge(
-              "d:f ai:c jc:c fs:0 w:7 h:7 bg:well",
+              "d:f ai:c jc:c fs:0 w:4 h:4",
               TILE_SHAPES[shape],
             )}
           >
-            <span className="w:2 h:2 br:9999 bw:1 bc:hint" />
+            <IconCircleDashed className="w:4 h:4 c:hint" />
           </span>
           <span className="f:1 c:hint">{rest}</span>
           <span className="c:hint">

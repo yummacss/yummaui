@@ -119,7 +119,7 @@ export default function RatingBase({
 
   const starClasses = (pressed: boolean) =>
     merge(
-      "d:f ai:c jc:c p:0 w:9 h:9 br:lg us:none",
+      "d:f ai:c jc:c p:0 w:9 h:9 us:none",
       "bw:0 bg:transparent",
       disabled ? "c:na o:60" : "",
       !disabled && !readOnly ? `c:p ${outline}` : "",
@@ -127,9 +127,12 @@ export default function RatingBase({
       !disabled && !readOnly && !pressed ? "h:c:hint" : "",
     );
 
+  // the star under the pointer, so every star up to it lights as a preview
+  const [hovered, setHovered] = useState(0);
+
   const iconClasses = (option: RatingIcon, active: boolean) =>
     merge(
-      "d:f ai:c jc:c p:0 w:12 h:12 bw:0 br:lg us:none",
+      "d:f ai:c jc:c p:0 w:12 h:12 bw:0 us:none",
       disabled ? "c:na o:60" : `c:p ${outline}`,
       active ? (option.activeClassName ?? "c:yellow") : "c:rim",
       !disabled && !active ? "h:c:hint" : "",
@@ -140,6 +143,7 @@ export default function RatingBase({
       {label && <span className="c:label fs:sm fw:500">{label}</span>}
 
       <Scored score={score}>
+        <div className="d:f" onPointerLeave={() => setHovered(0)}>
         <Row
           className={`d:f ${icons ? "g:3" : "g:1"}`}
           readOnly={readOnly}
@@ -158,7 +162,7 @@ export default function RatingBase({
                     className={
                       iconClasses(option, active) +
                       (animated && !disabled
-                        ? " tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none"
+                        ? " tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none"
                         : "")
                     }
                   >
@@ -173,6 +177,7 @@ export default function RatingBase({
             : Array.from({ length: max }, (_, index) => index + 1).map(
                 (star) => {
                   const filled = star <= value;
+                  const lit = hovered ? star <= hovered : filled;
                   const mark = <IconStarFilled className="fs:0 w:6 h:6" />;
                   const icon = animated ? <Pop on={filled}>{mark}</Pop> : mark;
 
@@ -189,14 +194,15 @@ export default function RatingBase({
                       key={star}
                       pressed={filled}
                       disabled={disabled}
+                      onPointerEnter={() => !disabled && setHovered(star)}
                       onPressedChange={() =>
                         handleChange(star === value ? 0 : star)
                       }
                       aria-label={`${star} star${star > 1 ? "s" : ""}`}
                       className={
-                        starClasses(filled) +
+                        starClasses(lit) +
                         (animated && !disabled
-                          ? " tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none"
+                          ? " tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none"
                           : "")
                       }
                     >
@@ -206,6 +212,7 @@ export default function RatingBase({
                 },
               )}
         </Row>
+        </div>
       </Scored>
 
       <span className="c:hint fs:xs">

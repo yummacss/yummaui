@@ -6,7 +6,7 @@ import { merge } from "yummacss/merge";
 type Shape = "rounded" | "square" | "squircle" | "circle";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
   circle: "br:9999",
@@ -24,6 +24,8 @@ export interface SeparatorProps {
   icon?: ReactNode;
   /** Called when the icon button is pressed. */
   onIconClick?: () => void;
+  /** The icon button's accessible name, such as "Add a section". */
+  iconLabel?: string;
   /** Renders as plain text in the middle. Ignored if `icon` is set. */
   label?: ReactNode;
   /**
@@ -58,8 +60,9 @@ export interface SeparatorProps {
 export default function SeparatorBase({
   icon,
   onIconClick,
+  iconLabel,
   label,
-  iconShape = "squircle",
+  iconShape = "rounded",
   orientation = "horizontal",
   className,
   focus = true,
@@ -86,7 +89,7 @@ export default function SeparatorBase({
 
   const buttonClasses = merge(
     outline,
-    "d:if ai:c jc:c w:8 h:8 bg:raised bc:rim c:label bw:1 tp:c tdu:150 ttf:io us:none c:p h:bg:well",
+    "d:if ai:c jc:c w:8 h:8 bg:raised bc:rim c:label bw:1 tp:a tdu:150 ttf:io a:s:95 wc:s @prm:tp:none us:none c:p h:bg:well",
     SHAPES[iconShape],
   );
 
@@ -101,7 +104,11 @@ export default function SeparatorBase({
     >
       <Separator orientation={orientation} className={half} />
       {icon ? (
-        <Button className={buttonClasses} onClick={onIconClick}>
+        <Button
+          aria-label={iconLabel}
+          className={buttonClasses}
+          onClick={onIconClick}
+        >
           {icon}
         </Button>
       ) : (

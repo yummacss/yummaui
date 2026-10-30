@@ -12,7 +12,10 @@
     {
       "name": "iconPosition",
       "type": "enum",
-      "values": ["leading", "trailing"],
+      "values": [
+        "leading",
+        "trailing"
+      ],
       "default": "leading",
       "description": "Which end `icon` sits at.",
       "dependsOn": "icon"
@@ -38,14 +41,24 @@
     {
       "name": "tone",
       "type": "enum",
-      "values": ["outline", "subtle", "solid"],
+      "values": [
+        "outline",
+        "subtle",
+        "solid"
+      ],
       "default": "outline",
       "description": "`outline` is a neutral bordered badge regardless of `color`. `subtle` and `solid` tint every part of the badge, including the dot, count and close button, to `color`."
     },
     {
       "name": "intent",
       "type": "enum",
-      "values": ["neutral", "info", "success", "warning", "danger"],
+      "values": [
+        "neutral",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
       "default": "neutral",
       "description": "What the badge means, not which hue it is. `tone` decides the look; `intent` tints it, including the dot, count and close button. `outline` stays neutral regardless.",
       "conflictsWith": [
@@ -58,15 +71,24 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Padding, text size and icon size together."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["square", "rounded", "pill", "squircle"],
-      "default": "squircle",
+      "values": [
+        "square",
+        "rounded",
+        "pill",
+        "squircle"
+      ],
+      "default": "rounded",
       "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {

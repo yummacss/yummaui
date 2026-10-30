@@ -42,7 +42,7 @@ export default defineConfig({
 		},
 		keyframes: {
 			pulse: "0%, 100% { opacity: .5; } 50% { opacity: 1; }",
-			shake: "25%, 75% { translate: -4px 0; } 50% { translate: 4px 0; }",
+			shake: "20%, 60% { translate: -8px 0; } 40%, 80% { translate: 8px 0; }",
 			slide: "from { translate: -100% 0; } to { translate: 100% 0; }",
 			spin: "to { rotate: 360deg; }",
 		},

@@ -28,7 +28,18 @@ export interface MeterSegment {
   value: number;
 }
 
+type Shape = "rounded" | "square" | "squircle" | "pill";
+
+const SHAPES: Record<Shape, string> = {
+  rounded: "br:xs",
+  square: "",
+  squircle: "br:md cs:s",
+  pill: "br:9999",
+};
+
 export interface MeterProps {
+  /** Corner radius of the track. */
+  shape?: Shape;
   /** The current value. With `segments`, their sum takes its place. */
   value?: number;
   /** Defaults to Base UI's own Meter minimum (0). */
@@ -82,6 +93,7 @@ export interface MeterProps {
  * with an optional icon and description.
  */
 export default function MeterBase({
+  shape = "rounded",
   value,
   min,
   max,
@@ -104,7 +116,7 @@ export default function MeterBase({
   const reading = unit
     ? (_: string, current: number) => (
         <>
-          <span className="c:label fw:600">{amount(current)}</span> of{" "}
+          <span className="c:label fw:500">{amount(current)}</span> of{" "}
           {amount(high)} {unit}
         </>
       )
@@ -144,18 +156,18 @@ export default function MeterBase({
             {icon}
           </span>
           <div className="d:f fd:c">
-            <Meter.Label className="c:label fs:sm fw:600">{label}</Meter.Label>
+            <Meter.Label className="c:label fs:sm fw:500">{label}</Meter.Label>
             {description && <span className="c:hint fs:xs">{description}</span>}
           </div>
         </div>
       ) : (
         <div className="d:f jc:sb ai:c">
-          <Meter.Label className="c:label fs:sm fw:600">{label}</Meter.Label>
+          <Meter.Label className="c:label fs:sm fw:500">{label}</Meter.Label>
           <Meter.Value className="c:hint fs:sm fvn:tn">{reading}</Meter.Value>
         </div>
       )}
 
-      <Meter.Track className="d:f g:px o:h h:2 br:9999 bg:rim">
+      <Meter.Track className={`d:f g:px o:h h:2 bg:rim ${SHAPES[shape]}`}>
         {segments ? (
           segments.map((segment, index) => (
             <span

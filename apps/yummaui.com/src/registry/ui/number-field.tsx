@@ -9,14 +9,15 @@ import { merge } from "yummacss/merge";
 type Size = "sm" | "md" | "lg";
 type Shape = "rounded" | "square" | "squircle";
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
+const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus fv:zi:10";
 
 // the box draws focus for its input, so the outline wraps the value
-const BOX_FOCUS = "fw:os:s fw:ow:3 fw:oo:0 fw:oc:focus/40 fw:bc:focus";
+const BOX_FOCUS = "fw:os:s fw:ow:3 fw:oo:0 fw:oc:focus/40 fw:bc:focus fw:zi:10";
 
+// the focused part rises above its neighbours, so no stepper covers its outline
 const STEP =
-  "d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bc:rim c:label us:none c:p h:bg:well";
-const BOX = "d:f bw:1 bg:field bc:rim";
+  "p:r d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bc:rim c:label us:none c:p h:bg:well";
+const BOX = "p:r d:f bw:1 bg:field bc:rim";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8",
@@ -43,13 +44,13 @@ const ICON_SIZES: Record<Size, string> = {
 };
 
 const START_SHAPES: Record<Shape, string> = {
-  rounded: "blr:lg",
+  rounded: "blr:md",
   square: "",
   squircle: "blr:xxl cs:s",
 };
 
 const END_SHAPES: Record<Shape, string> = {
-  rounded: "brr:lg",
+  rounded: "brr:md",
   square: "",
   squircle: "brr:xxl cs:s",
 };
@@ -104,7 +105,7 @@ export default function NumberFieldBase({
   required = false,
   description,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   disabled = false,
   className,
   focus = true,
@@ -129,7 +130,7 @@ export default function NumberFieldBase({
     >
       {label && (
         <NumberField.ScrubArea className="c:er">
-          <label htmlFor={id} className="c:label fs:sm fw:600 c:er">
+          <label htmlFor={id} className="c:label fs:sm fw:500 c:er">
             {label}
             {required && <span className="c:red-5"> *</span>}
           </label>
@@ -144,7 +145,7 @@ export default function NumberFieldBase({
           <NumberField.Input
             required={required}
             className={merge(
-              "os:none p:0 bw:0 bg:transparent c:label fw:600 ta:c fvn:tn",
+              "os:none p:0 bw:0 bg:transparent c:label fw:500 ta:c fvn:tn",
               INPUT_SIZES[size],
               className,
             )}

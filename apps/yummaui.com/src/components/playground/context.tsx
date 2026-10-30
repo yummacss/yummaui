@@ -8,7 +8,6 @@ import {
 	useContext,
 	useEffect,
 	useMemo,
-	useRef,
 	useState,
 } from "react";
 import { sidebarConfig } from "@/config/sidebar";
@@ -92,10 +91,13 @@ export function PlaygroundProvider({
 		writeScheme(next);
 	}, []);
 
-	const [shape, setShapeQuery] = useQueryState("shape", SHAPE_QUERY);
+	// held in state, so a page without ?shape= in its address keeps the last one
+	const [shape, setShapeState] = useState(DEFAULT_SHAPE);
+	const [, setShapeQuery] = useQueryState("shape", SHAPE_QUERY);
 
 	const setShape = useCallback(
 		(next: string) => {
+			setShapeState(next);
 			void setShapeQuery(next);
 			try {
 				window.localStorage.setItem(SHAPE_STORE, next);
@@ -105,14 +107,12 @@ export function PlaygroundProvider({
 	);
 
 	// the address wins; otherwise the shape carried from the last page
-	const arrived = useRef(false);
 	useEffect(() => {
-		if (arrived.current) return;
-		arrived.current = true;
-		if (new URLSearchParams(window.location.search).has("shape")) return;
-		const stored = readShape();
-		if (stored) void setShapeQuery(stored);
-	}, [setShapeQuery]);
+		const asked = new URLSearchParams(window.location.search).get("shape");
+		setShapeState(
+			asked && SHAPES.includes(asked) ? asked : (readShape() ?? DEFAULT_SHAPE),
+		);
+	}, [id]);
 
 	// the neighbours too, so the pagination arrows land on a component that is ready
 	useEffect(() => {

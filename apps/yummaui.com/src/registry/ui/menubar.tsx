@@ -11,25 +11,25 @@ type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
 
 const BAR_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -134,7 +134,7 @@ export interface MenubarProps {
  */
 export default function MenubarBase({
   menus,
-  shape = "squircle",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   animated = true,
@@ -198,7 +198,7 @@ export default function MenubarBase({
         return (
           <Menu.Group key={key}>
             {item.label && (
-              <div className="px:3 py:1 fs:xs fw:600 c:hint us:none">
+              <div className="px:3 py:1 fs:xs fw:500 c:hint us:none">
                 {item.label}
               </div>
             )}
@@ -216,7 +216,7 @@ export default function MenubarBase({
             disabled={item.disabled}
             className={itemClasses(false, false)}
           >
-            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim br:sm bw:1">
+            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim bw:1">
               <Menu.CheckboxItemIndicator>
                 <IconCheck className="w:3 h:3" />
               </Menu.CheckboxItemIndicator>
@@ -307,7 +307,7 @@ export default function MenubarBase({
           )}
           {action.shortcut && (
             <kbd
-              className={`ml:4 px:1 br:sm bw:1 bc:current fs:xs fw:400 lh:4 ff:d ${destructive ? "" : "o:70"}`}
+              className="ml:auto pl:6 fs:xs fw:400 lh:4 ff:d o:60"
             >
               {action.shortcut}
             </kbd>

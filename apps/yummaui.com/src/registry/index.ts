@@ -4,7 +4,6 @@
  */
 import meta_accordion from "./meta/accordion.json";
 import meta_alert_dialog from "./meta/alert-dialog.json";
-import meta_app_shell from "./meta/app-shell.json";
 import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
 import meta_avatar from "./meta/avatar.json";
@@ -39,7 +38,6 @@ import meta_rating from "./meta/rating.json";
 import meta_scroll_area from "./meta/scroll-area.json";
 import meta_select from "./meta/select.json";
 import meta_separator from "./meta/separator.json";
-import meta_settings_page from "./meta/settings-page.json";
 import meta_sidebar from "./meta/sidebar.json";
 import meta_sign_in from "./meta/sign-in.json";
 import meta_skeleton from "./meta/skeleton.json";
@@ -58,7 +56,6 @@ import meta_tooltip from "./meta/tooltip.json";
 export const registry = {
   "accordion": () => import("./ui/accordion"),
   "alert-dialog": () => import("./ui/alert-dialog"),
-  "app-shell": () => import("./ui/app-shell"),
   "autocomplete-grouped": () => import("./ui/autocomplete-grouped"),
   "autocomplete-helper": () => import("./ui/autocomplete-helper"),
   "autocomplete-icon-leading": () => import("./ui/autocomplete-icon-leading"),
@@ -96,8 +93,10 @@ export const registry = {
   "number-field": () => import("./ui/number-field"),
   "onboarding": () => import("./ui/onboarding"),
   "otp-field": () => import("./ui/otp-field"),
+  "popover-folder-color": () => import("./ui/popover-folder-color"),
   "popover": () => import("./ui/popover"),
   "preview-card": () => import("./ui/preview-card"),
+  "progress-upload": () => import("./ui/progress-upload"),
   "progress": () => import("./ui/progress"),
   "radio": () => import("./ui/radio"),
   "rating": () => import("./ui/rating"),
@@ -105,7 +104,6 @@ export const registry = {
   "select-grouped": () => import("./ui/select-grouped"),
   "select": () => import("./ui/select"),
   "separator": () => import("./ui/separator"),
-  "settings-page": () => import("./ui/settings-page"),
   "sidebar": () => import("./ui/sidebar"),
   "sign-in": () => import("./ui/sign-in"),
   "skeleton-activity": () => import("./ui/skeleton-activity"),
@@ -179,7 +177,6 @@ export interface ChildExample {
 export const registryMeta = {
   "accordion": meta_accordion,
   "alert-dialog": meta_alert_dialog,
-  "app-shell": meta_app_shell,
   "autocomplete": meta_autocomplete,
   "avatar-stack": meta_avatar_stack,
   "avatar": meta_avatar,
@@ -214,7 +211,6 @@ export const registryMeta = {
   "scroll-area": meta_scroll_area,
   "select": meta_select,
   "separator": meta_separator,
-  "settings-page": meta_settings_page,
   "sidebar": meta_sidebar,
   "sign-in": meta_sign_in,
   "skeleton": meta_skeleton,
@@ -245,7 +241,6 @@ export interface RegistryTarget {
 export const registryTargets: Record<string, RegistryTarget> = {
   "accordion": { component: "accordion", variant: "base", kind: "component", install: "accordion" },
   "alert-dialog": { component: "alert-dialog", variant: "base", kind: "component", install: "alert-dialog" },
-  "app-shell": { component: "app-shell", variant: "base", kind: "component", install: "app-shell" },
   "autocomplete-grouped": { component: "autocomplete", variant: "grouped", kind: "example", install: "autocomplete" },
   "autocomplete-helper": { component: "autocomplete", variant: "helper", kind: "example", install: "autocomplete" },
   "autocomplete-icon-leading": { component: "autocomplete", variant: "icon-leading", kind: "example", install: "autocomplete" },
@@ -283,8 +278,10 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "number-field": { component: "number-field", variant: "base", kind: "component", install: "number-field" },
   "onboarding": { component: "onboarding", variant: "base", kind: "component", install: "onboarding" },
   "otp-field": { component: "otp-field", variant: "base", kind: "component", install: "otp-field" },
+  "popover-folder-color": { component: "popover", variant: "folder-color", kind: "example", install: "popover" },
   "popover": { component: "popover", variant: "base", kind: "component", install: "popover" },
   "preview-card": { component: "preview-card", variant: "base", kind: "component", install: "preview-card" },
+  "progress-upload": { component: "progress", variant: "upload", kind: "example", install: "progress" },
   "progress": { component: "progress", variant: "base", kind: "component", install: "progress" },
   "radio": { component: "radio", variant: "base", kind: "component", install: "radio" },
   "rating": { component: "rating", variant: "base", kind: "component", install: "rating" },
@@ -292,7 +289,6 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "select-grouped": { component: "select", variant: "grouped", kind: "example", install: "select" },
   "select": { component: "select", variant: "base", kind: "component", install: "select" },
   "separator": { component: "separator", variant: "base", kind: "component", install: "separator" },
-  "settings-page": { component: "settings-page", variant: "base", kind: "component", install: "settings-page" },
   "sidebar": { component: "sidebar", variant: "base", kind: "component", install: "sidebar" },
   "sign-in": { component: "sign-in", variant: "base", kind: "component", install: "sign-in" },
   "skeleton-activity": { component: "skeleton", variant: "activity", kind: "example", install: "skeleton" },
@@ -343,11 +339,11 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "rating": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "scroll-area": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: {}, keyframes: {} },
   "select": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
-  "sign-in": { states: {}, easings: {}, keyframes: { "shake": "25%, 75% { translate: -4px 0; } 50% { translate: 4px 0; }" } },
+  "sign-in": { states: {}, easings: {}, keyframes: { "shake": "20%, 60% { translate: -8px 0; } 40%, 80% { translate: 8px 0; }" } },
   "skeleton": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
   "switch": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "tabs": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
-  "toast": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "toast": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "shake": "20%, 60% { translate: -8px 0; } 40%, 80% { translate: 8px 0; }" } },
   "toggle": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "toolbar": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "tooltip": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

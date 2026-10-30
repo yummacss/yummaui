@@ -10,8 +10,12 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "rounded",
       "description": "Corner radius on the focus outline. The thumb is always a capsule."
     },
     {
@@ -36,7 +40,7 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:f fd:c w:80 max-w:100% br:xl bg:raised bw:1 btc:rim blc:rim brc:rim bbc:shadow bs-o:xs c:label o:h",
+      "className": "d:f fd:c w:80 max-w:100% bg:raised bw:1 bc:rim c:label o:h",
       "children": [
         {
           "tag": "div",
@@ -44,7 +48,7 @@
           "children": [
             {
               "text": "Downloads",
-              "className": "fs:sm fw:600"
+              "className": "fs:sm fw:500"
             },
             {
               "text": "14 files",
@@ -54,7 +58,7 @@
         },
         {
           "tag": "div",
-          "className": "h:0 btw:1 bbw:1 btc:groove bbc:glint"
+          "className": "h:0 btw:1 bc:line"
         },
         {
           "component": "ScrollArea",
@@ -67,7 +71,7 @@
               "children": [
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -87,7 +91,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -107,7 +111,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -127,7 +131,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -147,7 +151,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -167,7 +171,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -187,7 +191,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -207,7 +211,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -227,7 +231,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -247,7 +251,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -267,7 +271,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -287,7 +291,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -307,7 +311,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {
@@ -327,7 +331,7 @@
                 },
                 {
                   "tag": "div",
-                  "className": "d:f ai:c g:3 h:9 px:3 br:md fs:sm h:bg:well",
+                  "className": "d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well",
                   "children": [
                     {
                       "icon": {

@@ -1,9 +1,25 @@
 "use client";
 
 import { CheckboxGroup } from "@base-ui/react/checkbox-group";
-import { type ReactNode, useId, useState } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactNode,
+  useId,
+  useState,
+} from "react";
 import { merge } from "yummacss/merge";
 import Checkbox from "./checkbox";
+
+type Shape = "rounded" | "square" | "squircle";
+
+// the well around the boxes, concentric with their rows inside it
+const WELL_SHAPES: Record<Shape, string> = {
+  rounded: "br:md",
+  square: "",
+  squircle: "br:xl cs:s",
+};
 
 export interface CheckboxGroupProps {
   /** Merged with the group's own classes, so a utility you pass wins. */
@@ -38,6 +54,8 @@ export interface CheckboxGroupProps {
    * `parentLabel` and `allValues`.
    */
   countLabel?: string;
+  /** Every checkbox's shape, and the well around them. One a box sets wins. */
+  shape?: Shape;
 }
 
 /**
@@ -56,6 +74,7 @@ export default function CheckboxGroupBase({
   disabled,
   name,
   countLabel,
+  shape = "rounded",
 }: CheckboxGroupProps) {
   const labelId = useId();
   const [internal, setInternal] = useState(defaultValue ?? []);
@@ -84,14 +103,26 @@ export default function CheckboxGroupBase({
       className={merge("d:f fd:c g:2 w:100 max-w:100% c:label", className)}
     >
       {label && (
-        <div className="c:label fs:sm fw:600 us:none" id={labelId}>
+        <div className="c:label fs:sm fw:500 us:none" id={labelId}>
           {label}
         </div>
       )}
       {parentLabel && (
-        <Checkbox name={name} parent label={parentLabel} description={count} />
+        <Checkbox
+          name={name}
+          parent
+          label={parentLabel}
+          description={count}
+          shape={shape}
+        />
       )}
-      <div className="d:f fd:c g:1 p:1 br:xl bg:well">{children}</div>
+      <div className={merge("d:f fd:c g:1 p:1 bg:well", WELL_SHAPES[shape])}>
+        {Children.map(children, (child) =>
+          isValidElement<{ shape?: Shape }>(child)
+            ? cloneElement(child, { shape: child.props.shape ?? shape })
+            : child,
+        )}
+      </div>
     </CheckboxGroup>
   );
 }

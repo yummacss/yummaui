@@ -13,7 +13,7 @@ import { ACCENTS, accentBars } from "@/utils/accent";
 import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { inTableOrder, typeOf } from "@/utils/props";
 import { SCHEMES, type Scheme } from "@/utils/scheme";
-import { SHAPES } from "@/utils/shapes.mjs";
+import { shapesFor } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
 function Summary({ text }: { text?: string }) {
@@ -140,6 +140,10 @@ const SWATCHES = ACCENTS.map((family) => ({
 export function Look() {
 	const playground = usePlayground();
 	if (!playground) return null;
+	// only the shapes this component takes as they are; none borrowed from another
+	const values =
+		playground.meta?.props.find((prop) => prop.name === "shape")?.values ?? [];
+	const offered = shapesFor(values);
 	const line = (name: string, control: React.ReactNode) => (
 		<div className="d:f fw:w ai:c jc:sb g:2 py:2 bc:border bbw:1">
 			<code className="c:code fs:xs ff:m">{name}</code>
@@ -152,15 +156,16 @@ export function Look() {
 			<p className="m:0 mb:1 c:ink/60 fs:xs lh:4">
 				The shape, accent & scheme set the preview only.
 			</p>
-			{line(
-				"shape",
-				<EnumSelect
-					name="shape"
-					values={SHAPES}
-					value={playground.shape}
-					onChange={(value) => playground.setShape(String(value))}
-				/>,
-			)}
+			{offered.length > 1 &&
+				line(
+					"shape",
+					<EnumSelect
+						name="shape"
+						values={offered}
+						value={playground.shape}
+						onChange={(value) => playground.setShape(String(value))}
+					/>,
+				)}
 			{line(
 				"accent",
 				<SwatchSelect

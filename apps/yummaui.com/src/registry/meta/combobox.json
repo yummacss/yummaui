@@ -44,8 +44,8 @@
     {
       "name": "placeholder",
       "type": "string",
-      "default": "Search",
-      "description": "Placeholder text."
+      "description": "Placeholder text.",
+      "example": "Search tags"
     },
     {
       "name": "multiple",
@@ -58,7 +58,10 @@
       "name": "defaultValue",
       "type": "none",
       "typeName": "string | string[]",
-      "example": ["taxes", "2026"],
+      "example": [
+        "taxes",
+        "2026"
+      ],
       "description": "The selection on first render: one item's label, or an array of labels with `multiple`."
     },
     {
@@ -70,21 +73,30 @@
     {
       "name": "emptyMessage",
       "type": "string",
-      "default": "No results found.",
-      "description": "Shown when nothing matches."
+      "description": "Shown when nothing matches.",
+      "example": "No tags match."
     },
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Height and width of the input. The popup and the trigger column follow it."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
       "description": "Corner radius, applied to the input and the popup together. `squircle` uses `corner-shape`."
     },
     {
@@ -147,7 +159,12 @@
         ],
         "label": "Tags",
         "multiple": true,
-        "defaultValue": ["taxes", "2026"]
+        "defaultValue": [
+          "taxes",
+          "2026"
+        ],
+        "placeholder": "Search tags",
+        "emptyMessage": "No tags match."
       }
     }
   ]

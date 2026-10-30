@@ -10,19 +10,19 @@ type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -140,7 +140,7 @@ export default function ContextMenuBase({
   trigger,
   triggerIcon,
   items,
-  shape = "squircle",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   disabled = false,
@@ -218,7 +218,7 @@ export default function ContextMenuBase({
         return (
           <ContextMenu.Group key={key}>
             {item.label && (
-              <div className="px:3 py:1 fs:xs fw:600 c:hint us:none">
+              <div className="px:3 py:1 fs:xs fw:500 c:hint us:none">
                 {item.label}
               </div>
             )}
@@ -236,7 +236,7 @@ export default function ContextMenuBase({
             disabled={item.disabled}
             className={itemClasses(false, false)}
           >
-            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim br:sm bw:1">
+            <span className="d:f ai:c jc:c fs:0 w:4 h:4 bc:rim bw:1">
               <ContextMenu.CheckboxItemIndicator>
                 <IconCheck className="w:3 h:3" />
               </ContextMenu.CheckboxItemIndicator>
@@ -325,7 +325,7 @@ export default function ContextMenuBase({
           )}
           {action.shortcut && (
             <kbd
-              className={`ml:4 px:1 br:sm bw:1 bc:current fs:xs fw:400 lh:4 ff:d ${destructive ? "" : "o:70"}`}
+              className="ml:auto pl:6 fs:xs fw:400 lh:4 ff:d o:60"
             >
               {action.shortcut}
             </kbd>
@@ -354,7 +354,7 @@ export default function ContextMenuBase({
     >
       <ContextMenu.Trigger className={triggerClasses}>
         {triggerIcon && (
-          <span className="d:f ai:c jc:c w:12 h:12 br:lg bg:well">
+          <span className="d:f ai:c jc:c">
             {triggerIcon}
           </span>
         )}

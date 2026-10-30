@@ -39,7 +39,7 @@ const LINE: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:xs",
   square: "br:0",
   squircle: "br:xxl cs:s",
 };
@@ -111,7 +111,7 @@ export default function CheckboxBase({
   aside,
   row = false,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   disabled = false,
   checked: controlledChecked,
   defaultChecked,
@@ -161,7 +161,7 @@ export default function CheckboxBase({
         className={(state) =>
           merge(
             outline,
-            "d:f ai:c g:3 w:100% px:2 py:2 bw:1 br:lg us:none tp:c tdu:150 ttf:io",
+            "d:f ai:c g:3 w:100% px:2 py:2 bw:1 us:none tp:c tdu:150 ttf:io",
             disabled ? "o:60 c:na" : "c:p",
             state.checked
               ? "bg:raised bc:rim"
@@ -218,7 +218,7 @@ export default function CheckboxBase({
         </Checkbox.Root>
       </span>
       <span className="d:f fd:c">
-        <span className={`c:label fw:600 ${LABEL_SIZES[size]}`}>{label}</span>
+        <span className={`c:label fw:500 ${LABEL_SIZES[size]}`}>{label}</span>
         {description && <span className="c:hint fs:xs">{description}</span>}
       </span>
     </label>

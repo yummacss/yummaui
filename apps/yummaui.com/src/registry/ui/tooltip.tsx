@@ -6,14 +6,23 @@ import { merge } from "yummacss/merge";
 
 type Side = "top" | "right" | "bottom" | "left";
 type Tone = "light" | "dark" | "danger";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:3xl cs:s",
+  pill: "br:9999",
+};
+
+// the trigger is a button, so it takes the same shape as the tooltip
+const TRIGGER_SHAPES: Record<Shape, string> = {
+  rounded: "br:sm",
+  square: "",
+  squircle: "br:lg cs:s",
+  pill: "br:9999",
 };
 
 const TONES: Record<Tone, string> = {
@@ -128,7 +137,7 @@ export default function TooltipBase({
   tone = "light",
   arrow = true,
   delay = 300,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,
@@ -144,7 +153,8 @@ export default function TooltipBase({
 
   const triggerClasses = merge(
     outline,
-    "d:f ai:c jc:c w:8 h:8 br:md bg:transparent bw:0 c:p h:bg:well",
+    "d:f ai:c jc:c w:8 h:8 bg:transparent bw:0 c:p h:bg:well",
+    TRIGGER_SHAPES[shape],
     TRIGGER_TONES[tone],
     className,
   );
@@ -178,7 +188,7 @@ export default function TooltipBase({
       )}
       {content}
       {shortcut && (
-        <kbd className="px:1 br:sm bw:1 bc:current fs:xs fw:400 lh:4 ff:d o:70">
+        <kbd className="fs:xs fw:400 lh:4 ff:d o:60">
           {shortcut}
         </kbd>
       )}

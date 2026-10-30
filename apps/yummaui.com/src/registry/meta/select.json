@@ -71,7 +71,10 @@
     {
       "name": "iconPosition",
       "type": "enum",
-      "values": ["leading", "trailing"],
+      "values": [
+        "leading",
+        "trailing"
+      ],
       "default": "leading",
       "description": "Which side `icon` sits on. Trailing sits just before the chevron.",
       "dependsOn": "icon"
@@ -79,15 +82,24 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Height and width of the trigger. The popup follows it."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
       "description": "Corner radius, applied to the trigger and the popup together. `squircle` uses `corner-shape`."
     },
     {

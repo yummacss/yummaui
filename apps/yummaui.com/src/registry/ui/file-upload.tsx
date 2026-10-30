@@ -16,19 +16,19 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 const ZONE = "d:f fd:c ai:c g:3 m:0 p:0 w:100% min-w:0 bg:transparent";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:3xl cs:s",
 };
 
 const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xl cs:s",
 };
@@ -146,6 +146,16 @@ export interface FileUploadProps {
  * A drop zone for files, in three shapes, dashed or solid, that picks by click
  * or by drop and lists what it holds.
  */
+// the type a reader recognises, from the name: "PDF" for report.pdf
+function extension(name: string): string {
+  const dot = name.lastIndexOf(".");
+  return dot > 0 ? name.slice(dot + 1).toUpperCase() : "";
+}
+
+/**
+ * A drop zone for files, in three shapes, dashed or solid, that picks by click
+ * or by drop and lists what it holds.
+ */
 export default function FileUploadBase({
   label = "Drop files to upload",
   browseLabel = "choose from your computer",
@@ -157,7 +167,7 @@ export default function FileUploadBase({
   accept,
   multiple = false,
   onFilesChange,
-  shape = "squircle",
+  shape = "rounded",
   border = "dashed",
   error,
   disabled = false,
@@ -247,7 +257,9 @@ export default function FileUploadBase({
     files.map((file) => ({
       id: identity(file),
       name: file.name,
-      detail: formatSize(file.size),
+      detail: [extension(file.name), formatSize(file.size)]
+        .filter(Boolean)
+        .join(", "),
     }));
 
   const remove = (id: string) => {
@@ -280,13 +292,13 @@ export default function FileUploadBase({
           <div
             className={merge(
               "d:f ai:c jc:c w:10 h:10 br:9999",
-              error ? "bg:red-1/50 c:red-5" : "bg:well c:check",
+              error ? "c:red-5" : "c:hint",
             )}
           >
             {icon ?? <IconCloudUpload className="w:5 h:5" />}
           </div>
           <div className="d:f fd:c ai:c g:1">
-            <span className={`fs:sm fw:600 ${error ? "c:red-5" : "c:label"}`}>
+            <span className={`fs:sm fw:500 ${error ? "c:red-5" : "c:label"}`}>
               {label}
             </span>
             <span className={`fs:xs ${error ? "c:red-5" : "c:hint"}`}>
@@ -326,7 +338,7 @@ export default function FileUploadBase({
         >
           <span
             className={merge(
-              "d:f ai:c jc:c fs:0 w:9 h:9 bg:well c:hint",
+              "d:f ai:c jc:c fs:0 w:5 h:5 c:hint",
               TILE_SHAPES[shape],
             )}
           >
@@ -334,7 +346,7 @@ export default function FileUploadBase({
           </span>
           <div className="d:f fd:c g:1 f:1 min-w:0">
             <div className="d:f ai:c jc:sb g:2">
-              <span className="o:h fs:sm fw:600 c:label to:e ws:nw">
+              <span className="o:h fs:sm fw:500 c:label to:e ws:nw">
                 {row.name}
               </span>
               {row.progress !== undefined && !row.done && row.detail && (
