@@ -10,12 +10,9 @@ import ProductLinks from "./product-links";
 
 interface Props {
 	sections: NavSection[];
-	/** Components & Blocks, each a link to its first page. */
-	areas?: { area: string; label: string; href: string }[];
-	current?: string;
 }
 
-export default function SidebarNav({ sections, areas, current }: Props) {
+export default function SidebarNav({ sections }: Props) {
 	const pathname = usePathname();
 	const { viewport, active } = useReveal(pathname);
 
@@ -31,24 +28,6 @@ export default function SidebarNav({ sections, areas, current }: Props) {
 					list="d:f fd:c g:2"
 					link="p:r d:if ai:c g:3 fs:sm us:none fv:oc:ink fv:oo:2 fv:ow:2"
 				/>
-				{areas && (
-					<nav aria-label="Area" className="d:f g:1 p:1 bc:border bw:1">
-						{areas.map((entry) => (
-							<Link
-								key={entry.area}
-								href={entry.href}
-								aria-current={entry.area === current ? "page" : undefined}
-								className={`d:f f:1 ai:c jc:c h:8 fs:sm us:none td:none fv:oc:ink fv:oo:-2 fv:ow:2 ${
-									entry.area === current
-										? "bg:surface c:ink fw:500"
-										: "c:ink/60 h:c:ink"
-								}`}
-							>
-								{entry.label}
-							</Link>
-						))}
-					</nav>
-				)}
 				{sections.map((section) => (
 					<div key={section.title} className="d:f fd:c g:3">
 						<h3 className="ff:system c:silver-8 fs:xs fw:600 ls:2 tt:u">

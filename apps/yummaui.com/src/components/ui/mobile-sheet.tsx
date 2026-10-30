@@ -25,9 +25,6 @@ export interface NavSection {
 
 interface Props {
 	menu: NavSection[];
-	/** Components & Blocks, each a link to its first page. */
-	areas?: { area: string; label: string; href: string }[];
-	current?: string;
 	isOpen: boolean;
 	onClose: () => void;
 }
@@ -41,13 +38,7 @@ const MOTION = {
 } as CSSProperties;
 
 /** The phone menu: a sheet from the bottom with a filter and the area's links. */
-export default function MobileSheet({
-	menu,
-	areas,
-	current,
-	isOpen,
-	onClose,
-}: Props) {
+export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 	const pathname = usePathname();
 	const [query, setQuery] = useState("");
 	const popup = useRef<HTMLDivElement>(null);
@@ -118,30 +109,6 @@ export default function MobileSheet({
 										link="p:r d:f ai:c g:2 h:10 px:7 fs:md us:none a:bg:surface fv:oc:ink fv:oo:-2 fv:ow:2"
 										onNavigate={onClose}
 									/>
-								)}
-								{!typed && areas && (
-									<nav
-										aria-label="Area"
-										className="d:f g:1 mx:7 p:1 bc:border bw:1"
-									>
-										{areas.map((entry) => (
-											<Link
-												key={entry.area}
-												href={entry.href}
-												onClick={onClose}
-												aria-current={
-													entry.area === current ? "page" : undefined
-												}
-												className={`d:f f:1 ai:c jc:c h:10 fs:md us:none td:none fv:oc:ink fv:oo:-2 fv:ow:2 ${
-													entry.area === current
-														? "bg:surface c:ink fw:500"
-														: "c:ink/60"
-												}`}
-											>
-												{entry.label}
-											</Link>
-										))}
-									</nav>
 								)}
 								{sections.length === 0 && (
 									<p className="px:4 py:8 c:ink/50 ta:c">

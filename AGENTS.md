@@ -143,7 +143,8 @@ is written.
   holds one per page and `src/utils/uis.ts` merges them with the MDX pages.
   A page with prose of its own is an MDX file instead.
 - **Blocks live under `/blocks`**: a section in `src/config/sidebar.ts` with
-  `area: "blocks"` puts its pages there, under a sidebar of their own.
+  `area: "blocks"` puts its pages there; the sidebar lists them like any
+  other section.
 - Every component page shows its Example, a `scene` in its meta, with the
   Component API table under it listing every prop. `tests/registry.test.ts`
   fails a meta without one. `resizable: true` on a row lets the preview drag

@@ -1,5 +1,5 @@
 import { uis } from "@/utils/uis";
-import { BLOCKS, sidebarConfig } from "@/config/sidebar";
+import { sidebarConfig } from "@/config/sidebar";
 
 function inSidebarOrder<T extends { _meta: { path: string }; title: string }>(
 	docs: T[],
@@ -20,24 +20,21 @@ export function getNavigation(slug: string): {
 	previous: { slug: string; title: string } | null;
 	next: { slug: string; title: string } | null;
 } {
-	// the arrows stay in their area: blocks lead to blocks, components to components
-	const block = BLOCKS.includes(slug);
-	const area = sorted.filter((p) => BLOCKS.includes(p._meta.path) === block);
-	const currentIndex = area.findIndex((p) => p._meta.path === slug);
+	const currentIndex = sorted.findIndex((p) => p._meta.path === slug);
 	if (currentIndex === -1) return { previous: null, next: null };
 	return {
 		previous:
 			currentIndex > 0
 				? {
-						slug: area[currentIndex - 1]._meta.path,
-						title: area[currentIndex - 1].title,
+						slug: sorted[currentIndex - 1]._meta.path,
+						title: sorted[currentIndex - 1].title,
 					}
 				: null,
 		next:
-			currentIndex < area.length - 1
+			currentIndex < sorted.length - 1
 				? {
-						slug: area[currentIndex + 1]._meta.path,
-						title: area[currentIndex + 1].title,
+						slug: sorted[currentIndex + 1]._meta.path,
+						title: sorted[currentIndex + 1].title,
 					}
 				: null,
 	};

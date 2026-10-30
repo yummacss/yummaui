@@ -1,7 +1,7 @@
 export interface SidebarSection {
 	title: string;
 	items: string[];
-	/** Blocks live under `/blocks` with a sidebar of their own. */
+	/** Its pages are blocks, under `/blocks`. */
 	area?: "blocks";
 }
 
@@ -78,7 +78,7 @@ export const sidebarConfig: SidebarSection[] = [
 		area: "blocks",
 	},
 	{
-		title: "Navigation",
+		title: "Layout",
 		items: ["sidebar"],
 		area: "blocks",
 	},
