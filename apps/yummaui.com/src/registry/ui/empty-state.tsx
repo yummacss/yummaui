@@ -1,18 +1,15 @@
-import { Button } from "@base-ui/react/button";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import Button from "./button";
 
 type IconTone = "accent" | "neutral";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const ICON_TONES: Record<IconTone, string> = {
   accent: "c:label",
   neutral: "c:hint",
 };
 
-const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
-
-const BUTTON_BASE =
-  "d:if ai:c px:3 py:2 bw:1 fs:sm fw:500 tp:c tdu:150 ttf:io us:none c:p";
 
 export interface EmptyStateProps {
   /** The glyph in the badge. No badge renders without one. */
@@ -26,6 +23,8 @@ export interface EmptyStateProps {
   title: string;
   /** A line under the title. */
   description?: string;
+  /** Corner radius of the buttons. */
+  shape?: Shape;
   /** The filled button. Omit it for a state with nothing to do. */
   primaryLabel?: string;
   /** A glyph before the primary label. */
@@ -68,11 +67,10 @@ export default function EmptyStateBase({
   onPrimary,
   secondaryLabel,
   onSecondary,
+  shape = "square",
   className,
   focus = true,
 }: EmptyStateProps) {
-  const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
-
   const hasActions = Boolean(primaryLabel || secondaryLabel);
 
   const gap = icon || hasActions ? "g:4" : "g:1";
@@ -99,27 +97,22 @@ export default function EmptyStateBase({
         <div className="d:f g:3">
           {secondaryLabel && (
             <Button
+              variant="secondary"
+              icon={secondaryIcon}
+              shape={shape}
+              focus={focus}
               onClick={onSecondary}
-              className={merge(
-                outline,
-                BUTTON_BASE,
-                "g:2 bg:raised bc:rim c:label h:bg:well",
-              )}
             >
-              {secondaryIcon}
               {secondaryLabel}
             </Button>
           )}
           {primaryLabel && (
             <Button
+              icon={primaryIcon}
+              shape={shape}
+              focus={focus}
               onClick={onPrimary}
-              className={merge(
-                outline,
-                BUTTON_BASE,
-                "g:2 bg:fill bc:fill h:o:90 c:on-fill",
-              )}
             >
-              {primaryIcon}
               {primaryLabel}
             </Button>
           )}

@@ -11,19 +11,20 @@ const SIZES: Record<Size, string> = {
   lg: "fs:4xl",
 };
 
+// radii in em scale with the heading; a tile's is its chip's less the padding
+// between them, so the two corners stay concentric
 const CHIP_SHAPES: Record<Shape, string> = {
   square: "",
-  rounded: "br:lg",
+  rounded: "br:calc(.25em)",
   pill: "br:9999",
-  squircle: "br:xxl cs:s",
+  squircle: "br:calc(.45em) cs:s",
 };
 
-// the tile sits inside the chip, so it takes the next radius down
 const TILE_SHAPES: Record<Shape, string> = {
   square: "",
-  rounded: "br:md",
+  rounded: "br:calc(.15em)",
   pill: "br:9999",
-  squircle: "br:lg cs:s",
+  squircle: "br:calc(.35em) cs:s",
 };
 
 // each icon arrives in turn, so the eye reads the three words in order

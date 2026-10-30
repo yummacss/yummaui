@@ -17,7 +17,11 @@
       "name": "allValues",
       "type": "string[]",
       "description": "Every value in the group. Without it the parent cannot tell all-checked from some-checked.",
-      "example": ["documents", "photos", "downloads"]
+      "example": [
+        "documents",
+        "photos",
+        "downloads"
+      ]
     },
     {
       "name": "value",
@@ -28,7 +32,10 @@
       "name": "defaultValue",
       "type": "string[]",
       "description": "The checked values on first render, uncontrolled.",
-      "example": ["documents", "photos"]
+      "example": [
+        "documents",
+        "photos"
+      ]
     },
     {
       "name": "onValueChange",
@@ -47,6 +54,17 @@
       "description": "Names what is counted under the parent, as in \"2 of 3 folders\". Needs `parentLabel` and `allValues`."
     },
     {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
+      "description": "Every checkbox's shape, and the well around them. One a box sets wins."
+    },
+    {
       "name": "disabled",
       "type": "boolean",
       "default": false,
@@ -63,8 +81,15 @@
       "component": "CheckboxGroup",
       "props": {
         "parentLabel": "Sync these folders",
-        "allValues": ["documents", "photos", "downloads"],
-        "defaultValue": ["documents", "photos"],
+        "allValues": [
+          "documents",
+          "photos",
+          "downloads"
+        ],
+        "defaultValue": [
+          "documents",
+          "photos"
+        ],
         "countLabel": "folders"
       },
       "children": [

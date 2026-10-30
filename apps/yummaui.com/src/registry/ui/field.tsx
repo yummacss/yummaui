@@ -95,6 +95,8 @@ export interface FieldProps
    */
   error?: string;
 
+  invalid?: boolean;
+
   /** Green border, a check icon & this message in place of `description`. */
   success?: string;
   /** Height and width of the control. */
@@ -149,6 +151,7 @@ export default function FieldBase({
   label,
   description,
   error,
+  invalid = false,
   success,
   size = "md",
   shape = "square",
@@ -166,7 +169,9 @@ export default function FieldBase({
   ...props
 }: FieldProps) {
   const [revealed, setRevealed] = useState(false);
-  const status: Status = error ? "error" : success ? "success" : "default";
+  // what the border says, and what the icon & message say: invalid only colors
+  const marked: Status = error ? "error" : success ? "success" : "default";
+  const status: Status = invalid && marked === "default" ? "error" : marked;
   const outline = focus
     ? merge(FOCUS, STATUS_OUTLINE[status], focus === true ? "" : focus)
     : "";
@@ -194,9 +199,9 @@ export default function FieldBase({
     icon
   );
   const activeIcon = reveal ? trailingIcon : icon;
-  const showDecorativeIcon = Boolean(activeIcon) && status === "default";
+  const showDecorativeIcon = Boolean(activeIcon) && marked === "default";
   const activeSide: IconSide =
-    reveal || status !== "default" ? "trailing" : iconPosition;
+    reveal || marked !== "default" ? "trailing" : iconPosition;
   const hasAffix = Boolean(prefixNode) || Boolean(suffix);
 
   const controlClasses = merge(
@@ -205,7 +210,7 @@ export default function FieldBase({
     SIZES[size],
     SHAPES[shape],
     STATUS_BORDER[status],
-    showDecorativeIcon || status !== "default"
+    showDecorativeIcon || marked !== "default"
       ? ICON_PADDING[activeSide]
       : "px:3",
     className,
@@ -271,9 +276,9 @@ export default function FieldBase({
             className={controlClasses}
             {...props}
           />
-          {status !== "default" && (
-            <span className={`d:f p:a r:3 ai:c pe:none ${STATUS_ICON[status]}`}>
-              {status === "error" ? (
+          {marked !== "default" && (
+            <span className={`d:f p:a r:3 ai:c pe:none ${STATUS_ICON[marked]}`}>
+              {marked === "error" ? (
                 <IconAlertTriangle className="w:4 h:4" />
               ) : (
                 <IconCheck className="w:4 h:4" />
@@ -284,7 +289,7 @@ export default function FieldBase({
       )}
 
       {message && (
-        <Field.Description className={`fs:xs ${STATUS_MESSAGE[status]}`}>
+        <Field.Description className={`fs:xs ${STATUS_MESSAGE[marked]}`}>
           {message}
         </Field.Description>
       )}

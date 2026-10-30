@@ -8,7 +8,10 @@ import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
+// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconSide = "leading" | "trailing";
 
 export interface SelectOption {
@@ -34,7 +37,7 @@ const SIZES: Record<Size, string> = {
   lg: "h:11 w:72 px:3 fs:md",
 };
 
-const ITEM_SHAPES: Record<Shape, string> = {
+const ITEM_SHAPES: Record<Card, string> = {
   rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
@@ -47,6 +50,13 @@ const POPUP_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
+  rounded: "br:lg",
+  square: "",
+  squircle: "br:xxl cs:s",
+  pill: "br:9999",
+};
+
+const POPUP_SHAPES: Record<Card, string> = {
   rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
@@ -70,7 +80,7 @@ function renderOption(option: SelectOption, shape: Shape) {
       key={option.value}
       value={option.value}
       className={(state) =>
-        `d:f ai:c g:2 h:8 px:2 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[shape]} fs:sm fw:400 us:none c:p c:label ${
+        `d:f ai:c g:2 h:8 px:2 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[cardOf(shape)]} fs:sm fw:400 us:none c:p c:label ${
           state.highlighted ? "bg:well" : "bg:transparent"
         }`
       }
@@ -244,7 +254,7 @@ export default function SelectBase({
 
   const popup = (
     <Select.Popup
-      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:xl bw:1 ${POPUP_SIZES[size]} ${SHAPES[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:xl bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       <Select.List className="p:r min-h:0 o:auto">
         {options.map((entry) =>

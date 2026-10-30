@@ -6,7 +6,10 @@ import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
+// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconSide = "leading" | "trailing";
 
 export interface AutocompleteItem {
@@ -32,7 +35,7 @@ const SIZES: Record<Size, string> = {
   lg: "h:11 w:72",
 };
 
-const ITEM_SHAPES: Record<Shape, string> = {
+const ITEM_SHAPES: Record<Card, string> = {
   rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
@@ -45,6 +48,13 @@ const POPUP_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
+  rounded: "br:lg",
+  square: "br:0",
+  squircle: "br:xxl cs:s",
+  pill: "br:9999",
+};
+
+const POPUP_SHAPES: Record<Card, string> = {
   rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
@@ -162,7 +172,7 @@ function renderItem(item: AutocompleteItem, shape: Shape, query: string) {
       render={(props, state) => (
         <div
           {...props}
-          className={`d:f ai:c g:3 py:2 px:3 mx:1 bw:1 bc:transparent c:label ${ITEM_SHAPES[shape]} fs:sm us:none c:p ${
+          className={`d:f ai:c g:3 py:2 px:3 mx:1 bw:1 bc:transparent c:label ${ITEM_SHAPES[cardOf(shape)]} fs:sm us:none c:p ${
             state.highlighted
               ? "bg:check c:white bc:transparent"
               : "bg:transparent"
@@ -245,7 +255,7 @@ export default function AutocompleteBase({
 
   const popup = (
     <Autocomplete.Popup
-      className={`o:h bg:raised bc:line bs-o:xl c:label bw:1 ${POPUP_SIZES[size]} ${SHAPES[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`o:h bg:raised bc:line bs-o:xl c:label bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       {loading ? (
         <div

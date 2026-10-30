@@ -152,6 +152,10 @@ function extension(name: string): string {
   return dot > 0 ? name.slice(dot + 1).toUpperCase() : "";
 }
 
+/**
+ * A drop zone for files, in three shapes, dashed or solid, that picks by click
+ * or by drop and lists what it holds.
+ */
 export default function FileUploadBase({
   label = "Drop files to upload",
   browseLabel = "choose from your computer",

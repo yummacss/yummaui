@@ -108,7 +108,8 @@
       "values": [
         "rounded",
         "square",
-        "squircle"
+        "squircle",
+        "pill"
       ],
       "default": "square",
       "description": "Corner radius on the popup, the badge and the buttons. `square` squares off the badge too."

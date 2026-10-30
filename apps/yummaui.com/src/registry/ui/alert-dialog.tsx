@@ -8,7 +8,10 @@ import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Tone = "danger" | "neutral";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
+// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconPosition = "leading" | "trailing";
 type Size = "sm" | "md" | "lg";
 
@@ -18,7 +21,7 @@ const SIZES: Record<Size, string> = {
   lg: "px:6 py:3 fs:md",
 };
 
-const POPUP_SHAPES: Record<Shape, string> = {
+const POPUP_SHAPES: Record<Card, string> = {
   rounded: "br:xxl",
   square: "",
   squircle: "br:3xl cs:s",
@@ -28,18 +31,21 @@ const BADGE_SHAPES: Record<Shape, string> = {
   rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
   rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
   rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
+  pill: "br:9999",
 };
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
@@ -173,7 +179,7 @@ export default function AlertDialogBase({
 
   const popupClasses = [
     "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
-    POPUP_SHAPES[shape],
+    POPUP_SHAPES[cardOf(shape)],
   ]
     .filter(Boolean)
     .join(" ");

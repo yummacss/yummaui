@@ -78,6 +78,18 @@
       "description": "`accent` for an invitation to act, `neutral` for a plain absence: nothing found, nothing to do."
     },
     {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "square",
+      "description": "Corner radius of the buttons."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

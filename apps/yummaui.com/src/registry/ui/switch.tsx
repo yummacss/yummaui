@@ -6,7 +6,7 @@ import { type ReactNode, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
@@ -23,9 +23,10 @@ const SIZES: Record<Size, SizeSpec> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:9999",
+  rounded: "br:md",
   square: "",
-  squircle: "br:xxl cs:s",
+  squircle: "br:xl cs:s",
+  pill: "br:9999",
 };
 
 export interface SwitchProps {

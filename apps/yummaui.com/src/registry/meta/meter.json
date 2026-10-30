@@ -85,9 +85,27 @@
     {
       "name": "intent",
       "type": "enum",
-      "values": ["neutral", "info", "success", "warning", "danger"],
+      "values": [
+        "neutral",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
       "default": "info",
       "description": "What the reading means, not which hue it is. The five map to Yumma families in the shipped `INTENTS` table; point one somewhere else and the type follows."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "square",
+      "description": "Corner radius of the track."
     },
     {
       "name": "animated",

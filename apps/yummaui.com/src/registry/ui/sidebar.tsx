@@ -41,6 +41,23 @@ export interface SidebarWorkspace {
 
 const ICON = "w:4 h:4";
 
+type Shape = "rounded" | "square" | "squircle" | "pill";
+
+const LINK_SHAPES: Record<Shape, string> = {
+  rounded: "br:md",
+  square: "",
+  squircle: "br:lg cs:s",
+  pill: "br:9999",
+};
+
+// the workspace's letter tile; a pill sidebar gives it a circle
+const TILE_SHAPES: Record<Shape, string> = {
+  rounded: "br:sm",
+  square: "",
+  squircle: "br:md cs:s",
+  pill: "br:9999",
+};
+
 const GROUPS: SidebarGroup[] = [
   {
     links: [
@@ -95,6 +112,8 @@ export interface SidebarProps {
   workspaces?: SidebarWorkspace[];
   /** Called with a workspace's name when it is picked from the switcher. */
   onWorkspaceChange?: (name: string) => void;
+  /** Corner radius of the links, menus, badges & avatar. */
+  shape?: Shape;
   /** Who is signed in, shown at the bottom with their menu. */
   user?: { name: string; email: string };
   /** Called when Sign out is picked from the user menu. */
@@ -121,6 +140,7 @@ export default function Sidebar({
   onNavigate,
   workspaces = WORKSPACES,
   onWorkspaceChange,
+  shape = "square",
   user = { name: "Ada Lovelace", email: "ada@example.com" },
   onSignOut,
   container,
@@ -139,10 +159,16 @@ export default function Sidebar({
       {active && (
         <Menu
           container={container}
+          shape={shape}
           className="w:100%"
           trigger={
             <span className="d:f ai:c g:2 w:100% ta:l">
-              <span className="d:f fs:0 ai:c jc:c w:7 h:7 bg:fill c:on-fill fs:xs fw:500">
+              <span
+                className={merge(
+                  "d:f fs:0 ai:c jc:c w:7 h:7 bg:fill c:on-fill fs:xs fw:500",
+                  TILE_SHAPES[shape],
+                )}
+              >
                 {active.name.charAt(0)}
               </span>
               <span className="d:f fd:c f:1 min-w:0">
@@ -182,7 +208,11 @@ export default function Sidebar({
                     setHere(link.href);
                     onNavigate?.(link.href);
                   }}
-                  className={merge(LINK, isCurrent ? CURRENT : "")}
+                  className={merge(
+                    LINK,
+                    LINK_SHAPES[shape],
+                    isCurrent ? CURRENT : "",
+                  )}
                 >
                   {link.icon && (
                     <span className="d:f fs:0" aria-hidden>
@@ -191,7 +221,7 @@ export default function Sidebar({
                   )}
                   <span className="f:1 min-w:0 o:h to:e ws:nw">{link.label}</span>
                   {link.badge !== undefined && (
-                    <Badge size="sm" tone="subtle">
+                    <Badge size="sm" tone="subtle" shape={shape}>
                       {link.badge}
                     </Badge>
                   )}
@@ -204,10 +234,16 @@ export default function Sidebar({
 
       <Menu
         container={container}
+        shape={shape}
         className="w:100%"
         trigger={
           <span className="d:f ai:c g:2 w:100% ta:l">
-            <Avatar name={user.name} size="sm" tint="indigo" />
+            <Avatar
+              name={user.name}
+              size="sm"
+              tint="indigo"
+              shape={shape === "pill" ? "circle" : shape}
+            />
             <span className="d:f fd:c f:1 min-w:0">
               <span className="fs:sm fw:500 o:h to:e ws:nw">{user.name}</span>
               <span className="fs:xs c:hint o:h to:e ws:nw">{user.email}</span>

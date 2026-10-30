@@ -81,7 +81,8 @@
       "values": [
         "rounded",
         "square",
-        "squircle"
+        "squircle",
+        "pill"
       ],
       "default": "square",
       "description": "Corner radius on the tooltip."

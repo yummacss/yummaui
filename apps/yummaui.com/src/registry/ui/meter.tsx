@@ -28,7 +28,18 @@ export interface MeterSegment {
   value: number;
 }
 
+type Shape = "rounded" | "square" | "squircle" | "pill";
+
+const SHAPES: Record<Shape, string> = {
+  rounded: "br:sm",
+  square: "",
+  squircle: "br:md cs:s",
+  pill: "br:9999",
+};
+
 export interface MeterProps {
+  /** Corner radius of the track. */
+  shape?: Shape;
   /** The current value. With `segments`, their sum takes its place. */
   value?: number;
   /** Defaults to Base UI's own Meter minimum (0). */
@@ -82,6 +93,7 @@ export interface MeterProps {
  * with an optional icon and description.
  */
 export default function MeterBase({
+  shape = "square",
   value,
   min,
   max,
@@ -155,7 +167,7 @@ export default function MeterBase({
         </div>
       )}
 
-      <Meter.Track className="d:f g:px o:h h:2 br:9999 bg:rim">
+      <Meter.Track className={`d:f g:px o:h h:2 bg:rim ${SHAPES[shape]}`}>
         {segments ? (
           segments.map((segment, index) => (
             <span

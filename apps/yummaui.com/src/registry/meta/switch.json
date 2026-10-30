@@ -57,7 +57,8 @@
       "values": [
         "rounded",
         "square",
-        "squircle"
+        "squircle",
+        "pill"
       ],
       "default": "square",
       "description": "Corner radius, applied to the track and the thumb together. `squircle` uses `corner-shape`."

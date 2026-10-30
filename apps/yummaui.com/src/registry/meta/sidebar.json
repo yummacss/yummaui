@@ -44,6 +44,18 @@
       "description": "Called when Sign out is picked from the user menu."
     },
     {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "square",
+      "description": "Corner radius of the links, menus, badges & avatar."
+    },
+    {
       "name": "container",
       "type": "none",
       "typeName": "HTMLElement | null",

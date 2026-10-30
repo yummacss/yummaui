@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
 
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
@@ -18,12 +18,14 @@ const ROOT_SHAPES: Record<Shape, string> = {
   rounded: "br:xxl",
   square: "",
   squircle: "br:3xl cs:s",
+  pill: "br:9999",
 };
 
 const CONTROL_SHAPES: Record<Shape, string> = {
   rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
 export interface ToolbarButtonItem {

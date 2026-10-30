@@ -91,7 +91,8 @@
       "values": [
         "rounded",
         "square",
-        "squircle"
+        "squircle",
+        "pill"
       ],
       "default": "square",
       "description": "Corner radius on the bar and every control inside it. The bar takes one step more than its controls."
