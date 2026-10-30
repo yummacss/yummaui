@@ -4,6 +4,7 @@
 // The notes, "OG images".
 import { mkdir } from "node:fs/promises";
 import { chromium } from "playwright";
+import { pagePath } from "../src/utils/hosts.ts";
 import { pageSlugs } from "./lib/registry-ids.mjs";
 
 const [BASE = "http://localhost:3000", ...ONLY] = process.argv.slice(2);
@@ -57,7 +58,7 @@ const page = await browser.newPage({
 });
 
 for (const slug of slugs) {
-	await page.goto(`${BASE}/components/${slug}`, {
+	await page.goto(`${BASE}${pagePath(slug)}`, {
 		waitUntil: "networkidle",
 	});
 	const iframe = page.locator('iframe[title="Component preview"]').first();

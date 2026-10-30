@@ -1,9 +1,11 @@
 export interface SidebarSection {
 	title: string;
 	items: string[];
+	/** Its pages are blocks, under `/blocks`. */
+	area?: "blocks";
 }
 
-/** The guides, under `/docs`; every other page is a component under `/components`. */
+/** The guides, under `/docs`; blocks are under `/blocks`; every other page is a component under `/components`. */
 export const GUIDES = ["installation", "configuration", "customization"];
 
 export const sidebarConfig: SidebarSection[] = [
@@ -71,7 +73,23 @@ export const sidebarConfig: SidebarSection[] = [
 		],
 	},
 	{
-		title: "Blocks",
-		items: ["inline-icon-heading", "sidebar", "sign-in"],
+		title: "Marketing",
+		items: ["inline-icon-heading"],
+		area: "blocks",
+	},
+	{
+		title: "Layout",
+		items: ["sidebar"],
+		area: "blocks",
+	},
+	{
+		title: "Authentication",
+		items: ["sign-in"],
+		area: "blocks",
 	},
 ];
+
+/** Every block, under `/blocks`. */
+export const BLOCKS = sidebarConfig
+	.filter((section) => section.area === "blocks")
+	.flatMap((section) => section.items);

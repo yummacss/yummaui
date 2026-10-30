@@ -1,4 +1,4 @@
-import { GUIDES } from "./src/config/sidebar";
+import { BLOCKS, GUIDES } from "./src/config/sidebar";
 import { pagePath } from "./src/utils/hosts";
 
 const uiRedirects = [
@@ -110,6 +110,24 @@ export const redirects = [
 		{
 			source: `/components/${slug}.md`,
 			destination: `/docs/${slug}.md`,
+			permanent: true,
+		},
+	]),
+	{
+		source: "/blocks",
+		destination: `/blocks/${BLOCKS[0]}`,
+		permanent: false,
+	},
+	// the blocks sat beside the components before they moved to /blocks
+	...BLOCKS.flatMap((slug) => [
+		{
+			source: `/components/${slug}`,
+			destination: `/blocks/${slug}`,
+			permanent: true,
+		},
+		{
+			source: `/components/${slug}.md`,
+			destination: `/blocks/${slug}.md`,
 			permanent: true,
 		},
 	]),

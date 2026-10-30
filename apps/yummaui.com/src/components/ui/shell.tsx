@@ -32,7 +32,7 @@ export default function UIShell({
 }: Props) {
 	const pathname = usePathname();
 	const slug = (pathname || "")
-		.replace(/^\/(?:components|docs)\//, "")
+		.replace(/^\/(?:components|blocks|docs)\//, "")
 		.replace(/\/$/, "");
 	const playground =
 		playgrounds.includes(slug) && Object.hasOwn(registryMeta, slug)
