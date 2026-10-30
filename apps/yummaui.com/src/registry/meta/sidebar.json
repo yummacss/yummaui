@@ -65,11 +65,20 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:f h:150",
+      "className": "d:f w:100% h:100%",
       "children": [
         {
           "component": "Sidebar",
           "props": {}
+        },
+        {
+          "tag": "div",
+          "className": "d:f f:1 ai:c jc:c m:4 bw:2 bs:d bc:rim c:hint fs:sm us:none",
+          "children": [
+            {
+              "text": "Page content"
+            }
+          ]
         }
       ]
     }

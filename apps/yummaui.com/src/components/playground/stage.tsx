@@ -79,12 +79,13 @@ export default function ComponentPlayground({
 					className="f:1 min-h:0 bg:page"
 					minHeight={0}
 					fill
+					bleed={resizable}
 					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
 				>
 					<Scene scene={scene} shape={shape} />
 				</PreviewFrame>
 			) : null,
-		[scene, shape, accent, scheme],
+		[scene, shape, accent, scheme, resizable],
 	);
 
 	if (!id || !scene) return null;
