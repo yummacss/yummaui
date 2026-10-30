@@ -143,7 +143,7 @@ export default function PopoverBase({
   open: controlledOpen,
   onOpenChange,
   showClose = false,
-  shape = "rounded",
+  shape = "square",
   animated = true,
   className,
   focus = true,

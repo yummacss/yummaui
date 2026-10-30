@@ -4,7 +4,10 @@
     {
       "name": "orientation",
       "type": "enum",
-      "values": ["horizontal", "vertical"],
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
       "default": "horizontal",
       "description": "A vertical rule for a row layout, like a button group. Applies to the `icon` and `label` forms too, which turn with it."
     },
@@ -38,8 +41,13 @@
     {
       "name": "iconShape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle", "circle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "circle"
+      ],
+      "default": "square",
       "description": "Corner radius on the icon button, which is the only part with corners. Only visible alongside `icon`.",
       "conflictsWith": [
         {

@@ -10,7 +10,10 @@
     {
       "name": "orientation",
       "type": "enum",
-      "values": ["horizontal", "vertical"],
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
       "default": "horizontal",
       "description": "Stacks the toggles and switches the arrow keys that move focus."
     },
@@ -29,7 +32,9 @@
       "name": "defaultValue",
       "type": "string[]",
       "description": "The pressed toggles on first render, uncontrolled.",
-      "example": ["grid"]
+      "example": [
+        "grid"
+      ]
     },
     {
       "name": "onValueChange",
@@ -39,8 +44,13 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle", "pill"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "square",
       "description": "Corner radius of the container. The toggles inside carry their own `shape`."
     },
     {
@@ -60,7 +70,9 @@
       "component": "ToggleGroup",
       "props": {
         "label": "View as",
-        "defaultValue": ["grid"]
+        "defaultValue": [
+          "grid"
+        ]
       },
       "children": [
         {

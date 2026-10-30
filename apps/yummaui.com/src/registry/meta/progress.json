@@ -37,8 +37,12 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius on both the track and the indicator."
     },
     {

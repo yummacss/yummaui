@@ -45,15 +45,23 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Height of the buttons and the input together. The icon inside the buttons grows only at `lg`."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius on the group's outer edges. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {

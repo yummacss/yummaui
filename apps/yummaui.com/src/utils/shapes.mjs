@@ -3,7 +3,7 @@
 
 export const SHAPES = ["none", "rounded", "squircle", "pill"];
 
-export const DEFAULT_SHAPE = "rounded";
+export const DEFAULT_SHAPE = "none";
 
 const NEAREST = {
 	none: ["square"],

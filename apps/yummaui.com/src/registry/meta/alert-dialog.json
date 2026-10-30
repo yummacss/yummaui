@@ -19,7 +19,10 @@
     {
       "name": "triggerIconPosition",
       "type": "enum",
-      "values": ["leading", "trailing"],
+      "values": [
+        "leading",
+        "trailing"
+      ],
       "default": "leading",
       "description": "Which end of the trigger `triggerIcon` sits at.",
       "dependsOn": "triggerIcon"
@@ -71,29 +74,43 @@
     {
       "name": "tone",
       "type": "enum",
-      "values": ["danger", "neutral"],
+      "values": [
+        "danger",
+        "neutral"
+      ],
       "default": "danger",
       "description": "Colors the badge and the confirm button together."
     },
     {
       "name": "triggerTone",
       "type": "enum",
-      "values": ["danger", "neutral"],
+      "values": [
+        "danger",
+        "neutral"
+      ],
       "default": "danger",
       "description": "The trigger's own color, independent of the dialog's `tone` - a neutral button can still open a destructive dialog."
     },
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Padding and text size of the trigger and the popup's buttons, on the same scale as Button, so a dialog matches the buttons beside it."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius on the popup, the badge and the buttons. `square` squares off the badge too."
     },
     {

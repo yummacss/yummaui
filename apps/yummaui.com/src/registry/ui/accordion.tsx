@@ -99,7 +99,7 @@ export interface AccordionProps {
 export default function AccordionBase({
   items,
   variant = "default",
-  shape = "rounded",
+  shape = "square",
   separated = true,
   indicator = "chevron",
   indicatorPosition = "trailing",

@@ -77,14 +77,22 @@
       "name": "marks",
       "type": "none",
       "typeName": "string[]",
-      "example": ["Small", "Medium", "Large"],
+      "example": [
+        "Small",
+        "Medium",
+        "Large"
+      ],
       "description": "Labels spread evenly under the track, first at the start, last at the end."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius, applied to the track, the indicator and the thumb together. `squircle` uses `corner-shape`."
     },
     {
@@ -116,7 +124,11 @@
         "min": 40,
         "max": 200,
         "unit": "px",
-        "marks": ["Small", "Medium", "Large"]
+        "marks": [
+          "Small",
+          "Medium",
+          "Large"
+        ]
       }
     }
   ]

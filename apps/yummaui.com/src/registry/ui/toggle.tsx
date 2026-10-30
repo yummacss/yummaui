@@ -125,7 +125,7 @@ export default function ToggleBase({
   defaultPressed,
   pressed: controlledPressed,
   onPressedChange,
-  shape = "rounded",
+  shape = "square",
   size = "md",
   disabled = false,
   animated = true,

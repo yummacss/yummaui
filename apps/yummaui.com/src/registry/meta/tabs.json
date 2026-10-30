@@ -44,7 +44,10 @@
     {
       "name": "orientation",
       "type": "enum",
-      "values": ["horizontal", "vertical"],
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
       "default": "horizontal",
       "description": "`vertical` stacks the tabs and sits any panels beside them rather than below."
     },
@@ -58,7 +61,10 @@
     {
       "name": "iconPosition",
       "type": "enum",
-      "values": ["leading", "trailing"],
+      "values": [
+        "leading",
+        "trailing"
+      ],
       "default": "leading",
       "description": "Which end of a tab its `icon` sits at. Ignored when `iconOnly` is set.",
       "conflictsWith": [
@@ -71,15 +77,24 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Tab padding and label size together."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["pill", "rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "pill",
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius on the track and the tabs. `pill` steps down to `rounded` when `orientation` is vertical: a capsule resolves its radius against the narrow axis, so the track becomes a blob and the selected tab's indicator is clipped to the curve."
     },
     {

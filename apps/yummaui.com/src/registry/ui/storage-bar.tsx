@@ -106,7 +106,7 @@ export default function StorageBar({
   unit = "GB",
   label = "Storage",
   rest = "Free",
-  shape = "rounded",
+  shape = "square",
   animated = true,
   className,
 }: StorageBarProps) {

@@ -9,7 +9,9 @@
         {
           "type": "toggles",
           "multiple": true,
-          "defaultValue": ["bold"],
+          "defaultValue": [
+            "bold"
+          ],
           "options": [
             {
               "value": "bold",
@@ -42,7 +44,9 @@
         },
         {
           "type": "toggles",
-          "defaultValue": ["bullets"],
+          "defaultValue": [
+            "bullets"
+          ],
           "options": [
             {
               "value": "bullets",
@@ -84,8 +88,12 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius on the bar and every control inside it. The bar takes one step more than its controls."
     },
     {
@@ -110,7 +118,9 @@
           {
             "type": "toggles",
             "multiple": true,
-            "defaultValue": ["bold"],
+            "defaultValue": [
+              "bold"
+            ],
             "options": [
               {
                 "value": "bold",
@@ -143,7 +153,9 @@
           },
           {
             "type": "toggles",
-            "defaultValue": ["bullets"],
+            "defaultValue": [
+              "bullets"
+            ],
             "options": [
               {
                 "value": "bullets",

@@ -22,7 +22,10 @@
     {
       "name": "iconPosition",
       "type": "enum",
-      "values": ["leading", "trailing"],
+      "values": [
+        "leading",
+        "trailing"
+      ],
       "default": "leading",
       "description": "Which end the icon sits at, on every button that has one. Unset, each button keeps its own.",
       "conflictsWith": [
@@ -47,8 +50,13 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle", "pill"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle",
+        "pill"
+      ],
+      "default": "square",
       "description": "Corner radius of the group. `pill` also insets the buttons, so a pill `Button` inside sits clear of the border."
     },
     {

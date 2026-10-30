@@ -124,7 +124,7 @@ export default function OnboardingBase({
   onFinish,
   finishLabel = "Done",
   closeOnEscape = true,
-  shape = "rounded",
+  shape = "square",
   animated = true,
   className,
   focus = true,

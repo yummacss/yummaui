@@ -86,7 +86,11 @@
     {
       "name": "border",
       "type": "enum",
-      "values": ["dashed", "solid", "none"],
+      "values": [
+        "dashed",
+        "solid",
+        "none"
+      ],
       "default": "dashed",
       "description": "`dashed` is the drop-zone convention and carries the extra width it needs to read as one. `solid` is a heavier, more permanent box, so it stays thin. `none` leaves the zone to its background."
     },
@@ -98,8 +102,12 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {

@@ -37,22 +37,33 @@
     {
       "name": "separator",
       "type": "enum",
-      "values": ["chevron", "slash"],
+      "values": [
+        "chevron",
+        "slash"
+      ],
       "default": "chevron",
       "description": "The mark between items."
     },
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Text size of every item."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius. Only visible when `bordered` is set.",
       "conflictsWith": [
         {

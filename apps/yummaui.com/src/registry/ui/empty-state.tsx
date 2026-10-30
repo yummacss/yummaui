@@ -77,7 +77,7 @@ export default function EmptyStateBase({
   onPrimary,
   secondaryLabel,
   onSecondary,
-  iconShape = "rounded",
+  iconShape = "square",
   className,
   focus = true,
 }: EmptyStateProps) {

@@ -4,15 +4,24 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "Text size of the whole heading; the chips scale with it."
     },
     {
       "name": "shape",
       "type": "enum",
-      "values": ["square", "rounded", "pill", "squircle"],
-      "default": "rounded",
+      "values": [
+        "square",
+        "rounded",
+        "pill",
+        "squircle"
+      ],
+      "default": "square",
       "description": "The corners of each chip & of the icon tile inside it."
     },
     {

@@ -70,15 +70,22 @@
     {
       "name": "iconTone",
       "type": "enum",
-      "values": ["accent", "neutral"],
+      "values": [
+        "accent",
+        "neutral"
+      ],
       "default": "accent",
       "description": "`accent` for an invitation to act, `neutral` for a plain absence: nothing found, nothing to do."
     },
     {
       "name": "iconShape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius on the badge."
     },
     {

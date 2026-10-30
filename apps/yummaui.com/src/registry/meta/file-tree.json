@@ -27,7 +27,9 @@
       "name": "defaultExpanded",
       "type": "none",
       "typeName": "string[]",
-      "example": ["Documents"],
+      "example": [
+        "Documents"
+      ],
       "description": "The folders open on first render, by path."
     },
     {
@@ -53,8 +55,12 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius on the tree and on each row."
     },
     {
@@ -90,7 +96,9 @@
           "Videos/holiday.mov",
           "notes.txt"
         ],
-        "defaultExpanded": ["Documents"],
+        "defaultExpanded": [
+          "Documents"
+        ],
         "defaultSelected": "Documents/budget.xlsx"
       }
     }

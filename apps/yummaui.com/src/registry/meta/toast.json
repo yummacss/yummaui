@@ -53,7 +53,10 @@
     {
       "name": "triggerTone",
       "type": "enum",
-      "values": ["neutral", "danger"],
+      "values": [
+        "neutral",
+        "danger"
+      ],
       "default": "neutral",
       "example": "danger",
       "description": "The trigger's color: `danger` when the action it reports destroys something."
@@ -61,8 +64,12 @@
     {
       "name": "shape",
       "type": "enum",
-      "values": ["rounded", "square", "squircle"],
-      "default": "rounded",
+      "values": [
+        "rounded",
+        "square",
+        "squircle"
+      ],
+      "default": "square",
       "description": "Corner radius of the toast and its buttons. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {
