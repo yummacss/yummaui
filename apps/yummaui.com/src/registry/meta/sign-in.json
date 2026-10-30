@@ -52,7 +52,7 @@
         "squircle",
         "pill"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius of the card, its fields and its buttons."
     },
     {

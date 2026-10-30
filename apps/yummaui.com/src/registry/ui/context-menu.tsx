@@ -10,19 +10,19 @@ type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -140,7 +140,7 @@ export default function ContextMenuBase({
   trigger,
   triggerIcon,
   items,
-  shape = "square",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   disabled = false,

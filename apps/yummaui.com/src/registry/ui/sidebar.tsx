@@ -44,7 +44,7 @@ const ICON = "w:4 h:4";
 type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const LINK_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",
@@ -52,7 +52,7 @@ const LINK_SHAPES: Record<Shape, string> = {
 
 // the workspace's letter tile; a pill sidebar gives it a circle
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:xs",
   square: "",
   squircle: "br:md cs:s",
   pill: "br:9999",
@@ -140,7 +140,7 @@ export default function Sidebar({
   onNavigate,
   workspaces = WORKSPACES,
   onWorkspaceChange,
-  shape = "square",
+  shape = "rounded",
   user = { name: "Ada Lovelace", email: "ada@example.com" },
   onSignOut,
   container,
@@ -242,7 +242,7 @@ export default function Sidebar({
               name={user.name}
               size="sm"
               tint="indigo"
-              shape={shape === "pill" ? "circle" : shape}
+              shape={shape === "square" ? "square" : "circle"}
             />
             <span className="d:f fd:c f:1 min-w:0">
               <span className="fs:sm fw:500 o:h to:e ws:nw">{user.name}</span>

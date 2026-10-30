@@ -11,25 +11,25 @@ type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
 
 const BAR_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -134,7 +134,7 @@ export interface MenubarProps {
  */
 export default function MenubarBase({
   menus,
-  shape = "square",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   animated = true,

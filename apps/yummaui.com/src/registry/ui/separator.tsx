@@ -6,7 +6,7 @@ import { merge } from "yummacss/merge";
 type Shape = "rounded" | "square" | "squircle" | "circle";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
   circle: "br:9999",
@@ -62,7 +62,7 @@ export default function SeparatorBase({
   onIconClick,
   iconLabel,
   label,
-  iconShape = "square",
+  iconShape = "rounded",
   orientation = "horizontal",
   className,
   focus = true,

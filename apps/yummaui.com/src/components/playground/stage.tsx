@@ -300,6 +300,7 @@ function Scene({
 		{
 			values: playground?.sceneValues ?? {},
 			set: playground?.setSceneValue ?? (() => {}),
+			setScheme: playground?.setScheme,
 		},
 	);
 }

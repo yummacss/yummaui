@@ -52,7 +52,7 @@
         "squircle",
         "pill"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius of the links, menus, badges & avatar."
     },
     {

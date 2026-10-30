@@ -3,7 +3,7 @@ import { merge } from "yummacss/merge";
 type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",

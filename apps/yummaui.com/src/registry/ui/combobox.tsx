@@ -42,7 +42,7 @@ const CHIPS_SIZES: Record<Size, string> = {
 };
 
 const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -61,14 +61,14 @@ const ACTION_HEIGHTS: Record<Size, string> = {
 
 // a chip sits inside the field, so it rounds one step less
 const CHIP_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:xs",
   square: "",
   squircle: "br:md cs:s",
   pill: "br:9999",
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -209,7 +209,7 @@ export default function ComboboxBase({
   label,
   description,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   multiple = false,
   defaultValue,
   clearable = true,

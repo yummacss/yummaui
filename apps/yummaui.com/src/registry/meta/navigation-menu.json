@@ -101,7 +101,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the bar, its items, the panel and its icon tiles."
     },
     {

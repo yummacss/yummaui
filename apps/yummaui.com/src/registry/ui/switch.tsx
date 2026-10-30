@@ -23,7 +23,7 @@ const SIZES: Record<Size, SizeSpec> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xl cs:s",
   pill: "br:9999",
@@ -91,7 +91,7 @@ export default function SwitchBase({
   onCheckedChange,
   icon,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   disabled = false,
   animated = true,
   className,

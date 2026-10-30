@@ -53,7 +53,7 @@
         "squircle",
         "circle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the icon button, which is the only part with corners. Only visible alongside `icon`.",
       "conflictsWith": [
         {

@@ -119,7 +119,7 @@
         "squircle",
         "pill"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius, applied to the input and the popup together. `squircle` uses `corner-shape`."
     },
     {

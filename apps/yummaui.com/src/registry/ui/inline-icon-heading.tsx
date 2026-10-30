@@ -93,7 +93,7 @@ function Chip({
  */
 export default function InlineIconHeading({
   size = "md",
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
 }: InlineIconHeadingProps) {

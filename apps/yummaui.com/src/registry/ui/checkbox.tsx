@@ -39,7 +39,7 @@ const LINE: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:xs",
   square: "br:0",
   squircle: "br:xxl cs:s",
 };
@@ -111,7 +111,7 @@ export default function CheckboxBase({
   aside,
   row = false,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   disabled = false,
   checked: controlledChecked,
   defaultChecked,

@@ -9,7 +9,7 @@ type Shape = "rounded" | "square" | "squircle";
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
@@ -46,7 +46,7 @@ export interface ScrollAreaProps {
  */
 export default function ScrollAreaBase({
   children,
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

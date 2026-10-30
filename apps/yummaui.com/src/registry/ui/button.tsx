@@ -69,7 +69,7 @@ const ICON_ONLY: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -151,7 +151,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
 export default function ButtonBase({
   variant = "primary",
   size = "md",
-  shape = "square",
+  shape = "rounded",
   loading = false,
   icon,
   iconPosition = "leading",

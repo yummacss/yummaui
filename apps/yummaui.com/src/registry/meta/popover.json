@@ -113,7 +113,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the trigger and the popup."
     },
     {

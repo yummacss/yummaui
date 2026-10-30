@@ -12,14 +12,14 @@ type Size = "sm" | "md";
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 // in a group, one step under the track's own round, so the chip nests inside it
 const GROUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xl cs:s",
 };
@@ -125,7 +125,7 @@ export default function ToggleBase({
   defaultPressed,
   pressed: controlledPressed,
   onPressedChange,
-  shape = "square",
+  shape = "rounded",
   size = "md",
   disabled = false,
   animated = true,

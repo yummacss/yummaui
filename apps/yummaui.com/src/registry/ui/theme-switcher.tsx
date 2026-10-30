@@ -23,14 +23,14 @@ const THEMES: {
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const TRACK_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 // one step under the track's own round, so the chip nests inside it
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xl cs:s",
 };
@@ -105,7 +105,7 @@ export default function ThemeSwitcher({
   storageKey,
   iconOnly = false,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   disabled = false,
   className,
   focus = true,

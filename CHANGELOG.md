@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - A plain look: neutral colors, white surfaces, light borders and medium weights.
-- Every component is square by default; `shape` rounds it.
+- Every component is rounded by default, at 6px for controls and 8px for menus and cards; Avatar stays a circle.
 - Shortcuts in menus and tooltips are plain text.
 - Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.
 - Sidebar marks the link you pick, and `onNavigate` reports it.

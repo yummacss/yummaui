@@ -6,7 +6,7 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "p:1 br:9999",
@@ -76,7 +76,7 @@ const INSET = "fv:oo:-3";
 export default function ButtonGroup({
   className,
   children,
-  shape = "square",
+  shape = "rounded",
   separated = true,
   stretch = false,
   icon = true,

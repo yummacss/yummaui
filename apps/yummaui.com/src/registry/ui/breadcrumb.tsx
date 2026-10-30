@@ -21,7 +21,7 @@ const SEPARATOR_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -72,7 +72,7 @@ export interface BreadcrumbProps {
 export default function BreadcrumbBase({
   items,
   bordered = false,
-  shape = "square",
+  shape = "rounded",
   size = "md",
   separator = "chevron",
   className,

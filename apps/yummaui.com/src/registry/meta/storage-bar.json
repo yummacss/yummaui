@@ -73,7 +73,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the card, the track and the icon tiles."
     },
     {

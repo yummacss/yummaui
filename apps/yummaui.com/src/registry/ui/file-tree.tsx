@@ -11,13 +11,13 @@ type Shape = "rounded" | "square" | "squircle";
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const TREE_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -134,7 +134,7 @@ export default function FileTree({
   defaultSelected,
   selected: controlledSelected,
   onSelectedChange,
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

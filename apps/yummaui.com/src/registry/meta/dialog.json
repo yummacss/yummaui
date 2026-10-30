@@ -122,7 +122,7 @@
         "squircle",
         "pill"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the popup and its buttons."
     },
     {

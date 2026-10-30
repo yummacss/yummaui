@@ -97,7 +97,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the trigger, popup and items together. `squircle` steps the popup & item radius up one and adds `corner-shape`."
     },
     {

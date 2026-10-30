@@ -61,13 +61,13 @@ const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -162,7 +162,7 @@ export default function DrawerBase({
   handle = true,
   showClose = false,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

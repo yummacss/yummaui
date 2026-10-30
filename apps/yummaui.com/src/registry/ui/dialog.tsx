@@ -17,20 +17,20 @@ type Size = "sm" | "md" | "lg";
 type ConfirmTone = "primary" | "danger";
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",
@@ -165,7 +165,7 @@ export default function DialogBase({
   onConfirm,
   confirmTone = "primary",
   showClose = true,
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

@@ -18,7 +18,7 @@ const TRIGGER_VARIANTS: Record<TriggerVariant, string> = {
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -143,7 +143,7 @@ export default function PopoverBase({
   open: controlledOpen,
   onOpenChange,
   showClose = false,
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

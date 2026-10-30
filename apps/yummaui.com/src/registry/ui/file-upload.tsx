@@ -16,19 +16,19 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 const ZONE = "d:f fd:c ai:c g:3 m:0 p:0 w:100% min-w:0 bg:transparent";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:3xl cs:s",
 };
 
 const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "br:0",
   squircle: "br:xl cs:s",
 };
@@ -167,7 +167,7 @@ export default function FileUploadBase({
   accept,
   multiple = false,
   onFilesChange,
-  shape = "square",
+  shape = "rounded",
   border = "dashed",
   error,
   disabled = false,

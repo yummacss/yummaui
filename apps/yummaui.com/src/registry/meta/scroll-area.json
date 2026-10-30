@@ -15,7 +15,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the focus outline. The thumb is always a capsule."
     },
     {

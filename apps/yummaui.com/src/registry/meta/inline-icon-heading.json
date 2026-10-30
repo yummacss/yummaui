@@ -21,7 +21,7 @@
         "pill",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "The corners of each chip & of the icon tile inside it."
     },
     {

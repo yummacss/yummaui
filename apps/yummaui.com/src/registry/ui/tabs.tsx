@@ -23,20 +23,20 @@ const SIZES: Record<Size, { tab: string; text: string }> = {
 
 const LIST_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const PANEL_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TAB_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -119,7 +119,7 @@ export default function TabsBase({
   onValueChange,
   orientation = "horizontal",
   size = "md",
-  shape = "square",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   animated = true,

@@ -22,27 +22,27 @@ const SIZES: Record<Size, string> = {
 };
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xxl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const BADGE_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",
@@ -151,7 +151,7 @@ export default function AlertDialogBase({
   onConfirm,
   showClose = true,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

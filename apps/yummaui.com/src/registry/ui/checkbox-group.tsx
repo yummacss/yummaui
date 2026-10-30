@@ -16,7 +16,7 @@ type Shape = "rounded" | "square" | "squircle";
 
 // the well around the boxes, concentric with their rows inside it
 const WELL_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xl cs:s",
 };
@@ -74,7 +74,7 @@ export default function CheckboxGroupBase({
   disabled,
   name,
   countLabel,
-  shape = "square",
+  shape = "rounded",
 }: CheckboxGroupProps) {
   const labelId = useId();
   const [internal, setInternal] = useState(defaultValue ?? []);

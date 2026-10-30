@@ -60,7 +60,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius of the track. The options nest one step inside it. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {

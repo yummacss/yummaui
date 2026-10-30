@@ -23,7 +23,7 @@ export interface AccordionItem {
 }
 
 const SHAPES: Record<Shape, { item: string; trigger: string }> = {
-  rounded: { item: "br:lg", trigger: "br:sm" },
+  rounded: { item: "br:md", trigger: "br:xs" },
   square: { item: "", trigger: "" },
   squircle: { item: "br:xxl cs:s", trigger: "br:xxl cs:s" },
 };
@@ -99,7 +99,7 @@ export interface AccordionProps {
 export default function AccordionBase({
   items,
   variant = "default",
-  shape = "square",
+  shape = "rounded",
   separated = true,
   indicator = "chevron",
   indicatorPosition = "trailing",

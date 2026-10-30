@@ -60,7 +60,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the tree and on each row."
     },
     {

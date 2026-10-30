@@ -22,7 +22,7 @@ const SLOT_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -91,7 +91,7 @@ export default function OTPFieldBase({
   validationType = "numeric",
   mask = false,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   disabled = false,
   required = false,
   focus = true,

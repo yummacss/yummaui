@@ -18,13 +18,13 @@ const TONES = [
 ];
 
 const CARD_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -107,7 +107,7 @@ export default function StorageBar({
   unit = "GB",
   label = "Storage",
   rest = "Free",
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
 }: StorageBarProps) {

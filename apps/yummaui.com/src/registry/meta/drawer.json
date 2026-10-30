@@ -105,7 +105,7 @@
         "square",
         "squircle"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius on the edge that faces the page, and on the buttons."
     },
     {

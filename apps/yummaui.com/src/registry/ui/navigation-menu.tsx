@@ -10,19 +10,19 @@ type Shape = "rounded" | "square" | "squircle";
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const BAR_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -92,7 +92,7 @@ export interface NavigationMenuProps {
 export default function NavigationMenuBase({
   items,
   label = "Main",
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

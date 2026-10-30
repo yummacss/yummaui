@@ -11,19 +11,19 @@ type Shape = "rounded" | "square" | "squircle";
 type TriggerTone = "neutral" | "danger";
 
 const TOAST_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const ACTION_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -147,7 +147,7 @@ export default function ToastBase({
   timeout = 5000,
   limit = 3,
   triggerTone = "neutral",
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

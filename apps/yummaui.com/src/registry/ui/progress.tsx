@@ -48,7 +48,7 @@ export default function ProgressBase({
   value,
   label,
   shimmer = false,
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
 }: ProgressProps) {

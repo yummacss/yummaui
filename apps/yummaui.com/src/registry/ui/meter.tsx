@@ -31,7 +31,7 @@ export interface MeterSegment {
 type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:xs",
   square: "",
   squircle: "br:md cs:s",
   pill: "br:9999",
@@ -93,7 +93,7 @@ export interface MeterProps {
  * with an optional icon and description.
  */
 export default function MeterBase({
-  shape = "square",
+  shape = "rounded",
   value,
   min,
   max,

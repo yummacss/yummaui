@@ -44,20 +44,20 @@ const SIZES: Record<Size, SizeSpec> = {
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:sm",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -188,7 +188,7 @@ export default function MenuBase({
   trigger,
   items,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   disabled = false,

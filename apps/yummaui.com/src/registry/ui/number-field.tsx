@@ -44,13 +44,13 @@ const ICON_SIZES: Record<Size, string> = {
 };
 
 const START_SHAPES: Record<Shape, string> = {
-  rounded: "blr:lg",
+  rounded: "blr:md",
   square: "",
   squircle: "blr:xxl cs:s",
 };
 
 const END_SHAPES: Record<Shape, string> = {
-  rounded: "brr:lg",
+  rounded: "brr:md",
   square: "",
   squircle: "brr:xxl cs:s",
 };
@@ -105,7 +105,7 @@ export default function NumberFieldBase({
   required = false,
   description,
   size = "md",
-  shape = "square",
+  shape = "rounded",
   disabled = false,
   className,
   focus = true,

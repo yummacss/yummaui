@@ -104,7 +104,7 @@
         "squircle",
         "pill"
       ],
-      "default": "square",
+      "default": "rounded",
       "description": "Corner radius of the track."
     },
     {

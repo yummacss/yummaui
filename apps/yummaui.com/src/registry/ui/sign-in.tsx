@@ -13,7 +13,7 @@ type Card = Exclude<Shape, "pill">;
 const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 
 const CARD_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:3xl cs:s",
 };
@@ -76,7 +76,7 @@ export default function SignIn({
   onPasskey,
   forgotHref,
   signUpHref,
-  shape = "square",
+  shape = "rounded",
   animated = true,
   className,
 }: SignInProps) {
