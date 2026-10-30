@@ -186,7 +186,7 @@ export default function FieldBase({
       disabled={disabled}
       className={merge(
         outline,
-        "d:f ai:c jc:c p:0 bg:transparent bw:0 c:hint c:p us:none",
+        "d:f ai:c jc:c w:6 h:6 m:-1 p:0 br:sm bg:transparent bw:0 c:hint c:p us:none",
       )}
     >
       {revealed ? (

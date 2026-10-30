@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Two blocks: Sidebar and Sign In.
+- Menu takes an element as `trigger`, such as a `Button`, which keeps its own look.
+- Combobox chips fade out when removed.
 
 ### Changed
 
@@ -22,7 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The colors `init` and `add` write are `oklch()`, which needs Yumma CSS 4.9 or later.
 - Components draw their icons from Tabler, `@tabler/icons-react`, in place of Solar.
 - Spinners and skeletons use `aic:i`, and pressed controls `wc:s`, which need Yumma CSS 4.10 or later.
-- Pressed controls scale to 97%, focus outlines grow in, and tinted avatars carry `bi-lg:b`, which need Yumma CSS 4.11 or later.
+- Pressed controls scale to 97%, focus outlines grow in, and avatars carry `bi-lg:b`, which need Yumma CSS 4.11 or later.
+- Every control is at least 24px to click: chip removes, the password toggle and breadcrumb links.
+- Combobox outlines its whole field on focus, not the input inside it.
 - `init` and `add` write `yummacss.config.mjs`, or `yumma.config.mjs` where a project already has one or an older Yumma CSS.
 
 ### Removed

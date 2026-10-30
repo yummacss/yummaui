@@ -25,6 +25,7 @@ const KNOWN_UNLISTED: string[] = [
 	"avatar-icon-fallback",
 	"avatar-initial-fallback",
 	"avatar-stack-compact",
+	"button-group-split",
 	"combobox-grouped",
 	"combobox-helper",
 	"field-prefix",

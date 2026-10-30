@@ -25,6 +25,8 @@ export interface ComboboxGroup {
 }
 
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
+// the chips field outlines itself while its input has focus
+const FIELD_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
 
 const INPUT =
   "pl:4 pr:16 bg:field bc:rim c:label bw:1 fs:sm";
@@ -231,7 +233,12 @@ export default function ComboboxBase({
   }, [disabled]);
   const id = useId();
 
+  const fieldOutline = focus
+    ? merge(FIELD_FOCUS, focus === true ? "" : focus)
+    : "";
+
   const chipsClasses = merge(
+    fieldOutline,
     "d:f fw:w ai:c g:1 py:1 pl:1 pr:16 bg:field bc:rim c:label bw:1",
     CHIPS_SIZES[size],
     SHAPES[shape],
@@ -313,35 +320,18 @@ export default function ComboboxBase({
               <Combobox.Value>
                 {(selected: string[] | string | null) => (
                   <>
-                    {toChips(selected).map((chip) => (
-                      <Combobox.Chip
-                        key={chip}
-                        className={merge(
-                          "d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500",
-                          CHIP_SHAPES[shape],
-                          // a new chip fades in
-                          animated && "tp:o tdu:150 ttf:eo @st:o:0 @prm:tp:none",
-                        )}
-                      >
-                        {chip}
-                        <Combobox.ChipRemove
-                          className="d:f b:0 ai:c jc:c p:0 bg:transparent c:hint c:p h:c:label"
-                          aria-label={`Remove ${chip}`}
-                        >
-                          <IconX className="w:3 h:3" />
-                        </Combobox.ChipRemove>
-                      </Combobox.Chip>
-                    ))}
+                    <ChipList
+                      chips={toChips(selected)}
+                      className={merge(CHIP, CHIP_SHAPES[shape])}
+                      animated={animated}
+                    />
                   </>
                 )}
               </Combobox.Value>
               <Combobox.Input
                 id={id}
                 placeholder={placeholder}
-                className={merge(
-                  outline,
-                  "fg:1 w:24 min-w:24 pl:1 bg:transparent c:label bw:0",
-                )}
+                className="fg:1 w:24 min-w:24 pl:1 bg:transparent c:label bw:0 os:none"
               />
             </Combobox.Chips>
           ) : (
@@ -379,6 +369,78 @@ export default function ComboboxBase({
         </Combobox.Positioner>
       </Combobox.Portal>
     </Combobox.Root>
+  );
+}
+
+const CHIP =
+  "d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500";
+const CHIP_REMOVE =
+  "d:f b:0 ai:c jc:c w:6 h:6 my:-px ml:-1 mr:-2 p:0 bg:transparent c:hint c:p h:c:label";
+
+// a removed chip stays a moment as a copy that fades out, since Base UI unmounts it at once
+function ChipList({
+  chips,
+  className,
+  animated,
+}: {
+  chips: string[];
+  className: string;
+  animated: boolean;
+}) {
+  const [previous, setPrevious] = useState(chips);
+  const [leaving, setLeaving] = useState<{ chip: string; at: number }[]>([]);
+  if (previous.join("\n") !== chips.join("\n")) {
+    const gone = previous
+      .map((chip, at) => ({ chip, at }))
+      .filter(({ chip }) => !chips.includes(chip));
+    setPrevious(chips);
+    if (animated)
+      setLeaving((list) => [
+        ...list.filter(({ chip }) => !chips.includes(chip)),
+        ...gone,
+      ]);
+  }
+
+  useEffect(() => {
+    if (!leaving.length) return;
+    const timer = setTimeout(() => setLeaving([]), 150);
+    return () => clearTimeout(timer);
+  }, [leaving]);
+
+  const rows = chips.map((chip) => ({ chip, gone: false }));
+  for (const { chip, at } of [...leaving].sort((a, b) => a.at - b.at))
+    rows.splice(Math.min(at, rows.length), 0, { chip, gone: true });
+
+  return rows.map(({ chip, gone }) =>
+    gone ? (
+      <span
+        key={`${chip}-leaving`}
+        aria-hidden
+        className={merge(
+          className,
+          "o:0 s:90 pe:none an:leave adu:150 atf:eo @prm:an:none",
+        )}
+      >
+        {chip}
+        <span className={CHIP_REMOVE}>
+          <IconX className="w:3 h:3" />
+        </span>
+      </span>
+    ) : (
+      <Combobox.Chip
+        key={chip}
+        className={merge(
+          className,
+          // a new chip fades in
+          animated && "tp:o tdu:150 ttf:eo @st:o:0 @prm:tp:none",
+        )}
+      >
+        {chip}
+        <Combobox.ChipRemove className={CHIP_REMOVE} aria-label={`Remove ${chip}`}>
+          <IconX className="w:3 h:3" />
+        </Combobox.ChipRemove>
+      </Combobox.Chip>
+    ),
   );
 }
 
