@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Four blocks: App Shell, Settings Page, Sidebar and Sign In.
+- Two blocks: Sidebar and Sign In.
 
 ### Changed
 

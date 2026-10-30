@@ -4,7 +4,6 @@
  */
 import meta_accordion from "./meta/accordion.json";
 import meta_alert_dialog from "./meta/alert-dialog.json";
-import meta_app_shell from "./meta/app-shell.json";
 import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
 import meta_avatar from "./meta/avatar.json";
@@ -39,7 +38,6 @@ import meta_rating from "./meta/rating.json";
 import meta_scroll_area from "./meta/scroll-area.json";
 import meta_select from "./meta/select.json";
 import meta_separator from "./meta/separator.json";
-import meta_settings_page from "./meta/settings-page.json";
 import meta_sidebar from "./meta/sidebar.json";
 import meta_sign_in from "./meta/sign-in.json";
 import meta_skeleton from "./meta/skeleton.json";
@@ -58,7 +56,6 @@ import meta_tooltip from "./meta/tooltip.json";
 export const registry = {
   "accordion": () => import("./ui/accordion"),
   "alert-dialog": () => import("./ui/alert-dialog"),
-  "app-shell": () => import("./ui/app-shell"),
   "autocomplete-grouped": () => import("./ui/autocomplete-grouped"),
   "autocomplete-helper": () => import("./ui/autocomplete-helper"),
   "autocomplete-icon-leading": () => import("./ui/autocomplete-icon-leading"),
@@ -107,7 +104,6 @@ export const registry = {
   "select-grouped": () => import("./ui/select-grouped"),
   "select": () => import("./ui/select"),
   "separator": () => import("./ui/separator"),
-  "settings-page": () => import("./ui/settings-page"),
   "sidebar": () => import("./ui/sidebar"),
   "sign-in": () => import("./ui/sign-in"),
   "skeleton-activity": () => import("./ui/skeleton-activity"),
@@ -181,7 +177,6 @@ export interface ChildExample {
 export const registryMeta = {
   "accordion": meta_accordion,
   "alert-dialog": meta_alert_dialog,
-  "app-shell": meta_app_shell,
   "autocomplete": meta_autocomplete,
   "avatar-stack": meta_avatar_stack,
   "avatar": meta_avatar,
@@ -216,7 +211,6 @@ export const registryMeta = {
   "scroll-area": meta_scroll_area,
   "select": meta_select,
   "separator": meta_separator,
-  "settings-page": meta_settings_page,
   "sidebar": meta_sidebar,
   "sign-in": meta_sign_in,
   "skeleton": meta_skeleton,
@@ -247,7 +241,6 @@ export interface RegistryTarget {
 export const registryTargets: Record<string, RegistryTarget> = {
   "accordion": { component: "accordion", variant: "base", kind: "component", install: "accordion" },
   "alert-dialog": { component: "alert-dialog", variant: "base", kind: "component", install: "alert-dialog" },
-  "app-shell": { component: "app-shell", variant: "base", kind: "component", install: "app-shell" },
   "autocomplete-grouped": { component: "autocomplete", variant: "grouped", kind: "example", install: "autocomplete" },
   "autocomplete-helper": { component: "autocomplete", variant: "helper", kind: "example", install: "autocomplete" },
   "autocomplete-icon-leading": { component: "autocomplete", variant: "icon-leading", kind: "example", install: "autocomplete" },
@@ -296,7 +289,6 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "select-grouped": { component: "select", variant: "grouped", kind: "example", install: "select" },
   "select": { component: "select", variant: "base", kind: "component", install: "select" },
   "separator": { component: "separator", variant: "base", kind: "component", install: "separator" },
-  "settings-page": { component: "settings-page", variant: "base", kind: "component", install: "settings-page" },
   "sidebar": { component: "sidebar", variant: "base", kind: "component", install: "sidebar" },
   "sign-in": { component: "sign-in", variant: "base", kind: "component", install: "sign-in" },
   "skeleton-activity": { component: "skeleton", variant: "activity", kind: "example", install: "skeleton" },
