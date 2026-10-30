@@ -6,7 +6,6 @@
  * @property {string} title
  * @property {string} description
  * @property {boolean | string} [primitive] The Base UI part it builds on: `true` for the one sharing its slug.
- * @property {string} [added] The day it arrived, for the New badge.
  * @property {boolean} [resizable] The preview drags narrower, for a whole screen region.
  */
 
@@ -102,7 +101,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Slide a panel in from an edge of the screen & swipe it away, built on Base UI.",
 		primitive: true,
-		added: "2026-09-28",
 	},
 	{
 		slug: "empty-state",
@@ -121,7 +119,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Browse folders & files from a list of paths, opening folder by folder, built on Base UI.",
 		primitive: true,
-		added: "2026-10-18",
 	},
 	{
 		slug: "file-upload",
@@ -133,14 +130,12 @@ export const COMPONENT_PAGES = [
 		title: "Inline Icon Heading",
 		description:
 			"A centered heading whose key words each sit in a chip with their icon.",
-		added: "2026-10-16",
 		resizable: true,
 	},
 	{
 		slug: "kbd",
 		title: "Kbd",
 		description: "Show a keyboard shortcut as keycaps in running text.",
-		added: "2026-10-18",
 	},
 	{
 		slug: "menu",
@@ -167,7 +162,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Open panels of links from a bar, sliding between them as you move across, built on Base UI.",
 		primitive: true,
-		added: "2026-10-18",
 	},
 	{
 		slug: "number-field",
@@ -187,7 +181,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Enter a one-time code one character at a time, built on Base UI.",
 		primitive: true,
-		added: "2026-09-28",
 	},
 	{
 		slug: "popover",
@@ -225,7 +218,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Scroll long content inside a card or panel, with a thin scrollbar that shows while you scroll, built on Base UI.",
 		primitive: true,
-		added: "2026-10-18",
 	},
 	{
 		slug: "select",
@@ -244,7 +236,6 @@ export const COMPONENT_PAGES = [
 		title: "Sidebar",
 		description:
 			"An app's sidebar with a workspace switcher, grouped links with badges & the user's menu.",
-		added: "2026-10-29",
 		resizable: true,
 	},
 	{
@@ -252,7 +243,6 @@ export const COMPONENT_PAGES = [
 		title: "Sign In",
 		description:
 			"A sign-in card with email, password, an optional passkey & a form that shakes on a mistake.",
-		added: "2026-10-29",
 		resizable: true,
 	},
 	{
@@ -272,7 +262,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Show how full a disk is & what fills it, with the total counting up, built on Base UI.",
 		primitive: true,
-		added: "2026-10-18",
 	},
 	{
 		slug: "switch",
@@ -298,7 +287,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Pick light, dark or the system's theme in one control, built on Base UI.",
 		primitive: true,
-		added: "2026-10-17",
 	},
 	{
 		slug: "toast",
@@ -306,7 +294,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Confirm what just happened in a brief message, with an action to undo it, built on Base UI.",
 		primitive: true,
-		added: "2026-10-17",
 	},
 	{
 		slug: "toggle-group",

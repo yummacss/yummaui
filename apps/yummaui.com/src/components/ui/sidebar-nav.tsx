@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import Scroller from "@/components/ui/scroller";
 import { useReveal } from "@/utils/reveal";
 import type { NavSection } from "./mobile-sheet";
-import NewBadge, { NewLabel } from "./new-badge";
 import ProductLinks from "./product-links";
 
 interface Props {
@@ -47,9 +46,7 @@ export default function SidebarNav({ sections }: Props) {
 											className={`p:r d:if ai:c g:3 fs:sm us:none fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:accent td:u tds:d" : "c:ink/70 h:c:accent"}`}
 										>
 											{item.title}
-											<NewLabel since={item.since} />
 										</Link>
-										<NewBadge since={item.since} />
 									</li>
 								);
 							})}
