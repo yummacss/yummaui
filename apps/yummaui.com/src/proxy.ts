@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
 	const match = request.nextUrl.pathname.match(
-		/^\/(?:docs|components)\/([^/]+)\.md$/,
+		/^\/(?:docs|components|blocks)\/([^/]+)\.md$/,
 	);
 	if (match) {
 		return NextResponse.rewrite(new URL(`/api/ui-md/${match[1]}`, request.url));
@@ -13,5 +13,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ["/docs/:path*.md", "/components/:path*.md"],
+	matcher: ["/docs/:path*.md", "/components/:path*.md", "/blocks/:path*.md"],
 };

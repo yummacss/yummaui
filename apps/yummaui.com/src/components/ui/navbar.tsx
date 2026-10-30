@@ -23,9 +23,17 @@ interface NavbarProps {
 	className?: string;
 	/** The phone menu's sections, built on the server; without them there is no menu button. */
 	menu?: NavSection[];
+	/** Components & Blocks, for the phone menu's switch. */
+	areas?: { area: string; label: string; href: string }[];
+	current?: string;
 }
 
-export default function Navbar({ className, menu }: NavbarProps) {
+export default function Navbar({
+	className,
+	menu,
+	areas,
+	current,
+}: NavbarProps) {
 	const [searchOpen, setSearchOpen] = useState(false);
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -77,6 +85,8 @@ export default function Navbar({ className, menu }: NavbarProps) {
 						isOpen={isSidebarOpen}
 						onClose={() => setIsSidebarOpen(false)}
 						menu={menu}
+						areas={areas}
+						current={current}
 					/>
 				</Suspense>
 			)}

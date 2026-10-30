@@ -9,14 +9,25 @@ function page(slug: string) {
 	return { href: pagePath(slug), title: ui?.title ?? slug, since: ui?.badge };
 }
 
-/** The sidebar's sections, built on the server so the client gets titles and badges, not the collection. */
-export function menu(): NavSection[] {
-	return sidebarConfig.map((section) => ({
-		title: section.title,
-		items: section.items.map(page),
-	}));
+export type Area = "components" | "blocks";
+
+/** The sidebar's sections for one area, built on the server so the client gets titles and badges, not the collection. */
+export function menu(area: Area = "components"): NavSection[] {
+	return sidebarConfig
+		.filter((section) => (section.area ?? "components") === area)
+		.map((section) => ({
+			title: section.title,
+			items: section.items.map(page),
+		}));
 }
 
-export default function Sidebar() {
-	return <SidebarNav sections={menu()} />;
+// where each area's link lands: its first page
+export const AREAS = (["components", "blocks"] as const).map((area) => ({
+	area,
+	label: area === "blocks" ? "Blocks" : "Components",
+	href: menu(area)[area === "blocks" ? 0 : 1]?.items[0]?.href ?? "/",
+}));
+
+export default function Sidebar({ area = "components" }: { area?: Area }) {
+	return <SidebarNav sections={menu(area)} areas={AREAS} current={area} />;
 }
