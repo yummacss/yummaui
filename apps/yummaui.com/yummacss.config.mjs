@@ -40,6 +40,14 @@ export default defineConfig({
 			"out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)",
 			"out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",
 		},
+		// the soft key: a lighter inner edge on top and a small drop under each key
+		boxShadow: {
+			key: "inset 0 1px 0 light-dark(oklch(1 0 0), oklch(1 0 0 / .11)), 0 1px 2px light-dark(oklch(0 0 0 / .07), oklch(0 0 0 / .35))",
+			"key-fill":
+				"inset 0 1px 0 light-dark(oklch(1 0 0 / .16), oklch(1 0 0 / .7)), 0 1px 2px light-dark(oklch(0 0 0 / .1), oklch(0 0 0 / .35))",
+			sunk: "inset 0 1px 2px light-dark(oklch(0 0 0 / .08), oklch(0 0 0 / .45))",
+			pop: "0 12px 28px -12px light-dark(oklch(0 0 0 / .16), oklch(0 0 0 / .7)), 0 2px 6px -2px light-dark(oklch(0 0 0 / .05), oklch(0 0 0 / .3))",
+		},
 		keyframes: {
 			// to the element's own style, so a leaving element ends where it rests
 			leave: "from { opacity: 1; scale: 1; }",

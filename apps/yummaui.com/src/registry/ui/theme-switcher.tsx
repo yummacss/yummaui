@@ -2,7 +2,7 @@
 
 import { Toggle } from "@base-ui/react/toggle";
 import { ToggleGroup } from "@base-ui/react/toggle-group";
-import { IconDeviceDesktopFilled, IconMoonFilled, IconSunFilled } from "@tabler/icons-react";
+import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 import { type ComponentType, useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 
@@ -15,22 +15,22 @@ const THEMES: {
   label: string;
   icon: ComponentType<{ className?: string }>;
 }[] = [
-  { value: "light", label: "Light", icon: IconSunFilled },
-  { value: "dark", label: "Dark", icon: IconMoonFilled },
-  { value: "system", label: "System", icon: IconDeviceDesktopFilled },
+  { value: "light", label: "Light", icon: IconSun },
+  { value: "dark", label: "Dark", icon: IconMoon },
+  { value: "system", label: "System", icon: IconDeviceDesktop },
 ];
 
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const TRACK_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 // one step under the track's own round, so the chip nests inside it
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:xl cs:s",
 };
@@ -46,7 +46,7 @@ const ICON_ONLY: Record<Size, string> = {
 };
 
 // picking one of several: the selected tab's raised chip on the track
-const PICKED = "bg:raised bc:rim c:label";
+const PICKED = "bg:raised bs-o:key bc:rim c:label";
 const UNPICKED = "bg:transparent bc:transparent c:hint h:c:label";
 
 function isTheme(value: unknown): value is Theme {
@@ -148,7 +148,7 @@ export default function ThemeSwitcher({
       onValueChange={pick}
       disabled={disabled}
       className={merge(
-        "d:f g:1 p:1 w:fc bg:well",
+        "d:f g:1 p:1 w:fc bg:well bs-o:sunk",
         TRACK_SHAPES[shape],
         disabled ? "o:60" : "",
         className,

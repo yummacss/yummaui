@@ -10,19 +10,19 @@ type Shape = "rounded" | "square" | "squircle";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BAR_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -114,7 +114,7 @@ export default function NavigationMenuBase({
     >
       <NavigationMenu.List
         className={merge(
-          "p:r d:f ai:c g:1 m:0 p:1 bg:raised bw:1 bc:rim",
+          "p:r d:f ai:c g:1 m:0 p:1 bg:raised bs-o:key bw:1 bc:rim",
           BAR_SHAPES[shape],
         )}
       >
@@ -208,7 +208,7 @@ export default function NavigationMenuBase({
         >
           <NavigationMenu.Popup
             className={merge(
-              "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:xl",
+              "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
               BAR_SHAPES[shape],
               animated &&
                 "tp:a tdu:350 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",

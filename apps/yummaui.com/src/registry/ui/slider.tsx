@@ -17,7 +17,7 @@ const FOCUS = "os:s ow:3 oo:0 oc:focus/40";
 
 // the knob, centered on the value and overhanging the bar, as a switch thumb
 const THUMB =
-  "w:5 h:5 bg:knob bw:1 bc:rim";
+  "w:5 h:5 bg:knob bw:1 bc:rim bs-o:key";
 
 function defaultFormat(value: Value): ReactNode {
   return Array.isArray(value) ? `${value[0]} - ${value[1]}` : `${value}%`;
@@ -171,9 +171,9 @@ export default function SliderBase({
           className={`d:f ai:c py:3 us:none ta:none ${disabled ? "c:na" : ""}`}
         >
           <Slider.Track
-            className={merge("p:r h:2 w:100% bg:rim", SHAPES[shape])}
+            className={merge("p:r h:2 w:100% bg:well bs-o:sunk", SHAPES[shape])}
           >
-            <Slider.Indicator className={merge("bg:check", SHAPES[shape])} />
+            <Slider.Indicator className={merge("bg:check bs-o:key-fill", SHAPES[shape])} />
             {isRange ? (
               value.map((_, index) => (
                 <Slider.Thumb

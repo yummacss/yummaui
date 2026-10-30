@@ -39,14 +39,14 @@ const LINE: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:xs",
+  rounded: "br:sm",
   square: "br:0",
   squircle: "br:xxl cs:s",
 };
 
 const CHECKED =
-  "bw:1 bg:check bc:transparent";
-const UNCHECKED = "bw:1 bg:field bc:rim";
+  "bw:1 bg:check bc:edge bs-o:key-fill";
+const UNCHECKED = "bw:1 bg:field bs-o:key bc:rim";
 
 export interface CheckboxProps
   extends Omit<ComponentProps<typeof Checkbox.Root>, "className"> {
@@ -164,7 +164,7 @@ export default function CheckboxBase({
             "d:f ai:c g:3 w:100% px:2 py:2 bw:1 us:none tp:c tdu:150 ttf:io",
             disabled ? "o:60 c:na" : "c:p",
             state.checked
-              ? "bg:raised bc:rim"
+              ? "bg:raised bs-o:key bc:rim"
               : "bg:transparent bc:transparent",
             className,
           )

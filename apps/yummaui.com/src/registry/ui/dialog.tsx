@@ -17,20 +17,20 @@ type Size = "sm" | "md" | "lg";
 type ConfirmTone = "primary" | "danger";
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",
@@ -41,23 +41,23 @@ const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none";
 
 const NEUTRAL_BUTTON =
-  "bg:raised bc:rim c:label h:bg:well";
+  "bg:raised bs-o:key bc:rim c:label h:bg:well";
 
 const PRIMARY_BUTTON =
-  "bg:fill bc:fill h:o:90 c:on-fill";
+  "bg:fill bc:edge h:o:90 c:on-fill bs-o:key-fill";
 
 const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
 const TRIGGER_TONES: Record<TriggerTone, string> = {
   neutral: NEUTRAL_BUTTON,
   danger:
-    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
+    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
 };
 
 const CONFIRM_TONES: Record<ConfirmTone, string> = {
   primary: PRIMARY_BUTTON,
   danger:
-    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
+    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
 };
 
 const SIZES: Record<Size, string> = {
@@ -191,7 +191,7 @@ export default function DialogBase({
   );
 
   const popupClasses = [
-    "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     POPUP_SHAPES[cardOf(shape)],
   ]
     .filter(Boolean)
@@ -235,7 +235,7 @@ export default function DialogBase({
                 <Button
                   className={merge(
                     outline,
-                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bc:rim c:label h:bg:well",
+                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
                     CLOSE_SHAPES[shape],
                   )}
                 />

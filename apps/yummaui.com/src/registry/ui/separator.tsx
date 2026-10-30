@@ -6,7 +6,7 @@ import { merge } from "yummacss/merge";
 type Shape = "rounded" | "square" | "squircle" | "circle";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   circle: "br:9999",
@@ -89,7 +89,7 @@ export default function SeparatorBase({
 
   const buttonClasses = merge(
     outline,
-    "d:if ai:c jc:c w:8 h:8 bg:raised bc:rim c:label bw:1 tp:a tdu:150 ttf:io a:s:97 wc:s @prm:tp:none us:none c:p h:bg:well",
+    "d:if ai:c jc:c w:8 h:8 bg:raised bs-o:key bc:rim c:label bw:1 tp:a tdu:150 ttf:io a:s:97 wc:s @prm:tp:none us:none c:p h:bg:well",
     SHAPES[iconShape],
   );
 

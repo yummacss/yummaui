@@ -18,13 +18,13 @@ const TONES = [
 ];
 
 const CARD_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -122,7 +122,7 @@ export default function StorageBar({
       max={max}
       getAriaValueText={() => `${amount(used)} of ${amount(max)} ${unit} used`}
       className={merge(
-        "d:f fd:c g:4 w:80 max-w:100% p:5 bg:raised c:label fvn:tn bw:1 bc:rim",
+        "d:f fd:c g:4 w:80 max-w:100% p:5 bg:raised bs-o:key c:label fvn:tn bw:1 bc:rim",
         CARD_SHAPES[shape],
         className,
       )}
@@ -141,7 +141,7 @@ export default function StorageBar({
 
       <Meter.Track
         className={merge(
-          "d:f g:px h:3 o:h bg:field bc:rim bw:1",
+          "d:f g:px h:3 o:h bg:well bc:rim bw:1 bs-o:sunk",
           TRACK_SHAPES[shape],
         )}
       >

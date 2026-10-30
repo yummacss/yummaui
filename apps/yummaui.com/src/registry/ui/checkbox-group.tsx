@@ -16,7 +16,7 @@ type Shape = "rounded" | "square" | "squircle";
 
 // the well around the boxes, concentric with their rows inside it
 const WELL_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xl cs:s",
 };
@@ -116,7 +116,7 @@ export default function CheckboxGroupBase({
           shape={shape}
         />
       )}
-      <div className={merge("d:f fd:c g:1 p:1 bg:well", WELL_SHAPES[shape])}>
+      <div className={merge("d:f fd:c g:1 p:1 bg:well bs-o:sunk", WELL_SHAPES[shape])}>
         {Children.map(children, (child) =>
           isValidElement<{ shape?: Shape }>(child)
             ? cloneElement(child, { shape: child.props.shape ?? shape })

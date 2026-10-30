@@ -1,6 +1,6 @@
 "use client";
 
-import { IconPaletteFilled } from "@tabler/icons-react";
+import { IconPalette } from "@tabler/icons-react";
 import { useState } from "react";
 import Button from "./button";
 import Popover from "./popover";
@@ -23,7 +23,7 @@ export default function PopoverFolderColor({
 
   return (
     <Popover
-      trigger={<IconPaletteFilled className={`w:4 h:4 ${color.ink}`} />}
+      trigger={<IconPalette className={`w:4 h:4 ${color.ink}`} />}
       triggerLabel="Folder color"
       triggerVariant="label"
       title="Taxes"

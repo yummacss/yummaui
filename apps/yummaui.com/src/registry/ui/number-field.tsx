@@ -16,8 +16,8 @@ const BOX_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus fw:zi:10
 
 // the focused part rises above its neighbours, so no stepper covers its outline
 const STEP =
-  "p:r d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bc:rim c:label us:none c:p h:bg:well";
-const BOX = "p:r d:f bw:1 bg:field bc:rim";
+  "p:r d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p h:bg:well";
+const BOX = "p:r d:f bw:1 bg:field bs-o:key bc:rim";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8",
@@ -44,13 +44,13 @@ const ICON_SIZES: Record<Size, string> = {
 };
 
 const START_SHAPES: Record<Shape, string> = {
-  rounded: "blr:md",
+  rounded: "blr:lg",
   square: "",
   squircle: "blr:xxl cs:s",
 };
 
 const END_SHAPES: Record<Shape, string> = {
-  rounded: "brr:md",
+  rounded: "brr:lg",
   square: "",
   squircle: "brr:xxl cs:s",
 };

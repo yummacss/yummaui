@@ -11,19 +11,19 @@ type Shape = "rounded" | "square" | "squircle";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const TREE_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
 };
 
 const PICKED =
-  "bg:check c:white bc:transparent";
+  "bg:well c:label bc:transparent";
 
 // a file's icon and tint come from its extension
 const KINDS = [
@@ -284,7 +284,7 @@ export default function FileTree({
       role="tree"
       aria-label={label}
       className={merge(
-        "d:f fd:c g:px w:64 max-w:100% p:1 bg:raised c:label bw:1 bc:rim",
+        "d:f fd:c g:px w:64 max-w:100% p:1 bg:raised bs-o:key c:label bw:1 bc:rim",
         TREE_SHAPES[shape],
         className,
       )}

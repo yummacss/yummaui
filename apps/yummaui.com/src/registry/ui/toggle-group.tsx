@@ -8,13 +8,13 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 type Orientation = "horizontal" | "vertical";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
-const BASE = "p:r d:f g:1 p:1 w:fc bg:well";
+const BASE = "p:r d:f g:1 p:1 w:fc bg:well bs-o:sunk";
 
 export interface ToggleGroupProps {
   /** A caption above the group, wired to it as its accessible name. */

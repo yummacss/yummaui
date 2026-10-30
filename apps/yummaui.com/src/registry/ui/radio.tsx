@@ -45,8 +45,8 @@ const LINE: Record<Size, string> = {
 const ROUND = "br:9999";
 
 const PICKED =
-  "bw:1 bg:check bc:transparent";
-const UNPICKED = "bw:1 bg:field bc:rim";
+  "bw:1 bg:check bc:edge bs-o:key-fill";
+const UNPICKED = "bw:1 bg:field bs-o:key bc:rim";
 
 export interface RadioProps {
   /**

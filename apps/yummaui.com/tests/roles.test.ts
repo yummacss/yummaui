@@ -11,7 +11,7 @@ function installed(): Record<string, { light: string; dark: string }> {
 		join(rootDir, "src/content/ui/installation.mdx"),
 		"utf8",
 	);
-	const block = page.match(/colors: \{\n([\s\S]*?)\n\s*\},\n\s*\},/)?.[1] ?? "";
+	const block = page.match(/\t\tcolors: \{\n([\s\S]*?)\n\t\t\},/)?.[1] ?? "";
 	return Object.fromEntries(
 		[
 			...block.matchAll(

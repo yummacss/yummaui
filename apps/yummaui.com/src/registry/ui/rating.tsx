@@ -1,7 +1,7 @@
 "use client";
 
 import { Toggle } from "@base-ui/react/toggle";
-import { IconStarFilled } from "@tabler/icons-react";
+import { IconStar } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -178,7 +178,7 @@ export default function RatingBase({
                 (star) => {
                   const filled = star <= value;
                   const lit = hovered ? star <= hovered : filled;
-                  const mark = <IconStarFilled className="fs:0 w:6 h:6" />;
+                  const mark = <IconStar className="fs:0 w:6 h:6" />;
                   const icon = animated ? <Pop on={filled}>{mark}</Pop> : mark;
 
                   if (readOnly) {

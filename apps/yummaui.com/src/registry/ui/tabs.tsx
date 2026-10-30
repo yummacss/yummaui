@@ -23,20 +23,20 @@ const SIZES: Record<Size, { tab: string; text: string }> = {
 
 const LIST_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const PANEL_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const TAB_SHAPES: Record<Shape, string> = {
   pill: "br:9999",
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -150,14 +150,14 @@ export default function TabsBase({
   const listShape = isVertical && shape === "pill" ? "rounded" : shape;
 
   const listClasses = merge(
-    "d:f p:r g:1 p:1 w:fc bg:well",
+    "d:f p:r g:1 p:1 w:fc bg:well bs-o:sunk",
     LIST_SHAPES[listShape],
     isVertical && "fd:c",
     hasPanels && !isVertical && "mb:3",
   );
 
   const indicatorClasses = merge(
-    "p:a l:0 t:0 zi:0 bg:raised bw:1 bc:rim",
+    "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim",
     TAB_SHAPES[shape],
     animated && "tp:a tdu:300 ttf:out-quart @prm:tp:none",
   );

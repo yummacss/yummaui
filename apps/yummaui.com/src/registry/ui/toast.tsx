@@ -11,19 +11,19 @@ type Shape = "rounded" | "square" | "squircle";
 type TriggerTone = "neutral" | "danger";
 
 const TOAST_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const ACTION_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -37,14 +37,14 @@ const CLOSE_SHAPES: Record<Shape, string> = {
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const RAISED =
-  "bg:raised bc:rim c:label h:bg:well";
+  "bg:raised bs-o:key bc:rim c:label h:bg:well";
 
 const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
 const TRIGGER_TONES: Record<TriggerTone, string> = {
   neutral: RAISED,
   danger:
-    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
+    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
 };
 
 const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none c:p";
@@ -249,7 +249,7 @@ function Stack({
       className={(state) =>
         merge(
           outline,
-          "p:a r:0 b:0 w:100% bg:raised bc:line bw:1 bs-o:xl us:none",
+          "p:a r:0 b:0 w:100% bg:raised bc:line bw:1 bs-o:pop us:none",
           TOAST_SHAPES[shape],
           animated ? "tp:a tdu:500 ttf:out-quart @prm:tp:none" : "",
           state.transitionStatus === "ending" || state.limited ? "o:0" : "",

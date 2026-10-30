@@ -76,7 +76,7 @@
               "props": {
                 "name": "Phone",
                 "fallback": {
-                  "$icon": "IconDeviceMobileFilled",
+                  "$icon": "IconDeviceMobile",
                   "size": "w:6 h:6 c:white"
                 }
               }
@@ -87,7 +87,7 @@
               "props": {
                 "name": "Tablet",
                 "fallback": {
-                  "$icon": "IconDeviceTabletFilled",
+                  "$icon": "IconDeviceTablet",
                   "size": "w:6 h:6 c:white"
                 }
               }

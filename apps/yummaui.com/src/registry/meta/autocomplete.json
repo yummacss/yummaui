@@ -10,7 +10,7 @@
           "label": "report-2026.pdf",
           "description": "Taxes",
           "icon": {
-            "$icon": "IconFileFilled",
+            "$icon": "IconFile",
             "size": "w:4 h:4"
           }
         },
@@ -18,7 +18,7 @@
           "label": "receipts.pdf",
           "description": "Taxes",
           "icon": {
-            "$icon": "IconFileFilled",
+            "$icon": "IconFile",
             "size": "w:4 h:4"
           }
         },
@@ -26,7 +26,7 @@
           "label": "repo-notes.md",
           "description": "Notes",
           "icon": {
-            "$icon": "IconFileFilled",
+            "$icon": "IconFile",
             "size": "w:4 h:4"
           }
         },
@@ -34,7 +34,7 @@
           "label": "Repairs",
           "description": "Home",
           "icon": {
-            "$icon": "IconFolderFilled",
+            "$icon": "IconFolder",
             "size": "w:4 h:4"
           }
         }
@@ -163,7 +163,7 @@
             "label": "report-2026.pdf",
             "description": "Taxes",
             "icon": {
-              "$icon": "IconFileFilled",
+              "$icon": "IconFile",
               "size": "w:4 h:4"
             }
           },
@@ -171,7 +171,7 @@
             "label": "receipts.pdf",
             "description": "Taxes",
             "icon": {
-              "$icon": "IconFileFilled",
+              "$icon": "IconFile",
               "size": "w:4 h:4"
             }
           },
@@ -179,7 +179,7 @@
             "label": "repo-notes.md",
             "description": "Notes",
             "icon": {
-              "$icon": "IconFileFilled",
+              "$icon": "IconFile",
               "size": "w:4 h:4"
             }
           },
@@ -187,7 +187,7 @@
             "label": "Repairs",
             "description": "Home",
             "icon": {
-              "$icon": "IconFolderFilled",
+              "$icon": "IconFolder",
               "size": "w:4 h:4"
             }
           }

@@ -29,7 +29,7 @@ const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 const FIELD_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
 
 const INPUT =
-  "pl:4 pr:16 bg:field bc:rim c:label bw:1 fs:sm";
+  "pl:4 pr:16 bg:field bs-o:key bc:rim c:label bw:1 fs:sm";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8 w:56",
@@ -44,7 +44,7 @@ const CHIPS_SIZES: Record<Size, string> = {
 };
 
 const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -63,21 +63,21 @@ const ACTION_HEIGHTS: Record<Size, string> = {
 
 // a chip sits inside the field, so it rounds one step less
 const CHIP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xs",
+  rounded: "br:sm",
   square: "",
   squircle: "br:md cs:s",
   pill: "br:9999",
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "br:0",
   squircle: "br:xxl cs:s",
 };
@@ -174,7 +174,7 @@ function renderItem(item: ComboboxItem, shape: Shape) {
       className={(state) =>
         `d:f ai:c g:2 py:2 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[cardOf(shape)]} fs:sm fw:500 us:none c:p ${
           state.highlighted
-            ? "bg:check c:white bc:transparent"
+            ? "bg:well c:label bc:transparent"
             : "bg:transparent"
         }`
       }
@@ -239,7 +239,7 @@ export default function ComboboxBase({
 
   const chipsClasses = merge(
     fieldOutline,
-    "d:f fw:w ai:c g:1 py:1 pl:1 pr:16 bg:field bc:rim c:label bw:1",
+    "d:f fw:w ai:c g:1 py:1 pl:1 pr:16 bg:field bs-o:key bc:rim c:label bw:1",
     CHIPS_SIZES[size],
     SHAPES[shape],
     className,
@@ -255,7 +255,7 @@ export default function ComboboxBase({
 
   const popup = (
     <Combobox.Popup
-      className={`o:h bg:raised bc:line bs-o:xl c:label bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       {loading ? (
         <div
@@ -373,7 +373,7 @@ export default function ComboboxBase({
 }
 
 const CHIP =
-  "d:f ai:c g:1 px:2 py:0 h:6 bg:raised bc:rim c:label bw:1 fs:xs fw:500";
+  "d:f ai:c g:1 px:2 py:0 h:6 bg:raised bs-o:key bc:rim c:label bw:1 fs:xs fw:500";
 const CHIP_REMOVE =
   "d:f b:0 ai:c jc:c w:6 h:6 my:-px ml:-1 mr:-2 p:0 bg:transparent c:hint c:p h:c:label";
 

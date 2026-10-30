@@ -18,7 +18,7 @@ const SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -206,7 +206,7 @@ export default function FieldBase({
 
   const controlClasses = merge(
     outline,
-    "bg:field c:label bw:1 fs:sm",
+    "bg:field bs-o:key c:label bw:1 fs:sm",
     SIZES[size],
     SHAPES[shape],
     STATUS_BORDER[status],
@@ -225,7 +225,7 @@ export default function FieldBase({
           focus === true ? "" : focus.replace(/\bfv:/g, "fw:"),
         )
       : "",
-    "d:f ai:c g:2 px:3 bg:field bw:1 fs:sm",
+    "d:f ai:c g:2 px:3 bg:field bs-o:key bw:1 fs:sm",
     SIZES[size],
     SHAPES[shape],
     STATUS_BORDER[status],

@@ -152,7 +152,7 @@
                 "hold": true,
                 "holdLabel": "Deleted",
                 "icon": {
-                  "$icon": "IconTrashFilled",
+                  "$icon": "IconTrash",
                   "size": "w:4 h:4"
                 }
               },

@@ -1,6 +1,6 @@
 "use client";
 
-import { IconClockFilled } from "@tabler/icons-react";
+import { IconClock } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import Button from "./button";
 import Progress from "./progress";
@@ -43,7 +43,7 @@ export default function ProgressUpload() {
       />
       <div className="d:f ai:c jc:sb">
         <span className="d:f ai:c g:1 fs:sm c:hint fvn:tn">
-          <IconClockFilled className="w:4 h:4" />
+          <IconClock className="w:4 h:4" />
           {done ? "Done" : paused ? "Paused" : `About ${seconds} seconds left`}
         </span>
         <Button

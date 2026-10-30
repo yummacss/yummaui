@@ -7,7 +7,7 @@
       "typeName": "ReactNode",
       "description": "The glyph in the badge. No badge renders without one.",
       "example": {
-        "$icon": "IconFolderFilled",
+        "$icon": "IconFolder",
         "size": "w:6 h:6 c:yellow"
       }
     },
@@ -57,7 +57,7 @@
       "typeName": "ReactNode",
       "description": "A glyph before the secondary action's label.",
       "example": {
-        "$icon": "IconCloudFilled",
+        "$icon": "IconCloud",
         "size": "w:4 h:4"
       }
     },
@@ -102,7 +102,7 @@
       "component": "EmptyState",
       "props": {
         "icon": {
-          "$icon": "IconFolderFilled",
+          "$icon": "IconFolder",
           "size": "w:6 h:6 c:yellow"
         },
         "title": "This folder is empty",
@@ -114,7 +114,7 @@
         },
         "secondaryLabel": "Upload",
         "secondaryIcon": {
-          "$icon": "IconCloudFilled",
+          "$icon": "IconCloud",
           "size": "w:4 h:4"
         }
       }

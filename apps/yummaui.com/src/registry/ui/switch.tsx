@@ -23,7 +23,7 @@ const SIZES: Record<Size, SizeSpec> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:xl cs:s",
   pill: "br:9999",
@@ -117,13 +117,13 @@ export default function SwitchBase({
     "p:r d:f ai:c fs:0 m:0 p:0 bw:2 bc:transparent tp:c tdu:300 ttf:out-quart",
     track,
     SHAPES[shape],
-    checked ? "bg:on" : "bg:rim",
+    checked ? "bg:on bs-o:key-fill" : "bg:well bs-o:sunk",
     disabled ? "" : "c:p",
     className,
   );
 
   const thumbClasses = [
-    "bg:knob",
+    "bg:knob bs-o:key",
     thumb,
     SHAPES[shape],
   ].join(" ");

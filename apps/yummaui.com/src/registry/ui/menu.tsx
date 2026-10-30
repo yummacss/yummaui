@@ -44,20 +44,20 @@ const SIZES: Record<Size, SizeSpec> = {
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -219,7 +219,7 @@ export default function MenuBase({
   const spec = SIZES[size];
   const triggerClasses = merge(
     outline,
-    "d:f ai:c g:2 h:fc bg:raised bc:rim bw:1 fw:500 us:none",
+    "d:f ai:c g:2 h:fc bg:raised bs-o:key bc:rim bw:1 fw:500 us:none",
     spec.trigger,
     spec.text,
     TRIGGER_SHAPES[shape],
@@ -229,7 +229,7 @@ export default function MenuBase({
   );
 
   const popupClasses = [
-    "py:1 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "py:1 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     spec.popup,
     POPUP_SHAPES[cardOf(shape)],
   ]
@@ -249,7 +249,7 @@ export default function MenuBase({
         state.highlighted
           ? destructive
             ? "bg:red c:white bc:transparent"
-            : "bg:check c:white bc:transparent"
+            : "bg:well c:label bc:transparent"
           : "bg:transparent",
       ]
         .filter(Boolean)

@@ -6,7 +6,7 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "p:1 br:9999",
@@ -15,7 +15,7 @@ const SHAPES: Record<Shape, string> = {
 const BASE = "d:f ai:c o:h w:fc";
 
 // a pill insets its buttons inside a border of its own
-const PILL = "bg:raised bc:rim bw:1";
+const PILL = "bg:raised bs-o:key bc:rim bw:1";
 
 // a filled button's shared edge takes the rim's color, or the line would vanish
 // into it; they keep still when pressed, so the group moves as one control

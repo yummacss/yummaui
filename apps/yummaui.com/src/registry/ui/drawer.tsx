@@ -61,13 +61,13 @@ const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -81,7 +81,7 @@ const HANDLE_SHAPES: Record<Shape, string> = {
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BUTTON =
-  "d:if ai:c jc:c g:2 bw:1 fw:500 tp:c tdu:150 ttf:io us:none bg:raised bc:rim c:label h:bg:well";
+  "d:if ai:c jc:c g:2 bw:1 fw:500 tp:c tdu:150 ttf:io us:none bg:raised bs-o:key bc:rim c:label h:bg:well";
 
 const SIZES: Record<Size, string> = {
   sm: "px:3 py:1 fs:xs",
@@ -179,7 +179,7 @@ export default function DrawerBase({
   );
 
   const popupClasses = [
-    "p:r d:f fd:c bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "p:r d:f fd:c bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     PLACEMENTS[side],
     EDGE_SHAPES[side][shape],
     TRAVEL[side].swipe,
@@ -193,7 +193,7 @@ export default function DrawerBase({
   const grip = vertical && handle && (
     <div
       aria-hidden
-      className={`fs:0 w:12 h:1 mx:auto bg:rim ${HANDLE_SHAPES[shape]}`}
+      className={`fs:0 w:12 h:1 mx:auto bg:line ${HANDLE_SHAPES[shape]}`}
     />
   );
 
@@ -227,7 +227,7 @@ export default function DrawerBase({
                   <Button
                     className={merge(
                       outline,
-                      "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bc:rim c:label h:bg:well",
+                      "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
                       CLOSE_SHAPES[shape],
                     )}
                   />

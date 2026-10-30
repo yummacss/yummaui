@@ -1,4 +1,4 @@
-import { IconMicrophoneFilled, IconPencilFilled, IconVideoFilled } from "@tabler/icons-react";
+import { IconMicrophone, IconPencil, IconVideo } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -67,11 +67,11 @@ function Chip({
   return (
     <span className="ws:nw">
       <span
-        className={`d:if ai:c g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised bc:rim bw:1 c:label lh:1 ws:nw va:m ${CHIP_SHAPES[shape]}`}
+        className={`d:if ai:c g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised bs-o:key bc:rim bw:1 c:label lh:1 ws:nw va:m ${CHIP_SHAPES[shape]}`}
       >
         <span
           aria-hidden
-          className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:transparent bw:1 c:white ${TILE_SHAPES[shape]} ${
+          className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:edge bw:1 c:on-fill bs-o:key-fill ${TILE_SHAPES[shape]} ${
             animated
               ? `tp:a tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index]}`
               : ""
@@ -108,7 +108,7 @@ export default function InlineIconHeading({
     >
       Everything you have{" "}
       <Chip
-        icon={<IconPencilFilled className={icon} />}
+        icon={<IconPencil className={icon} />}
         index={0}
         shape={shape}
         animated={animated}
@@ -117,7 +117,7 @@ export default function InlineIconHeading({
         written
       </Chip>{" "}
       <Chip
-        icon={<IconVideoFilled className={icon} />}
+        icon={<IconVideo className={icon} />}
         index={1}
         shape={shape}
         animated={animated}
@@ -126,7 +126,7 @@ export default function InlineIconHeading({
       </Chip>{" "}
       &amp;{" "}
       <Chip
-        icon={<IconMicrophoneFilled className={icon} />}
+        icon={<IconMicrophone className={icon} />}
         index={2}
         shape={shape}
         animated={animated}

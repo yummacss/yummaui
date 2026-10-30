@@ -13,7 +13,7 @@ type ValidationType = "numeric" | "alpha" | "alphanumeric";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SLOT =
-  "p:0 bw:1 bg:field bc:rim c:label ta:c fw:500 tp:c tdu:150 ttf:io";
+  "p:0 bw:1 bg:field bs-o:key bc:rim c:label ta:c fw:500 tp:c tdu:150 ttf:io";
 
 const SLOT_SIZES: Record<Size, string> = {
   sm: "w:8 h:9 fs:md",
@@ -22,7 +22,7 @@ const SLOT_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };

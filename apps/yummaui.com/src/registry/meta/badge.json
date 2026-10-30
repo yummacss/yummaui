@@ -88,7 +88,7 @@
         "pill",
         "squircle"
       ],
-      "default": "rounded",
+      "default": "pill",
       "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     },
     {
@@ -107,12 +107,9 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "solid",
+            "tone": "outline",
             "intent": "success",
-            "icon": {
-              "$icon": "IconCheck",
-              "size": "w:3 h:3"
-            }
+            "dot": true
           },
           "children": "Synced"
         },
@@ -131,15 +128,17 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "outline"
+            "tone": "outline",
+            "dot": true
           },
           "children": "Draft"
         },
         {
           "component": "Badge",
           "props": {
-            "tone": "solid",
-            "intent": "danger"
+            "tone": "outline",
+            "intent": "danger",
+            "dot": true
           },
           "children": "Over quota"
         },

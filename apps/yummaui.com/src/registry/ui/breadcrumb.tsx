@@ -21,7 +21,7 @@ const SEPARATOR_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -83,7 +83,7 @@ export default function BreadcrumbBase({
   const navClasses = merge(
     "d:f ai:c g:2",
     bordered
-      ? "px:3 py:2 bg:raised bc:rim bw:1"
+      ? "px:3 py:2 bg:raised bs-o:key bc:rim bw:1"
       : "",
     bordered ? SHAPES[shape] : "",
     className,
@@ -93,7 +93,7 @@ export default function BreadcrumbBase({
   // the current page sits in a raised chip
   const currentClasses = [
     SIZES[size],
-    "px:2 py:1 bw:1 bg:raised bc:rim fw:500 c:label",
+    "px:2 py:1 bw:1 bg:raised bs-o:key bc:rim fw:500 c:label",
   ]
     .filter(Boolean)
     .join(" ");

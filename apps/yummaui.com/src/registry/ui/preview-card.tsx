@@ -9,7 +9,7 @@ type Shape = "rounded" | "square" | "squircle";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -90,7 +90,7 @@ export default function PreviewCardBase({
   container,
 }: PreviewCardProps) {
   const popupClasses = [
-    "d:f fd:c g:3 w:64 p:3 bg:raised bc:line bw:1 c:label fs:sm bs-o:xl",
+    "d:f fd:c g:3 w:64 p:3 bg:raised bc:line bw:1 c:label fs:sm bs-o:pop",
     SHAPES[shape],
     arrow ? "p:r" : "",
   ]

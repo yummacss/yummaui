@@ -12,13 +12,13 @@ type IconPosition = "leading" | "trailing";
 type Shape = "rounded" | "square" | "squircle";
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const CONTROL_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -32,10 +32,10 @@ const STEP_SHAPES: Record<Shape, string> = {
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const RAISED =
-  "bg:raised bc:rim c:label h:bg:well";
+  "bg:raised bs-o:key bc:rim c:label h:bg:well";
 
 // a picked choice sinks in, like a pressed toggle
-const PICKED = "bg:well bc:rim c:check";
+const PICKED = "bg:well bc:rim c:check bs-o:sunk";
 
 export interface OnboardingChoice {
   id: string;
@@ -200,7 +200,7 @@ export default function OnboardingBase({
           ref={popupRef}
           initialFocus={(type) => type === "keyboard" || popupRef.current}
           className={merge(
-            "o:h w:112 max-w:100% p:5 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+            "o:h w:112 max-w:100% p:5 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
             POPUP_SHAPES[shape],
             animated &&
               "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:eo @prm:tp:none",
@@ -216,7 +216,7 @@ export default function OnboardingBase({
                     className={merge(
                       "w:6 h:1",
                       STEP_SHAPES[shape],
-                      index <= page ? "bg:check" : "bg:rim",
+                      index <= page ? "bg:check" : "bg:line",
                       animated && "tp:c tdu:250 ttf:out-quart @prm:tp:none",
                     )}
                   />

@@ -1,7 +1,7 @@
 "use client";
 
 import { Accordion } from "@base-ui/react/accordion";
-import { IconChevronDown, IconLockFilled, IconMinus, IconPlus } from "@tabler/icons-react";
+import { IconChevronDown, IconLock, IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -128,7 +128,7 @@ export default function AccordionBase({
   const rootClasses = merge(
     "d:f fd:c w:100% max-w:96",
     variant === "bordered" || variant === "subtle" ? "g:2" : "",
-    isCard ? `bg:raised bw:1 bc:rim ${SHAPES[shape].item}` : "",
+    isCard ? `bg:raised bs-o:key bw:1 bc:rim ${SHAPES[shape].item}` : "",
     className,
   );
 
@@ -145,7 +145,7 @@ export default function AccordionBase({
 
         const itemClasses =
           variant === "bordered"
-            ? `bg:raised bw:1 bc:rim ${SHAPES[shape].item}`
+            ? `bg:raised bs-o:key bw:1 bc:rim ${SHAPES[shape].item}`
             : variant === "ghost"
               ? [
                   "blw:2 pl:4",
@@ -155,7 +155,7 @@ export default function AccordionBase({
                   .filter(Boolean)
                   .join(" ")
               : variant === "subtle"
-                ? [SHAPES[shape].item, isOpen ? "bg:well" : "bg:well h:bg:rim"]
+                ? [SHAPES[shape].item, isOpen ? "bg:well" : "bg:well h:bg:line"]
                     .filter(Boolean)
                     .join(" ")
                 : separated && !isLast
@@ -239,7 +239,7 @@ export default function AccordionBase({
                     {item.title}
                   </span>
                   {item.disabled && (
-                    <IconLockFilled className="w:3 h:3 c:hint" aria-hidden />
+                    <IconLock className="w:3 h:3 c:hint" aria-hidden />
                   )}
                 </div>
                 {indicator === "chevron" ? (

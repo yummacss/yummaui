@@ -14,7 +14,7 @@
               "href": "/files/recent",
               "description": "What you opened this week.",
               "icon": {
-                "$icon": "IconClockFilled",
+                "$icon": "IconClock",
                 "size": "w:5 h:5 c:blue"
               }
             },
@@ -23,7 +23,7 @@
               "href": "/files/starred",
               "description": "The files you keep coming back to.",
               "icon": {
-                "$icon": "IconStarFilled",
+                "$icon": "IconStar",
                 "size": "w:5 h:5 c:yellow"
               }
             },
@@ -32,7 +32,7 @@
               "href": "/files/trash",
               "description": "Deleted files, kept for 30 days.",
               "icon": {
-                "$icon": "IconTrashFilled",
+                "$icon": "IconTrash",
                 "size": "w:5 h:5 c:red"
               }
             }
@@ -47,7 +47,7 @@
               "href": "/library/photos",
               "description": "Scans & pictures, by date.",
               "icon": {
-                "$icon": "IconPhotoFilled",
+                "$icon": "IconPhoto",
                 "size": "w:5 h:5 c:mint"
               }
             },
@@ -56,7 +56,7 @@
               "href": "/library/videos",
               "description": "Clips, with the longest first.",
               "icon": {
-                "$icon": "IconVideoFilled",
+                "$icon": "IconVideo",
                 "size": "w:5 h:5 c:red"
               }
             },
@@ -65,7 +65,7 @@
               "href": "/library/documents",
               "description": "Notes, sheets & PDFs.",
               "icon": {
-                "$icon": "IconFileFilled",
+                "$icon": "IconFile",
                 "size": "w:5 h:5 c:blue"
               }
             },
@@ -74,7 +74,7 @@
               "href": "/library/archives",
               "description": "Zips you have not opened.",
               "icon": {
-                "$icon": "IconArchiveFilled",
+                "$icon": "IconArchive",
                 "size": "w:5 h:5 c:yellow"
               }
             }
@@ -142,7 +142,7 @@
                 "href": "/files/recent",
                 "description": "What you opened this week.",
                 "icon": {
-                  "$icon": "IconClockFilled",
+                  "$icon": "IconClock",
                   "size": "w:5 h:5 c:blue"
                 }
               },
@@ -151,7 +151,7 @@
                 "href": "/files/starred",
                 "description": "The files you keep coming back to.",
                 "icon": {
-                  "$icon": "IconStarFilled",
+                  "$icon": "IconStar",
                   "size": "w:5 h:5 c:yellow"
                 }
               },
@@ -160,7 +160,7 @@
                 "href": "/files/trash",
                 "description": "Deleted files, kept for 30 days.",
                 "icon": {
-                  "$icon": "IconTrashFilled",
+                  "$icon": "IconTrash",
                   "size": "w:5 h:5 c:red"
                 }
               }
@@ -175,7 +175,7 @@
                 "href": "/library/photos",
                 "description": "Scans & pictures, by date.",
                 "icon": {
-                  "$icon": "IconPhotoFilled",
+                  "$icon": "IconPhoto",
                   "size": "w:5 h:5 c:mint"
                 }
               },
@@ -184,7 +184,7 @@
                 "href": "/library/videos",
                 "description": "Clips, with the longest first.",
                 "icon": {
-                  "$icon": "IconVideoFilled",
+                  "$icon": "IconVideo",
                   "size": "w:5 h:5 c:red"
                 }
               },
@@ -193,7 +193,7 @@
                 "href": "/library/documents",
                 "description": "Notes, sheets & PDFs.",
                 "icon": {
-                  "$icon": "IconFileFilled",
+                  "$icon": "IconFile",
                   "size": "w:5 h:5 c:blue"
                 }
               },
@@ -202,7 +202,7 @@
                 "href": "/library/archives",
                 "description": "Zips you have not opened.",
                 "icon": {
-                  "$icon": "IconArchiveFilled",
+                  "$icon": "IconArchive",
                   "size": "w:5 h:5 c:yellow"
                 }
               }

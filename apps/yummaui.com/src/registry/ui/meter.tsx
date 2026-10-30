@@ -31,7 +31,7 @@ export interface MeterSegment {
 type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:xs",
+  rounded: "br:sm",
   square: "",
   squircle: "br:md cs:s",
   pill: "br:9999",
@@ -167,7 +167,7 @@ export default function MeterBase({
         </div>
       )}
 
-      <Meter.Track className={`d:f g:px o:h h:2 bg:rim ${SHAPES[shape]}`}>
+      <Meter.Track className={`d:f g:px o:h h:2 bg:well bs-o:sunk ${SHAPES[shape]}`}>
         {segments ? (
           segments.map((segment, index) => (
             <span
@@ -193,7 +193,7 @@ export default function MeterBase({
           ))}
           {rest && (
             <span className="d:f ai:c g:1">
-              <span aria-hidden className="w:2 h:2 br:9999 bg:rim" />
+              <span aria-hidden className="w:2 h:2 br:9999 bg:line" />
               {rest}
             </span>
           )}
