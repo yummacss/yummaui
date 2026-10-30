@@ -5,7 +5,7 @@ import { merge } from "yummacss/merge";
 type Shape = "line" | "block" | "circle";
 type Tone = "default" | "subtle";
 
-const PULSE = "an:pulse adu:1000 atf:io aic:inf @prm:an:none";
+const PULSE = "an:pulse adu:1000 atf:io aic:i @prm:an:none";
 
 const RADII: Record<Shape, string> = {
   line: "br:xs",

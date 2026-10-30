@@ -73,7 +73,7 @@ export default function ProgressBase({
         {isIndeterminate ? (
           <Progress.Indicator
             className={[
-              "h:100% w:100% bg:fill an:slide adu:1000 atf:io aic:inf @prm:an:none",
+              "h:100% w:100% bg:fill an:slide adu:1000 atf:io aic:i @prm:an:none",
               SHAPES[shape],
             ]
               .filter(Boolean)
@@ -97,7 +97,7 @@ export default function ProgressBase({
             {sweeps && (
               <span
                 aria-hidden
-                className="d:f jc:fe h:100% w:100% an:slide adu:1000 atf:io aic:inf @prm:an:none"
+                className="d:f jc:fe h:100% w:100% an:slide adu:1000 atf:io aic:i @prm:an:none"
               >
                 <span className="h:100% w:30% bg:white/20" />
               </span>

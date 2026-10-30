@@ -20,7 +20,7 @@ const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
 const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 
-const MOTION = "tp:a tdu:150 ttf:io a:s:95";
+const MOTION = "tp:a tdu:150 ttf:io a:s:95 wc:s";
 
 const VARIANTS: Record<Variant, string> = {
   primary:
@@ -176,7 +176,7 @@ export default function ButtonBase({
       stroke="currentColor"
       strokeWidth={2.5}
       strokeLinecap="round"
-      className={`w:4 h:4 fs:0 ${transition ? "an:spin adu:700 atf:l aic:inf @prm:an:none" : ""}`}
+      className={`w:4 h:4 fs:0 ${transition ? "an:spin adu:700 atf:l aic:i @prm:an:none" : ""}`}
     >
       <path d="M12 3a9 9 0 1 0 9 9" />
     </svg>
