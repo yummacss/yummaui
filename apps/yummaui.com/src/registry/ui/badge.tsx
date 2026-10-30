@@ -12,7 +12,7 @@ type IconPosition = "leading" | "trailing";
 
 const SHAPES: Record<Shape, string> = {
   square: "",
-  rounded: "br:xs",
+  rounded: "br:sm",
   pill: "br:9999",
   squircle: "br:xxl cs:s",
 };
@@ -40,7 +40,7 @@ const INTENTS = {
     subtleBg: "bg:well",
     subtleBorder: "bc:rim",
     subtleText: "c:hint",
-    subtleHover: "h:bg:rim",
+    subtleHover: "h:bg:line",
     solidBg: "bg:fill",
     solidText: "c:fill",
     solidHover: "h:o:90",
@@ -184,10 +184,10 @@ export default function BadgeBase({
     pad,
     SHAPES[shape],
     tone === "outline"
-      ? "bg:raised bc:rim bw:1"
+      ? "bg:raised bs-o:key bc:rim bw:1"
       : tone === "subtle"
         ? [INTENTS[intent].subtleBg, INTENTS[intent].subtleBorder, "bw:1"].join(" ")
-        : [INTENTS[intent].solidBg, "bw:1 bc:transparent"].join(" "),
+        : [INTENTS[intent].solidBg, "bw:1 bc:black/20 bs-o:key-fill"].join(" "),
     className,
   );
 

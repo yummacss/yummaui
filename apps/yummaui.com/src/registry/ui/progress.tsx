@@ -57,7 +57,7 @@ export default function ProgressBase({
 
   const rootClasses = merge("d:f fd:c g:2 w:64", className);
 
-  const trackClasses = ["o:h h:2 bg:rim", SHAPES[shape]]
+  const trackClasses = ["o:h h:2 bg:well bs-o:sunk", SHAPES[shape]]
     .filter(Boolean)
     .join(" ");
 

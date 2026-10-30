@@ -18,13 +18,13 @@ const TRIGGER_VARIANTS: Record<TriggerVariant, string> = {
 };
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
@@ -160,7 +160,7 @@ export default function PopoverBase({
 
   const triggerClasses = merge(
     outline,
-    "d:f ai:c jc:c bw:1 bg:raised bc:rim c:label us:none c:p h:bg:well",
+    "d:f ai:c jc:c bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p h:bg:well",
     TRIGGER_VARIANTS[triggerVariant],
     TRIGGER_SHAPES[shape],
     open ? "bg:well" : "",
@@ -168,7 +168,7 @@ export default function PopoverBase({
   );
 
   const popupClasses = [
-    "px:4 py:3 w:max max-w:80 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "px:4 py:3 w:max max-w:80 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     POPUP_SHAPES[shape],
     arrow ? "p:r" : "",
   ]

@@ -1,7 +1,7 @@
 "use client";
 
 import { Field } from "@base-ui/react/field";
-import { IconAlertTriangleFilled, IconCheck } from "@tabler/icons-react";
+import { IconAlertTriangle, IconCheck } from "@tabler/icons-react";
 import type { ChangeEvent, ComponentProps } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -12,7 +12,7 @@ type Status = "default" | "error" | "success";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -140,7 +140,7 @@ export default function TextareaBase({
 
   const controlClasses = merge(
     outline,
-    "h:24 w:100% py:2 pl:3 bg:field c:label bw:1 fs:sm r:none",
+    "h:24 w:100% py:2 pl:3 bg:field bs-o:key c:label bw:1 fs:sm r:none",
     status !== "default" ? "pr:10" : "pr:3",
     SHAPES[shape],
     STATUS_BORDER[status],
@@ -188,7 +188,7 @@ export default function TextareaBase({
         {status !== "default" && (
           <span className={`d:f p:a r:3 t:3 ai:c jc:c ${STATUS_ICON[status]}`}>
             {status === "error" ? (
-              <IconAlertTriangleFilled className="w:4 h:4" />
+              <IconAlertTriangle className="w:4 h:4" />
             ) : (
               <IconCheck className="w:4 h:4" />
             )}

@@ -1,5 +1,5 @@
 import { Avatar } from "@base-ui/react/avatar";
-import { IconRosetteDiscountCheckFilled, IconUserFilled } from "@tabler/icons-react";
+import { IconRosetteDiscountCheck, IconUser } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
@@ -11,10 +11,10 @@ type Tint = "blue" | "mint" | "indigo" | "slate";
 const ROOT = "d:if o:h ai:c jc:c va:m us:none";
 
 const TINTS: Record<Tint, { bg: string; fg: string }> = {
-  blue: { bg: "bg:blue-9 bc:blue-9", fg: "c:white" },
-  mint: { bg: "bg:mint-8 bc:mint-8", fg: "c:white" },
-  indigo: { bg: "bg:indigo-8 bc:indigo-8", fg: "c:white" },
-  slate: { bg: "bg:slate-10 bc:slate-10", fg: "c:white" },
+  blue: { bg: "bg:blue-9 bc:blue-11 bs-o:key-fill", fg: "c:white" },
+  mint: { bg: "bg:mint-8 bc:mint-10 bs-o:key-fill", fg: "c:white" },
+  indigo: { bg: "bg:indigo-8 bc:indigo-10 bs-o:key-fill", fg: "c:white" },
+  slate: { bg: "bg:slate-10 bc:slate-12 bs-o:key-fill", fg: "c:white" },
 };
 
 const SIZES: Record<Size, string> = {
@@ -144,7 +144,7 @@ export default function AvatarBase({
       : shape === "rounded"
         ? ROUNDED_RADII[size]
         : SHAPES[shape],
-    tint ? `${TINTS[tint].bg} bw:1` : "bg:well bc:raised bw:1",
+    tint ? `${TINTS[tint].bg} bw:1` : "bg:well bc:raised bw:1 bs-o:key",
     "bi-lg:b",
     className,
   );
@@ -169,7 +169,7 @@ export default function AvatarBase({
         )}
         <Avatar.Fallback className={fallbackClasses}>
           {fallback ??
-            (name ? initials(name) : <IconUserFilled className={ICON_SIZES[size]} />)}
+            (name ? initials(name) : <IconUser className={ICON_SIZES[size]} />)}
         </Avatar.Fallback>
       </Avatar.Root>
 
@@ -187,7 +187,7 @@ export default function AvatarBase({
           aria-label={badgeLabel}
           className={`d:f p:a t:0 r:0 ai:c jc:c bg:raised bc:raised br:9999 bw:1 ${BADGE_SIZES[size]}`}
         >
-          {badgeIcon ?? <IconRosetteDiscountCheckFilled className="w:100% h:100% c:label" />}
+          {badgeIcon ?? <IconRosetteDiscountCheck className="w:100% h:100% c:label" />}
         </span>
       )}
 

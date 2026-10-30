@@ -117,7 +117,13 @@ const block = (name: string, table: Record<string, ThemeColor>) =>
 				.join("\n")}\n    },\n`
 		: "";
 
-const KINDS = ["states", "easings", "keyframes", "colors"] as const;
+const KINDS = [
+	"states",
+	"easings",
+	"keyframes",
+	"colors",
+	"boxShadow",
+] as const;
 
 export function configSource(globs: string[], theme?: RegistryTheme): string {
 	const body = theme
@@ -138,6 +144,7 @@ export function missingTheme(source: string, theme?: RegistryTheme): string[] {
 		...theme?.easings,
 		...theme?.keyframes,
 		...theme?.colors,
+		...theme?.boxShadow,
 	}).filter(
 		(name) => !new RegExp(`(?<![\\w-])["']?${name}["']?\\s*:`).test(source),
 	);

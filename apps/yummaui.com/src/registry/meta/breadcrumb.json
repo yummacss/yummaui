@@ -10,7 +10,7 @@
           "label": "Documents",
           "href": "#",
           "icon": {
-            "$icon": "IconFolderFilled",
+            "$icon": "IconFolder",
             "size": "w:4 h:4"
           }
         },
@@ -90,7 +90,7 @@
             "label": "Documents",
             "href": "#",
             "icon": {
-              "$icon": "IconFolderFilled",
+              "$icon": "IconFolder",
               "size": "w:4 h:4"
             }
           },

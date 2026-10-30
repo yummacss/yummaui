@@ -12,14 +12,14 @@ type Size = "sm" | "md";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 // in a group, one step under the track's own round, so the chip nests inside it
 const GROUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:xl cs:s",
 };
@@ -38,13 +38,13 @@ const LABELLED: Record<Size, string> = {
 const DISABLED = "bw:1 bc:line bg:well c:hint o:60";
 
 // pressed sinks in: the one place an inset shadow belongs
-const PRESSED = "bg:well bc:rim c:check";
+const PRESSED = "bg:well bc:rim c:check bs-o:sunk";
 const UNPRESSED =
-  "bg:raised bc:rim c:label h:bg:well";
+  "bg:raised bs-o:key bc:rim c:label h:bg:well";
 
 // in a group, picking one of several: the selected tab's raised chip on the track
 const GROUP_PRESSED =
-  "bg:raised bc:rim c:label";
+  "bg:raised bs-o:key bc:rim c:label";
 const GROUP_UNPRESSED = "bg:transparent bc:transparent c:hint h:c:label";
 
 export interface ToggleProps

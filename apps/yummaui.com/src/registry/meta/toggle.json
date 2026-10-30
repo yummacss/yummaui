@@ -6,14 +6,14 @@
       "type": "none",
       "typeName": "ReactNode",
       "description": "Shown while not pressed.",
-      "exampleIcon": "IconSunFilled"
+      "exampleIcon": "IconSun"
     },
     {
       "name": "pressedIcon",
       "type": "none",
       "typeName": "ReactNode",
       "description": "Shown while pressed.",
-      "exampleIcon": "IconMoonFilled"
+      "exampleIcon": "IconMoon"
     },
     {
       "name": "label",
@@ -102,7 +102,7 @@
           "props": {
             "aria-label": "Favorite",
             "icon": {
-              "$icon": "IconStarFilled",
+              "$icon": "IconStar",
               "size": "w:5 h:5"
             },
             "defaultPressed": true
@@ -113,7 +113,7 @@
           "props": {
             "aria-label": "Pin to sidebar",
             "icon": {
-              "$icon": "IconPinFilled",
+              "$icon": "IconPin",
               "size": "w:5 h:5"
             }
           }
@@ -123,7 +123,7 @@
           "props": {
             "aria-label": "Keep offline",
             "icon": {
-              "$icon": "IconCloudFilled",
+              "$icon": "IconCloud",
               "size": "w:5 h:5"
             }
           }

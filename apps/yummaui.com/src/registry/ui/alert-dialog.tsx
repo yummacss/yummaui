@@ -22,27 +22,27 @@ const SIZES: Record<Size, string> = {
 };
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const BADGE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",
@@ -54,13 +54,13 @@ const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
 const TONE_BUTTON: Record<Tone, string> = {
   danger:
-    "bg:red h:bg:red-8 bc:red h:bc:red-8 c:white",
+    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
   neutral:
-    "bg:raised bc:rim c:label h:bg:well",
+    "bg:raised bs-o:key bc:rim c:label h:bg:well",
 };
 
 const TONE_BADGE: Record<Tone, string> = {
-  danger: "bw:1 bg:red bc:red c:white",
+  danger: "bw:1 bg:red bc:red-9 c:white bs-o:key-fill",
   neutral: "bg:well c:hint",
 };
 
@@ -178,7 +178,7 @@ export default function AlertDialogBase({
   );
 
   const popupClasses = [
-    "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     POPUP_SHAPES[cardOf(shape)],
   ]
     .filter(Boolean)
@@ -228,7 +228,7 @@ export default function AlertDialogBase({
                 <Button
                   className={merge(
                     outline,
-                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bc:rim c:label h:bg:well",
+                    "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
                     CLOSE_SHAPES[shape],
                   )}
                 />

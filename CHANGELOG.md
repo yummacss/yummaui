@@ -15,7 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- A plain look: neutral colors, white surfaces, light borders and medium weights.
+- Soft key: every control is a key with a lighter top edge and a small drop, on violet-leaning grays with a charcoal fill. Needs Yumma CSS 4.12 or later.
+- `init` and `add` write the `theme.boxShadow` entries the components use.
+- The rounded shape is one step larger: 8px controls and 12px menus and cards.
+- Components draw Tabler's outline icons.
+- Menus, listboxes and File Tree highlight in a soft gray.
+- Badges in the examples are white with a status dot.
 - Every component is rounded by default, at 6px for controls and 8px for menus and cards; Avatar stays a circle.
 - Shortcuts in menus and tooltips are plain text.
 - Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.

@@ -10,19 +10,19 @@ type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
 
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:xxl cs:s",
 };
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -178,7 +178,7 @@ export default function ContextMenuBase({
     );
 
   const popupClasses = [
-    "py:1 min-w:52 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:xl",
+    "py:1 min-w:52 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     POPUP_SHAPES[shape],
   ]
     .filter(Boolean)
@@ -195,7 +195,7 @@ export default function ContextMenuBase({
         state.highlighted
           ? destructive
             ? "bg:red c:white bc:transparent"
-            : "bg:check c:white bc:transparent"
+            : "bg:well c:label bc:transparent"
           : "bg:transparent",
       ]
         .filter(Boolean)

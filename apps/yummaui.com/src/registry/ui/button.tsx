@@ -23,11 +23,11 @@ const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 const MOTION = "tp:a tdu:150 ttf:io a:s:97 wc:s";
 
 const VARIANTS: Record<Variant, string> = {
-  primary: "bg:fill bc:fill c:on-fill",
-  secondary: "bg:raised bc:rim c:label",
+  primary: "bg:fill bc:edge c:on-fill bs-o:key-fill",
+  secondary: "bg:raised bs-o:key bc:rim c:label",
   subtle: "bg:well bc:transparent c:hint",
   ghost: "bg:transparent bc:transparent c:label",
-  danger: "bg:red bc:red c:white",
+  danger: "bg:red bc:red-9 c:white bs-o:key-fill",
   link: "bg:transparent bc:transparent c:label tuo:2",
 };
 
@@ -35,7 +35,7 @@ const VARIANTS: Record<Variant, string> = {
 const HOVERS: Record<Variant, string> = {
   primary: "h:o:90",
   secondary: "h:bg:well",
-  subtle: "h:bg:rim",
+  subtle: "h:bg:line",
   ghost: "h:bg:well",
   danger: "h:bg:red-8 h:bc:red-8",
   link: "h:td:u",
@@ -47,7 +47,7 @@ const VARIANT_OUTLINE: Partial<Record<Variant, string>> = {
 
 // held, the button's content again in a stronger color sweeps across it
 const HOLD_FILL: Record<Variant, string> = {
-  primary: "bg:check c:white",
+  primary: "bg:edge c:on-fill",
   secondary: "bg:fill c:on-fill",
   subtle: "bg:fill c:on-fill",
   ghost: "bg:fill c:on-fill",
@@ -69,7 +69,7 @@ const ICON_ONLY: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xxl cs:s",
   pill: "br:9999",

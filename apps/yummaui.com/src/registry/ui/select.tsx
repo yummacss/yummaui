@@ -29,7 +29,7 @@ export interface SelectGroup {
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const TRIGGER =
-  "d:f ai:c jc:sb bw:1 bg:raised bc:rim c:label us:none c:p";
+  "d:f ai:c jc:sb bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8 w:56 px:3 fs:sm",
@@ -38,7 +38,7 @@ const SIZES: Record<Size, string> = {
 };
 
 const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -50,14 +50,14 @@ const POPUP_SIZES: Record<Size, string> = {
 };
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
 };
 
 const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -254,7 +254,7 @@ export default function SelectBase({
 
   const popup = (
     <Select.Popup
-      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:xl bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:pop bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       <Select.List className="p:r min-h:0 o:auto">
         {options.map((entry) =>

@@ -13,7 +13,7 @@ type Card = Exclude<Shape, "pill">;
 const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 
 const CARD_SHAPES: Record<Card, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "br:0",
   squircle: "br:3xl cs:s",
 };
@@ -112,7 +112,7 @@ export default function SignIn({
   return (
     <div
       className={merge(
-        "d:f fd:c g:6 w:100% max-w:96 p:8 bg:raised bw:1 bc:rim c:label",
+        "d:f fd:c g:6 w:100% max-w:96 p:8 bg:raised bs-o:key bw:1 bc:rim c:label",
         CARD_SHAPES[cardOf(shape)],
         className,
       )}

@@ -47,7 +47,7 @@
             {
               "label": "Copy",
               "icon": {
-                "$icon": "IconCopyFilled",
+                "$icon": "IconCopy",
                 "size": "w:4 h:4"
               },
               "shortcut": "Ctrl C"
@@ -71,7 +71,7 @@
             {
               "label": "List",
               "icon": {
-                "$icon": "IconLayoutListFilled",
+                "$icon": "IconLayoutList",
                 "size": "w:4 h:4"
               }
             },
@@ -97,21 +97,21 @@
             {
               "label": "Documents",
               "icon": {
-                "$icon": "IconFolderFilled",
+                "$icon": "IconFolder",
                 "size": "w:4 h:4"
               }
             },
             {
               "label": "Downloads",
               "icon": {
-                "$icon": "IconFolderFilled",
+                "$icon": "IconFolder",
                 "size": "w:4 h:4"
               }
             },
             {
               "label": "Trash",
               "icon": {
-                "$icon": "IconTrashFilled",
+                "$icon": "IconTrash",
                 "size": "w:4 h:4"
               }
             }
@@ -212,7 +212,7 @@
               {
                 "label": "Copy",
                 "icon": {
-                  "$icon": "IconCopyFilled",
+                  "$icon": "IconCopy",
                   "size": "w:4 h:4"
                 },
                 "shortcut": "Ctrl C"
@@ -236,7 +236,7 @@
               {
                 "label": "List",
                 "icon": {
-                  "$icon": "IconLayoutListFilled",
+                  "$icon": "IconLayoutList",
                   "size": "w:4 h:4"
                 }
               },
@@ -262,21 +262,21 @@
               {
                 "label": "Documents",
                 "icon": {
-                  "$icon": "IconFolderFilled",
+                  "$icon": "IconFolder",
                   "size": "w:4 h:4"
                 }
               },
               {
                 "label": "Downloads",
                 "icon": {
-                  "$icon": "IconFolderFilled",
+                  "$icon": "IconFolder",
                   "size": "w:4 h:4"
                 }
               },
               {
                 "label": "Trash",
                 "icon": {
-                  "$icon": "IconTrashFilled",
+                  "$icon": "IconTrash",
                   "size": "w:4 h:4"
                 }
               }

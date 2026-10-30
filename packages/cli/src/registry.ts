@@ -50,6 +50,8 @@ export interface RegistryTheme {
 	keyframes: Record<string, string>;
 	// absent from an index published before colors existed
 	colors?: Record<string, ThemeColor>;
+	// absent from an index published before box shadows existed
+	boxShadow?: Record<string, string>;
 }
 
 export interface RegistryIndex {

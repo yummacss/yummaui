@@ -44,7 +44,7 @@ const ICON = "w:4 h:4";
 type Shape = "rounded" | "square" | "squircle" | "pill";
 
 const LINK_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",
@@ -52,7 +52,7 @@ const LINK_SHAPES: Record<Shape, string> = {
 
 // the workspace's letter tile; a pill sidebar gives it a circle
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:xs",
+  rounded: "br:sm",
   square: "",
   squircle: "br:md cs:s",
   pill: "br:9999",

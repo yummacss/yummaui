@@ -16,19 +16,19 @@ const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 const ZONE = "d:f fd:c ai:c g:3 m:0 p:0 w:100% min-w:0 bg:transparent";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "br:0",
   squircle: "br:3xl cs:s",
 };
 
 const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "br:0",
   squircle: "br:xxl cs:s",
 };
 
 const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "br:0",
   squircle: "br:xl cs:s",
 };
@@ -332,7 +332,7 @@ export default function FileUploadBase({
         <div
           key={row.id}
           className={merge(
-            "d:f ai:c g:3 px:2 py:2 bw:1 bg:raised bc:rim",
+            "d:f ai:c g:3 px:2 py:2 bw:1 bg:raised bs-o:key bc:rim",
             ROW_SHAPES[shape],
           )}
         >
@@ -354,7 +354,7 @@ export default function FileUploadBase({
               )}
             </div>
             {row.progress !== undefined && !row.done ? (
-              <div className="h:1 br:9999 bg:rim o:h">
+              <div className="h:1 br:9999 bg:well bs-o:sunk o:h">
                 <div
                   className="h:100% br:9999 bg:check tp:w tdu:300 ttf:out-quart"
                   style={{
@@ -375,7 +375,7 @@ export default function FileUploadBase({
               onClick={() => remove(row.id)}
               className={merge(
                 outline,
-                "d:f ai:c jc:c w:8 h:8 p:0 bw:1 bg:raised bc:rim c:label c:p h:bg:well",
+                "d:f ai:c jc:c w:8 h:8 p:0 bw:1 bg:raised bs-o:key bc:rim c:label c:p h:bg:well",
                 TILE_SHAPES[shape],
               )}
             >

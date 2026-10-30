@@ -15,14 +15,14 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const ROOT_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
   pill: "br:9999",
 };
 
 const CONTROL_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
   pill: "br:9999",
@@ -136,7 +136,7 @@ export default function ToolbarBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const rootClasses = merge(
-    "d:f fw:w ai:c g:1 p:2 bg:raised bc:rim bw:1",
+    "d:f fw:w ai:c g:1 p:2 bg:raised bs-o:key bc:rim bw:1",
     ROOT_SHAPES[shape],
     className,
   );
@@ -323,7 +323,7 @@ function ToolbarToggles({
       "d:f w:9 h:9 ai:c jc:c bw:0 us:none c:p",
       control,
       pressed
-        ? "bg:well bw:1 bc:rim c:check"
+        ? "bg:well bw:1 bc:rim c:check bs-o:sunk"
         : "bg:transparent bw:1 bc:transparent c:hint h:bg:well h:c:label",
     );
 

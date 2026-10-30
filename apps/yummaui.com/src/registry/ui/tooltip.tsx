@@ -11,7 +11,7 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:lg",
   square: "",
   squircle: "br:3xl cs:s",
   pill: "br:9999",
@@ -19,7 +19,7 @@ const SHAPES: Record<Shape, string> = {
 
 // the trigger is a button, so it takes the same shape as the tooltip
 const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
+  rounded: "br:md",
   square: "",
   squircle: "br:lg cs:s",
   pill: "br:9999",
@@ -163,7 +163,7 @@ export default function TooltipBase({
     "d:f ai:c g:2 px:3 py:2 fs:sm us:none",
     TONES[tone],
     SHAPES[shape],
-    "bs-o:md",
+    "bs-o:pop",
     arrow ? "p:r" : "",
   ]
     .filter(Boolean)

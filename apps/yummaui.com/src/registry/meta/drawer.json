@@ -12,7 +12,7 @@
       "name": "triggerIcon",
       "type": "none",
       "typeName": "ReactNode",
-      "exampleIcon": "IconFileFilled",
+      "exampleIcon": "IconFile",
       "description": "A glyph beside the trigger's label."
     },
     {
@@ -134,7 +134,7 @@
       "props": {
         "trigger": "File details",
         "triggerIcon": {
-          "$icon": "IconFileFilled",
+          "$icon": "IconFile",
           "size": "w:4 h:4"
         },
         "title": "budget.xlsx",

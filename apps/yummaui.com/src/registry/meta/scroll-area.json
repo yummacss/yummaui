@@ -75,7 +75,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconFileFilled",
+                        "$icon": "IconFile",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -95,7 +95,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconFileFilled",
+                        "$icon": "IconFile",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -115,7 +115,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconPhotoFilled",
+                        "$icon": "IconPhoto",
                         "size": "w:4 h:4 c:mint"
                       }
                     },
@@ -135,7 +135,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconPhotoFilled",
+                        "$icon": "IconPhoto",
                         "size": "w:4 h:4 c:mint"
                       }
                     },
@@ -155,7 +155,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconVideoFilled",
+                        "$icon": "IconVideo",
                         "size": "w:4 h:4 c:red"
                       }
                     },
@@ -175,7 +175,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconFileFilled",
+                        "$icon": "IconFile",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -195,7 +195,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconArchiveFilled",
+                        "$icon": "IconArchive",
                         "size": "w:4 h:4 c:yellow"
                       }
                     },
@@ -215,7 +215,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconFileFilled",
+                        "$icon": "IconFile",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -235,7 +235,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconPhotoFilled",
+                        "$icon": "IconPhoto",
                         "size": "w:4 h:4 c:mint"
                       }
                     },
@@ -255,7 +255,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconFileFilled",
+                        "$icon": "IconFile",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -275,7 +275,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconVideoFilled",
+                        "$icon": "IconVideo",
                         "size": "w:4 h:4 c:red"
                       }
                     },
@@ -295,7 +295,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconArchiveFilled",
+                        "$icon": "IconArchive",
                         "size": "w:4 h:4 c:yellow"
                       }
                     },
@@ -315,7 +315,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconFileFilled",
+                        "$icon": "IconFile",
                         "size": "w:4 h:4 c:blue"
                       }
                     },
@@ -335,7 +335,7 @@
                   "children": [
                     {
                       "icon": {
-                        "$icon": "IconPhotoFilled",
+                        "$icon": "IconPhoto",
                         "size": "w:4 h:4 c:mint"
                       }
                     },
