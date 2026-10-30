@@ -184,7 +184,7 @@ function Selected({
 					alignItems: "center",
 					gap: 10,
 					padding: "3px 10px",
-					borderRadius: 4,
+					borderRadius: 0,
 					background: c.accent,
 					color: c.on,
 					fontFamily: "Quattro",
