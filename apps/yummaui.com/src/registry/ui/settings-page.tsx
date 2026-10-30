@@ -42,9 +42,9 @@ const WEEK_STARTS = [
   { value: "saturday", label: "Saturday" },
 ];
 
-const SECTION = "d:g g:6 py:8 btw:1 bc:line @md:gtc:3 @md:g:10";
+const SECTION = "d:g g:4 py:6 btw:1 bc:line @md:gtc:3 @md:g:8";
 const SECTION_HEAD = "d:f fd:c g:1";
-const SECTION_BODY = "d:f fd:c g:5 @md:gc-s:2";
+const SECTION_BODY = "d:f fd:c g:4 @md:gc-s:2";
 
 export interface SettingsPageProps {
   /** The page heading. */
@@ -112,16 +112,16 @@ export default function SettingsPage({
   return (
     <Form
       onSubmit={submit}
-      className={merge("d:f fd:c w:100% max-w:240 mx:auto c:label", className)}
+      className={merge("d:f fd:c w:100% max-w:180 mx:auto c:label", className)}
     >
-      <header className="d:f fd:c g:1 pb:8">
-        <h1 className="m:0 fs:xxl fw:600">{title}</h1>
+      <header className="d:f fd:c g:1 pb:6">
+        <h1 className="m:0 fs:xl fw:600">{title}</h1>
         {description && <p className="m:0 fs:sm c:hint">{description}</p>}
       </header>
 
       <section className={SECTION}>
         <div className={SECTION_HEAD}>
-          <h2 className="m:0 fs:md fw:600">Profile</h2>
+          <h2 className="m:0 fs:sm fw:600">Profile</h2>
           <p className="m:0 fs:sm c:hint">
             How you appear on files you share.
           </p>
@@ -148,7 +148,7 @@ export default function SettingsPage({
 
       <section className={SECTION}>
         <div className={SECTION_HEAD}>
-          <h2 className="m:0 fs:md fw:600">Notifications</h2>
+          <h2 className="m:0 fs:sm fw:600">Notifications</h2>
           <p className="m:0 fs:sm c:hint">Emails, never more than one a day.</p>
         </div>
         <div className={SECTION_BODY}>
@@ -175,7 +175,7 @@ export default function SettingsPage({
 
       <section className={SECTION}>
         <div className={SECTION_HEAD}>
-          <h2 className="m:0 fs:md fw:600">Preferences</h2>
+          <h2 className="m:0 fs:sm fw:600">Preferences</h2>
           <p className="m:0 fs:sm c:hint">Language and calendar.</p>
         </div>
         <div className={SECTION_BODY}>
@@ -201,7 +201,7 @@ export default function SettingsPage({
       {dirty && (
         <div
           role="status"
-          className="p:st b:4 d:f fw:w ai:c jc:sb g:3 mt:4 px:4 py:3 bg:raised bw:1 bc:rim br:xxl cs:s bs-o:xl"
+          className="p:st b:4 d:f fw:w ai:c jc:sb g:3 mt:4 px:3 py:2 bg:raised bw:1 bc:rim br:lg bs-o:xl"
         >
           <span className="fs:sm fw:500">You have unsaved changes</span>
           <div className="d:f g:2">

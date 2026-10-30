@@ -91,7 +91,7 @@ export default function OTPFieldBase({
   validationType = "numeric",
   mask = false,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   disabled = false,
   required = false,
   focus = true,

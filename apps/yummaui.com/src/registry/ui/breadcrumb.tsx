@@ -71,7 +71,7 @@ export interface BreadcrumbProps {
 export default function BreadcrumbBase({
   items,
   bordered = false,
-  shape = "squircle",
+  shape = "rounded",
   size = "md",
   separator = "chevron",
   className,

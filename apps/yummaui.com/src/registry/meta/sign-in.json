@@ -51,7 +51,7 @@
         "square",
         "squircle"
       ],
-      "default": "squircle",
+      "default": "rounded",
       "description": "Corner radius of the card. Its fields and buttons keep their own."
     },
     {

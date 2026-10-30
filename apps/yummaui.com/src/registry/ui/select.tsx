@@ -35,7 +35,7 @@ const SIZES: Record<Size, string> = {
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
+  rounded: "br:sm",
   square: "",
   squircle: "br:lg cs:s",
 };
@@ -70,10 +70,8 @@ function renderOption(option: SelectOption, shape: Shape) {
       key={option.value}
       value={option.value}
       className={(state) =>
-        `d:f ai:c g:3 py:2 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[shape]} fs:sm fw:500 us:none c:p c:label ${
-          state.highlighted
-            ? "bg:check c:white bc:transparent"
-            : "bg:transparent"
+        `d:f ai:c g:2 h:8 px:2 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[shape]} fs:sm fw:400 us:none c:p c:label ${
+          state.highlighted ? "bg:well" : "bg:transparent"
         }`
       }
     >
@@ -191,7 +189,7 @@ export default function SelectBase({
   value,
   onValueChange,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   icon,
   iconPosition = "leading",
   disabled = false,

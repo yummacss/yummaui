@@ -145,7 +145,7 @@ export default function AlertDialogBase({
   onConfirm,
   showClose = true,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

@@ -11,7 +11,13 @@
       "name": "current",
       "type": "string",
       "default": "#files",
-      "description": "The `href` of the page being shown, marked as current."
+      "description": "The `href` of the page shown first, marked as current until a link is picked."
+    },
+    {
+      "name": "onNavigate",
+      "type": "none",
+      "typeName": "(href: string) => void",
+      "description": "Called with a link's `href` when it is picked."
     },
     {
       "name": "workspaces",

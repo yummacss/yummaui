@@ -12,7 +12,7 @@
       "name": "shape",
       "type": "enum",
       "values": ["square", "rounded", "pill", "squircle"],
-      "default": "squircle",
+      "default": "rounded",
       "description": "The corners of each chip & of the icon tile inside it."
     },
     {

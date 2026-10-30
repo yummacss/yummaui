@@ -46,7 +46,7 @@ export interface ScrollAreaProps {
  */
 export default function ScrollAreaBase({
   children,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

@@ -105,7 +105,7 @@ export default function ThemeSwitcher({
   storageKey,
   iconOnly = false,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   disabled = false,
   className,
   focus = true,

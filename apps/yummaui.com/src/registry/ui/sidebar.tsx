@@ -13,6 +13,7 @@ import {
   IconUsers,
 } from "@tabler/icons-react";
 import type { ReactNode } from "react";
+import { useState } from "react";
 import { merge } from "yummacss/merge";
 import Avatar from "./avatar";
 import Badge from "./badge";
@@ -34,7 +35,7 @@ export interface SidebarGroup {
 
 export interface SidebarWorkspace {
   name: string;
-  /** A line under the name, such as the plan. */
+  /** A line under the name, such as the space it uses. */
   detail?: string;
 }
 
@@ -70,19 +71,24 @@ const GROUPS: SidebarGroup[] = [
 ];
 
 const WORKSPACES: SidebarWorkspace[] = [
-  { name: "Lovelace Studio", detail: "Team, 6 people" },
-  { name: "Personal", detail: "Free" },
+  { name: "My library", detail: "12.4 GB of 50 GB" },
+  { name: "Archive", detail: "External drive" },
 ];
 
 const LINK =
-  "d:f ai:c g:3 h:9 px:3 br:lg cs:s fs:sm td:none bw:1 bc:transparent c:hint h:bg:well h:c:label fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40";
-const CURRENT = "bg:raised bc:rim c:label fw:500";
+  "d:f ai:c g:2 h:8 px:2 br:md fs:sm td:none c:hint tp:c tdu:100 h:bg:well h:c:label fv:os:s fv:ow:2 fv:oo:0 fv:oc:focus/40";
+const CURRENT = "bg:well c:label fw:500";
 
 export interface SidebarProps {
   /** The navigation, in groups. */
   groups?: SidebarGroup[];
-  /** The `href` of the page being shown, marked as current. */
+  /**
+   * The `href` of the page shown first, marked as current until a link is
+   * picked.
+   */
   current?: string;
+  /** Called with a link's `href` when it is picked. */
+  onNavigate?: (href: string) => void;
   /**
    * The workspaces the switcher at the top lists; the first is the active one.
    */
@@ -112,6 +118,7 @@ export interface SidebarProps {
 export default function Sidebar({
   groups = GROUPS,
   current = "#files",
+  onNavigate,
   workspaces = WORKSPACES,
   onWorkspaceChange,
   user = { name: "Ada Lovelace", email: "ada@example.com" },
@@ -120,11 +127,12 @@ export default function Sidebar({
   className,
 }: SidebarProps) {
   const active = workspaces[0];
+  const [here, setHere] = useState(current);
 
   return (
     <aside
       className={merge(
-        "d:f fd:c g:6 w:64 h:100% p:3 bg:well brw:1 bc:line c:label",
+        "d:f fd:c g:4 w:60 h:100% p:3 bg:raised brw:1 bc:line c:label",
         className,
       )}
     >
@@ -133,8 +141,8 @@ export default function Sidebar({
           container={container}
           className="w:100%"
           trigger={
-            <span className="d:f ai:c g:3 w:100% ta:l">
-              <span className="d:f fs:0 ai:c jc:c w:8 h:8 br:lg cs:s bg:fill c:on-fill fs:sm fw:600">
+            <span className="d:f ai:c g:2 w:100% ta:l">
+              <span className="d:f fs:0 ai:c jc:c w:7 h:7 br:md bg:fill c:on-fill fs:xs fw:600">
                 {active.name.charAt(0)}
               </span>
               <span className="d:f fd:c f:1 min-w:0">
@@ -155,22 +163,26 @@ export default function Sidebar({
         />
       )}
 
-      <nav aria-label="Main" className="d:f fd:c g:5 f:1 min-h:0 oy:auto">
+      <nav aria-label="Main" className="d:f fd:c g:4 f:1 min-h:0 oy:auto">
         {groups.map((group, index) => (
-          <div key={group.label ?? index} className="d:f fd:c g:1">
+          <div key={group.label ?? index} className="d:f fd:c g:px">
             {group.label && (
-              <span className="px:3 pb:1 fs:xs fw:600 c:hint">
+              <span className="px:2 pb:1 fs:xs fw:500 c:hint">
                 {group.label}
               </span>
             )}
             {group.links.map((link) => {
-              const here = link.href === current;
+              const isCurrent = link.href === here;
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  aria-current={here ? "page" : undefined}
-                  className={merge(LINK, here ? CURRENT : "")}
+                  aria-current={isCurrent ? "page" : undefined}
+                  onClick={() => {
+                    setHere(link.href);
+                    onNavigate?.(link.href);
+                  }}
+                  className={merge(LINK, isCurrent ? CURRENT : "")}
                 >
                   {link.icon && (
                     <span className="d:f fs:0" aria-hidden>
@@ -194,7 +206,7 @@ export default function Sidebar({
         container={container}
         className="w:100%"
         trigger={
-          <span className="d:f ai:c g:3 w:100% ta:l">
+          <span className="d:f ai:c g:2 w:100% ta:l">
             <Avatar name={user.name} size="sm" tint="indigo" />
             <span className="d:f fd:c f:1 min-w:0">
               <span className="fs:sm fw:500 o:h to:e ws:nw">{user.name}</span>

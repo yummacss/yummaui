@@ -59,7 +59,7 @@ export default function SeparatorBase({
   icon,
   onIconClick,
   label,
-  iconShape = "squircle",
+  iconShape = "rounded",
   orientation = "horizontal",
   className,
   focus = true,

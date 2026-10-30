@@ -128,7 +128,7 @@ export default function TooltipBase({
   tone = "light",
   arrow = true,
   delay = 300,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

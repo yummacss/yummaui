@@ -92,7 +92,7 @@ export interface NavigationMenuProps {
 export default function NavigationMenuBase({
   items,
   label = "Main",
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,
@@ -140,7 +140,7 @@ export default function NavigationMenuBase({
                 </NavigationMenu.Trigger>
                 <NavigationMenu.Content
                   className={merge(
-                    "p:2 w:max max-w:100%",
+                    "p:1 w:max max-w:100%",
                     animated &&
                       `tp:a tdu:350 ttf:out-quart ${SLIDE} @prm:tp:none`,
                   )}
@@ -148,8 +148,8 @@ export default function NavigationMenuBase({
                   <div
                     className={
                       entry.columns === 2
-                        ? "d:g gtc:2 g:1 w:120"
-                        : "d:g g:1 w:72"
+                        ? "d:g gtc:2 g:px w:112"
+                        : "d:g g:px w:64"
                     }
                   >
                     {entry.links.map((link) => (
@@ -158,7 +158,7 @@ export default function NavigationMenuBase({
                         href={link.href}
                         className={merge(
                           outline,
-                          "d:f ai:s g:3 p:3 bw:1 bc:transparent c:label td:none h:bg:well",
+                          "d:f ai:s g:3 p:2 bw:1 bc:transparent c:label td:none h:bg:well",
                           ITEM_SHAPES[shape],
                           animated && "tp:c tdu:150 ttf:io @prm:tp:none",
                         )}
@@ -167,15 +167,15 @@ export default function NavigationMenuBase({
                           <span
                             aria-hidden
                             className={merge(
-                              "d:f ai:c jc:c fs:0 w:9 h:9 bg:well",
+                              "d:f ai:c jc:c fs:0 w:8 h:8 bg:well",
                               TILE_SHAPES[shape],
                             )}
                           >
                             {link.icon}
                           </span>
                         )}
-                        <span className="d:f fd:c g:1">
-                          <span className="fs:sm fw:600">{link.title}</span>
+                        <span className="d:f fd:c">
+                          <span className="fs:sm fw:500">{link.title}</span>
                           {link.description && (
                             <span className="c:hint fs:xs lh:4">
                               {link.description}

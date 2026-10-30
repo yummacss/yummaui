@@ -111,7 +111,7 @@ export default function CheckboxBase({
   aside,
   row = false,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   disabled = false,
   checked: controlledChecked,
   defaultChecked,

@@ -83,7 +83,7 @@ export default function PreviewCardBase({
   defaultOpen,
   open,
   onOpenChange,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,

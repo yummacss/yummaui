@@ -85,7 +85,7 @@
       "name": "shape",
       "type": "enum",
       "values": ["rounded", "square", "squircle"],
-      "default": "squircle",
+      "default": "rounded",
       "description": "Corner radius on the bar and every control inside it. The bar takes one step more than its controls."
     },
     {

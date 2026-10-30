@@ -66,7 +66,7 @@ const INSET = "fv:oo:-3";
 export default function ButtonGroup({
   className,
   children,
-  shape = "squircle",
+  shape = "rounded",
   separated = true,
   stretch = false,
   icon = true,

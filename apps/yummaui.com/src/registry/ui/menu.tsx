@@ -23,19 +23,19 @@ const SIZES: Record<Size, SizeSpec> = {
   sm: {
     trigger: "px:2 py:1",
     popup: "min-w:44",
-    item: "py:1 px:2",
+    item: "h:7 px:2",
     text: "fs:xs",
   },
   md: {
     trigger: "px:3 py:2",
     popup: "min-w:52",
-    item: "py:2 pl:2 pr:3",
+    item: "h:8 pl:2 pr:3",
     text: "fs:sm",
   },
   lg: {
     trigger: "px:4 py:3",
     popup: "min-w:60",
-    item: "py:3 px:4",
+    item: "h:10 px:3",
     text: "fs:md",
   },
 };
@@ -47,13 +47,13 @@ const TRIGGER_SHAPES: Record<Shape, string> = {
 };
 
 const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xxl",
+  rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
 };
 
 const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
+  rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
 };
@@ -184,7 +184,7 @@ export default function MenuBase({
   trigger,
   items,
   size = "md",
-  shape = "squircle",
+  shape = "rounded",
   icon = true,
   iconPosition = "leading",
   disabled = false,
@@ -235,7 +235,7 @@ export default function MenuBase({
     (destructive: boolean, spread: boolean) =>
     (state: { highlighted: boolean }) =>
       [
-        "d:f ai:c g:2 us:none c:p mx:1 fw:500 os:none bw:1 bc:transparent",
+        "d:f ai:c g:2 us:none c:p mx:1 fw:400 os:none bw:1 bc:transparent",
         spec.item,
         spec.text,
         spread ? "jc:sb" : "",

@@ -19,37 +19,37 @@ const RECENT = [
   {
     name: "budget.xlsx",
     detail: "Edited 10 minutes ago",
-    icon: <IconFileTypeXls className="w:5 h:5 c:mint" />,
+    icon: <IconFileTypeXls className="w:4 h:4 c:mint" />,
   },
   {
     name: "receipts.pdf",
     detail: "Edited yesterday",
-    icon: <IconFileTypePdf className="w:5 h:5 c:red" />,
+    icon: <IconFileTypePdf className="w:4 h:4 c:red" />,
   },
   {
     name: "scan.png",
     detail: "Added on Monday",
-    icon: <IconPhoto className="w:5 h:5 c:mint" />,
+    icon: <IconPhoto className="w:4 h:4 c:mint" />,
   },
 ];
 
 function Recent() {
   return (
-    <div className="d:f fd:c g:3">
-      <h2 className="m:0 fs:sm fw:600 c:hint">Recent</h2>
-      <ul className="d:g g:3 m:0 p:0 gtc:repeat(auto-fill,minmax(14rem,1fr))">
+    <div className="d:f fd:c g:2">
+      <h2 className="m:0 fs:xs fw:500 c:hint">Recent</h2>
+      <ul className="m:0 p:0 bw:1 bc:rim br:lg o:h">
         {RECENT.map((file) => (
           <li
             key={file.name}
-            className="d:f ai:c g:3 p:4 bg:raised bw:1 bc:rim br:xxl cs:s"
+            className="d:f ai:c g:3 h:12 px:3 bg:raised btw:1 bc:line fc:btw:0"
           >
-            <span className="d:f fs:0 ai:c jc:c w:10 h:10 br:lg cs:s bg:well">
+            <span className="d:f fs:0 ai:c jc:c w:7 h:7 br:md bg:well">
               {file.icon}
             </span>
-            <span className="d:f fd:c min-w:0">
-              <span className="fs:sm fw:500 o:h to:e ws:nw">{file.name}</span>
-              <span className="fs:xs c:hint">{file.detail}</span>
+            <span className="f:1 min-w:0 fs:sm fw:500 o:h to:e ws:nw">
+              {file.name}
             </span>
+            <span className="fs:xs c:hint ws:nw">{file.detail}</span>
           </li>
         ))}
       </ul>
@@ -106,7 +106,7 @@ export default function AppShell({
       />
 
       <div className="d:f fd:c f:1 min-w:0">
-        <header className="d:f ai:c g:3 h:16 px:4 bbw:1 bc:line @md:px:8">
+        <header className="d:f ai:c g:3 h:12 px:4 bbw:1 bc:line @md:px:6">
           <div className="d:b @md:d:none">
             <Drawer
               container={container}
@@ -123,13 +123,14 @@ export default function AppShell({
               />
             </Drawer>
           </div>
-          <h1 className="m:0 fs:lg fw:600 o:h to:e ws:nw">{title}</h1>
+          <h1 className="m:0 fs:sm fw:600 o:h to:e ws:nw">{title}</h1>
           <div className="d:none f:1 jc:c @lg:d:f">
             <Field
               aria-label="Search files"
               placeholder="Search files"
               icon={<IconSearch className="w:4 h:4" />}
-              className="w:100% max-w:80"
+              size="sm"
+              className="w:100% max-w:72"
             />
           </div>
           <div className="d:f ai:c g:2 ml:auto @lg:ml:0">
@@ -141,7 +142,7 @@ export default function AppShell({
           </div>
         </header>
 
-        <main className="f:1 min-h:0 oy:auto p:4 @md:p:8">
+        <main className="f:1 min-h:0 oy:auto p:4 @md:p:6">
           {children ?? <Recent />}
         </main>
       </div>

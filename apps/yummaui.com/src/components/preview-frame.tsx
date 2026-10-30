@@ -16,8 +16,8 @@ const RESET = `
   body {
     margin: 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: safe center;
+    justify-content: safe center;
     background: light-dark(#fff, #1f2023);
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
       Arial, sans-serif;
@@ -30,8 +30,8 @@ const RESET = `
     width: 100%;
     padding: 2.5rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: safe center;
+    justify-content: safe center;
   }
   /* Height is the same story but only safe on a frame that has one of its own.
      An auto-height frame is sized *from* this element, so handing a percentage

@@ -157,7 +157,7 @@ export default function FileUploadBase({
   accept,
   multiple = false,
   onFilesChange,
-  shape = "squircle",
+  shape = "rounded",
   border = "dashed",
   error,
   disabled = false,

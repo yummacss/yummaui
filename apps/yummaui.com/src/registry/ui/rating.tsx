@@ -158,7 +158,7 @@ export default function RatingBase({
                     className={
                       iconClasses(option, active) +
                       (animated && !disabled
-                        ? " tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none"
+                        ? " tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none"
                         : "")
                     }
                   >
@@ -196,7 +196,7 @@ export default function RatingBase({
                       className={
                         starClasses(filled) +
                         (animated && !disabled
-                          ? " tp:t tdu:200 ttf:eo a:s:90 wc:s @prm:tp:none"
+                          ? " tp:t tdu:200 ttf:eo a:s:95 wc:s @prm:tp:none"
                           : "")
                       }
                     >

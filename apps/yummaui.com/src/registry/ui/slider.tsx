@@ -99,7 +99,7 @@ export default function SliderBase({
   min = 0,
   max = 100,
   step = 1,
-  shape = "squircle",
+  shape = "rounded",
   disabled = false,
   formatValue,
   unit,

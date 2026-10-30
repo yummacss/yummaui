@@ -75,7 +75,7 @@ export default function SignIn({
   onPasskey,
   forgotHref,
   signUpHref,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
 }: SignInProps) {

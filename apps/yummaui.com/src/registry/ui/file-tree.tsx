@@ -134,7 +134,7 @@ export default function FileTree({
   defaultSelected,
   selected: controlledSelected,
   onSelectedChange,
-  shape = "squircle",
+  shape = "rounded",
   animated = true,
   className,
   focus = true,
