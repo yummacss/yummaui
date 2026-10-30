@@ -229,6 +229,9 @@ importers:
       unist-util-visit:
         specifier: ^5.1.0
         version: 5.1.0
+      usehooks-ts:
+        specifier: ^3.1.1
+        version: 3.1.1(react@19.3.0)
       yummacss:
         specifier: ^4.10.0
         version: 4.10.0
@@ -2395,6 +2398,9 @@ packages:
   lite-emit@4.0.0:
     resolution: {integrity: sha512-8krVeIZLS7JbkXz4R9xYziqHcxga6UgmomVWb45g21aB4M8qzDwr7FTEW3PJa80PTUASXeqbfipveKCB5YZdug==}
 
+  lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
@@ -3027,6 +3033,12 @@ packages:
     resolution: {integrity: sha512-6L+EeigHMQhdaIPNIFUKwfWJSwWFQ8gJbJ2DLOs5sDIegTwR9fRxvnM3uciHKjIZhFz+KAv2emhWMRvDmMcY8A==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  usehooks-ts@3.1.1:
+    resolution: {integrity: sha512-I4diPp9Cq6ieSUH2wu+fDAVQO43xwtulo+fKEidHUwZPnYImbtkTjzIJYcDcJqxgmX31GVqNFURodvcgHcW0pA==}
+    engines: {node: '>=16.15.0'}
+    peerDependencies:
+      react: ^16.8.0  || ^17 || ^18 || ^19 || ^19.0.0-rc
 
   vfile-matter@5.0.1:
     resolution: {integrity: sha512-o6roP82AiX0XfkyTHyRCMXgHfltUNlXSEqCIS80f+mbAyiQBE2fxtDVMtseyytGx75sihiJFo/zR6r/4LTs2Cw==}
@@ -4755,6 +4767,8 @@ snapshots:
 
   lite-emit@4.0.0: {}
 
+  lodash.debounce@4.0.8: {}
+
   longest-streak@3.1.0: {}
 
   lz-string@1.5.0: {}
@@ -5868,6 +5882,11 @@ snapshots:
 
   use-sync-external-store@1.7.0(react@19.3.0):
     dependencies:
+      react: 19.3.0
+
+  usehooks-ts@3.1.1(react@19.3.0):
+    dependencies:
+      lodash.debounce: 4.0.8
       react: 19.3.0
 
   vfile-matter@5.0.1:
