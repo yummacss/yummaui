@@ -1,6 +1,7 @@
 "use client";
 
 import { Meter } from "@base-ui/react/meter";
+import { IconCircleDashed } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
@@ -182,7 +183,7 @@ export default function StorageBar({
               TILE_SHAPES[shape],
             )}
           >
-            <span className="w:2 h:2 br:9999 bw:1 bc:hint" />
+            <IconCircleDashed className="w:4 h:4 c:hint" />
           </span>
           <span className="f:1 c:hint">{rest}</span>
           <span className="c:hint">

@@ -232,7 +232,7 @@ export default function ComboboxBase({
   const id = useId();
 
   const chipsClasses = merge(
-    "d:f fw:w ai:c g:1 py:1 pl:2 pr:16 bg:field bc:rim c:label bw:1",
+    "d:f fw:w ai:c g:1 py:1 pl:1 pr:16 bg:field bc:rim c:label bw:1",
     CHIPS_SIZES[size],
     SHAPES[shape],
     className,
@@ -340,7 +340,7 @@ export default function ComboboxBase({
                 placeholder={placeholder}
                 className={merge(
                   outline,
-                  "fg:1 w:24 min-w:24 bg:transparent c:label bw:0",
+                  "fg:1 w:24 min-w:24 pl:1 bg:transparent c:label bw:0",
                 )}
               />
             </Combobox.Chips>

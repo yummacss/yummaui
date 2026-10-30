@@ -4,6 +4,7 @@ import { Button } from "@base-ui/react/button";
 import { Toast } from "@base-ui/react/toast";
 import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
+import { useRef } from "react";
 import { merge } from "yummacss/merge";
 
 type Shape = "rounded" | "square" | "squircle";
@@ -195,9 +196,18 @@ function Trigger({
   children: ReactNode;
 }) {
   const manager = Toast.useToastManager();
+  const raised = useRef<{ id: string; attempt: number } | null>(null);
   const raise = () => {
+    // pressed again while its toast shows, the toast shakes rather than stacking
+    const open = raised.current;
+    if (open && manager.toasts.some((toast) => toast.id === open.id)) {
+      open.attempt += 1;
+      manager.update(open.id, { data: { attempt: open.attempt } });
+      return;
+    }
     // the action runs, then its toast goes: an undone change needs no message
     const id = manager.add({
+      data: { attempt: 0 },
       title,
       description,
       actionProps: actionLabel
@@ -210,6 +220,7 @@ function Trigger({
           }
         : undefined,
     });
+    raised.current = { id, attempt: 0 };
   };
   return (
     <Button className={className} onClick={raise}>
@@ -248,9 +259,13 @@ function Stack({
       {/* bridges the gap between toasts, so the stack stays open as the pointer crosses it */}
       <span aria-hidden className="p:a t:100% l:0 w:100% h:4" />
       <Toast.Content
+        key={(toast.data as { attempt?: number } | undefined)?.attempt ?? 0}
         className={(state) =>
           [
             "d:f ai:c g:3 py:3 pl:4 pr:3 o:h",
+            animated && ((toast.data as { attempt?: number } | undefined)?.attempt ?? 0) > 0
+              ? "an:shake adu:500 atf:io @prm:an:none"
+              : "",
             animated ? "tp:o tdu:250 ttf:out-quart @prm:tp:none" : "",
             state.behind && !state.expanded ? "o:0" : "",
           ]

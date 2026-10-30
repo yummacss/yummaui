@@ -6,6 +6,7 @@ import { Toggle } from "@base-ui/react/toggle";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import Action from "./button";
 
 type IconPosition = "leading" | "trailing";
 type Shape = "rounded" | "square" | "squircle";
@@ -30,12 +31,8 @@ const STEP_SHAPES: Record<Shape, string> = {
 
 const FOCUS = "fv:os:s fv:ow:3 fv:oo:0 fv:oc:focus/40 fv:bc:focus";
 
-const BUTTON =
-  "d:if ai:c jc:c g:2 px:4 py:2 bw:1 fs:sm fw:500 tp:c tdu:150 ttf:io us:none c:p";
 const RAISED =
   "bg:raised bc:rim c:label h:bg:well";
-const FILLED =
-  "bg:fill bc:fill h:o:90 c:on-fill d:o:50 d:c:na";
 
 // a picked choice sinks in, like a pressed toggle
 const PICKED = "bg:well bc:rim c:check";
@@ -158,7 +155,6 @@ export default function OnboardingBase({
       return next;
     });
 
-  const control = merge(outline, BUTTON, CONTROL_SHAPES[shape]);
 
   const slide = (
     <div className="d:f fd:c g:2">
@@ -251,33 +247,34 @@ export default function OnboardingBase({
             <div className="d:f ai:c jc:sb g:2 pt:2">
               {isFirst ? (
                 <AlertDialog.Close
-                  render={<Button className={merge(control, RAISED)} />}
+                  render={<Action variant="secondary" shape={shape} />}
                 >
                   Skip
                 </AlertDialog.Close>
               ) : (
-                <Button
+                <Action
+                  variant="secondary"
+                  shape={shape}
                   onClick={() => go(page - 1)}
-                  className={merge(control, RAISED)}
                 >
                   Back
-                </Button>
+                </Action>
               )}
               {isLast ? (
                 <AlertDialog.Close
-                  render={<Button className={merge(control, FILLED)} />}
+                  render={<Action shape={shape} />}
                   onClick={() => onFinish?.([...picked])}
                 >
                   {finishLabel}
                 </AlertDialog.Close>
               ) : (
-                <Button
-                  onClick={() => go(page + 1)}
+                <Action
+                  shape={shape}
                   disabled={!chosen}
-                  className={merge(control, FILLED)}
+                  onClick={() => go(page + 1)}
                 >
                   Continue
-                </Button>
+                </Action>
               )}
             </div>
           </div>
