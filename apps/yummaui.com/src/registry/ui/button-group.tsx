@@ -17,12 +17,10 @@ const BASE = "d:f ai:c o:h w:fc";
 // a pill insets its buttons inside a border of its own
 const PILL = "bg:raised bc:rim bw:1";
 
-// joined buttons overlap by their border, so two edges draw one line; a filled
-// button's shared edge takes the rim's color, or the line would vanish into it.
-// they keep still when pressed, so the group moves as one control
+// a filled button's shared edge takes the rim's color, or the line would vanish
+// into it; they keep still when pressed, so the group moves as one control
 function joined(index: number, separated: boolean): string {
-  const shared = index > 0 ? `ml:-px ${separated ? "blc:rim" : ""}` : "";
-  return `br:0 a:s:100 ${shared}`;
+  return `br:0 a:s:100 ${index > 0 && separated ? "blc:rim" : ""}`;
 }
 
 export interface ButtonGroupProps {
@@ -117,8 +115,16 @@ export default function ButtonGroup({
       )}
     >
       {items.map((child, index) => (
+        // the wrapper, not the button, overlaps the border, so the group still fits the last edge
         // biome-ignore lint/suspicious/noArrayIndexKey: position is the identity here
-        <div key={index} className={stretch ? "d:f fg:1" : "d:f"}>
+        <div
+          key={index}
+          className={merge(
+            "d:f",
+            stretch && "fg:1",
+            index > 0 && shape !== "pill" && "ml:-px",
+          )}
+        >
           {index > 0 && separated && shape === "pill" && (
             <Separator
               orientation="vertical"
