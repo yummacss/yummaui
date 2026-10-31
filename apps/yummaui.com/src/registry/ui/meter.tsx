@@ -3,7 +3,10 @@
 import { Meter } from "@base-ui/react/meter";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { RADIUS, useShape, type Shape } from "./style";
+import { RADIUS, useShape } from "./style";
+
+// a track is either a bar or a capsule
+const SHAPES = ["square", "pill"] as const;
 
 const INTENTS = {
   neutral: "bg:fill",
@@ -32,8 +35,11 @@ export interface MeterSegment {
 }
 
 export interface MeterProps {
-  /** Corner radius of the track. Inherits the nearest `Shape`. */
-  shape?: Shape;
+  /**
+   * Corner radius of the track. Inherits the nearest `Shape`; under one it does
+   * not take, a pill.
+   */
+  shape?: (typeof SHAPES)[number];
   /** The current value. With `segments`, their sum takes its place. */
   value?: number;
   /** Defaults to Base UI's own Meter minimum (0). */
@@ -101,7 +107,7 @@ export default function MeterBase({
   animated = true,
   className,
 }: MeterProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const hasHeader = Boolean(icon);
   const low = min ?? 0;
   const high = max ?? 100;

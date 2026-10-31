@@ -5,7 +5,10 @@ import { IconChevronDown, IconLock, IconMinus, IconPlus } from "@tabler/icons-re
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, useShape } from "./style";
+
+// a card reads wrong square or as a capsule
+const SHAPES = ["rounded", "squircle"] as const;
 
 type Variant = "default" | "bordered" | "ghost" | "subtle";
 const TURN = "tp:t tdu:300 ttf:out-quart @prm:tp:none";
@@ -34,9 +37,10 @@ export interface AccordionProps {
   variant?: Variant;
   /**
    * Corner radius on `bordered` items. The other variants use a fixed radius,
-   * since no shape was ever paired with them. Inherits the nearest `Shape`.
+   * since no shape was ever paired with them. Inherits the nearest `Shape`;
+   * under one it does not take, `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
   /**
    * Draws a rule between each pair of items. Only visible on the `default`
    * variant.
@@ -103,7 +107,7 @@ export default function AccordionBase({
   className,
   focus = true,
 }: AccordionProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [internalValue, setInternalValue] = useState<string[]>(

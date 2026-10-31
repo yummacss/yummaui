@@ -7,7 +7,7 @@ import { RADIUS, useShape, type Shape } from "./style";
 
 type Orientation = "horizontal" | "vertical";
 
-const BASE = "p:r d:f g:1 p:1 w:fc bg:well bs-o:sunk";
+const BASE = "p:r d:f g:1 w:fc bg:well bs-o:sunk";
 
 export interface ToggleGroupProps {
   /** A caption above the group, wired to it as its accessible name. */

@@ -8,6 +8,9 @@ import { useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
+// a field of chips grows past one line, where a capsule turns into a blob
+const SHAPES = ["square", "rounded", "squircle"] as const;
+
 type Size = "sm" | "md" | "lg";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 
@@ -82,9 +85,10 @@ export interface ComboboxProps {
   size?: Size;
   /**
    * Corner radius, applied to the input and the popup together. `squircle` uses
-   * `corner-shape`. Inherits the nearest `Shape`.
+   * `corner-shape`. Inherits the nearest `Shape`; under one it does not take,
+   * `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
   /**
    * Allows more than one selection. Choices become removable chips under the
    * input.
@@ -194,7 +198,7 @@ export default function ComboboxBase({
   focus = true,
   container,
 }: ComboboxProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [open, setOpen] = useState(false);

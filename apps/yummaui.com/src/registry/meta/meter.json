@@ -100,12 +100,10 @@
       "type": "enum",
       "values": [
         "square",
-        "rounded",
-        "squircle",
         "pill"
       ],
-      "default": "rounded",
-      "description": "Corner radius of the track. Inherits the nearest `Shape`."
+      "default": "pill",
+      "description": "Corner radius of the track. Inherits the nearest `Shape`; under one it does not take, a pill."
     },
     {
       "name": "animated",

@@ -255,7 +255,6 @@ export default function Sidebar({
               size="sm"
               tint="indigo"
               status={status}
-              shape={shape === "square" ? "square" : "circle"}
             />
             <span className="d:f fd:c f:1 min-w:0">
               <span className="fs:sm fw:500 o:h to:e ws:nw">{user.name}</span>

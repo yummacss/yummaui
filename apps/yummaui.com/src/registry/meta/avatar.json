@@ -1,5 +1,5 @@
 {
-  "summary": "A user's picture, in three sizes and three shapes, falling back to their initials and then to an icon, with an optional presence dot and badge.",
+  "summary": "A user's picture, in three sizes, falling back to their initials and then to an icon, with an optional presence dot and badge.",
   "props": [
     {
       "name": "src",
@@ -75,18 +75,6 @@
       ],
       "default": "md",
       "description": "Diameter, and the size of the initials or icon inside it."
-    },
-    {
-      "name": "shape",
-      "type": "enum",
-      "values": [
-        "circle",
-        "rounded",
-        "square",
-        "squircle"
-      ],
-      "default": "circle",
-      "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
     }
   ],
   "scene": [

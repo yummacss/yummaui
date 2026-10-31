@@ -106,13 +106,11 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "square",
         "rounded",
-        "squircle",
-        "pill"
+        "squircle"
       ],
       "default": "rounded",
-      "description": "Corner radius on `bordered` items. The other variants use a fixed radius, since no shape was ever paired with them. Inherits the nearest `Shape`.",
+      "description": "Corner radius on `bordered` items. The other variants use a fixed radius, since no shape was ever paired with them. Inherits the nearest `Shape`; under one it does not take, `rounded`.",
       "conflictsWith": [
         {
           "prop": "variant",

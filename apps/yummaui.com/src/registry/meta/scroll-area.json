@@ -8,18 +8,6 @@
       "description": "What scrolls."
     },
     {
-      "name": "shape",
-      "type": "enum",
-      "values": [
-        "square",
-        "rounded",
-        "squircle",
-        "pill"
-      ],
-      "default": "rounded",
-      "description": "Corner radius on the focus outline. The thumb is always a capsule. Inherits the nearest `Shape`."
-    },
-    {
       "name": "animated",
       "type": "boolean",
       "default": true,

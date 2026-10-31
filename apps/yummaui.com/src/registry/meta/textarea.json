@@ -40,11 +40,10 @@
       "values": [
         "square",
         "rounded",
-        "squircle",
-        "pill"
+        "squircle"
       ],
       "default": "rounded",
-      "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported. Inherits the nearest `Shape`."
+      "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported. Inherits the nearest `Shape`; under one it does not take, `rounded`."
     },
     {
       "name": "disabled",

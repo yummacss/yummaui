@@ -2,9 +2,8 @@ import { Button } from "@base-ui/react/button";
 import { Separator } from "@base-ui/react/separator";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS } from "./style";
+import { FOCUS } from "./style";
 
-type Shape = "rounded" | "square" | "squircle" | "circle";
 
 type Orientation = "horizontal" | "vertical";
 
@@ -20,11 +19,6 @@ export interface SeparatorProps {
   iconLabel?: string;
   /** Renders as plain text in the middle. Ignored if `icon` is set. */
   label?: ReactNode;
-  /**
-   * Corner radius on the icon button, which is the only part with corners. Only
-   * visible alongside `icon`.
-   */
-  iconShape?: Shape;
   /**
    * A vertical rule for a row layout, like a button group. Applies to the
    * `icon` and `label` forms too, which turn with it.
@@ -54,7 +48,6 @@ export default function SeparatorBase({
   onIconClick,
   iconLabel,
   label,
-  iconShape = "rounded",
   orientation = "horizontal",
   className,
   focus = true,
@@ -82,7 +75,7 @@ export default function SeparatorBase({
   const buttonClasses = merge(
     outline,
     "d:if ai:c jc:c w:8 h:8 bg:raised bs-o:key bc:rim c:label bw:1 tp:a tdu:150 ttf:io a:s:97 wc:s @prm:tp:none us:none c:p h:bg:well",
-    iconShape === "circle" ? "br:9999" : RADIUS.control[iconShape],
+    "br:lg",
   );
 
   const half = `fg:1 ${vertical ? "w:0" : "h:0"} ${line}`;

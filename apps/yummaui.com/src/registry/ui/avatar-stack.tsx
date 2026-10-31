@@ -1,9 +1,8 @@
-import { Children, cloneElement, isValidElement, type ReactNode } from "react";
+import { Children, type ReactNode } from "react";
 import { merge } from "yummacss/merge";
 import Avatar from "./avatar";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "circle" | "rounded" | "square" | "squircle";
 type Overlap = "none" | "sm" | "md" | "lg";
 
 const OVERLAPS: Record<Overlap, string> = {
@@ -32,11 +31,6 @@ export interface AvatarStackProps {
    * Size of the `+N` avatar only. The avatars you pass carry their own `size`.
    */
   size?: Size;
-  /**
-   * Every avatar's shape, the `+N` one included. One an avatar sets itself
-   * wins.
-   */
-  shape?: Shape;
 }
 
 /**
@@ -49,13 +43,8 @@ export default function AvatarStack({
   overlap = "md",
   max,
   size = "sm",
-  shape = "circle",
 }: AvatarStackProps) {
-  const items = Children.toArray(children).map((child) =>
-    isValidElement<{ shape?: Shape }>(child)
-      ? cloneElement(child, { shape: child.props.shape ?? shape })
-      : child,
-  );
+  const items = Children.toArray(children);
   const shown = max === undefined ? items : items.slice(0, max);
   const hidden = items.length - shown.length;
 
@@ -69,7 +58,7 @@ export default function AvatarStack({
       ))}
       {hidden > 0 && (
         <span className={OVERLAPS[overlap]}>
-          <Avatar size={size} shape={shape} fallback={`+${hidden}`} />
+          <Avatar size={size} fallback={`+${hidden}`} />
         </span>
       )}
     </div>

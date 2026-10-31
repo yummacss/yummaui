@@ -2,20 +2,31 @@
 
 import { Children, cloneElement, isValidElement, type ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import Separator from "./separator";
 import { RADIUS, useShape, type Shape } from "./style";
 
 type IconSide = "leading" | "trailing";
 
-const BASE = "d:f ai:c o:h w:fc";
+const BASE = "d:f ai:c w:fc";
 
-// a pill insets its buttons inside a border of its own
-const PILL = "bg:raised bs-o:key bc:rim bw:1";
-
-// a filled button's shared edge takes the rim's color, or the line would vanish
-// into it; they keep still when pressed, so the group moves as one control
-function joined(index: number, separated: boolean): string {
-  return `br:0 a:s:100 ${index > 0 && separated ? "blc:rim" : ""}`;
+// the buttons are square and only the group's two outer ends are rounded, so no
+// radius class fights another; a filled button's shared edge takes
+// the rim's color, or the line would vanish into it; they keep still when pressed,
+// so the group moves as one control
+function joined(
+  index: number,
+  count: number,
+  shape: Shape,
+  separated: boolean,
+): string {
+  const ends =
+    count === 1
+      ? RADIUS.control[shape]
+      : index === 0
+        ? RADIUS.controlStart[shape]
+        : index === count - 1
+          ? RADIUS.controlEnd[shape]
+          : "";
+  return `${ends} a:s:100 ${index > 0 && separated ? "blc:rim" : ""}`;
 }
 
 export interface ButtonGroupProps {
@@ -23,10 +34,7 @@ export interface ButtonGroupProps {
   className?: string;
   /** The buttons, spaced and rounded as one control. */
   children: ReactNode;
-  /**
-   * Corner radius of the group. `pill` also insets the buttons, so a pill
-   * `Button` inside sits clear of the border. Inherits the nearest `Shape`.
-   */
+  /** Corner radius of the group. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
    * Draws a rule between each pair of buttons. Turn it off when the buttons
@@ -54,6 +62,7 @@ export interface ButtonGroupProps {
 
 type IconProps = {
   className?: string;
+  shape?: Shape;
   icon?: ReactNode;
   iconPosition?: IconSide;
   iconOnly?: boolean;
@@ -81,20 +90,28 @@ export default function ButtonGroup({
   const all = Children.toArray(children);
   const items = all.map((child, index) => {
     if (!isValidElement<IconProps>(child)) return child;
-    const className = merge(
-      INSET,
-      shape === "pill" ? "" : joined(index, separated),
-      child.props.className,
-    );
-    if (!child.props.icon) return cloneElement(child, { className });
+    const joint = joined(index, all.length, shape, separated);
+    // a menu's own trigger is the part that sits in the row
+    const { trigger } = child.props as { trigger?: unknown };
+    if (isValidElement<IconProps>(trigger))
+      return cloneElement(child, {
+        trigger: cloneElement(trigger, {
+          className: merge(INSET, joint, trigger.props.className),
+          shape: "square",
+        }),
+      } as Partial<IconProps>);
+    const className = merge(INSET, joint, child.props.className);
+    if (!child.props.icon) return cloneElement(child, { className, shape: "square" });
     if (!icon)
       return cloneElement(child, {
         className,
+        shape: "square",
         icon: undefined,
         iconOnly: false,
       });
     return cloneElement(child, {
       className,
+      shape: "square",
       iconPosition: child.props.iconPosition ?? iconPosition,
       iconOnly: child.props.iconOnly ?? iconOnly,
     });
@@ -105,7 +122,6 @@ export default function ButtonGroup({
       className={merge(
         BASE,
         RADIUS.control[shape],
-        shape === "pill" && PILL,
         stretch && "w:100%",
         className,
       )}
@@ -118,15 +134,9 @@ export default function ButtonGroup({
           className={merge(
             "d:f",
             stretch && "fg:1",
-            index > 0 && shape !== "pill" && "ml:-px",
+            index > 0 && "ml:-px",
           )}
         >
-          {index > 0 && separated && shape === "pill" && (
-            <Separator
-              orientation="vertical"
-              className={shape === "pill" ? "mx:1 my:1" : undefined}
-            />
-          )}
           {child}
         </div>
       ))}

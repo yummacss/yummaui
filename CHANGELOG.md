@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Accordion takes `rounded` & `squircle`; Combobox & Textarea take every shape but `pill`; Meter takes `square` & `pill`.
+- Button Group joins its buttons in every shape, a menu trigger included.
+- Toggle Group has no padding around its toggles.
 - Every component takes all four shapes: `square`, `rounded`, `squircle` & `pill`. The `none` shape is named `square`; `--shape none` still works.
 - Soft key: every control is a key with a lighter top edge and a small drop, on violet-leaning grays with a charcoal fill. Needs Yumma CSS 4.12 or later.
 - `init` and `add` write the `theme.boxShadow` entries the components use.
@@ -52,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- `shape` on Avatar, Avatar Stack & Scroll Area, and `iconShape` on Separator: avatars are round, and the others keep one radius.
 - Sidebar's `workspaces` and `onWorkspaceChange`.
 - Empty State's `iconShape`.
 

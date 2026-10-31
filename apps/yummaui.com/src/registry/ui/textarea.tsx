@@ -5,7 +5,10 @@ import { IconAlertTriangle, IconCheck } from "@tabler/icons-react";
 import type { ChangeEvent, ComponentProps } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, useShape } from "./style";
+
+// a capsule turns into a blob past one line
+const SHAPES = ["square", "rounded", "squircle"] as const;
 
 type Status = "default" | "error" | "success";
 
@@ -70,9 +73,10 @@ export interface TextareaProps
   maxLength?: number;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`.
+   * square where that is unsupported. Inherits the nearest `Shape`; under one
+   * it does not take, `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
   /** Called on every input event. */
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   /**
@@ -110,7 +114,7 @@ export default function TextareaBase({
   value: controlledValue,
   ...props
 }: TextareaProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const [internalValue, setInternalValue] = useState(
     String(defaultValue ?? controlledValue ?? ""),
   );

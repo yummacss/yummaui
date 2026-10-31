@@ -21,10 +21,25 @@ export function Shape({ value, children }: ShapeProps) {
   return <ShapeContext value={value}>{children}</ShapeContext>;
 }
 
-/** The shape to draw: the component's own prop, else the nearest `Shape`, else the default. */
-export function useShape(own?: Shape): Shape {
+const ALL: readonly Shape[] = ["square", "rounded", "squircle", "pill"];
+
+/**
+ * The shape to draw: the component's own prop, else the nearest `Shape`, else
+ * the default. A component that `takes` only some shapes gets `rounded` for one
+ * it does not, or `pill` where it has no `rounded`.
+ */
+export function useShape<T extends Shape = Shape>(
+  own?: T,
+  takes: readonly T[] = ALL as readonly T[],
+): T {
   const inherited = useContext(ShapeContext);
-  return own ?? inherited;
+  const shape: Shape = own ?? inherited;
+  if ((takes as readonly Shape[]).includes(shape)) return shape as T;
+  return (
+    takes.find((one) => one === "rounded") ??
+    takes.find((one) => one === "pill") ??
+    takes[0]
+  );
 }
 
 /**
