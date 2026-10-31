@@ -4,7 +4,7 @@ import type { ComponentProps } from "react";
 /** Width over height of the bare mark. */
 export const MARK_RATIO = 1.1079;
 
-/** The Yumma mark on its own, in the current text color. */
+/** The Yumma mark on its own. */
 export function YummaMark(props: ComponentProps<"svg">) {
 	return (
 		<svg
@@ -21,6 +21,7 @@ export function YummaMark(props: ComponentProps<"svg">) {
 				height={25}
 				rx={4}
 				transform="rotate(75 28.1481 6)"
+				className="f:mark-back"
 			/>
 			<rect
 				opacity={0.95}
@@ -30,12 +31,13 @@ export function YummaMark(props: ComponentProps<"svg">) {
 				height={25}
 				rx={4}
 				transform="rotate(75 36.7783 10.9827)"
+				className="f:mark-front"
 			/>
 		</svg>
 	);
 }
 
-/** The Yumma UI logo, the mark and the wordmark, in the current text color. */
+/** The Yumma UI logo: the mark, and the wordmark in the current text color. */
 export function YummaUILogo(props: ComponentProps<"svg">) {
 	return (
 		<svg
@@ -53,6 +55,7 @@ export function YummaUILogo(props: ComponentProps<"svg">) {
 					height={25}
 					rx={4}
 					transform="rotate(75 28.1481 6)"
+					className="f:mark-back"
 				/>
 				<rect
 					opacity={0.95}
@@ -62,6 +65,7 @@ export function YummaUILogo(props: ComponentProps<"svg">) {
 					height={25}
 					rx={4}
 					transform="rotate(75 36.7783 10.9827)"
+					className="f:mark-front"
 				/>
 			</g>
 			<path
