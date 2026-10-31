@@ -41,14 +41,18 @@ export async function uiOg(slug: string): Promise<OgSpec | null> {
 export async function ogImage(spec: OgSpec | null, theme: OgTheme = "light") {
 	if (!spec) return new Response("Not found", { status: 404 });
 
-	// the brand file, so the covers draw the same mark people download
+	// the brand file, so the covers draw the same logo people download
 	const svg = await readFile(
 		join(
 			process.cwd(),
-			`public/brand/yummaui-mark${theme === "dark" ? "-dark" : ""}.svg`,
+			`public/brand/yummaui${theme === "dark" ? "-dark" : ""}.svg`,
 		),
 	);
 	const mark = `data:image/svg+xml;base64,${svg.toString("base64")}`;
+	const [, , w, h] = /viewBox="([^"]+)"/
+		.exec(svg.toString())?.[1]
+		.split(" ")
+		.map(Number) ?? [0, 0, 1, 1];
 
 	const font = (file: string) =>
 		readFile(join(process.cwd(), "node_modules", file));
@@ -62,17 +66,20 @@ export async function ogImage(spec: OgSpec | null, theme: OgTheme = "light") {
 		),
 	]);
 
-	return new ImageResponse(<OgImage spec={spec} theme={theme} mark={mark} />, {
-		width: 1200,
-		height: 630,
-		fonts: [
-			{
-				name: "Geist Serif",
-				data: Buffer.from(serif),
-				weight: 400,
-				style: "normal",
-			},
-			{ name: "Quattro", data: quattro, weight: 400, style: "normal" },
-		],
-	});
+	return new ImageResponse(
+		<OgImage spec={spec} theme={theme} mark={mark} markRatio={w / h} />,
+		{
+			width: 1200,
+			height: 630,
+			fonts: [
+				{
+					name: "Geist Serif",
+					data: Buffer.from(serif),
+					weight: 400,
+					style: "normal",
+				},
+				{ name: "Quattro", data: quattro, weight: 400, style: "normal" },
+			],
+		},
+	);
 }

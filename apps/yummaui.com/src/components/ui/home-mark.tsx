@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { CSS_ORIGIN } from "@/utils/hosts";
-import { YummaCSSMark } from "../icons/yummacss-mark";
+import { YummaUILogo } from "../icons/yumma-logo";
 
-/** The mark, linking to the landing page; a right-click opens the brand page, which is what someone right-clicking a logo is after. */
+/** The logo, linking to the landing page; a right-click opens the brand page, which is what someone right-clicking a logo is after. */
 export default function HomeMark({ className }: { className: string }) {
 	return (
 		<Link
@@ -16,7 +16,7 @@ export default function HomeMark({ className }: { className: string }) {
 			}}
 			className="d:b w:fc fv:oc:ink fv:ow:2"
 		>
-			<YummaCSSMark product="ui" className={className} />
+			<YummaUILogo className={className} />
 		</Link>
 	);
 }
