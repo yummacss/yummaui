@@ -19,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Accordion takes `rounded` & `squircle`; Combobox & Textarea take every shape but `pill`; Meter takes `square` & `pill`.
+- Accordion takes `rounded` & `squircle`; Combobox, Textarea & Scroll Area take every shape but `pill`; Meter takes `square` & `pill`.
+- Separator's `iconShape` takes `circle` where it took `pill`.
 - Button Group joins its buttons in every shape, a menu trigger included.
 - Toggle Group has no padding around its toggles.
 - Every component takes all four shapes: `square`, `rounded`, `squircle` & `pill`. The `none` shape is named `square`; `--shape none` still works.
@@ -55,7 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- `shape` on Avatar, Avatar Stack & Scroll Area, and `iconShape` on Separator: avatars are round, and the others keep one radius.
+- `shape` on Avatar & Avatar Stack: avatars are round.
 - Sidebar's `workspaces` and `onWorkspaceChange`.
 - Empty State's `iconShape`.
 

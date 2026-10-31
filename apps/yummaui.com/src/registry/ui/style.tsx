@@ -42,6 +42,20 @@ export function useShape<T extends Shape = Shape>(
   );
 }
 
+/** The shape of a part as wide as it is tall, where a capsule is a `circle`. */
+export type Corner = "square" | "rounded" | "squircle" | "circle";
+
+/** Like `useShape`, for a square part: the nearest `pill` draws a circle. */
+export function useCorner(own?: Corner): Corner {
+  const shape = useShape(own === "circle" ? "pill" : own);
+  return shape === "pill" ? "circle" : shape;
+}
+
+/** The `RADIUS` column for a corner. */
+export function shapeOf(corner: Corner): Shape {
+  return corner === "circle" ? "pill" : corner;
+}
+
 /**
  * The radius of each kind of part, for each shape. Edit a row here to restyle
  * every component that has that part.

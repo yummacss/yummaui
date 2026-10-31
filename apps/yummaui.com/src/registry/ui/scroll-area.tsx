@@ -3,11 +3,19 @@
 import { ScrollArea } from "@base-ui/react/scroll-area";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS } from "./style";
+import { FOCUS, RADIUS, useShape } from "./style";
+
+// a capsule cannot hold a scrolling list
+const SHAPES = ["square", "rounded", "squircle"] as const;
 
 export interface ScrollAreaProps {
   /** What scrolls. */
   children?: ReactNode;
+  /**
+   * Corner radius on the focus outline. Inherits the nearest `Shape`; under
+   * `pill`, `rounded`.
+   */
+  shape?: (typeof SHAPES)[number];
   /**
    * The scrollbar fading in while you hover or scroll. Turn it off for a
    * scrollbar that is simply there, or when the user has asked for reduced
@@ -35,16 +43,18 @@ export interface ScrollAreaProps {
  */
 export default function ScrollAreaBase({
   children,
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
 }: ScrollAreaProps) {
+  const shape = useShape(shapeProp, SHAPES);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   return (
     <ScrollArea.Root className={merge("w:100% h:72 c:label", className)}>
       <ScrollArea.Viewport
-        className={merge(outline, "h:100% bw:1 bc:transparent")}
+        className={merge(outline, "h:100% bw:1 bc:transparent", RADIUS.popup[shape])}
       >
         <ScrollArea.Content>{children}</ScrollArea.Content>
       </ScrollArea.Viewport>

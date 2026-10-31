@@ -45,6 +45,18 @@
       ]
     },
     {
+      "name": "iconShape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "circle"
+      ],
+      "default": "rounded",
+      "description": "Corner radius on the icon button, the only part with corners. Only visible alongside `icon`. Inherits the nearest `Shape`, where `pill` draws a circle."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

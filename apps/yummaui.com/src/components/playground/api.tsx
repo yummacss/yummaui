@@ -140,10 +140,22 @@ const SWATCHES = ACCENTS.map((family) => ({
 export function Look() {
 	const playground = usePlayground();
 	if (!playground) return null;
-	// every component with a shape takes all four
-	const offered = playground.meta?.props.some((prop) => prop.name === "shape")
-		? SHAPES
-		: [];
+	// the shapes this component takes; a corner's circle is the preview's pill
+	const props = playground.meta?.props ?? [];
+	const shapeProp = props.find((prop) => prop.name === "shape");
+	const offered = shapeProp
+		? SHAPES.filter((shape) => shapeProp.values?.includes(shape))
+		: props.some((prop) => prop.name === "iconShape")
+			? SHAPES
+			: [];
+	// a shape this component does not take draws as rounded, else pill
+	const shown = offered.includes(playground.shape)
+		? playground.shape
+		: offered.includes("rounded")
+			? "rounded"
+			: offered.includes("pill")
+				? "pill"
+				: offered[0];
 	const line = (name: string, control: React.ReactNode) => (
 		<div className="d:f fw:w ai:c jc:sb g:2 py:2 bc:border bbw:1">
 			<code className="c:code fs:xs ff:m">{name}</code>
@@ -162,7 +174,7 @@ export function Look() {
 					<EnumSelect
 						name="shape"
 						values={offered}
-						value={playground.shape}
+						value={shown}
 						onChange={(value) => playground.setShape(String(value))}
 					/>,
 				)}
