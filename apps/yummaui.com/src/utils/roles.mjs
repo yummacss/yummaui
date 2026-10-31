@@ -2,7 +2,7 @@
 // lean violet, white keys & a charcoal fill. See the notes, "Soft key".
 export const ROLES = {
 	raised: { light: "oklch(1 0 none)", dark: "oklch(0.245 0.008 290)" },
-	well: { light: "oklch(0.945 0.004 286)", dark: "oklch(0.165 0.006 290)" },
+	well: { light: "oklch(0.965 0.003 286)", dark: "oklch(0.165 0.006 290)" },
 	field: { light: "oklch(1 0 none)", dark: "oklch(0.215 0.007 290)" },
 	fill: { light: "oklch(0.27 0.009 286)", dark: "oklch(0.93 0.005 286)" },
 	"on-fill": { light: "oklch(0.97 0.004 286)", dark: "oklch(0.225 0.008 286)" },

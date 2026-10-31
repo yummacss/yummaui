@@ -150,7 +150,7 @@ export default function TabsBase({
   const listShape = isVertical && shape === "pill" ? "rounded" : shape;
 
   const listClasses = merge(
-    "d:f p:r g:1 p:1 w:fc bg:well bs-o:sunk",
+    "d:f p:r w:fc bg:well bs-o:sunk",
     LIST_SHAPES[listShape],
     isVertical && "fd:c",
     hasPanels && !isVertical && "mb:3",
