@@ -1,5 +1,5 @@
 import { IconMicrophone, IconPencil, IconVideo } from "@tabler/icons-react";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
@@ -27,10 +27,37 @@ const TILE_SHAPES: Record<Shape, string> = {
   squircle: "br:calc(.35em) cs:s",
 };
 
-// each icon arrives in turn, so the eye reads the three words in order
-const DELAYS = ["td:200", "td:350", "td:500"];
+// each icon arrives in turn, so the eye reads the words in order
+const DELAYS = ["td:200", "td:350", "td:500", "td:650", "td:800"];
+
+/** A word in a chip, with the icon that names it and any punctuation after it. */
+export interface InlineIconHeadingChip {
+  label: string;
+  icon: ReactNode;
+  /** Text right after the chip, such as a comma, kept on its line. */
+  after?: string;
+}
+
+/** The heading, in order: plain text between chips. */
+export type InlineIconHeadingPart = string | InlineIconHeadingChip;
+
+const ICON = "w:calc(.62em) h:calc(.62em)";
+
+const PARTS: InlineIconHeadingPart[] = [
+  "Everything you have",
+  { label: "written", icon: <IconPencil className={ICON} />, after: "," },
+  { label: "filmed", icon: <IconVideo className={ICON} /> },
+  "&",
+  { label: "recorded", icon: <IconMicrophone className={ICON} />, after: "," },
+  "kept in one folder.",
+];
 
 export interface InlineIconHeadingProps {
+  /**
+   * The heading, in order: plain text, and chips that pair a word with its
+   * icon.
+   */
+  parts?: InlineIconHeadingPart[];
   /** Text size of the whole heading; the chips scale with it. */
   size?: Size;
   /** The corners of each chip & of the icon tile inside it. */
@@ -73,7 +100,7 @@ function Chip({
           aria-hidden
           className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:edge bw:1 c:on-fill bs-o:key-fill ${TILE_SHAPES[shape]} ${
             animated
-              ? `tp:a tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index]}`
+              ? `tp:a tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index % DELAYS.length]}`
               : ""
           }`}
         >
@@ -92,12 +119,13 @@ function Chip({
  * recorded.
  */
 export default function InlineIconHeading({
+  parts = PARTS,
   size = "md",
   shape = "rounded",
   animated = true,
   className,
 }: InlineIconHeadingProps) {
-  const icon = "w:calc(.62em) h:calc(.62em)";
+  let chips = 0;
   return (
     <h2
       className={merge(
@@ -106,35 +134,26 @@ export default function InlineIconHeading({
         className,
       )}
     >
-      Everything you have{" "}
-      <Chip
-        icon={<IconPencil className={icon} />}
-        index={0}
-        shape={shape}
-        animated={animated}
-        after=","
-      >
-        written
-      </Chip>{" "}
-      <Chip
-        icon={<IconVideo className={icon} />}
-        index={1}
-        shape={shape}
-        animated={animated}
-      >
-        filmed
-      </Chip>{" "}
-      &amp;{" "}
-      <Chip
-        icon={<IconMicrophone className={icon} />}
-        index={2}
-        shape={shape}
-        animated={animated}
-        after=","
-      >
-        recorded
-      </Chip>{" "}
-      kept in one folder.
+      {parts.map((part, index) => {
+        const space = index > 0 ? " " : "";
+        if (typeof part === "string") return `${space}${part}`;
+        const order = chips++;
+        return (
+          // biome-ignore lint/suspicious/noArrayIndexKey: position is the identity here
+          <Fragment key={index}>
+            {space}
+            <Chip
+              icon={part.icon}
+              index={order}
+              shape={shape}
+              animated={animated}
+              after={part.after}
+            >
+              {part.label}
+            </Chip>
+          </Fragment>
+        );
+      })}
     </h2>
   );
 }

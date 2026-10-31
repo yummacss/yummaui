@@ -4,7 +4,7 @@ import { Button } from "@base-ui/react/button";
 import { Toast } from "@base-ui/react/toast";
 import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 
 type Shape = "rounded" | "square" | "squircle";
@@ -241,17 +241,53 @@ function Stack({
   const { toasts } = Toast.useToastManager();
 
   return toasts.map((toast) => (
-    <Toast.Root
+    <Item
       key={toast.id}
+      toast={toast}
+      shape={shape}
+      animated={animated}
+      outline={outline}
+    />
+  ));
+}
+
+function Item({
+  toast,
+  shape,
+  animated,
+  outline,
+}: {
+  toast: ReturnType<typeof Toast.useToastManager>["toasts"][number];
+  shape: Shape;
+  animated: boolean;
+  outline: string;
+}) {
+  const attempt = (toast.data as { attempt?: number } | undefined)?.attempt ?? 0;
+  const [shaking, setShaking] = useState(false);
+
+  // each new attempt shakes the whole toast, restarting a shake already running
+  useEffect(() => {
+    if (!attempt || !animated) return;
+    setShaking(false);
+    const frame = requestAnimationFrame(() => setShaking(true));
+    return () => cancelAnimationFrame(frame);
+  }, [attempt, animated]);
+
+  return (
+    <Toast.Root
       toast={toast}
       swipeDirection={["down", "right"]}
       style={place}
+      onAnimationEnd={(event) => {
+        if (event.target === event.currentTarget) setShaking(false);
+      }}
       className={(state) =>
         merge(
           outline,
           "p:a r:0 b:0 w:100% bg:raised bc:line bw:1 bs-o:pop us:none",
           TOAST_SHAPES[shape],
           animated ? "tp:a tdu:500 ttf:out-quart @prm:tp:none" : "",
+          shaking ? "an:shake adu:500 atf:io @prm:an:none" : "",
           state.transitionStatus === "ending" || state.limited ? "o:0" : "",
         )
       }
@@ -259,13 +295,9 @@ function Stack({
       {/* bridges the gap between toasts, so the stack stays open as the pointer crosses it */}
       <span aria-hidden className="p:a t:100% l:0 w:100% h:4" />
       <Toast.Content
-        key={(toast.data as { attempt?: number } | undefined)?.attempt ?? 0}
         className={(state) =>
           [
             "d:f ai:c g:3 py:3 pl:4 pr:3 o:h",
-            animated && ((toast.data as { attempt?: number } | undefined)?.attempt ?? 0) > 0
-              ? "an:shake adu:500 atf:io @prm:an:none"
-              : "",
             animated ? "tp:o tdu:250 ttf:out-quart @prm:tp:none" : "",
             state.behind && !state.expanded ? "o:0" : "",
           ]
@@ -302,5 +334,5 @@ function Stack({
         </Toast.Close>
       </Toast.Content>
     </Toast.Root>
-  ));
+  );
 }

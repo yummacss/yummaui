@@ -172,7 +172,7 @@ function renderItem(item: ComboboxItem, shape: Shape) {
       key={item.label}
       value={item.label}
       className={(state) =>
-        `d:f ai:c g:2 py:2 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[cardOf(shape)]} fs:sm fw:500 us:none c:p ${
+        `d:f ai:c g:2 min-h:8 py:1 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[cardOf(shape)]} fs:sm fw:400 us:none c:p ${
           state.highlighted
             ? "bg:well c:label bc:transparent"
             : "bg:transparent"

@@ -21,6 +21,8 @@ export interface Token {
 	kind: TokenKind;
 	text: string;
 	id: string;
+	/** A color of its own, for code a highlighter colored. */
+	color?: string;
 }
 
 type Draft = Omit<Token, "id">;

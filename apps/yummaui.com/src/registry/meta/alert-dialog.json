@@ -139,10 +139,6 @@
       "component": "AlertDialog",
       "props": {
         "trigger": "Delete 12 files",
-        "icon": {
-          "$icon": "IconTrash",
-          "size": "w:5 h:5"
-        },
         "title": "Delete 12 files?",
         "description": "They move to Trash and are deleted for good after 30 days.",
         "confirmLabel": "Delete",

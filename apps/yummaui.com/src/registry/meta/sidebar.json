@@ -20,22 +20,59 @@
       "description": "Called with a link's `href` when it is picked."
     },
     {
-      "name": "workspaces",
-      "type": "none",
-      "typeName": "SidebarWorkspace[]",
-      "description": "The workspaces the switcher at the top lists; the first is the active one."
-    },
-    {
-      "name": "onWorkspaceChange",
-      "type": "none",
-      "typeName": "(name: string) => void",
-      "description": "Called with a workspace's name when it is picked from the switcher."
-    },
-    {
       "name": "user",
       "type": "none",
       "typeName": "{ name: string; email: string }",
       "description": "Who is signed in, shown at the bottom with their menu."
+    },
+    {
+      "name": "brand",
+      "type": "none",
+      "typeName": "{ name: string; logo?: ReactNode }",
+      "description": "The app's name and mark at the top."
+    },
+    {
+      "name": "onSearch",
+      "type": "none",
+      "typeName": "(query: string) => void",
+      "description": "Called with the text typed into the search field."
+    },
+    {
+      "name": "accounts",
+      "type": "none",
+      "typeName": "SidebarAccount[]",
+      "description": "Every account the switcher in the user menu lists, the signed-in one included."
+    },
+    {
+      "name": "onAccountChange",
+      "type": "none",
+      "typeName": "(email: string) => void",
+      "description": "Called with an account's email when it is picked from the switcher."
+    },
+    {
+      "name": "onAddAccount",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called when Add account is picked from the switcher."
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "values": [
+        "online",
+        "busy",
+        "offline"
+      ],
+      "default": "online",
+      "description": "The user's status, shown on their avatar and picked from their menu.",
+      "controlled": true,
+      "handler": "onStatusChange"
+    },
+    {
+      "name": "onStatusChange",
+      "type": "none",
+      "typeName": "(status: SidebarStatus) => void",
+      "description": "Called with the status picked from the user menu."
     },
     {
       "name": "onSignOut",
@@ -69,7 +106,100 @@
       "children": [
         {
           "component": "Sidebar",
-          "props": {}
+          "props": {
+            "brand": {
+              "name": "Drive",
+              "logo": {
+                "$icon": "IconCloud",
+                "size": "w:4 h:4"
+              }
+            },
+            "groups": [
+              {
+                "links": [
+                  {
+                    "label": "Home",
+                    "href": "#home",
+                    "icon": {
+                      "$icon": "IconHome",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "My files",
+                    "href": "#files",
+                    "icon": {
+                      "$icon": "IconFolder",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "Photos",
+                    "href": "#photos",
+                    "icon": {
+                      "$icon": "IconPhoto",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "Starred",
+                    "href": "#starred",
+                    "icon": {
+                      "$icon": "IconStar",
+                      "size": "w:4 h:4"
+                    }
+                  }
+                ]
+              },
+              {
+                "label": "Sharing",
+                "links": [
+                  {
+                    "label": "Shared with me",
+                    "href": "#shared",
+                    "icon": {
+                      "$icon": "IconShare",
+                      "size": "w:4 h:4"
+                    },
+                    "badge": 3
+                  },
+                  {
+                    "label": "People",
+                    "href": "#people",
+                    "icon": {
+                      "$icon": "IconUsers",
+                      "size": "w:4 h:4"
+                    }
+                  }
+                ]
+              },
+              {
+                "links": [
+                  {
+                    "label": "Trash",
+                    "href": "#trash",
+                    "icon": {
+                      "$icon": "IconTrash",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "Settings",
+                    "href": "#settings",
+                    "icon": {
+                      "$icon": "IconSettings",
+                      "size": "w:4 h:4"
+                    }
+                  }
+                ]
+              }
+            ],
+            "current": "#files",
+            "user": {
+              "name": "Ada Lovelace",
+              "email": "ada@yummaui.com"
+            }
+          }
         },
         {
           "tag": "div",

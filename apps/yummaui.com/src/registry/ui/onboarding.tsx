@@ -9,9 +9,12 @@ import { merge } from "yummacss/merge";
 import Action from "./button";
 
 type IconPosition = "leading" | "trailing";
-type Shape = "rounded" | "square" | "squircle";
+type Shape = "rounded" | "square" | "squircle" | "pill";
+// a card cannot be a pill; under pill it takes rounded corners
+type Card = Exclude<Shape, "pill">;
+const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 
-const POPUP_SHAPES: Record<Shape, string> = {
+const POPUP_SHAPES: Record<Card, string> = {
   rounded: "br:xl",
   square: "",
   squircle: "br:3xl cs:s",
@@ -21,9 +24,10 @@ const CONTROL_SHAPES: Record<Shape, string> = {
   rounded: "br:lg",
   square: "",
   squircle: "br:xxl cs:s",
+  pill: "br:9999",
 };
 
-const STEP_SHAPES: Record<Shape, string> = {
+const STEP_SHAPES: Record<Card, string> = {
   rounded: "br:9999",
   square: "",
   squircle: "br:xxl cs:s",
@@ -201,7 +205,7 @@ export default function OnboardingBase({
           initialFocus={(type) => type === "keyboard" || popupRef.current}
           className={merge(
             "o:h w:112 max-w:100% p:5 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
-            POPUP_SHAPES[shape],
+            POPUP_SHAPES[cardOf(shape)],
             animated &&
               "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:eo @prm:tp:none",
           )}
@@ -215,7 +219,7 @@ export default function OnboardingBase({
                     key={index}
                     className={merge(
                       "w:6 h:1",
-                      STEP_SHAPES[shape],
+                      STEP_SHAPES[cardOf(shape)],
                       index <= page ? "bg:check" : "bg:line",
                       animated && "tp:c tdu:250 ttf:out-quart @prm:tp:none",
                     )}

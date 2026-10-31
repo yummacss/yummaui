@@ -11,7 +11,7 @@ type Shape = "rounded" | "square" | "squircle" | "pill";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
+  rounded: "br:md",
   square: "",
   squircle: "br:3xl cs:s",
   pill: "br:9999",
@@ -160,7 +160,7 @@ export default function TooltipBase({
   );
 
   const popupClasses = [
-    "d:f ai:c g:2 px:3 py:2 fs:sm us:none",
+    "d:f ai:c g:2 px:2 py:1 fs:xs us:none",
     TONES[tone],
     SHAPES[shape],
     "bs-o:pop",

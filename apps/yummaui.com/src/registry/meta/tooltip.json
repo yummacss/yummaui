@@ -109,49 +109,7 @@
   ],
   "scene": [
     {
-      "tag": "div",
-      "className": "d:f g:1 p:1 bw:1 bg:raised bc:rim",
-      "children": [
-        {
-          "component": "Tooltip",
-          "props": {
-            "trigger": {
-              "$icon": "IconPencil",
-              "size": "w:4 h:4"
-            },
-            "triggerLabel": "Rename",
-            "content": "Rename",
-            "shortcut": "F2",
-            "tone": "dark"
-          }
-        },
-        {
-          "component": "Tooltip",
-          "props": {
-            "trigger": {
-              "$icon": "IconCopy",
-              "size": "w:4 h:4"
-            },
-            "triggerLabel": "Duplicate",
-            "content": "Duplicate",
-            "shortcut": "Ctrl D",
-            "tone": "dark"
-          }
-        },
-        {
-          "component": "Tooltip",
-          "props": {
-            "trigger": {
-              "$icon": "IconTrash",
-              "size": "w:4 h:4"
-            },
-            "triggerLabel": "Move to Trash",
-            "content": "Move to Trash",
-            "shortcut": "Del",
-            "tone": "dark"
-          }
-        }
-      ]
+      "component": "TooltipToolbar"
     }
   ]
 }

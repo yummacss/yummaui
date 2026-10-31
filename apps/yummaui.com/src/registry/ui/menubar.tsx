@@ -168,7 +168,7 @@ export default function MenubarBase({
     (destructive: boolean, spread: boolean) =>
     (state: { highlighted: boolean }) =>
       [
-        "d:f ai:c g:2 py:2 pl:2 pr:3 fs:sm us:none c:p mx:1 fw:500 os:none bw:1 bc:transparent",
+        "d:f ai:c g:2 h:8 pl:2 pr:3 fs:sm fw:400 us:none c:p mx:1 os:none bw:1 bc:transparent",
         spread ? "jc:sb" : "",
         ITEM_SHAPES[shape],
         destructive ? "c:red" : "",
