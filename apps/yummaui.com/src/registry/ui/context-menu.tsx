@@ -5,27 +5,9 @@ import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
-
-const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
 
 export interface ContextMenuAction {
   type?: "item";
@@ -98,7 +80,8 @@ export interface ContextMenuProps {
   items: ContextMenuItem[];
   /**
    * Corner radius on the trigger, popup and items together. `squircle` steps
-   * the popup & item radius up one and adds `corner-shape`.
+   * the popup & item radius up one and adds `corner-shape`. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -140,7 +123,7 @@ export default function ContextMenuBase({
   trigger,
   triggerIcon,
   items,
-  shape = "rounded",
+  shape: shapeProp,
   icon = true,
   iconPosition = "leading",
   disabled = false,
@@ -150,6 +133,7 @@ export default function ContextMenuBase({
   className,
   container,
 }: ContextMenuProps) {
+  const shape = useShape(shapeProp);
   const [internalOpen, setInternalOpen] = useState(false);
   const open = controlledOpen ?? internalOpen;
 
@@ -168,7 +152,7 @@ export default function ContextMenuBase({
   const triggerClasses = (state: { open: boolean }) =>
     merge(
       "d:if fd:c ai:c jc:c g:2 p:3 min-w:24 bg:raised bw:2 fs:sm fw:500 c:label us:none",
-      TRIGGER_SHAPES[shape],
+      RADIUS.popup[shape],
       disabled
         ? "o:60 c:na bc:transparent"
         : state.open
@@ -179,7 +163,7 @@ export default function ContextMenuBase({
 
   const popupClasses = [
     "py:1 min-w:52 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:pop",
-    POPUP_SHAPES[shape],
+    RADIUS.popup[shape],
   ]
     .filter(Boolean)
     .join(" ");
@@ -190,7 +174,7 @@ export default function ContextMenuBase({
       [
         "d:f ai:c g:2 h:8 pl:2 pr:3 fs:sm fw:400 us:none c:p mx:1 os:none bw:1 bc:transparent",
         spread ? "jc:sb" : "",
-        ITEM_SHAPES[shape],
+        RADIUS.item[shape],
         destructive ? "c:red" : "",
         state.highlighted
           ? destructive

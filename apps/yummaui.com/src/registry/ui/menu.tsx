@@ -5,15 +5,11 @@ import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { cloneElement, isValidElement, useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconPosition = "leading" | "trailing";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 interface SizeSpec {
   trigger: string;
@@ -41,25 +37,6 @@ const SIZES: Record<Size, SizeSpec> = {
     item: "h:10 px:3",
     text: "fs:md",
   },
-};
-
-const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xxl cs:s",
 };
 
 export interface MenuAction {
@@ -139,7 +116,8 @@ export interface MenuProps {
   size?: Size;
   /**
    * Corner radius on the trigger, popup and items together. `squircle` steps
-   * the popup & item radius up one and adds `corner-shape`.
+   * the popup & item radius up one and adds `corner-shape`. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -189,7 +167,7 @@ export default function MenuBase({
   trigger,
   items,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   icon = true,
   iconPosition = "leading",
   disabled = false,
@@ -200,6 +178,7 @@ export default function MenuBase({
   focus = true,
   container,
 }: MenuProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [internalOpen, setInternalOpen] = useState(false);
@@ -222,7 +201,7 @@ export default function MenuBase({
     "d:f ai:c g:2 h:fc bg:raised bs-o:key bc:rim bw:1 fw:500 us:none",
     spec.trigger,
     spec.text,
-    TRIGGER_SHAPES[shape],
+    RADIUS.control[shape],
     animated ? "tp:c tdu:150 ttf:io" : "",
     disabled ? "c:hint o:60 c:na" : "c:label c:p h:bg:well",
     className,
@@ -231,7 +210,7 @@ export default function MenuBase({
   const popupClasses = [
     "py:1 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     spec.popup,
-    POPUP_SHAPES[cardOf(shape)],
+    RADIUS.popup[shape],
   ]
     .filter(Boolean)
     .join(" ");
@@ -244,7 +223,7 @@ export default function MenuBase({
         spec.item,
         spec.text,
         spread ? "jc:sb" : "",
-        ITEM_SHAPES[cardOf(shape)],
+        RADIUS.item[shape],
         destructive ? "c:red" : "",
         state.highlighted
           ? destructive

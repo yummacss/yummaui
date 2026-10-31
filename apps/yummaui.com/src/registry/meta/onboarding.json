@@ -103,13 +103,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the trigger, the popup and its controls."
+      "description": "Corner radius on the trigger, the popup and its controls. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

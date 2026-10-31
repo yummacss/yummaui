@@ -4,28 +4,7 @@ import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { IconChevronDown } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-
-type Shape = "rounded" | "square" | "squircle";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const BAR_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 // a panel slides in from the side you moved from, and out the other way
 const SLIDE =
@@ -62,7 +41,10 @@ export interface NavigationMenuProps {
   items: NavigationItem[];
   /** The navigation's accessible name. */
   label?: string;
-  /** Corner radius on the bar, its items, the panel and its icon tiles. */
+  /**
+   * Corner radius on the bar, its items, the panel and its icon tiles. Inherits
+   * the nearest `Shape`.
+   */
   shape?: Shape;
   /**
    * The panel's scale-in, its resize between items and the slide between
@@ -92,18 +74,19 @@ export interface NavigationMenuProps {
 export default function NavigationMenuBase({
   items,
   label = "Main",
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: NavigationMenuProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const item = merge(
     outline,
     "d:f ai:c g:1 h:8 px:3 bw:1 bc:transparent fs:sm fw:500 c:label td:none us:none c:p h:bg:well",
-    ITEM_SHAPES[shape],
+    RADIUS.item[shape],
     animated && "tp:c tdu:150 ttf:io @prm:tp:none",
   );
 
@@ -115,7 +98,7 @@ export default function NavigationMenuBase({
       <NavigationMenu.List
         className={merge(
           "p:r d:f ai:c g:1 m:0 p:1 bg:raised bs-o:key bw:1 bc:rim",
-          BAR_SHAPES[shape],
+          RADIUS.bar[shape],
         )}
       >
         {items.map((entry) => (
@@ -159,7 +142,7 @@ export default function NavigationMenuBase({
                         className={merge(
                           outline,
                           "d:f ai:s g:3 p:2 bw:1 bc:transparent c:label td:none h:bg:well",
-                          ITEM_SHAPES[shape],
+                          RADIUS.item[shape],
                           animated && "tp:c tdu:150 ttf:io @prm:tp:none",
                         )}
                       >
@@ -168,7 +151,7 @@ export default function NavigationMenuBase({
                             aria-hidden
                             className={merge(
                               "d:f ai:c jc:c fs:0 w:5 h:5",
-                              TILE_SHAPES[shape],
+                              RADIUS.item[shape],
                             )}
                           >
                             {link.icon}
@@ -209,7 +192,7 @@ export default function NavigationMenuBase({
           <NavigationMenu.Popup
             className={merge(
               "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
-              BAR_SHAPES[shape],
+              RADIUS.bar[shape],
               animated &&
                 "tp:a tdu:350 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",
             )}

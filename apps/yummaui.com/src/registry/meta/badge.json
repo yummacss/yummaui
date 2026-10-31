@@ -85,11 +85,11 @@
       "values": [
         "square",
         "rounded",
-        "pill",
-        "squircle"
+        "squircle",
+        "pill"
       ],
       "default": "pill",
-      "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported."
+      "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported. Inherits the nearest `Shape`; under the default, a pill."
     },
     {
       "name": "focus",

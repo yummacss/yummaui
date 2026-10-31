@@ -3,15 +3,9 @@
 import { Slider } from "@base-ui/react/slider";
 import { type FocusEvent, type ReactNode, useState } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle";
 type Value = number | number[];
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:9999",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
 
 const FOCUS = "os:s ow:3 oo:0 oc:focus/40";
 
@@ -51,7 +45,7 @@ export interface SliderProps {
   step?: number;
   /**
    * Corner radius, applied to the track, the indicator and the thumb together.
-   * `squircle` uses `corner-shape`.
+   * `squircle` uses `corner-shape`. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /** Blocks interaction and dims the control. */
@@ -99,7 +93,7 @@ export default function SliderBase({
   min = 0,
   max = 100,
   step = 1,
-  shape = "rounded",
+  shape: shapeProp,
   disabled = false,
   formatValue,
   unit,
@@ -107,6 +101,7 @@ export default function SliderBase({
   className,
   focus = true,
 }: SliderProps) {
+  const shape = useShape(shapeProp);
   const [internalValue, setInternalValue] = useState<Value>(
     defaultValue ?? controlledValue ?? 0,
   );
@@ -125,7 +120,7 @@ export default function SliderBase({
   );
 
   const thumbClasses = (index: number) =>
-    merge(THUMB, SHAPES[shape], focused === index ? outline : "");
+    merge(THUMB, RADIUS.track[shape], focused === index ? outline : "");
 
   const focusProps = (index: number) => ({
     onFocus: (event: FocusEvent<HTMLInputElement>) => {
@@ -171,9 +166,9 @@ export default function SliderBase({
           className={`d:f ai:c py:3 us:none ta:none ${disabled ? "c:na" : ""}`}
         >
           <Slider.Track
-            className={merge("p:r h:2 w:100% bg:line bs-o:sunk", SHAPES[shape])}
+            className={merge("p:r h:2 w:100% bg:line bs-o:sunk", RADIUS.track[shape])}
           >
-            <Slider.Indicator className={merge("bg:check bs-o:key-fill", SHAPES[shape])} />
+            <Slider.Indicator className={merge("bg:check bs-o:key-fill", RADIUS.track[shape])} />
             {isRange ? (
               value.map((_, index) => (
                 <Slider.Thumb

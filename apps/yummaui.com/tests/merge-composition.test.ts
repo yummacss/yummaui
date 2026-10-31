@@ -180,9 +180,12 @@ describe("merge across a component's arguments", () => {
 	const dropped = new Set<string>();
 	let combinations = 0;
 
+	// what a component imports from style.tsx counts as its own
+	const shared = constants(readFileSync(join(dir, "style.tsx"), "utf8"));
+
 	for (const file of files) {
 		const source = readFileSync(join(dir, file), "utf8");
-		const table = constants(source);
+		const table = new Map([...shared, ...constants(source)]);
 
 		for (const args of mergeCalls(source)) {
 			let acc: string[][] = [[]];

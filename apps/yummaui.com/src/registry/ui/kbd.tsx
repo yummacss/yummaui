@@ -1,18 +1,12 @@
+"use client";
+
 import { merge } from "yummacss/merge";
-
-type Shape = "rounded" | "square" | "squircle" | "pill";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-  pill: "br:9999",
-};
+import { RADIUS, type Shape, useShape } from "./style";
 
 export interface KbdProps {
   /** The keys to press together, each drawn as its own keycap. */
   keys: string[];
-  /** Corner radius of each keycap. */
+  /** Corner radius of each keycap. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
    * Extra classes on each keycap. `merge` folds them in last, so one here
@@ -22,7 +16,8 @@ export interface KbdProps {
 }
 
 /** A keyboard shortcut as raised keycaps, for hints in running text. */
-export default function Kbd({ keys, shape = "square", className }: KbdProps) {
+export default function Kbd({ keys, shape: shapeProp, className }: KbdProps) {
+  const shape = useShape(shapeProp);
   return (
     <span className="d:if ai:c g:1 va:m">
       {keys.map((key) => (
@@ -30,7 +25,7 @@ export default function Kbd({ keys, shape = "square", className }: KbdProps) {
           key={key}
           className={merge(
             "d:if ai:c jc:c min-w:6 h:6 px:1 bg:raised bs-o:key c:label btw:1 blw:1 brw:1 bbw:2 bc:rim fs:xs fw:500 lh:1 ff:d",
-            SHAPES[shape],
+            RADIUS.chip[shape],
             className,
           )}
         >

@@ -23,6 +23,7 @@ import {
 } from "@/utils/prefetch-registry";
 import { schemeCss } from "@/utils/scheme";
 import { buildConfig, buildScene, type Token } from "@/utils/snippet";
+import { Shape, type Shape as ShapeName } from "@/registry/ui/style";
 import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
@@ -130,7 +131,9 @@ export default function ComponentPlayground({
 					bleed={resizable}
 					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
 				>
-					<Scene scene={scene} shape={shape} />
+					<Shape value={shape as ShapeName}>
+						<Scene scene={scene} shape={shape} />
+					</Shape>
 				</PreviewFrame>
 			) : null,
 		[scene, shape, accent, scheme, resizable],

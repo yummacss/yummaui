@@ -7,33 +7,10 @@ import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import Action from "./button";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type IconPosition = "leading" | "trailing";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
-
-const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const CONTROL_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const STEP_SHAPES: Record<Card, string> = {
-  rounded: "br:9999",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const RAISED =
   "bg:raised bs-o:key bc:rim c:label h:bg:well";
@@ -83,7 +60,10 @@ export interface OnboardingProps {
    * must be finished or closed from its last step.
    */
   closeOnEscape?: boolean;
-  /** Corner radius on the trigger, the popup and its controls. */
+  /**
+   * Corner radius on the trigger, the popup and its controls. Inherits the
+   * nearest `Shape`.
+   */
   shape?: Shape;
   /**
    * The slide transition between steps and the popup's scale-in. Turn it off
@@ -125,12 +105,13 @@ export default function OnboardingBase({
   onFinish,
   finishLabel = "Done",
   closeOnEscape = true,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: OnboardingProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [open, setOpen] = useState(false);
@@ -159,7 +140,6 @@ export default function OnboardingBase({
       return next;
     });
 
-
   const slide = (
     <div className="d:f fd:c g:2">
       <AlertDialog.Title className="m:0 tw:b c:label fs:md fw:500">
@@ -179,7 +159,7 @@ export default function OnboardingBase({
                 merge(
                   outline,
                   "d:if ai:c g:2 px:3 py:2 bw:1 fs:sm fw:500 us:none c:p tp:c tdu:150 ttf:io",
-                  CONTROL_SHAPES[shape],
+                  RADIUS.control[shape],
                   state.pressed ? PICKED : RAISED,
                 )
               }
@@ -205,7 +185,7 @@ export default function OnboardingBase({
           initialFocus={(type) => type === "keyboard" || popupRef.current}
           className={merge(
             "o:h w:112 max-w:100% p:5 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
-            POPUP_SHAPES[cardOf(shape)],
+            RADIUS.popup[shape],
             animated &&
               "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:eo @prm:tp:none",
           )}
@@ -219,7 +199,7 @@ export default function OnboardingBase({
                     key={index}
                     className={merge(
                       "w:6 h:1",
-                      STEP_SHAPES[cardOf(shape)],
+                      RADIUS.track[shape],
                       index <= page ? "bg:check" : "bg:line",
                       animated && "tp:c tdu:250 ttf:out-quart @prm:tp:none",
                     )}
@@ -310,7 +290,7 @@ export default function OnboardingBase({
               outline,
               "d:if ai:c g:2 px:3 py:2 bw:1 fs:sm fw:500 tp:c tdu:150 ttf:io us:none",
               RAISED,
-              CONTROL_SHAPES[shape],
+              RADIUS.control[shape],
               className,
             )}
           />

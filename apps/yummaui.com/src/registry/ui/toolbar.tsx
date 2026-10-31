@@ -9,24 +9,7 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-
-type Shape = "rounded" | "square" | "squircle" | "pill";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const ROOT_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-  pill: "br:9999",
-};
-
-const CONTROL_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 export interface ToolbarButtonItem {
   type?: "button";
@@ -99,7 +82,7 @@ export interface ToolbarProps {
   items: ToolbarItem[];
   /**
    * Corner radius on the bar and every control inside it. The bar takes one
-   * step more than its controls.
+   * step more than its controls. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -128,20 +111,21 @@ export interface ToolbarProps {
  */
 export default function ToolbarBase({
   items,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
 }: ToolbarProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const rootClasses = merge(
     "d:f fw:w ai:c g:1 p:2 bg:raised bs-o:key bc:rim bw:1",
-    ROOT_SHAPES[shape],
+    RADIUS.bar[shape],
     className,
   );
 
-  const control = CONTROL_SHAPES[shape];
+  const control = RADIUS.control[shape];
 
   return (
     <Toolbar.Root className={rootClasses}>

@@ -5,22 +5,7 @@ import { IconChevronRight, IconFile, IconFileTypeCsv, IconFileTypeDoc, IconFileT
 import type { KeyboardEvent } from "react";
 import { useMemo, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-
-type Shape = "rounded" | "square" | "squircle";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const TREE_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 const PICKED =
   "bg:well c:label bc:transparent";
@@ -101,7 +86,9 @@ export interface FileTreeProps {
   selected?: string;
   /** Called with the path of the row just picked. */
   onSelectedChange?: (selected: string) => void;
-  /** Corner radius on the tree and on each row. */
+  /**
+   * Corner radius on the tree and on each row. Inherits the nearest `Shape`.
+   */
   shape?: Shape;
   /**
    * The chevron's turn and the folder's open and close. Turn it off for an
@@ -134,11 +121,12 @@ export default function FileTree({
   defaultSelected,
   selected: controlledSelected,
   onSelectedChange,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
 }: FileTreeProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const tree = useMemo(() => toTree(paths), [paths]);
 
@@ -235,7 +223,7 @@ export default function FileTree({
           className={merge(
             outline,
             "d:f ai:c g:2 h:8 pl:1 pr:2 bw:1 fs:sm us:none c:p",
-            ROW_SHAPES[shape],
+            RADIUS.item[shape],
             animated && "tp:c tdu:150 ttf:io @prm:tp:none",
             isPicked ? PICKED : "bc:transparent c:label h:bg:well",
           )}
@@ -281,7 +269,7 @@ export default function FileTree({
       aria-label={label}
       className={merge(
         "d:f fd:c g:px w:64 max-w:100% p:1 bg:raised bs-o:key c:label bw:1 bc:rim",
-        TREE_SHAPES[shape],
+        RADIUS.popup[shape],
         className,
       )}
     >

@@ -99,13 +99,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the track."
+      "description": "Corner radius of the track. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

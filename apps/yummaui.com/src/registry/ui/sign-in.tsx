@@ -6,17 +6,9 @@ import { type FormEvent, useState } from "react";
 import { merge } from "yummacss/merge";
 import Button from "./button";
 import Field from "./field";
+import { RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
-
-const CARD_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "br:0",
-  squircle: "br:3xl cs:s",
-};
 
 const LINK =
   "c:label fw:500 tuo:2 td:u h:c:hint ow:0 oc:focus/40 fv:os:s fv:ow:2 br:sm";
@@ -49,7 +41,10 @@ export interface SignInProps {
   forgotHref?: string;
   /** Where "Create an account" leads. No line renders without it. */
   signUpHref?: string;
-  /** Corner radius of the card, its fields and its buttons. */
+  /**
+   * Corner radius of the card, its fields and its buttons. Inherits the nearest
+   * `Shape`.
+   */
   shape?: Shape;
   /**
    * The form shakes when it is sent with a mistake. Turn it off for a form that
@@ -76,10 +71,11 @@ export default function SignIn({
   onPasskey,
   forgotHref,
   signUpHref,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
 }: SignInProps) {
+  const shape = useShape(shapeProp);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // an empty field turns red when the form is sent, and clears once filled
@@ -113,7 +109,7 @@ export default function SignIn({
     <div
       className={merge(
         "d:f fd:c g:6 w:100% max-w:96 p:8 bg:raised bs-o:key bw:1 bc:rim c:label",
-        CARD_SHAPES[cardOf(shape)],
+        RADIUS.popup[shape],
         className,
       )}
     >

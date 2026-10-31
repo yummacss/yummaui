@@ -3,16 +3,9 @@
 import { ToggleGroup } from "@base-ui/react/toggle-group";
 import { type ReactNode, useId } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle" | "pill";
 type Orientation = "horizontal" | "vertical";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
 
 const BASE = "p:r d:f g:1 p:1 w:fc bg:well bs-o:sunk";
 
@@ -25,6 +18,7 @@ export interface ToggleGroupProps {
   children: ReactNode;
   /**
    * Corner radius of the container. The toggles inside carry their own `shape`.
+   * Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /** Stacks the toggles and switches the arrow keys that move focus. */
@@ -52,7 +46,7 @@ export default function ToggleGroupBase({
   label,
   className,
   children,
-  shape = "rounded",
+  shape: shapeProp,
   orientation = "horizontal",
   multiple = false,
   disabled = false,
@@ -60,6 +54,7 @@ export default function ToggleGroupBase({
   defaultValue,
   onValueChange,
 }: ToggleGroupProps) {
+  const shape = useShape(shapeProp);
   const labelId = useId();
   const group = (
     <ToggleGroup
@@ -72,7 +67,7 @@ export default function ToggleGroupBase({
       orientation={orientation}
       className={merge(
         BASE,
-        SHAPES[shape],
+        RADIUS.bar[shape],
         orientation === "vertical" && "fd:c",
         className,
       )}

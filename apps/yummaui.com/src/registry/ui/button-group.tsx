@@ -1,16 +1,11 @@
+"use client";
+
 import { Children, cloneElement, isValidElement, type ReactNode } from "react";
 import { merge } from "yummacss/merge";
 import Separator from "./separator";
+import { RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-  pill: "p:1 br:9999",
-};
 
 const BASE = "d:f ai:c o:h w:fc";
 
@@ -30,7 +25,7 @@ export interface ButtonGroupProps {
   children: ReactNode;
   /**
    * Corner radius of the group. `pill` also insets the buttons, so a pill
-   * `Button` inside sits clear of the border.
+   * `Button` inside sits clear of the border. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -74,13 +69,14 @@ const INSET = "fv:oo:-3";
 export default function ButtonGroup({
   className,
   children,
-  shape = "rounded",
+  shape: shapeProp,
   separated = true,
   stretch = false,
   icon = true,
   iconPosition,
   iconOnly,
 }: ButtonGroupProps) {
+  const shape = useShape(shapeProp);
   // a button with an icon takes the group's icon props; one it sets itself wins
   const all = Children.toArray(children);
   const items = all.map((child, index) => {
@@ -108,7 +104,7 @@ export default function ButtonGroup({
     <div
       className={merge(
         BASE,
-        SHAPES[shape],
+        RADIUS.control[shape],
         shape === "pill" && PILL,
         stretch && "w:100%",
         className,

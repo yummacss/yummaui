@@ -2,15 +2,7 @@
 
 import { IconCopy, IconPencil, IconTrash } from "@tabler/icons-react";
 import Tooltip from "./tooltip";
-
-type Shape = "rounded" | "square" | "squircle" | "pill";
-
-const BAR_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
+import { RADIUS, useShape, type Shape } from "./style";
 
 const ACTIONS = [
   { label: "Rename", shortcut: "F2", Icon: IconPencil },
@@ -19,15 +11,16 @@ const ACTIONS = [
 ];
 
 export default function TooltipToolbar({
-  shape = "rounded",
+  shape: shapeProp,
   container,
 }: {
   shape?: Shape;
   container?: HTMLElement | null;
 }) {
+  const shape = useShape(shapeProp);
   return (
     <div
-      className={`d:f g:1 p:1 bw:1 bg:raised bc:rim bs-o:key ${BAR_SHAPES[shape]}`}
+      className={`d:f g:1 p:1 bw:1 bg:raised bc:rim bs-o:key ${RADIUS.bar[shape]}`}
     >
       {ACTIONS.map(({ label, shortcut, Icon }) => (
         <Tooltip

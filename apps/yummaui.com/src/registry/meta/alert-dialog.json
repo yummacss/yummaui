@@ -106,13 +106,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the popup, the badge and the buttons. `square` squares off the badge too."
+      "description": "Corner radius on the popup, the badge and the buttons. `square` squares off the badge too. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

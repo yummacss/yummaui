@@ -89,13 +89,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the bar and every control inside it. The bar takes one step more than its controls."
+      "description": "Corner radius on the bar and every control inside it. The bar takes one step more than its controls. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

@@ -5,13 +5,11 @@ import { IconChevronDown, IconLock, IconMinus, IconPlus } from "@tabler/icons-re
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Variant = "default" | "bordered" | "ghost" | "subtle";
-type Shape = "rounded" | "square" | "squircle";
-
 const TURN = "tp:t tdu:300 ttf:out-quart @prm:tp:none";
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 type Indicator = "chevron" | "plus-minus";
 type IndicatorPosition = "leading" | "trailing";
 
@@ -21,12 +19,6 @@ export interface AccordionItem {
   content: ReactNode;
   disabled?: boolean;
 }
-
-const SHAPES: Record<Shape, { item: string; trigger: string }> = {
-  rounded: { item: "br:md", trigger: "br:xs" },
-  square: { item: "", trigger: "" },
-  squircle: { item: "br:xxl cs:s", trigger: "br:xxl cs:s" },
-};
 
 export interface AccordionProps {
   /**
@@ -42,7 +34,7 @@ export interface AccordionProps {
   variant?: Variant;
   /**
    * Corner radius on `bordered` items. The other variants use a fixed radius,
-   * since no shape was ever paired with them.
+   * since no shape was ever paired with them. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -99,7 +91,7 @@ export interface AccordionProps {
 export default function AccordionBase({
   items,
   variant = "default",
-  shape = "rounded",
+  shape: shapeProp,
   separated = true,
   indicator = "chevron",
   indicatorPosition = "trailing",
@@ -111,6 +103,7 @@ export default function AccordionBase({
   className,
   focus = true,
 }: AccordionProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [internalValue, setInternalValue] = useState<string[]>(
@@ -128,7 +121,7 @@ export default function AccordionBase({
   const rootClasses = merge(
     "d:f fd:c w:100% max-w:96",
     variant === "bordered" || variant === "subtle" ? "g:2" : "",
-    isCard ? `bg:raised bs-o:key bw:1 bc:rim ${SHAPES[shape].item}` : "",
+    isCard ? `bg:raised bs-o:key bw:1 bc:rim ${RADIUS.popup[shape]}` : "",
     className,
   );
 
@@ -145,7 +138,7 @@ export default function AccordionBase({
 
         const itemClasses =
           variant === "bordered"
-            ? `bg:raised bs-o:key bw:1 bc:rim ${SHAPES[shape].item}`
+            ? `bg:raised bs-o:key bw:1 bc:rim ${RADIUS.popup[shape]}`
             : variant === "ghost"
               ? [
                   "blw:2 pl:4",
@@ -155,7 +148,7 @@ export default function AccordionBase({
                   .filter(Boolean)
                   .join(" ")
               : variant === "subtle"
-                ? [SHAPES[shape].item, isOpen ? "bg:well" : "bg:well h:bg:line"]
+                ? [RADIUS.popup[shape], isOpen ? "bg:well" : "bg:well h:bg:line"]
                     .filter(Boolean)
                     .join(" ")
                 : separated && !isLast
@@ -163,7 +156,7 @@ export default function AccordionBase({
                   : "";
 
         const triggerRadius =
-          variant === "bordered" || isCard ? SHAPES[shape].trigger : "";
+          variant === "bordered" || isCard ? RADIUS.item[shape] : "";
         const inset = variant === "bordered" || variant === "subtle" || isCard;
         const triggerPadX = inset ? "px:4" : "px:0";
         const triggerPadY =

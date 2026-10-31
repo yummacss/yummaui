@@ -79,13 +79,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the tooltip."
+      "description": "Corner radius on the tooltip. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

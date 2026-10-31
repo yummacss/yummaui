@@ -1,30 +1,16 @@
+"use client";
+
 import { IconMicrophone, IconPencil, IconVideo } from "@tabler/icons-react";
 import { Fragment, type ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, type Shape, useShape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "square" | "rounded" | "pill" | "squircle";
 
 const SIZES: Record<Size, string> = {
   sm: "fs:xxl",
   md: "fs:3xl",
   lg: "fs:4xl",
-};
-
-// radii in em scale with the heading; a tile's is its chip's less the padding
-// between them, so the two corners stay concentric
-const CHIP_SHAPES: Record<Shape, string> = {
-  square: "",
-  rounded: "br:calc(.25em)",
-  pill: "br:9999",
-  squircle: "br:calc(.45em) cs:s",
-};
-
-const TILE_SHAPES: Record<Shape, string> = {
-  square: "",
-  rounded: "br:calc(.15em)",
-  pill: "br:9999",
-  squircle: "br:calc(.35em) cs:s",
 };
 
 // each icon arrives in turn, so the eye reads the words in order
@@ -60,7 +46,10 @@ export interface InlineIconHeadingProps {
   parts?: InlineIconHeadingPart[];
   /** Text size of the whole heading; the chips scale with it. */
   size?: Size;
-  /** The corners of each chip & of the icon tile inside it. */
+  /**
+   * The corners of each chip & of the icon tile inside it. Inherits the nearest
+   * `Shape`.
+   */
   shape?: Shape;
   /**
    * The icons pop in one after another as the heading first renders. Turn it
@@ -94,11 +83,11 @@ function Chip({
   return (
     <span className="ws:nw">
       <span
-        className={`d:if ai:c g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised bs-o:key bc:rim bw:1 c:label lh:1 ws:nw va:m ${CHIP_SHAPES[shape]}`}
+        className={`d:if ai:c g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised bs-o:key bc:rim bw:1 c:label lh:1 ws:nw va:m ${RADIUS.textChip[shape]}`}
       >
         <span
           aria-hidden
-          className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:edge bw:1 c:on-fill bs-o:key-fill ${TILE_SHAPES[shape]} ${
+          className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:edge bw:1 c:on-fill bs-o:key-fill ${RADIUS.textTile[shape]} ${
             animated
               ? `tp:a tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index % DELAYS.length]}`
               : ""
@@ -121,10 +110,11 @@ function Chip({
 export default function InlineIconHeading({
   parts = PARTS,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
 }: InlineIconHeadingProps) {
+  const shape = useShape(shapeProp);
   let chips = 0;
   return (
     <h2

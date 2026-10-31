@@ -10,13 +10,11 @@ import type {
 } from "react";
 import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Variant = "primary" | "secondary" | "subtle" | "ghost" | "danger" | "link";
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 
@@ -68,13 +66,6 @@ const ICON_ONLY: Record<Size, string> = {
   lg: "w:11 h:11",
 };
 
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
 export interface ButtonProps extends ComponentProps<typeof Button> {
   /**
    * Extra classes. `merge` folds them in last, so one here replaces the
@@ -93,7 +84,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
   size?: Size;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
+   * square where that is unsupported. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -151,7 +142,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
 export default function ButtonBase({
   variant = "primary",
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   loading = false,
   icon,
   iconPosition = "leading",
@@ -167,6 +158,7 @@ export default function ButtonBase({
   onClick,
   ...props
 }: ButtonProps) {
+  const shape = useShape(shapeProp);
   const outline = focus
     ? merge(FOCUS, VARIANT_OUTLINE[variant], focus === true ? "" : focus)
     : "";
@@ -212,7 +204,7 @@ export default function ButtonBase({
     VARIANTS[variant],
     inactive ? "" : HOVERS[variant],
     iconOnlyActive ? ICON_ONLY[size] : SIZES[size],
-    SHAPES[shape],
+    RADIUS.control[shape],
     inactive ? "o:60 c:na" : "c:p",
     className,
   );

@@ -94,13 +94,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius, applied to the trigger and the popup together. `squircle` uses `corner-shape`."
+      "description": "Corner radius, applied to the trigger and the popup together. `squircle` uses `corner-shape`. Inherits the nearest `Shape`."
     },
     {
       "name": "disabled",

@@ -59,13 +59,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius. Only visible when `bordered` is set.",
+      "description": "Corner radius. Only visible when `bordered` is set. Inherits the nearest `Shape`.",
       "conflictsWith": [
         {
           "prop": "bordered",

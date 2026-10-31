@@ -23,6 +23,7 @@ import { merge } from "yummacss/merge";
 import Avatar from "./avatar";
 import Badge from "./badge";
 import Menu from "./menu";
+import { RADIUS, useShape, type Shape } from "./style";
 
 export interface SidebarLink {
   label: string;
@@ -46,23 +47,6 @@ export interface SidebarAccount {
 export type SidebarStatus = "online" | "busy" | "offline";
 
 const ICON = "w:4 h:4";
-
-type Shape = "rounded" | "square" | "squircle" | "pill";
-
-const LINK_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-  pill: "br:9999",
-};
-
-// the brand's tile; a pill sidebar gives it a circle
-const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
-  square: "",
-  squircle: "br:md cs:s",
-  pill: "br:9999",
-};
 
 const GROUPS: SidebarGroup[] = [
   {
@@ -104,12 +88,6 @@ const STATUS_LABELS: Record<SidebarStatus, string> = {
 const LINK =
   "d:f ai:c g:2 h:8 px:2 fs:sm td:none c:hint c:p us:none tp:c tdu:100 h:bg:well h:c:label ow:0 oc:focus/40 fv:os:s fv:ow:2 fv:oo:0";
 
-const FIELD_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
 const CURRENT = "bg:well c:label fw:500";
 
 export interface SidebarProps {
@@ -126,7 +104,10 @@ export interface SidebarProps {
   brand?: { name: string; logo?: ReactNode };
   /** Called with the text typed into the search field. */
   onSearch?: (query: string) => void;
-  /** Corner radius of the links, menus, badges & avatar. */
+  /**
+   * Corner radius of the links, menus, badges & avatar. Inherits the nearest
+   * `Shape`.
+   */
   shape?: Shape;
   /** Who is signed in, shown at the bottom with their menu. */
   user?: SidebarAccount;
@@ -167,7 +148,7 @@ export default function Sidebar({
   onNavigate,
   brand = { name: "Drive" },
   onSearch,
-  shape = "rounded",
+  shape: shapeProp,
   user = ADA,
   accounts = [user],
   onAccountChange,
@@ -178,6 +159,7 @@ export default function Sidebar({
   container,
   className,
 }: SidebarProps) {
+  const shape = useShape(shapeProp);
   const [here, setHere] = useState(current);
   const [userOpen, setUserOpen] = useState(false);
   const [ownStatus, setOwnStatus] = useState<SidebarStatus>("online");
@@ -194,7 +176,7 @@ export default function Sidebar({
         <span
           className={merge(
             "d:f fs:0 ai:c jc:c w:7 h:7 bg:fill bc:edge bw:1 bs-o:key-fill c:on-fill",
-            TILE_SHAPES[shape],
+            RADIUS.chip[shape],
           )}
         >
           {brand.logo ?? <IconCloud className={ICON} />}
@@ -214,7 +196,7 @@ export default function Sidebar({
           onValueChange={(value) => onSearch?.(String(value))}
           className={merge(
             "w:100% h:8 pl:8 pr:2 bg:field bs-o:key bc:rim bw:1 c:label fs:sm ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus",
-            FIELD_SHAPES[shape],
+            RADIUS.control[shape],
           )}
         />
       </label>
@@ -240,7 +222,7 @@ export default function Sidebar({
                   }}
                   className={merge(
                     LINK,
-                    LINK_SHAPES[shape],
+                    RADIUS.item[shape],
                     isCurrent ? CURRENT : "",
                   )}
                 >

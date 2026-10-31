@@ -57,12 +57,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
-        "squircle"
+        "rounded",
+        "squircle",
+        "pill"
       ],
       "default": "rounded",
-      "description": "Every checkbox's shape, and the well around them. One a box sets wins."
+      "description": "Every checkbox's shape, and the well around them. One a box sets wins. Inherits the nearest `Shape`."
     },
     {
       "name": "disabled",

@@ -7,31 +7,11 @@ import { IconCheck, IconCloudUpload, IconFile, IconX } from "@tabler/icons-react
 import type { ChangeEvent, DragEvent, ReactNode } from "react";
 import { useId, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle";
 type Border = "dashed" | "solid" | "none";
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
 const ZONE = "d:f fd:c ai:c g:3 m:0 p:0 w:100% min-w:0 bg:transparent";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "br:0",
-  squircle: "br:3xl cs:s",
-};
-
-const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-};
-
-const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "br:0",
-  squircle: "br:xl cs:s",
-};
 
 const BORDERS: Record<Border, string> = {
   dashed: "bw:2 bs:d",
@@ -108,7 +88,7 @@ export interface FileUploadProps {
   onFilesChange?: (files: File[]) => void;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
+   * square where that is unsupported. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -167,13 +147,14 @@ export default function FileUploadBase({
   accept,
   multiple = false,
   onFilesChange,
-  shape = "rounded",
+  shape: shapeProp,
   border = "dashed",
   error,
   disabled = false,
   className,
   focus = true,
 }: FileUploadProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const browseOutline = focus
     ? merge(
@@ -245,7 +226,7 @@ export default function FileUploadBase({
 
   const zone = merge(
     ZONE,
-    SHAPES[shape],
+    RADIUS.popup[shape],
     BORDERS[border],
     error ? "bc:red-5" : "bc:rim",
     disabled ? "bg:well c:hint c:na" : dragging ? "bc:check bg:well" : "",
@@ -333,13 +314,13 @@ export default function FileUploadBase({
           key={row.id}
           className={merge(
             "d:f ai:c g:3 px:2 py:2 bw:1 bg:raised bs-o:key bc:rim",
-            ROW_SHAPES[shape],
+            RADIUS.popup[shape],
           )}
         >
           <span
             className={merge(
               "d:f ai:c jc:c fs:0 w:5 h:5 c:hint",
-              TILE_SHAPES[shape],
+              RADIUS.item[shape],
             )}
           >
             {row.icon ?? <IconFile className="w:5 h:5" />}
@@ -376,7 +357,7 @@ export default function FileUploadBase({
               className={merge(
                 outline,
                 "d:f ai:c jc:c w:8 h:8 p:0 bw:1 bg:raised bs-o:key bc:rim c:label c:p h:bg:well",
-                TILE_SHAPES[shape],
+                RADIUS.item[shape],
               )}
             >
               <IconX className="w:4 h:4" />

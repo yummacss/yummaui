@@ -1,26 +1,25 @@
-import { readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
 import { colorTheme, generateShades } from "@yummacss/core";
 import { describe, expect, it } from "vite-plus/test";
+import { ROLE_CLASSES } from "../src/registry/role-classes";
 import {
-	ACCENT_CLASSES,
-	ACCENT_EXCLUDES,
 	ACCENTS,
 	accentCss,
 	accentShade,
 	DEFAULT_ACCENT,
 } from "../src/utils/accent";
-import { rootDir } from "./helpers";
 
 describe("preview accent", () => {
 	it("emits nothing for the colour the components already ship", () => {
 		expect(accentCss(DEFAULT_ACCENT)).toBe("");
 	});
 
-	it("writes selectors the generator emits", () => {
+	it("repaints the role classes, as the generator writes them", () => {
 		const css = accentCss("indigo");
-		expect(css).toContain(".bg\\:slate-12 {");
-		expect(css).toContain(".h\\:bg\\:slate-11:hover {");
+		expect(css).toContain(".bg\\:fill {");
+		expect(css).toContain(".bc\\:edge {");
+		expect(css).toContain(".fv\\:bc\\:focus:focus-visible {");
+		expect(css).toContain(".oc\\:focus\\/40 {");
+		expect(css).toContain(".c\\:on-fill { color: #ffffff; }");
 	});
 
 	it("picks a shade that keeps white text readable", () => {
@@ -34,42 +33,18 @@ describe("preview accent", () => {
 		}
 		const indigo = generateShades(colorTheme.indigo);
 		expect(accentCss("indigo")).toContain(
-			`background-color: ${indigo[accentShade(indigo)]};`,
+			`.bg\\:fill { background-color: ${indigo[accentShade(indigo)]}; }`,
 		);
 	});
 
-	it("covers every family Yumma ships", () => {
+	it("writes one rule per role class for every family Yumma ships", () => {
 		expect(ACCENTS).toContain("indigo");
 		expect(ACCENTS.length).toBeGreaterThan(15);
+		expect(ROLE_CLASSES).toContain("bg:fill");
 
 		for (const family of ACCENTS) {
 			if (family === DEFAULT_ACCENT) continue;
-			const css = accentCss(family);
-			expect(css.split("\n")).toHaveLength(ACCENT_CLASSES.length);
-			expect(css).toMatch(/oklch\(/);
-			const selectors = css
-				.split("\n")
-				.map((rule) => rule.slice(0, rule.indexOf(" {")));
-			for (const excluded of ACCENT_EXCLUDES) {
-				expect(selectors).not.toContain(`.${excluded}`);
-			}
+			expect(accentCss(family).split("\n")).toHaveLength(ROLE_CLASSES.length);
 		}
-	});
-
-	it("names every accent-shaped class the registry uses", () => {
-		const dir = join(rootDir, "src/registry/ui");
-		const known = new Set([...ACCENT_CLASSES, ...ACCENT_EXCLUDES]);
-		const missed = new Set<string>();
-
-		for (const file of readdirSync(dir).filter((f) => f.endsWith(".tsx"))) {
-			const source = readFileSync(join(dir, file), "utf-8");
-			for (const [cls] of source.matchAll(
-				/\b(?:[a-z]{1,3}:)?[a-z]{1,4}:slate-1[12]\b/g,
-			)) {
-				if (!known.has(cls)) missed.add(`${file}: ${cls}`);
-			}
-		}
-
-		expect([...missed].sort()).toEqual([]);
 	});
 });

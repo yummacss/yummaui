@@ -3,27 +3,10 @@
 import { Tooltip } from "@base-ui/react/tooltip";
 import type { CSSProperties, ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Side = "top" | "right" | "bottom" | "left";
 type Tone = "light" | "dark" | "danger";
-type Shape = "rounded" | "square" | "squircle" | "pill";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:3xl cs:s",
-  pill: "br:9999",
-};
-
-// the trigger is a button, so it takes the same shape as the tooltip
-const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-  pill: "br:9999",
-};
 
 const TONES: Record<Tone, string> = {
   light: "bg:raised bc:line c:label bw:1",
@@ -101,7 +84,7 @@ export interface TooltipProps {
    * contact.
    */
   delay?: number;
-  /** Corner radius on the tooltip. */
+  /** Corner radius on the tooltip. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
    * The tooltip's fade and rise. Turn it off for an instant tooltip, or when
@@ -137,12 +120,13 @@ export default function TooltipBase({
   tone = "light",
   arrow = true,
   delay = 300,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: TooltipProps) {
+  const shape = useShape(shapeProp);
   const outline = focus
     ? merge(
         FOCUS,
@@ -154,7 +138,7 @@ export default function TooltipBase({
   const triggerClasses = merge(
     outline,
     "d:f ai:c jc:c w:8 h:8 bg:transparent bw:0 c:p h:bg:well",
-    TRIGGER_SHAPES[shape],
+    RADIUS.item[shape],
     TRIGGER_TONES[tone],
     className,
   );
@@ -162,7 +146,7 @@ export default function TooltipBase({
   const popupClasses = [
     "d:f ai:c g:2 px:2 py:1 fs:xs us:none",
     TONES[tone],
-    SHAPES[shape],
+    RADIUS.item[shape],
     "bs-o:pop",
     arrow ? "p:r" : "",
   ]

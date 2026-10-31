@@ -51,13 +51,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the group. `pill` also insets the buttons, so a pill `Button` inside sits clear of the border."
+      "description": "Corner radius of the group. `pill` also insets the buttons, so a pill `Button` inside sits clear of the border. Inherits the nearest `Shape`."
     },
     {
       "name": "className",

@@ -55,7 +55,6 @@ import {
 import { type ComponentType, Fragment, type ReactNode } from "react";
 import { type ChildExample, getRegistryMeta } from "@/registry";
 import { componentId, iconMarker } from "@/utils/snippet";
-import { shapeProps } from "@/utils/shapes.mjs";
 
 export type DemoProps = Record<string, unknown>;
 
@@ -178,10 +177,7 @@ export function renderScene(
 			// an example has no meta; it takes the container for its popups and the rail's shape
 			if (!meta) return { container, shape };
 			const portals = meta.props.some((prop) => prop.name === "container");
-			return {
-				...shapeProps(meta.props, shape),
-				...(portals ? { container } : {}),
-			};
+			return portals ? { container } : {};
 		},
 		// a prop with a handler is controlled from the address, by instance
 		wired: (component, path, props) => {

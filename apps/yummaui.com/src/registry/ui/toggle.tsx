@@ -5,24 +5,9 @@ import { Toggle } from "@base-ui/react/toggle";
 import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle";
 type Size = "sm" | "md";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-// in a group, one step under the track's own round, so the chip nests inside it
-const GROUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xl cs:s",
-};
 
 const SIZES: Record<Size, string> = {
   sm: "w:9 h:9",
@@ -71,7 +56,7 @@ export interface ToggleProps
   onPressedChange?: (pressed: boolean) => void;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
+   * square where that is unsupported. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /** The button's footprint. */
@@ -125,7 +110,7 @@ export default function ToggleBase({
   defaultPressed,
   pressed: controlledPressed,
   onPressedChange,
-  shape = "rounded",
+  shape: shapeProp,
   size = "md",
   disabled = false,
   animated = true,
@@ -134,6 +119,7 @@ export default function ToggleBase({
   value,
   ...props
 }: ToggleProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const grouped = value !== undefined;
@@ -162,7 +148,7 @@ export default function ToggleBase({
           "d:f ai:c jc:c us:none",
           disabled ? "c:na" : "c:p",
           label ? LABELLED[size] : SIZES[size],
-          grouped ? GROUP_SHAPES[shape] : SHAPES[shape],
+          grouped ? RADIUS.bar[shape] : RADIUS.control[shape],
           disabled
             ? DISABLED
             : `bw:1 ${

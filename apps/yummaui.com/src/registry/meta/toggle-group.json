@@ -45,13 +45,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the container. The toggles inside carry their own `shape`."
+      "description": "Corner radius of the container. The toggles inside carry their own `shape`. Inherits the nearest `Shape`."
     },
     {
       "name": "disabled",

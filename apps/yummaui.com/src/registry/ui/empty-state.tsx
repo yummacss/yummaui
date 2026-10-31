@@ -1,15 +1,15 @@
+"use client";
+
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 import Button from "./button";
+import { useShape, type Shape } from "./style";
 
 type IconTone = "accent" | "neutral";
-type Shape = "rounded" | "square" | "squircle" | "pill";
-
 const ICON_TONES: Record<IconTone, string> = {
   accent: "c:label",
   neutral: "c:hint",
 };
-
 
 export interface EmptyStateProps {
   /** The glyph in the badge. No badge renders without one. */
@@ -23,7 +23,7 @@ export interface EmptyStateProps {
   title: string;
   /** A line under the title. */
   description?: string;
-  /** Corner radius of the buttons. */
+  /** Corner radius of the buttons. Inherits the nearest `Shape`. */
   shape?: Shape;
   /** The filled button. Omit it for a state with nothing to do. */
   primaryLabel?: string;
@@ -67,10 +67,11 @@ export default function EmptyStateBase({
   onPrimary,
   secondaryLabel,
   onSecondary,
-  shape = "rounded",
+  shape: shapeProp,
   className,
   focus = true,
 }: EmptyStateProps) {
+  const shape = useShape(shapeProp);
   const hasActions = Boolean(primaryLabel || secondaryLabel);
 
   const gap = icon || hasActions ? "g:4" : "g:1";

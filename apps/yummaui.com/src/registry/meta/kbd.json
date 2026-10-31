@@ -15,12 +15,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
-      "description": "Corner radius of each keycap."
+      "description": "Corner radius of each keycap. Inherits the nearest `Shape`.",
+      "default": "rounded"
     },
     {
       "name": "className",

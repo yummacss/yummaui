@@ -5,10 +5,9 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ComponentProps } from "react";
 import { useId } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
-
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus fv:zi:10";
 
 // the box draws focus for its input, so the outline wraps the value
@@ -43,18 +42,6 @@ const ICON_SIZES: Record<Size, string> = {
   lg: "w:4 h:4",
 };
 
-const START_SHAPES: Record<Shape, string> = {
-  rounded: "blr:lg",
-  square: "",
-  squircle: "blr:xxl cs:s",
-};
-
-const END_SHAPES: Record<Shape, string> = {
-  rounded: "brr:lg",
-  square: "",
-  squircle: "brr:xxl cs:s",
-};
-
 export interface NumberFieldProps
   extends Omit<ComponentProps<typeof NumberField.Root>, "className" | "id"> {
   /**
@@ -78,7 +65,8 @@ export interface NumberFieldProps
   size?: Size;
   /**
    * Corner radius on the group's outer edges. `squircle` uses `corner-shape`,
-   * which degrades to a rounded square where that is unsupported.
+   * which degrades to a rounded square where that is unsupported. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
 
@@ -105,12 +93,13 @@ export default function NumberFieldBase({
   required = false,
   description,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   disabled = false,
   className,
   focus = true,
   ...props
 }: NumberFieldProps) {
+  const shape = useShape(shapeProp);
   const id = useId();
 
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
@@ -138,7 +127,7 @@ export default function NumberFieldBase({
       )}
 
       <NumberField.Group className="d:f">
-        <NumberField.Decrement className={stepClasses(START_SHAPES[shape])}>
+        <NumberField.Decrement className={stepClasses(RADIUS.controlStart[shape])}>
           <IconMinus className={ICON_SIZES[size]} />
         </NumberField.Decrement>
         <span className={merge(BOX, "blw:0 brw:0", SIZES[size], boxOutline)}>
@@ -151,7 +140,7 @@ export default function NumberFieldBase({
             )}
           />
         </span>
-        <NumberField.Increment className={stepClasses(END_SHAPES[shape])}>
+        <NumberField.Increment className={stepClasses(RADIUS.controlEnd[shape])}>
           <IconPlus className={ICON_SIZES[size]} />
         </NumberField.Increment>
       </NumberField.Group>

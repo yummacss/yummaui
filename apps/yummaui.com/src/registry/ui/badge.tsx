@@ -1,21 +1,15 @@
+"use client";
+
 import { Button } from "@base-ui/react";
 import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, type Shape, useShape } from "./style";
 
 type Tone = "outline" | "subtle" | "solid";
-type Shape = "square" | "rounded" | "pill" | "squircle";
 type Size = "sm" | "md" | "lg";
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 type IconPosition = "leading" | "trailing";
-
-const SHAPES: Record<Shape, string> = {
-  square: "",
-  rounded: "br:sm",
-  pill: "br:9999",
-  squircle: "br:xxl cs:s",
-};
 
 const SIZES: Record<Size, { pad: string; text: string; icon: string }> = {
   sm: { pad: "px:2 py:0", text: "fs:xs", icon: "w:3 h:3" },
@@ -95,7 +89,6 @@ const INTENTS = {
 
 type Intent = keyof typeof INTENTS;
 
-
 export interface BadgeProps {
   /** The badge's label. */
   children: ReactNode;
@@ -113,7 +106,8 @@ export interface BadgeProps {
   intent?: Intent;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
+   * square where that is unsupported. Inherits the nearest `Shape`; under the
+   * default, a pill.
    */
   shape?: Shape;
   /** Padding, text size and icon size together. */
@@ -165,7 +159,7 @@ export default function BadgeBase({
   children,
   tone = "outline",
   intent = "neutral",
-  shape = "pill",
+  shape: shapeProp,
   size = "md",
   icon,
   iconPosition = "leading",
@@ -175,6 +169,9 @@ export default function BadgeBase({
   className,
   focus = true,
 }: BadgeProps) {
+  const inherited = useShape();
+  // a badge is a pill wherever the shape is the default
+  const shape = shapeProp ?? (inherited === "rounded" ? "pill" : inherited);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const { pad, text, icon: iconSize } = SIZES[size];
@@ -182,7 +179,7 @@ export default function BadgeBase({
   const badgeClasses = merge(
     "d:if ai:c g:1",
     pad,
-    SHAPES[shape],
+    RADIUS.chip[shape],
     tone === "outline"
       ? "bg:chip bs-o:key bc:rim bw:1"
       : tone === "subtle"

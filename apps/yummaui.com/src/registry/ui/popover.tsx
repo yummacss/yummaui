@@ -5,28 +5,14 @@ import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Side = "top" | "right" | "bottom" | "left";
-type Shape = "rounded" | "square" | "squircle";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 type TriggerVariant = "icon" | "label";
 
 const TRIGGER_VARIANTS: Record<TriggerVariant, string> = {
   icon: "w:10 h:10",
   label: "px:3 py:2 g:2 fs:sm fw:500",
-};
-
-const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
 };
 
 const ARROW_PLACEMENT: Record<string, CSSProperties> = {
@@ -102,7 +88,9 @@ export interface PopoverProps {
   onOpenChange?: (open: boolean) => void;
   /** An X beside the title. Clicking outside dismisses it either way. */
   showClose?: boolean;
-  /** Corner radius on the trigger and the popup. */
+  /**
+   * Corner radius on the trigger and the popup. Inherits the nearest `Shape`.
+   */
   shape?: Shape;
   /**
    * The popup's scale-in. Turn it off for an instant popup, or when the user
@@ -143,12 +131,13 @@ export default function PopoverBase({
   open: controlledOpen,
   onOpenChange,
   showClose = false,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: PopoverProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
@@ -162,14 +151,14 @@ export default function PopoverBase({
     outline,
     "d:f ai:c jc:c bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p h:bg:well",
     TRIGGER_VARIANTS[triggerVariant],
-    TRIGGER_SHAPES[shape],
+    RADIUS.control[shape],
     open ? "bg:well" : "",
     className,
   );
 
   const popupClasses = [
     "px:4 py:3 w:max max-w:80 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
-    POPUP_SHAPES[shape],
+    RADIUS.popup[shape],
     arrow ? "p:r" : "",
   ]
     .filter(Boolean)

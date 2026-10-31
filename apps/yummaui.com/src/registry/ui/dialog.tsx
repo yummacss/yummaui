@@ -6,37 +6,13 @@ import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconPosition = "leading" | "trailing";
 type TriggerTone = "neutral" | "danger";
 type Size = "sm" | "md" | "lg";
 type ConfirmTone = "primary" | "danger";
-
-const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-  pill: "br:9999",
-};
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none";
 
@@ -123,7 +99,9 @@ export interface DialogProps {
    * scale as Button, so a dialog matches the buttons beside it.
    */
   size?: Size;
-  /** Corner radius on the popup and its buttons. */
+  /**
+   * Corner radius on the popup and its buttons. Inherits the nearest `Shape`.
+   */
   shape?: Shape;
   /**
    * The backdrop's fade and the popup's scale-in. Turn it off for an instant
@@ -165,12 +143,13 @@ export default function DialogBase({
   onConfirm,
   confirmTone = "primary",
   showClose = true,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: DialogProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const triggerOutline =
     focus && triggerTone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
@@ -185,14 +164,14 @@ export default function DialogBase({
     "d:if ai:c g:2",
     BUTTON_BASE,
     SIZES[size],
-    BUTTON_SHAPES[shape],
+    RADIUS.control[shape],
     TRIGGER_TONES[triggerTone],
     className,
   );
 
   const popupClasses = [
     "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
-    POPUP_SHAPES[cardOf(shape)],
+    RADIUS.popup[shape],
   ]
     .filter(Boolean)
     .join(" ");
@@ -201,7 +180,7 @@ export default function DialogBase({
     outline,
     BUTTON_BASE,
     SIZES[size],
-    BUTTON_SHAPES[shape],
+    RADIUS.control[shape],
     NEUTRAL_BUTTON,
   );
 
@@ -209,7 +188,7 @@ export default function DialogBase({
     confirmOutline,
     BUTTON_BASE,
     SIZES[size],
-    BUTTON_SHAPES[shape],
+    RADIUS.control[shape],
     CONFIRM_TONES[confirmTone],
   );
 
@@ -236,7 +215,7 @@ export default function DialogBase({
                   className={merge(
                     outline,
                     "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
-                    CLOSE_SHAPES[shape],
+                    RADIUS.item[shape],
                   )}
                 />
               }

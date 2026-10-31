@@ -9,10 +9,14 @@ const registryDir = join(rootDir, "src/registry/ui");
 const indexPath = join(rootDir, "src/registry/index.ts");
 
 function componentFiles(): string[] {
-	return readdirSync(registryDir)
-		.filter((file) => file.endsWith(".tsx") || file.endsWith(".ts"))
-		.map((file) => file.replace(/\.tsx?$/, ""))
-		.sort();
+	return (
+		readdirSync(registryDir)
+			.filter((file) => file.endsWith(".tsx") || file.endsWith(".ts"))
+			.map((file) => file.replace(/\.tsx?$/, ""))
+			// what the components share, not a component
+			.filter((id) => id !== "style")
+			.sort()
+	);
 }
 
 function enclosingStatement(source: string, at: number): string {
@@ -428,7 +432,9 @@ describe("Yumma UI registry", () => {
 			if (!/\bFOCUS\b/.test(source)) continue;
 
 			const declarations = source.match(/^const FOCUS = "[^"]*";$/gm) ?? [];
-			if (declarations.length !== 1)
+			const imported =
+				/^import \{[^}]*\bFOCUS\b[^}]*\} from "\.\/style";$/m.test(source);
+			if (declarations.length + (imported ? 1 : 0) !== 1)
 				wrong.push(`${id}: ${declarations.length} FOCUS`);
 
 			for (const use of source.matchAll(/fv:[\w:/.-]+/g)) {
@@ -452,6 +458,7 @@ describe("Yumma UI registry", () => {
 				const at = use.index ?? 0;
 				const statement = enclosingStatement(source, at);
 				if (/\bconst [A-Z_]*FOCUS\b/.test(statement)) continue;
+				if (statement.includes('from "./style"')) continue;
 				if (!/\bconst \w+ =/.test(statement) || !statement.includes("focus"))
 					wrong.push(`${id}: FOCUS read outside the gate, in \`${statement}\``);
 			}
@@ -630,5 +637,37 @@ describe("Yumma UI registry", () => {
 		const config = (await import("../yummacss.config.mjs")).default as Config;
 		const { invalid } = validateClasses([...sizes], config);
 		expect(invalid).toEqual([]);
+	});
+
+	// their own shapes: a circle for people, a skeleton's size, a separator's icon
+	const OWN_SHAPES = new Set([
+		"avatar",
+		"avatar-stack",
+		"skeleton",
+		"separator",
+	]);
+
+	it("takes every shape from style.tsx", () => {
+		const wrong: string[] = [];
+		for (const id of componentFiles()) {
+			const source = readFileSync(join(registryDir, `${id}.tsx`), "utf-8");
+			if (OWN_SHAPES.has(id)) continue;
+			if (/^type Shape\b/m.test(source))
+				wrong.push(`${id}: its own Shape type`);
+			if (/^const \w+: Record<Shape, string>/m.test(source))
+				wrong.push(`${id}: its own radius table, where RADIUS has a row`);
+			if (/\bshape\??: Shape\b/.test(source) && !source.includes("useShape"))
+				wrong.push(`${id}: a shape prop that ignores the nearest Shape`);
+		}
+		expect(wrong).toEqual([]);
+	});
+
+	it("declares one focus outline, in style.tsx", () => {
+		const copies = componentFiles().filter((id) =>
+			readFileSync(join(registryDir, `${id}.tsx`), "utf-8").includes(
+				'const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";',
+			),
+		);
+		expect(copies).toEqual([]);
 	});
 });

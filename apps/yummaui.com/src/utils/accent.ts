@@ -1,6 +1,7 @@
 "use client";
 
 import { colorTheme, generateShades } from "@yummacss/core";
+import { ROLE_CLASSES } from "@/registry/role-classes";
 import {
 	formatCss,
 	modeLrgb,
@@ -14,43 +15,15 @@ import {
 // the shades are oklch(); contrast needs linear RGB
 for (const mode of [modeRgb, modeLrgb, modeOklch]) useMode(mode);
 
-const SURFACE: {
-	name: string;
-	property: string;
-	darker?: boolean;
-	shade?: number;
-	alpha?: number;
-}[] = [
-	{
-		name: "bg:slate-12",
-		property: "background-color",
-	},
-	{
-		name: "bc:slate-12",
-		property: "border-color",
-	},
-	{
-		name: "blc:slate-12",
-		property: "border-left-color",
-	},
-	{
-		name: "h:bg:slate-11",
-		property: "background-color",
-		darker: true,
-	},
-	{ name: "f:slate-12", property: "fill" },
-	{ name: "c:slate-11", property: "color" },
-	// `shade` indexes generateShades(), where Yumma's `slate-4` is [3].
-	{ name: "oc:focus/40", property: "outline-color", shade: 3, alpha: 0.6 },
-	{ name: "fv:oc:focus/40", property: "outline-color", shade: 3, alpha: 0.6 },
-	{ name: "fw:oc:focus/40", property: "outline-color", shade: 3, alpha: 0.6 },
-	{ name: "fv:bc:focus", property: "border-color" },
-	{ name: "fw:bc:focus", property: "border-color" },
-	{
-		name: "s:slate-12",
-		property: "stroke",
-	},
-];
+// the property each color utility sets
+const PROPERTIES: Record<string, string> = {
+	bg: "background-color",
+	bc: "border-color",
+	c: "color",
+	oc: "outline-color",
+	f: "fill",
+	s: "stroke",
+};
 
 const STATES: Record<string, string> = {
 	h: ":hover",
@@ -58,15 +31,18 @@ const STATES: Record<string, string> = {
 	fw: ":focus-within",
 };
 
-// `h:bg:slate-11` is `.h\:bg\:slate-11:hover`, as the generator writes it.
+// `fv:bc:focus` is `.fv\:bc\:focus:focus-visible`, as the generator writes it.
 function selectorOf(name: string): string {
 	const state = STATES[name.split(":")[0]] ?? "";
 	return `.${name.replace(/[:/]/g, "\\$&")}${state}`;
 }
 
-export const ACCENT_CLASSES = SURFACE.map((entry) => entry.name);
-
-export const ACCENT_EXCLUDES = ["c:slate-12"];
+/** The accent's color for a role: the fill and its ring, the focus outline, and white on the fill. */
+function roleColor(role: string, shades: string[], base: number): string {
+	if (role === "on-fill") return "#ffffff";
+	if (role === "edge") return shades[Math.min(base + 2, 11)];
+	return shades[base];
+}
 
 export const ACCENTS = Object.keys(colorTheme);
 
@@ -76,17 +52,28 @@ export function isAccent(value: unknown): value is string {
 	return typeof value === "string" && ACCENTS.includes(value);
 }
 
-export function accentCss(family: string): string {
+/** CSS that repaints every role class in `classes` in the accent `family`. */
+export function accentCss(
+	family: string,
+	classes: string[] = ROLE_CLASSES,
+): string {
 	if (family === DEFAULT_ACCENT || !isAccent(family)) return "";
 
 	const shades = generateShades(colorTheme[family as keyof typeof colorTheme]);
 	const base = accentShade(shades);
 
-	return SURFACE.map(({ name, property, darker, shade, alpha }) => {
-		const color = shades[shade ?? (darker ? base + 1 : base)];
-		const value = alpha ? withAlpha(color, alpha) : color;
-		return `${selectorOf(name)} { ${property}: ${value}; }`;
-	}).join("\n");
+	return classes
+		.map((name) => {
+			const parts = name.split(":");
+			const [role, alpha] = parts[parts.length - 1].split("/");
+			const property = PROPERTIES[parts[parts.length - 2]];
+			if (!property) return "";
+			const color = roleColor(role, shades, base);
+			const value = alpha ? withAlpha(color, Number(alpha) / 100) : color;
+			return `${selectorOf(name)} { ${property}: ${value}; }`;
+		})
+		.filter(Boolean)
+		.join("\n");
 }
 
 /** Three shades of a family, light, base and dark, as the accent picker draws it. */

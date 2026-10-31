@@ -191,16 +191,17 @@ for (const id of published) {
 		`${JSON.stringify(entry, null, 2)}\n`,
 	);
 
-	// one folder per shape, so the CLI only swaps its base URL
-	for (const shape of SHAPES) {
-		const dir = join(outDir, shape);
+	// one folder per shape, so the CLI only swaps its base URL; `none` for a CLI from before `square`
+	for (const folder of [...SHAPES, "none"]) {
+		const shape = folder === "none" ? "square" : folder;
+		const dir = join(outDir, folder);
 		mkdirSync(dir, { recursive: true });
 		const shaped = {
 			...entry,
 			files: [
 				{
 					...entry.files[0],
-					// the default keeps each component's own, as the site does
+					// only style.tsx names the default shape
 					content: shape === DEFAULT_SHAPE ? source : applyShape(source, shape),
 				},
 			],

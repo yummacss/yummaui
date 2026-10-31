@@ -4,11 +4,9 @@ import { Field } from "@base-ui/react/field";
 import { Switch } from "@base-ui/react/switch";
 import { type ReactNode, useId, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle" | "pill";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 interface SizeSpec {
   track: string;
@@ -20,13 +18,6 @@ const SIZES: Record<Size, SizeSpec> = {
   sm: { track: "h:5 w:8", thumb: "w:4 h:4", travelClass: "ttx:3" },
   md: { track: "h:6 w:10", thumb: "w:5 h:5", travelClass: "ttx:4" },
   lg: { track: "h:7 w:12", thumb: "w:6 h:6", travelClass: "ttx:5" },
-};
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xl cs:s",
-  pill: "br:9999",
 };
 
 export interface SwitchProps {
@@ -52,7 +43,7 @@ export interface SwitchProps {
   size?: Size;
   /**
    * Corner radius, applied to the track and the thumb together. `squircle` uses
-   * `corner-shape`.
+   * `corner-shape`. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /** Blocks interaction and dims the whole control, label included. */
@@ -91,13 +82,14 @@ export default function SwitchBase({
   onCheckedChange,
   icon,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   disabled = false,
   animated = true,
   className,
   focus = true,
   ariaLabel,
 }: SwitchProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [internalChecked, setInternalChecked] = useState(
@@ -116,7 +108,7 @@ export default function SwitchBase({
     outline,
     "p:r d:f ai:c fs:0 m:0 p:0 bw:2 bc:transparent tp:c tdu:300 ttf:out-quart",
     track,
-    SHAPES[shape],
+    RADIUS.item[shape],
     checked ? "bg:on bs-o:key-fill" : "bg:line bs-o:sunk",
     disabled ? "" : "c:p",
     className,
@@ -125,7 +117,7 @@ export default function SwitchBase({
   const thumbClasses = [
     "bg:knob bs-o:key",
     thumb,
-    SHAPES[shape],
+    RADIUS.item[shape],
   ].join(" ");
 
   return (
