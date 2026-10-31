@@ -167,8 +167,8 @@ export function renderScene(
 		components,
 		styled: (component) => {
 			const meta = getRegistryMeta(componentId(component));
-			// an example has no meta; it takes the container for the popups it holds
-			if (!meta) return { container };
+			// an example has no meta; it takes the container for its popups and the rail's shape
+			if (!meta) return { container, shape };
 			const portals = meta.props.some((prop) => prop.name === "container");
 			return {
 				...shapeProps(meta.props, shape),

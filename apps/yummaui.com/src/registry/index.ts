@@ -122,6 +122,7 @@ export const registry = {
   "toggle-group": () => import("./ui/toggle-group"),
   "toggle": () => import("./ui/toggle"),
   "toolbar": () => import("./ui/toolbar"),
+  "tooltip-toolbar": () => import("./ui/tooltip-toolbar"),
   "tooltip": () => import("./ui/tooltip"),
 } as const;
 
@@ -308,6 +309,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "toggle-group": { component: "toggle-group", variant: "base", kind: "component", install: "toggle-group" },
   "toggle": { component: "toggle", variant: "base", kind: "component", install: "toggle" },
   "toolbar": { component: "toolbar", variant: "base", kind: "component", install: "toolbar" },
+  "tooltip-toolbar": { component: "tooltip", variant: "toolbar", kind: "example", install: "tooltip" },
   "tooltip": { component: "tooltip", variant: "base", kind: "component", install: "tooltip" },
 };
 
