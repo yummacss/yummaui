@@ -43,6 +43,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Combobox outlines its whole field on focus, not the input inside it.
 - `init` and `add` write `yummacss.config.mjs`, or `yumma.config.mjs` where a project already has one or an older Yumma CSS.
 
+### Fixed
+
+- Checkbox, Radio and Switch marks show on the light key in the dark scheme.
+- Switch, Slider, Progress, Meter & Storage Bar tracks are visible on a white page.
+
 ### Removed
 
 - Sidebar's `workspaces` and `onWorkspaceChange`.

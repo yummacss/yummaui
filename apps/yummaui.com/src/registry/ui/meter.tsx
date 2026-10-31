@@ -167,7 +167,7 @@ export default function MeterBase({
         </div>
       )}
 
-      <Meter.Track className={`d:f g:px o:h h:2 bg:well bs-o:sunk ${SHAPES[shape]}`}>
+      <Meter.Track className={`d:f g:px o:h h:2 bg:line bs-o:sunk ${SHAPES[shape]}`}>
         {segments ? (
           segments.map((segment, index) => (
             <span

@@ -141,7 +141,7 @@ export default function StorageBar({
 
       <Meter.Track
         className={merge(
-          "d:f g:px h:3 o:h bg:well bc:rim bw:1 bs-o:sunk",
+          "d:f g:px h:3 o:h bg:line bc:rim bw:1 bs-o:sunk",
           TRACK_SHAPES[shape],
         )}
       >

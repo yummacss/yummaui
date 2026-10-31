@@ -145,7 +145,7 @@ export default function CheckboxBase({
 
   const indicator = (
     <Checkbox.Indicator
-      className={`d:f c:white ${animated ? "tp:a tdu:350 ttf:out-back opening:o:0 opening:s:40 closing:o:0 closing:s:80 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`d:f c:on-fill ${animated ? "tp:a tdu:350 ttf:out-back opening:o:0 opening:s:40 closing:o:0 closing:s:80 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
       render={(indicatorProps, state) => (
         <span {...indicatorProps}>
           {state.indeterminate ? (
