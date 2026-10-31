@@ -22,7 +22,7 @@ import {
 	loadRegistryComponent,
 } from "@/utils/prefetch-registry";
 import { schemeCss } from "@/utils/scheme";
-import { buildConfig, buildScene } from "@/utils/snippet";
+import { buildConfig, buildScene, type Token } from "@/utils/snippet";
 import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
@@ -67,6 +67,54 @@ export default function ComponentPlayground({
 
 	const id = playground?.id ?? "";
 	const scene = playground?.meta?.scene;
+
+	// an example the scene names is shown as its own file, under the scene
+	const examples = useMemo(
+		() =>
+			scene
+				? sceneIds(scene).filter(
+						(name) => getRegistryTarget(name).kind === "example",
+					)
+				: [],
+		[scene],
+	);
+	const [exampleTokens, setExampleTokens] = useState<Token[]>([]);
+	useEffect(() => {
+		if (!examples.length) {
+			setExampleTokens([]);
+			return;
+		}
+		let live = true;
+		void Promise.all([
+			import("@/registry/examples"),
+			import("@/lib/highlighter"),
+		]).then(([{ EXAMPLE_SOURCES }, { highlightTokens }]) => {
+			if (!live) return;
+			const out: Token[] = [];
+			for (const name of examples) {
+				out.push({
+					kind: "text",
+					text: `\n\n// ${name}.tsx\n`,
+					id: `${name}-file`,
+				});
+				highlightTokens(EXAMPLE_SOURCES[name] ?? "").forEach((line, row) => {
+					line.forEach((token, column) =>
+						out.push({
+							kind: "text",
+							text: token.text,
+							color: token.color,
+							id: `${name}-${row}-${column}`,
+						}),
+					);
+					out.push({ kind: "text", text: "\n", id: `${name}-${row}-end` });
+				});
+			}
+			setExampleTokens(out);
+		});
+		return () => {
+			live = false;
+		};
+	}, [examples]);
 	const shape = playground?.shape ?? DEFAULT_SHAPE;
 	const accent = playground?.accent ?? DEFAULT_ACCENT;
 	const scheme = playground?.scheme ?? "light";
@@ -89,7 +137,7 @@ export default function ComponentPlayground({
 	);
 
 	if (!id || !scene) return null;
-	const usage = buildScene(scene);
+	const usage = [...buildScene(scene), ...exampleTokens];
 
 	const config = registryConfig[getRegistryTarget(id).install];
 	// a page without a config tab falls back to the code it does have

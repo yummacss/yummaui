@@ -11,17 +11,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Two blocks: Sidebar and Sign In.
 - Menu takes an element as `trigger`, such as a `Button`, which keeps its own look.
+- Sidebar has the brand and a search field on top, and its user menu holds a status, an account switcher and Sign out.
+- Inline Icon Heading takes its sentence as `parts`.
+- Onboarding takes the `pill` shape.
 - Combobox chips fade out when removed.
 
 ### Changed
 
 - Soft key: every control is a key with a lighter top edge and a small drop, on violet-leaning grays with a charcoal fill. Needs Yumma CSS 4.12 or later.
 - `init` and `add` write the `theme.boxShadow` entries the components use.
-- The rounded shape is one step larger: 8px controls and 12px menus and cards.
+- Every component is rounded by default, at 8px for controls and 12px for menus and cards; Avatar stays a circle.
 - Components draw Tabler's outline icons.
 - Menus, listboxes and File Tree highlight in a soft gray.
+- Menu, Context Menu, Menubar & listbox items share one height.
+- Toast shakes as a whole on a repeated attempt.
+- Tooltips are smaller.
+- Rating draws filled stars.
+- Tabs have no padding around their items.
+- Checkbox rows in Checkbox Group follow `shape`.
+- File Tree keeps an item's icon color when it is picked.
 - Badge is a pill by default, and its outline tone is a gray key whose dot carries a soft halo.
-- Every component is rounded by default, at 6px for controls and 8px for menus and cards; Avatar stays a circle.
 - Shortcuts in menus and tooltips are plain text.
 - Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.
 - Sidebar marks the link you pick, and `onNavigate` reports it.
@@ -36,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Sidebar's `workspaces` and `onWorkspaceChange`.
 - Empty State's `iconShape`.
 
 ## [0.9.0] - 2026-10-29

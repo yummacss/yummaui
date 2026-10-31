@@ -2,6 +2,12 @@
   "summary": "A centered heading whose key words each sit in a raised chip with the icon that names them: a pen for written, a camera for filmed, a microphone for recorded.",
   "props": [
     {
+      "name": "parts",
+      "type": "none",
+      "typeName": "InlineIconHeadingPart[]",
+      "description": "The heading, in order: plain text, and chips that pair a word with its icon."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [
@@ -34,7 +40,36 @@
   "scene": [
     {
       "component": "InlineIconHeading",
-      "props": {}
+      "props": {
+        "parts": [
+          "Everything you have",
+          {
+            "label": "written",
+            "icon": {
+              "$icon": "IconPencil",
+              "size": "w:calc(.62em) h:calc(.62em)"
+            },
+            "after": ","
+          },
+          {
+            "label": "filmed",
+            "icon": {
+              "$icon": "IconVideo",
+              "size": "w:calc(.62em) h:calc(.62em)"
+            }
+          },
+          "&",
+          {
+            "label": "recorded",
+            "icon": {
+              "$icon": "IconMicrophone",
+              "size": "w:calc(.62em) h:calc(.62em)"
+            },
+            "after": ","
+          },
+          "kept in one folder."
+        ]
+      }
     }
   ]
 }

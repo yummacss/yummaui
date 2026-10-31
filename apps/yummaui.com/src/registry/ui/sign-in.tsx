@@ -135,7 +135,7 @@ export default function SignIn({
             label="Email"
             type="email"
             autoComplete="email"
-            placeholder="name@example.com"
+            placeholder="ada@yummaui.com"
             value={email}
             onChange={(event) => {
               setEmail(event.currentTarget.value);

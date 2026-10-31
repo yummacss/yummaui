@@ -47,7 +47,10 @@ export default function TokenBlock({
 			>
 				<code>
 					{tokens.map((token) => (
-						<span key={token.id} style={{ color: TOKEN_COLORS[token.kind] }}>
+						<span
+							key={token.id}
+							style={{ color: token.color ?? TOKEN_COLORS[token.kind] }}
+						>
 							{token.text}
 						</span>
 					))}

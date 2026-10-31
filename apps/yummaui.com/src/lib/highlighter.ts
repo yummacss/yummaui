@@ -82,3 +82,15 @@ export function highlight(
 
 	return hastToHtml(hast);
 }
+
+/** Code as colored runs, one array per line, for blocks that draw their own tokens. */
+export function highlightTokens(
+	code: string,
+	lang = "tsx",
+): { text: string; color?: string }[][] {
+	return get()
+		.codeToTokensBase(code, { lang, theme: THEME_NAME })
+		.map((line) =>
+			line.map((token) => ({ text: token.content, color: token.color })),
+		);
+}

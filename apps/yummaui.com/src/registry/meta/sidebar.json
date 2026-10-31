@@ -106,7 +106,100 @@
       "children": [
         {
           "component": "Sidebar",
-          "props": {}
+          "props": {
+            "brand": {
+              "name": "Drive",
+              "logo": {
+                "$icon": "IconCloud",
+                "size": "w:4 h:4"
+              }
+            },
+            "groups": [
+              {
+                "links": [
+                  {
+                    "label": "Home",
+                    "href": "#home",
+                    "icon": {
+                      "$icon": "IconHome",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "My files",
+                    "href": "#files",
+                    "icon": {
+                      "$icon": "IconFolder",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "Photos",
+                    "href": "#photos",
+                    "icon": {
+                      "$icon": "IconPhoto",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "Starred",
+                    "href": "#starred",
+                    "icon": {
+                      "$icon": "IconStar",
+                      "size": "w:4 h:4"
+                    }
+                  }
+                ]
+              },
+              {
+                "label": "Sharing",
+                "links": [
+                  {
+                    "label": "Shared with me",
+                    "href": "#shared",
+                    "icon": {
+                      "$icon": "IconShare",
+                      "size": "w:4 h:4"
+                    },
+                    "badge": 3
+                  },
+                  {
+                    "label": "People",
+                    "href": "#people",
+                    "icon": {
+                      "$icon": "IconUsers",
+                      "size": "w:4 h:4"
+                    }
+                  }
+                ]
+              },
+              {
+                "links": [
+                  {
+                    "label": "Trash",
+                    "href": "#trash",
+                    "icon": {
+                      "$icon": "IconTrash",
+                      "size": "w:4 h:4"
+                    }
+                  },
+                  {
+                    "label": "Settings",
+                    "href": "#settings",
+                    "icon": {
+                      "$icon": "IconSettings",
+                      "size": "w:4 h:4"
+                    }
+                  }
+                ]
+              }
+            ],
+            "current": "#files",
+            "user": {
+              "name": "Ada Lovelace",
+              "email": "ada@yummaui.com"
+            }
+          }
         },
         {
           "tag": "div",
