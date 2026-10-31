@@ -57,7 +57,7 @@ export default function ProgressBase({
 
   const rootClasses = merge("d:f fd:c g:2 w:64", className);
 
-  const trackClasses = ["o:h h:2 bg:well bs-o:sunk", SHAPES[shape]]
+  const trackClasses = ["o:h h:2 bg:line bs-o:sunk", SHAPES[shape]]
     .filter(Boolean)
     .join(" ");
 
@@ -99,7 +99,7 @@ export default function ProgressBase({
                 aria-hidden
                 className="d:f jc:fe h:100% w:100% an:slide adu:1000 atf:io aic:i @prm:an:none"
               >
-                <span className="h:100% w:30% bg:white/20" />
+                <span className="h:100% w:30% bg:on-fill/20" />
               </span>
             )}
           </Progress.Indicator>

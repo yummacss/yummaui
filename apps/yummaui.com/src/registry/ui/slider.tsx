@@ -171,7 +171,7 @@ export default function SliderBase({
           className={`d:f ai:c py:3 us:none ta:none ${disabled ? "c:na" : ""}`}
         >
           <Slider.Track
-            className={merge("p:r h:2 w:100% bg:well bs-o:sunk", SHAPES[shape])}
+            className={merge("p:r h:2 w:100% bg:line bs-o:sunk", SHAPES[shape])}
           >
             <Slider.Indicator className={merge("bg:check bs-o:key-fill", SHAPES[shape])} />
             {isRange ? (

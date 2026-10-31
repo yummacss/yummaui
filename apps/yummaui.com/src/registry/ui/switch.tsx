@@ -117,7 +117,7 @@ export default function SwitchBase({
     "p:r d:f ai:c fs:0 m:0 p:0 bw:2 bc:transparent tp:c tdu:300 ttf:out-quart",
     track,
     SHAPES[shape],
-    checked ? "bg:on bs-o:key-fill" : "bg:well bs-o:sunk",
+    checked ? "bg:on bs-o:key-fill" : "bg:line bs-o:sunk",
     disabled ? "" : "c:p",
     className,
   );
@@ -141,7 +141,7 @@ export default function SwitchBase({
         className={trackClasses}
       >
         {icon && checked && (
-          <span className="d:f p:a l:1 ai:c jc:c w:3 h:3 c:white">{icon}</span>
+          <span className="d:f p:a l:1 ai:c jc:c w:3 h:3 c:on-fill">{icon}</span>
         )}
         <Switch.Thumb
           className={merge(
