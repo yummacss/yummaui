@@ -44,6 +44,13 @@ const SHAPES: Record<Shape, string> = {
   squircle: "br:xxl cs:s",
 };
 
+// a row sits inside Checkbox Group's well, so it rounds one step less
+const ROW_SHAPES: Record<Shape, string> = {
+  rounded: "br:md",
+  square: "",
+  squircle: "br:xl cs:s",
+};
+
 const CHECKED =
   "bw:1 bg:check bc:edge bs-o:key-fill";
 const UNCHECKED = "bw:1 bg:field bs-o:key bc:rim";
@@ -162,6 +169,7 @@ export default function CheckboxBase({
           merge(
             outline,
             "d:f ai:c g:3 w:100% px:2 py:2 bw:1 us:none tp:c tdu:150 ttf:io",
+            ROW_SHAPES[shape],
             disabled ? "o:60 c:na" : "c:p",
             state.checked
               ? "bg:raised bs-o:key bc:rim"

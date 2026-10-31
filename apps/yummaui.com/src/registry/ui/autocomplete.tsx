@@ -172,7 +172,7 @@ function renderItem(item: AutocompleteItem, shape: Shape, query: string) {
       render={(props, state) => (
         <div
           {...props}
-          className={`d:f ai:c g:3 py:2 px:3 mx:1 bw:1 bc:transparent c:label ${ITEM_SHAPES[cardOf(shape)]} fs:sm us:none c:p ${
+          className={`d:f ai:c g:3 min-h:8 py:1 px:3 mx:1 bw:1 bc:transparent c:label ${ITEM_SHAPES[cardOf(shape)]} fs:sm us:none c:p ${
             state.highlighted
               ? "bg:well c:label bc:transparent"
               : "bg:transparent"

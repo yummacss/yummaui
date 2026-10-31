@@ -211,11 +211,7 @@ export default function FileTree({
           ? IconFolderOpen
           : IconFolder
         : (kind?.Icon ?? IconFile);
-      const tint = isPicked
-        ? "c:white"
-        : node.children
-          ? "c:yellow"
-          : (kind?.tint ?? "c:hint");
+      const tint = node.children ? "c:yellow" : (kind?.tint ?? "c:hint");
 
       const row = (
         <div
