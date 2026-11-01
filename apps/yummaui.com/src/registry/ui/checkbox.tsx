@@ -5,7 +5,10 @@ import { IconCheck, IconMinus } from "@tabler/icons-react";
 import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, useShape } from "./style";
+
+// a round box reads as a single choice, which is a radio
+const SHAPES = ["square", "rounded", "squircle"] as const;
 
 type Size = "sm" | "md" | "lg";
 
@@ -69,9 +72,10 @@ export interface CheckboxProps
   size?: Size;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`.
+   * square where that is unsupported. Inherits the nearest `Shape`; under
+   * `pill`, `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
   /**
    * The mark's transition when the box is ticked. Turn it off for a static
    * form, or when the user has asked for reduced motion.
@@ -113,7 +117,7 @@ export default function CheckboxBase({
   focus = true,
   ...props
 }: CheckboxProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [internalChecked, setInternalChecked] = useState(
