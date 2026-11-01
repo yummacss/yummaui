@@ -10,6 +10,7 @@
 		"yummacss"
 	],
 	"homepage": "https://www.yummaui.com",
+	"bugs": "https://github.com/yummacss/yummaui/issues",
 	"license": "MIT",
 	"author": "Renildo Pereira",
 	"repository": {
