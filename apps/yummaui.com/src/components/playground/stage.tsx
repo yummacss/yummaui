@@ -169,7 +169,7 @@ export default function ComponentPlayground({
 					</BaseTabs.List>
 					<div className="d:f ai:c jc:fe f:1">
 						{resizable && active === "preview" && width !== null && (
-							<span className="px:2 c:ink/50 fs:xs ff:m fvn:tn">{width}px</span>
+							<span className="px:2 c:ink/60 fs:xs ff:m fvn:tn">{width}px</span>
 						)}
 						{styling && (
 							<Drawer.Root swipeDirection="right">
@@ -305,7 +305,7 @@ function FileTab({
 	return (
 		<BaseTabs.Tab
 			value={value}
-			className={(state) => `${TOOL} ${state.active ? "c:ink" : "c:ink/50"}`}
+			className={(state) => `${TOOL} ${state.active ? "c:ink" : "c:ink/60"}`}
 			style={{ fontFamily: "inherit" }}
 		>
 			{icon}
