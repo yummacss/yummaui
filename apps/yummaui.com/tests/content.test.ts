@@ -32,6 +32,7 @@ const KNOWN_UNLISTED: string[] = [
 	"field-suffix",
 	"popover-folder-color",
 	"progress-upload",
+	"scroll-area-files",
 	"select-grouped",
 	"skeleton-activity",
 	"skeleton-filters",

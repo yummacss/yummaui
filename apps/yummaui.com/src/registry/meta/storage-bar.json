@@ -69,12 +69,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
-        "squircle"
+        "rounded",
+        "squircle",
+        "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the card, the track and the icon tiles."
+      "description": "Corner radius on the card, the track and the icon tiles. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

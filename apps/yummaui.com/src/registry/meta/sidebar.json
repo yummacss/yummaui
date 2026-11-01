@@ -84,13 +84,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the links, menus, badges & avatar."
+      "description": "Corner radius of the links, menus, badges & avatar. Inherits the nearest `Shape`."
     },
     {
       "name": "container",

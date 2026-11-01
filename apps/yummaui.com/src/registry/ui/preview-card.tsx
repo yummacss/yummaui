@@ -3,16 +3,7 @@
 import { PreviewCard } from "@base-ui/react/preview-card";
 import type { CSSProperties, ReactNode } from "react";
 import { merge } from "yummacss/merge";
-
-type Shape = "rounded" | "square" | "squircle";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 const ARROW_PLACEMENT: Record<string, CSSProperties> = {
   top: { bottom: -6, rotate: "180deg" },
@@ -52,7 +43,8 @@ export interface PreviewCardProps {
   onOpenChange?: (open: boolean) => void;
   /**
    * Corner radius on the card. `squircle` uses `corner-shape`, which degrades
-   * to a rounded square where that is unsupported.
+   * to a rounded square where that is unsupported. Inherits the nearest
+   * `Shape`.
    */
   shape?: Shape;
   /**
@@ -83,15 +75,16 @@ export default function PreviewCardBase({
   defaultOpen,
   open,
   onOpenChange,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: PreviewCardProps) {
+  const shape = useShape(shapeProp);
   const popupClasses = [
     "d:f fd:c g:3 w:64 p:3 bg:raised bc:line bw:1 c:label fs:sm bs-o:pop",
-    SHAPES[shape],
+    RADIUS.control[shape],
     arrow ? "p:r" : "",
   ]
     .filter(Boolean)

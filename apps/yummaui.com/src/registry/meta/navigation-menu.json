@@ -97,12 +97,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
-        "squircle"
+        "rounded",
+        "squircle",
+        "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the bar, its items, the panel and its icon tiles."
+      "description": "Corner radius on the bar, its items, the panel and its icon tiles. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

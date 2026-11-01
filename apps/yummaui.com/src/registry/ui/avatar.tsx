@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "circle" | "rounded" | "square" | "squircle";
 type Status = "none" | "online" | "offline" | "busy";
 type Tint = "blue" | "mint" | "indigo" | "slate";
 
@@ -41,26 +40,7 @@ const BADGE_SIZES: Record<Size, string> = {
   lg: "w:4 h:4",
 };
 
-const SHAPES: Record<Shape, string> = {
-  circle: "br:9999",
-  rounded: "",
-  square: "br:0",
-  squircle: "cs:s",
-};
-
 // a radius scales with the avatar, so rounded never reads as a circle
-const ROUNDED_RADII: Record<Size, string> = {
-  sm: "br:sm",
-  md: "br:md",
-  lg: "br:lg",
-};
-
-const SQUIRCLE_RADII: Record<Size, string> = {
-  sm: "br:lg",
-  md: "br:xl",
-  lg: "br:xxl",
-};
-
 const STATUSES: Record<Exclude<Status, "none">, string> = {
   online: "bg:green-6",
   offline: "bg:hint",
@@ -77,11 +57,6 @@ export interface AvatarProps {
   name?: string;
   /** Diameter, and the size of the initials or icon inside it. */
   size?: Size;
-  /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
-   */
-  shape?: Shape;
   /**
    * A presence dot in the bottom right corner. It carries meaning, so it is
    * labelled for screen readers rather than left decorative.
@@ -119,14 +94,13 @@ export interface AvatarProps {
 }
 
 /**
- * A user's picture, in three sizes and three shapes, falling back to their
- * initials and then to an icon, with an optional presence dot and badge.
+ * A user's picture, in three sizes, falling back to their initials and then to
+ * an icon, with an optional presence dot and badge.
  */
 export default function AvatarBase({
   src,
   name,
   size = "md",
-  shape = "circle",
   status = "none",
   badge = false,
   badgeIcon,
@@ -139,11 +113,7 @@ export default function AvatarBase({
   const classes = merge(
     ROOT,
     SIZES[size],
-    shape === "squircle"
-      ? `cs:s ${SQUIRCLE_RADII[size]}`
-      : shape === "rounded"
-        ? ROUNDED_RADII[size]
-        : SHAPES[shape],
+    "br:9999",
     tint ? `${TINTS[tint].bg} bw:1` : "bg:well bc:raised bw:1 bs-o:key",
     "bi-lg:b",
     className,

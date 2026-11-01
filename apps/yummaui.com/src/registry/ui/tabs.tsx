@@ -4,41 +4,18 @@ import { Tabs } from "@base-ui/react/tabs";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Orientation = "horizontal" | "vertical";
 type Size = "sm" | "md" | "lg";
-type Shape = "pill" | "rounded" | "square" | "squircle";
 // a panel cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 type IconPosition = "leading" | "trailing";
 
 const SIZES: Record<Size, { tab: string; text: string }> = {
   sm: { tab: "py:1 px:2", text: "fs:xs" },
   md: { tab: "py:2 px:3", text: "fs:sm" },
   lg: { tab: "py:3 px:4", text: "fs:md" },
-};
-
-const LIST_SHAPES: Record<Shape, string> = {
-  pill: "br:9999",
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const PANEL_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const TAB_SHAPES: Record<Shape, string> = {
-  pill: "br:9999",
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
 };
 
 export interface TabItem {
@@ -78,7 +55,7 @@ export interface TabsProps {
    * Corner radius on the track and the tabs. `pill` steps down to `rounded`
    * when `orientation` is vertical: a capsule resolves its radius against the
    * narrow axis, so the track becomes a blob and the selected tab's indicator
-   * is clipped to the curve.
+   * is clipped to the curve. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -119,13 +96,14 @@ export default function TabsBase({
   onValueChange,
   orientation = "horizontal",
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   icon = true,
   iconPosition = "leading",
   animated = true,
   className,
   focus = true,
 }: TabsProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [internalValue, setInternalValue] = useState(
@@ -151,14 +129,14 @@ export default function TabsBase({
 
   const listClasses = merge(
     "d:f p:r w:fc bg:well bs-o:sunk",
-    LIST_SHAPES[listShape],
+    RADIUS.bar[listShape],
     isVertical && "fd:c",
     hasPanels && !isVertical && "mb:3",
   );
 
   const indicatorClasses = merge(
     "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim",
-    TAB_SHAPES[shape],
+    RADIUS.control[shape],
     animated && "tp:a tdu:300 ttf:out-quart @prm:tp:none",
   );
 
@@ -181,7 +159,7 @@ export default function TabsBase({
             glyph && !iconOnly ? "g:2" : "",
             item.count !== undefined ? "g:2" : "",
             spec.tab,
-            TAB_SHAPES[shape],
+            RADIUS.control[shape],
             item.disabled
               ? "c:hint o:60 c:na"
               : isSelected
@@ -233,7 +211,7 @@ export default function TabsBase({
           <Tabs.Panel
             key={item.value}
             value={item.value}
-            className={`f:1 p:4 bw:1 bg:raised bc:rim c:hint fs:sm os:none ${PANEL_SHAPES[cardOf(shape)]}`}
+            className={`f:1 p:4 bw:1 bg:raised bc:rim c:hint fs:sm os:none ${RADIUS.popup[shape]}`}
           >
             {item.panel}
           </Tabs.Panel>

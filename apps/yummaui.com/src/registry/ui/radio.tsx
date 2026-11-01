@@ -4,6 +4,7 @@ import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { useId } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS } from "./style";
 
 type Size = "sm" | "md" | "lg";
 
@@ -12,8 +13,6 @@ export interface RadioOption {
   label: string;
   description?: string;
 }
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BASE = "d:f ai:c jc:c p:0 m:0";
 

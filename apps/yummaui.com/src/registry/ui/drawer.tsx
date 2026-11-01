@@ -5,9 +5,9 @@ import { Drawer } from "@base-ui/react/drawer";
 import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Side = "bottom" | "top" | "left" | "right";
-type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
 type Size = "sm" | "md" | "lg";
 
@@ -54,31 +54,11 @@ const TRAVEL: Record<Side, { swipe: string; offstage: string }> = {
 
 // only the edge that faces the page is rounded
 const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
-  bottom: { rounded: "btr:xxl", square: "", squircle: "btr:3xl cs:s" },
-  top: { rounded: "bbr:xxl", square: "", squircle: "bbr:3xl cs:s" },
-  left: { rounded: "brr:xxl", square: "", squircle: "brr:3xl cs:s" },
-  right: { rounded: "blr:xxl", square: "", squircle: "blr:3xl cs:s" },
+  bottom: { square: "", rounded: "btr:xxl", squircle: "btr:3xl cs:s", pill: "btr:3xl" },
+  top: { square: "", rounded: "bbr:xxl", squircle: "bbr:3xl cs:s", pill: "bbr:3xl" },
+  left: { square: "", rounded: "brr:xxl", squircle: "brr:3xl cs:s", pill: "brr:3xl" },
+  right: { square: "", rounded: "blr:xxl", squircle: "blr:3xl cs:s", pill: "blr:3xl" },
 };
-
-const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
-
-const HANDLE_SHAPES: Record<Shape, string> = {
-  rounded: "br:9999",
-  square: "",
-  squircle: "br:9999 cs:s",
-};
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BUTTON =
   "d:if ai:c jc:c g:2 bw:1 fw:500 tp:c tdu:150 ttf:io us:none bg:raised bs-o:key bc:rim c:label h:bg:well";
@@ -125,7 +105,10 @@ export interface DrawerProps {
    * scale as Button.
    */
   size?: Size;
-  /** Corner radius on the edge that faces the page, and on the buttons. */
+  /**
+   * Corner radius on the edge that faces the page, and on the buttons. Inherits
+   * the nearest `Shape`.
+   */
   shape?: Shape;
   /**
    * The slide in and out and the backdrop's fade. A swipe follows the finger
@@ -162,12 +145,13 @@ export default function DrawerBase({
   handle = true,
   showClose = false,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: DrawerProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const vertical = side === "bottom" || side === "top";
 
@@ -175,7 +159,7 @@ export default function DrawerBase({
     outline,
     BUTTON,
     SIZES[size],
-    BUTTON_SHAPES[shape],
+    RADIUS.control[shape],
   );
 
   const popupClasses = [
@@ -193,7 +177,7 @@ export default function DrawerBase({
   const grip = vertical && handle && (
     <div
       aria-hidden
-      className={`fs:0 w:12 h:1 mx:auto bg:line ${HANDLE_SHAPES[shape]}`}
+      className={`fs:0 w:12 h:1 mx:auto bg:line ${shape === "square" ? "" : "br:9999"}`}
     />
   );
 
@@ -228,7 +212,7 @@ export default function DrawerBase({
                     className={merge(
                       outline,
                       "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
-                      CLOSE_SHAPES[shape],
+                      RADIUS.item[shape],
                     )}
                   />
                 }

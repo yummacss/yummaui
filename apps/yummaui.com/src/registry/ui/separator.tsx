@@ -1,20 +1,13 @@
+"use client";
+
 import { Button } from "@base-ui/react/button";
 import { Separator } from "@base-ui/react/separator";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import { type Corner, FOCUS, RADIUS, shapeOf, useCorner } from "./style";
 
-type Shape = "rounded" | "square" | "squircle" | "circle";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  circle: "br:9999",
-};
 
 type Orientation = "horizontal" | "vertical";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 export interface SeparatorProps {
   /**
@@ -29,10 +22,11 @@ export interface SeparatorProps {
   /** Renders as plain text in the middle. Ignored if `icon` is set. */
   label?: ReactNode;
   /**
-   * Corner radius on the icon button, which is the only part with corners. Only
-   * visible alongside `icon`.
+   * Corner radius on the icon button, the only part with corners. Only visible
+   * alongside `icon`. Inherits the nearest `Shape`, where `pill` draws a
+   * circle.
    */
-  iconShape?: Shape;
+  iconShape?: Corner;
   /**
    * A vertical rule for a row layout, like a button group. Applies to the
    * `icon` and `label` forms too, which turn with it.
@@ -62,11 +56,12 @@ export default function SeparatorBase({
   onIconClick,
   iconLabel,
   label,
-  iconShape = "rounded",
+  iconShape: iconShapeProp,
   orientation = "horizontal",
   className,
   focus = true,
 }: SeparatorProps) {
+  const iconShape = useCorner(iconShapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const vertical = orientation === "vertical";
@@ -90,7 +85,7 @@ export default function SeparatorBase({
   const buttonClasses = merge(
     outline,
     "d:if ai:c jc:c w:8 h:8 bg:raised bs-o:key bc:rim c:label bw:1 tp:a tdu:150 ttf:io a:s:97 wc:s @prm:tp:none us:none c:p h:bg:well",
-    SHAPES[iconShape],
+    RADIUS.control[shapeOf(iconShape)],
   );
 
   const half = `fg:1 ${vertical ? "w:0" : "h:0"} ${line}`;

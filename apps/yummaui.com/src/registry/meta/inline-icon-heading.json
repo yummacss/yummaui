@@ -24,11 +24,11 @@
       "values": [
         "square",
         "rounded",
-        "pill",
-        "squircle"
+        "squircle",
+        "pill"
       ],
       "default": "rounded",
-      "description": "The corners of each chip & of the icon tile inside it."
+      "description": "The corners of each chip & of the icon tile inside it. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

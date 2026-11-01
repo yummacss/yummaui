@@ -6,12 +6,13 @@ import { IconCheck, IconSelector, IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+
+// a field of chips grows past one line, where a capsule turns into a blob
+const SHAPES = ["square", "rounded", "squircle"] as const;
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 
 export interface ComboboxItem {
   label: string;
@@ -24,7 +25,6 @@ export interface ComboboxGroup {
   items: ComboboxItem[];
 }
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 // the chips field outlines itself while its input has focus
 const FIELD_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
 
@@ -43,12 +43,6 @@ const CHIPS_SIZES: Record<Size, string> = {
   lg: "min-h:11 w:72 fs:md",
 };
 
-const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
-
 const POPUP_SIZES: Record<Size, string> = {
   sm: "w:56",
   md: "w:64",
@@ -59,27 +53,6 @@ const ACTION_HEIGHTS: Record<Size, string> = {
   sm: "h:8",
   md: "h:9",
   lg: "h:11",
-};
-
-// a chip sits inside the field, so it rounds one step less
-const CHIP_SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
-  square: "",
-  squircle: "br:md cs:s",
-  pill: "br:9999",
-};
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
 };
 
 const ACTION =
@@ -112,9 +85,10 @@ export interface ComboboxProps {
   size?: Size;
   /**
    * Corner radius, applied to the input and the popup together. `squircle` uses
-   * `corner-shape`.
+   * `corner-shape`. Inherits the nearest `Shape`; under one it does not take,
+   * `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
   /**
    * Allows more than one selection. Choices become removable chips under the
    * input.
@@ -172,7 +146,7 @@ function renderItem(item: ComboboxItem, shape: Shape) {
       key={item.label}
       value={item.label}
       className={(state) =>
-        `d:f ai:c g:2 min-h:8 py:1 px:3 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[cardOf(shape)]} fs:sm fw:400 us:none c:p ${
+        `d:f ai:c g:2 min-h:8 py:1 px:3 mx:1 bw:1 bc:transparent ${RADIUS.item[shape]} fs:sm fw:400 us:none c:p ${
           state.highlighted
             ? "bg:well c:label bc:transparent"
             : "bg:transparent"
@@ -211,7 +185,7 @@ export default function ComboboxBase({
   label,
   description,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   multiple = false,
   defaultValue,
   clearable = true,
@@ -224,6 +198,7 @@ export default function ComboboxBase({
   focus = true,
   container,
 }: ComboboxProps) {
+  const shape = useShape(shapeProp, SHAPES);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [open, setOpen] = useState(false);
@@ -241,7 +216,7 @@ export default function ComboboxBase({
     fieldOutline,
     "d:f fw:w ai:c g:1 py:1 pl:1 pr:16 bg:field bs-o:key bc:rim c:label bw:1",
     CHIPS_SIZES[size],
-    SHAPES[shape],
+    RADIUS.box[shape],
     className,
   );
 
@@ -249,13 +224,13 @@ export default function ComboboxBase({
     outline,
     INPUT,
     SIZES[size],
-    SHAPES[shape],
+    RADIUS.control[shape],
     className,
   );
 
   const popup = (
     <Combobox.Popup
-      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${POPUP_SIZES[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       {loading ? (
         <div
@@ -322,7 +297,7 @@ export default function ComboboxBase({
                   <>
                     <ChipList
                       chips={toChips(selected)}
-                      className={merge(CHIP, CHIP_SHAPES[shape])}
+                      className={merge(CHIP, RADIUS.chip[shape])}
                       animated={animated}
                     />
                   </>

@@ -5,9 +5,9 @@ import { ToggleGroup } from "@base-ui/react/toggle-group";
 import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 import { type ComponentType, useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Theme = "light" | "dark" | "system";
-type Shape = "rounded" | "square" | "squircle";
 type Size = "sm" | "md";
 
 const THEMES: {
@@ -19,21 +19,6 @@ const THEMES: {
   { value: "dark", label: "Dark", icon: IconMoon },
   { value: "system", label: "System", icon: IconDeviceDesktop },
 ];
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const TRACK_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-// one step under the track's own round, so the chip nests inside it
-const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xl cs:s",
-};
 
 const SIZES: Record<Size, string> = {
   sm: "h:7 px:2 g:1 fs:xs",
@@ -75,7 +60,7 @@ export interface ThemeSwitcherProps {
   /**
    * Corner radius of the track. The options nest one step inside it. `squircle`
    * uses `corner-shape`, which degrades to a rounded square where that is
-   * unsupported.
+   * unsupported. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /** Blocks every option and dims the control. */
@@ -105,11 +90,12 @@ export default function ThemeSwitcher({
   storageKey,
   iconOnly = false,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   disabled = false,
   className,
   focus = true,
 }: ThemeSwitcherProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [internal, setInternal] = useState<Theme>(defaultValue);
   const current = value ?? internal;
@@ -149,7 +135,7 @@ export default function ThemeSwitcher({
       disabled={disabled}
       className={merge(
         "d:f g:1 p:1 w:fc bg:well bs-o:sunk",
-        TRACK_SHAPES[shape],
+        RADIUS.bar[shape],
         disabled ? "o:60" : "",
         className,
       )}
@@ -165,7 +151,7 @@ export default function ThemeSwitcher({
               "d:f ai:c jc:c bw:1 fw:500 us:none tp:c tdu:150 ttf:io @prm:tp:none",
               disabled ? "c:na" : "c:p",
               iconOnly ? ICON_ONLY[size] : SIZES[size],
-              ITEM_SHAPES[shape],
+              RADIUS.item[shape],
               state.pressed ? PICKED : UNPICKED,
             )
           }

@@ -1,11 +1,12 @@
+"use client";
+
 import { IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle" | "pill";
 type Size = "sm" | "md" | "lg";
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 type Separator = "chevron" | "slash";
 
 const SIZES: Record<Size, string> = {
@@ -18,13 +19,6 @@ const SEPARATOR_SIZES: Record<Size, string> = {
   sm: "w:4 h:4",
   md: "w:5 h:5",
   lg: "w:6 h:6",
-};
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
 };
 
 export interface BreadcrumbItem {
@@ -44,7 +38,10 @@ export interface BreadcrumbProps {
   items: BreadcrumbItem[];
   /** Wraps the trail in a bordered card. */
   bordered?: boolean;
-  /** Corner radius. Only visible when `bordered` is set. */
+  /**
+   * Corner radius. Only visible when `bordered` is set. Inherits the nearest
+   * `Shape`.
+   */
   shape?: Shape;
   /** Text size of every item. */
   size?: Size;
@@ -72,12 +69,13 @@ export interface BreadcrumbProps {
 export default function BreadcrumbBase({
   items,
   bordered = false,
-  shape = "rounded",
+  shape: shapeProp,
   size = "md",
   separator = "chevron",
   className,
   focus = true,
 }: BreadcrumbProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const navClasses = merge(
@@ -85,7 +83,7 @@ export default function BreadcrumbBase({
     bordered
       ? "px:3 py:2 bg:raised bs-o:key bc:rim bw:1"
       : "",
-    bordered ? SHAPES[shape] : "",
+    bordered ? RADIUS.control[shape] : "",
     className,
   );
 
@@ -94,6 +92,7 @@ export default function BreadcrumbBase({
   const currentClasses = [
     SIZES[size],
     "px:2 py:1 bw:1 bg:raised bs-o:key bc:rim fw:500 c:label",
+    RADIUS.chip[shape],
   ]
     .filter(Boolean)
     .join(" ");

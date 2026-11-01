@@ -5,17 +5,12 @@ import { IconAlertTriangle, IconCheck } from "@tabler/icons-react";
 import type { ChangeEvent, ComponentProps } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle";
+// a capsule turns into a blob past one line
+const SHAPES = ["square", "rounded", "squircle"] as const;
+
 type Status = "default" | "error" | "success";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
 
 const STATUS_BORDER: Record<Status, string> = {
   default: "bc:rim",
@@ -78,9 +73,10 @@ export interface TextareaProps
   maxLength?: number;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
+   * square where that is unsupported. Inherits the nearest `Shape`; under one
+   * it does not take, `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
   /** Called on every input event. */
   onChange?: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   /**
@@ -109,7 +105,7 @@ export default function TextareaBase({
   error,
   success,
   maxLength,
-  shape = "rounded",
+  shape: shapeProp,
   disabled,
   className,
   focus = true,
@@ -118,6 +114,7 @@ export default function TextareaBase({
   value: controlledValue,
   ...props
 }: TextareaProps) {
+  const shape = useShape(shapeProp, SHAPES);
   const [internalValue, setInternalValue] = useState(
     String(defaultValue ?? controlledValue ?? ""),
   );
@@ -142,7 +139,7 @@ export default function TextareaBase({
     outline,
     "h:24 w:100% py:2 pl:3 bg:field bs-o:key c:label bw:1 fs:sm r:none",
     status !== "default" ? "pr:10" : "pr:3",
-    SHAPES[shape],
+    RADIUS.box[shape],
     STATUS_BORDER[status],
     className,
   );

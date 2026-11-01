@@ -6,12 +6,10 @@ import { Select } from "@base-ui/react/select";
 import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconSide = "leading" | "trailing";
 
 export interface SelectOption {
@@ -26,8 +24,6 @@ export interface SelectGroup {
   items: SelectOption[];
 }
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
 const TRIGGER =
   "d:f ai:c jc:sb bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p";
 
@@ -37,29 +33,10 @@ const SIZES: Record<Size, string> = {
   lg: "h:11 w:72 px:3 fs:md",
 };
 
-const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
-
 const POPUP_SIZES: Record<Size, string> = {
   sm: "w:56",
   md: "w:64",
   lg: "w:72",
-};
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:xxl cs:s",
 };
 
 function isGroupEntry(entry: SelectOption | SelectGroup): entry is SelectGroup {
@@ -80,7 +57,7 @@ function renderOption(option: SelectOption, shape: Shape) {
       key={option.value}
       value={option.value}
       className={(state) =>
-        `d:f ai:c g:2 h:8 px:2 mx:1 bw:1 bc:transparent ${ITEM_SHAPES[cardOf(shape)]} fs:sm fw:400 us:none c:p c:label ${
+        `d:f ai:c g:2 h:8 px:2 mx:1 bw:1 bc:transparent ${RADIUS.item[shape]} fs:sm fw:400 us:none c:p c:label ${
           state.highlighted ? "bg:well" : "bg:transparent"
         }`
       }
@@ -153,7 +130,7 @@ export interface SelectProps {
   size?: Size;
   /**
    * Corner radius, applied to the trigger and the popup together. `squircle`
-   * uses `corner-shape`.
+   * uses `corner-shape`. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -199,7 +176,7 @@ export default function SelectBase({
   value,
   onValueChange,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   icon,
   iconPosition = "leading",
   disabled = false,
@@ -208,6 +185,7 @@ export default function SelectBase({
   focus = true,
   container,
 }: SelectProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [open, setOpen] = useState(false);
@@ -221,7 +199,7 @@ export default function SelectBase({
     outline,
     TRIGGER,
     SIZES[size],
-    SHAPES[shape],
+    RADIUS.control[shape],
     open ? "bg:well" : "",
     className,
   );
@@ -254,7 +232,7 @@ export default function SelectBase({
 
   const popup = (
     <Select.Popup
-      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:pop bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:pop bw:1 ${POPUP_SIZES[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       <Select.List className="p:r min-h:0 o:auto">
         {options.map((entry) =>

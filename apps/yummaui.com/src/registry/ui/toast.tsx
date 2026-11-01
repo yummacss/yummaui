@@ -6,35 +6,9 @@ import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle";
 type TriggerTone = "neutral" | "danger";
-
-const TOAST_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const ACTION_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
-
-const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:9999",
-  square: "",
-  squircle: "br:lg cs:s",
-};
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const RAISED =
   "bg:raised bs-o:key bc:rim c:label h:bg:well";
@@ -110,7 +84,8 @@ export interface ToastProps {
   triggerTone?: TriggerTone;
   /**
    * Corner radius of the toast and its buttons. `squircle` uses `corner-shape`,
-   * which degrades to a rounded square where that is unsupported.
+   * which degrades to a rounded square where that is unsupported. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -147,12 +122,13 @@ export default function ToastBase({
   timeout = 5000,
   limit = 3,
   triggerTone = "neutral",
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: ToastProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const triggerOutline =
     focus && triggerTone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
@@ -164,7 +140,7 @@ export default function ToastBase({
           triggerOutline,
           "d:if ai:c g:2 px:4 py:2 fs:sm",
           BUTTON_BASE,
-          BUTTON_SHAPES[shape],
+          RADIUS.control[shape],
           TRIGGER_TONES[triggerTone],
           className,
         )}
@@ -285,7 +261,7 @@ function Item({
         merge(
           outline,
           "p:a r:0 b:0 w:100% bg:raised bc:line bw:1 bs-o:pop us:none",
-          TOAST_SHAPES[shape],
+          RADIUS.popup[shape],
           animated ? "tp:a tdu:500 ttf:out-quart @prm:tp:none" : "",
           shaking ? "an:shake adu:500 atf:io @prm:an:none" : "",
           state.transitionStatus === "ending" || state.limited ? "o:0" : "",
@@ -314,7 +290,7 @@ function Item({
             outline,
             "fs:0 px:3 py:1 fs:xs",
             BUTTON_BASE,
-            ACTION_SHAPES[shape],
+            RADIUS.item[shape],
             RAISED,
           )}
         />
@@ -325,7 +301,7 @@ function Item({
               className={merge(
                 outline,
                 "d:f fs:0 ai:c jc:c w:7 h:7 p:0 c:hint bw:0 bg:transparent c:p h:bg:well h:c:hint",
-                CLOSE_SHAPES[shape],
+                RADIUS.item[shape],
               )}
             />
           }

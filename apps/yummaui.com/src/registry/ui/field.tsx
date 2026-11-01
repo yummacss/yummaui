@@ -5,9 +5,9 @@ import { Toggle } from "@base-ui/react/toggle";
 import { IconAlertTriangle, IconCheck, IconEye, IconEyeOff } from "@tabler/icons-react";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, FOCUS_WITHIN, RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 type IconSide = "leading" | "trailing";
 type Status = "default" | "error" | "success";
 
@@ -17,20 +17,10 @@ const SIZES: Record<Size, string> = {
   lg: "h:11 w:72",
 };
 
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
 const ICON_PADDING: Record<IconSide, string> = {
   leading: "pl:9 pr:3",
   trailing: "pl:3 pr:9",
 };
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-const FOCUS_WITHIN = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
 
 const STATUS_BORDER: Record<Status, string> = {
   default: "bc:rim",
@@ -103,7 +93,7 @@ export interface FieldProps
   size?: Size;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
+   * square where that is unsupported. Inherits the nearest `Shape`.
    */
   shape?: Shape;
 
@@ -154,7 +144,7 @@ export default function FieldBase({
   invalid = false,
   success,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   icon,
   iconPosition = "leading",
   iconInteractive = false,
@@ -168,6 +158,7 @@ export default function FieldBase({
   type,
   ...props
 }: FieldProps) {
+  const shape = useShape(shapeProp);
   const [revealed, setRevealed] = useState(false);
   // what the border says, and what the icon & message say: invalid only colors
   const marked: Status = error ? "error" : success ? "success" : "default";
@@ -208,7 +199,7 @@ export default function FieldBase({
     outline,
     "bg:field bs-o:key c:label bw:1 fs:sm",
     SIZES[size],
-    SHAPES[shape],
+    RADIUS.control[shape],
     STATUS_BORDER[status],
     showDecorativeIcon || marked !== "default"
       ? ICON_PADDING[activeSide]
@@ -227,7 +218,7 @@ export default function FieldBase({
       : "",
     "d:f ai:c g:2 px:3 bg:field bs-o:key bw:1 fs:sm",
     SIZES[size],
-    SHAPES[shape],
+    RADIUS.control[shape],
     STATUS_BORDER[status],
     className,
   );

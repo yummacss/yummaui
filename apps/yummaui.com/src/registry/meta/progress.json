@@ -38,12 +38,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
-        "squircle"
+        "rounded",
+        "squircle",
+        "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on both the track and the indicator."
+      "description": "Corner radius on both the track and the indicator. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

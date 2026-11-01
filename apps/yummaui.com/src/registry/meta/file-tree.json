@@ -56,12 +56,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
-        "squircle"
+        "rounded",
+        "squircle",
+        "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the tree and on each row."
+      "description": "Corner radius on the tree and on each row. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

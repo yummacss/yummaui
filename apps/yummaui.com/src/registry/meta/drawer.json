@@ -101,12 +101,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
-        "squircle"
+        "rounded",
+        "squircle",
+        "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the edge that faces the page, and on the buttons."
+      "description": "Corner radius on the edge that faces the page, and on the buttons. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

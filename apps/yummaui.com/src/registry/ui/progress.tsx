@@ -3,14 +3,7 @@
 import { Progress } from "@base-ui/react/progress";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-
-type Shape = "rounded" | "square" | "squircle";
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:9999",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
+import { RADIUS, useShape, type Shape } from "./style";
 
 export interface ProgressProps {
   /**
@@ -29,7 +22,10 @@ export interface ProgressProps {
    * 100. Needs `animated`, and stops under reduced motion.
    */
   shimmer?: boolean;
-  /** Corner radius on both the track and the indicator. */
+  /**
+   * Corner radius on both the track and the indicator. Inherits the nearest
+   * `Shape`.
+   */
   shape?: Shape;
   /**
    * The indicator's width transition as `value` changes. Indeterminate progress
@@ -48,16 +44,17 @@ export default function ProgressBase({
   value,
   label,
   shimmer = false,
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
 }: ProgressProps) {
+  const shape = useShape(shapeProp);
   const isIndeterminate = value === null;
   const sweeps = shimmer && animated && !isIndeterminate && value < 100;
 
   const rootClasses = merge("d:f fd:c g:2 w:64", className);
 
-  const trackClasses = ["o:h h:2 bg:line bs-o:sunk", SHAPES[shape]]
+  const trackClasses = ["o:h h:2 bg:line bs-o:sunk", RADIUS.track[shape]]
     .filter(Boolean)
     .join(" ");
 
@@ -74,7 +71,7 @@ export default function ProgressBase({
           <Progress.Indicator
             className={[
               "h:100% w:100% bg:fill an:slide adu:1000 atf:io aic:i @prm:an:none",
-              SHAPES[shape],
+              RADIUS.track[shape],
             ]
               .filter(Boolean)
               .join(" ")}
@@ -86,7 +83,7 @@ export default function ProgressBase({
                 "h:100%",
                 sweeps ? "o:h" : "",
                 animated ? "tp:w tdu:500 ttf:eo" : "",
-                SHAPES[shape],
+                RADIUS.track[shape],
                 state.status === "complete" ? "bg:green" : "bg:fill",
               ]
                 .filter(Boolean)

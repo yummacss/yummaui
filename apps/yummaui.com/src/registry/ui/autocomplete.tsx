@@ -4,12 +4,10 @@ import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Avatar } from "@base-ui/react/avatar";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconSide = "leading" | "trailing";
 
 export interface AutocompleteItem {
@@ -24,8 +22,6 @@ export interface AutocompleteGroup {
   items: AutocompleteItem[];
 }
 
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
-
 const INPUT =
   "bg:field bs-o:key bc:rim c:label bw:1 fs:sm";
 
@@ -35,29 +31,10 @@ const SIZES: Record<Size, string> = {
   lg: "h:11 w:72",
 };
 
-const ITEM_SHAPES: Record<Card, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
-
 const POPUP_SIZES: Record<Size, string> = {
   sm: "w:56",
   md: "w:64",
   lg: "w:72",
-};
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
 };
 
 const ICON_PADDING: Record<IconSide, string> = {
@@ -97,7 +74,7 @@ export interface AutocompleteProps {
   size?: Size;
   /**
    * Corner radius, applied to the input and the popup together. `squircle` uses
-   * `corner-shape`.
+   * `corner-shape`. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -172,7 +149,7 @@ function renderItem(item: AutocompleteItem, shape: Shape, query: string) {
       render={(props, state) => (
         <div
           {...props}
-          className={`d:f ai:c g:3 min-h:8 py:1 px:3 mx:1 bw:1 bc:transparent c:label ${ITEM_SHAPES[cardOf(shape)]} fs:sm us:none c:p ${
+          className={`d:f ai:c g:3 min-h:8 py:1 px:3 mx:1 bw:1 bc:transparent c:label ${RADIUS.item[shape]} fs:sm us:none c:p ${
             state.highlighted
               ? "bg:well c:label bc:transparent"
               : "bg:transparent"
@@ -219,7 +196,7 @@ export default function AutocompleteBase({
   label,
   description,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   icon,
   iconPosition = "leading",
   disabled = false,
@@ -234,6 +211,7 @@ export default function AutocompleteBase({
   focus = true,
   container,
 }: AutocompleteProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [open, setOpen] = useState(false);
@@ -248,14 +226,14 @@ export default function AutocompleteBase({
     outline,
     INPUT,
     SIZES[size],
-    SHAPES[shape],
+    RADIUS.control[shape],
     icon ? ICON_PADDING[iconPosition] : "pl:4",
     className,
   );
 
   const popup = (
     <Autocomplete.Popup
-      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${POPUP_SIZES[size]} ${POPUP_SHAPES[cardOf(shape)]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${POPUP_SIZES[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       {loading ? (
         <div

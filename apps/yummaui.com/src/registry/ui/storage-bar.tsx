@@ -5,8 +5,7 @@ import { IconCircleDashed } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
-
-type Shape = "rounded" | "square" | "squircle";
+import { RADIUS, useShape, type Shape } from "./style";
 
 // one hue per category, in order; a sixth repeats the last
 const TONES = [
@@ -16,24 +15,6 @@ const TONES = [
   { bar: "bg:yellow", ink: "c:yellow" },
   { bar: "bg:indigo", ink: "c:indigo" },
 ];
-
-const CARD_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const TILE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-};
-
-const TRACK_SHAPES: Record<Shape, string> = {
-  rounded: "br:9999",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
 
 export interface StorageCategory {
   /** Its name in the legend. */
@@ -58,7 +39,10 @@ export interface StorageBarProps {
   label?: string;
   /** Names the empty part of the track in the legend. */
   rest?: string;
-  /** Corner radius on the card, the track and the icon tiles. */
+  /**
+   * Corner radius on the card, the track and the icon tiles. Inherits the
+   * nearest `Shape`.
+   */
   shape?: Shape;
   /**
    * The numbers counting up and the shares growing in when it first shows. Turn
@@ -107,10 +91,11 @@ export default function StorageBar({
   unit = "GB",
   label = "Storage",
   rest = "Free",
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
 }: StorageBarProps) {
+  const shape = useShape(shapeProp);
   const progress = useArrival(animated);
   const used = categories.reduce((sum, entry) => sum + entry.value, 0);
   const amount = (count: number) => (Math.round(count * 10) / 10).toFixed(1);
@@ -123,7 +108,7 @@ export default function StorageBar({
       getAriaValueText={() => `${amount(used)} of ${amount(max)} ${unit} used`}
       className={merge(
         "d:f fd:c g:4 w:80 max-w:100% p:5 bg:raised bs-o:key c:label fvn:tn bw:1 bc:rim",
-        CARD_SHAPES[shape],
+        RADIUS.popup[shape],
         className,
       )}
     >
@@ -142,7 +127,7 @@ export default function StorageBar({
       <Meter.Track
         className={merge(
           "d:f g:px h:3 o:h bg:line bc:rim bw:1 bs-o:sunk",
-          TRACK_SHAPES[shape],
+          RADIUS.track[shape],
         )}
       >
         {categories.map((entry, index) => (
@@ -161,7 +146,7 @@ export default function StorageBar({
               aria-hidden
               className={merge(
                 "d:f ai:c jc:c fs:0 w:4 h:4",
-                TILE_SHAPES[shape],
+                RADIUS.item[shape],
                 tone(index).ink,
               )}
             >
@@ -180,7 +165,7 @@ export default function StorageBar({
             aria-hidden
             className={merge(
               "d:f ai:c jc:c fs:0 w:4 h:4",
-              TILE_SHAPES[shape],
+              RADIUS.item[shape],
             )}
           >
             <IconCircleDashed className="w:4 h:4 c:hint" />

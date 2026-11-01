@@ -5,12 +5,10 @@ import { OTPField } from "@base-ui/react/otp-field";
 import type { ComponentProps } from "react";
 import { Fragment } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
 type ValidationType = "numeric" | "alpha" | "alphanumeric";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const SLOT =
   "p:0 bw:1 bg:field bs-o:key bc:rim c:label ta:c fw:500 tp:c tdu:150 ttf:io";
@@ -19,12 +17,6 @@ const SLOT_SIZES: Record<Size, string> = {
   sm: "w:8 h:9 fs:md",
   md: "w:9 h:11 fs:lg",
   lg: "w:11 h:13 fs:xl",
-};
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
 };
 
 export interface OTPFieldProps
@@ -56,7 +48,8 @@ export interface OTPFieldProps
   size?: Size;
   /**
    * Corner radius on each slot. `squircle` uses `corner-shape`, which degrades
-   * to a rounded square where that is unsupported.
+   * to a rounded square where that is unsupported. Inherits the nearest
+   * `Shape`.
    */
   shape?: Shape;
   /** Blocks input and dims the whole field, label included. */
@@ -91,13 +84,14 @@ export default function OTPFieldBase({
   validationType = "numeric",
   mask = false,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   disabled = false,
   required = false,
   focus = true,
   className,
   ...props
 }: OTPFieldProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const slots = Array.from({ length }, (_, index) => index);
 
@@ -131,7 +125,7 @@ export default function OTPFieldBase({
                 outline,
                 SLOT,
                 SLOT_SIZES[size],
-                SHAPES[shape],
+                RADIUS.control[shape],
                 className,
               )}
             />

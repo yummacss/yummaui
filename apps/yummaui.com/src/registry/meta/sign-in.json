@@ -47,13 +47,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the card, its fields and its buttons."
+      "description": "Corner radius of the card, its fields and its buttons. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

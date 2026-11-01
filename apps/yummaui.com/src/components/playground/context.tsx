@@ -15,7 +15,7 @@ import { getRegistryMeta, type RegistryMeta } from "@/registry";
 import { DEFAULT_ACCENT, isAccent } from "@/utils/accent";
 import { prefetchRegistry } from "@/utils/prefetch-registry";
 import type { Scheme } from "@/utils/scheme";
-import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
+import { DEFAULT_SHAPE, readShape, SHAPES } from "@/utils/shapes.mjs";
 
 const SHAPE_QUERY = parseAsStringLiteral(SHAPES as [string, ...string[]])
 	.withDefault(DEFAULT_SHAPE)
@@ -94,7 +94,7 @@ export function PlaygroundProvider({
 		DEFAULT_SHAPE,
 		STORED,
 	);
-	const shape = SHAPES.includes(storedShape) ? storedShape : DEFAULT_SHAPE;
+	const shape = readShape(storedShape) ?? DEFAULT_SHAPE;
 	const [, setShapeQuery] = useQueryState("shape", SHAPE_QUERY);
 
 	const setShape = useCallback(
@@ -107,8 +107,10 @@ export function PlaygroundProvider({
 
 	// a shape in the address wins, and is kept for the pages after it
 	useEffect(() => {
-		const asked = new URLSearchParams(window.location.search).get("shape");
-		if (asked && SHAPES.includes(asked)) setStoredShape(asked);
+		const asked = readShape(
+			new URLSearchParams(window.location.search).get("shape"),
+		);
+		if (asked) setStoredShape(asked);
 	}, [id, setStoredShape]);
 
 	// the neighbours too, so the pagination arrows land on a component that is ready

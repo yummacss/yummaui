@@ -117,13 +117,13 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "rounded",
         "square",
+        "rounded",
         "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the popup and its buttons."
+      "description": "Corner radius on the popup and its buttons. Inherits the nearest `Shape`."
     },
     {
       "name": "animated",

@@ -6,12 +6,10 @@ import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Tone = "danger" | "neutral";
-type Shape = "rounded" | "square" | "squircle" | "pill";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
-type Card = Exclude<Shape, "pill">;
-const cardOf = (shape: Shape): Card => (shape === "pill" ? "rounded" : shape);
 type IconPosition = "leading" | "trailing";
 type Size = "sm" | "md" | "lg";
 
@@ -20,35 +18,6 @@ const SIZES: Record<Size, string> = {
   md: "px:4 py:2 fs:sm",
   lg: "px:6 py:3 fs:md",
 };
-
-const POPUP_SHAPES: Record<Card, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const BADGE_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const BUTTON_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-  pill: "br:9999",
-};
-
-const CLOSE_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:lg cs:s",
-  pill: "br:9999",
-};
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
@@ -110,7 +79,7 @@ export interface AlertDialogProps {
   size?: Size;
   /**
    * Corner radius on the popup, the badge and the buttons. `square` squares off
-   * the badge too.
+   * the badge too. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -151,12 +120,13 @@ export default function AlertDialogBase({
   onConfirm,
   showClose = true,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   animated = true,
   className,
   focus = true,
   container,
 }: AlertDialogProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const triggerOutline =
     focus && triggerTone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
@@ -172,14 +142,14 @@ export default function AlertDialogBase({
     triggerOutline,
     "d:if ai:c g:2",
     base,
-    BUTTON_SHAPES[shape],
+    RADIUS.control[shape],
     TONE_BUTTON[triggerTone],
     className,
   );
 
   const popupClasses = [
     "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
-    POPUP_SHAPES[cardOf(shape)],
+    RADIUS.popup[shape],
   ]
     .filter(Boolean)
     .join(" ");
@@ -187,7 +157,7 @@ export default function AlertDialogBase({
   const badgeClasses = [
     "d:f ai:c jc:c w:12 h:12",
     TONE_BADGE[tone],
-    BADGE_SHAPES[shape],
+    RADIUS.control[shape],
   ]
     .filter(Boolean)
     .join(" ");
@@ -195,14 +165,14 @@ export default function AlertDialogBase({
   const cancelClasses = merge(
     outline,
     base,
-    BUTTON_SHAPES[shape],
+    RADIUS.control[shape],
     TONE_BUTTON.neutral,
   );
 
   const confirmClasses = merge(
     confirmOutline,
     base,
-    BUTTON_SHAPES[shape],
+    RADIUS.control[shape],
     TONE_BUTTON[tone],
   );
 
@@ -229,7 +199,7 @@ export default function AlertDialogBase({
                   className={merge(
                     outline,
                     "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
-                    CLOSE_SHAPES[shape],
+                    RADIUS.item[shape],
                   )}
                 />
               }

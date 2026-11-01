@@ -6,33 +6,9 @@ import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape, type Shape } from "./style";
 
-type Shape = "rounded" | "square" | "squircle";
 type IconPosition = "leading" | "trailing";
-
-const BAR_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const TRIGGER_SHAPES: Record<Shape, string> = {
-  rounded: "br:lg",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
-
-const POPUP_SHAPES: Record<Shape, string> = {
-  rounded: "br:xl",
-  square: "",
-  squircle: "br:3xl cs:s",
-};
-
-const ITEM_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xxl cs:s",
-};
 
 export interface MenubarAction {
   type?: "item";
@@ -104,6 +80,7 @@ export interface MenubarProps {
   menus: MenubarMenu[];
   /**
    * Corner radius on the bar, its buttons, the popups and their items together.
+   * Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -134,22 +111,23 @@ export interface MenubarProps {
  */
 export default function MenubarBase({
   menus,
-  shape = "rounded",
+  shape: shapeProp,
   icon = true,
   iconPosition = "leading",
   animated = true,
   className,
   container,
 }: MenubarProps) {
+  const shape = useShape(shapeProp);
   const barClasses = merge(
     "d:f g:1 p:1 bg:raised bs-o:key bc:rim bw:1",
-    BAR_SHAPES[shape],
+    RADIUS.bar[shape],
     className,
   );
 
   const popupClasses = [
     "py:1 min-w:52 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:pop",
-    POPUP_SHAPES[shape],
+    RADIUS.popup[shape],
   ]
     .filter(Boolean)
     .join(" ");
@@ -157,7 +135,7 @@ export default function MenubarBase({
   const triggerClasses = (disabled: boolean) => (state: { open: boolean }) =>
     [
       "d:if ai:c h:8 px:3 py:0 fs:sm fw:500 us:none bw:0 bg:transparent",
-      TRIGGER_SHAPES[shape],
+      RADIUS.control[shape],
       disabled ? "c:hint o:60 c:na" : "c:label c:p h:bg:well",
       !disabled && state.open ? "bg:well" : "",
     ]
@@ -170,7 +148,7 @@ export default function MenubarBase({
       [
         "d:f ai:c g:2 h:8 pl:2 pr:3 fs:sm fw:400 us:none c:p mx:1 os:none bw:1 bc:transparent",
         spread ? "jc:sb" : "",
-        ITEM_SHAPES[shape],
+        RADIUS.item[shape],
         destructive ? "c:red" : "",
         state.highlighted
           ? destructive

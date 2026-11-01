@@ -5,8 +5,7 @@ import { IconStarFilled } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
+import { FOCUS } from "./style";
 
 export interface RatingIcon {
   icon: ReactNode;

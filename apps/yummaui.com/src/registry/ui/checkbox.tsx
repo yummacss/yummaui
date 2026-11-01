@@ -5,11 +5,9 @@ import { IconCheck, IconMinus } from "@tabler/icons-react";
 import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md" | "lg";
-type Shape = "rounded" | "square" | "squircle";
-
-const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 const BOX = "d:f ai:c jc:c fs:0";
 
@@ -36,19 +34,6 @@ const LINE: Record<Size, string> = {
   sm: "h:4",
   md: "h:5",
   lg: "h:6",
-};
-
-const SHAPES: Record<Shape, string> = {
-  rounded: "br:sm",
-  square: "br:0",
-  squircle: "br:xxl cs:s",
-};
-
-// a row sits inside Checkbox Group's well, so it rounds one step less
-const ROW_SHAPES: Record<Shape, string> = {
-  rounded: "br:md",
-  square: "",
-  squircle: "br:xl cs:s",
 };
 
 const CHECKED =
@@ -84,7 +69,7 @@ export interface CheckboxProps
   size?: Size;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported.
+   * square where that is unsupported. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**
@@ -118,7 +103,7 @@ export default function CheckboxBase({
   aside,
   row = false,
   size = "md",
-  shape = "rounded",
+  shape: shapeProp,
   disabled = false,
   checked: controlledChecked,
   defaultChecked,
@@ -128,6 +113,7 @@ export default function CheckboxBase({
   focus = true,
   ...props
 }: CheckboxProps) {
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [internalChecked, setInternalChecked] = useState(
@@ -169,7 +155,7 @@ export default function CheckboxBase({
           merge(
             outline,
             "d:f ai:c g:3 w:100% px:2 py:2 bw:1 us:none tp:c tdu:150 ttf:io",
-            ROW_SHAPES[shape],
+            RADIUS.item[shape],
             disabled ? "o:60 c:na" : "c:p",
             state.checked
               ? "bg:raised bs-o:key bc:rim"
@@ -183,7 +169,7 @@ export default function CheckboxBase({
               className={merge(
                 BOX,
                 SIZES[size],
-                SHAPES[shape],
+                RADIUS.mark[shape],
                 state.checked || state.indeterminate ? CHECKED : UNCHECKED,
               )}
             >
@@ -215,7 +201,7 @@ export default function CheckboxBase({
               outline,
               BOX,
               SIZES[size],
-              SHAPES[shape],
+              RADIUS.mark[shape],
               state.checked || state.indeterminate ? CHECKED : UNCHECKED,
               className,
             )
