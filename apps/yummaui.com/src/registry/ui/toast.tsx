@@ -6,22 +6,10 @@ import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import ButtonBase from "./button";
 import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type TriggerTone = "neutral" | "danger";
-
-const RAISED =
-  "bg:raised bs-o:key bc:rim c:label h:bg:well";
-
-const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
-
-const TRIGGER_TONES: Record<TriggerTone, string> = {
-  neutral: RAISED,
-  danger:
-    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
-};
-
-const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none c:p";
 
 // a collapsed toast peeks out under the one in front and shrinks with depth
 const STACK = {
@@ -130,20 +118,14 @@ export default function ToastBase({
 }: ToastProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
-  const triggerOutline =
-    focus && triggerTone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
 
   return (
     <Toast.Provider timeout={timeout} limit={limit}>
       <Trigger
-        className={merge(
-          triggerOutline,
-          "d:if ai:c g:2 px:4 py:2 fs:sm",
-          BUTTON_BASE,
-          RADIUS.control[shape],
-          TRIGGER_TONES[triggerTone],
-          className,
-        )}
+        variant={triggerTone === "danger" ? "danger" : "secondary"}
+        shape={shape}
+        focus={focus}
+        className={className}
         title={title}
         description={description}
         actionLabel={actionLabel}
@@ -161,14 +143,21 @@ export default function ToastBase({
 }
 
 function Trigger({
+  variant,
+  shape,
+  focus,
   className,
   title,
   description,
   actionLabel,
   onAction,
   children,
-}: Pick<ToastProps, "title" | "description" | "actionLabel" | "onAction"> & {
-  className: string;
+}: Pick<
+  ToastProps,
+  "title" | "description" | "actionLabel" | "onAction" | "focus" | "className"
+> & {
+  variant: "secondary" | "danger";
+  shape: Shape;
   children: ReactNode;
 }) {
   const manager = Toast.useToastManager();
@@ -199,9 +188,15 @@ function Trigger({
     raised.current = { id, attempt: 0 };
   };
   return (
-    <Button className={className} onClick={raise}>
+    <ButtonBase
+      variant={variant}
+      shape={shape}
+      focus={focus}
+      className={className}
+      onClick={raise}
+    >
       {children}
-    </Button>
+    </ButtonBase>
   );
 }
 
@@ -286,13 +281,15 @@ function Item({
           <Toast.Description className="m:0 tw:p c:hint fs:sm" />
         </div>
         <Toast.Action
-          className={merge(
-            outline,
-            "fs:0 px:3 py:1 fs:xs",
-            BUTTON_BASE,
-            RADIUS.item[shape],
-            RAISED,
-          )}
+          render={
+            <ButtonBase
+              variant="secondary"
+              size="sm"
+              shape={shape}
+              focus={outline !== ""}
+              className="fs:0"
+            />
+          }
         />
         <Toast.Close
           aria-label="Dismiss"

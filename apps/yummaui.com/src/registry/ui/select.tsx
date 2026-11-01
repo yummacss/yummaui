@@ -6,9 +6,8 @@ import { Select } from "@base-ui/react/select";
 import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
-type Size = "sm" | "md" | "lg";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconSide = "leading" | "trailing";
 
@@ -31,12 +30,6 @@ const SIZES: Record<Size, string> = {
   sm: "h:8 w:56 px:3 fs:sm",
   md: "h:9 w:64 px:3 fs:sm",
   lg: "h:11 w:72 px:3 fs:md",
-};
-
-const POPUP_SIZES: Record<Size, string> = {
-  sm: "w:56",
-  md: "w:64",
-  lg: "w:72",
 };
 
 function isGroupEntry(entry: SelectOption | SelectGroup): entry is SelectGroup {
@@ -232,7 +225,7 @@ export default function SelectBase({
 
   const popup = (
     <Select.Popup
-      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:pop bw:1 ${POPUP_SIZES[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`d:f fd:c o:h max-h:var(--available-height) py:1 bg:raised bc:line bs-o:pop bw:1 ${SIZE.width[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       <Select.List className="p:r min-h:0 o:auto">
         {options.map((entry) =>

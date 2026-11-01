@@ -5,9 +5,8 @@ import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { cloneElement, isValidElement, useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
-type Size = "sm" | "md" | "lg";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconPosition = "leading" | "trailing";
 

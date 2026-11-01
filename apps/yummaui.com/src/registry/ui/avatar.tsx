@@ -2,8 +2,8 @@ import { Avatar } from "@base-ui/react/avatar";
 import { IconRosetteDiscountCheck, IconUser } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
+import type { Size } from "./style";
 
-type Size = "sm" | "md" | "lg";
 type Status = "none" | "online" | "offline" | "busy";
 type Tint = "blue" | "mint" | "indigo" | "slate";
 

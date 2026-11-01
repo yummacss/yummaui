@@ -662,6 +662,15 @@ describe("Yumma UI registry", () => {
 		expect(wrong).toEqual([]);
 	});
 
+	it("takes the size scale from style.tsx", () => {
+		const own = componentFiles().filter((id) =>
+			/^type Size = "sm" \| "md" \| "lg";$/m.test(
+				readFileSync(join(registryDir, `${id}.tsx`), "utf-8"),
+			),
+		);
+		expect(own).toEqual([]);
+	});
+
 	it("declares one focus outline, in style.tsx", () => {
 		const copies = componentFiles().filter((id) =>
 			readFileSync(join(registryDir, `${id}.tsx`), "utf-8").includes(

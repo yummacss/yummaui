@@ -6,12 +6,11 @@ import { IconCheck, IconSelector, IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
 // a field of chips grows past one line, where a capsule turns into a blob
 const SHAPES = ["square", "rounded", "squircle"] as const;
 
-type Size = "sm" | "md" | "lg";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 
 export interface ComboboxItem {
@@ -31,22 +30,10 @@ const FIELD_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
 const INPUT =
   "pl:4 pr:16 bg:field bs-o:key bc:rim c:label bw:1 fs:sm";
 
-const SIZES: Record<Size, string> = {
-  sm: "h:8 w:56",
-  md: "h:9 w:64",
-  lg: "h:11 w:72",
-};
-
 const CHIPS_SIZES: Record<Size, string> = {
   sm: "min-h:8 w:56 fs:sm",
   md: "min-h:9 w:64 fs:sm",
   lg: "min-h:11 w:72 fs:md",
-};
-
-const POPUP_SIZES: Record<Size, string> = {
-  sm: "w:56",
-  md: "w:64",
-  lg: "w:72",
 };
 
 const ACTION_HEIGHTS: Record<Size, string> = {
@@ -223,14 +210,15 @@ export default function ComboboxBase({
   const inputClasses = merge(
     outline,
     INPUT,
-    SIZES[size],
+    SIZE.height[size],
+    SIZE.width[size],
     RADIUS.control[shape],
     className,
   );
 
   const popup = (
     <Combobox.Popup
-      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${POPUP_SIZES[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${SIZE.width[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       {loading ? (
         <div

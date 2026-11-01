@@ -3,17 +3,9 @@
 import { IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
-
-type Size = "sm" | "md" | "lg";
+import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
 type Separator = "chevron" | "slash";
-
-const SIZES: Record<Size, string> = {
-  sm: "fs:xs",
-  md: "fs:sm",
-  lg: "fs:md",
-};
 
 const SEPARATOR_SIZES: Record<Size, string> = {
   sm: "w:4 h:4",
@@ -87,10 +79,10 @@ export default function BreadcrumbBase({
     className,
   );
 
-  const labelClasses = [SIZES[size], "fw:400"].filter(Boolean).join(" ");
+  const labelClasses = [SIZE.text[size], "fw:400"].filter(Boolean).join(" ");
   // the current page sits in a raised chip
   const currentClasses = [
-    SIZES[size],
+    SIZE.text[size],
     "px:2 py:1 bw:1 bg:raised bs-o:key bc:rim fw:500 c:label",
     RADIUS.chip[shape],
   ]
@@ -138,7 +130,7 @@ export default function BreadcrumbBase({
                   aria-hidden="true"
                 />
               ) : (
-                <span className={`c:hint ${SIZES[size]}`} aria-hidden="true">
+                <span className={`c:hint ${SIZE.text[size]}`} aria-hidden="true">
                   /
                 </span>
               ))}

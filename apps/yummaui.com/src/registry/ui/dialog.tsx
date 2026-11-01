@@ -6,41 +6,12 @@ import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import ButtonBase from "./button";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
-// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconPosition = "leading" | "trailing";
 type TriggerTone = "neutral" | "danger";
-type Size = "sm" | "md" | "lg";
 type ConfirmTone = "primary" | "danger";
-
-const BUTTON_BASE = "bw:1 fw:500 tp:c tdu:150 ttf:io us:none";
-
-const NEUTRAL_BUTTON =
-  "bg:raised bs-o:key bc:rim c:label h:bg:well";
-
-const PRIMARY_BUTTON =
-  "bg:fill bc:edge h:o:90 c:on-fill bs-o:key-fill";
-
-const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
-
-const TRIGGER_TONES: Record<TriggerTone, string> = {
-  neutral: NEUTRAL_BUTTON,
-  danger:
-    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
-};
-
-const CONFIRM_TONES: Record<ConfirmTone, string> = {
-  primary: PRIMARY_BUTTON,
-  danger:
-    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
-};
-
-const SIZES: Record<Size, string> = {
-  sm: "px:3 py:1 fs:xs",
-  md: "px:4 py:2 fs:sm",
-  lg: "px:6 py:3 fs:md",
-};
 
 export interface DialogProps {
   /**
@@ -151,23 +122,9 @@ export default function DialogBase({
 }: DialogProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
-  const triggerOutline =
-    focus && triggerTone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
-  const confirmOutline =
-    focus && confirmTone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
 
   const [open, setOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
-
-  const triggerClasses = merge(
-    triggerOutline,
-    "d:if ai:c g:2",
-    BUTTON_BASE,
-    SIZES[size],
-    RADIUS.control[shape],
-    TRIGGER_TONES[triggerTone],
-    className,
-  );
 
   const popupClasses = [
     "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
@@ -175,22 +132,6 @@ export default function DialogBase({
   ]
     .filter(Boolean)
     .join(" ");
-
-  const cancelClasses = merge(
-    outline,
-    BUTTON_BASE,
-    SIZES[size],
-    RADIUS.control[shape],
-    NEUTRAL_BUTTON,
-  );
-
-  const confirmClasses = merge(
-    confirmOutline,
-    BUTTON_BASE,
-    SIZES[size],
-    RADIUS.control[shape],
-    CONFIRM_TONES[confirmTone],
-  );
 
   const popup = (
     <Dialog.Portal container={container} keepMounted>
@@ -247,11 +188,27 @@ export default function DialogBase({
 
           {confirmLabel && (
             <div className="d:f jc:fe g:2 px:5 pb:5">
-              <Dialog.Close render={<Button className={cancelClasses} />}>
+              <Dialog.Close
+                render={
+                  <ButtonBase
+                    variant="secondary"
+                    size={size}
+                    shape={shape}
+                    focus={focus}
+                  />
+                }
+              >
                 {cancelLabel}
               </Dialog.Close>
               <Dialog.Close
-                render={<Button className={confirmClasses} />}
+                render={
+                  <ButtonBase
+                    variant={confirmTone}
+                    size={size}
+                    shape={shape}
+                    focus={focus}
+                  />
+                }
                 onClick={onConfirm}
               >
                 {confirmLabel}
@@ -267,11 +224,19 @@ export default function DialogBase({
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger
         onClick={onTriggerClick}
-        render={<Button className={triggerClasses} />}
+        render={
+          <ButtonBase
+            variant={triggerTone === "danger" ? "danger" : "secondary"}
+            size={size}
+            shape={shape}
+            focus={focus}
+            icon={triggerIcon}
+            iconPosition={triggerIconPosition}
+            className={className}
+          />
+        }
       >
-        {triggerIcon && triggerIconPosition === "leading" && triggerIcon}
         {trigger}
-        {triggerIcon && triggerIconPosition === "trailing" && triggerIcon}
       </Dialog.Trigger>
 
       {popup}

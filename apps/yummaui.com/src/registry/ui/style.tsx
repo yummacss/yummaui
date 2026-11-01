@@ -87,6 +87,21 @@ export const RADIUS = {
   mark: { square: "", rounded: "br:sm", squircle: "br:md cs:s", pill: "br:9999" },
 } as const satisfies Record<string, Record<Shape, string>>;
 
+/** The sizes a component offers. */
+export type Size = "sm" | "md" | "lg";
+
+/** The measures several components share at each size. Edit a row to resize them all. */
+export const SIZE = {
+  /** The height of a one-line control: a button, field, select or stepper. */
+  height: { sm: "h:8", md: "h:9", lg: "h:11" },
+  /** The width of a field and of the list it opens. */
+  width: { sm: "w:56", md: "w:64", lg: "w:72" },
+  /** The text of a label beside a control. */
+  text: { sm: "fs:xs", md: "fs:sm", lg: "fs:md" },
+  /** The box of a checkbox or radio. */
+  mark: { sm: "w:3 h:3", md: "w:4 h:4", lg: "w:5 h:5" },
+} as const satisfies Record<string, Record<Size, string>>;
+
 /** The focus outline of a control. */
 export const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 

@@ -5,9 +5,8 @@ import { OTPField } from "@base-ui/react/otp-field";
 import type { ComponentProps } from "react";
 import { Fragment } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
-type Size = "sm" | "md" | "lg";
 type ValidationType = "numeric" | "alpha" | "alphanumeric";
 
 const SLOT =

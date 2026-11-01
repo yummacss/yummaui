@@ -15,19 +15,13 @@ const EXPECTED_DROPS = [
 	// the current link's border and ink replace the link's own
 	"sidebar.tsx: c:hint",
 	"preview-card.tsx: td:none",
-	"alert-dialog.tsx: fv:bc:focus",
-	"alert-dialog.tsx: oc:focus/40",
 	"button.tsx: fv:bc:focus",
 	"button.tsx: oc:focus/40",
-	"dialog.tsx: fv:bc:focus",
-	"dialog.tsx: oc:focus/40",
 	"field.tsx: fv:bc:focus",
 	"field.tsx: oc:focus/40",
 	"file-upload.tsx: oc:focus/40",
 	"textarea.tsx: fv:bc:focus",
 	"textarea.tsx: oc:focus/40",
-	"toast.tsx: fv:bc:focus",
-	"toast.tsx: oc:focus/40",
 	"tooltip.tsx: fv:bc:focus",
 	"tooltip.tsx: oc:focus/40",
 	"file-upload.tsx: fv:oo:0",
@@ -110,6 +104,16 @@ function constants(source: string): Map<string, string[]> {
 
 		const values = [...strings, ...extra];
 		table.set(match[1], values.length > 0 ? values : [""]);
+
+		// a table of rows, such as RADIUS or SIZE, is read a row at a time too
+		if (first === "{") {
+			for (const [, key, row] of body.matchAll(/(\w+):\s*\{([^{}]*)\}/g)) {
+				table.set(
+					`${match[1]}.${key}`,
+					[...row.matchAll(/"([^"\n]*)"/g)].map((s) => s[1]),
+				);
+			}
+		}
 	}
 
 	return table;
@@ -146,8 +150,8 @@ function resolve(
 		return acc;
 	}
 
-	const name = /^([A-Za-z_$][\w$]*)/.exec(expr);
-	const known = name ? table.get(name[1]) : undefined;
+	const name = /^([A-Za-z_$][\w$]*)(\.[A-Za-z_$][\w$]*)?/.exec(expr);
+	const known = name ? (table.get(name[0]) ?? table.get(name[1])) : undefined;
 
 	return known && known.length > 0 ? known : [""];
 }

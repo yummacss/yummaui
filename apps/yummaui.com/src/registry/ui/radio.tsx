@@ -4,9 +4,7 @@ import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { useId } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS } from "./style";
-
-type Size = "sm" | "md" | "lg";
+import { FOCUS, SIZE, type Size } from "./style";
 
 export interface RadioOption {
   value: string;
@@ -16,22 +14,10 @@ export interface RadioOption {
 
 const BASE = "d:f ai:c jc:c p:0 m:0";
 
-const SIZES: Record<Size, string> = {
-  sm: "w:3 h:3",
-  md: "w:4 h:4",
-  lg: "w:5 h:5",
-};
-
 const DOT_SIZES: Record<Size, string> = {
   sm: "w:1 h:1",
   md: "w:2 h:2",
   lg: "w:3 h:3",
-};
-
-const LABEL_SIZES: Record<Size, string> = {
-  sm: "fs:xs",
-  md: "fs:sm",
-  lg: "fs:md",
 };
 
 // a box of the label's first line, so the circle sits level with it
@@ -138,7 +124,7 @@ export default function RadioBase({
             merge(
               outline,
               BASE,
-              SIZES[size],
+              SIZE.mark[size],
               ROUND,
               checked ? PICKED : UNPICKED,
             );
@@ -163,7 +149,7 @@ export default function RadioBase({
                 </Radio.Root>
               </span>
               <span className="d:f fd:c">
-                <span className={`c:label fw:500 ${LABEL_SIZES[size]}`}>
+                <span className={`c:label fw:500 ${SIZE.text[size]}`}>
                   {option.label}
                 </span>
                 {option.description && (

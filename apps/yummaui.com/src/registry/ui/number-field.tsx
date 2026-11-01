@@ -5,9 +5,8 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ComponentProps } from "react";
 import { useId } from "react";
 import { merge } from "yummacss/merge";
-import { RADIUS, useShape, type Shape } from "./style";
+import { RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
-type Size = "sm" | "md" | "lg";
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus fv:zi:10";
 
 // the box draws focus for its input, so the outline wraps the value
@@ -17,12 +16,6 @@ const BOX_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus fw:zi:10
 const STEP =
   "p:r d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p h:bg:well";
 const BOX = "p:r d:f bw:1 bg:field bs-o:key bc:rim";
-
-const SIZES: Record<Size, string> = {
-  sm: "h:8",
-  md: "h:9",
-  lg: "h:11",
-};
 
 const STEP_SIZES: Record<Size, string> = {
   sm: "w:8",
@@ -108,7 +101,7 @@ export default function NumberFieldBase({
     : "";
 
   const stepClasses = (side: string) =>
-    merge(outline, STEP, SIZES[size], STEP_SIZES[size], side);
+    merge(outline, STEP, SIZE.height[size], STEP_SIZES[size], side);
 
   return (
     <NumberField.Root
@@ -130,7 +123,7 @@ export default function NumberFieldBase({
         <NumberField.Decrement className={stepClasses(RADIUS.controlStart[shape])}>
           <IconMinus className={ICON_SIZES[size]} />
         </NumberField.Decrement>
-        <span className={merge(BOX, "blw:0 brw:0", SIZES[size], boxOutline)}>
+        <span className={merge(BOX, "blw:0 brw:0", SIZE.height[size], boxOutline)}>
           <NumberField.Input
             required={required}
             className={merge(
