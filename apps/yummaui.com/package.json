@@ -29,7 +29,6 @@
 		"@mdx-js/loader": "^3.1.1",
 		"@mdx-js/react": "^3.1.1",
 		"@next/mdx": "^16.3.8",
-		"@phosphor-icons/react": "^2.1.10",
 		"@shikijs/core": "4.4.3",
 		"@shikijs/engine-javascript": "4.4.3",
 		"@shikijs/langs": "4.4.3",
