@@ -180,8 +180,8 @@ is written.
 - Registry icons are Tabler, from `@tabler/icons-react`: filled for objects,
   outline for marks, arrows and operators. A component whose objects lack a
   filled half draws them all outline. `tests/icons.test.ts` holds it.
-- Site icons come from `src/icons.tsx`, Phosphor regular. Duotone blurs at
-  16px; the notes, "Icons at 16px", have the measurements.
+- Site icons come from `src/icons.tsx`, Tabler outline at a 1.5 stroke; the
+  notes, "Icons at 16px", have the measurements.
 
 ## Motion
 

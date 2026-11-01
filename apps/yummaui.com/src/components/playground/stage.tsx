@@ -9,7 +9,7 @@ import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
-import { Close, Code, Gear, Globe, Sliders } from "@/icons";
+import { Close, Code, Gear, Globe, Settings2 } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -171,7 +171,7 @@ export default function ComponentPlayground({
 						{styling && (
 							<Drawer.Root swipeDirection="right">
 								<Drawer.Trigger className={`${TOOL} c:ink/60`}>
-									<Sliders className="w:4 h:4" />
+									<Settings2 className="w:4 h:4" />
 									Styling
 								</Drawer.Trigger>
 								<Drawer.Portal>
