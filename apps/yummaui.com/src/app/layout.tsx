@@ -1,7 +1,3 @@
-import "@fontsource/ia-writer-quattro/latin-400.css";
-import "@fontsource/ia-writer-quattro/latin-400-italic.css";
-import "@fontsource/ia-writer-quattro/latin-700.css";
-import "@fontsource/ia-writer-quattro/latin-700-italic.css";
 import "@/styles/globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -9,6 +5,7 @@ import { GeistSerifSquare } from "geist/font/serif/square";
 import type { Metadata } from "next";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import JsonLd from "@/components/json-ld";
+import "@/fonts";
 import { UI_ORIGIN } from "@/utils/hosts";
 
 const description =
