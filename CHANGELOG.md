@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Dialog, Alert Dialog, Drawer & Toast draw their buttons with Button, which `add` installs with them.
+- `style.tsx` holds the size scale controls, fields and labels share.
 - Accordion, Checkbox, Checkbox Group, Combobox, Textarea & Scroll Area take every shape but `pill`; Meter takes `square` & `pill`.
 - Button Group joins its buttons in every shape, a menu trigger included.
 - Toggle Group has no padding around its toggles.

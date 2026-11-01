@@ -1,8 +1,8 @@
 import { Children, type ReactNode } from "react";
 import { merge } from "yummacss/merge";
 import Avatar from "./avatar";
+import type { Size } from "./style";
 
-type Size = "sm" | "md" | "lg";
 type Overlap = "none" | "sm" | "md" | "lg";
 
 const OVERLAPS: Record<Overlap, string> = {

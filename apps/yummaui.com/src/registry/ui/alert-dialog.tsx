@@ -6,28 +6,11 @@ import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import ButtonBase from "./button";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type Tone = "danger" | "neutral";
-// a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconPosition = "leading" | "trailing";
-type Size = "sm" | "md" | "lg";
-
-const SIZES: Record<Size, string> = {
-  sm: "px:3 py:1 fs:xs",
-  md: "px:4 py:2 fs:sm",
-  lg: "px:6 py:3 fs:md",
-};
-
-const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
-
-const TONE_BUTTON: Record<Tone, string> = {
-  danger:
-    "bg:red h:bg:red-8 bc:red-9 c:white bs-o:key-fill",
-  neutral:
-    "bg:raised bs-o:key bc:rim c:label h:bg:well",
-};
-
 const TONE_BADGE: Record<Tone, string> = {
   danger: "bw:1 bg:red bc:red-9 c:white bs-o:key-fill",
   neutral: "bg:well c:hint",
@@ -128,24 +111,9 @@ export default function AlertDialogBase({
 }: AlertDialogProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
-  const triggerOutline =
-    focus && triggerTone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
-  const confirmOutline =
-    focus && tone === "danger" ? merge(FOCUS, DANGER_OUTLINE) : outline;
 
   const [open, setOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
-
-  const base = `${SIZES[size]} bw:1 fw:500 tp:c tdu:150 ttf:io us:none`;
-
-  const triggerClasses = merge(
-    triggerOutline,
-    "d:if ai:c g:2",
-    base,
-    RADIUS.control[shape],
-    TONE_BUTTON[triggerTone],
-    className,
-  );
 
   const popupClasses = [
     "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
@@ -162,18 +130,13 @@ export default function AlertDialogBase({
     .filter(Boolean)
     .join(" ");
 
-  const cancelClasses = merge(
-    outline,
-    base,
-    RADIUS.control[shape],
-    TONE_BUTTON.neutral,
-  );
-
-  const confirmClasses = merge(
-    confirmOutline,
-    base,
-    RADIUS.control[shape],
-    TONE_BUTTON[tone],
+  const button = (tone: Tone) => (
+    <ButtonBase
+      variant={tone === "danger" ? "danger" : "secondary"}
+      size={size}
+      shape={shape}
+      focus={focus}
+    />
   );
 
   const popup = (
@@ -220,13 +183,10 @@ export default function AlertDialogBase({
           </div>
 
           <div className="d:f jc:fe g:2 px:5 pb:5">
-            <AlertDialog.Close render={<Button className={cancelClasses} />}>
+            <AlertDialog.Close render={button("neutral")}>
               {cancelLabel}
             </AlertDialog.Close>
-            <AlertDialog.Close
-              render={<Button className={confirmClasses} />}
-              onClick={onConfirm}
-            >
+            <AlertDialog.Close render={button(tone)} onClick={onConfirm}>
               {confirmLabel}
             </AlertDialog.Close>
           </div>
@@ -237,10 +197,20 @@ export default function AlertDialogBase({
 
   return (
     <AlertDialog.Root open={open} onOpenChange={setOpen}>
-      <AlertDialog.Trigger render={<Button className={triggerClasses} />}>
-        {triggerIcon && triggerIconPosition === "leading" && triggerIcon}
+      <AlertDialog.Trigger
+        render={
+          <ButtonBase
+            variant={triggerTone === "danger" ? "danger" : "secondary"}
+            size={size}
+            shape={shape}
+            focus={focus}
+            icon={triggerIcon}
+            iconPosition={triggerIconPosition}
+            className={className}
+          />
+        }
+      >
         {trigger}
-        {triggerIcon && triggerIconPosition === "trailing" && triggerIcon}
       </AlertDialog.Trigger>
 
       {popup}

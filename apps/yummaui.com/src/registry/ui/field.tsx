@@ -5,17 +5,10 @@ import { Toggle } from "@base-ui/react/toggle";
 import { IconAlertTriangle, IconCheck, IconEye, IconEyeOff } from "@tabler/icons-react";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, FOCUS_WITHIN, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, FOCUS_WITHIN, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
-type Size = "sm" | "md" | "lg";
 type IconSide = "leading" | "trailing";
 type Status = "default" | "error" | "success";
-
-const SIZES: Record<Size, string> = {
-  sm: "h:8 w:56",
-  md: "h:9 w:64",
-  lg: "h:11 w:72",
-};
 
 const ICON_PADDING: Record<IconSide, string> = {
   leading: "pl:9 pr:3",
@@ -198,7 +191,8 @@ export default function FieldBase({
   const controlClasses = merge(
     outline,
     "bg:field bs-o:key c:label bw:1 fs:sm",
-    SIZES[size],
+    SIZE.height[size],
+    SIZE.width[size],
     RADIUS.control[shape],
     STATUS_BORDER[status],
     showDecorativeIcon || marked !== "default"
@@ -217,7 +211,8 @@ export default function FieldBase({
         )
       : "",
     "d:f ai:c g:2 px:3 bg:field bs-o:key bw:1 fs:sm",
-    SIZES[size],
+    SIZE.height[size],
+    SIZE.width[size],
     RADIUS.control[shape],
     STATUS_BORDER[status],
     className,

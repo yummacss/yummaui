@@ -4,11 +4,9 @@ import { Button } from "@base-ui/react";
 import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type Tone = "outline" | "subtle" | "solid";
-type Size = "sm" | "md" | "lg";
-
 type IconPosition = "leading" | "trailing";
 
 const SIZES: Record<Size, { pad: string; text: string; icon: string }> = {

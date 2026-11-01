@@ -3,9 +3,7 @@
 import { IconMicrophone, IconPencil, IconVideo } from "@tabler/icons-react";
 import { Fragment, type ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { RADIUS, type Shape, useShape } from "./style";
-
-type Size = "sm" | "md" | "lg";
+import { RADIUS, type Shape, type Size, useShape } from "./style";
 
 const SIZES: Record<Size, string> = {
   sm: "fs:xxl",

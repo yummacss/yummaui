@@ -4,10 +4,9 @@ import { Tabs } from "@base-ui/react/tabs";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type Orientation = "horizontal" | "vertical";
-type Size = "sm" | "md" | "lg";
 // a panel cannot be a pill; under pill it takes rounded corners
 
 type IconPosition = "leading" | "trailing";

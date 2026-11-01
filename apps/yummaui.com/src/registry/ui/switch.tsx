@@ -4,9 +4,7 @@ import { Field } from "@base-ui/react/field";
 import { Switch } from "@base-ui/react/switch";
 import { type ReactNode, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
-
-type Size = "sm" | "md" | "lg";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 interface SizeSpec {
   track: string;

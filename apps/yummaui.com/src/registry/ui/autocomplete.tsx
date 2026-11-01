@@ -4,9 +4,8 @@ import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Avatar } from "@base-ui/react/avatar";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
-type Size = "sm" | "md" | "lg";
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconSide = "leading" | "trailing";
 
@@ -24,18 +23,6 @@ export interface AutocompleteGroup {
 
 const INPUT =
   "bg:field bs-o:key bc:rim c:label bw:1 fs:sm";
-
-const SIZES: Record<Size, string> = {
-  sm: "h:8 w:56",
-  md: "h:9 w:64",
-  lg: "h:11 w:72",
-};
-
-const POPUP_SIZES: Record<Size, string> = {
-  sm: "w:56",
-  md: "w:64",
-  lg: "w:72",
-};
 
 const ICON_PADDING: Record<IconSide, string> = {
   leading: "pl:10 pr:4",
@@ -225,7 +212,8 @@ export default function AutocompleteBase({
   const inputClasses = merge(
     outline,
     INPUT,
-    SIZES[size],
+    SIZE.height[size],
+    SIZE.width[size],
     RADIUS.control[shape],
     icon ? ICON_PADDING[iconPosition] : "pl:4",
     className,
@@ -233,7 +221,7 @@ export default function AutocompleteBase({
 
   const popup = (
     <Autocomplete.Popup
-      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${POPUP_SIZES[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+      className={`o:h bg:raised bc:line bs-o:pop c:label bw:1 ${SIZE.width[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
       {loading ? (
         <div

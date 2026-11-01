@@ -5,31 +5,17 @@ import { IconCheck, IconMinus } from "@tabler/icons-react";
 import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape } from "./style";
+import { FOCUS, RADIUS, type Size, SIZE, useShape } from "./style";
 
 // a round box reads as a single choice, which is a radio
 const SHAPES = ["square", "rounded", "squircle"] as const;
 
-type Size = "sm" | "md" | "lg";
-
 const BOX = "d:f ai:c jc:c fs:0";
-
-const SIZES: Record<Size, string> = {
-  sm: "w:3 h:3",
-  md: "w:4 h:4",
-  lg: "w:5 h:5",
-};
 
 const ICON_SIZES: Record<Size, string> = {
   sm: "w:2 h:2",
   md: "w:3 h:3",
   lg: "w:4 h:4",
-};
-
-const LABEL_SIZES: Record<Size, string> = {
-  sm: "fs:xs",
-  md: "fs:sm",
-  lg: "fs:md",
 };
 
 // a box of the label's first line, so the box sits level with it at every size
@@ -172,7 +158,7 @@ export default function CheckboxBase({
             <span
               className={merge(
                 BOX,
-                SIZES[size],
+                SIZE.mark[size],
                 RADIUS.mark[shape],
                 state.checked || state.indeterminate ? CHECKED : UNCHECKED,
               )}
@@ -180,7 +166,7 @@ export default function CheckboxBase({
               {indicator}
             </span>
             {icon && <span className="d:f fs:0">{icon}</span>}
-            <span className={`c:label fw:500 ${LABEL_SIZES[size]}`}>
+            <span className={`c:label fw:500 ${SIZE.text[size]}`}>
               {label}
             </span>
             {aside && <span className="ml:auto c:hint fs:xs">{aside}</span>}
@@ -204,7 +190,7 @@ export default function CheckboxBase({
             merge(
               outline,
               BOX,
-              SIZES[size],
+              SIZE.mark[size],
               RADIUS.mark[shape],
               state.checked || state.indeterminate ? CHECKED : UNCHECKED,
               className,
@@ -216,7 +202,7 @@ export default function CheckboxBase({
         </Checkbox.Root>
       </span>
       <span className="d:f fd:c">
-        <span className={`c:label fw:500 ${LABEL_SIZES[size]}`}>{label}</span>
+        <span className={`c:label fw:500 ${SIZE.text[size]}`}>{label}</span>
         {description && <span className="c:hint fs:xs">{description}</span>}
       </span>
     </label>

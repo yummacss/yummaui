@@ -10,10 +10,9 @@ import type {
 } from "react";
 import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type Variant = "primary" | "secondary" | "subtle" | "ghost" | "danger" | "link";
-type Size = "sm" | "md" | "lg";
 type IconSide = "leading" | "trailing";
 
 const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";

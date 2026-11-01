@@ -5,12 +5,11 @@ import { Drawer } from "@base-ui/react/drawer";
 import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import ButtonBase from "./button";
+import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type Side = "bottom" | "top" | "left" | "right";
 type IconPosition = "leading" | "trailing";
-type Size = "sm" | "md" | "lg";
-
 const SWIPE: Record<Side, "down" | "up" | "left" | "right"> = {
   bottom: "down",
   top: "up",
@@ -58,15 +57,6 @@ const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
   top: { square: "", rounded: "bbr:xxl", squircle: "bbr:3xl cs:s", pill: "bbr:3xl" },
   left: { square: "", rounded: "brr:xxl", squircle: "brr:3xl cs:s", pill: "brr:3xl" },
   right: { square: "", rounded: "blr:xxl", squircle: "blr:3xl cs:s", pill: "blr:3xl" },
-};
-
-const BUTTON =
-  "d:if ai:c jc:c g:2 bw:1 fw:500 tp:c tdu:150 ttf:io us:none bg:raised bs-o:key bc:rim c:label h:bg:well";
-
-const SIZES: Record<Size, string> = {
-  sm: "px:3 py:1 fs:xs",
-  md: "px:4 py:2 fs:sm",
-  lg: "px:6 py:3 fs:md",
 };
 
 export interface DrawerProps {
@@ -155,13 +145,6 @@ export default function DrawerBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const vertical = side === "bottom" || side === "top";
 
-  const buttonClasses = merge(
-    outline,
-    BUTTON,
-    SIZES[size],
-    RADIUS.control[shape],
-  );
-
   const popupClasses = [
     "p:r d:f fd:c bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     PLACEMENTS[side],
@@ -184,11 +167,19 @@ export default function DrawerBase({
   return (
     <Drawer.Root swipeDirection={SWIPE[side]}>
       <Drawer.Trigger
-        render={<Button className={merge(buttonClasses, className)} />}
+        render={
+          <ButtonBase
+            variant="secondary"
+            size={size}
+            shape={shape}
+            focus={focus}
+            icon={triggerIcon}
+            iconPosition={triggerIconPosition}
+            className={className}
+          />
+        }
       >
-        {triggerIcon && triggerIconPosition === "leading" && triggerIcon}
         {trigger}
-        {triggerIcon && triggerIconPosition === "trailing" && triggerIcon}
       </Drawer.Trigger>
 
       <Drawer.Portal container={container}>
@@ -238,7 +229,13 @@ export default function DrawerBase({
               {closeLabel && (
                 <Drawer.Close
                   render={
-                    <Button className={merge(buttonClasses, "w:100% mt:2")} />
+                    <ButtonBase
+                      variant="secondary"
+                      size={size}
+                      shape={shape}
+                      focus={focus}
+                      className="w:100% mt:2"
+                    />
                   }
                 >
                   {closeLabel}
