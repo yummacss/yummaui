@@ -6,7 +6,8 @@ import {
 	PlaygroundProvider,
 	StaticPlayground,
 } from "@/components/playground/context";
-import { ApiTable, Look } from "@/components/playground/api";
+import { ApiTable } from "@/components/playground/api";
+import { Look } from "@/components/playground/look";
 import ComponentPlayground from "@/components/playground/stage";
 import TableOfContents from "@/components/ui/toc";
 import { registryMeta } from "@/registry";

@@ -5,15 +5,11 @@ import Link from "next/link";
 import { Fragment, useState } from "react";
 import { BaseUI } from "@/components/icons/icons";
 import { usePlayground } from "@/components/playground/context";
-import { EnumSelect, SwatchSelect } from "@/components/playground/control";
 import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
 import { getRegistryTarget } from "@/registry";
-import { ACCENTS, accentBars } from "@/utils/accent";
 import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { inTableOrder, typeOf } from "@/utils/props";
-import { SCHEMES, type Scheme } from "@/utils/scheme";
-import { SHAPES } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
 function Summary({ text }: { text?: string }) {
@@ -128,74 +124,5 @@ export function ApiTable({ primitives }: { primitives: Primitives }) {
 				</table>
 			</div>
 		</section>
-	);
-}
-
-const SWATCHES = ACCENTS.map((family) => ({
-	value: family,
-	colors: accentBars(family),
-}));
-
-/** Shape, Accent and Scheme, the preview's styling. */
-export function Look() {
-	const playground = usePlayground();
-	if (!playground) return null;
-	// the shapes this component takes; a corner's circle is the preview's pill
-	const props = playground.meta?.props ?? [];
-	const shapeProp = props.find((prop) => prop.name === "shape");
-	const offered = shapeProp
-		? SHAPES.filter((shape) => shapeProp.values?.includes(shape))
-		: props.some((prop) => prop.name === "iconShape")
-			? SHAPES
-			: [];
-	// a shape this component does not take draws as rounded, else pill
-	const shown = offered.includes(playground.shape)
-		? playground.shape
-		: offered.includes("rounded")
-			? "rounded"
-			: offered.includes("pill")
-				? "pill"
-				: offered[0];
-	const line = (name: string, control: React.ReactNode) => (
-		<div className="d:f fw:w ai:c jc:sb g:2 py:2 bc:border bbw:1">
-			<code className="c:code fs:xs ff:m">{name}</code>
-			{control}
-		</div>
-	);
-
-	return (
-		<div className="d:f fd:c pb:4 mb:4">
-			<p className="m:0 mb:1 c:ink/60 fs:xs lh:4">
-				The shape, accent & scheme set the preview only.
-			</p>
-			{offered.length > 1 &&
-				line(
-					"shape",
-					<EnumSelect
-						name="shape"
-						values={offered}
-						value={shown}
-						onChange={(value) => playground.setShape(String(value))}
-					/>,
-				)}
-			{line(
-				"accent",
-				<SwatchSelect
-					name="accent"
-					options={SWATCHES}
-					value={playground.accent}
-					onChange={playground.setAccent}
-				/>,
-			)}
-			{line(
-				"scheme",
-				<EnumSelect
-					name="scheme"
-					values={[...SCHEMES]}
-					value={playground.scheme}
-					onChange={(value) => playground.setScheme(value as Scheme)}
-				/>,
-			)}
-		</div>
 	);
 }

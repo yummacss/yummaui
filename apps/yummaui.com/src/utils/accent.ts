@@ -37,19 +37,26 @@ function selectorOf(name: string): string {
 	return `.${name.replace(/[:/]/g, "\\$&")}${state}`;
 }
 
-/** The accent's color for a role: the fill and its ring, the focus outline, and white on the fill. */
-function roleColor(role: string, shades: string[], base: number): string {
-	if (role === "on-fill") return "#ffffff";
-	if (role === "edge") return shades[Math.min(base + 2, 11)];
-	return shades[base];
-}
-
 export const ACCENTS = Object.keys(colorTheme);
 
 export const DEFAULT_ACCENT = "slate";
 
 export function isAccent(value: unknown): value is string {
 	return typeof value === "string" && ACCENTS.includes(value);
+}
+
+/** The accent's color for each role: the fill and its ring, the focus outline, and white on the fill. */
+export function accentRoles(family: string): Record<string, string> {
+	const shades = generateShades(colorTheme[family as keyof typeof colorTheme]);
+	const base = accentShade(shades);
+	return {
+		fill: shades[base],
+		check: shades[base],
+		on: shades[base],
+		edge: shades[Math.min(base + 2, 11)],
+		focus: shades[base],
+		"on-fill": "#ffffff",
+	};
 }
 
 /** CSS that repaints every role class in `classes` in the accent `family`. */
@@ -59,8 +66,7 @@ export function accentCss(
 ): string {
 	if (family === DEFAULT_ACCENT || !isAccent(family)) return "";
 
-	const shades = generateShades(colorTheme[family as keyof typeof colorTheme]);
-	const base = accentShade(shades);
+	const roles = accentRoles(family);
 
 	return classes
 		.map((name) => {
@@ -68,7 +74,7 @@ export function accentCss(
 			const [role, alpha] = parts[parts.length - 1].split("/");
 			const property = PROPERTIES[parts[parts.length - 2]];
 			if (!property) return "";
-			const color = roleColor(role, shades, base);
+			const color = roles[role];
 			const value = alpha ? withAlpha(color, Number(alpha) / 100) : color;
 			return `${selectorOf(name)} { ${property}: ${value}; }`;
 		})

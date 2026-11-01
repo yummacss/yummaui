@@ -178,10 +178,10 @@ export default function ComponentPlayground({
 									Styling
 								</Drawer.Trigger>
 								<Drawer.Portal>
-									{/* the search dialog's backdrop, so every overlay on the site dims alike */}
+									{/* light and clear, so the preview it changes stays in view */}
 									<Drawer.Backdrop
 										data-chrome
-										className="tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none p:f zi:10 i:0 bg:black/60 bf-b:sm fgr:90"
+										className="tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none p:f zi:10 i:0 bg:black/10"
 									/>
 									<Drawer.Viewport className="d:f p:f i:0 zi:20 jc:fe">
 										<Drawer.Popup

@@ -30,6 +30,7 @@ export default defineConfig({
 			system: "system-ui, sans-serif",
 		},
 		states: {
+			checked: "[data-checked]",
 			closing: "[data-ending-style]",
 			"from-left": "[data-activation-direction=left]",
 			"from-right": "[data-activation-direction=right]",
