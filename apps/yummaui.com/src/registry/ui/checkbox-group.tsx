@@ -13,6 +13,9 @@ import { merge } from "yummacss/merge";
 import Checkbox from "./checkbox";
 import { RADIUS, useShape, type Shape } from "./style";
 
+// a round box reads as a single choice, which is a radio
+const SHAPES = ["square", "rounded", "squircle"] as const;
+
 export interface CheckboxGroupProps {
   /** Merged with the group's own classes, so a utility you pass wins. */
   className?: string;
@@ -48,9 +51,9 @@ export interface CheckboxGroupProps {
   countLabel?: string;
   /**
    * Every checkbox's shape, and the well around them. One a box sets wins.
-   * Inherits the nearest `Shape`.
+   * Inherits the nearest `Shape`; under `pill`, `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
 }
 
 /**
@@ -71,7 +74,7 @@ export default function CheckboxGroupBase({
   countLabel,
   shape: shapeProp,
 }: CheckboxGroupProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const labelId = useId();
   const [internal, setInternal] = useState(defaultValue ?? []);
   const current = value ?? internal;
