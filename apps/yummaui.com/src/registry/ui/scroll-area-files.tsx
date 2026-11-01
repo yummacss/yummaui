@@ -35,7 +35,10 @@ export default function ScrollAreaFiles() {
       <ScrollArea shape={shape} className="h:64">
         <div className="d:f fd:c p:1 pr:3">
           {files.map(({ Icon, color, name, size }) => (
-            <div key={name} className="d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well">
+            <div
+              key={name}
+              className={`d:f ai:c g:3 h:8 px:2 fs:sm h:bg:well ${RADIUS.item[shape]}`}
+            >
               <Icon className={`w:4 h:4 ${color}`} />
               <span className="f:1">{name}</span>
               <span className="c:hint fs:xs">{size}</span>
