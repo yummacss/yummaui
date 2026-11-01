@@ -106,6 +106,7 @@
       "name": "shape",
       "type": "enum",
       "values": [
+        "square",
         "rounded",
         "squircle"
       ],

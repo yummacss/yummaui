@@ -7,8 +7,8 @@ import { useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape } from "./style";
 
-// a card reads wrong square or as a capsule
-const SHAPES = ["rounded", "squircle"] as const;
+// a card reads wrong as a capsule
+const SHAPES = ["square", "rounded", "squircle"] as const;
 
 type Variant = "default" | "bordered" | "ghost" | "subtle";
 const TURN = "tp:t tdu:300 ttf:out-quart @prm:tp:none";
