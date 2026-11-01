@@ -59,11 +59,10 @@
       "values": [
         "square",
         "rounded",
-        "squircle",
-        "pill"
+        "squircle"
       ],
       "default": "rounded",
-      "description": "Every checkbox's shape, and the well around them. One a box sets wins. Inherits the nearest `Shape`."
+      "description": "Every checkbox's shape, and the well around them. One a box sets wins. Inherits the nearest `Shape`; under `pill`, `rounded`."
     },
     {
       "name": "disabled",
