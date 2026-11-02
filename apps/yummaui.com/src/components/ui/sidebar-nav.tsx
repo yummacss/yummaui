@@ -25,7 +25,7 @@ export default function SidebarNav({ sections }: Props) {
 				<ProductLinks
 					heading="ff:system mb:3 c:silver-8 fs:xs fw:600 ls:2 tt:u"
 					list="d:f fd:c g:2"
-					link="p:r d:if ai:c g:3 fs:sm us:none fv:oc:ink fv:oo:2 fv:ow:2"
+					link="p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2"
 				/>
 				{sections.map((section) => (
 					<div key={section.title} className="d:f fd:c g:3">
@@ -43,7 +43,7 @@ export default function SidebarNav({ sections }: Props) {
 									>
 										<Link
 											href={item.href}
-											className={`p:r d:if ai:c g:3 fs:sm us:none fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:accent td:u tds:d" : "c:ink/70 h:c:accent"}`}
+											className={`p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:accent td:u tds:d" : "c:ink/70 h:c:accent"}`}
 										>
 											{item.title}
 										</Link>

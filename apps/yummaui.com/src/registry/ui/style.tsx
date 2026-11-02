@@ -107,3 +107,6 @@ export const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus";
 
 /** The focus outline of a box that holds the focused input. */
 export const FOCUS_WITHIN = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
+
+/** The text typed into a field: 16px on a phone, where iOS zooms in on anything smaller. */
+export const INPUT_TEXT = "fs:md @sm:fs:sm";

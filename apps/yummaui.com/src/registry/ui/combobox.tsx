@@ -6,7 +6,7 @@ import { IconCheck, IconSelector, IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
 // a field of chips grows past one line, where a capsule turns into a blob
 const SHAPES = ["square", "rounded", "squircle"] as const;
@@ -28,11 +28,11 @@ export interface ComboboxGroup {
 const FIELD_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus";
 
 const INPUT =
-  "pl:4 pr:16 bg:field bs-o:key bc:rim c:label bw:1 fs:sm";
+  `pl:4 pr:16 bg:field bs-o:key bc:rim c:label bw:1 ${INPUT_TEXT}`;
 
 const CHIPS_SIZES: Record<Size, string> = {
-  sm: "min-h:8 w:56 fs:sm",
-  md: "min-h:9 w:64 fs:sm",
+  sm: `min-h:8 w:56 ${INPUT_TEXT}`,
+  md: `min-h:9 w:64 ${INPUT_TEXT}`,
   lg: "min-h:11 w:72 fs:md",
 };
 
@@ -235,7 +235,7 @@ export default function ComboboxBase({
         </div>
       ) : (
         <>
-          <Combobox.List className="oy:auto py:1 max-h:72 ow:0">
+          <Combobox.List className="oy:auto ob:c py:1 max-h:72 ow:0">
             {(entry: ComboboxItem | ComboboxGroup) =>
               isGroupEntry(entry) ? (
                 <Combobox.Group key={entry.group}>

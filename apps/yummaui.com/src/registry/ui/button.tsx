@@ -17,7 +17,7 @@ type IconSide = "leading" | "trailing";
 
 const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 
-const MOTION = "tp:a tdu:150 ttf:io a:s:97 wc:s";
+const MOTION = "tp:a tdu:150 ttf:io a:s:96 wc:s @prm:tp:none @prm:a:s:100";
 
 const VARIANTS: Record<Variant, string> = {
   primary: "bg:fill bc:edge c:on-fill bs-o:key-fill",
