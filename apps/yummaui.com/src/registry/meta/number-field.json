@@ -5,8 +5,7 @@
       "name": "label",
       "type": "string",
       "example": "Keep deleted files for",
-      "description": "Text above the control. Also a scrub area: drag left or right on it to change the value.",
-      "optional": true
+      "description": "Text above the control. Also a scrub area: drag left or right on it to change the value."
     },
     {
       "name": "description",
@@ -18,10 +17,7 @@
       "name": "defaultValue",
       "type": "number",
       "example": 30,
-      "description": "Starting value when you are not controlling it. Pair `value` with `onValueChange` instead if you are.",
-      "min": 0,
-      "max": 20,
-      "step": 1
+      "description": "Starting value when you are not controlling it. Pair `value` with `onValueChange` instead if you are."
     },
     {
       "name": "min",
@@ -37,10 +33,7 @@
       "name": "step",
       "type": "number",
       "default": 1,
-      "description": "Amount each click of increment or decrement changes the value by.",
-      "min": 1,
-      "max": 10,
-      "step": 1
+      "description": "Amount each click of increment or decrement changes the value by."
     },
     {
       "name": "size",

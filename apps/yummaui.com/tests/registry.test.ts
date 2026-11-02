@@ -112,32 +112,6 @@ describe("Yumma UI registry", () => {
 		expect(split).toEqual([]);
 	});
 
-	it("points every conflict rule at a prop that exists", () => {
-		const broken: string[] = [];
-
-		for (const file of readdirSync(join(rootDir, "src/registry/meta"))) {
-			const meta = JSON.parse(
-				readFileSync(join(rootDir, "src/registry/meta", file), "utf-8"),
-			);
-			const names = new Set(
-				(meta.props ?? []).map((p: { name: string }) => p.name),
-			);
-			for (const prop of meta.props ?? []) {
-				for (const rule of prop.conflictsWith ?? []) {
-					if (!names.has(rule.prop)) {
-						broken.push(`${file}: ${prop.name} -> ${rule.prop}`);
-					}
-					const forms = ["is", "not", "set"].filter((key) => key in rule);
-					if (forms.length !== 1) {
-						broken.push(`${file}: ${prop.name} -> ${forms.length} forms`);
-					}
-				}
-			}
-		}
-
-		expect(broken).toEqual([]);
-	});
-
 	it("gives one name one meaning across components", () => {
 		const GENERIC = new Set([
 			"value",
@@ -357,35 +331,6 @@ describe("Yumma UI registry", () => {
 			"shape",
 		);
 		expect(source).not.toMatch(/shape\s*[?:=]|SHAPES|\bShape\b/);
-	});
-
-	it("gives an optional string an example and a guard to read it", () => {
-		const wrong: string[] = [];
-		const metaDir = join(rootDir, "src/registry/meta");
-		const uiDir = join(rootDir, "src/registry/ui");
-
-		for (const file of readdirSync(metaDir).filter((f) =>
-			f.endsWith(".json"),
-		)) {
-			const id = file.replace(/\.json$/, "");
-			const meta = JSON.parse(readFileSync(join(metaDir, file), "utf-8"));
-
-			for (const prop of meta.props ?? []) {
-				if (!prop.optional) continue;
-
-				if (typeof prop.example !== "string" || prop.example === "") {
-					wrong.push(`${id}:${prop.name} has no example to switch back on`);
-				}
-
-				const source = readFileSync(join(uiDir, `${id}.tsx`), "utf-8");
-				const guard = new RegExp(`\\{\\s*${prop.name}\\s*&&`);
-				if (!guard.test(source)) {
-					wrong.push(`${id}:${prop.name} is rendered either way`);
-				}
-			}
-		}
-
-		expect(wrong).toEqual([]);
 	});
 
 	it("keeps an icon-only button off the type scale", () => {

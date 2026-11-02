@@ -72,13 +72,7 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end of an item its `icon` sits at. A `shortcut` always trails regardless.",
-      "conflictsWith": [
-        {
-          "prop": "icon",
-          "set": false
-        }
-      ]
+      "description": "Which end of an item its `icon` sits at. A `shortcut` always trails regardless."
     },
     {
       "name": "open",

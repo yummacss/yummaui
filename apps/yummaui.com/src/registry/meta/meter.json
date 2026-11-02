@@ -5,33 +5,18 @@
       "name": "value",
       "type": "number",
       "example": 12.7,
-      "description": "The current value. With `segments`, their sum takes its place.",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "conflictsWith": [
-        {
-          "prop": "segments",
-          "set": true
-        }
-      ]
+      "description": "The current value. With `segments`, their sum takes its place."
     },
     {
       "name": "min",
       "type": "number",
       "description": "Defaults to Base UI's own Meter minimum (0).",
-      "min": 0,
-      "max": 100,
-      "step": 5,
       "example": 0
     },
     {
       "name": "max",
       "type": "number",
       "description": "Defaults to Base UI's own Meter maximum (100).",
-      "min": 0,
-      "max": 100,
-      "step": 5,
       "example": 20
     },
     {
@@ -78,8 +63,6 @@
       "name": "rest",
       "type": "string",
       "example": "Free",
-      "optional": true,
-      "dependsOn": "segments",
       "description": "Names the empty part of the track in the legend, `Free` for storage."
     },
     {

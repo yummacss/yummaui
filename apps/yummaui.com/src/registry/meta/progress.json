@@ -6,10 +6,7 @@
       "type": "number",
       "typeName": "number | null",
       "example": 60,
-      "description": "The current value, 0-100. Pass `null` for an indeterminate, always-animated sliding bar. There is no fill level to show, so the schema here cannot demo it, but the prop accepts it.",
-      "min": 0,
-      "max": 100,
-      "step": 5
+      "description": "The current value, 0-100. Pass `null` for an indeterminate, always-animated sliding bar. There is no fill level to show, so the schema here cannot demo it, but the prop accepts it."
     },
     {
       "name": "label",
@@ -22,17 +19,7 @@
       "name": "shimmer",
       "type": "boolean",
       "default": false,
-      "description": "A band of light that sweeps along the fill on a loop while the bar is below 100. Needs `animated`, and stops under reduced motion.",
-      "conflictsWith": [
-        {
-          "prop": "animated",
-          "set": false
-        },
-        {
-          "prop": "value",
-          "set": false
-        }
-      ]
+      "description": "A band of light that sweeps along the fill on a loop while the bar is below 100. Needs `animated`, and stops under reduced motion."
     },
     {
       "name": "shape",
@@ -50,13 +37,7 @@
       "name": "animated",
       "type": "boolean",
       "default": true,
-      "description": "The indicator's width transition as `value` changes. Indeterminate progress always animates regardless of this.",
-      "conflictsWith": [
-        {
-          "prop": "value",
-          "set": false
-        }
-      ]
+      "description": "The indicator's width transition as `value` changes. Indeterminate progress always animates regardless of this."
     }
   ],
   "scene": [

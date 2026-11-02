@@ -103,21 +103,10 @@ export interface RegistryProp {
   type: "enum" | "boolean" | "string" | "number" | "none";
   typeName?: string;
   values?: string[];
-  min?: number;
-  max?: number;
-  step?: number;
   default?: string | boolean | number;
   example?: unknown;
   exampleIcon?: string;
-  optional?: boolean;
-  dependsOn?: string;
   handler?: string;
-  conflictsWith?: {
-    prop: string;
-    is?: unknown;
-    not?: unknown;
-    set?: boolean;
-  }[];
   controlled?: boolean;
   description?: string;
 }

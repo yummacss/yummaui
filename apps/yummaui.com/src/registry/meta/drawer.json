@@ -23,8 +23,7 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end of the trigger `triggerIcon` sits at.",
-      "dependsOn": "triggerIcon"
+      "description": "Which end of the trigger `triggerIcon` sits at."
     },
     {
       "name": "title",
@@ -49,8 +48,7 @@
       "name": "closeLabel",
       "type": "string",
       "example": "Done",
-      "description": "A full-width button at the end that closes the drawer. None renders without it.",
-      "optional": true
+      "description": "A full-width button at the end that closes the drawer. None renders without it."
     },
     {
       "name": "side",
@@ -68,17 +66,7 @@
       "name": "handle",
       "type": "boolean",
       "default": true,
-      "description": "A grab bar on the edge facing the page, for a `bottom` or `top` drawer.",
-      "conflictsWith": [
-        {
-          "prop": "side",
-          "is": "left"
-        },
-        {
-          "prop": "side",
-          "is": "right"
-        }
-      ]
+      "description": "A grab bar on the edge facing the page, for a `bottom` or `top` drawer."
     },
     {
       "name": "showClose",

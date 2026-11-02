@@ -65,13 +65,7 @@
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius. Only visible when `bordered` is set. Inherits the nearest `Shape`.",
-      "conflictsWith": [
-        {
-          "prop": "bordered",
-          "set": false
-        }
-      ]
+      "description": "Corner radius. Only visible when `bordered` is set. Inherits the nearest `Shape`."
     },
     {
       "name": "focus",
