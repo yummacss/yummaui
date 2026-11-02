@@ -5,7 +5,7 @@ import { Toggle } from "@base-ui/react/toggle";
 import { IconAlertTriangle, IconCheck, IconEye, IconEyeOff } from "@tabler/icons-react";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, FOCUS_WITHIN, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, FOCUS_WITHIN, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
 type IconSide = "leading" | "trailing";
 type Status = "default" | "error" | "success";
@@ -190,7 +190,8 @@ export default function FieldBase({
 
   const controlClasses = merge(
     outline,
-    "bg:field bs-o:key c:label bw:1 fs:sm",
+    "bg:field bs-o:key c:label bw:1",
+    INPUT_TEXT,
     SIZE.height[size],
     SIZE.width[size],
     RADIUS.control[shape],
@@ -210,7 +211,8 @@ export default function FieldBase({
           focus === true ? "" : focus.replace(/\bfv:/g, "fw:"),
         )
       : "",
-    "d:f ai:c g:2 px:3 bg:field bs-o:key bw:1 fs:sm",
+    "d:f ai:c g:2 px:3 bg:field bs-o:key bw:1",
+    INPUT_TEXT,
     SIZE.height[size],
     SIZE.width[size],
     RADIUS.control[shape],
@@ -238,7 +240,7 @@ export default function FieldBase({
           <Field.Control
             required={required}
             type={controlType}
-            className="f:1 min-w:0 h:100% p:0 bw:0 bg:transparent c:label fs:sm os:none"
+            className={`f:1 min-w:0 h:100% p:0 bw:0 bg:transparent c:label os:none ${INPUT_TEXT}`}
             {...props}
           />
           {suffix && <span className="d:f ai:c fs:0 c:hint">{suffix}</span>}

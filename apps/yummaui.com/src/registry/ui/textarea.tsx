@@ -5,7 +5,7 @@ import { IconAlertTriangle, IconCheck } from "@tabler/icons-react";
 import type { ChangeEvent, ComponentProps } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape } from "./style";
+import { FOCUS, INPUT_TEXT, RADIUS, useShape } from "./style";
 
 // a capsule turns into a blob past one line
 const SHAPES = ["square", "rounded", "squircle"] as const;
@@ -137,7 +137,8 @@ export default function TextareaBase({
 
   const controlClasses = merge(
     outline,
-    "h:24 w:100% py:2 pl:3 bg:field bs-o:key c:label bw:1 fs:sm r:none",
+    "h:24 w:100% py:2 pl:3 bg:field bs-o:key c:label bw:1 r:none",
+    INPUT_TEXT,
     status !== "default" ? "pr:10" : "pr:3",
     RADIUS.box[shape],
     STATUS_BORDER[status],

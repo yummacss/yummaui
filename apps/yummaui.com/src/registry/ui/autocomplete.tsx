@@ -4,7 +4,7 @@ import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Avatar } from "@base-ui/react/avatar";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconSide = "leading" | "trailing";
@@ -22,7 +22,7 @@ export interface AutocompleteGroup {
 }
 
 const INPUT =
-  "bg:field bs-o:key bc:rim c:label bw:1 fs:sm";
+  `bg:field bs-o:key bc:rim c:label bw:1 ${INPUT_TEXT}`;
 
 const ICON_PADDING: Record<IconSide, string> = {
   leading: "pl:10 pr:4",
@@ -238,7 +238,7 @@ export default function AutocompleteBase({
         </div>
       ) : (
         <>
-          <Autocomplete.List className="oy:auto max-h:72 py:1 ow:0">
+          <Autocomplete.List className="oy:auto ob:c max-h:72 py:1 ow:0">
             {(entry: AutocompleteItem | AutocompleteGroup) =>
               isGroupEntry(entry) ? (
                 <Autocomplete.Group key={entry.group}>

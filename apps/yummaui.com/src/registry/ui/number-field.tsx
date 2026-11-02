@@ -5,7 +5,7 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ComponentProps } from "react";
 import { useId } from "react";
 import { merge } from "yummacss/merge";
-import { RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus fv:zi:10";
 
@@ -24,8 +24,8 @@ const STEP_SIZES: Record<Size, string> = {
 };
 
 const INPUT_SIZES: Record<Size, string> = {
-  sm: "w:16 fs:sm",
-  md: "w:20 fs:sm",
+  sm: `w:16 ${INPUT_TEXT}`,
+  md: `w:20 ${INPUT_TEXT}`,
   lg: "w:24 fs:md",
 };
 

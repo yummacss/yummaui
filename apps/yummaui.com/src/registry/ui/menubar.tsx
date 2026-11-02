@@ -126,7 +126,7 @@ export default function MenubarBase({
   );
 
   const popupClasses = [
-    "py:1 min-w:52 max-h:var(--available-height) oy:auto bg:raised bc:line c:label bw:1 os:none bs-o:pop",
+    "py:1 min-w:52 max-h:var(--available-height) oy:auto ob:c bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     RADIUS.popup[shape],
   ]
     .filter(Boolean)
