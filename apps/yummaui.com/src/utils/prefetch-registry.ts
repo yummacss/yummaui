@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { getRegistryImport } from "@/registry";
+import { getRegistryImport } from "@/registry/loaders";
 
 type RegistryComponent = ComponentType<Record<string, unknown>>;
 

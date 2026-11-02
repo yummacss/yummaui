@@ -6,7 +6,7 @@ import { SHARED_PROP_ORDER } from "../src/utils/props";
 import { rootDir, exampleIconNames } from "./helpers";
 
 const registryDir = join(rootDir, "src/registry/ui");
-const indexPath = join(rootDir, "src/registry/index.ts");
+const indexPath = join(rootDir, "src/registry/loaders.ts");
 
 function componentFiles(): string[] {
 	return (

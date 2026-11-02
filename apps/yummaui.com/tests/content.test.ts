@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vite-plus/test";
 import { contentPages, rootDir } from "./helpers";
 
-const indexPath = join(rootDir, "src/registry/index.ts");
+const indexPath = join(rootDir, "src/registry/loaders.ts");
 
 const registryIds = new Set(
 	[
