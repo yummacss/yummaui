@@ -66,13 +66,7 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end of a tab its `icon` sits at. Ignored when `iconOnly` is set.",
-      "conflictsWith": [
-        {
-          "prop": "icon",
-          "set": false
-        }
-      ]
+      "description": "Which end of a tab its `icon` sits at. Ignored when `iconOnly` is set."
     },
     {
       "name": "size",

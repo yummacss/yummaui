@@ -6,8 +6,7 @@
       "type": "none",
       "example": "File name",
       "description": "Text above the control. `Field.Root` and `Field.Label` associate it automatically, so no `id`/`htmlFor` bookkeeping is needed.",
-      "typeName": "string",
-      "optional": true
+      "typeName": "string"
     },
     {
       "name": "description",
@@ -41,26 +40,13 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end `icon` sits at.",
-      "dependsOn": "icon",
-      "conflictsWith": [
-        {
-          "prop": "revealable",
-          "is": true
-        }
-      ]
+      "description": "Which end `icon` sits at."
     },
     {
       "name": "iconInteractive",
       "type": "boolean",
       "default": false,
-      "description": "Lets `icon` receive pointer events, for an inline button, a clear or reveal toggle, instead of a decorative glyph.",
-      "conflictsWith": [
-        {
-          "prop": "revealable",
-          "is": true
-        }
-      ]
+      "description": "Lets `icon` receive pointer events, for an inline button, a clear or reveal toggle, instead of a decorative glyph."
     },
     {
       "name": "prefixNode",

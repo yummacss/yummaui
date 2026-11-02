@@ -5,33 +5,25 @@
       "name": "label",
       "type": "string",
       "example": "Verification code",
-      "description": "Text above the slots, wired to the first one through Base UI's `Field.Label`.",
-      "optional": true
+      "description": "Text above the slots, wired to the first one through Base UI's `Field.Label`."
     },
     {
       "name": "description",
       "type": "string",
       "example": "Sent to your phone, ending in 42.",
-      "description": "A line under the slots, for where the code comes from.",
-      "optional": true
+      "description": "A line under the slots, for where the code comes from."
     },
     {
       "name": "length",
       "type": "number",
       "default": 6,
-      "description": "How many characters the code has, one slot each.",
-      "min": 4,
-      "max": 8,
-      "step": 1
+      "description": "How many characters the code has, one slot each."
     },
     {
       "name": "groupSize",
       "type": "number",
       "default": 3,
-      "description": "Slots per group, with a dash between groups. `0` draws one unbroken row.",
-      "min": 0,
-      "max": 4,
-      "step": 1
+      "description": "Slots per group, with a dash between groups. `0` draws one unbroken row."
     },
     {
       "name": "validationType",

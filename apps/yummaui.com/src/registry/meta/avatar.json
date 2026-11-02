@@ -55,15 +55,13 @@
       "type": "none",
       "typeName": "ReactNode",
       "example": null,
-      "description": "The badge's icon, in place of the verified check. Give it `w:100% h:100%` to fill the badge.",
-      "dependsOn": "badge"
+      "description": "The badge's icon, in place of the verified check. Give it `w:100% h:100%` to fill the badge."
     },
     {
       "name": "badgeLabel",
       "type": "string",
       "default": "Verified",
-      "description": "The badge's accessible name.",
-      "dependsOn": "badge"
+      "description": "The badge's accessible name."
     },
     {
       "name": "size",

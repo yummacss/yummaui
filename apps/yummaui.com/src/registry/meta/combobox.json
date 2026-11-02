@@ -33,8 +33,7 @@
       "name": "label",
       "type": "string",
       "example": "Tags",
-      "description": "Field label above the input.",
-      "optional": true
+      "description": "Field label above the input."
     },
     {
       "name": "description",

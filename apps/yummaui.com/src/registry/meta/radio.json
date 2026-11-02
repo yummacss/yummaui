@@ -28,8 +28,7 @@
       "name": "label",
       "type": "string",
       "example": "When a file already exists",
-      "description": "A caption above the group, correctly wired to it via `aria-labelledby`. Without one the group has no accessible name at all.",
-      "optional": true
+      "description": "A caption above the group, correctly wired to it via `aria-labelledby`. Without one the group has no accessible name at all."
     },
     {
       "name": "defaultValue",
@@ -51,7 +50,11 @@
     {
       "name": "size",
       "type": "enum",
-      "values": ["sm", "md", "lg"],
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
       "default": "md",
       "description": "The circle, the dot and the label together."
     },

@@ -36,18 +36,12 @@
       "name": "timeout",
       "type": "number",
       "default": 5000,
-      "min": 0,
-      "max": 20000,
-      "step": 1000,
       "description": "Milliseconds before a toast closes by itself. `0` keeps it open."
     },
     {
       "name": "limit",
       "type": "number",
       "default": 3,
-      "min": 1,
-      "max": 5,
-      "step": 1,
       "description": "How many toasts stay visible; older ones wait until there is room."
     },
     {

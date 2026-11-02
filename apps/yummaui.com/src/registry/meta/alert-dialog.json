@@ -24,8 +24,7 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end of the trigger `triggerIcon` sits at.",
-      "dependsOn": "triggerIcon"
+      "description": "Which end of the trigger `triggerIcon` sits at."
     },
     {
       "name": "icon",

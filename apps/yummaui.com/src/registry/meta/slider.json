@@ -5,8 +5,7 @@
       "name": "label",
       "type": "string",
       "example": "Thumbnail size",
-      "description": "Text beside the value, above the track.",
-      "optional": true
+      "description": "Text beside the value, above the track."
     },
     {
       "name": "description",
@@ -37,9 +36,6 @@
       "type": "number",
       "default": 0,
       "description": "Lower bound.",
-      "min": 0,
-      "max": 100,
-      "step": 10,
       "example": 40
     },
     {
@@ -47,19 +43,13 @@
       "type": "number",
       "default": 100,
       "description": "Upper bound.",
-      "min": 0,
-      "max": 200,
-      "step": 10,
       "example": 200
     },
     {
       "name": "step",
       "type": "number",
       "default": 1,
-      "description": "Amount each keyboard press or drag increment changes the value by.",
-      "min": 1,
-      "max": 25,
-      "step": 1
+      "description": "Amount each keyboard press or drag increment changes the value by."
     },
     {
       "name": "formatValue",
