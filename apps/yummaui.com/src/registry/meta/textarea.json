@@ -6,8 +6,7 @@
       "type": "none",
       "example": "Description",
       "description": "Text above the control. `Field.Root` and `Field.Label` associate it automatically, so no `id`/`htmlFor` bookkeeping is needed.",
-      "typeName": "string",
-      "optional": true
+      "typeName": "string"
     },
     {
       "name": "description",
@@ -29,10 +28,7 @@
       "name": "maxLength",
       "type": "number",
       "example": 200,
-      "description": "Caps the value and draws the counter under the field. Zero draws neither.",
-      "min": 0,
-      "max": 400,
-      "step": 20
+      "description": "Caps the value and draws the counter under the field. Zero draws neither."
     },
     {
       "name": "shape",

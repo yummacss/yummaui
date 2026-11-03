@@ -11,16 +11,7 @@
       "name": "max",
       "type": "number",
       "default": 5,
-      "description": "How many marks to draw, and the top of the scale. Ignored when `icons` is set.",
-      "conflictsWith": [
-        {
-          "prop": "icons",
-          "set": true
-        }
-      ],
-      "min": 3,
-      "max": 10,
-      "step": 1
+      "description": "How many marks to draw, and the top of the scale. Ignored when `icons` is set."
     },
     {
       "name": "icons",
@@ -32,9 +23,6 @@
       "name": "defaultValue",
       "type": "number",
       "description": "The rating on first render. Pair `value` with `onValueChange` instead if you are controlling it.",
-      "min": 0,
-      "max": 10,
-      "step": 1,
       "example": 4
     },
     {

@@ -27,25 +27,13 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end the icon sits at, on every button that has one. Unset, each button keeps its own.",
-      "conflictsWith": [
-        {
-          "prop": "icon",
-          "set": false
-        }
-      ]
+      "description": "Which end the icon sits at, on every button that has one. Unset, each button keeps its own."
     },
     {
       "name": "iconOnly",
       "type": "boolean",
       "default": false,
-      "description": "Draws each button's icon alone, keeping its label as the accessible name. A button without an icon keeps its label.",
-      "conflictsWith": [
-        {
-          "prop": "icon",
-          "set": false
-        }
-      ]
+      "description": "Draws each button's icon alone, keeping its label as the accessible name. A button without an icon keeps its label."
     },
     {
       "name": "shape",

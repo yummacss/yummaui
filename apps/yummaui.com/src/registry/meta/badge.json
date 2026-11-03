@@ -17,8 +17,7 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end `icon` sits at.",
-      "dependsOn": "icon"
+      "description": "Which end `icon` sits at."
     },
     {
       "name": "dot",
@@ -60,13 +59,7 @@
         "danger"
       ],
       "default": "neutral",
-      "description": "What the badge means, not which hue it is. `tone` decides the look; `intent` tints it, including the dot, count and close button. `outline` stays neutral regardless.",
-      "conflictsWith": [
-        {
-          "prop": "tone",
-          "is": "outline"
-        }
-      ]
+      "description": "What the badge means, not which hue it is. `tone` decides the look; `intent` tints it, including the dot, count and close button. `outline` stays neutral regardless."
     },
     {
       "name": "size",

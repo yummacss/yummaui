@@ -45,8 +45,7 @@
       "name": "label",
       "type": "string",
       "example": "Find a file",
-      "description": "Field label above the input. Leave it out and the input is described by its placeholder alone.",
-      "optional": true
+      "description": "Field label above the input. Leave it out and the input is described by its placeholder alone."
     },
     {
       "name": "description",
@@ -74,8 +73,7 @@
         "trailing"
       ],
       "default": "leading",
-      "description": "Which end `icon` sits at.",
-      "dependsOn": "icon"
+      "description": "Which end `icon` sits at."
     },
     {
       "name": "autoHighlight",
@@ -88,10 +86,7 @@
       "name": "limit",
       "type": "number",
       "default": 0,
-      "description": "Cap on how many matches are listed. `0` lists them all.",
-      "min": 0,
-      "max": 10,
-      "step": 1
+      "description": "Cap on how many matches are listed. `0` lists them all."
     },
     {
       "name": "emptyMessage",

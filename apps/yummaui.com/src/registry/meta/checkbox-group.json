@@ -10,8 +10,7 @@
       "name": "parentLabel",
       "type": "ReactNode",
       "description": "Renders a checkbox above the group that checks and clears all of them, and is indeterminate while only some are checked. Needs `allValues`, and indents the group under it.",
-      "example": "Sync these folders",
-      "optional": true
+      "example": "Sync these folders"
     },
     {
       "name": "allValues",
