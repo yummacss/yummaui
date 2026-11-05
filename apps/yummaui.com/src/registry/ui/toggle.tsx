@@ -3,9 +3,9 @@
 import { Button } from "@base-ui/react/button";
 import { Toggle } from "@base-ui/react/toggle";
 import type { ComponentProps, ReactNode } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, Sliding, useShape, type Shape } from "./style";
 
 type Size = "sm" | "md";
 
@@ -31,6 +31,10 @@ const UNPRESSED =
 const GROUP_PRESSED =
   "bg:raised bs-o:key bc:rim c:label";
 const GROUP_UNPRESSED = "bg:transparent bc:transparent c:hint h:c:label";
+
+// the group slides one key under the pressed toggle, so the toggle draws none
+const SLID_PRESSED = "p:r zi:10 bg:transparent bc:transparent c:label";
+const SLID_UNPRESSED = "p:r zi:10 bg:transparent bc:transparent c:hint h:c:label";
 
 export interface ToggleProps
   extends Omit<ComponentProps<"button">, "className" | "value">,
@@ -123,6 +127,7 @@ export default function ToggleBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const grouped = value !== undefined;
+  const slid = useContext(Sliding) && grouped;
   const [internalPressed, setInternalPressed] = useState(
     defaultPressed ?? false,
   );
@@ -152,7 +157,11 @@ export default function ToggleBase({
           disabled
             ? DISABLED
             : `bw:1 ${
-                grouped
+                slid
+                  ? state.pressed
+                    ? SLID_PRESSED
+                    : SLID_UNPRESSED
+                  : grouped
                   ? state.pressed
                     ? GROUP_PRESSED
                     : GROUP_UNPRESSED

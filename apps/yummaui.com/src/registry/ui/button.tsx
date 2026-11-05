@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@base-ui/react/button";
+import { IconArrowBackUp } from "@tabler/icons-react";
 import type {
   ComponentProps,
   KeyboardEvent,
@@ -8,7 +9,7 @@ import type {
   PointerEvent,
   ReactNode,
 } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
@@ -43,6 +44,25 @@ const VARIANT_OUTLINE: Partial<Record<Variant, string>> = {
 };
 
 // held, the button's content again in a stronger color sweeps across it
+// counting: a pale tint of the button, its label in the button's own color
+const COUNTING: Record<Variant, string> = {
+  primary: "bg:well bc:rim c:label",
+  secondary: "bg:well bc:rim c:label",
+  subtle: "bg:well bc:transparent c:label",
+  ghost: "bg:well bc:transparent c:label",
+  danger: "bg:red-1 bc:red-3 c:red-8",
+  link: "bg:well bc:transparent c:label",
+};
+
+const BADGE: Record<Variant, string> = {
+  primary: "bg:fill c:on-fill",
+  secondary: "bg:fill c:on-fill",
+  subtle: "bg:fill c:on-fill",
+  ghost: "bg:fill c:on-fill",
+  danger: "bg:red c:white",
+  link: "bg:fill c:on-fill",
+};
+
 const HOLD_FILL: Record<Variant, string> = {
   primary: "bg:edge c:on-fill",
   secondary: "bg:fill c:on-fill",
@@ -119,12 +139,12 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
   onHold?: () => void;
   /**
    * Acts only once a countdown runs out, for `true` 5 seconds or for this many
-   * milliseconds. A press starts it, the fill drains while it runs, and a second
-   * press cancels it. Not with `hold`.
+   * milliseconds. A press starts it and turns the button pale with the seconds
+   * left in a badge, and a second press cancels it. Not with `hold`.
    */
   countdown?: boolean | number;
-  /** What the button says while the countdown runs, given the seconds left. */
-  countdownLabel?: (seconds: number) => string;
+  /** What the button says while the countdown runs, beside the seconds left. */
+  countdownLabel?: string;
   /** Called once a countdown runs out. A counting button never calls `onClick`. */
   onCountdown?: () => void;
   /**
@@ -160,7 +180,7 @@ export default function ButtonBase({
   holdLabel,
   onHold,
   countdown,
-  countdownLabel = (seconds) => `Undo in ${seconds}`,
+  countdownLabel = "Undo",
   onCountdown,
   transition = true,
   disabled,
@@ -197,9 +217,21 @@ export default function ButtonBase({
 
   const held = useHold(hold, onHold, transition);
   const timed = !hold && Boolean(countdown);
-  const counter = useCountdown(timed ? countdown : undefined, onCountdown, transition);
-  const label = counter.seconds ? (
-    <span className="fvn:tn">{countdownLabel(counter.seconds)}</span>
+  const counter = useCountdown(timed ? countdown : undefined, onCountdown);
+  const counting = counter.seconds > 0;
+  const morph = useMorph<HTMLSpanElement>(counting, transition);
+  const label = counting ? (
+    <>
+      {countdownLabel}
+      <span
+        className={merge(
+          "d:if ai:c jc:c h:5 min-w:5 px:1 br:9999 fs:xs fw:600 fvn:tn",
+          BADGE[variant],
+        )}
+      >
+        {counter.seconds}
+      </span>
+    </>
   ) : holdLabel ? (
       <Swap
         first={children}
@@ -219,8 +251,8 @@ export default function ButtonBase({
     transition && !inactive
       ? `${variant === "primary" ? "tp:a" : "tp:ct"} ${MOTION}`
       : "",
-    VARIANTS[variant],
-    inactive ? "" : HOVERS[variant],
+    counting ? COUNTING[variant] : VARIANTS[variant],
+    inactive || counting ? "" : HOVERS[variant],
     iconOnlyActive ? ICON_ONLY[size] : SIZES[size],
     RADIUS.control[shape],
     inactive ? "o:60 c:na" : "c:p",
@@ -241,7 +273,17 @@ export default function ButtonBase({
       {...props}
     >
       {iconOnlyActive ? (
-        glyph
+        counting ? (
+          label
+        ) : (
+          glyph
+        )
+      ) : timed ? (
+        <span ref={morph} className="d:if ai:c jc:c g:2 ws:nw o:h">
+          {counting ? <IconArrowBackUp aria-hidden className="w:4 h:4 fs:0" /> : !trailing && glyph}
+          {label}
+          {!counting && trailing && glyph}
+        </span>
       ) : (
         <>
           {!trailing && glyph}
@@ -266,26 +308,9 @@ export default function ButtonBase({
           )}
         </span>
       )}
-      {timed && counter.seconds > 0 && (
-        <span
-          aria-hidden
-          style={counter.style}
-          className={merge("p:a i:0 d:f ai:c jc:c g:2", HOLD_FILL[variant])}
-        >
-          {iconOnlyActive ? (
-            glyph
-          ) : (
-            <>
-              {!trailing && glyph}
-              {label}
-              {trailing && glyph}
-            </>
-          )}
-        </span>
-      )}
       {timed && (
         <span aria-live="polite" className="p:a w:px h:px o:h">
-          {counter.started ? countdownLabel(counter.started) : ""}
+          {counter.started ? `${countdownLabel}, ${counter.started} seconds` : ""}
         </span>
       )}
       {hold && holdLabel && (
@@ -412,31 +437,18 @@ function useHold(
 function useCountdown(
   countdown: boolean | number | undefined,
   onCountdown: (() => void) | undefined,
-  animated: boolean,
 ) {
   const duration = typeof countdown === "number" ? countdown : 5000;
   const [seconds, setSeconds] = useState(0);
   const [started, setStarted] = useState(0);
-  const [draining, setDraining] = useState(false);
-  const [still, setStill] = useState(!animated);
   const timers = useRef<{
     tick?: ReturnType<typeof setInterval>;
     end?: ReturnType<typeof setTimeout>;
-    frame?: number;
   }>({});
-
-  useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setStill(!animated || query.matches);
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, [animated]);
 
   const clear = () => {
     clearInterval(timers.current.tick);
     clearTimeout(timers.current.end);
-    cancelAnimationFrame(timers.current.frame ?? 0);
   };
 
   useEffect(() => clear, []);
@@ -445,7 +457,6 @@ function useCountdown(
     clear();
     setSeconds(0);
     setStarted(0);
-    setDraining(false);
   };
 
   const start = () => {
@@ -453,11 +464,6 @@ function useCountdown(
     const first = Math.ceil(duration / 1000);
     setSeconds(first);
     setStarted(first);
-    setDraining(false);
-    // the fill paints full for a frame before it drains
-    timers.current.frame = requestAnimationFrame(() => {
-      timers.current.frame = requestAnimationFrame(() => setDraining(true));
-    });
     timers.current.tick = setInterval(() => {
       setSeconds(Math.max(1, Math.ceil((endsAt - Date.now()) / 1000)));
     }, 200);
@@ -467,20 +473,36 @@ function useCountdown(
     }, duration);
   };
 
-  const timing = `${duration}ms linear`;
+  return { seconds, started, toggle: () => (seconds ? reset() : start()) };
+}
 
-  return {
-    seconds,
-    started,
-    toggle: () => (seconds ? reset() : start()),
-    style: still
-      ? {
-          opacity: draining ? 0 : 1,
-          transition: draining ? `opacity ${timing}` : "none",
-        }
-      : {
-          clipPath: draining ? "inset(0 0 0 100%)" : "inset(0 0 0 0)",
-          transition: draining ? `clip-path ${timing}` : "none",
-        },
-  };
+// eases the content's width from the old label to the new one when `key` flips
+function useMorph<T extends HTMLElement>(key: boolean, animated: boolean) {
+  const ref = useRef<T>(null);
+  const width = useRef(0);
+
+  useLayoutEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    node.style.transition = "";
+    node.style.width = "";
+    const to = node.offsetWidth;
+    const from = width.current;
+    width.current = to;
+    const still =
+      !animated || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!from || from === to || still) return;
+    node.style.width = `${from}px`;
+    node.getBoundingClientRect();
+    node.style.transition = "width 250ms cubic-bezier(0.25, 1, 0.5, 1)";
+    node.style.width = `${to}px`;
+    const settle = () => {
+      node.style.transition = "";
+      node.style.width = "";
+    };
+    node.addEventListener("transitionend", settle, { once: true });
+    return () => node.removeEventListener("transitionend", settle);
+  }, [key, animated]);
+
+  return ref;
 }

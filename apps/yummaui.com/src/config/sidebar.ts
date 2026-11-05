@@ -37,12 +37,10 @@ export const sidebarConfig: SidebarSection[] = [
 		title: "Display",
 		items: [
 			"accordion",
-			"activity-heatmap",
 			"avatar",
 			"avatar-stack",
 			"badge",
 			"breadcrumb",
-			"gauge",
 			"kbd",
 			"meter",
 			"preview-card",
@@ -50,6 +48,10 @@ export const sidebarConfig: SidebarSection[] = [
 			"scroll-area",
 			"separator",
 		],
+	},
+	{
+		title: "Charts",
+		items: ["activity-heatmap", "gauge"],
 	},
 	{
 		title: "Interactive",

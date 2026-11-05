@@ -5,7 +5,7 @@ import { ToggleGroup } from "@base-ui/react/toggle-group";
 import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
 import { type ComponentType, useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, useIndicator, useShape, type Shape } from "./style";
 
 type Theme = "light" | "dark" | "system";
 type Size = "sm" | "md";
@@ -30,9 +30,9 @@ const ICON_ONLY: Record<Size, string> = {
   md: "w:8 h:8",
 };
 
-// picking one of several: the selected tab's raised chip on the track
-const PICKED = "bg:raised bs-o:key bc:rim c:label";
-const UNPICKED = "bg:transparent bc:transparent c:hint h:c:label";
+// the raised key slides under the picked option, so the options draw none
+const PICKED = "bc:transparent c:label";
+const UNPICKED = "bc:transparent c:hint h:c:label";
 
 function isTheme(value: unknown): value is Theme {
   return value === "light" || value === "dark" || value === "system";
@@ -66,6 +66,11 @@ export interface ThemeSwitcherProps {
   /** Blocks every option and dims the control. */
   disabled?: boolean;
   /**
+   * The raised key sliding to the picked option. Turn it off for an instant
+   * jump; reduced motion does the same.
+   */
+  animated?: boolean;
+  /**
    * Extra classes. `merge` folds them in last, so one here replaces the
    * component's own class for the same utility.
    */
@@ -92,9 +97,11 @@ export default function ThemeSwitcher({
   size = "md",
   shape: shapeProp,
   disabled = false,
+  animated = true,
   className,
   focus = true,
 }: ThemeSwitcherProps) {
+  const indicator = useIndicator<HTMLDivElement>();
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [internal, setInternal] = useState<Theme>(defaultValue);
@@ -129,17 +136,27 @@ export default function ThemeSwitcher({
 
   return (
     <ToggleGroup
+      ref={indicator.ref}
       aria-label="Theme"
       value={[current]}
       onValueChange={pick}
       disabled={disabled}
       className={merge(
-        "d:f g:1 p:1 w:fc bg:well bs-o:sunk",
+        "p:r d:f g:1 p:1 w:fc bg:well bs-o:sunk",
         RADIUS.bar[shape],
         disabled ? "o:60" : "",
         className,
       )}
     >
+      <span
+        aria-hidden
+        style={indicator.style}
+        className={merge(
+          "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim",
+          RADIUS.item[shape],
+          animated && indicator.ready && "tp:a tdu:300 ttf:out-quart @prm:tp:none",
+        )}
+      />
       {THEMES.map((theme) => (
         <Toggle
           key={theme.value}
@@ -148,7 +165,7 @@ export default function ThemeSwitcher({
           className={(state) =>
             merge(
               outline,
-              "d:f ai:c jc:c bw:1 fw:500 us:none tp:c tdu:150 ttf:io @prm:tp:none",
+              "p:r zi:10 d:f ai:c jc:c bw:1 bg:transparent fw:500 us:none tp:c tdu:150 ttf:io @prm:tp:none",
               disabled ? "c:na" : "c:p",
               iconOnly ? ICON_ONLY[size] : SIZES[size],
               RADIUS.item[shape],

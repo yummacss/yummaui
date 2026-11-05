@@ -3,7 +3,7 @@
 import { ToggleGroup } from "@base-ui/react/toggle-group";
 import { type ReactNode, useId } from "react";
 import { merge } from "yummacss/merge";
-import { RADIUS, useShape, type Shape } from "./style";
+import { RADIUS, Sliding, useIndicator, useShape, type Shape } from "./style";
 
 type Orientation = "horizontal" | "vertical";
 
@@ -36,6 +36,12 @@ export interface ToggleGroupProps {
   defaultValue?: readonly string[];
   /** Called with the pressed values whenever they change. */
   onValueChange?: (value: string[]) => void;
+  /**
+   * The raised key sliding to the pressed toggle. Turn it off for an instant
+   * jump; reduced motion does the same. Not with `multiple`, where each pressed
+   * toggle draws its own key.
+   */
+  animated?: boolean;
 }
 
 /**
@@ -53,11 +59,15 @@ export default function ToggleGroupBase({
   value,
   defaultValue,
   onValueChange,
+  animated = true,
 }: ToggleGroupProps) {
   const shape = useShape(shapeProp);
   const labelId = useId();
+  const sliding = !multiple;
+  const indicator = useIndicator<HTMLDivElement>(sliding);
   const group = (
     <ToggleGroup
+      ref={indicator.ref}
       aria-labelledby={label ? labelId : undefined}
       value={value}
       defaultValue={defaultValue}
@@ -72,7 +82,18 @@ export default function ToggleGroupBase({
         className,
       )}
     >
-      {children}
+      {sliding && (
+        <span
+          aria-hidden
+          style={indicator.style}
+          className={merge(
+            "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim",
+            RADIUS.bar[shape],
+            animated && indicator.ready && "tp:a tdu:300 ttf:out-quart @prm:tp:none",
+          )}
+        />
+      )}
+      <Sliding value={sliding}>{children}</Sliding>
     </ToggleGroup>
   );
 

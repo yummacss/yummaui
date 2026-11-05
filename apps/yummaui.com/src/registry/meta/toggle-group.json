@@ -60,6 +60,12 @@
       "description": "Ignores interaction on every toggle in the group."
     },
     {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The raised key sliding to the pressed toggle. Turn it off for an instant jump; reduced motion does the same. Not with `multiple`, where each pressed toggle draws its own key."
+    },
+    {
       "name": "className",
       "type": "string",
       "description": "Merged with the group's own classes, so a utility you pass wins."

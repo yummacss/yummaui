@@ -71,6 +71,12 @@
       "description": "Blocks every option and dims the control."
     },
     {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The raised key sliding to the picked option. Turn it off for an instant jump; reduced motion does the same."
+    },
+    {
       "name": "className",
       "type": "string",
       "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
