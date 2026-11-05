@@ -118,6 +118,16 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
   /** Called once a hold completes. A held button never calls `onClick`. */
   onHold?: () => void;
   /**
+   * Acts only once a countdown runs out, for `true` 5 seconds or for this many
+   * milliseconds. A press starts it, the fill drains while it runs, and a second
+   * press cancels it. Not with `hold`.
+   */
+  countdown?: boolean | number;
+  /** What the button says while the countdown runs, given the seconds left. */
+  countdownLabel?: (seconds: number) => string;
+  /** Called once a countdown runs out. A counting button never calls `onClick`. */
+  onCountdown?: () => void;
+  /**
    * The hover and focus transition. Turn it off for a static button, or when
    * the user has asked for reduced motion.
    */
@@ -136,7 +146,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
 
 /**
  * A primary action, in six variants, three sizes and four shapes, with loading,
- * icon-only and hold-to-confirm states.
+ * icon-only, hold-to-confirm and countdown states.
  */
 export default function ButtonBase({
   variant = "primary",
@@ -149,6 +159,9 @@ export default function ButtonBase({
   hold,
   holdLabel,
   onHold,
+  countdown,
+  countdownLabel = (seconds) => `Undo in ${seconds}`,
+  onCountdown,
   transition = true,
   disabled,
   className,
@@ -183,8 +196,11 @@ export default function ButtonBase({
   );
 
   const held = useHold(hold, onHold, transition);
-  const label =
-    holdLabel ? (
+  const timed = !hold && Boolean(countdown);
+  const counter = useCountdown(timed ? countdown : undefined, onCountdown, transition);
+  const label = counter.seconds ? (
+    <span className="fvn:tn">{countdownLabel(counter.seconds)}</span>
+  ) : holdLabel ? (
       <Swap
         first={children}
         second={holdLabel}
@@ -198,7 +214,7 @@ export default function ButtonBase({
   const classes = merge(
     outline,
     BASE,
-    hold ? "p:r o:h ta:none" : "",
+    hold || timed ? "p:r o:h ta:none" : "",
     // primary hovers with opacity, which tp:ct does not carry
     transition && !inactive
       ? `${variant === "primary" ? "tp:a" : "tp:ct"} ${MOTION}`
@@ -220,7 +236,7 @@ export default function ButtonBase({
       aria-label={
         iconOnlyActive && typeof children === "string" ? children : undefined
       }
-      onClick={hold ? undefined : onClick}
+      onClick={hold ? undefined : timed ? counter.toggle : onClick}
       {...(hold && !inactive ? held.handlers : {})}
       {...props}
     >
@@ -248,6 +264,28 @@ export default function ButtonBase({
               {trailing && glyph}
             </>
           )}
+        </span>
+      )}
+      {timed && counter.seconds > 0 && (
+        <span
+          aria-hidden
+          style={counter.style}
+          className={merge("p:a i:0 d:f ai:c jc:c g:2", HOLD_FILL[variant])}
+        >
+          {iconOnlyActive ? (
+            glyph
+          ) : (
+            <>
+              {!trailing && glyph}
+              {label}
+              {trailing && glyph}
+            </>
+          )}
+        </span>
+      )}
+      {timed && (
+        <span aria-live="polite" className="p:a w:px h:px o:h">
+          {counter.started ? countdownLabel(counter.started) : ""}
         </span>
       )}
       {hold && holdLabel && (
@@ -368,5 +406,81 @@ function useHold(
         stop();
       },
     },
+  };
+}
+
+function useCountdown(
+  countdown: boolean | number | undefined,
+  onCountdown: (() => void) | undefined,
+  animated: boolean,
+) {
+  const duration = typeof countdown === "number" ? countdown : 5000;
+  const [seconds, setSeconds] = useState(0);
+  const [started, setStarted] = useState(0);
+  const [draining, setDraining] = useState(false);
+  const [still, setStill] = useState(!animated);
+  const timers = useRef<{
+    tick?: ReturnType<typeof setInterval>;
+    end?: ReturnType<typeof setTimeout>;
+    frame?: number;
+  }>({});
+
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setStill(!animated || query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, [animated]);
+
+  const clear = () => {
+    clearInterval(timers.current.tick);
+    clearTimeout(timers.current.end);
+    cancelAnimationFrame(timers.current.frame ?? 0);
+  };
+
+  useEffect(() => clear, []);
+
+  const reset = () => {
+    clear();
+    setSeconds(0);
+    setStarted(0);
+    setDraining(false);
+  };
+
+  const start = () => {
+    const endsAt = Date.now() + duration;
+    const first = Math.ceil(duration / 1000);
+    setSeconds(first);
+    setStarted(first);
+    setDraining(false);
+    // the fill paints full for a frame before it drains
+    timers.current.frame = requestAnimationFrame(() => {
+      timers.current.frame = requestAnimationFrame(() => setDraining(true));
+    });
+    timers.current.tick = setInterval(() => {
+      setSeconds(Math.max(1, Math.ceil((endsAt - Date.now()) / 1000)));
+    }, 200);
+    timers.current.end = setTimeout(() => {
+      reset();
+      onCountdown?.();
+    }, duration);
+  };
+
+  const timing = `${duration}ms linear`;
+
+  return {
+    seconds,
+    started,
+    toggle: () => (seconds ? reset() : start()),
+    style: still
+      ? {
+          opacity: draining ? 0 : 1,
+          transition: draining ? `opacity ${timing}` : "none",
+        }
+      : {
+          clipPath: draining ? "inset(0 0 0 100%)" : "inset(0 0 0 0)",
+          transition: draining ? `clip-path ${timing}` : "none",
+        },
   };
 }

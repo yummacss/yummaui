@@ -1,5 +1,5 @@
 {
-  "summary": "A primary action, in six variants, three sizes and four shapes, with loading, icon-only and hold-to-confirm states.",
+  "summary": "A primary action, in six variants, three sizes and four shapes, with loading, icon-only, hold-to-confirm and countdown states.",
   "props": [
     {
       "name": "icon",
@@ -42,6 +42,25 @@
       "type": "none",
       "typeName": "() => void",
       "description": "Called once a hold completes. A held button never calls `onClick`."
+    },
+    {
+      "name": "countdown",
+      "type": "boolean",
+      "typeName": "boolean | number",
+      "default": false,
+      "description": "Acts only once a countdown runs out, for `true` 5 seconds or for this many milliseconds. A press starts it, the fill drains while it runs, and a second press cancels it. Not with `hold`."
+    },
+    {
+      "name": "countdownLabel",
+      "type": "none",
+      "typeName": "(seconds: number) => string",
+      "description": "What the button says while the countdown runs, given the seconds left."
+    },
+    {
+      "name": "onCountdown",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called once a countdown runs out. A counting button never calls `onClick`."
     },
     {
       "name": "variant",
@@ -150,6 +169,18 @@
                 }
               },
               "children": "Delete"
+            },
+            {
+              "component": "Button",
+              "props": {
+                "variant": "secondary",
+                "countdown": true,
+                "icon": {
+                  "$icon": "IconArchive",
+                  "size": "w:4 h:4"
+                }
+              },
+              "children": "Archive"
             },
             {
               "component": "Button",
