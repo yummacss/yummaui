@@ -22,7 +22,7 @@ export function EnumSelect({
 	const [open, setOpen] = useState(false);
 
 	const popup = (
-		<Select.Popup className="tp:a tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:40 bc:border bg:surface bw:1">
+		<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:40 bc:border bg:surface bw:1">
 			<Select.List>
 				{values.map((option) => (
 					<Select.Item
@@ -132,7 +132,7 @@ export function SwatchSelect({
 					collisionAvoidance={{ side: "none", fallbackAxisSide: "none" }}
 					className="zi:50"
 				>
-					<Select.Popup className="tp:a tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:72 bc:border bg:surface bw:1">
+					<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:72 bc:border bg:surface bw:1">
 						<Select.List>
 							{options.map((option) => (
 								<Select.Item

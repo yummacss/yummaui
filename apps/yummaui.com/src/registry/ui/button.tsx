@@ -270,7 +270,7 @@ function Swap({
   swapped: boolean;
   animated: boolean;
 }) {
-  const motion = animated ? "tp:a tdu:200 ttf:eo @prm:tp:none" : "";
+  const motion = animated ? "tp:ot tdu:200 ttf:eo @prm:tp:none" : "";
   return (
     <span className="d:ig ji:c o:h">
       <span
