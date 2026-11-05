@@ -63,10 +63,10 @@
       "values": [
         "square",
         "rounded",
-        "squircle",
-        "pill"
+        "squircle"
       ],
-      "description": "Corner radius on the card and the days. Inherits the nearest `Shape`."
+      "description": "Corner radius on the card and the days. Inherits the nearest `Shape`; under a pill it is rounded, so the days stay squares.",
+      "default": "rounded"
     },
     {
       "name": "className",

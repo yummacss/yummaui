@@ -3,7 +3,7 @@
 import type { KeyboardEvent } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, useShape } from "./style";
 
 // empty, then four steps of the fill, so the accent recolors every step
 const LEVELS = ["bg:line", "bg:fill/25", "bg:fill/50", "bg:fill/75", "bg:fill"];
@@ -14,6 +14,12 @@ const SIZES = {
 };
 
 const DAY = 86_400_000;
+
+// days stay squares: a pill would turn them into dots
+const SHAPES = ["square", "rounded", "squircle"] as const;
+
+// a chip's radius would round an 8px day into a dot
+const DAY_RADIUS = { square: "", rounded: "br:xs", squircle: "br:xs cs:s" };
 
 export interface ActivityDay {
   /** The day, as `YYYY-MM-DD`. */
@@ -37,8 +43,11 @@ export interface ActivityHeatmapProps {
   locale?: string;
   /** Size of each day. */
   size?: keyof typeof SIZES;
-  /** Corner radius on the card and the days. Inherits the nearest `Shape`. */
-  shape?: Shape;
+  /**
+   * Corner radius on the card and the days. Inherits the nearest `Shape`;
+   * under a pill it is rounded, so the days stay squares.
+   */
+  shape?: (typeof SHAPES)[number];
   /**
    * The focus outline on each day. `true` draws it, `false` removes it, and a
    * string of Yumma CSS utilities restyles it. Removing it outright and
@@ -70,7 +79,7 @@ export default function ActivityHeatmap({
   focus = true,
   className,
 }: ActivityHeatmapProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const counts = new Map(data.map((day) => [day.date, day.count]));
   const last = Date.parse(end ?? iso(Date.now()));
@@ -191,7 +200,7 @@ export default function ActivityHeatmap({
                     SIZES[size].cell,
                     "d:b p:0 bw:0",
                     LEVELS[level(day.count)],
-                    RADIUS.chip[shape],
+                    DAY_RADIUS[shape],
                   )}
                 />
               ),
@@ -209,7 +218,7 @@ export default function ActivityHeatmap({
           {LEVELS.map((shade) => (
             <span
               key={shade}
-              className={merge(SIZES[size].cell, shade, RADIUS.chip[shape])}
+              className={merge(SIZES[size].cell, shade, DAY_RADIUS[shape])}
             />
           ))}
           <span className="ml:1">More</span>
