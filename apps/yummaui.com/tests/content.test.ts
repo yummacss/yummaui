@@ -18,6 +18,7 @@ const PLAYGROUND = /<ComponentPlayground\b/;
 const uiPages = contentPages();
 
 const KNOWN_UNLISTED: string[] = [
+	"activity-heatmap-deploys",
 	"autocomplete-grouped",
 	"autocomplete-helper",
 	"autocomplete-icon-leading",

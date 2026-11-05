@@ -1,0 +1,89 @@
+{
+  "summary": "A year of daily counts as a grid of days, a column per week from Monday, shaded by how much happened. Arrow keys move between days.",
+  "props": [
+    {
+      "name": "data",
+      "type": "none",
+      "typeName": "ActivityDay[]",
+      "example": [
+        {
+          "date": "2026-11-04",
+          "count": 6
+        },
+        {
+          "date": "2026-11-05",
+          "count": 3
+        }
+      ],
+      "description": "One entry per day with activity. Days left out count as zero."
+    },
+    {
+      "name": "end",
+      "type": "string",
+      "example": "2026-11-05",
+      "description": "The last day shown, as `YYYY-MM-DD`. Defaults to today."
+    },
+    {
+      "name": "weeks",
+      "type": "number",
+      "default": 53,
+      "description": "How many weeks back from `end`, each a column starting on Monday."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Activity",
+      "description": "The heading over the grid, and its accessible name."
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "default": "contributions",
+      "description": "What a count counts, in the plural, for the total & each day's label."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "default": "en-US",
+      "description": "Formats the month and day names."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md"
+      ],
+      "default": "md",
+      "description": "Size of each day."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "description": "Corner radius on the card and the days. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline on each day. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ActivityHeatmapDeploys"
+    }
+  ]
+}

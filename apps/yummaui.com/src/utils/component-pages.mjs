@@ -19,6 +19,12 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "activity-heatmap",
+		title: "Activity Heatmap",
+		description:
+			"Show a year of daily counts as a grid of days, shaded by how much happened.",
+	},
+	{
 		slug: "alert-dialog",
 		title: "Alert Dialog",
 		description:

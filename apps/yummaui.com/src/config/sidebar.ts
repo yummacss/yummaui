@@ -37,6 +37,7 @@ export const sidebarConfig: SidebarSection[] = [
 		title: "Display",
 		items: [
 			"accordion",
+			"activity-heatmap",
 			"avatar",
 			"avatar-stack",
 			"badge",

@@ -41,9 +41,9 @@
 
 - **PR bodies**: link every component you name to its page, with the link on
   the bold heading itself. While a branch is open the link is that branch's
-  Vercel preview:
-  `https://yummauicom-git-<branch>-rrenildopereiraas-projects.vercel.app/components/<id>`,
-  where `<branch>` is the branch name with `/` as `-`. Once merged it is
+  Vercel preview, taken from the Vercel bot's comment on the PR, plus
+  `/components/<id>`. Never build it from the branch name: a long one is cut
+  and hashed in the host. Once merged it is
   `https://www.yummaui.com/components/<id>`. The same rule applies in chat.
 - **Docs pages are short.** The description is the lead, so the body opens
   with a heading, a reference table or a hint, never a paragraph. A paragraph
