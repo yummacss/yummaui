@@ -35,6 +35,7 @@ export const registry = {
   "field": () => import("./ui/field"),
   "file-tree": () => import("./ui/file-tree"),
   "file-upload": () => import("./ui/file-upload"),
+  "gauge": () => import("./ui/gauge"),
   "inline-icon-heading": () => import("./ui/inline-icon-heading"),
   "kbd": () => import("./ui/kbd"),
   "menu": () => import("./ui/menu"),

@@ -126,6 +126,13 @@ export const COMPONENT_PAGES = [
 		description: "Upload files with drag & drop.",
 	},
 	{
+		slug: "gauge",
+		title: "Gauge",
+		description:
+			"Show a value on a fixed range as a half-circle arc, with thresholds, built on Base UI.",
+		primitive: true,
+	},
+	{
 		slug: "inline-icon-heading",
 		title: "Inline Icon Heading",
 		description:
