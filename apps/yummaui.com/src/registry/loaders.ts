@@ -5,6 +5,8 @@
 
 export const registry = {
   "accordion": () => import("./ui/accordion"),
+  "activity-heatmap-deploys": () => import("./ui/activity-heatmap-deploys"),
+  "activity-heatmap": () => import("./ui/activity-heatmap"),
   "alert-dialog": () => import("./ui/alert-dialog"),
   "autocomplete-grouped": () => import("./ui/autocomplete-grouped"),
   "autocomplete-helper": () => import("./ui/autocomplete-helper"),

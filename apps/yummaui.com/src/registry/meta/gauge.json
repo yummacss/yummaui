@@ -91,57 +91,15 @@
   ],
   "scene": [
     {
-      "tag": "div",
-      "className": "d:f fw:w ai:e jc:c g:10",
-      "children": [
-        {
-          "component": "Gauge",
-          "props": {
-            "value": 72,
-            "max": 100,
-            "label": "Storage",
-            "unit": "GB",
-            "description": "72 of 100 GB used",
-            "size": "lg"
-          }
-        },
-        {
-          "tag": "div",
-          "className": "d:f g:6",
-          "children": [
-            {
-              "component": "Gauge",
-              "props": {
-                "value": 34,
-                "label": "CPU",
-                "size": "sm",
-                "warning": 70,
-                "danger": 90
-              }
-            },
-            {
-              "component": "Gauge",
-              "props": {
-                "value": 78,
-                "label": "Memory",
-                "size": "sm",
-                "warning": 70,
-                "danger": 90
-              }
-            },
-            {
-              "component": "Gauge",
-              "props": {
-                "value": 94,
-                "label": "Disk",
-                "size": "sm",
-                "warning": 70,
-                "danger": 90
-              }
-            }
-          ]
-        }
-      ]
+      "component": "Gauge",
+      "props": {
+        "value": 72,
+        "max": 100,
+        "label": "Storage",
+        "unit": "GB",
+        "description": "72 of 100 GB used",
+        "size": "lg"
+      }
     }
   ]
 }

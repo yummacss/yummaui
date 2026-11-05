@@ -3,6 +3,7 @@
  * `pnpm generate:registry` instead.
  */
 import meta_accordion from "./meta/accordion.json";
+import meta_activity_heatmap from "./meta/activity-heatmap.json";
 import meta_alert_dialog from "./meta/alert-dialog.json";
 import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
@@ -88,6 +89,7 @@ export interface ChildExample {
 
 export const registryMeta = {
   "accordion": meta_accordion,
+  "activity-heatmap": meta_activity_heatmap,
   "alert-dialog": meta_alert_dialog,
   "autocomplete": meta_autocomplete,
   "avatar-stack": meta_avatar_stack,
@@ -153,6 +155,8 @@ export interface RegistryTarget {
 
 export const registryTargets: Record<string, RegistryTarget> = {
   "accordion": { component: "accordion", variant: "base", kind: "component", install: "accordion" },
+  "activity-heatmap-deploys": { component: "activity-heatmap", variant: "deploys", kind: "example", install: "activity-heatmap" },
+  "activity-heatmap": { component: "activity-heatmap", variant: "base", kind: "component", install: "activity-heatmap" },
   "alert-dialog": { component: "alert-dialog", variant: "base", kind: "component", install: "alert-dialog" },
   "autocomplete-grouped": { component: "autocomplete", variant: "grouped", kind: "example", install: "autocomplete" },
   "autocomplete-helper": { component: "autocomplete", variant: "helper", kind: "example", install: "autocomplete" },
