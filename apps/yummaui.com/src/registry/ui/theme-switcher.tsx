@@ -20,19 +20,20 @@ const THEMES: {
   { value: "system", label: "System", icon: IconDeviceDesktop },
 ];
 
+// the same measures as Tabs, so the two read as one family
 const SIZES: Record<Size, string> = {
-  sm: "h:7 px:2 g:1 fs:xs",
-  md: "h:8 px:3 g:2 fs:sm",
+  sm: "py:1 px:2 g:1 fs:xs",
+  md: "py:2 px:3 g:2 fs:sm",
 };
 
 const ICON_ONLY: Record<Size, string> = {
-  sm: "w:7 h:7",
-  md: "w:8 h:8",
+  sm: "p:1",
+  md: "p:2",
 };
 
 // the raised key slides under the picked option, so the options draw none
-const PICKED = "bc:transparent c:label";
-const UNPICKED = "bc:transparent c:hint h:c:label";
+const PICKED = "c:label";
+const UNPICKED = "c:hint h:c:label";
 
 function isTheme(value: unknown): value is Theme {
   return value === "light" || value === "dark" || value === "system";
@@ -58,7 +59,7 @@ export interface ThemeSwitcherProps {
   /** Height of the track and its options. */
   size?: Size;
   /**
-   * Corner radius of the track. The options nest one step inside it. `squircle`
+   * Corner radius of the track and of the key that slides on it. `squircle`
    * uses `corner-shape`, which degrades to a rounded square where that is
    * unsupported. Inherits the nearest `Shape`.
    */
@@ -142,7 +143,7 @@ export default function ThemeSwitcher({
       onValueChange={pick}
       disabled={disabled}
       className={merge(
-        "p:r d:f g:1 p:1 w:fc bg:well bs-o:sunk",
+        "p:r d:f w:fc bg:well bs-o:sunk",
         RADIUS.bar[shape],
         disabled ? "o:60" : "",
         className,
@@ -153,7 +154,7 @@ export default function ThemeSwitcher({
         style={indicator.style}
         className={merge(
           "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim",
-          RADIUS.item[shape],
+          RADIUS.control[shape],
           animated && indicator.ready && "tp:a tdu:300 ttf:out-quart @prm:tp:none",
         )}
       />
@@ -165,10 +166,10 @@ export default function ThemeSwitcher({
           className={(state) =>
             merge(
               outline,
-              "p:r zi:10 d:f ai:c jc:c bw:1 bg:transparent fw:500 us:none tp:c tdu:150 ttf:io @prm:tp:none",
+              "p:r zi:10 d:f ai:c jc:c bg:transparent fw:500 us:none tp:c tdu:150 ttf:io @prm:tp:none",
               disabled ? "c:na" : "c:p",
               iconOnly ? ICON_ONLY[size] : SIZES[size],
-              RADIUS.item[shape],
+              RADIUS.control[shape],
               state.pressed ? PICKED : UNPICKED,
             )
           }
