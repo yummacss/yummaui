@@ -152,7 +152,7 @@ export default function AlertDialogBase({
         <AlertDialog.Popup
           ref={popupRef}
           initialFocus={(type) => type === "keyboard" || popupRef.current}
-          className={`${popupClasses} ${animated ? "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:eo @prm:tp:none" : ""}`}
+          className={`${popupClasses} ${animated ? "tp:ot tdu:250 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:eo @prm:tp:none" : ""}`}
           style={{ maxWidth: "90vw" }}
         >
           {showClose && (

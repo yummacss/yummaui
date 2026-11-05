@@ -216,7 +216,7 @@ export default function PopoverBase({
         sideOffset={sideOffset + (arrow ? ARROW_HEIGHT : 0)}
       >
         <Popover.Popup
-          className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+          className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
         >
           {body}
         </Popover.Popup>

@@ -187,7 +187,7 @@ export default function OnboardingBase({
             "o:h w:112 max-w:100% p:5 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
             RADIUS.popup[shape],
             animated &&
-              "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:eo @prm:tp:none",
+              "tp:ot tdu:250 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:eo @prm:tp:none",
           )}
         >
           <div className="d:f fd:c g:4">
@@ -216,9 +216,9 @@ export default function OnboardingBase({
                 key={page}
                 className={
                   direction > 0
-                    ? "tp:a tdu:250 ttf:out-quart @st:o:0 @st:ttx:10 @prm:tp:none"
+                    ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:10 @prm:tp:none"
                     : direction < 0
-                      ? "tp:a tdu:250 ttf:out-quart @st:o:0 @st:ttx:-10 @prm:tp:none"
+                      ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:-10 @prm:tp:none"
                       : ""
                 }
               >

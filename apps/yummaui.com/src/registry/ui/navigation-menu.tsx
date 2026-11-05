@@ -125,7 +125,7 @@ export default function NavigationMenuBase({
                   className={merge(
                     "p:1 w:max max-w:100%",
                     animated &&
-                      `tp:a tdu:350 ttf:out-quart ${SLIDE} @prm:tp:none`,
+                      `tp:ot tdu:350 ttf:out-quart ${SLIDE} @prm:tp:none`,
                   )}
                 >
                   <div
@@ -194,7 +194,7 @@ export default function NavigationMenuBase({
               "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
               RADIUS.bar[shape],
               animated &&
-                "tp:a tdu:350 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",
+                "tp:ot tdu:350 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",
             )}
           >
             <NavigationMenu.Viewport className="p:r w:100% h:100% o:h" />

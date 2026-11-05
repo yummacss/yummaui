@@ -87,7 +87,7 @@ function Chip({
           aria-hidden
           className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:edge bw:1 c:on-fill bs-o:key-fill ${RADIUS.textTile[shape]} ${
             animated
-              ? `tp:a tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index % DELAYS.length]}`
+              ? `tp:ot tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index % DELAYS.length]}`
               : ""
           }`}
         >

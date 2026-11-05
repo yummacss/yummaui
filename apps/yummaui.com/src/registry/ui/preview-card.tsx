@@ -114,7 +114,7 @@ export default function PreviewCardBase({
       <PreviewCard.Portal container={container}>
         <PreviewCard.Positioner sideOffset={8 + (arrow ? ARROW_HEIGHT : 0)}>
           <PreviewCard.Popup
-            className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:a tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+            className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
           >
             {arrow && (
               <PreviewCard.Arrow
