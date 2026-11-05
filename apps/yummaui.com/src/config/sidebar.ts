@@ -41,6 +41,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"avatar-stack",
 			"badge",
 			"breadcrumb",
+			"gauge",
 			"kbd",
 			"meter",
 			"preview-card",

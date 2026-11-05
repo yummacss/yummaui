@@ -21,6 +21,7 @@ import meta_empty_state from "./meta/empty-state.json";
 import meta_field from "./meta/field.json";
 import meta_file_tree from "./meta/file-tree.json";
 import meta_file_upload from "./meta/file-upload.json";
+import meta_gauge from "./meta/gauge.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
 import meta_kbd from "./meta/kbd.json";
 import meta_menu from "./meta/menu.json";
@@ -105,6 +106,7 @@ export const registryMeta = {
   "field": meta_field,
   "file-tree": meta_file_tree,
   "file-upload": meta_file_upload,
+  "gauge": meta_gauge,
   "inline-icon-heading": meta_inline_icon_heading,
   "kbd": meta_kbd,
   "menu": meta_menu,
@@ -181,6 +183,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "field": { component: "field", variant: "base", kind: "component", install: "field" },
   "file-tree": { component: "file-tree", variant: "base", kind: "component", install: "file-tree" },
   "file-upload": { component: "file-upload", variant: "base", kind: "component", install: "file-upload" },
+  "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
   "kbd": { component: "kbd", variant: "base", kind: "component", install: "kbd" },
   "menu": { component: "menu", variant: "base", kind: "component", install: "menu" },
