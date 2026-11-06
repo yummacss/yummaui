@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/json-ld";
 import Pagination from "@/components/ui/pagination";
+import StylingButton from "@/components/playground/styling-button";
 import ViewMarkdown from "@/components/ui/view-markdown";
 import { pagePath, UI_ORIGIN } from "@/utils/hosts";
 import { getNavigation } from "@/utils/pagination";
@@ -65,6 +66,7 @@ export default async function Page({
 							{ui.title}
 						</h1>
 						<div className="d:f fs:0 ai:c g:2 mt:1">
+							<StylingButton />
 							<Pagination
 								previous={navigation.previous}
 								next={navigation.next}

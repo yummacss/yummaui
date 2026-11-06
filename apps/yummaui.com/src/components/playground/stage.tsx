@@ -1,7 +1,6 @@
 "use client";
 
 import { Tabs as BaseTabs } from "@base-ui/react/tabs";
-import { Drawer } from "@base-ui/react/drawer";
 import { Resizable } from "re-resizable";
 import type { ComponentType, ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
@@ -9,7 +8,7 @@ import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { Tabs, TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
-import { Close, Code, Gear, Globe, Settings2 } from "@/icons";
+import { Code, Gear, Globe } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -47,12 +46,9 @@ const DIVIDER = <span aria-hidden className="fs:0 w:0 h:4 blw:1 bc:border" />;
 
 export default function ComponentPlayground({
 	resizable = false,
-	styling,
 }: {
 	/** The frame drags narrower, for a whole screen region rather than one control. */
 	resizable?: boolean;
-	/** The styling controls, opened in a drawer from the toolbar. */
-	styling?: ReactNode;
 }) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
@@ -170,45 +166,6 @@ export default function ComponentPlayground({
 					<div className="d:f ai:c jc:fe f:1">
 						{resizable && active === "preview" && width !== null && (
 							<span className="px:2 c:ink/60 fs:xs ff:m fvn:tn">{width}px</span>
-						)}
-						{styling && (
-							<Drawer.Root swipeDirection="right">
-								<Drawer.Trigger className={`${TOOL} c:ink/60`}>
-									<Settings2 className="w:4 h:4" />
-									Styling
-								</Drawer.Trigger>
-								<Drawer.Portal>
-									{/* the search dialog's backdrop, so every overlay on the site dims alike */}
-									<Drawer.Backdrop
-										data-chrome
-										className="tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none p:f zi:10 i:0 bg:black/60 bf-b:sm fgr:90"
-									/>
-									<Drawer.Viewport className="d:f p:f i:0 zi:20 jc:fe">
-										<Drawer.Popup
-											data-chrome
-											className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto bg:page blw:1 bc:border os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
-										>
-											<div className="d:f ai:c jc:sb">
-												<div className="d:f fd:c g:1">
-													<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">
-														Styling
-													</Drawer.Title>
-													<Drawer.Description className="m:0 c:ink/60 fs:sm">
-														Suit your style.
-													</Drawer.Description>
-												</div>
-												<Drawer.Close
-													aria-label="Close"
-													className={`${TOOL} c:ink/60`}
-												>
-													<Close className="w:4 h:4" />
-												</Drawer.Close>
-											</div>
-											{styling}
-										</Drawer.Popup>
-									</Drawer.Viewport>
-								</Drawer.Portal>
-							</Drawer.Root>
 						)}
 					</div>
 				</div>

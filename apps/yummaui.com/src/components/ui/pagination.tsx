@@ -16,24 +16,26 @@ export default function Pagination({ previous, next }: Props) {
 	}
 
 	return (
-		<div className="d:f fs:0 ai:c g:2">
+		<div className="d:f fs:0 ai:c h:8 br:9999 bc:border bg:surface bw:1 o:h">
 			{previous && (
 				<Button
 					nativeButton={false}
 					render={<Link href={pagePath(previous.slug)} />}
 					aria-label={`Previous: ${previous.title}`}
-					className="d:f ai:c jc:c w:8 h:8 br:9999 bc:border bg:surface h:bg:hover a:bg:press c:ink bw:1 fv:oc:ink fv:oo:2"
+					className="d:f ai:c jc:c w:9 h:100% h:bg:hover a:bg:press c:ink fv:oc:ink fv:oo:-2 fv:ow:2"
 				>
 					<NavArrowLeft className="w:4 h:4" />
 				</Button>
 			)}
+
+			{previous && next && <span aria-hidden className="w:px h:4 bg:border" />}
 
 			{next && (
 				<Button
 					nativeButton={false}
 					render={<Link href={pagePath(next.slug)} />}
 					aria-label={`Next: ${next.title}`}
-					className="d:f ai:c jc:c w:8 h:8 br:9999 bc:border bg:surface h:bg:hover a:bg:press c:ink bw:1 fv:oc:ink fv:oo:2"
+					className="d:f ai:c jc:c w:9 h:100% h:bg:hover a:bg:press c:ink fv:oc:ink fv:oo:-2 fv:ow:2"
 				>
 					<NavArrowRight className="w:4 h:4" />
 				</Button>
