@@ -33,7 +33,7 @@ export default function StylingButton() {
 				<Drawer.Viewport className="d:f p:f i:0 zi:20 jc:fe">
 					<Drawer.Popup
 						data-chrome
-						className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto bg:page os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
+						className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto blr:3xl bg:page os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
 					>
 						<div className="d:f ai:c jc:sb">
 							<div className="d:f fd:c g:1">
