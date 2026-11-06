@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Inline Icon Heading takes its sentence as `parts`.
 - Onboarding takes the `pill` shape.
 - Combobox chips fade out when removed.
+- Select takes `ariaLabel`, and an `icon` per option.
 
 ### Changed
 

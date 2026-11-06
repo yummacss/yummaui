@@ -155,6 +155,8 @@ const PLUMBING = new Set([
 /** Shape, Accent and Scheme, the preview's styling. */
 export function Look() {
 	const playground = usePlayground();
+	// popups portal into the drawer, which sits above the page's layers
+	const [box, setBox] = useState<HTMLElement | null>(null);
 	if (!playground) return null;
 	// the shapes this component takes; a corner's circle is the preview's pill
 	const props = playground.meta?.props ?? [];
@@ -200,7 +202,7 @@ export function Look() {
 	};
 
 	return (
-		<div className="d:f fd:c pb:4 mb:4">
+		<div ref={setBox} className="d:f fd:c pb:4 mb:4">
 			<p className="m:0 mb:1 c:ink/60 fs:xs lh:4">
 				Everything here sets the preview only.
 			</p>
@@ -208,6 +210,7 @@ export function Look() {
 				line(
 					"shape",
 					<EnumSelect
+						container={box}
 						name="shape"
 						values={offered}
 						value={shown}
@@ -217,6 +220,7 @@ export function Look() {
 			{line(
 				"accent",
 				<SwatchSelect
+					container={box}
 					name="accent"
 					options={SWATCHES}
 					value={playground.accent}
@@ -226,6 +230,7 @@ export function Look() {
 			{line(
 				"scheme",
 				<EnumSelect
+					container={box}
 					name="scheme"
 					values={[...SCHEMES]}
 					value={playground.scheme}
@@ -258,6 +263,7 @@ export function Look() {
 										/>
 									) : (
 										<EnumSelect
+											container={box}
 											name={prop.name}
 											values={prop.values ?? []}
 											value={String(current)}

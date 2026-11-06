@@ -1,108 +1,34 @@
 "use client";
 
-import { Select } from "@base-ui/react/select";
-import { Switch } from "@base-ui/react/switch";
-import { useState } from "react";
-import { NavArrowDown } from "@/icons";
+import type { ReactNode } from "react";
+import Select from "@/registry/ui/select";
+import Switch from "@/registry/ui/switch";
 
+/** A select over a prop's values, for the Styling drawer. */
 export function EnumSelect({
 	name,
 	values,
 	value,
 	onChange,
-	inert,
-	blocked = [],
+	container,
 }: {
 	name: string;
 	values: string[];
 	value: string | null;
-	onChange: (value: unknown) => void;
-	inert?: boolean;
-	blocked?: string[];
+	onChange: (value: string) => void;
+	container?: HTMLElement | null;
 }) {
-	const [open, setOpen] = useState(false);
-
-	const popup = (
-		<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:40 bc:border bg:surface bw:1 br:xl">
-			<Select.List>
-				{values.map((option) => (
-					<Select.Item
-						key={option}
-						value={option}
-						disabled={blocked.includes(option)}
-						className={(state) =>
-							`d:b px:2 py:1 br:lg ff:m fs:xs us:none ${
-								state.disabled
-									? "c:ink/30 c:na tdl:lt"
-									: state.highlighted
-										? "bg:border c:accent c:p"
-										: "c:accent-dim c:p"
-							}`
-						}
-					>
-						<Select.ItemText>{option}</Select.ItemText>
-					</Select.Item>
-				))}
-			</Select.List>
-		</Select.Popup>
-	);
-
 	return (
-		<Select.Root
+		<Select
+			ariaLabel={name}
+			options={values.map((option) => ({ value: option, label: option }))}
 			value={value}
-			onValueChange={onChange}
-			disabled={inert}
-			open={open}
-			onOpenChange={setOpen}
-		>
-			<Select.Trigger
-				aria-label={name}
-				className={`d:f fs:0 ai:c jc:sb g:1 px:3 py:1 w:32 br:9999 bg:surface a:bg:press bw:1 ff:m fs:xs us:none fv:oo:-1 fv:oc:accent ${
-					inert ? "bc:border c:ink/40 c:na" : "bc:border c:ink c:p"
-				}`}
-			>
-				<Select.Value className="o:h to:e ws:nw" />
-				<NavArrowDown className="fs:0 w:3 h:3 c:ink/50" aria-hidden />
-			</Select.Trigger>
-			<Select.Portal>
-				<Select.Positioner
-					data-chrome
-					side="bottom"
-					sideOffset={4}
-					alignItemWithTrigger={false}
-					collisionAvoidance={{ side: "none", fallbackAxisSide: "none" }}
-					className="zi:50"
-				>
-					{popup}
-				</Select.Positioner>
-			</Select.Portal>
-		</Select.Root>
-	);
-}
-
-/** An on and off control for a boolean prop. */
-export function PropSwitch({
-	name,
-	checked,
-	onChange,
-}: {
-	name: string;
-	checked: boolean;
-	onChange: (checked: boolean) => void;
-}) {
-	return (
-		<Switch.Root
-			render={<button type="button" />}
-			nativeButton
-			aria-label={name}
-			checked={checked}
-			onCheckedChange={onChange}
-			className={`d:f fs:0 ai:c w:8 h:5 p:0 br:9999 bw:2 bc:transparent tp:c tdu:150 c:p fv:oo:2 fv:oc:accent ${checked ? "bg:accent" : "bg:border"}`}
-		>
-			<Switch.Thumb
-				className={`d:b w:4 h:4 br:9999 bg:surface tp:t tdu:150 @prm:tp:none ${checked ? "ttx:3" : ""}`}
-			/>
-		</Switch.Root>
+			onValueChange={(next) => next && onChange(next)}
+			size="sm"
+			shape="pill"
+			className="w:40"
+			container={container}
+		/>
 	);
 }
 
@@ -126,63 +52,53 @@ export function SwatchSelect({
 	options,
 	value,
 	onChange,
+	container,
 }: {
 	name: string;
 	options: { value: string; colors: string[] }[];
 	value: string;
 	onChange: (value: string) => void;
+	container?: HTMLElement | null;
 }) {
-	const [open, setOpen] = useState(false);
 	const current = options.find((option) => option.value === value);
+	const icon: ReactNode = current && <Bars colors={current.colors} />;
 
 	return (
-		<Select.Root
+		<Select
+			ariaLabel={name}
+			options={options.map((option) => ({
+				value: option.value,
+				label: option.value,
+				icon: <Bars colors={option.colors} />,
+			}))}
 			value={value}
-			onValueChange={(next) => next && onChange(String(next))}
-			open={open}
-			onOpenChange={setOpen}
-		>
-			<Select.Trigger
-				aria-label={name}
-				className="d:f fs:0 ai:c g:2 px:3 py:1 w:32 br:9999 bg:surface a:bg:press bw:1 bc:border c:ink c:p ff:m fs:xs us:none fv:oo:-1 fv:oc:accent"
-			>
-				{current && <Bars colors={current.colors} />}
-				<Select.Value className="f:1 o:h to:e ws:nw ta:l" />
-				<NavArrowDown className="fs:0 w:3 h:3 c:ink/50" aria-hidden />
-			</Select.Trigger>
-			<Select.Portal>
-				<Select.Positioner
-					data-chrome
-					side="bottom"
-					sideOffset={4}
-					alignItemWithTrigger={false}
-					collisionAvoidance={{ side: "none", fallbackAxisSide: "none" }}
-					className="zi:50"
-				>
-					<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:72 bc:border bg:surface bw:1 br:xl">
-						<Select.List>
-							{options.map((option) => (
-								<Select.Item
-									key={option.value}
-									value={option.value}
-									className={(state) =>
-										`d:f ai:c g:2 px:2 py:1 br:lg ff:m fs:xs us:none c:p ${
-											state.highlighted
-												? "bg:border c:accent"
-												: state.selected
-													? "c:ink"
-													: "c:accent-dim"
-										}`
-									}
-								>
-									<Bars colors={option.colors} />
-									<Select.ItemText>{option.value}</Select.ItemText>
-								</Select.Item>
-							))}
-						</Select.List>
-					</Select.Popup>
-				</Select.Positioner>
-			</Select.Portal>
-		</Select.Root>
+			onValueChange={(next) => next && onChange(next)}
+			icon={icon}
+			size="sm"
+			shape="pill"
+			className="w:40"
+			container={container}
+		/>
+	);
+}
+
+/** An on and off control for a boolean prop. */
+export function PropSwitch({
+	name,
+	checked,
+	onChange,
+}: {
+	name: string;
+	checked: boolean;
+	onChange: (checked: boolean) => void;
+}) {
+	return (
+		<Switch
+			ariaLabel={name}
+			checked={checked}
+			onCheckedChange={onChange}
+			size="sm"
+			shape="pill"
+		/>
 	);
 }

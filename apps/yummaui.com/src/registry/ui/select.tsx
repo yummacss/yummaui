@@ -16,6 +16,8 @@ export interface SelectOption {
   label: string;
   description?: string;
   avatar?: string;
+  /** A glyph before the label, such as a color swatch. */
+  icon?: ReactNode;
 }
 
 export interface SelectGroup {
@@ -72,6 +74,11 @@ function renderOption(option: SelectOption, shape: Shape) {
           </Avatar.Fallback>
         </Avatar.Root>
       )}
+      {option.icon && (
+        <span className="d:f ai:c fs:0" aria-hidden>
+          {option.icon}
+        </span>
+      )}
       <div className="d:f fd:c">
         <Select.ItemText>{option.label}</Select.ItemText>
         {option.description && (
@@ -90,10 +97,10 @@ export interface SelectProps {
    */
   container?: HTMLElement | null;
   /**
-   * The choices. `value` and `label` are required; `description` and `avatar`
-   * are optional per option. The shape is fixed rather than generic because you
-   * own the file: data that does not fit is an edit to the option body, not an
-   * API.
+   * The choices. `value` and `label` are required; `description`, `avatar` and
+   * `icon` are optional per option. The shape is fixed rather than generic
+   * because you own the file: data that does not fit is an edit to the option
+   * body, not an API.
    */
   options: SelectOption[] | SelectGroup[];
   /** Text above the trigger. */
@@ -153,6 +160,8 @@ export interface SelectProps {
    * back fails WCAG 2.4.7.
    */
   focus?: boolean | string;
+  /** The accessible name, for a select with no visible label. */
+  ariaLabel?: string;
 }
 
 /**
@@ -177,6 +186,7 @@ export default function SelectBase({
   className,
   focus = true,
   container,
+  ariaLabel,
 }: SelectProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
@@ -263,7 +273,7 @@ export default function SelectBase({
         disabled={disabled}
         required={required}
       >
-        <Select.Trigger id={id} className={triggerClasses}>
+        <Select.Trigger id={id} aria-label={ariaLabel} className={triggerClasses}>
           {icon && iconPosition === "leading" && (
             <span className="d:f ai:c g:2">
               {iconEl}
