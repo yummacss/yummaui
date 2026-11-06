@@ -176,6 +176,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "money-input",
+		title: "Money Input",
+		description:
+			"Enter an amount with its currency, picked from a list in the field, built on Base UI.",
+		primitive: "number-field",
+	},
+	{
 		slug: "navigation-menu",
 		title: "Navigation Menu",
 		description:
