@@ -3,6 +3,11 @@ import { pagePath } from "./src/utils/hosts";
 
 const uiRedirects = [
 	{
+		source: "/components/money-input",
+		destination: "/components/currency-input",
+		permanent: true,
+	},
+	{
 		source: "/components/cli",
 		destination: "/docs/configuration",
 		permanent: true,

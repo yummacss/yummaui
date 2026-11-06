@@ -117,7 +117,7 @@
   ],
   "scene": [
     {
-      "component": "MoneyInput",
+      "component": "CurrencyInput",
       "props": {
         "label": "Budget",
         "defaultValue": 12480.5,
