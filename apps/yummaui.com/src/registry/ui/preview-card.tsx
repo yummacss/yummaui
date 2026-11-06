@@ -102,7 +102,7 @@ export default function PreviewCardBase({
         className={(state) =>
           merge(
             outline,
-            "c:blue c:p fw:500 td:none h:td:u",
+            "c:fill c:p fw:500 td:none h:td:u",
             state.open ? "td:u" : "",
             className,
           )

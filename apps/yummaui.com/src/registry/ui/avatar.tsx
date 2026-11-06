@@ -5,11 +5,12 @@ import { merge } from "yummacss/merge";
 import type { Size } from "./style";
 
 type Status = "none" | "online" | "offline" | "busy";
-type Tint = "blue" | "mint" | "indigo" | "slate";
+type Tint = "accent" | "blue" | "mint" | "indigo" | "slate";
 
 const ROOT = "d:if o:h ai:c jc:c va:m us:none";
 
 const TINTS: Record<Tint, { bg: string; fg: string }> = {
+  accent: { bg: "bg:fill bc:edge bs-o:key-fill", fg: "c:on-fill" },
   blue: { bg: "bg:blue-9 bc:blue-11 bs-o:key-fill", fg: "c:white" },
   mint: { bg: "bg:mint-8 bc:mint-10 bs-o:key-fill", fg: "c:white" },
   indigo: { bg: "bg:indigo-8 bc:indigo-10 bs-o:key-fill", fg: "c:white" },

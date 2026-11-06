@@ -17,7 +17,6 @@ import { getRegistryTarget } from "@/registry";
 import { ACCENTS, accentBars, DEFAULT_ACCENT } from "@/utils/accent";
 import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { inTableOrder, typeOf } from "@/utils/props";
-import { SCHEMES, type Scheme } from "@/utils/scheme";
 import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
@@ -228,13 +227,11 @@ export function Look() {
 				/>,
 			)}
 			{line(
-				"scheme",
-				<EnumSelect
-					container={box}
-					name="scheme"
-					values={[...SCHEMES]}
-					value={playground.scheme}
-					onChange={(value) => playground.setScheme(value as Scheme)}
+				"dark",
+				<PropSwitch
+					name="dark"
+					checked={playground.scheme === "dark"}
+					onChange={(dark) => playground.setScheme(dark ? "dark" : "light")}
 				/>,
 			)}
 			{looks.length > 0 && (

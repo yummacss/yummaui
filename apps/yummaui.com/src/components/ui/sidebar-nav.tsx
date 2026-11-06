@@ -21,7 +21,7 @@ export default function SidebarNav({ sections }: Props) {
 			<Scroller
 				viewportRef={viewport}
 				className="p:st t:20 max-h:calc(100dvh-5rem)"
-				viewportClassName="d:f fd:c g:8 mx:-2 px:2 pb:12"
+				viewportClassName="d:f fd:c g:8 mx:-3 px:3 pb:12"
 			>
 				<ProductLinks
 					heading="ff:system mb:3 c:silver-8 fs:xs fw:600 ls:2 tt:u"

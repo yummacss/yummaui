@@ -24,6 +24,7 @@
       "name": "tint",
       "type": "enum",
       "values": [
+        "accent",
         "blue",
         "mint",
         "indigo",
@@ -85,7 +86,7 @@
           "props": {
             "name": "Ada Lovelace",
             "status": "online",
-            "tint": "blue"
+            "tint": "accent"
           }
         },
         {

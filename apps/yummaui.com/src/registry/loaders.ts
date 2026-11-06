@@ -64,6 +64,7 @@ export const registry = {
   "select-grouped": () => import("./ui/select-grouped"),
   "select": () => import("./ui/select"),
   "separator": () => import("./ui/separator"),
+  "sidebar-pages": () => import("./ui/sidebar-pages"),
   "sidebar": () => import("./ui/sidebar"),
   "sign-in": () => import("./ui/sign-in"),
   "skeleton-activity": () => import("./ui/skeleton-activity"),

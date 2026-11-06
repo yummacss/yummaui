@@ -34,11 +34,11 @@ export function EnumSelect({
 
 function Bars({ colors }: { colors: string[] }) {
 	return (
-		<span aria-hidden className="d:f fs:0 g:px">
-			{colors.map((color) => (
+		<span aria-hidden className="d:f fs:0 ai:c">
+			{colors.map((color, at) => (
 				<span
 					key={color}
-					className="d:b w:1 h:3"
+					className={`d:b w:3 h:3 br:9999 bw:1 bc:raised ${at ? "ml:-1" : ""}`}
 					style={{ backgroundColor: color }}
 				/>
 			))}
