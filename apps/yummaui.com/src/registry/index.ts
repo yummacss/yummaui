@@ -4,6 +4,7 @@
  */
 import meta_accordion from "./meta/accordion.json";
 import meta_activity_heatmap from "./meta/activity-heatmap.json";
+import meta_activity_timeline from "./meta/activity-timeline.json";
 import meta_alert_dialog from "./meta/alert-dialog.json";
 import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
@@ -37,6 +38,7 @@ import meta_onboarding from "./meta/onboarding.json";
 import meta_otp_field from "./meta/otp-field.json";
 import meta_popover from "./meta/popover.json";
 import meta_preview_card from "./meta/preview-card.json";
+import meta_progress_timeline from "./meta/progress-timeline.json";
 import meta_progress from "./meta/progress.json";
 import meta_radio from "./meta/radio.json";
 import meta_rating from "./meta/rating.json";
@@ -94,6 +96,7 @@ export interface ChildExample {
 export const registryMeta = {
   "accordion": meta_accordion,
   "activity-heatmap": meta_activity_heatmap,
+  "activity-timeline": meta_activity_timeline,
   "alert-dialog": meta_alert_dialog,
   "autocomplete": meta_autocomplete,
   "avatar-stack": meta_avatar_stack,
@@ -127,6 +130,7 @@ export const registryMeta = {
   "otp-field": meta_otp_field,
   "popover": meta_popover,
   "preview-card": meta_preview_card,
+  "progress-timeline": meta_progress_timeline,
   "progress": meta_progress,
   "radio": meta_radio,
   "rating": meta_rating,
@@ -165,6 +169,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "accordion": { component: "accordion", variant: "base", kind: "component", install: "accordion" },
   "activity-heatmap-deploys": { component: "activity-heatmap", variant: "deploys", kind: "example", install: "activity-heatmap" },
   "activity-heatmap": { component: "activity-heatmap", variant: "base", kind: "component", install: "activity-heatmap" },
+  "activity-timeline": { component: "activity-timeline", variant: "base", kind: "component", install: "activity-timeline" },
   "alert-dialog": { component: "alert-dialog", variant: "base", kind: "component", install: "alert-dialog" },
   "autocomplete-grouped": { component: "autocomplete", variant: "grouped", kind: "example", install: "autocomplete" },
   "autocomplete-helper": { component: "autocomplete", variant: "helper", kind: "example", install: "autocomplete" },
@@ -211,6 +216,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "popover-folder-color": { component: "popover", variant: "folder-color", kind: "example", install: "popover" },
   "popover": { component: "popover", variant: "base", kind: "component", install: "popover" },
   "preview-card": { component: "preview-card", variant: "base", kind: "component", install: "preview-card" },
+  "progress-timeline": { component: "progress-timeline", variant: "base", kind: "component", install: "progress-timeline" },
   "progress-upload": { component: "progress", variant: "upload", kind: "example", install: "progress" },
   "progress": { component: "progress", variant: "base", kind: "component", install: "progress" },
   "radio": { component: "radio", variant: "base", kind: "component", install: "radio" },

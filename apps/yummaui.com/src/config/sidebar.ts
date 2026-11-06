@@ -40,6 +40,7 @@ export const sidebarConfig: SidebarSection[] = [
 		title: "Display",
 		items: [
 			"accordion",
+			"activity-timeline",
 			"avatar",
 			"avatar-stack",
 			"badge",
@@ -47,6 +48,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"kbd",
 			"meter",
 			"preview-card",
+			"progress-timeline",
 			"progress",
 			"scroll-area",
 			"separator",

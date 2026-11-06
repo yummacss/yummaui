@@ -1,0 +1,61 @@
+{
+  "summary": "Steps down a line as an ordered list: done ones checked, the current one ringed and marked for screen readers, the rest hollow.",
+  "props": [
+    {
+      "name": "steps",
+      "type": "none",
+      "typeName": "ProgressStep[]",
+      "description": "The steps, first to last."
+    },
+    {
+      "name": "currentStep",
+      "type": "number",
+      "example": 2,
+      "description": "The index of the step in progress. Every step before it is done."
+    },
+    {
+      "name": "states",
+      "type": "none",
+      "typeName": "ProgressStates",
+      "description": "What each state is called under its step, so color is never the only sign of one."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Progress",
+      "description": "Names the list for screen readers."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ProgressTimeline",
+      "props": {
+        "steps": [
+          {
+            "title": "Order placed",
+            "time": "Nov 4"
+          },
+          {
+            "title": "Packed",
+            "time": "Nov 5"
+          },
+          {
+            "title": "Out for delivery",
+            "time": "Today"
+          },
+          {
+            "title": "Delivered",
+            "time": "Nov 7"
+          }
+        ],
+        "className": "w:80 max-w:100%",
+        "currentStep": 2
+      }
+    }
+  ]
+}

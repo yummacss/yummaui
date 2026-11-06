@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Scroller from "@/components/ui/scroller";
+import { Point, Sparkles } from "@/icons";
 import { useReveal } from "@/utils/reveal";
 import type { NavSection } from "./mobile-sheet";
 import ProductLinks from "./product-links";
@@ -27,32 +28,50 @@ export default function SidebarNav({ sections }: Props) {
 					list="d:f fd:c g:2"
 					link="p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2"
 				/>
-				{sections.map((section) => (
-					<div key={section.title} className="d:f fd:c g:3">
-						<h3 className="ff:system c:silver-8 fs:xs fw:600 ls:2 tt:u">
-							{section.title}
-						</h3>
-						<ul className="d:f fd:c g:2">
-							{section.items.map((item) => {
-								const isActive = pathname === item.href;
-								return (
-									<li
-										key={item.href}
-										ref={isActive ? active : undefined}
-										className="d:f ai:c g:3"
-									>
-										<Link
-											href={item.href}
-											className={`p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:accent td:u tds:d" : "c:ink/70 h:c:accent"}`}
+				{sections.map((section) => {
+					const fresh = section.items.filter((item) => item.isNew).length;
+					return (
+						<div key={section.title} className="d:f fd:c g:3">
+							<h3 className="d:f ai:c g:2 ff:system c:silver-8 fs:xs fw:600 ls:2 tt:u">
+								{section.title}
+								{fresh > 0 && (
+									<span className="d:if ai:c g:1 c:ink/70 fw:500 ls:0 tt:none">
+										<Point aria-hidden className="w:2 h:2" />
+										{fresh} new
+									</span>
+								)}
+							</h3>
+							<ul className="d:f fd:c g:2">
+								{section.items.map((item) => {
+									const isActive = pathname === item.href;
+									return (
+										<li
+											key={item.href}
+											ref={isActive ? active : undefined}
+											className="d:f ai:c g:3"
 										>
-											{item.title}
-										</Link>
-									</li>
-								);
-							})}
-						</ul>
-					</div>
-				))}
+											<Link
+												href={item.href}
+												className={`p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:ink fw:500 bg:press br:9999 px:3 py:1 my:-1 ml:-3" : "c:ink/70 h:c:accent"}`}
+											>
+												{item.title}
+												{item.isNew && (
+													<>
+														<Sparkles
+															aria-hidden
+															className="w:4 h:4 fs:0 c:ink/60"
+														/>
+														<span className="p:a w:px h:px o:h">, new</span>
+													</>
+												)}
+											</Link>
+										</li>
+									);
+								})}
+							</ul>
+						</div>
+					);
+				})}
 			</Scroller>
 		</aside>
 	);

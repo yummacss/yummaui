@@ -12,6 +12,7 @@ export const uis = [
 		primitive: page.primitive,
 		playground: true,
 		resizable: page.resizable,
+		since: page.since,
 		content: COMPONENT_BODY,
 		slug: page.slug,
 		_meta: { path: page.slug },

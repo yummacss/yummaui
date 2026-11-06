@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Topography from "./topography";
 
-/** The landing page's contour field, drawn in indigo on either scheme. */
+/** The landing page's contour field, drawn in charcoal or, on the dark scheme, a pale gray. */
 export default function Field() {
 	const [dark, setDark] = useState(false);
 
@@ -18,7 +18,7 @@ export default function Field() {
 	return (
 		<Topography
 			key={dark ? "dark" : "light"}
-			color="#4c5fc7"
+			color={dark ? "#c9c6d2" : "#3b3942"}
 			lightMode={!dark}
 			lineCount={28}
 			glow={0.8}
