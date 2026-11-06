@@ -25,6 +25,7 @@ import meta_file_upload from "./meta/file-upload.json";
 import meta_gauge from "./meta/gauge.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
 import meta_kbd from "./meta/kbd.json";
+import meta_keypad from "./meta/keypad.json";
 import meta_menu from "./meta/menu.json";
 import meta_menubar from "./meta/menubar.json";
 import meta_meter from "./meta/meter.json";
@@ -111,6 +112,7 @@ export const registryMeta = {
   "gauge": meta_gauge,
   "inline-icon-heading": meta_inline_icon_heading,
   "kbd": meta_kbd,
+  "keypad": meta_keypad,
   "menu": meta_menu,
   "menubar": meta_menubar,
   "meter": meta_meter,
@@ -190,6 +192,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
   "kbd": { component: "kbd", variant: "base", kind: "component", install: "kbd" },
+  "keypad": { component: "keypad", variant: "base", kind: "component", install: "keypad" },
   "menu": { component: "menu", variant: "base", kind: "component", install: "menu" },
   "menubar": { component: "menubar", variant: "base", kind: "component", install: "menubar" },
   "meter": { component: "meter", variant: "base", kind: "component", install: "meter" },
@@ -265,7 +268,9 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "skeleton": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
   "switch": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "tabs": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "theme-switcher": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "toast": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "shake": "20%, 60% { translate: -8px 0; } 40%, 80% { translate: 8px 0; }" } },
+  "toggle-group": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "toggle": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "toolbar": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "tooltip": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

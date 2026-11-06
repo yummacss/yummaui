@@ -1,0 +1,91 @@
+{
+  "summary": "Digits as raised keys, for a PIN shown as dots or an amount in its currency. The keyboard types into it too once it has focus.",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "description": "The typed digits, controlled. Pair with `onValueChange`."
+    },
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "description": "The typed digits on first render, uncontrolled."
+    },
+    {
+      "name": "onValueChange",
+      "type": "none",
+      "typeName": "(value: string) => void",
+      "description": "Called with the digits whenever they change."
+    },
+    {
+      "name": "length",
+      "type": "number",
+      "default": 4,
+      "description": "How many digits a PIN takes."
+    },
+    {
+      "name": "onComplete",
+      "type": "none",
+      "typeName": "(value: string) => void",
+      "description": "Called once a PIN reaches `length`."
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": "USD",
+      "description": "The currency an amount is in, as an ISO code."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "default": "en-US",
+      "description": "Formats the amount's grouping, decimal mark and currency sign."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "The line over the display, and the keypad's accessible name."
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "values": [
+        "pin",
+        "amount"
+      ],
+      "default": "pin",
+      "description": "A PIN of a fixed length, shown as dots, or an amount with its currency."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "description": "Corner radius of the keys. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Keypad",
+      "props": {
+        "defaultValue": "48"
+      }
+    }
+  ]
+}

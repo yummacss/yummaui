@@ -146,6 +146,12 @@ export const COMPONENT_PAGES = [
 		resizable: true,
 	},
 	{
+		slug: "keypad",
+		title: "Keypad",
+		description:
+			"Enter a PIN or an amount on raised digit keys, or type it on the keyboard.",
+	},
+	{
 		slug: "kbd",
 		title: "Kbd",
 		description: "Show a keyboard shortcut as keycaps in running text.",
