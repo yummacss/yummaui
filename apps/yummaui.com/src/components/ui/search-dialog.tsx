@@ -32,7 +32,7 @@ interface SearchDialogProps {
 	onClose: () => void;
 }
 
-const KBD = "d:if ai:c jc:c h:5 px:1 bc:border bw:1 c:ink/60 fs:xs";
+const KBD = "d:if ai:c jc:c h:5 px:2 br:9999 bc:border bw:1 c:ink/60 fs:xs";
 const LABEL = "px:3 py:1 c:ink/60 fs:xs ls:2 tt:u";
 
 /** The highlighted page's details, shown once, on the right. */
@@ -211,7 +211,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 
 	const highlighted = current;
 	const rowClass = (selected: boolean) =>
-		`d:f b:0 ai:c g:3 w:100% px:3 py:2 ta:l c:p ${selected ? "bg:hover" : "bg:transparent"}`;
+		`d:f b:0 ai:c g:3 w:100% px:3 py:2 br:lg ta:l c:p ${selected ? "bg:hover" : "bg:transparent"}`;
 
 	// the word set huge at the foot of the right side
 	const wash = highlighted?.title;
@@ -261,7 +261,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 					<Dialog.Popup
 						data-chrome
 						aria-label="Search"
-						className="tp:o tdu:150 ttf:eo opening:o:0 closing:o:0 @prm:tp:none d:f fd:c o:h w:100% h:dvh bg:page pe:auto @md:w:224 @md:max-w:calc(100vw-4rem) @md:h:144 @md:max-h:calc(100dvh-8rem) @md:bc:border @md:bw:1"
+						className="tp:o tdu:150 ttf:eo opening:o:0 closing:o:0 @prm:tp:none d:f fd:c o:h w:100% h:dvh bg:page pe:auto @md:w:224 @md:max-w:calc(100vw-4rem) @md:h:144 @md:max-h:calc(100dvh-8rem) @md:bc:border @md:bw:1 @md:br:xl"
 						onKeyDown={handleKeyDown}
 					>
 						<div className="d:f fs:0 ai:c g:3 px:4 h:14 bc:border bbw:1">
@@ -271,7 +271,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 									type="button"
 									onClick={leave}
 									aria-label={`Back from ${category.title}`}
-									className="d:if fs:0 ai:c g:1 h:6 px:2 bc:border bg:transparent h:bg:hover c:ink/80 bw:1 fs:sm fv:oc:ink fv:ow:2"
+									className="d:if fs:0 ai:c g:1 h:6 px:3 br:9999 bc:border bg:transparent h:bg:hover c:ink/80 bw:1 fs:sm fv:oc:ink fv:ow:2"
 								>
 									<NavArrowLeft className="w:3 h:3" />
 									{category.title}
@@ -296,7 +296,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 							/>
 							<Dialog.Close
 								aria-label="Close search"
-								className="d:if fs:0 ai:c jc:c h:6 px:2 bc:border bg:transparent c:ink/60 bw:1 fs:xs fv:oc:ink fv:ow:2"
+								className="d:if fs:0 ai:c jc:c h:6 px:3 br:9999 bc:border bg:transparent c:ink/60 bw:1 fs:xs fv:oc:ink fv:ow:2"
 							>
 								Esc
 							</Dialog.Close>

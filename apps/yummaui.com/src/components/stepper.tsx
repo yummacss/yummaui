@@ -42,7 +42,7 @@ export function Step({
 }: StepProps & InjectedStepProps) {
 	return (
 		<li className={isLast ? "ml:8" : "mb:10 ml:8"}>
-			<div className="d:f p:a l:-3 ai:c jc:c w:6 h:6 bc:border bg:surface bw:1">
+			<div className="d:f p:a l:-3 ai:c jc:c w:6 h:6 br:9999 bc:border bg:surface bw:1">
 				<span className="c:accent fs:xs">{stepNumber}</span>
 			</div>
 			<div className="d:f ai:c mb:2">

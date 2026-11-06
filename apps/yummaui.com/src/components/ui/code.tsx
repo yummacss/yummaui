@@ -63,7 +63,7 @@ export default function Code({
 	}
 
 	return (
-		<div ref={ref} className="o:h my:4 cs:d bc:border bg:surface bw:1">
+		<div ref={ref} className="o:h my:4 cs:d bc:border bg:surface bw:1 br:xl">
 			<TitleBar title={title} action={copyAction} />
 			{body ?? <pre className={`${PRE_CLASSES} lh:5`}>{children}</pre>}
 		</div>

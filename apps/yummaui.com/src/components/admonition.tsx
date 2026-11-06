@@ -34,10 +34,10 @@ export default function Admonition({ kind = "note", title, children }: Props) {
 	return (
 		<aside
 			aria-label={title ?? label}
-			className={`p:r d:f fd:c mt:10 mb:6 px:4 blw:2 ${box}`}
+			className={`p:r d:f fd:c mt:10 mb:6 px:4 blw:2 brr:lg ${box}`}
 		>
 			<span
-				className={`p:a l:calc(-2px) b:100% d:if ai:c g:1 px:2 py:1 c:surface ff:m fs:xs lh:1 ${tag}`}
+				className={`p:a l:calc(-2px) b:100% d:if ai:c g:1 px:2 py:1 btr:md c:surface ff:m fs:xs lh:1 ${tag}`}
 				aria-hidden
 			>
 				<Icon className="w:3 h:3" />

@@ -48,7 +48,9 @@ export default function StylingButton() {
 								<Close className="w:4 h:4" />
 							</Drawer.Close>
 						</div>
-						<Look />
+						<Drawer.Content>
+							<Look />
+						</Drawer.Content>
 					</Drawer.Popup>
 				</Drawer.Viewport>
 			</Drawer.Portal>
