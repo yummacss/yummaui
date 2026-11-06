@@ -40,6 +40,7 @@ export const registry = {
   "gauge": () => import("./ui/gauge"),
   "inline-icon-heading": () => import("./ui/inline-icon-heading"),
   "kbd": () => import("./ui/kbd"),
+  "keypad": () => import("./ui/keypad"),
   "menu": () => import("./ui/menu"),
   "menubar": () => import("./ui/menubar"),
   "meter": () => import("./ui/meter"),

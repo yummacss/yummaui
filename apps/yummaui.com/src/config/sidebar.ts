@@ -22,6 +22,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"combobox",
 			"file-upload",
 			"field",
+			"keypad",
 			"number-field",
 			"otp-field",
 			"radio",
