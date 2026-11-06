@@ -18,18 +18,6 @@ import {
   IconCurrencyYen,
   IconCurrencyYuan,
 } from "@tabler/icons-react";
-import AU from "country-flag-icons/react/3x2/AU";
-import BR from "country-flag-icons/react/3x2/BR";
-import CA from "country-flag-icons/react/3x2/CA";
-import CH from "country-flag-icons/react/3x2/CH";
-import CN from "country-flag-icons/react/3x2/CN";
-import EU from "country-flag-icons/react/3x2/EU";
-import GB from "country-flag-icons/react/3x2/GB";
-import IN from "country-flag-icons/react/3x2/IN";
-import JP from "country-flag-icons/react/3x2/JP";
-import MX from "country-flag-icons/react/3x2/MX";
-import SE from "country-flag-icons/react/3x2/SE";
-import US from "country-flag-icons/react/3x2/US";
 import { type ComponentType, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 import {
@@ -44,37 +32,27 @@ import {
 
 type Glyph = ComponentType<{ className?: string }>;
 
-// each known currency's flag and sign; any other code shows its text sign alone
-const KNOWN: Record<string, { flag: Glyph; sign: Glyph }> = {
-  AUD: { flag: AU, sign: IconCurrencyDollarAustralian },
-  BRL: { flag: BR, sign: IconCurrencyReal },
-  CAD: { flag: CA, sign: IconCurrencyDollarCanadian },
-  CHF: { flag: CH, sign: IconCurrencyFrank },
-  CNY: { flag: CN, sign: IconCurrencyYuan },
-  EUR: { flag: EU, sign: IconCurrencyEuro },
-  GBP: { flag: GB, sign: IconCurrencyPound },
-  INR: { flag: IN, sign: IconCurrencyRupee },
-  JPY: { flag: JP, sign: IconCurrencyYen },
-  MXN: { flag: MX, sign: IconCurrencyPeso },
-  SEK: { flag: SE, sign: IconCurrencyKroneSwedish },
-  USD: { flag: US, sign: IconCurrencyDollar },
+// each known currency's sign; any other code shows its text sign
+const SIGNS: Record<string, Glyph> = {
+  AUD: IconCurrencyDollarAustralian,
+  BRL: IconCurrencyReal,
+  CAD: IconCurrencyDollarCanadian,
+  CHF: IconCurrencyFrank,
+  CNY: IconCurrencyYuan,
+  EUR: IconCurrencyEuro,
+  GBP: IconCurrencyPound,
+  INR: IconCurrencyRupee,
+  JPY: IconCurrencyYen,
+  MXN: IconCurrencyPeso,
+  SEK: IconCurrencyKroneSwedish,
+  USD: IconCurrencyDollar,
 };
 
 // the box draws the outline only while the amount has focus, not the picker
 const TYPING = "os:s ow:3 oo:0 oc:focus/40 bc:focus";
 
-function Flag({ code }: { code: string }) {
-  const Mark = KNOWN[code]?.flag;
-  if (!Mark) return null;
-  return (
-    <span aria-hidden className="d:f w:6 h:4 fs:0 o:h br:xs bw:1 bc:rim">
-      <Mark className="w:100% h:100%" />
-    </span>
-  );
-}
-
 function Sign({ code, locale }: { code: string; locale: string }) {
-  const Icon = KNOWN[code]?.sign;
+  const Icon = SIGNS[code];
   if (Icon) return <Icon aria-hidden className="w:4 h:4 fs:0 ml:3 c:hint" />;
   const text = new Intl.NumberFormat(locale, {
     style: "currency",
@@ -110,8 +88,7 @@ export interface MoneyInputProps {
   /** Called with the ISO code when another currency is picked. */
   onCurrencyChange?: (currency: string) => void;
   /**
-   * The ISO codes the picker offers, each with its flag where one is known.
-   * One code hides the picker.
+   * The ISO codes the picker offers. One code hides the picker.
    */
   currencies?: string[];
   /** Formats the grouping, the decimal mark and the currency names. */
@@ -143,8 +120,8 @@ export interface MoneyInputProps {
 }
 
 /**
- * An amount with its currency, picked by flag and code at the start of the
- * field and grouped for the locale when the field is left.
+ * An amount with its currency, picked at the start of the field, its sign
+ * beside the value, grouped for the locale when the field is left.
  */
 export default function MoneyInput({
   label,
@@ -231,7 +208,6 @@ export default function MoneyInput({
                 "d:f ai:c g:2 h:100% pl:3 pr:2 bw:0 brw:1 bc:rim bg:transparent c:label fw:500 fs:sm us:none c:p h:bg:well",
               )}
             >
-              <Flag code={currency} />
               <Select.Value>{currency}</Select.Value>
               <Select.Icon className="d:f c:hint">
                 <IconChevronDown className="w:4 h:4" />
@@ -256,7 +232,6 @@ export default function MoneyInput({
                             <IconCheck className="w:4 h:4" />
                           </Select.ItemIndicator>
                         </span>
-                        <Flag code={code} />
                         <Select.ItemText className="fw:500">{code}</Select.ItemText>
                         <span className="c:hint to:e o:h ws:nw">{names.of(code)}</span>
                       </Select.Item>
@@ -269,7 +244,6 @@ export default function MoneyInput({
         )}
         {!pickable && (
           <span className="d:f ai:c g:2 h:100% pl:3 pr:2 brw:1 bc:rim fw:500 fs:sm">
-            <Flag code={currency} />
             {currency}
           </span>
         )}
