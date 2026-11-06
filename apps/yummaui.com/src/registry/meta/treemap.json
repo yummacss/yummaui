@@ -1,0 +1,108 @@
+{
+  "summary": "Shares of a whole as tiles sized by value, shaded in steps of the fill so the accent recolors them. Each tile is a button; arrow keys move between them.",
+  "props": [
+    {
+      "name": "data",
+      "type": "none",
+      "typeName": "TreemapItem[]",
+      "example": [
+        {
+          "label": "Videos",
+          "value": 84
+        },
+        {
+          "label": "Photos",
+          "value": 52
+        },
+        {
+          "label": "Apps",
+          "value": 40
+        }
+      ],
+      "description": "The shares, in any order; the map sorts them biggest first."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Total",
+      "description": "The heading over the map, and its accessible name."
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "description": "The unit every value is read in."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "default": "en-US",
+      "description": "Formats the values and shares."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "description": "Corner radius of the card and the tiles. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes on the map itself, such as its height. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline on each tile. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Treemap",
+      "props": {
+        "data": [
+          {
+            "label": "Videos",
+            "value": 84
+          },
+          {
+            "label": "Photos",
+            "value": 52
+          },
+          {
+            "label": "Apps",
+            "value": 40
+          },
+          {
+            "label": "Documents",
+            "value": 28
+          },
+          {
+            "label": "Music",
+            "value": 18
+          },
+          {
+            "label": "System",
+            "value": 14
+          },
+          {
+            "label": "Archives",
+            "value": 12
+          },
+          {
+            "label": "Other",
+            "value": 8
+          }
+        ],
+        "label": "Disk usage",
+        "unit": "GB"
+      }
+    }
+  ]
+}

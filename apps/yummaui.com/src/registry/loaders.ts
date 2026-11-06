@@ -81,6 +81,7 @@ export const registry = {
   "toolbar": () => import("./ui/toolbar"),
   "tooltip-toolbar": () => import("./ui/tooltip-toolbar"),
   "tooltip": () => import("./ui/tooltip"),
+  "treemap": () => import("./ui/treemap"),
 } as const;
 
 export type RegistryId = keyof typeof registry;

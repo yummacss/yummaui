@@ -57,6 +57,7 @@ import meta_toggle_group from "./meta/toggle-group.json";
 import meta_toggle from "./meta/toggle.json";
 import meta_toolbar from "./meta/toolbar.json";
 import meta_tooltip from "./meta/tooltip.json";
+import meta_treemap from "./meta/treemap.json";
 
 export interface RegistryProp {
   name: string;
@@ -146,6 +147,7 @@ export const registryMeta = {
   "toggle": meta_toggle,
   "toolbar": meta_toolbar,
   "tooltip": meta_tooltip,
+  "treemap": meta_treemap,
 } as unknown as Record<string, RegistryMeta>;
 
 export function getRegistryMeta(id: string): RegistryMeta | null {
@@ -237,6 +239,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "toolbar": { component: "toolbar", variant: "base", kind: "component", install: "toolbar" },
   "tooltip-toolbar": { component: "tooltip", variant: "toolbar", kind: "example", install: "tooltip" },
   "tooltip": { component: "tooltip", variant: "base", kind: "component", install: "tooltip" },
+  "treemap": { component: "treemap", variant: "base", kind: "component", install: "treemap" },
 };
 
 export interface RegistryConfig {

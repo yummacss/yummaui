@@ -7,13 +7,13 @@ import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
 import { RADIUS, useShape, type Shape } from "./style";
 
-// one hue per category, in order; a sixth repeats the last
+// one step of the fill per category, so the accent recolors them; a sixth repeats the last
 const TONES = [
-  { bar: "bg:blue", ink: "c:blue" },
-  { bar: "bg:mint", ink: "c:mint" },
-  { bar: "bg:red", ink: "c:red" },
-  { bar: "bg:yellow", ink: "c:yellow" },
-  { bar: "bg:indigo", ink: "c:indigo" },
+  { bar: "bg:fill", ink: "c:fill" },
+  { bar: "bg:fill/80", ink: "c:fill/80" },
+  { bar: "bg:fill/60", ink: "c:fill/60" },
+  { bar: "bg:fill/40", ink: "c:fill/40" },
+  { bar: "bg:fill/20", ink: "c:fill/20" },
 ];
 
 export interface StorageCategory {
@@ -28,7 +28,7 @@ export interface StorageCategory {
 export interface StorageBarProps {
   /**
    * What fills the space, biggest first reads best. Each one's `label` and
-   * `value`, plus an optional `icon`. Up to five colors.
+   * `value`, plus an optional `icon`. Up to five steps of the fill color.
    */
   categories: StorageCategory[];
   /** The whole space, in `unit`. */

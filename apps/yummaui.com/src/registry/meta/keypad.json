@@ -53,7 +53,7 @@
         "pin",
         "amount"
       ],
-      "default": "pin",
+      "default": "amount",
       "description": "A PIN of a fixed length, shown as dots, or an amount with its currency."
     },
     {
