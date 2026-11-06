@@ -68,7 +68,14 @@ function Sign({ code, locale }: { code: string; locale: string }) {
   );
 }
 
-export interface MoneyInputProps {
+// the picker sits inset, one step shorter than the field, so its hover keeps rounded corners
+const PICKER: Record<Size, string> = {
+  sm: "h:6 ml:1",
+  md: "h:7 ml:1",
+  lg: "h:9 ml:1",
+};
+
+export interface CurrencyInputProps {
   /** Text above the field, wired to it as its accessible name. */
   label?: string;
   /** A line under the field. */
@@ -123,7 +130,7 @@ export interface MoneyInputProps {
  * An amount with its currency, picked at the start of the field, its sign
  * beside the value, grouped for the locale when the field is left.
  */
-export default function MoneyInput({
+export default function CurrencyInput({
   label,
   description,
   error,
@@ -142,7 +149,7 @@ export default function MoneyInput({
   container,
   focus = true,
   className,
-}: MoneyInputProps) {
+}: CurrencyInputProps) {
   const shape = useShape(shapeProp);
   const id = useId();
   const [internalCurrency, setInternalCurrency] = useState(defaultCurrency);
@@ -205,7 +212,9 @@ export default function MoneyInput({
               aria-label={`Currency, ${names.of(currency) ?? currency}`}
               className={merge(
                 itemOutline,
-                "d:f ai:c g:2 h:100% pl:3 pr:2 bw:0 brw:1 bc:rim bg:transparent c:label fw:500 fs:sm us:none c:p h:bg:well",
+                "d:f ai:c g:1 px:2 bw:0 bg:transparent c:label fw:500 fs:sm us:none c:p h:bg:well",
+                PICKER[size],
+                RADIUS.item[shape],
               )}
             >
               <Select.Value>{currency}</Select.Value>
@@ -241,6 +250,9 @@ export default function MoneyInput({
               </Select.Positioner>
             </Select.Portal>
           </Select.Root>
+        )}
+        {pickable && (
+          <span aria-hidden className="w:px h:5 ml:1 fs:0 bg:rim" />
         )}
         {!pickable && (
           <span className="d:f ai:c g:2 h:100% pl:3 pr:2 brw:1 bc:rim fw:500 fs:sm">

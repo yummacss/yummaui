@@ -16,6 +16,7 @@ import meta_checkbox_group from "./meta/checkbox-group.json";
 import meta_checkbox from "./meta/checkbox.json";
 import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
+import meta_currency_input from "./meta/currency-input.json";
 import meta_dialog from "./meta/dialog.json";
 import meta_drawer from "./meta/drawer.json";
 import meta_empty_state from "./meta/empty-state.json";
@@ -30,7 +31,6 @@ import meta_keypad from "./meta/keypad.json";
 import meta_menu from "./meta/menu.json";
 import meta_menubar from "./meta/menubar.json";
 import meta_meter from "./meta/meter.json";
-import meta_money_input from "./meta/money-input.json";
 import meta_navigation_menu from "./meta/navigation-menu.json";
 import meta_number_field from "./meta/number-field.json";
 import meta_onboarding from "./meta/onboarding.json";
@@ -105,6 +105,7 @@ export const registryMeta = {
   "checkbox": meta_checkbox,
   "combobox": meta_combobox,
   "context-menu": meta_context_menu,
+  "currency-input": meta_currency_input,
   "dialog": meta_dialog,
   "drawer": meta_drawer,
   "empty-state": meta_empty_state,
@@ -119,7 +120,6 @@ export const registryMeta = {
   "menu": meta_menu,
   "menubar": meta_menubar,
   "meter": meta_meter,
-  "money-input": meta_money_input,
   "navigation-menu": meta_navigation_menu,
   "number-field": meta_number_field,
   "onboarding": meta_onboarding,
@@ -185,6 +185,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "combobox-helper": { component: "combobox", variant: "helper", kind: "example", install: "combobox" },
   "combobox": { component: "combobox", variant: "base", kind: "component", install: "combobox" },
   "context-menu": { component: "context-menu", variant: "base", kind: "component", install: "context-menu" },
+  "currency-input": { component: "currency-input", variant: "base", kind: "component", install: "currency-input" },
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
   "drawer": { component: "drawer", variant: "base", kind: "component", install: "drawer" },
   "empty-state": { component: "empty-state", variant: "base", kind: "component", install: "empty-state" },
@@ -201,7 +202,6 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "menu": { component: "menu", variant: "base", kind: "component", install: "menu" },
   "menubar": { component: "menubar", variant: "base", kind: "component", install: "menubar" },
   "meter": { component: "meter", variant: "base", kind: "component", install: "meter" },
-  "money-input": { component: "money-input", variant: "base", kind: "component", install: "money-input" },
   "navigation-menu": { component: "navigation-menu", variant: "base", kind: "component", install: "navigation-menu" },
   "number-field": { component: "number-field", variant: "base", kind: "component", install: "number-field" },
   "onboarding": { component: "onboarding", variant: "base", kind: "component", install: "onboarding" },
@@ -253,6 +253,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "checkbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "combobox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "leave": "from { opacity: 1; scale: 1; }", "spin": "to { rotate: 360deg; }" } },
   "context-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "currency-input": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "dialog": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "drawer": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "swiping": "[data-swiping]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-tree": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
@@ -260,7 +261,6 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "menubar": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
-  "money-input": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "navigation-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "from-left": "[data-activation-direction=left]", "from-right": "[data-activation-direction=right]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "onboarding": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "popover": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

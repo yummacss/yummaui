@@ -95,6 +95,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "currency-input",
+		title: "Currency Input",
+		description:
+			"Enter an amount with its currency, picked from a list in the field, built on Base UI.",
+		primitive: "number-field",
+	},
+	{
 		slug: "dialog",
 		title: "Dialog",
 		description:
@@ -180,13 +187,6 @@ export const COMPONENT_PAGES = [
 		description:
 			"Show how much of something is used, whole or split into shares, built on Base UI.",
 		primitive: true,
-	},
-	{
-		slug: "money-input",
-		title: "Money Input",
-		description:
-			"Enter an amount with its currency, picked from a list in the field, built on Base UI.",
-		primitive: "number-field",
 	},
 	{
 		slug: "navigation-menu",
