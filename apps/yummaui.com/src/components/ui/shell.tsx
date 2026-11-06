@@ -6,7 +6,7 @@ import {
 	PlaygroundProvider,
 	StaticPlayground,
 } from "@/components/playground/context";
-import { ApiTable, Look } from "@/components/playground/api";
+import { ApiTable } from "@/components/playground/api";
 import ComponentPlayground from "@/components/playground/stage";
 import TableOfContents from "@/components/ui/toc";
 import { registryMeta } from "@/registry";
@@ -51,10 +51,7 @@ export default function UIShell({
 				<article className="d:f fd:c f:1 min-h:0">
 					{children}
 					{playground && (
-						<ComponentPlayground
-							resizable={resizable.includes(playground)}
-							styling={<Look />}
-						/>
+						<ComponentPlayground resizable={resizable.includes(playground)} />
 					)}
 					{playground && <ApiTable primitives={primitives} />}
 				</article>

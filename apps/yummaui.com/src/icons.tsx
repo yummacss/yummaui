@@ -19,6 +19,7 @@ import {
 	IconLetterT,
 	IconLogout,
 	IconMarkdown,
+	IconPalette,
 	IconPlus,
 	IconPointFilled,
 	IconSearch,
@@ -58,6 +59,7 @@ export const NavArrowRight = line(IconChevronRight);
 export const NavArrowUp = line(IconChevronUp);
 export const OpenBook = line(IconBook);
 export const Page = line(IconFile);
+export const Palette = line(IconPalette);
 export const Plus = line(IconPlus);
 export const Point = line(IconPointFilled);
 export const Search = line(IconSearch);
