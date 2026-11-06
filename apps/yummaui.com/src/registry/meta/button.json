@@ -48,13 +48,13 @@
       "type": "boolean",
       "typeName": "boolean | number",
       "default": false,
-      "description": "Acts only once a countdown runs out, for `true` 5 seconds or for this many milliseconds. A press starts it, the fill drains while it runs, and a second press cancels it. Not with `hold`."
+      "description": "Acts only once a countdown runs out, for `true` 5 seconds or for this many milliseconds. A press starts it and turns the button pale with the seconds left in a badge, and a second press cancels it. Not with `hold`."
     },
     {
       "name": "countdownLabel",
-      "type": "none",
-      "typeName": "(seconds: number) => string",
-      "description": "What the button says while the countdown runs, given the seconds left."
+      "type": "string",
+      "default": "Undo",
+      "description": "What the button says while the countdown runs, beside the seconds left."
     },
     {
       "name": "onCountdown",

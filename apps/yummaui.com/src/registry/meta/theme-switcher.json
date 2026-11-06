@@ -62,13 +62,19 @@
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the track. The options nest one step inside it. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported. Inherits the nearest `Shape`."
+      "description": "Corner radius of the track and of the key that slides on it. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported. Inherits the nearest `Shape`."
     },
     {
       "name": "disabled",
       "type": "boolean",
       "default": false,
       "description": "Blocks every option and dims the control."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The raised key sliding to the picked option. Turn it off for an instant jump; reduced motion does the same."
     },
     {
       "name": "className",

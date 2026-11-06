@@ -43,11 +43,11 @@ export default defineConfig({
 			"out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)",
 			"out-quart": "cubic-bezier(0.25, 1, 0.5, 1)",
 		},
-		// the soft key: a lighter inner edge on top and a small drop under each key
+		// the soft key: a lit top edge, a crisp bottom edge and a tight drop under each key
 		boxShadow: {
-			key: "inset 0 1px 0 light-dark(oklch(1 0 0), oklch(1 0 0 / .11)), 0 1px 2px light-dark(oklch(0 0 0 / .07), oklch(0 0 0 / .35))",
+			key: "inset 0 1px 0 light-dark(oklch(1 0 0), oklch(1 0 0 / .11)), 0 1px 0 light-dark(oklch(0.18 0.008 286 / .1), oklch(0 0 0 / .45)), 0 2px 4px -1px light-dark(oklch(0.18 0.008 286 / .08), oklch(0 0 0 / .4))",
 			"key-fill":
-				"inset 0 1px 0 light-dark(oklch(1 0 0 / .16), oklch(1 0 0 / .7)), 0 1px 2px light-dark(oklch(0 0 0 / .1), oklch(0 0 0 / .35))",
+				"inset 0 1px 0 light-dark(oklch(1 0 0 / .14), oklch(1 0 0 / .7)), 0 1px 0 light-dark(oklch(0.18 0.008 286 / .25), oklch(0 0 0 / 0)), 0 2px 4px -1px light-dark(oklch(0.18 0.008 286 / .2), oklch(0 0 0 / .35))",
 			sunk: "inset 0 1px 2px light-dark(oklch(0 0 0 / .05), oklch(0 0 0 / .45))",
 			pop: "0 12px 28px -12px light-dark(oklch(0 0 0 / .16), oklch(0 0 0 / .7)), 0 2px 6px -2px light-dark(oklch(0 0 0 / .05), oklch(0 0 0 / .3))",
 		},

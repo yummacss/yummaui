@@ -1,6 +1,15 @@
 "use client";
 
-import { createContext, type ReactNode, useContext } from "react";
+import {
+  createContext,
+  type CSSProperties,
+  type ReactNode,
+  type RefObject,
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 /** The corner style every component shares, set app-wide with `Shape` or per component with its `shape` prop. */
 export type Shape = "square" | "rounded" | "squircle" | "pill";
@@ -110,3 +119,51 @@ export const FOCUS_WITHIN = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focu
 
 /** The text typed into a field: 16px on a phone, where iOS zooms in on anything smaller. */
 export const INPUT_TEXT = "fs:md @sm:fs:sm";
+
+/** Set by a group that slides one raised key under its pressed item, so the items stop drawing their own. */
+export const Sliding = createContext(false);
+
+/**
+ * Follows the `[data-pressed]` item inside the returned `ref` and gives the
+ * style that puts a sliding key under it. `ready` turns true after the first
+ * measure, so the key does not slide in from the corner on load.
+ */
+export function useIndicator<T extends HTMLElement>(
+  on = true,
+): { ref: RefObject<T | null>; style: CSSProperties; ready: boolean } {
+  const ref = useRef<T>(null);
+  const [box, setBox] = useState<DOMRect | null>(null);
+  const [ready, setReady] = useState(false);
+
+  useLayoutEffect(() => {
+    const root = ref.current;
+    if (!root || !on) return;
+    const measure = () => {
+      const item = root.querySelector<HTMLElement>("[data-pressed]");
+      setBox(
+        item
+          ? new DOMRect(item.offsetLeft, item.offsetTop, item.offsetWidth, item.offsetHeight)
+          : null,
+      );
+    };
+    measure();
+    const frame = requestAnimationFrame(() => setReady(true));
+    const mutations = new MutationObserver(measure);
+    mutations.observe(root, { subtree: true, attributeFilter: ["data-pressed"] });
+    const sizes = new ResizeObserver(measure);
+    sizes.observe(root);
+    return () => {
+      cancelAnimationFrame(frame);
+      mutations.disconnect();
+      sizes.disconnect();
+    };
+  }, [on]);
+
+  return {
+    ref,
+    ready,
+    style: box
+      ? { translate: `${box.x}px ${box.y}px`, width: box.width, height: box.height }
+      : { opacity: 0 },
+  };
+}
