@@ -1,0 +1,128 @@
+{
+  "summary": "An amount with its currency, picked from a list at the start of the field and grouped for the locale when the field is left.",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "example": "Budget",
+      "description": "Text above the field, wired to it as its accessible name."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "A line under the field."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "description": "Marks the field invalid and shows this under it in place of `description`."
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "description": "The amount, controlled. Pair with `onValueChange`."
+    },
+    {
+      "name": "defaultValue",
+      "type": "number",
+      "description": "The amount on first render, uncontrolled."
+    },
+    {
+      "name": "onValueChange",
+      "type": "none",
+      "typeName": "(value: number | null) => void",
+      "description": "Called with the amount, or `null` when the field is cleared."
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "description": "The currency, as an ISO code, controlled. Pair with `onCurrencyChange`."
+    },
+    {
+      "name": "defaultCurrency",
+      "type": "string",
+      "default": "USD",
+      "description": "The currency on first render, uncontrolled."
+    },
+    {
+      "name": "onCurrencyChange",
+      "type": "none",
+      "typeName": "(currency: string) => void",
+      "description": "Called with the ISO code when another currency is picked."
+    },
+    {
+      "name": "currencies",
+      "type": "none",
+      "typeName": "string[]",
+      "description": "The ISO codes the picker offers. One code hides the picker."
+    },
+    {
+      "name": "locale",
+      "type": "string",
+      "default": "en-US",
+      "description": "Formats the grouping, the decimal mark and the currency names."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Height & width of the field."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "description": "Corner radius of the field and its popup. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Blocks the field and the picker and dims both."
+    },
+    {
+      "name": "required",
+      "type": "boolean",
+      "default": false,
+      "description": "Marks the field required and adds an asterisk to the label."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes on the field. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "The picker list rendering inside this element instead of the page, for a frame or a container that owns its own stacking context."
+    }
+  ],
+  "scene": [
+    {
+      "component": "MoneyInput",
+      "props": {
+        "label": "Budget",
+        "defaultValue": 12480.5,
+        "description": "Grouped when you leave the field."
+      }
+    }
+  ]
+}

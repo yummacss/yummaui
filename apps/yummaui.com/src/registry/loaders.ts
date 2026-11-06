@@ -44,6 +44,7 @@ export const registry = {
   "menu": () => import("./ui/menu"),
   "menubar": () => import("./ui/menubar"),
   "meter": () => import("./ui/meter"),
+  "money-input": () => import("./ui/money-input"),
   "navigation-menu": () => import("./ui/navigation-menu"),
   "number-field": () => import("./ui/number-field"),
   "onboarding": () => import("./ui/onboarding"),

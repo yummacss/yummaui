@@ -23,6 +23,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"file-upload",
 			"field",
 			"keypad",
+			"money-input",
 			"number-field",
 			"otp-field",
 			"radio",
