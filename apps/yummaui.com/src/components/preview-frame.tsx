@@ -145,11 +145,15 @@ export default function PreviewFrame({
 				true,
 			);
 
-			// a press brings the whole frame into view, so what it opens fits without
-			// a scroll, whose touch would land outside a popup and close it
+			// a tap on a control brings the whole frame into view, so what it opens fits
+			// without a scroll; a touch that starts a scroll is not a tap, so it is left alone
 			target.addEventListener(
-				"pointerdown",
-				() => {
+				"click",
+				(event) => {
+					const control = (event.target as Element | null)?.closest?.(
+						"button, input, select, textarea, [role]",
+					);
+					if (!control) return;
 					const box = element.getBoundingClientRect();
 					const top = 64;
 					if (box.top >= top && box.bottom <= window.innerHeight) return;

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type CSSProperties, useMemo, useRef, useState } from "react";
 import Scroller from "@/components/ui/scroller";
-import { Search, Sparkles } from "@/icons";
+import { Check, Search, Sparkles } from "@/icons";
 import { useReveal } from "@/utils/reveal";
 import Match from "./match";
 import ProductLinks from "./product-links";
@@ -131,10 +131,10 @@ export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 														<Drawer.Close
 															nativeButton={false}
 															render={<Link href={item.href} />}
-															className={`p:r d:f ai:c g:2 h:10 px:7 fs:md us:none a:bg:surface fv:oc:ink fv:oo:-2 fv:ow:2 ${
+															className={`p:r d:f ai:c g:2 h:10 fs:md us:none a:bg:surface fv:oc:ink fv:oo:-2 fv:ow:2 ${
 																isActive
-																	? "c:accent td:u tds:d"
-																	: "c:ink/80 h:td:u"
+																	? "mx:3 px:4 br:9999 bg:press c:ink fw:500"
+																	: "px:7 c:ink/80 h:td:u"
 															}`}
 														>
 															<Match text={item.title} query={typed} />
@@ -148,6 +148,12 @@ export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 																		, new
 																	</span>
 																</>
+															)}
+															{isActive && (
+																<Check
+																	aria-hidden
+																	className="ml:auto w:4 h:4 fs:0"
+																/>
 															)}
 														</Drawer.Close>
 													</li>
