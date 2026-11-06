@@ -199,7 +199,10 @@ const components: MDXComponents = {
 		props.className ? (
 			<blockquote {...props}>{children}</blockquote>
 		) : (
-			<blockquote className="pl:2 bc:accent bg:accent-dim/10 blw:2" {...props}>
+			<blockquote
+				className="pl:2 bc:accent bg:accent-dim/10 blw:2 brr:lg"
+				{...props}
+			>
 				{children}
 			</blockquote>
 		),
@@ -213,8 +216,8 @@ const components: MDXComponents = {
 		props.className ? (
 			<table {...props}>{children}</table>
 		) : (
-			<div className="ox:auto my:6">
-				<table className="w:100% bc:border bg:transparent bc:c" {...props}>
+			<div className="ox:auto my:6 bw:1 bc:border br:xl">
+				<table className="w:100% bg:transparent bc:s bs:0" {...props}>
 					{children}
 				</table>
 			</div>
@@ -231,7 +234,10 @@ const components: MDXComponents = {
 		props.className ? (
 			<th {...props}>{children}</th>
 		) : (
-			<th className="px:4 py:2 bc:border c:ink bw:1 ta:l fw:500" {...props}>
+			<th
+				className="px:4 py:2 bc:border c:ink bw:0 blw:1 fc:blw:0 ta:l fw:500"
+				{...props}
+			>
 				{children}
 			</th>
 		),
@@ -239,7 +245,10 @@ const components: MDXComponents = {
 		props.className ? (
 			<td {...props}>{children}</td>
 		) : (
-			<td className="px:4 py:2 bc:border c:ink/80 bw:1" {...props}>
+			<td
+				className="px:4 py:2 bc:border c:ink/80 bw:0 btw:1 blw:1 fc:blw:0"
+				{...props}
+			>
 				{children}
 			</td>
 		),
@@ -256,7 +265,7 @@ const components: MDXComponents = {
 		<Image
 			src={src as string}
 			alt={alt || ""}
-			className={`${className || "w:100% h:auto my:4"} bc:border bg:surface bw:1`}
+			className={`${className || "w:100% h:auto my:4"} bc:border bg:surface bw:1 br:xl`}
 			unoptimized
 			width={1920}
 			height={1080}

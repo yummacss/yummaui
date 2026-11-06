@@ -52,7 +52,7 @@ export default function CodeGroup({ children }: Props) {
 	};
 
 	return (
-		<div className="o:h my:4 cs:d bc:border bg:surface bw:1">
+		<div className="o:h my:4 cs:d bc:border bg:surface bw:1 br:xl">
 			<CodeTabs
 				idPrefix={groupId}
 				active={String(current)}

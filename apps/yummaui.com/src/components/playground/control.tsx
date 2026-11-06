@@ -23,7 +23,7 @@ export function EnumSelect({
 	const [open, setOpen] = useState(false);
 
 	const popup = (
-		<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:40 bc:border bg:surface bw:1">
+		<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:40 bc:border bg:surface bw:1 br:xl">
 			<Select.List>
 				{values.map((option) => (
 					<Select.Item
@@ -31,7 +31,7 @@ export function EnumSelect({
 						value={option}
 						disabled={blocked.includes(option)}
 						className={(state) =>
-							`d:b px:2 py:1 ff:m fs:xs us:none ${
+							`d:b px:2 py:1 br:lg ff:m fs:xs us:none ${
 								state.disabled
 									? "c:ink/30 c:na tdl:lt"
 									: state.highlighted
@@ -57,7 +57,7 @@ export function EnumSelect({
 		>
 			<Select.Trigger
 				aria-label={name}
-				className={`d:f fs:0 ai:c jc:sb g:1 px:2 py:1 w:32 bg:surface a:bg:press bw:1 ff:m fs:xs us:none fv:oo:-1 fv:oc:accent ${
+				className={`d:f fs:0 ai:c jc:sb g:1 px:3 py:1 w:32 br:9999 bg:surface a:bg:press bw:1 ff:m fs:xs us:none fv:oo:-1 fv:oc:accent ${
 					inert ? "bc:border c:ink/40 c:na" : "bc:border c:ink c:p"
 				}`}
 			>
@@ -144,7 +144,7 @@ export function SwatchSelect({
 		>
 			<Select.Trigger
 				aria-label={name}
-				className="d:f fs:0 ai:c g:2 px:2 py:1 w:32 bg:surface a:bg:press bw:1 bc:border c:ink c:p ff:m fs:xs us:none fv:oo:-1 fv:oc:accent"
+				className="d:f fs:0 ai:c g:2 px:3 py:1 w:32 br:9999 bg:surface a:bg:press bw:1 bc:border c:ink c:p ff:m fs:xs us:none fv:oo:-1 fv:oc:accent"
 			>
 				{current && <Bars colors={current.colors} />}
 				<Select.Value className="f:1 o:h to:e ws:nw ta:l" />
@@ -159,14 +159,14 @@ export function SwatchSelect({
 					collisionAvoidance={{ side: "none", fallbackAxisSide: "none" }}
 					className="zi:50"
 				>
-					<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:72 bc:border bg:surface bw:1">
+					<Select.Popup className="tp:ot tdu:200 ttf:eo opening:o:0 opening:s:90 closing:o:0 closing:s:90 @prm:tp:none p:1 oy:auto w:32 max-h:72 bc:border bg:surface bw:1 br:xl">
 						<Select.List>
 							{options.map((option) => (
 								<Select.Item
 									key={option.value}
 									value={option.value}
 									className={(state) =>
-										`d:f ai:c g:2 px:2 py:1 ff:m fs:xs us:none c:p ${
+										`d:f ai:c g:2 px:2 py:1 br:lg ff:m fs:xs us:none c:p ${
 											state.highlighted
 												? "bg:border c:accent"
 												: state.selected

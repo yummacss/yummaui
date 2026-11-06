@@ -57,8 +57,10 @@ export function ApiTable({ primitives }: { primitives: Primitives }) {
 	const target = getRegistryTarget(playground.id);
 	const primitive = primitiveSlug(primitives, target.component, target.install);
 	// the docs' own table, so the API reads like every other table on the site
-	const th = "px:2 @md:px:4 py:2 bc:border c:ink bw:1 ta:l fw:500";
-	const td = "px:2 @md:px:4 py:2 bc:border c:ink/80 bw:1 va:t";
+	const th =
+		"px:2 @md:px:4 py:2 bc:border c:ink bw:0 blw:1 fc:blw:0 ta:l fw:500";
+	const td =
+		"px:2 @md:px:4 py:2 bc:border c:ink/80 bw:0 btw:1 blw:1 fc:blw:0 va:t";
 
 	return (
 		<section>
@@ -78,8 +80,8 @@ export function ApiTable({ primitives }: { primitives: Primitives }) {
 					</Link>
 				)}
 			</div>
-			<div className="ox:auto">
-				<table className="w:100% bc:border bg:transparent bc:c">
+			<div className="ox:auto bw:1 bc:border br:xl">
+				<table className="w:100% bg:transparent bc:s bs:0">
 					<thead className="bg:surface">
 						<tr>
 							<th className={th}>Prop</th>
