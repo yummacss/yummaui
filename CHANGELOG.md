@@ -59,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Sidebar's links show their whole focus outline.
 - Combobox with chips opens its popup under the whole field.
 - Expanding Input keeps its border and focus outline while it opens.
 - Checkbox, Radio and Switch marks show on the light key in the dark scheme.

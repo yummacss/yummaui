@@ -195,7 +195,7 @@ export default function Sidebar({
         />
       </label>
 
-      <nav aria-label="Main" className="d:f fd:c g:4 f:1 min-h:0 oy:auto ob:c">
+      <nav aria-label="Main" className="d:f fd:c g:4 f:1 min-h:0 m:-1 p:1 oy:auto ob:c">
         {groups.map((group, index) => (
           <div key={group.label ?? index} className="d:f fd:c g:px">
             {group.label && (
