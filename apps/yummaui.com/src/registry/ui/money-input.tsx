@@ -2,7 +2,22 @@
 
 import { NumberField } from "@base-ui/react/number-field";
 import { Select } from "@base-ui/react/select";
-import { IconCheck, IconChevronDown } from "@tabler/icons-react";
+import {
+  IconCheck,
+  IconChevronDown,
+  IconCurrencyDollar,
+  IconCurrencyDollarAustralian,
+  IconCurrencyDollarCanadian,
+  IconCurrencyEuro,
+  IconCurrencyFrank,
+  IconCurrencyKroneSwedish,
+  IconCurrencyPeso,
+  IconCurrencyPound,
+  IconCurrencyReal,
+  IconCurrencyRupee,
+  IconCurrencyYen,
+  IconCurrencyYuan,
+} from "@tabler/icons-react";
 import AU from "country-flag-icons/react/3x2/AU";
 import BR from "country-flag-icons/react/3x2/BR";
 import CA from "country-flag-icons/react/3x2/CA";
@@ -27,31 +42,50 @@ import {
   useShape,
 } from "./style";
 
-// one flag per currency; a code without one shows the code alone
-const FLAGS: Record<string, ComponentType<{ className?: string }>> = {
-  AUD: AU,
-  BRL: BR,
-  CAD: CA,
-  CHF: CH,
-  CNY: CN,
-  EUR: EU,
-  GBP: GB,
-  INR: IN,
-  JPY: JP,
-  MXN: MX,
-  SEK: SE,
-  USD: US,
+type Glyph = ComponentType<{ className?: string }>;
+
+// each known currency's flag and sign; any other code shows its text sign alone
+const KNOWN: Record<string, { flag: Glyph; sign: Glyph }> = {
+  AUD: { flag: AU, sign: IconCurrencyDollarAustralian },
+  BRL: { flag: BR, sign: IconCurrencyReal },
+  CAD: { flag: CA, sign: IconCurrencyDollarCanadian },
+  CHF: { flag: CH, sign: IconCurrencyFrank },
+  CNY: { flag: CN, sign: IconCurrencyYuan },
+  EUR: { flag: EU, sign: IconCurrencyEuro },
+  GBP: { flag: GB, sign: IconCurrencyPound },
+  INR: { flag: IN, sign: IconCurrencyRupee },
+  JPY: { flag: JP, sign: IconCurrencyYen },
+  MXN: { flag: MX, sign: IconCurrencyPeso },
+  SEK: { flag: SE, sign: IconCurrencyKroneSwedish },
+  USD: { flag: US, sign: IconCurrencyDollar },
 };
 
 // the box draws the outline only while the amount has focus, not the picker
 const TYPING = "os:s ow:3 oo:0 oc:focus/40 bc:focus";
 
 function Flag({ code }: { code: string }) {
-  const Glyph = FLAGS[code];
-  if (!Glyph) return null;
+  const Mark = KNOWN[code]?.flag;
+  if (!Mark) return null;
   return (
-    <span aria-hidden className="d:f ai:c jc:c w:4 h:4 fs:0 o:h br:9999">
-      <Glyph className="h:4 w:6 fs:0" />
+    <span aria-hidden className="d:f w:6 h:4 fs:0 o:h br:xs bw:1 bc:rim">
+      <Mark className="w:100% h:100%" />
+    </span>
+  );
+}
+
+function Sign({ code, locale }: { code: string; locale: string }) {
+  const Icon = KNOWN[code]?.sign;
+  if (Icon) return <Icon aria-hidden className="w:4 h:4 fs:0 ml:3 c:hint" />;
+  const text = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: code,
+    currencyDisplay: "narrowSymbol",
+  })
+    .formatToParts(0)
+    .find((part) => part.type === "currency")?.value;
+  return (
+    <span aria-hidden className="ml:3 c:hint">
+      {text ?? code}
     </span>
   );
 }
@@ -239,6 +273,7 @@ export default function MoneyInput({
             {currency}
           </span>
         )}
+        <Sign code={currency} locale={locale} />
         <NumberField.Group className="d:f f:1 min-w:0 h:100%">
           <NumberField.Input
             aria-invalid={error ? true : undefined}
@@ -246,7 +281,7 @@ export default function MoneyInput({
             placeholder={(0).toFixed(digits)}
             onFocus={() => setTyping(true)}
             onBlur={() => setTyping(false)}
-            className={`f:1 min-w:0 h:100% px:3 bw:0 bg:transparent c:label os:none fvn:tn ${INPUT_TEXT}`}
+            className={`f:1 min-w:0 h:100% pl:2 pr:3 bw:0 bg:transparent c:label os:none fvn:tn ${INPUT_TEXT}`}
           />
         </NumberField.Group>
       </div>

@@ -1,5 +1,5 @@
 {
-  "summary": "An amount with its currency, picked by flag and code at the start of the field and grouped for the locale when the field is left.",
+  "summary": "An amount with its currency, picked by flag and code at the start of the field, its sign beside the value, grouped for the locale when the field is left.",
   "props": [
     {
       "name": "label",
