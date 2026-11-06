@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type CSSProperties, useMemo, useRef, useState } from "react";
 import Scroller from "@/components/ui/scroller";
-import { Search } from "@/icons";
+import { Search, Sparkles } from "@/icons";
 import { useReveal } from "@/utils/reveal";
 import Match from "./match";
 import ProductLinks from "./product-links";
@@ -14,6 +14,8 @@ import ProductLinks from "./product-links";
 interface NavItem {
 	title: string;
 	href: string;
+	/** Added in the newest release, so the sidebar marks it. */
+	isNew?: boolean;
 }
 
 export interface NavSection {
@@ -136,6 +138,17 @@ export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 															}`}
 														>
 															<Match text={item.title} query={typed} />
+															{item.isNew && (
+																<>
+																	<Sparkles
+																		aria-hidden
+																		className="w:4 h:4 fs:0 c:ink/60"
+																	/>
+																	<span className="p:a w:px h:px o:h">
+																		, new
+																	</span>
+																</>
+															)}
 														</Drawer.Close>
 													</li>
 												);

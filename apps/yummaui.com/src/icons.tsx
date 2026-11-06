@@ -20,9 +20,11 @@ import {
 	IconLogout,
 	IconMarkdown,
 	IconPlus,
+	IconPointFilled,
 	IconSearch,
 	IconSettings,
 	IconSettings2,
+	IconSparkles,
 	IconTerminal2,
 	IconWorld,
 	IconX,
@@ -57,8 +59,10 @@ export const NavArrowUp = line(IconChevronUp);
 export const OpenBook = line(IconBook);
 export const Page = line(IconFile);
 export const Plus = line(IconPlus);
+export const Point = line(IconPointFilled);
 export const Search = line(IconSearch);
 export const Settings2 = line(IconSettings2);
+export const Sparkles = line(IconSparkles);
 export const Terminal = line(IconTerminal2);
 export const TextLayer = line(IconLetterT);
 export const Twitter = line(IconBrandX);

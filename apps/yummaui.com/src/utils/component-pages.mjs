@@ -7,6 +7,7 @@
  * @property {string} description
  * @property {boolean | string} [primitive] The Base UI part it builds on: `true` for the one sharing its slug.
  * @property {boolean} [resizable] The preview drags narrower, for a whole screen region.
+ * @property {string} [since] The release that first ships it, `0.10`; the newest one listed marks its pages new.
  */
 
 /** @type {ComponentPage[]} */
@@ -20,12 +21,14 @@ export const COMPONENT_PAGES = [
 	},
 	{
 		slug: "activity-heatmap",
+		since: "0.10",
 		title: "Activity Heatmap",
 		description:
 			"Show a year of daily counts as a grid of days, shaded by how much happened.",
 	},
 	{
 		slug: "activity-timeline",
+		since: "0.10",
 		title: "Activity Timeline",
 		description:
 			"List events down a line, each on a raised marker with when it happened.",
@@ -102,6 +105,7 @@ export const COMPONENT_PAGES = [
 	},
 	{
 		slug: "currency-input",
+		since: "0.10",
 		title: "Currency Input",
 		description:
 			"Enter an amount with its currency, picked from a list in the field, built on Base UI.",
@@ -128,6 +132,7 @@ export const COMPONENT_PAGES = [
 	},
 	{
 		slug: "expanding-input",
+		since: "0.10",
 		title: "Expanding Input",
 		description:
 			"Open a button into a field where it sits, the button riding along as its submit.",
@@ -152,6 +157,7 @@ export const COMPONENT_PAGES = [
 	},
 	{
 		slug: "gauge",
+		since: "0.10",
 		title: "Gauge",
 		description:
 			"Show a value on a fixed range as a half-circle arc, with thresholds, built on Base UI.",
@@ -166,6 +172,7 @@ export const COMPONENT_PAGES = [
 	},
 	{
 		slug: "keypad",
+		since: "0.10",
 		title: "Keypad",
 		description:
 			"Enter a PIN or an amount on raised digit keys, or type it on the keyboard.",
@@ -235,6 +242,7 @@ export const COMPONENT_PAGES = [
 	},
 	{
 		slug: "progress-timeline",
+		since: "0.10",
 		title: "Progress Timeline",
 		description:
 			"Show steps down a line as done, in progress or next, with each state written out.",
@@ -365,6 +373,7 @@ export const COMPONENT_PAGES = [
 	},
 	{
 		slug: "treemap",
+		since: "0.10",
 		title: "Treemap",
 		description:
 			"Show shares of a whole as tiles sized by value, shaded in steps of the accent.",
@@ -386,3 +395,9 @@ export function componentSource(page) {
 		COMPONENT_BODY,
 	].join("\n");
 }
+
+/** The newest release any row names, whose pages the sidebar marks new. */
+export const NEWEST = COMPONENT_PAGES.map((page) => page.since)
+	.filter(Boolean)
+	.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+	.at(-1);
