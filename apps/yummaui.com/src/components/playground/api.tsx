@@ -1,19 +1,24 @@
 "use client";
 
+import { Button } from "@base-ui/react/button";
 import { Collapsible } from "@base-ui/react/collapsible";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { BaseUI } from "@/components/icons/icons";
 import { usePlayground } from "@/components/playground/context";
-import { EnumSelect, SwatchSelect } from "@/components/playground/control";
+import {
+	EnumSelect,
+	PropSwitch,
+	SwatchSelect,
+} from "@/components/playground/control";
 import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
 import { getRegistryTarget } from "@/registry";
-import { ACCENTS, accentBars } from "@/utils/accent";
+import { ACCENTS, accentBars, DEFAULT_ACCENT } from "@/utils/accent";
 import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { inTableOrder, typeOf } from "@/utils/props";
 import { SCHEMES, type Scheme } from "@/utils/scheme";
-import { SHAPES } from "@/utils/shapes.mjs";
+import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
 function Summary({ text }: { text?: string }) {
@@ -136,6 +141,15 @@ const SWATCHES = ACCENTS.map((family) => ({
 	colors: accentBars(family),
 }));
 
+// props that change how the component looks; text, handlers and plumbing stay out of the drawer
+const PLUMBING = new Set([
+	"shape",
+	"focus",
+	"container",
+	"className",
+	"iconShape",
+]);
+
 /** Shape, Accent and Scheme, the preview's styling. */
 export function Look() {
 	const playground = usePlayground();
@@ -163,10 +177,30 @@ export function Look() {
 		</div>
 	);
 
+	const looks = props.filter(
+		(prop) =>
+			!prop.handler &&
+			!PLUMBING.has(prop.name) &&
+			(prop.type === "enum" || (prop.type === "boolean" && !prop.typeName)),
+	);
+	const valueOf = (name: string, fallback: unknown) => {
+		const key = `all.${name}`;
+		return key in playground.sceneValues
+			? playground.sceneValues[key]
+			: fallback;
+	};
+	const reset = () => {
+		for (const prop of looks)
+			playground.setSceneValue(`all.${prop.name}`, prop.default, prop.default);
+		playground.setShape(DEFAULT_SHAPE);
+		playground.setAccent(DEFAULT_ACCENT);
+		playground.setScheme("light");
+	};
+
 	return (
 		<div className="d:f fd:c pb:4 mb:4">
 			<p className="m:0 mb:1 c:ink/60 fs:xs lh:4">
-				The shape, accent & scheme set the preview only.
+				Everything here sets the preview only.
 			</p>
 			{offered.length > 1 &&
 				line(
@@ -196,6 +230,56 @@ export function Look() {
 					onChange={(value) => playground.setScheme(value as Scheme)}
 				/>,
 			)}
+			{looks.length > 0 && (
+				<>
+					<h3 className="m:0 mt:6 mb:1 c:ink/60 fs:xs fw:500">Props</h3>
+					{looks.map((prop) => {
+						const fallback =
+							prop.default ??
+							(prop.type === "boolean" ? false : prop.values?.[0]);
+						const current = valueOf(prop.name, fallback);
+						return (
+							<Fragment key={prop.name}>
+								{line(
+									prop.name,
+									prop.type === "boolean" ? (
+										<PropSwitch
+											name={prop.name}
+											checked={current === true}
+											onChange={(value) =>
+												playground.setSceneValue(
+													`all.${prop.name}`,
+													value,
+													fallback,
+												)
+											}
+										/>
+									) : (
+										<EnumSelect
+											name={prop.name}
+											values={prop.values ?? []}
+											value={String(current)}
+											onChange={(value) =>
+												playground.setSceneValue(
+													`all.${prop.name}`,
+													value,
+													fallback,
+												)
+											}
+										/>
+									),
+								)}
+							</Fragment>
+						);
+					})}
+				</>
+			)}
+			<Button
+				onClick={reset}
+				className="as:fs mt:4 p:0 bw:0 bg:transparent c:ink/70 fs:xs td:u tds:d tuo:4 c:p h:c:ink fv:oc:ink fv:ow:2"
+			>
+				Reset
+			</Button>
 		</div>
 	);
 }

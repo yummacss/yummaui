@@ -1,6 +1,7 @@
 "use client";
 
 import { Select } from "@base-ui/react/select";
+import { Switch } from "@base-ui/react/switch";
 import { useState } from "react";
 import { NavArrowDown } from "@/icons";
 
@@ -76,6 +77,32 @@ export function EnumSelect({
 				</Select.Positioner>
 			</Select.Portal>
 		</Select.Root>
+	);
+}
+
+/** An on and off control for a boolean prop. */
+export function PropSwitch({
+	name,
+	checked,
+	onChange,
+}: {
+	name: string;
+	checked: boolean;
+	onChange: (checked: boolean) => void;
+}) {
+	return (
+		<Switch.Root
+			render={<button type="button" />}
+			nativeButton
+			aria-label={name}
+			checked={checked}
+			onCheckedChange={onChange}
+			className={`d:f fs:0 ai:c w:8 h:5 p:0 br:9999 bw:2 bc:transparent tp:c tdu:150 c:p fv:oo:2 fv:oc:accent ${checked ? "bg:accent" : "bg:border"}`}
+		>
+			<Switch.Thumb
+				className={`d:b w:4 h:4 br:9999 bg:surface tp:t tdu:150 @prm:tp:none ${checked ? "ttx:3" : ""}`}
+			/>
+		</Switch.Root>
 	);
 }
 

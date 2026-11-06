@@ -191,7 +191,13 @@ export function renderScene(
 		wired: (component, path, props) => {
 			const meta = getRegistryMeta(componentId(component));
 			const out: DemoProps = {};
+			const own = componentId(component) === state.page;
 			for (const prop of meta?.props ?? []) {
+				const look = `all.${prop.name}`;
+				if (own && !prop.handler && look in state.values) {
+					out[prop.name] = state.values[look];
+					continue;
+				}
 				if (!prop.handler) continue;
 				const initial = `default${prop.name.charAt(0).toUpperCase()}${prop.name.slice(1)}`;
 				const fallback =
@@ -218,6 +224,8 @@ export function renderScene(
 
 export interface SceneState {
 	values: Record<string, unknown>;
+	/** The page's component, whose look props the Styling drawer sets on every instance. */
+	page?: string;
 	set: (key: string, value: unknown, fallback: unknown) => void;
 	/** Sets the preview's own scheme, so a Theme Switcher in it does what it says. */
 	setScheme?: (scheme: "light" | "dark") => void;

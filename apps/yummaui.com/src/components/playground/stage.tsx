@@ -308,6 +308,7 @@ function Scene({
 		container,
 		{
 			values: playground?.sceneValues ?? {},
+			page: playground?.id,
 			set: playground?.setSceneValue ?? (() => {}),
 			setScheme: playground?.setScheme,
 		},
