@@ -75,7 +75,7 @@
         "warning",
         "danger"
       ],
-      "default": "info",
+      "default": "neutral",
       "description": "What the reading means, not which hue it is. The five map to Yumma families in the shipped `INTENTS` table; point one somewhere else and the type follows."
     },
     {

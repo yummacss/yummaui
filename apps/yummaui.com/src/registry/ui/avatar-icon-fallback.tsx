@@ -10,4 +10,4 @@ export default function AvatarIconFallback() {
   );
 }
 
-const tints: NonNullable<AvatarProps["tint"]>[] = ["blue", "mint", "indigo"];
+const tints: NonNullable<AvatarProps["tint"]>[] = ["accent", "mint", "indigo"];

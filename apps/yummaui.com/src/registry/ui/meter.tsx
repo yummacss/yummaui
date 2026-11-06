@@ -20,7 +20,7 @@ type Intent = keyof typeof INTENTS;
 
 // one step lighter per segment, so the first reads as the biggest share
 const SEGMENTS = {
-  neutral: ["bg:fill", "bg:hint", "bg:line"],
+  neutral: ["bg:fill", "bg:fill/60", "bg:fill/25"],
   info: ["bg:blue", "bg:blue-5", "bg:blue-3"],
   success: ["bg:green", "bg:green-5", "bg:green-3"],
   warning: ["bg:yellow", "bg:yellow-5", "bg:yellow-3"],
@@ -100,7 +100,7 @@ export default function MeterBase({
   label,
   description,
   icon,
-  intent = "info",
+  intent = "neutral",
   segments,
   unit,
   rest,

@@ -226,6 +226,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "select-grouped": { component: "select", variant: "grouped", kind: "example", install: "select" },
   "select": { component: "select", variant: "base", kind: "component", install: "select" },
   "separator": { component: "separator", variant: "base", kind: "component", install: "separator" },
+  "sidebar-pages": { component: "sidebar", variant: "pages", kind: "example", install: "sidebar" },
   "sidebar": { component: "sidebar", variant: "base", kind: "component", install: "sidebar" },
   "sign-in": { component: "sign-in", variant: "base", kind: "component", install: "sign-in" },
   "skeleton-activity": { component: "skeleton", variant: "activity", kind: "example", install: "skeleton" },

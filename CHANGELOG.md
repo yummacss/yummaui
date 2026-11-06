@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Avatar takes the `accent` tint.
+- An icon-only Button shows its countdown as a circle around the seconds.
+- Sidebar takes `focus`.
 - `Shape` sets the shape of every component inside it. Components share `style.tsx`, which `add` installs with them.
 - Two blocks: Sidebar and Sign In.
 - Menu takes an element as `trigger`, such as a `Button`, which keeps its own look.
-- Sidebar has the brand and a search field on top, and its user menu holds a status, an account switcher and Sign out.
+- Sidebar has the brand and a search field on top, and its user menu holds an account switcher and Sign out.
 - Inline Icon Heading takes its sentence as `parts`.
 - Onboarding takes the `pill` shape.
 - Combobox chips fade out when removed.
@@ -20,6 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Meter defaults to the `neutral` intent, which follows the accent.
+- Sidebar opens its user menu from the arrow alone.
+- Select caps its popup at 18rem.
 - Dialog, Alert Dialog, Drawer & Toast draw their buttons with Button, which `add` installs with them.
 - `style.tsx` holds the size scale controls, fields and labels share.
 - Accordion, Checkbox, Checkbox Group, Combobox, Textarea & Scroll Area take every shape but `pill`; Meter takes `square` & `pill`.
@@ -53,6 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Combobox with chips opens its popup under the whole field.
+- Expanding Input keeps its border and focus outline while it opens.
 - Checkbox, Radio and Switch marks show on the light key in the dark scheme.
 - Switch, Slider, Progress, Meter & Storage Bar tracks are visible on a white page.
 

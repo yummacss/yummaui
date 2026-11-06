@@ -274,7 +274,7 @@ export default function ButtonBase({
     >
       {iconOnlyActive ? (
         counting ? (
-          label
+          <Dial seconds={counter.seconds} duration={counter.duration} />
         ) : (
           glyph
         )
@@ -351,6 +351,41 @@ function Swap({
       >
         {second}
       </span>
+    </span>
+  );
+}
+
+// an icon-only countdown: a circle empties around the seconds; reduced motion keeps the number alone
+function Dial({ seconds, duration }: { seconds: number; duration: number }) {
+  const [empty, setEmpty] = useState(false);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setEmpty(true));
+    return () => cancelAnimationFrame(frame);
+  }, []);
+  const length = 2 * Math.PI * 13;
+
+  return (
+    <span className="p:r d:f ai:c jc:c w:100% h:100%">
+      <svg
+        aria-hidden
+        viewBox="0 0 32 32"
+        className="p:a i:0 w:100% h:100% ro:54 @prm:d:none"
+      >
+        <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" strokeOpacity={0.2} strokeWidth={2} />
+        <circle
+          cx="16"
+          cy="16"
+          r="13"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeDasharray={length}
+          strokeDashoffset={empty ? length : 0}
+          style={{ transition: `stroke-dashoffset ${duration}ms linear` }}
+        />
+      </svg>
+      <span className="p:r fs:xs fw:600 fvn:tn">{seconds}</span>
     </span>
   );
 }
@@ -473,5 +508,10 @@ function useCountdown(
     }, duration);
   };
 
-  return { seconds, started, toggle: () => (seconds ? reset() : start()) };
+  return {
+    seconds,
+    started,
+    duration,
+    toggle: () => (seconds ? reset() : start()),
+  };
 }

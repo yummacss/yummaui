@@ -23,7 +23,7 @@ import { merge } from "yummacss/merge";
 import Avatar from "./avatar";
 import Badge from "./badge";
 import Menu from "./menu";
-import { RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 export interface SidebarLink {
   label: string;
@@ -43,8 +43,6 @@ export interface SidebarAccount {
   name: string;
   email: string;
 }
-
-export type SidebarStatus = "online" | "busy" | "offline";
 
 const ICON = "w:4 h:4";
 
@@ -78,12 +76,6 @@ const GROUPS: SidebarGroup[] = [
 ];
 
 const ADA: SidebarAccount = { name: "Ada Lovelace", email: "ada@yummaui.com" };
-
-const STATUS_LABELS: Record<SidebarStatus, string> = {
-  online: "Online",
-  busy: "Busy",
-  offline: "Offline",
-};
 
 const LINK =
   "d:f ai:c g:2 h:8 px:2 fs:sm td:none c:hint c:p us:none tp:c tdu:100 h:bg:well h:c:label ow:0 oc:focus/40 fv:os:s fv:ow:2 fv:oo:0";
@@ -120,10 +112,6 @@ export interface SidebarProps {
   onAccountChange?: (email: string) => void;
   /** Called when Add account is picked from the switcher. */
   onAddAccount?: () => void;
-  /** The user's status, shown on their avatar and picked from their menu. */
-  status?: SidebarStatus;
-  /** Called with the status picked from the user menu. */
-  onStatusChange?: (status: SidebarStatus) => void;
   /** Called when Sign out is picked from the user menu. */
   onSignOut?: () => void;
   /**
@@ -131,6 +119,14 @@ export interface SidebarProps {
    * pass an element to keep them inside a scrolling frame.
    */
   container?: HTMLElement | null;
+  /**
+   * The focus outline. `true` draws it, `false` removes it along with the
+   * danger, error and success tints that ride with it, and a string of Yumma
+   * CSS utilities restyles it on every focusable part of the component, which
+   * is more than `className` reaches. Removing it outright and putting nothing
+   * back fails WCAG 2.4.7.
+   */
+  focus?: boolean | string;
   /**
    * Extra classes. `merge` folds them in last, so one here replaces the
    * component's own class for the same utility.
@@ -153,17 +149,15 @@ export default function Sidebar({
   accounts = [user],
   onAccountChange,
   onAddAccount,
-  status: controlledStatus,
-  onStatusChange,
   onSignOut,
   container,
+  focus = true,
   className,
 }: SidebarProps) {
   const shape = useShape(shapeProp);
+  const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [here, setHere] = useState(current);
   const [userOpen, setUserOpen] = useState(false);
-  const [ownStatus, setOwnStatus] = useState<SidebarStatus>("online");
-  const status = controlledStatus ?? ownStatus;
 
   return (
     <aside
@@ -242,48 +236,33 @@ export default function Sidebar({
         ))}
       </nav>
 
-      <Menu
-        container={container}
-        shape={shape}
-        className="w:100%"
-        open={userOpen}
-        onOpenChange={setUserOpen}
-        trigger={
-          <span className="d:f ai:c g:2 w:100% ta:l">
-            <Avatar
-              name={user.name}
-              size="sm"
-              tint="indigo"
-              status={status}
-            />
-            <span className="d:f fd:c f:1 min-w:0">
-              <span className="fs:sm fw:500 o:h to:e ws:nw">{user.name}</span>
-              <span className="fs:xs c:hint o:h to:e ws:nw">{user.email}</span>
-            </span>
-            <IconChevronDown
-              className={`w:4 h:4 fs:0 c:hint tp:t tdu:200 ttf:out-quart @prm:tp:none ${userOpen ? "ro:36" : "ro:0"}`}
-            />
-          </span>
-        }
-        items={[
-          {
-            type: "group",
-            label: "Status",
-            items: [
-              {
-                type: "radio",
-                value: status,
-                onValueChange: (value) => {
-                  setOwnStatus(value as SidebarStatus);
-                  onStatusChange?.(value as SidebarStatus);
-                },
-                options: (Object.keys(STATUS_LABELS) as SidebarStatus[]).map(
-                  (value) => ({ value, label: STATUS_LABELS[value] }),
-                ),
-              },
-            ],
-          },
-          { type: "separator" },
+      <div className="d:f ai:c g:2 px:1">
+        <Avatar name={user.name} size="sm" tint="accent" />
+        <span className="d:f fd:c f:1 min-w:0">
+          <span className="fs:sm fw:500 o:h to:e ws:nw">{user.name}</span>
+          <span className="fs:xs c:hint o:h to:e ws:nw">{user.email}</span>
+        </span>
+        <Menu
+          container={container}
+          shape={shape}
+          open={userOpen}
+          onOpenChange={setUserOpen}
+          trigger={
+            <button
+              type="button"
+              aria-label="Account menu"
+              className={merge(
+                outline,
+                "d:f fs:0 ai:c jc:c w:8 h:8 p:0 bw:0 bg:transparent c:hint c:p tp:c tdu:100 h:bg:well h:c:label",
+                RADIUS.control[shape],
+              )}
+            >
+              <IconChevronDown
+                className={`w:4 h:4 tp:t tdu:200 ttf:out-quart @prm:tp:none ${userOpen ? "ro:36" : "ro:0"}`}
+              />
+            </button>
+          }
+          items={[
           {
             type: "submenu",
             label: "Switch account",
@@ -311,7 +290,8 @@ export default function Sidebar({
             onClick: onSignOut,
           },
         ]}
-      />
+        />
+      </div>
     </aside>
   );
 }

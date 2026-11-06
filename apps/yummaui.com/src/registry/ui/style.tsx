@@ -178,7 +178,7 @@ export function useMorph<T extends HTMLElement>(key: boolean, animated: boolean)
     if (!node) return;
     node.style.transition = "";
     node.style.width = "";
-    node.style.overflow = "";
+    node.style.clipPath = "";
     const to = node.offsetWidth;
     const from = width.current;
     width.current = to;
@@ -186,14 +186,15 @@ export function useMorph<T extends HTMLElement>(key: boolean, animated: boolean)
       !animated || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!from || from === to || still) return;
     node.style.width = `${from}px`;
-    node.style.overflow = "hidden";
+    // a clip with room for the border & focus outline, where overflow would cut them
+    node.style.clipPath = "inset(-4px)";
     node.getBoundingClientRect();
     node.style.transition = "width 250ms cubic-bezier(0.25, 1, 0.5, 1)";
     node.style.width = `${to}px`;
     const settle = () => {
       node.style.transition = "";
       node.style.width = "";
-      node.style.overflow = "";
+      node.style.clipPath = "";
     };
     node.addEventListener("transitionend", settle, { once: true });
     return () => node.removeEventListener("transitionend", settle);

@@ -4,7 +4,7 @@ import { Avatar } from "@base-ui/react/avatar";
 import { Combobox } from "@base-ui/react/combobox";
 import { IconCheck, IconSelector, IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
 
@@ -189,6 +189,7 @@ export default function ComboboxBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const [open, setOpen] = useState(false);
+  const chipsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (disabled) setOpen(false);
@@ -279,7 +280,7 @@ export default function ComboboxBase({
 
         <div className="p:r">
           {multiple ? (
-            <Combobox.Chips className={chipsClasses}>
+            <Combobox.Chips ref={chipsRef} className={chipsClasses}>
               <Combobox.Value>
                 {(selected: string[] | string | null) => (
                   <>
@@ -327,7 +328,11 @@ export default function ComboboxBase({
         {description && <p className="m:0 c:hint fs:xs">{description}</p>}
       </div>
       <Combobox.Portal container={container} keepMounted>
-        <Combobox.Positioner className="ow:0" sideOffset={8}>
+        <Combobox.Positioner
+          className="ow:0"
+          sideOffset={8}
+          anchor={multiple ? chipsRef : undefined}
+        >
           {popup}
         </Combobox.Positioner>
       </Combobox.Portal>
