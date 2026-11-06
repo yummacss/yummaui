@@ -8,25 +8,25 @@ export type OgTheme = "light" | "dark";
 // the site's own tokens; `on` is what sits on the accent and fills the handles
 const PALETTES = {
 	light: {
-		page: "#f7f8fb",
+		page: "#f9f9fa",
 		panel: "#ffffff",
-		rule: "#e3e6ef",
-		tick: "#8b91a3",
+		rule: "#dfdfe3",
+		tick: "#74747a",
 		ink: "#14171f",
-		muted: "#6b7180",
-		accent: "#4c5fc7",
+		muted: "#626269",
+		accent: "#24222a",
 		on: "#ffffff",
 	},
 	// the canvas is the surface, as the site's boxes are, so it stands off the page
 	dark: {
-		page: "#1a1d2e",
-		panel: "#20243a",
-		rule: "#2c3152",
-		tick: "#5c6080",
+		page: "#0e0e11",
+		panel: "#19191d",
+		rule: "#2e2d32",
+		tick: "#636269",
 		ink: "#ffffff",
-		muted: "#9a9db0",
-		accent: "#bec6f2",
-		on: "#151724",
+		muted: "#9e9ea3",
+		accent: "#e6e5ea",
+		on: "#24222a",
 	},
 };
 

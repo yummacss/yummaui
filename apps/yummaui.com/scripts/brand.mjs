@@ -10,9 +10,9 @@ import opentype from "opentype.js";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const HEADER = "written by apps/yummaui.com/scripts/brand.mjs, do not edit";
 
-// back and front square: the pale accent behind the brand indigo, in both schemes
-const LIGHT = ["#BEC6F2", "#4C5FC7"];
-const DARK = LIGHT;
+// back and front square, the site's mark-back and mark-front in each scheme
+const LIGHT = ["#C9C6D2", "#24222A"];
+const DARK = ["#4A4852", "#E6E5EA"];
 const INK = "#2B2B2B";
 const PAPER = "#FFFFFF";
 const NIGHT = "#000000";
