@@ -20,6 +20,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"checkbox",
 			"checkbox-group",
 			"combobox",
+			"expanding-input",
 			"file-upload",
 			"field",
 			"keypad",

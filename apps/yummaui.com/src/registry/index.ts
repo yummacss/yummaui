@@ -19,6 +19,7 @@ import meta_context_menu from "./meta/context-menu.json";
 import meta_dialog from "./meta/dialog.json";
 import meta_drawer from "./meta/drawer.json";
 import meta_empty_state from "./meta/empty-state.json";
+import meta_expanding_input from "./meta/expanding-input.json";
 import meta_field from "./meta/field.json";
 import meta_file_tree from "./meta/file-tree.json";
 import meta_file_upload from "./meta/file-upload.json";
@@ -107,6 +108,7 @@ export const registryMeta = {
   "dialog": meta_dialog,
   "drawer": meta_drawer,
   "empty-state": meta_empty_state,
+  "expanding-input": meta_expanding_input,
   "field": meta_field,
   "file-tree": meta_file_tree,
   "file-upload": meta_file_upload,
@@ -186,6 +188,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
   "drawer": { component: "drawer", variant: "base", kind: "component", install: "drawer" },
   "empty-state": { component: "empty-state", variant: "base", kind: "component", install: "empty-state" },
+  "expanding-input": { component: "expanding-input", variant: "base", kind: "component", install: "expanding-input" },
   "field-prefix": { component: "field", variant: "prefix", kind: "example", install: "field" },
   "field-suffix": { component: "field", variant: "suffix", kind: "example", install: "field" },
   "field": { component: "field", variant: "base", kind: "component", install: "field" },

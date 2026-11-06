@@ -8,6 +8,7 @@ export const ROLE_CLASSES: string[] = [
   "bc:check",
   "bc:check/40",
   "bc:edge",
+  "bc:focus",
   "bg:check",
   "bg:edge",
   "bg:fill",

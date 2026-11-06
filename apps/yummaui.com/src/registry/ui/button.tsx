@@ -9,9 +9,9 @@ import type {
   PointerEvent,
   ReactNode,
 } from "react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, useMorph, useShape } from "./style";
 
 type Variant = "primary" | "secondary" | "subtle" | "ghost" | "danger" | "link";
 type IconSide = "leading" | "trailing";
@@ -474,35 +474,4 @@ function useCountdown(
   };
 
   return { seconds, started, toggle: () => (seconds ? reset() : start()) };
-}
-
-// eases the content's width from the old label to the new one when `key` flips
-function useMorph<T extends HTMLElement>(key: boolean, animated: boolean) {
-  const ref = useRef<T>(null);
-  const width = useRef(0);
-
-  useLayoutEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    node.style.transition = "";
-    node.style.width = "";
-    const to = node.offsetWidth;
-    const from = width.current;
-    width.current = to;
-    const still =
-      !animated || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!from || from === to || still) return;
-    node.style.width = `${from}px`;
-    node.getBoundingClientRect();
-    node.style.transition = "width 250ms cubic-bezier(0.25, 1, 0.5, 1)";
-    node.style.width = `${to}px`;
-    const settle = () => {
-      node.style.transition = "";
-      node.style.width = "";
-    };
-    node.addEventListener("transitionend", settle, { once: true });
-    return () => node.removeEventListener("transitionend", settle);
-  }, [key, animated]);
-
-  return ref;
 }
