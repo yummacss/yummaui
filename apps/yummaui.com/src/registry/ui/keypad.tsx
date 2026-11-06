@@ -49,7 +49,8 @@ export interface KeypadProps {
 
 /**
  * Digits as raised keys, for a PIN shown as dots or an amount in its currency.
- * The keyboard types into it too once it has focus.
+ * Every key is a button in the Tab order, and the keyboard types digits while
+ * any key has focus.
  */
 export default function Keypad({
   variant = "pin",
@@ -121,13 +122,12 @@ export default function Keypad({
   ];
 
   return (
-    // the group takes focus so the keyboard can type into it
+    // typed digits bubble up from whichever key has focus
     <div
       role="group"
       aria-label={label}
-      tabIndex={0}
       onKeyDown={onKeyDown}
-      className={merge("d:f fd:c ai:c g:5 w:64 c:label", outline, RADIUS.popup[shape], className)}
+      className={merge("d:f fd:c ai:c g:5 w:64 c:label", className)}
     >
       <div className="d:f fd:c ai:c jc:c g:2 h:16">
         <span className="fs:xs c:hint">{label}</span>
@@ -161,10 +161,9 @@ export default function Keypad({
           ) : (
             <Button
               key={key}
-              tabIndex={-1}
               aria-label={key === "back" ? "Delete" : key === "." ? "Decimal point" : key}
               onClick={() => type(key)}
-              className={merge(key === "back" ? QUIET : KEY, RADIUS.control[shape])}
+              className={merge(outline, key === "back" ? QUIET : KEY, RADIUS.control[shape])}
             >
               {key === "back" ? (
                 <IconBackspace aria-hidden className="w:6 h:6" />

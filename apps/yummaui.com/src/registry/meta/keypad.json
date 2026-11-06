@@ -1,5 +1,5 @@
 {
-  "summary": "Digits as raised keys, for a PIN shown as dots or an amount in its currency. The keyboard types into it too once it has focus.",
+  "summary": "Digits as raised keys, for a PIN shown as dots or an amount in its currency. Every key is a button in the Tab order, and the keyboard types digits while any key has focus.",
   "props": [
     {
       "name": "value",
