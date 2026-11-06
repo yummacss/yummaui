@@ -167,3 +167,37 @@ export function useIndicator<T extends HTMLElement>(
       : { opacity: 0 },
   };
 }
+
+/** Eases an element's width from its old size to its new one whenever `key` changes. */
+export function useMorph<T extends HTMLElement>(key: boolean, animated: boolean) {
+  const ref = useRef<T>(null);
+  const width = useRef(0);
+
+  useLayoutEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    node.style.transition = "";
+    node.style.width = "";
+    node.style.overflow = "";
+    const to = node.offsetWidth;
+    const from = width.current;
+    width.current = to;
+    const still =
+      !animated || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!from || from === to || still) return;
+    node.style.width = `${from}px`;
+    node.style.overflow = "hidden";
+    node.getBoundingClientRect();
+    node.style.transition = "width 250ms cubic-bezier(0.25, 1, 0.5, 1)";
+    node.style.width = `${to}px`;
+    const settle = () => {
+      node.style.transition = "";
+      node.style.width = "";
+      node.style.overflow = "";
+    };
+    node.addEventListener("transitionend", settle, { once: true });
+    return () => node.removeEventListener("transitionend", settle);
+  }, [key, animated]);
+
+  return ref;
+}

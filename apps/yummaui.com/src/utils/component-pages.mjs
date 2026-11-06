@@ -114,6 +114,12 @@ export const COMPONENT_PAGES = [
 		description: "Communicate when there is nothing to show.",
 	},
 	{
+		slug: "expanding-input",
+		title: "Expanding Input",
+		description:
+			"Open a button into a field where it sits, the button riding along as its submit.",
+	},
+	{
 		slug: "field",
 		title: "Field",
 		description: "Capture user text input, built on Base UI.",

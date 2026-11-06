@@ -32,6 +32,7 @@ export const registry = {
   "dialog": () => import("./ui/dialog"),
   "drawer": () => import("./ui/drawer"),
   "empty-state": () => import("./ui/empty-state"),
+  "expanding-input": () => import("./ui/expanding-input"),
   "field-prefix": () => import("./ui/field-prefix"),
   "field-suffix": () => import("./ui/field-suffix"),
   "field": () => import("./ui/field"),
