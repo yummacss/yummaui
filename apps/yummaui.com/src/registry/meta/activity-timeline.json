@@ -1,0 +1,76 @@
+{
+  "summary": "Events down a line as an ordered list, each on a raised marker with when it happened and an optional quote.",
+  "props": [
+    {
+      "name": "events",
+      "type": "none",
+      "typeName": "ActivityEvent[]",
+      "description": "The events, newest first."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "Activity",
+      "description": "Names the list for screen readers."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "description": "Corner radius of the markers and quotes. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ActivityTimeline",
+      "props": {
+        "events": [
+          {
+            "icon": {
+              "$icon": "IconRocket",
+              "size": "w:4 h:4"
+            },
+            "title": "Ada Lovelace deployed Northwind to production",
+            "time": "2 min ago"
+          },
+          {
+            "icon": {
+              "$icon": "IconMessage",
+              "size": "w:4 h:4"
+            },
+            "title": "Ada Lovelace commented on the release",
+            "time": "1 h ago",
+            "body": "The new keys read much better in light mode."
+          },
+          {
+            "icon": {
+              "$icon": "IconGitMerge",
+              "size": "w:4 h:4"
+            },
+            "title": "Ada Lovelace merged #84 into main",
+            "time": "3 h ago"
+          },
+          {
+            "icon": {
+              "$icon": "IconTag",
+              "size": "w:4 h:4"
+            },
+            "title": "Release bot tagged v4.13.0",
+            "time": "Yesterday"
+          }
+        ],
+        "className": "w:96 max-w:100%"
+      }
+    }
+  ]
+}

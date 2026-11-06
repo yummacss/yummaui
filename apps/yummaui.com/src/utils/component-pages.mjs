@@ -25,6 +25,12 @@ export const COMPONENT_PAGES = [
 			"Show a year of daily counts as a grid of days, shaded by how much happened.",
 	},
 	{
+		slug: "activity-timeline",
+		title: "Activity Timeline",
+		description:
+			"List events down a line, each on a raised marker with when it happened.",
+	},
+	{
 		slug: "alert-dialog",
 		title: "Alert Dialog",
 		description:
@@ -226,6 +232,12 @@ export const COMPONENT_PAGES = [
 		title: "Preview Card",
 		description: "Preview content in a card layout, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "progress-timeline",
+		title: "Progress Timeline",
+		description:
+			"Show steps down a line as done, in progress or next, with each state written out.",
 	},
 	{
 		slug: "progress",
