@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type CSSProperties, useMemo, useRef, useState } from "react";
 import Scroller from "@/components/ui/scroller";
-import { Search, Sparkles } from "@/icons";
+import { Check, Search, Sparkles } from "@/icons";
 import { useReveal } from "@/utils/reveal";
 import Match from "./match";
 import ProductLinks from "./product-links";
@@ -77,14 +77,14 @@ export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 						aria-label="Menu"
 						initialFocus={popup}
 						style={MOTION}
-						className="p:r d:f fd:c o:h w:100% max-w:sm h:calc(100dvh-4rem+3rem) mb:-12 bc:border bg:page c:ink btw:1 os:none ta:none tp:t tdu:300 ttf:var(--sheet-ease) opening:tr:var(--sheet-offstage) closing:tr:var(--sheet-offstage) closing:tdu:var(--sheet-close) swiping:tdu:0 swiping:us:none @prm:tp:none @sm:blw:1 @sm:brw:1"
+						className="p:r d:f fd:c o:h w:100% max-w:sm h:calc(100dvh-4rem+3rem) mb:-12 btr:3xl bg:page c:ink os:none ta:none tp:t tdu:300 ttf:var(--sheet-ease) opening:tr:var(--sheet-offstage) closing:tr:var(--sheet-offstage) closing:tdu:var(--sheet-close) swiping:tdu:0 swiping:us:none @prm:tp:none"
 					>
-						<div className="p:r fs:0 px:4 pt:6 pb:3 bc:border bbw:1 ta:none us:none">
+						<div className="p:r fs:0 px:4 pt:6 pb:3 ta:none us:none">
 							<div
 								aria-hidden
-								className="p:a t:2 l:0 r:0 w:14 h:1 mx:auto bg:border"
+								className="p:a t:2 l:0 r:0 w:14 h:1 mx:auto br:9999 bg:border"
 							/>
-							<div className="d:f ai:c g:3 h:10 px:3 bc:border bg:surface c:ink/60 bw:1 fw:oc:ink fw:ow:2">
+							<div className="d:f ai:c g:3 h:10 px:4 br:9999 bg:press c:ink/60 fw:oc:ink fw:ow:2">
 								<Search className="fs:0 w:4 h:4" />
 								<Input
 									type="text"
@@ -131,10 +131,10 @@ export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 														<Drawer.Close
 															nativeButton={false}
 															render={<Link href={item.href} />}
-															className={`p:r d:f ai:c g:2 h:10 px:7 fs:md us:none a:bg:surface fv:oc:ink fv:oo:-2 fv:ow:2 ${
+															className={`p:r d:f ai:c g:2 h:10 fs:md us:none a:bg:surface fv:oc:ink fv:oo:-2 fv:ow:2 ${
 																isActive
-																	? "c:accent td:u tds:d"
-																	: "c:ink/80 h:td:u"
+																	? "mx:3 px:4 br:9999 bg:press c:ink fw:500"
+																	: "px:7 c:ink/80 h:td:u"
 															}`}
 														>
 															<Match text={item.title} query={typed} />
@@ -148,6 +148,12 @@ export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 																		, new
 																	</span>
 																</>
+															)}
+															{isActive && (
+																<Check
+																	aria-hidden
+																	className="ml:auto w:4 h:4 fs:0"
+																/>
 															)}
 														</Drawer.Close>
 													</li>
