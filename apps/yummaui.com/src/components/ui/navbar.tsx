@@ -17,7 +17,7 @@ const preloadSearch = () => {
 const MobileSheet = lazy(() => import("./mobile-sheet"));
 
 // below @lg the page runs up to the navbar with no line between
-const BASE = "p:f ix:0 t:0 zi:10 bg:page/70 bf-b:md bc:border @lg:bbw:1";
+const BASE = "p:f ix:0 t:0 zi:10 bg:page/70 bf-b:md";
 
 interface NavbarProps {
 	className?: string;
@@ -46,10 +46,10 @@ export default function Navbar({ className, menu }: NavbarProps) {
 								onFocus={preloadSearch}
 								aria-label="Search, Ctrl + K"
 								aria-keyshortcuts="Control+K Meta+K"
-								className="d:none ai:c jc:c g:2 h:8 px:4 bc:border bg:surface a:bg:press c:ink bw:1 fs:sm bf-b:sm @lg:d:f fv:oc:ink fv:ow:2"
+								className="d:none ai:c jc:c g:2 h:8 pl:4 pr:1 br:9999 bc:border bg:surface a:bg:press c:ink bw:1 fs:sm bf-b:sm @lg:d:f fv:oc:ink fv:ow:2"
 							>
 								<Search className="w:4 h:4" />
-								<kbd className="px:1 bc:border bw:1 c:ink/70 fs:xs us:none">
+								<kbd className="px:2 br:9999 bc:border bw:1 c:ink/70 fs:xs us:none">
 									Ctrl + K
 								</kbd>
 							</Button>
@@ -59,7 +59,7 @@ export default function Navbar({ className, menu }: NavbarProps) {
 									type="button"
 									onClick={() => setIsSidebarOpen(true)}
 									aria-expanded={isSidebarOpen}
-									className="d:if ai:c g:2 h:8 px:2 bg:transparent bw:0 c:ink/80 fs:sm us:none h:bg:surface a:bg:hover @lg:d:none fv:oc:ink fv:ow:2"
+									className="d:if ai:c g:2 h:8 px:2 br:9999 bg:transparent bw:0 c:ink/80 fs:sm us:none h:bg:surface a:bg:hover @lg:d:none fv:oc:ink fv:ow:2"
 								>
 									<Search className="fs:0 w:4 h:4" />
 									Navigation

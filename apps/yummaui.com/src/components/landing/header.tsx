@@ -15,7 +15,7 @@ const preloadSearch = () => {
 };
 
 const SQUARE =
-	"d:f ai:c jc:c w:9 h:9 bc:border bg:surface a:bg:press c:ink bw:1 fv:oc:ink fv:ow:2";
+	"d:f ai:c jc:c w:9 h:9 br:9999 bc:border bg:surface a:bg:press c:ink bw:1 fv:oc:ink fv:ow:2";
 
 /** The landing page's bar: the logo, search, GitHub and Install, with no links in between. */
 export default function LandingHeader() {
@@ -56,7 +56,7 @@ export default function LandingHeader() {
 						href="/docs/installation"
 						hotkey="I"
 						primary
-						className="d:none ai:c g:3 h:9 px:4 fs:sm td:none bw:1 fv:oc:ink fv:ow:2 @sm:d:if"
+						className="d:none ai:c g:3 h:9 pl:4 pr:2 br:9999 fs:sm td:none bw:1 fv:oc:ink fv:ow:2 @sm:d:if"
 					>
 						Install
 					</HotkeyLink>

@@ -6,22 +6,22 @@ export default defineConfig({
 	theme: {
 		colors: {
 			...ROLES,
-			"accent-dim": { light: "#8892c2", dark: "#9aa5ef" },
+			"accent-dim": { light: "#8a8794", dark: "#a19fab" },
 			"diff-add": { light: "#2e7d5b", dark: "#a8e1ad" },
 			"diff-remove": { light: "#a8372b", dark: "#e1a8a8" },
-			accent: { light: "#4c5fc7", dark: "#bec6f2" },
-			// indigo in both schemes, where accent turns pale in the dark
-			brand: "#4c5fc7",
+			accent: { light: "#24222a", dark: "#e6e5ea" },
+			// the primary key: charcoal, a light key in the dark like the components' own
+			brand: { light: "#24222a", dark: "#e6e5ea" },
 			// the logo's two squares
-			"mark-back": "#bec6f2",
-			"mark-front": "#4c5fc7",
-			border: { light: "#dde1eb", dark: "#232741" },
+			"mark-back": { light: "#c9c6d2", dark: "#4a4852" },
+			"mark-front": { light: "#24222a", dark: "#e6e5ea" },
+			border: { light: "oklch(0.905 0.006 286)", dark: "oklch(0.3 0.008 290)" },
 			code: { light: "#3e4a80", dark: "#dda2f6" },
 			ink: { light: "#14171f", dark: "#ffffff" },
-			hover: { light: "#eef0f6", dark: "#131521" },
-			page: { light: "#f7f8fb", dark: "#151724" },
-			press: { light: "#e5e8f0", dark: "#0f111b" },
-			surface: { light: "#ffffff", dark: "#1a1d2e" },
+			hover: { light: "oklch(0.955 0.004 286)", dark: "oklch(0.2 0.007 290)" },
+			page: { light: "oklch(0.982 0.002 286)", dark: "oklch(0.165 0.006 290)" },
+			press: { light: "oklch(0.93 0.005 286)", dark: "oklch(0.25 0.008 290)" },
+			surface: { light: "oklch(1 0 none)", dark: "oklch(0.215 0.007 290)" },
 			warning: { light: "#b4581a", dark: "#f0b27a" },
 		},
 		fonts: {

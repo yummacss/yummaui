@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import { type ReactNode, useState } from "react";
 
 const BUTTON =
-	"d:if ai:c jc:c g:3 h:11 px:5 fs:sm td:none bw:1 fv:oc:ink fv:ow:2";
-const PRIMARY = "bg:brand bc:brand c:white";
+	"d:if ai:c jc:c g:3 h:11 pl:5 pr:3 br:9999 fs:sm td:none bw:1 fv:oc:ink fv:ow:2";
+const PRIMARY = "bg:brand bc:brand c:page";
 const SECONDARY = "bg:surface bc:border c:ink";
 
 /** The key that triggers a button, drawn inside it. */
@@ -16,7 +16,7 @@ function Key({ hotkey, primary }: { hotkey: LetterKey; primary?: boolean }) {
 	return (
 		<kbd
 			aria-hidden="true"
-			className={`d:none ai:c jc:c w:5 h:5 bw:1 ff:body fs:xs @sm:d:if ${primary ? "bc:white/40 c:white/80" : "bc:border c:ink/60"}`}
+			className={`d:none ai:c jc:c w:5 h:5 br:9999 bw:1 ff:body fs:xs @sm:d:if ${primary ? "bc:page/40 c:page/80" : "bc:border c:ink/60"}`}
 		>
 			{hotkey}
 		</kbd>

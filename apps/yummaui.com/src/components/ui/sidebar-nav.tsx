@@ -43,7 +43,7 @@ export default function SidebarNav({ sections }: Props) {
 									>
 										<Link
 											href={item.href}
-											className={`p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:accent td:u tds:d" : "c:ink/70 h:c:accent"}`}
+											className={`p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:ink fw:500 bg:press br:9999 px:3 py:1 my:-1 ml:-3" : "c:ink/70 h:c:accent"}`}
 										>
 											{item.title}
 										</Link>
