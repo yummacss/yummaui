@@ -3,11 +3,22 @@
 import { NumberField } from "@base-ui/react/number-field";
 import { Select } from "@base-ui/react/select";
 import { IconCheck, IconChevronDown } from "@tabler/icons-react";
-import { useId, useState } from "react";
+import AU from "country-flag-icons/react/3x2/AU";
+import BR from "country-flag-icons/react/3x2/BR";
+import CA from "country-flag-icons/react/3x2/CA";
+import CH from "country-flag-icons/react/3x2/CH";
+import CN from "country-flag-icons/react/3x2/CN";
+import EU from "country-flag-icons/react/3x2/EU";
+import GB from "country-flag-icons/react/3x2/GB";
+import IN from "country-flag-icons/react/3x2/IN";
+import JP from "country-flag-icons/react/3x2/JP";
+import MX from "country-flag-icons/react/3x2/MX";
+import SE from "country-flag-icons/react/3x2/SE";
+import US from "country-flag-icons/react/3x2/US";
+import { type ComponentType, useId, useState } from "react";
 import { merge } from "yummacss/merge";
 import {
   FOCUS,
-  FOCUS_WITHIN,
   INPUT_TEXT,
   RADIUS,
   type Shape,
@@ -15,6 +26,35 @@ import {
   SIZE,
   useShape,
 } from "./style";
+
+// one flag per currency; a code without one shows the code alone
+const FLAGS: Record<string, ComponentType<{ className?: string }>> = {
+  AUD: AU,
+  BRL: BR,
+  CAD: CA,
+  CHF: CH,
+  CNY: CN,
+  EUR: EU,
+  GBP: GB,
+  INR: IN,
+  JPY: JP,
+  MXN: MX,
+  SEK: SE,
+  USD: US,
+};
+
+// the box draws the outline only while the amount has focus, not the picker
+const TYPING = "os:s ow:3 oo:0 oc:focus/40 bc:focus";
+
+function Flag({ code }: { code: string }) {
+  const Glyph = FLAGS[code];
+  if (!Glyph) return null;
+  return (
+    <span aria-hidden className="d:f ai:c jc:c w:4 h:4 fs:0 o:h br:9999">
+      <Glyph className="h:4 w:6 fs:0" />
+    </span>
+  );
+}
 
 export interface MoneyInputProps {
   /** Text above the field, wired to it as its accessible name. */
@@ -35,7 +75,10 @@ export interface MoneyInputProps {
   defaultCurrency?: string;
   /** Called with the ISO code when another currency is picked. */
   onCurrencyChange?: (currency: string) => void;
-  /** The ISO codes the picker offers. One code hides the picker. */
+  /**
+   * The ISO codes the picker offers, each with its flag where one is known.
+   * One code hides the picker.
+   */
   currencies?: string[];
   /** Formats the grouping, the decimal mark and the currency names. */
   locale?: string;
@@ -66,8 +109,8 @@ export interface MoneyInputProps {
 }
 
 /**
- * An amount with its currency, picked from a list at the start of the field
- * and grouped for the locale when the field is left.
+ * An amount with its currency, picked by flag and code at the start of the
+ * field and grouped for the locale when the field is left.
  */
 export default function MoneyInput({
   label,
@@ -94,16 +137,11 @@ export default function MoneyInput({
   const [internalCurrency, setInternalCurrency] = useState(defaultCurrency);
   const currency = controlledCurrency ?? internalCurrency;
   const pickable = currencies.length > 1;
+  const [typing, setTyping] = useState(false);
 
-  const money = new Intl.NumberFormat(locale, {
-    style: "currency",
-    currency,
-    currencyDisplay: "narrowSymbol",
-  });
-  const sign =
-    money.formatToParts(0).find((part) => part.type === "currency")?.value ??
-    currency;
-  const digits = money.resolvedOptions().maximumFractionDigits ?? 2;
+  const digits =
+    new Intl.NumberFormat(locale, { style: "currency", currency }).resolvedOptions()
+      .maximumFractionDigits ?? 2;
   const names = new Intl.DisplayNames([locale], { type: "currency" });
 
   const pick = (next: string | null) => {
@@ -112,9 +150,10 @@ export default function MoneyInput({
     onCurrencyChange?.(next);
   };
 
-  const outline = focus
-    ? merge(FOCUS_WITHIN, focus === true ? "" : focus.replace(/\bfv:/g, "fw:"))
-    : "";
+  const outline =
+    focus && typing
+      ? merge(TYPING, focus === true ? "" : focus.replace(/\bfv:/g, ""))
+      : "";
   const itemOutline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   return (
@@ -137,15 +176,15 @@ export default function MoneyInput({
         </label>
       )}
 
-      <NumberField.Group
+      <div
         className={merge(
-          outline,
-          "d:f ai:c o:h bg:field bs-o:key bw:1",
+          "d:f ai:c bg:field bs-o:key bw:1",
           error ? "bc:red-5" : "bc:rim",
           INPUT_TEXT,
           SIZE.height[size],
           SIZE.width[size],
           RADIUS.control[shape],
+          outline,
           className,
         )}
       >
@@ -155,9 +194,10 @@ export default function MoneyInput({
               aria-label={`Currency, ${names.of(currency) ?? currency}`}
               className={merge(
                 itemOutline,
-                "d:f ai:c g:1 h:100% pl:3 pr:2 bw:0 brw:1 bc:rim bg:transparent c:label fw:500 fs:sm us:none c:p h:bg:well",
+                "d:f ai:c g:2 h:100% pl:3 pr:2 bw:0 brw:1 bc:rim bg:transparent c:label fw:500 fs:sm us:none c:p h:bg:well",
               )}
             >
+              <Flag code={currency} />
               <Select.Value>{currency}</Select.Value>
               <Select.Icon className="d:f c:hint">
                 <IconChevronDown className="w:4 h:4" />
@@ -182,6 +222,7 @@ export default function MoneyInput({
                             <IconCheck className="w:4 h:4" />
                           </Select.ItemIndicator>
                         </span>
+                        <Flag code={code} />
                         <Select.ItemText className="fw:500">{code}</Select.ItemText>
                         <span className="c:hint to:e o:h ws:nw">{names.of(code)}</span>
                       </Select.Item>
@@ -192,15 +233,23 @@ export default function MoneyInput({
             </Select.Portal>
           </Select.Root>
         )}
-        <span aria-hidden className="pl:3 c:hint">
-          {sign}
-        </span>
-        <NumberField.Input
-          aria-invalid={error ? true : undefined}
-          placeholder={(0).toFixed(digits)}
-          className={`f:1 min-w:0 h:100% pl:1 pr:3 bw:0 bg:transparent c:label os:none fvn:tn ${INPUT_TEXT}`}
-        />
-      </NumberField.Group>
+        {!pickable && (
+          <span className="d:f ai:c g:2 h:100% pl:3 pr:2 brw:1 bc:rim fw:500 fs:sm">
+            <Flag code={currency} />
+            {currency}
+          </span>
+        )}
+        <NumberField.Group className="d:f f:1 min-w:0 h:100%">
+          <NumberField.Input
+            aria-invalid={error ? true : undefined}
+            aria-label={label ? undefined : `Amount in ${names.of(currency) ?? currency}`}
+            placeholder={(0).toFixed(digits)}
+            onFocus={() => setTyping(true)}
+            onBlur={() => setTyping(false)}
+            className={`f:1 min-w:0 h:100% px:3 bw:0 bg:transparent c:label os:none fvn:tn ${INPUT_TEXT}`}
+          />
+        </NumberField.Group>
+      </div>
 
       {error ? (
         <p role="alert" className="m:0 fs:xs c:red-7">
