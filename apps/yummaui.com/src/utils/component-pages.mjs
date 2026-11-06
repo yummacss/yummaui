@@ -351,6 +351,12 @@ export const COMPONENT_PAGES = [
 		description: "Show contextual hints on hover or focus, built on Base UI.",
 		primitive: true,
 	},
+	{
+		slug: "treemap",
+		title: "Treemap",
+		description:
+			"Show shares of a whole as tiles sized by value, shaded in steps of the accent.",
+	},
 ];
 
 /** Every component page's body: the stage, which the UI shell renders. */

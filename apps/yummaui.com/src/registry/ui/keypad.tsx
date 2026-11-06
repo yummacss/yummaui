@@ -53,7 +53,7 @@ export interface KeypadProps {
  * any key has focus.
  */
 export default function Keypad({
-  variant = "pin",
+  variant = "amount",
   value: controlled,
   defaultValue = "",
   onValueChange,

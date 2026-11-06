@@ -54,7 +54,7 @@ export const sidebarConfig: SidebarSection[] = [
 	},
 	{
 		title: "Charts",
-		items: ["activity-heatmap", "gauge"],
+		items: ["activity-heatmap", "gauge", "treemap"],
 	},
 	{
 		title: "Interactive",

@@ -39,7 +39,7 @@
           }
         }
       ],
-      "description": "What fills the space, biggest first reads best. Each one's `label` and `value`, plus an optional `icon`. Up to five colors."
+      "description": "What fills the space, biggest first reads best. Each one's `label` and `value`, plus an optional `icon`. Up to five steps of the fill color."
     },
     {
       "name": "max",
