@@ -70,7 +70,7 @@ export default function ActivityTimeline({
                 {event.time}
               </time>
               {event.body && (
-                <div className={merge("mt:1 px:3 py:2 bg:well bw:1 bc:line fs:sm c:label", RADIUS.item[shape])}>
+                <div className={merge("mt:1 px:3 py:2 bg:well bw:1 bc:line fs:sm c:label", RADIUS.block[shape])}>
                   {event.body}
                 </div>
               )}

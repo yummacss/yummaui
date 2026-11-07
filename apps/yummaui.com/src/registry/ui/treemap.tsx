@@ -194,7 +194,7 @@ export default function Treemap({
                 outline,
                 "p:a d:f fd:c ai:fs jc:fe p:3 bw:0 o:h ta:l c:p",
                 TONES[Math.min(index, TONES.length - 1)],
-                RADIUS.item[shape],
+                RADIUS.block[shape],
               )}
             >
               {roomy && (

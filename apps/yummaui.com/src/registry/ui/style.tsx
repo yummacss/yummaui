@@ -80,6 +80,8 @@ export const RADIUS = {
   box: { square: "", rounded: "br:lg", squircle: "br:xxl cs:s", pill: "br:xxl" },
   /** Rows inside a list or popup: menu items, options, links & small close buttons. */
   item: { square: "", rounded: "br:md", squircle: "br:xl cs:s", pill: "br:9999" },
+  /** Areas that hold wrapping text or data, such as a quote or a chart tile; never round enough to read as a pill. */
+  block: { square: "", rounded: "br:md", squircle: "br:xl cs:s", pill: "br:xl" },
   /** Popups, dialogs, cards & panels. */
   popup: { square: "", rounded: "br:xl", squircle: "br:3xl cs:s", pill: "br:3xl" },
   /** A strip that holds controls, such as a toolbar, a tab list or a menubar. */
