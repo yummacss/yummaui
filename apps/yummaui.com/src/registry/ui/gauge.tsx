@@ -52,8 +52,8 @@ export interface GaugeProps {
   /** The value from which the arc turns red and names its level. */
   danger?: number;
   /**
-   * What each level is called under the gauge, so color is never the only
-   * sign of one. Shown only with `warning` or `danger`.
+   * What each level is called under the gauge, so color is never the only sign
+   * of one. Shown only with `warning` or `danger`.
    */
   levels?: GaugeLevels;
   /**
@@ -64,8 +64,8 @@ export interface GaugeProps {
   /** Width of the gauge, with the type scaled to match. */
   size?: Size;
   /**
-   * The arc sweeping in and the value counting up when it first shows. Turn
-   * it off for a gauge that is simply there; reduced motion does the same.
+   * The arc sweeping in and the value counting up when it first shows. Turn it
+   * off for a gauge that is simply there; reduced motion does the same.
    */
   animated?: boolean;
   /**

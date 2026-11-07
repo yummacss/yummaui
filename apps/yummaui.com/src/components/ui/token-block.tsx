@@ -1,61 +1,46 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { useState } from "react";
-import { CopyButton, TitleBar } from "@/components/ui/code";
+import { Fragment, type ReactNode } from "react";
+import Block from "@/registry/ui/code-block";
 import { TOKEN_COLORS, type Token, tokensToText } from "@/utils/snippet";
 
+/** The stage's Code and Configuration tabs: colored tokens in a Code Block that fills its panel. */
 export default function TokenBlock({
 	tokens,
-	className = "bc:border btw:1",
-	title,
-	fill = false,
-	bar = true,
+	className = "",
 }: {
 	tokens: Token[];
 	className?: string;
-	title?: string;
-	fill?: boolean;
-	/** Off where a tab already names the file: the copy button floats instead. */
-	bar?: boolean;
 }) {
-	const [copied, setCopied] = useState(false);
+	const rows: ReactNode[][] = [[]];
+	for (const token of tokens) {
+		token.text.split("\n").forEach((part, index) => {
+			if (index > 0) rows.push([]);
+			if (part)
+				rows[rows.length - 1].push(
+					<span
+						key={`${token.id}-${index}`}
+						style={{ color: token.color ?? TOKEN_COLORS[token.kind] }}
+					>
+						{part}
+					</span>,
+				);
+		});
+	}
+	const lines = rows.map((row, index) => (
+		<Fragment key={index}>{row.length ? row : ""}</Fragment>
+	));
 
-	const copy = async () => {
-		try {
-			await navigator.clipboard.writeText(tokensToText(tokens));
-		} catch {
-			return;
-		}
-		setCopied(true);
-		setTimeout(() => setCopied(false), 2000);
-	};
-
-	const action: ReactNode = <CopyButton copied={copied} onCopy={copy} />;
-
+	// the panel is the frame, so the block drops its own edge
 	return (
-		<div className={`cs:d bg:surface ${bar ? "" : "p:r"} ${className}`}>
-			{bar ? (
-				<TitleBar title={title} action={action} />
-			) : (
-				<div className="p:a t:2 r:3 zi:10">{action}</div>
-			)}
-			<pre
-				className={`ox:auto px:4 py:3 ff:m lh:5 ws:pw ${
-					fill ? "f:1 min-h:0 oy:auto" : ""
-				}`}
-			>
-				<code>
-					{tokens.map((token) => (
-						<span
-							key={token.id}
-							style={{ color: token.color ?? TOKEN_COLORS[token.kind] }}
-						>
-							{token.text}
-						</span>
-					))}
-				</code>
-			</pre>
+		<div className={`cs:d ${className}`}>
+			<Block
+				code={tokensToText(tokens)}
+				lines={lines}
+				lineNumbers={rows.length > 3}
+				fill
+				className="bw:0 br:0 bg:surface"
+			/>
 		</div>
 	);
 }

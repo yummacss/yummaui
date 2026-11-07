@@ -80,7 +80,9 @@ export interface CurrencyInputProps {
   label?: string;
   /** A line under the field. */
   description?: string;
-  /** Marks the field invalid and shows this under it in place of `description`. */
+  /**
+   * Marks the field invalid and shows this under it in place of `description`.
+   */
   error?: string;
   /** The amount, controlled. Pair with `onValueChange`. */
   value?: number | null;
@@ -94,9 +96,7 @@ export interface CurrencyInputProps {
   defaultCurrency?: string;
   /** Called with the ISO code when another currency is picked. */
   onCurrencyChange?: (currency: string) => void;
-  /**
-   * The ISO codes the picker offers. One code hides the picker.
-   */
+  /** The ISO codes the picker offers. One code hides the picker. */
   currencies?: string[];
   /** Formats the grouping, the decimal mark and the currency names. */
   locale?: string;

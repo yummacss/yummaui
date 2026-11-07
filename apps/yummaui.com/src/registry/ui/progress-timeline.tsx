@@ -26,7 +26,10 @@ export interface ProgressTimelineProps {
   steps: ProgressStep[];
   /** The index of the step in progress. Every step before it is done. */
   currentStep: number;
-  /** What each state is called under its step, so color is never the only sign of one. */
+  /**
+   * What each state is called under its step, so color is never the only sign
+   * of one.
+   */
   states?: ProgressStates;
   /** Names the list for screen readers. */
   label?: string;

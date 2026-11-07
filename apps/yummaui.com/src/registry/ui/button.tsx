@@ -145,7 +145,9 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
   countdown?: boolean | number;
   /** What the button says while the countdown runs, beside the seconds left. */
   countdownLabel?: string;
-  /** Called once a countdown runs out. A counting button never calls `onClick`. */
+  /**
+   * Called once a countdown runs out. A counting button never calls `onClick`.
+   */
   onCountdown?: () => void;
   /**
    * The hover and focus transition. Turn it off for a static button, or when

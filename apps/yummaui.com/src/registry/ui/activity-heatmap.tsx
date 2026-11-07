@@ -44,14 +44,14 @@ export interface ActivityHeatmapProps {
   /** Size of each day. */
   size?: keyof typeof SIZES;
   /**
-   * Corner radius on the card and the days. Inherits the nearest `Shape`;
-   * under a pill it is rounded, so the days stay squares.
+   * Corner radius on the card and the days. Inherits the nearest `Shape`; under
+   * a pill it is rounded, so the days stay squares.
    */
   shape?: (typeof SHAPES)[number];
   /**
    * The focus outline on each day. `true` draws it, `false` removes it, and a
-   * string of Yumma CSS utilities restyles it. Removing it outright and
-   * putting nothing back fails WCAG 2.4.7.
+   * string of Yumma CSS utilities restyles it. Removing it outright and putting
+   * nothing back fails WCAG 2.4.7.
    */
   focus?: boolean | string;
   /**

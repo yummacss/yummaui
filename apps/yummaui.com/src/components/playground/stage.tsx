@@ -227,17 +227,12 @@ export default function ComponentPlayground({
 				</TabsPanel>
 
 				<TabsPanel value="code" className={FILL}>
-					<TokenBlock tokens={usage} bar={false} className={FILL} fill />
+					<TokenBlock tokens={usage} className={FILL} />
 				</TabsPanel>
 
 				{config && (
 					<TabsPanel value="config" className={FILL}>
-						<TokenBlock
-							tokens={buildConfig(config)}
-							bar={false}
-							className={FILL}
-							fill
-						/>
+						<TokenBlock tokens={buildConfig(config)} className={FILL} />
 					</TabsPanel>
 				)}
 

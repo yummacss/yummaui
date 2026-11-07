@@ -98,8 +98,8 @@ function squarify(items: TreemapItem[], width: number, height: number): Tile[] {
 }
 
 /**
- * Shares of a whole as tiles sized by value, shaded in steps of the fill so
- * the accent recolors them. Each tile is a button; arrow keys move between them.
+ * Shares of a whole as tiles sized by value, shaded in steps of the fill so the
+ * accent recolors them. Each tile is a button; arrow keys move between them.
  */
 export default function Treemap({
   data,
