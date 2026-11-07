@@ -71,9 +71,13 @@ function Lines({
   const rows = lines ?? code.split("\n");
 
   return (
-    // a scrolling region takes focus, so a keyboard can scroll it
+    // iOS enlarges text in wide scrolling blocks unless told not to; tabs indent two columns
     // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region needs to be focusable
-    <pre tabIndex={0} className={merge(outline, "m:0 py:3 ox:auto")}>
+    <pre
+      tabIndex={0}
+      className={merge(outline, "m:0 py:3 ox:auto")}
+      style={{ WebkitTextSizeAdjust: "100%", textSizeAdjust: "100%", tabSize: 2 }}
+    >
       <code className="d:b w:fc min-w:100% ff:m fs:xs lh:5">
         {rows.map((line, index) => {
           const marked = highlightLines.includes(index + 1);
