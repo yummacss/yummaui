@@ -178,6 +178,13 @@ export const COMPONENT_PAGES = [
 			"Enter a PIN or an amount on raised digit keys, or type it on the keyboard.",
 	},
 	{
+		slug: "code-block",
+		since: "0.10",
+		title: "Code Block",
+		description:
+			"Show code with a file name or tabs, a copy button & marked lines.",
+	},
+	{
 		slug: "kbd",
 		title: "Kbd",
 		description: "Show a keyboard shortcut as keycaps in running text.",

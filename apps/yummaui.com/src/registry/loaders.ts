@@ -26,6 +26,7 @@ export const registry = {
   "button": () => import("./ui/button"),
   "checkbox-group": () => import("./ui/checkbox-group"),
   "checkbox": () => import("./ui/checkbox"),
+  "code-block": () => import("./ui/code-block"),
   "combobox-grouped": () => import("./ui/combobox-grouped"),
   "combobox-helper": () => import("./ui/combobox-helper"),
   "combobox": () => import("./ui/combobox"),

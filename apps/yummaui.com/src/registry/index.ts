@@ -15,6 +15,7 @@ import meta_button_group from "./meta/button-group.json";
 import meta_button from "./meta/button.json";
 import meta_checkbox_group from "./meta/checkbox-group.json";
 import meta_checkbox from "./meta/checkbox.json";
+import meta_code_block from "./meta/code-block.json";
 import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
 import meta_currency_input from "./meta/currency-input.json";
@@ -107,6 +108,7 @@ export const registryMeta = {
   "button": meta_button,
   "checkbox-group": meta_checkbox_group,
   "checkbox": meta_checkbox,
+  "code-block": meta_code_block,
   "combobox": meta_combobox,
   "context-menu": meta_context_menu,
   "currency-input": meta_currency_input,
@@ -188,6 +190,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "button": { component: "button", variant: "base", kind: "component", install: "button" },
   "checkbox-group": { component: "checkbox-group", variant: "base", kind: "component", install: "checkbox-group" },
   "checkbox": { component: "checkbox", variant: "base", kind: "component", install: "checkbox" },
+  "code-block": { component: "code-block", variant: "base", kind: "component", install: "code-block" },
   "combobox-grouped": { component: "combobox", variant: "grouped", kind: "example", install: "combobox" },
   "combobox-helper": { component: "combobox", variant: "helper", kind: "example", install: "combobox" },
   "combobox": { component: "combobox", variant: "base", kind: "component", install: "combobox" },

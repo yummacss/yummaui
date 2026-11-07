@@ -1,0 +1,119 @@
+{
+  "summary": "Code in a raised card with a file name or tabs, a copy button and marked lines; your highlighter fills the lines.",
+  "props": [
+    {
+      "name": "code",
+      "type": "string",
+      "example": "import { Button } from \"@/components/ui/button\";\n\nexport default function Save() {\n  return (\n    <Button variant=\"primary\" countdown>\n      Save changes\n    </Button>\n  );\n}",
+      "description": "The text to show, and what Copy puts on the clipboard."
+    },
+    {
+      "name": "lines",
+      "type": "none",
+      "typeName": "ReactNode[]",
+      "description": "The same text from your highlighter, one node per line. Without it the lines show plain."
+    },
+    {
+      "name": "title",
+      "type": "string",
+      "description": "A file name in the header, beside a file icon."
+    },
+    {
+      "name": "tabs",
+      "type": "none",
+      "typeName": "CodeBlockTab[]",
+      "description": "Versions of the same snippet, one per tab, such as package managers."
+    },
+    {
+      "name": "highlightLines",
+      "type": "none",
+      "typeName": "number[]",
+      "description": "Lines to mark, counting from 1."
+    },
+    {
+      "name": "lineNumbers",
+      "type": "boolean",
+      "default": true,
+      "description": "Numbers down the left."
+    },
+    {
+      "name": "copyLabel",
+      "type": "string",
+      "default": "Copy",
+      "description": "What the copy button says."
+    },
+    {
+      "name": "copiedLabel",
+      "type": "string",
+      "default": "Copied",
+      "description": "What the copy button says for a moment once it has copied."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the block and its buttons. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it along with the danger, error and success tints that ride with it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "d:f fd:c g:4 w:120 max-w:100%",
+      "children": [
+        {
+          "component": "CodeBlock",
+          "props": {
+            "title": "save.tsx",
+            "code": "import { Button } from \"@/components/ui/button\";\n\nexport default function Save() {\n  return (\n    <Button variant=\"primary\" countdown>\n      Save changes\n    </Button>\n  );\n}",
+            "highlightLines": [
+              5,
+              6
+            ]
+          }
+        },
+        {
+          "component": "CodeBlock",
+          "props": {
+            "lineNumbers": false,
+            "tabs": [
+              {
+                "label": "pnpm",
+                "code": "pnpm dlx yummaui add code-block"
+              },
+              {
+                "label": "npm",
+                "code": "npx yummaui add code-block"
+              },
+              {
+                "label": "yarn",
+                "code": "yarn dlx yummaui add code-block"
+              },
+              {
+                "label": "bun",
+                "code": "bunx yummaui add code-block"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
