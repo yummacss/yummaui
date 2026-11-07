@@ -4,6 +4,7 @@ import { Button } from "@base-ui/react/button";
 import { Drawer } from "@base-ui/react/drawer";
 import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
+import { cloneElement, isValidElement, useState } from "react";
 import { merge } from "yummacss/merge";
 import ButtonBase from "./button";
 import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
@@ -65,8 +66,18 @@ export interface DrawerProps {
    * to portal somewhere else, such as inside a frame.
    */
   container?: HTMLElement | null;
-  /** The trigger button's label. */
-  trigger: ReactNode;
+  /**
+   * The trigger button's label. An element, such as a list row, is the trigger
+   * itself and keeps its own look. Leave it out when `open` opens it from code.
+   */
+  trigger?: ReactNode;
+  /**
+   * Controlled open state, for opening it from code: a menu item, a keyboard
+   * shortcut or a list row. Uncontrolled (the default) if omitted.
+   */
+  open?: boolean;
+  /** Called whenever it opens or closes, controlled or not. */
+  onOpenChange?: (open: boolean) => void;
   /** A glyph beside the trigger's label. */
   triggerIcon?: ReactNode;
   /** Which end of the trigger `triggerIcon` sits at. */
@@ -140,8 +151,16 @@ export default function DrawerBase({
   className,
   focus = true,
   container,
+  open: controlledOpen,
+  onOpenChange,
 }: DrawerProps) {
   const shape = useShape(shapeProp);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const open = controlledOpen ?? uncontrolledOpen;
+  const setOpen = (next: boolean) => {
+    if (controlledOpen === undefined) setUncontrolledOpen(next);
+    onOpenChange?.(next);
+  };
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const vertical = side === "bottom" || side === "top";
 
@@ -165,22 +184,36 @@ export default function DrawerBase({
   );
 
   return (
-    <Drawer.Root swipeDirection={SWIPE[side]}>
-      <Drawer.Trigger
-        render={
-          <ButtonBase
-            variant="secondary"
-            size={size}
-            shape={shape}
-            focus={focus}
-            icon={triggerIcon}
-            iconPosition={triggerIconPosition}
-            className={className}
-          />
-        }
-      >
-        {trigger}
-      </Drawer.Trigger>
+    <Drawer.Root
+      swipeDirection={SWIPE[side]}
+      open={open}
+      onOpenChange={setOpen}
+    >
+      {isValidElement<{ className?: string }>(trigger) ? (
+        <Drawer.Trigger
+          render={cloneElement(trigger, {
+            className: merge(trigger.props.className, className),
+          })}
+        />
+      ) : (
+        trigger !== undefined && (
+          <Drawer.Trigger
+            render={
+              <ButtonBase
+                variant="secondary"
+                size={size}
+                shape={shape}
+                focus={focus}
+                icon={triggerIcon}
+                iconPosition={triggerIconPosition}
+                className={className}
+              />
+            }
+          >
+            {trigger}
+          </Drawer.Trigger>
+        )
+      )}
 
       <Drawer.Portal container={container}>
         <Drawer.Backdrop

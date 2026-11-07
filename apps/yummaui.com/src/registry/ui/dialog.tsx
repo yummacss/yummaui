@@ -20,8 +20,17 @@ export interface DialogProps {
    * frame or a container that owns its own stacking context.
    */
   container?: HTMLElement | null;
-  /** The trigger button's label. */
-  trigger: ReactNode;
+  /**
+   * The trigger button's label. Leave it out when `open` opens it from code.
+   */
+  trigger?: ReactNode;
+  /**
+   * Controlled open state, for opening it from code: a menu item, a keyboard
+   * shortcut or a list row. Uncontrolled (the default) if omitted.
+   */
+  open?: boolean;
+  /** Called whenever it opens or closes, controlled or not. */
+  onOpenChange?: (open: boolean) => void;
   /** A glyph beside the trigger's label. */
   triggerIcon?: ReactNode;
   /** Which end of the trigger `triggerIcon` sits at. */
@@ -119,11 +128,18 @@ export default function DialogBase({
   className,
   focus = true,
   container,
+  open: controlledOpen,
+  onOpenChange,
 }: DialogProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
-  const [open, setOpen] = useState(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const open = controlledOpen ?? uncontrolledOpen;
+  const setOpen = (next: boolean) => {
+    if (controlledOpen === undefined) setUncontrolledOpen(next);
+    onOpenChange?.(next);
+  };
   const popupRef = useRef<HTMLDivElement>(null);
 
   const popupClasses = [
@@ -222,22 +238,24 @@ export default function DialogBase({
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger
-        onClick={onTriggerClick}
-        render={
-          <ButtonBase
-            variant={triggerTone === "danger" ? "danger" : "secondary"}
-            size={size}
-            shape={shape}
-            focus={focus}
-            icon={triggerIcon}
-            iconPosition={triggerIconPosition}
-            className={className}
-          />
-        }
-      >
-        {trigger}
-      </Dialog.Trigger>
+      {trigger !== undefined && (
+        <Dialog.Trigger
+          onClick={onTriggerClick}
+          render={
+            <ButtonBase
+              variant={triggerTone === "danger" ? "danger" : "secondary"}
+              size={size}
+              shape={shape}
+              focus={focus}
+              icon={triggerIcon}
+              iconPosition={triggerIconPosition}
+              className={className}
+            />
+          }
+        >
+          {trigger}
+        </Dialog.Trigger>
+      )}
 
       {popup}
     </Dialog.Root>

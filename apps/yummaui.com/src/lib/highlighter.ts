@@ -94,3 +94,32 @@ export function highlightTokens(
 			line.map((token) => ({ text: token.content, color: token.color })),
 		);
 }
+
+/** Highlighted code as one HTML string per line, with the meta's word marks, for Code Block's `lines`. */
+export function highlightLines(
+	code: string,
+	lang?: string,
+	meta?: string,
+	title?: string,
+): string[] {
+	const shiki = get();
+	let resolved = lang || "text";
+	if (!isPlainLang(resolved) && !isSpecialLang(resolved)) {
+		if (!shiki.getLoadedLanguages().includes(resolved)) resolved = "text";
+	}
+	const hast: Root = shiki.codeToHast(code.replace(/\n$/, ""), {
+		lang: resolved,
+		theme: THEME_NAME,
+	});
+	const pre = hast.children.find(
+		(c): c is Element => c.type === "element" && c.tagName === "pre",
+	);
+	if (!pre) return code.split("\n");
+	decorateCodeHast(pre, meta ?? "", title ?? null);
+	const codeEl = pre.children.find(
+		(c): c is Element => c.type === "element" && c.tagName === "code",
+	);
+	return (codeEl?.children ?? [])
+		.filter((c): c is Element => c.type === "element" && c.tagName === "span")
+		.map((line) => hastToHtml({ type: "root", children: line.children }));
+}
