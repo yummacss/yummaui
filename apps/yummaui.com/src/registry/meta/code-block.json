@@ -37,6 +37,12 @@
       "description": "Numbers down the left."
     },
     {
+      "name": "maxLines",
+      "type": "number",
+      "default": 20,
+      "description": "How many lines show before the block scrolls. Shift and the wheel scroll it sideways."
+    },
+    {
       "name": "copyLabel",
       "type": "string",
       "default": "Copy",
@@ -59,6 +65,12 @@
       ],
       "default": "rounded",
       "description": "Corner radius of the block and its buttons. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The scrollbars fading in while you scroll or hover. Turn it off to keep them shown; reduced motion does the same."
     },
     {
       "name": "className",

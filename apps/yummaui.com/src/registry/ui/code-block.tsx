@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@base-ui/react/button";
+import { ScrollArea } from "@base-ui/react/scroll-area";
 import { Tabs } from "@base-ui/react/tabs";
 import { IconCheck, IconCopy, IconFile } from "@tabler/icons-react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
@@ -32,6 +33,16 @@ export interface CodeBlockProps {
   highlightLines?: number[];
   /** Numbers down the left. */
   lineNumbers?: boolean;
+  /**
+   * How many lines show before the block scrolls. Shift and the wheel scroll it
+   * sideways.
+   */
+  maxLines?: number;
+  /**
+   * The scrollbars fading in while you scroll or hover. Turn it off to keep
+   * them shown; reduced motion does the same.
+   */
+  animated?: boolean;
   /** What the copy button says. */
   copyLabel?: string;
   /** What the copy button says for a moment once it has copied. */
@@ -60,43 +71,72 @@ function Lines({
   lines,
   highlightLines = [],
   lineNumbers,
+  maxLines,
+  animated,
   outline,
 }: {
   code: string;
   lines?: ReactNode[];
   highlightLines?: number[];
   lineNumbers: boolean;
+  maxLines: number;
+  animated: boolean;
   outline: string;
 }) {
   const rows = lines ?? code.split("\n");
 
+  const fade = animated
+    ? "o:0 tp:o tdu:200 ttf:io hovering:o:100 scrolling:o:100 scrolling:tdu:0 @prm:tp:none"
+    : "o:100";
+
   return (
-    // iOS enlarges text in wide scrolling blocks unless told not to; tabs indent two columns
-    // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region needs to be focusable
-    <pre
-      tabIndex={0}
-      className={merge(outline, "m:0 py:3 ox:auto")}
-      style={{ WebkitTextSizeAdjust: "100%", textSizeAdjust: "100%", tabSize: 2 }}
-    >
-      <code className="d:b w:fc min-w:100% ff:m fs:xs lh:5">
-        {rows.map((line, index) => {
-          const marked = highlightLines.includes(index + 1);
-          return (
-            <span
-              key={index}
-              className={`d:b pl:4 pr:6 blw:2 ${marked ? "bc:label bg:well" : "bc:transparent"}`}
-            >
-              {lineNumbers && (
-                <span aria-hidden className="d:ib w:6 mr:3 c:hint ta:r us:none">
-                  {index + 1}
+    <ScrollArea.Root className="p:r">
+      {/* iOS enlarges text in wide scrolling blocks unless told not to; tabs indent two columns */}
+      <ScrollArea.Viewport
+        tabIndex={0}
+        className={merge(outline, "ob:c")}
+        style={{
+          // each line is 1.25rem, plus the block's 1.5rem of padding
+          maxHeight: `calc(${maxLines} * 1.25rem + 1.5rem)`,
+          WebkitTextSizeAdjust: "100%",
+          textSizeAdjust: "100%",
+          tabSize: 2,
+        }}
+      >
+        <pre className="m:0 py:3">
+          <code className="d:b w:fc min-w:100% ff:m fs:xs lh:5">
+            {rows.map((line, index) => {
+              const marked = highlightLines.includes(index + 1);
+              return (
+                <span
+                  key={index}
+                  className={`d:b pl:4 pr:6 blw:2 ${marked ? "bc:label bg:well" : "bc:transparent"}`}
+                >
+                  {lineNumbers && (
+                    <span aria-hidden className="d:ib w:6 mr:3 c:hint ta:r us:none">
+                      {index + 1}
+                    </span>
+                  )}
+                  {line === "" ? "​" : line}
                 </span>
-              )}
-              {line === "" ? "​" : line}
-            </span>
-          );
-        })}
-      </code>
-    </pre>
+              );
+            })}
+          </code>
+        </pre>
+      </ScrollArea.Viewport>
+      <ScrollArea.Scrollbar
+        orientation="vertical"
+        className={merge("d:f jc:c w:2 py:1", fade)}
+      >
+        <ScrollArea.Thumb className="w:1 br:9999 bg:hint/50" />
+      </ScrollArea.Scrollbar>
+      <ScrollArea.Scrollbar
+        orientation="horizontal"
+        className={merge("d:f fd:c jc:c h:2 px:1", fade)}
+      >
+        <ScrollArea.Thumb className="h:1 br:9999 bg:hint/50" />
+      </ScrollArea.Scrollbar>
+    </ScrollArea.Root>
   );
 }
 
@@ -111,6 +151,8 @@ export default function CodeBlock({
   tabs,
   highlightLines,
   lineNumbers = true,
+  maxLines = 20,
+  animated = true,
   copyLabel = "Copy",
   copiedLabel = "Copied",
   shape: shapeProp,
@@ -198,6 +240,8 @@ export default function CodeBlock({
               lines={item.lines}
               highlightLines={highlightLines}
               lineNumbers={lineNumbers}
+          maxLines={maxLines}
+          animated={animated}
               outline={outline}
             />
           </Tabs.Panel>
@@ -224,6 +268,8 @@ export default function CodeBlock({
           lines={lines}
           highlightLines={highlightLines}
           lineNumbers={lineNumbers}
+          maxLines={maxLines}
+          animated={animated}
           outline={outline}
         />
       ) : (
@@ -235,6 +281,8 @@ export default function CodeBlock({
               lines={lines}
               highlightLines={highlightLines}
               lineNumbers={lineNumbers}
+          maxLines={maxLines}
+          animated={animated}
               outline={outline}
             />
           </div>
