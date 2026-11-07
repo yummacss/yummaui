@@ -6,7 +6,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "example": "Rename file",
-      "description": "The trigger button's label."
+      "description": "The trigger button's label. Leave it out when `open` opens it from code."
     },
     {
       "name": "triggerIcon",
@@ -31,6 +31,19 @@
       "type": "none",
       "typeName": "() => void",
       "description": "Fires when the trigger is pressed, before the dialog opens, for capturing which row triggered it, say, in a dialog reused across a list."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "Controlled open state, for opening it from code: a menu item, a keyboard shortcut or a list row. Uncontrolled (the default) if omitted.",
+      "controlled": true,
+      "handler": "onOpenChange"
+    },
+    {
+      "name": "onOpenChange",
+      "type": "none",
+      "typeName": "(open: boolean) => void",
+      "description": "Called whenever it opens or closes, controlled or not."
     },
     {
       "name": "header",
