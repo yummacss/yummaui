@@ -43,6 +43,12 @@
       "description": "How many lines show before the block scrolls. Shift and the wheel scroll it sideways."
     },
     {
+      "name": "fill",
+      "type": "boolean",
+      "default": false,
+      "description": "Takes its container's height and scrolls inside it, in place of `maxLines`."
+    },
+    {
       "name": "copyLabel",
       "type": "string",
       "default": "Copy",

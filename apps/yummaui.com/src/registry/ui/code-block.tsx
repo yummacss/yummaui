@@ -39,6 +39,10 @@ export interface CodeBlockProps {
    */
   maxLines?: number;
   /**
+   * Takes its container's height and scrolls inside it, in place of `maxLines`.
+   */
+  fill?: boolean;
+  /**
    * The scrollbars fading in while you scroll or hover. Turn it off to keep
    * them shown; reduced motion does the same.
    */
@@ -72,6 +76,7 @@ function Lines({
   highlightLines = [],
   lineNumbers,
   maxLines,
+  fill,
   animated,
   outline,
 }: {
@@ -80,6 +85,7 @@ function Lines({
   highlightLines?: number[];
   lineNumbers: boolean;
   maxLines: number;
+  fill: boolean;
   animated: boolean;
   outline: string;
 }) {
@@ -90,14 +96,14 @@ function Lines({
     : "o:100";
 
   return (
-    <ScrollArea.Root className="p:r">
+    <ScrollArea.Root className={fill ? "p:r d:f fd:c f:1 min-h:0" : "p:r"}>
       {/* iOS enlarges text in wide scrolling blocks unless told not to; tabs indent two columns */}
       <ScrollArea.Viewport
         tabIndex={0}
-        className={merge(outline, "ob:c")}
+        className={merge(outline, "ob:c", fill && "f:1 min-h:0")}
         style={{
           // each line is 1.25rem, plus the block's 1.5rem of padding
-          maxHeight: `calc(${maxLines} * 1.25rem + 1.5rem)`,
+          maxHeight: fill ? undefined : `calc(${maxLines} * 1.25rem + 1.5rem)`,
           WebkitTextSizeAdjust: "100%",
           textSizeAdjust: "100%",
           tabSize: 2,
@@ -152,6 +158,7 @@ export default function CodeBlock({
   highlightLines,
   lineNumbers = true,
   maxLines = 20,
+  fill = false,
   animated = true,
   copyLabel = "Copy",
   copiedLabel = "Copied",
@@ -204,6 +211,7 @@ export default function CodeBlock({
 
   const frame = merge(
     "p:r min-w:0 o:h bw:1 bc:rim bg:raised bs-o:key c:label",
+    fill && "d:f fd:c f:1 min-h:0",
     RADIUS.popup[shape],
     className,
   );
@@ -240,8 +248,9 @@ export default function CodeBlock({
               lines={item.lines}
               highlightLines={highlightLines}
               lineNumbers={lineNumbers}
-          maxLines={maxLines}
-          animated={animated}
+              maxLines={maxLines}
+              fill={fill}
+              animated={animated}
               outline={outline}
             />
           </Tabs.Panel>
@@ -269,20 +278,22 @@ export default function CodeBlock({
           highlightLines={highlightLines}
           lineNumbers={lineNumbers}
           maxLines={maxLines}
+          fill={fill}
           animated={animated}
           outline={outline}
         />
       ) : (
         // without a header, copy sits beside the code rather than over it
-        <div className="d:f ai:fs">
-          <div className="f:1 min-w:0">
+        <div className={fill ? "d:f f:1 min-h:0" : "d:f ai:fs"}>
+          <div className={fill ? "d:f fd:c f:1 min-w:0" : "f:1 min-w:0"}>
             <Lines
               code={code}
               lines={lines}
               highlightLines={highlightLines}
               lineNumbers={lineNumbers}
-          maxLines={maxLines}
-          animated={animated}
+              maxLines={maxLines}
+              fill={fill}
+              animated={animated}
               outline={outline}
             />
           </div>
