@@ -62,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Under `pill`, a Toolbar that wraps keeps round corners instead of turning into a capsule.
 - Under `pill`, Preview Card and Navigation Menu popups, Treemap tiles and Activity Timeline quotes keep soft corners instead of turning round.
 - Sidebar's links show their whole focus outline.
 - Combobox with chips opens its popup under the whole field.

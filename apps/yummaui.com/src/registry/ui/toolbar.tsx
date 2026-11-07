@@ -121,7 +121,8 @@ export default function ToolbarBase({
 
   const rootClasses = merge(
     "d:f fw:w ai:c g:1 p:2 bg:raised bs-o:key bc:rim bw:1",
-    RADIUS.bar[shape],
+    // a capsule's radius as a length, so a toolbar that wraps keeps round corners rather than a stadium
+    shape === "pill" ? "br:calc(1.6875rem)" : RADIUS.bar[shape],
     className,
   );
 
