@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Color Picker, with a hue slider, a row of shades and a hex field.
 - Code Block, with a file name or tabs, a copy button and marked lines, scrolling past `maxLines` or filling its container with `fill`.
 - Dialog, Alert Dialog & Drawer take `open` and `onOpenChange`, and `trigger` is optional.
 - Drawer takes an element as `trigger`.

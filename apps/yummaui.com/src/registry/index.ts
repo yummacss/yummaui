@@ -16,6 +16,7 @@ import meta_button from "./meta/button.json";
 import meta_checkbox_group from "./meta/checkbox-group.json";
 import meta_checkbox from "./meta/checkbox.json";
 import meta_code_block from "./meta/code-block.json";
+import meta_color_picker from "./meta/color-picker.json";
 import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
 import meta_currency_input from "./meta/currency-input.json";
@@ -109,6 +110,7 @@ export const registryMeta = {
   "checkbox-group": meta_checkbox_group,
   "checkbox": meta_checkbox,
   "code-block": meta_code_block,
+  "color-picker": meta_color_picker,
   "combobox": meta_combobox,
   "context-menu": meta_context_menu,
   "currency-input": meta_currency_input,
@@ -191,6 +193,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "checkbox-group": { component: "checkbox-group", variant: "base", kind: "component", install: "checkbox-group" },
   "checkbox": { component: "checkbox", variant: "base", kind: "component", install: "checkbox" },
   "code-block": { component: "code-block", variant: "base", kind: "component", install: "code-block" },
+  "color-picker": { component: "color-picker", variant: "base", kind: "component", install: "color-picker" },
   "combobox-grouped": { component: "combobox", variant: "grouped", kind: "example", install: "combobox" },
   "combobox-helper": { component: "combobox", variant: "helper", kind: "example", install: "combobox" },
   "combobox": { component: "combobox", variant: "base", kind: "component", install: "combobox" },
@@ -264,6 +267,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "autocomplete": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "button": { states: {}, easings: {}, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "checkbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
+  "code-block": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: {}, keyframes: {} },
   "combobox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "leave": "from { opacity: 1; scale: 1; }", "spin": "to { rotate: 360deg; }" } },
   "context-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "currency-input": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

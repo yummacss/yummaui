@@ -1,0 +1,67 @@
+{
+  "summary": "A color from a hue slider, a row of nine shades and a hex field, every part a Base UI control.",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "example": "Folder color",
+      "description": "Text above the picker."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "The color, as a hex like `#5b4bdb`. Controlled; pair with `onValueChange`.",
+      "controlled": true,
+      "handler": "onValueChange"
+    },
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "description": "The color it starts on when uncontrolled. Without one, the middle shade of a violet."
+    },
+    {
+      "name": "onValueChange",
+      "type": "none",
+      "typeName": "(value: string) => void",
+      "description": "Called with the new hex whenever the color changes."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the shades, the field & the swatch. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Blocks every part of the picker & dims it."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it along with the danger, error and success tints that ride with it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ColorPicker",
+      "props": {
+        "label": "Folder color"
+      }
+    }
+  ]
+}
