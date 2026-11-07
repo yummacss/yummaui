@@ -213,16 +213,30 @@ export default function CodeBlock({
           </span>
           {copyButton}
         </div>
+      ) : null}
+      {title ? (
+        <Lines
+          code={code}
+          lines={lines}
+          highlightLines={highlightLines}
+          lineNumbers={lineNumbers}
+          outline={outline}
+        />
       ) : (
-        <div className="p:a t:2 r:2 zi:10">{copyButton}</div>
+        // without a header, copy sits beside the code rather than over it
+        <div className="d:f ai:fs">
+          <div className="f:1 min-w:0">
+            <Lines
+              code={code}
+              lines={lines}
+              highlightLines={highlightLines}
+              lineNumbers={lineNumbers}
+              outline={outline}
+            />
+          </div>
+          <div className="fs:0 pt:2 pr:2">{copyButton}</div>
+        </div>
       )}
-      <Lines
-        code={code}
-        lines={lines}
-        highlightLines={highlightLines}
-        lineNumbers={lineNumbers}
-        outline={outline}
-      />
       {status}
     </div>
   );
