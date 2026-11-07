@@ -91,6 +91,12 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "color-picker",
+		since: "0.10",
+		title: "Color Picker",
+		description: "Pick a color by hue, shade or hex, built on Base UI.",
+	},
+	{
 		slug: "combobox",
 		title: "Combobox",
 		description:

@@ -19,6 +19,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"autocomplete",
 			"checkbox",
 			"checkbox-group",
+			"color-picker",
 			"combobox",
 			"currency-input",
 			"expanding-input",
