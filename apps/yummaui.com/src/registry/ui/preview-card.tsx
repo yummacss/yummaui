@@ -84,7 +84,7 @@ export default function PreviewCardBase({
   const shape = useShape(shapeProp);
   const popupClasses = [
     "d:f fd:c g:3 w:64 p:3 bg:raised bc:line bw:1 c:label fs:sm bs-o:pop",
-    RADIUS.control[shape],
+    RADIUS.popup[shape],
     arrow ? "p:r" : "",
   ]
     .filter(Boolean)

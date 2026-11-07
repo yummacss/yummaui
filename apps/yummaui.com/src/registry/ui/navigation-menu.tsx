@@ -192,7 +192,7 @@ export default function NavigationMenuBase({
           <NavigationMenu.Popup
             className={merge(
               "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
-              RADIUS.bar[shape],
+              RADIUS.popup[shape],
               animated &&
                 "tp:ot tdu:350 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",
             )}
