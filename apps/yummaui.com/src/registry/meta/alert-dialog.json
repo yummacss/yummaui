@@ -6,7 +6,7 @@
       "type": "none",
       "typeName": "ReactNode",
       "example": "Delete 12 files",
-      "description": "The trigger button's label."
+      "description": "The trigger button's label. Leave it out when `open` opens it from code."
     },
     {
       "name": "triggerIcon",
@@ -25,6 +25,19 @@
       ],
       "default": "leading",
       "description": "Which end of the trigger `triggerIcon` sits at."
+    },
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "Controlled open state, for opening it from code: a menu item, a keyboard shortcut or a list row. Uncontrolled (the default) if omitted.",
+      "controlled": true,
+      "handler": "onOpenChange"
+    },
+    {
+      "name": "onOpenChange",
+      "type": "none",
+      "typeName": "(open: boolean) => void",
+      "description": "Called whenever it opens or closes, controlled or not."
     },
     {
       "name": "icon",

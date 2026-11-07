@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Code Block, with a file name or tabs, a copy button and marked lines.
+- Dialog, Alert Dialog & Drawer take `open` and `onOpenChange`, and `trigger` is optional.
+- Drawer takes an element as `trigger`.
 - Avatar takes the `accent` tint.
 - An icon-only Button shows its countdown as a circle around the seconds.
 - Sidebar takes `focus`.
