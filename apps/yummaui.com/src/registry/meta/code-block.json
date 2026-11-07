@@ -76,7 +76,7 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:f fd:c g:4 w:120 max-w:100%",
+      "className": "d:f fd:c w:120 max-w:100%",
       "children": [
         {
           "component": "CodeBlock",
@@ -86,30 +86,6 @@
             "highlightLines": [
               5,
               6
-            ]
-          }
-        },
-        {
-          "component": "CodeBlock",
-          "props": {
-            "lineNumbers": false,
-            "tabs": [
-              {
-                "label": "pnpm",
-                "code": "pnpm dlx yummaui add code-block"
-              },
-              {
-                "label": "npm",
-                "code": "npx yummaui add code-block"
-              },
-              {
-                "label": "yarn",
-                "code": "yarn dlx yummaui add code-block"
-              },
-              {
-                "label": "bun",
-                "code": "bunx yummaui add code-block"
-              }
             ]
           }
         }

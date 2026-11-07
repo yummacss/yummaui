@@ -73,8 +73,8 @@ function Lines({
   return (
     // a scrolling region takes focus, so a keyboard can scroll it
     // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region needs to be focusable
-    <pre tabIndex={0} className={merge(outline, "m:0 py:3 ox:auto ff:m fs:sm lh:6")}>
-      <code className="d:b w:fc min-w:100%">
+    <pre tabIndex={0} className={merge(outline, "m:0 py:3 ox:auto")}>
+      <code className="d:b w:fc min-w:100% ff:m fs:xs lh:5">
         {rows.map((line, index) => {
           const marked = highlightLines.includes(index + 1);
           return (
@@ -136,7 +136,7 @@ export default function CodeBlock({
       onClick={copy}
       className={merge(
         outline,
-        "d:f fs:0 ai:c g:1 h:7 px:2 bw:1 bg:raised bs-o:key bc:rim fs:xs fw:500 us:none c:p h:bg:well",
+        "d:f fs:0 ai:c g:1 h:7 px:2 bw:1 bg:raised bs-o:key bc:rim fw:500 us:none c:p h:bg:well",
         copied ? "c:green-7" : "c:label",
         RADIUS.item[shape],
       )}
@@ -146,7 +146,7 @@ export default function CodeBlock({
       ) : (
         <IconCopy aria-hidden className="w:4 h:4" />
       )}
-      {copied ? copiedLabel : copyLabel}
+      <span className="fs:xs">{copied ? copiedLabel : copyLabel}</span>
     </Button>
   );
 
@@ -157,7 +157,7 @@ export default function CodeBlock({
   );
 
   const frame = merge(
-    "p:r o:h bw:1 bc:rim bg:raised bs-o:key c:label",
+    "p:r min-w:0 o:h bw:1 bc:rim bg:raised bs-o:key c:label",
     RADIUS.popup[shape],
     className,
   );
@@ -167,7 +167,7 @@ export default function CodeBlock({
     return (
       <Tabs.Root value={tab} onValueChange={(next) => setTab(String(next))} className={frame}>
         <div className={`${header} pl:2`}>
-          <Tabs.List className="d:f ai:c g:1">
+          <Tabs.List className="d:f ai:c g:1 min-w:0 ox:auto">
             {tabs.map((item) => (
               <Tabs.Tab
                 key={item.label}
@@ -175,13 +175,13 @@ export default function CodeBlock({
                 className={(state) =>
                   merge(
                     outline,
-                    "h:7 px:3 bw:0 fs:xs fw:500 us:none c:p",
+                    "fs:0 h:7 px:3 bw:0 fw:500 us:none c:p",
                     state.active ? "bg:well c:label" : "bg:transparent c:hint h:c:label",
                     RADIUS.item[shape],
                   )
                 }
               >
-                {item.label}
+                <span className="fs:xs">{item.label}</span>
               </Tabs.Tab>
             ))}
           </Tabs.List>
