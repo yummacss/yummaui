@@ -191,7 +191,6 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "button-group-split": { component: "button-group", variant: "split", kind: "example", install: "button-group" },
   "button-group": { component: "button-group", variant: "base", kind: "component", install: "button-group" },
   "button": { component: "button", variant: "base", kind: "component", install: "button" },
-  "card-revenue": { component: "card", variant: "revenue", kind: "example", install: "card" },
   "card": { component: "card", variant: "base", kind: "component", install: "card" },
   "checkbox-group": { component: "checkbox-group", variant: "base", kind: "component", install: "checkbox-group" },
   "checkbox": { component: "checkbox", variant: "base", kind: "component", install: "checkbox" },

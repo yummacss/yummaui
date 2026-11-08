@@ -84,7 +84,7 @@ export default function Alert({
     <div
       role={urgent ? "alert" : "status"}
       className={merge(
-        "d:f ai:c g:3 py:3 pl:3 pr:3 bw:1 bc:rim bg:raised bs-o:key c:label",
+        "d:f ai:c g:3 w:100% p:3 bw:1 bc:rim bg:raised bs-o:key c:label",
         RADIUS.block[shape],
         className,
       )}

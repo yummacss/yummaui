@@ -81,7 +81,8 @@
         "title": "Storage almost full",
         "description": "92% of 10 GB used.",
         "tone": "warning"
-      }
+      },
+      "className": "w:112 max-w:100%"
     }
   ]
 }

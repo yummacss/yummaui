@@ -1,5 +1,5 @@
 {
-  "summary": "A raised panel with a heading, content and actions.",
+  "summary": "A raised panel with a heading and anything under it.",
   "props": [
     {
       "name": "title",
@@ -17,13 +17,7 @@
       "name": "children",
       "type": "none",
       "typeName": "ReactNode",
-      "description": "What the card holds, between the heading and the actions."
-    },
-    {
-      "name": "actions",
-      "type": "none",
-      "typeName": "ReactNode",
-      "description": "Buttons along the bottom, right-aligned."
+      "description": "What the card holds under the heading, buttons included."
     },
     {
       "name": "shape",
@@ -45,8 +39,49 @@
   ],
   "scene": [
     {
-      "component": "CardRevenue",
-      "props": {}
+      "component": "Card",
+      "className": "w:88 max-w:100%",
+      "props": {
+        "title": "Monthly revenue",
+        "description": "Across every plan, after refunds."
+      },
+      "children": [
+        {
+          "tag": "div",
+          "className": "d:f ai:b g:2",
+          "children": [
+            {
+              "text": "$48,210",
+              "className": "fs:3xl fw:600 fvn:tn"
+            },
+            {
+              "text": "+12.4%",
+              "className": "c:green-6 fs:sm fw:500"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f fw:w jc:fe g:2",
+          "children": [
+            {
+              "component": "Button",
+              "props": {
+                "variant": "secondary",
+                "size": "sm"
+              },
+              "children": "Export"
+            },
+            {
+              "component": "Button",
+              "props": {
+                "size": "sm"
+              },
+              "children": "View report"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -9,10 +9,8 @@ export interface CardProps {
   title?: string;
   /** A line under the title. */
   description?: string;
-  /** What the card holds, between the heading and the actions. */
+  /** What the card holds under the heading, buttons included. */
   children?: ReactNode;
-  /** Buttons along the bottom, right-aligned. */
-  actions?: ReactNode;
   /** Corner radius of the card. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
@@ -22,12 +20,11 @@ export interface CardProps {
   className?: string;
 }
 
-/** A raised panel with a heading, content and actions. */
+/** A raised panel with a heading and anything under it. */
 export default function Card({
   title,
   description,
   children,
-  actions,
   shape: shapeProp,
   className,
 }: CardProps) {
@@ -48,7 +45,6 @@ export default function Card({
         </div>
       )}
       {children}
-      {actions && <div className="d:f fw:w jc:fe g:2">{actions}</div>}
     </div>
   );
 }
