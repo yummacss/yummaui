@@ -69,6 +69,12 @@
       "description": "Which end of a tab its `icon` sits at. Ignored when `iconOnly` is set."
     },
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "Panels of your own, from Base UI's `Tabs.Panel`, after the list in the same tabs, for panels laid out other than as cards."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [
