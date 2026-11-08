@@ -18,19 +18,19 @@ interface InjectedStepProps {
 	onReach?: () => void;
 }
 
-// a wave 6px wide repeating every 12px, as a mask so a token colors it
+// a wave 8px wide, one swing every 20px, with round crests; a mask so a token colors it
 const WAVE = `url("data:image/svg+xml,${encodeURIComponent(
-	'<svg xmlns="http://www.w3.org/2000/svg" width="6" height="12"><path d="M3 0C5.5 3 5.5 3 3 6S.5 9 3 12" fill="none" stroke="#000" stroke-width="1.5"/></svg>',
+	'<svg xmlns="http://www.w3.org/2000/svg" width="8" height="20"><path d="M1.5 0C1.5 5 6.5 5 6.5 10S1.5 15 1.5 20" fill="none" stroke="#000" stroke-width="1.5"/></svg>',
 )}")`;
 const LINE = {
-	left: -3,
-	width: 6,
+	left: -4,
+	width: 8,
 	top: 12,
 	maskImage: WAVE,
-	maskSize: "6px 12px",
+	maskSize: "8px 20px",
 	maskRepeat: "repeat-y",
 	WebkitMaskImage: WAVE,
-	WebkitMaskSize: "6px 12px",
+	WebkitMaskSize: "8px 20px",
 	WebkitMaskRepeat: "repeat-y",
 } as const;
 
