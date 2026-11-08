@@ -143,6 +143,7 @@ export default function ComponentPlayground({
 				value={active}
 				onValueChange={setTab}
 				size="sm"
+				shape="pill"
 				icon
 				items={[
 					{
