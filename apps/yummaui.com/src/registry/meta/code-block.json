@@ -19,6 +19,12 @@
       "description": "A file name in the header, beside a file icon."
     },
     {
+      "name": "icon",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "A glyph before `title`, in place of the file icon."
+    },
+    {
       "name": "tabs",
       "type": "none",
       "typeName": "CodeBlockTab[]",

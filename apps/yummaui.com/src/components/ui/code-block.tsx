@@ -1,5 +1,6 @@
 import { parseRanges } from "@/lib/code-decorate.mjs";
 import { highlightLines } from "@/lib/highlighter";
+import { YummaMark } from "@/components/icons/yumma-logo";
 import Block from "@/registry/ui/code-block";
 
 interface Props {
@@ -30,6 +31,11 @@ export default function CodeBlock({ code = "", meta, title, lang }: Props) {
 		<div className="my:4">
 			<Block
 				shape="pill"
+				icon={
+					title?.startsWith("yumma") ? (
+						<YummaMark aria-hidden className="w:4 h:4" />
+					) : undefined
+				}
 				className="br:xl"
 				code={text}
 				lines={lines}

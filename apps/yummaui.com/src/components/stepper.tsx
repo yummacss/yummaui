@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface StepperProps {
 	children: React.ReactNode;
@@ -18,38 +18,73 @@ interface InjectedStepProps {
 	onReach?: () => void;
 }
 
+// a wave 6px wide repeating every 12px, as a mask so a token colors it
+const WAVE = `url("data:image/svg+xml,${encodeURIComponent(
+	'<svg xmlns="http://www.w3.org/2000/svg" width="6" height="12"><path d="M3 0C5.5 3 5.5 3 3 6S.5 9 3 12" fill="none" stroke="#000" stroke-width="1.5"/></svg>',
+)}")`;
+const LINE = {
+	left: -3,
+	width: 6,
+	top: 12,
+	maskImage: WAVE,
+	maskSize: "6px 12px",
+	maskRepeat: "repeat-y",
+	WebkitMaskImage: WAVE,
+	WebkitMaskSize: "6px 12px",
+	WebkitMaskRepeat: "repeat-y",
+} as const;
+
+/** Where a step's circle centers, 12px below the step's top. */
+const center = (item?: Element | null) =>
+	item instanceof HTMLElement ? item.offsetTop + 12 : 12;
+
 export function Stepper({ children }: StepperProps) {
 	const childArray = React.Children.toArray(children);
 	const list = useRef<HTMLOListElement>(null);
-	// the step the pointer or focus is on; the line fills down to its circle
+	// the step the pointer or focus is on; the wave fills down to its circle
 	const [at, setAt] = useState(0);
-	const [fill, setFill] = useState(0);
+	const [fill, setFill] = useState(12);
+	const [end, setEnd] = useState(12);
+
+	useEffect(() => {
+		const root = list.current;
+		if (!root) return;
+		const measure = () =>
+			setEnd(center(root.querySelector(":scope > li:last-of-type")));
+		measure();
+		const observer = new ResizeObserver(measure);
+		observer.observe(root);
+		return () => observer.disconnect();
+	}, []);
 
 	const reach = (step: number) => {
 		setAt(step);
-		const item = list.current?.children[step] as HTMLElement | undefined;
-		// a circle's center sits 12px below its step's top
-		setFill(item ? item.offsetTop + 12 : 0);
+		setFill(
+			step
+				? center(list.current?.querySelectorAll(":scope > li")[step - 1])
+				: 12,
+		);
 	};
 
 	return (
 		<ol
 			ref={list}
-			className="p:r ml:4 bc:border blw:2 bs:d"
+			className="p:r ml:4"
 			onMouseLeave={() => reach(0)}
 			onBlur={(event) => {
 				if (!event.currentTarget.contains(event.relatedTarget)) reach(0);
 			}}
 		>
-			{/* the same dashes in ink, laid over the line and grown to the step */}
+			{/* the wave runs from the first circle to the last, and fills in ink */}
 			<span
 				aria-hidden
-				className="p:a t:0 c:ink tp:a tdu:700 ttf:io @prm:tp:none"
-				style={{
-					left: -2,
-					height: fill,
-					borderLeft: "2px dashed currentColor",
-				}}
+				className="p:a bg:border"
+				style={{ ...LINE, height: end - 12 }}
+			/>
+			<span
+				aria-hidden
+				className="p:a bg:ink tp:a tdu:700 ttf:io @prm:tp:none"
+				style={{ ...LINE, height: fill - 12 }}
 			/>
 			{childArray.map((child, i) => {
 				if (React.isValidElement<StepProps & InjectedStepProps>(child)) {
@@ -80,8 +115,10 @@ export function Step({
 			onMouseEnter={onReach}
 			onFocus={onReach}
 		>
+			{/* the second ring is a shadow, so it grows smoothly rather than a pixel at a time */}
 			<div
-				className={`d:f p:a l:-3 ai:c jc:c w:6 h:6 br:9999 bg:surface tp:a tdu:500 ttf:io @prm:tp:none ${reached ? "bw:2 bc:ink" : "bw:1 bc:border"}`}
+				className={`d:f p:a l:-3 zi:10 ai:c jc:c w:6 h:6 br:9999 bw:1 bg:surface c:ink tp:a tdu:500 ttf:io @prm:tp:none ${reached ? "bc:ink" : "bc:border"}`}
+				style={{ boxShadow: `0 0 0 ${reached ? 1 : 0}px currentColor` }}
 			>
 				<span className="c:accent fs:xs">{stepNumber}</span>
 			</div>
