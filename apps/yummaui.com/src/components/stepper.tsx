@@ -41,10 +41,15 @@ export function Stepper({ children }: StepperProps) {
 				if (!event.currentTarget.contains(event.relatedTarget)) reach(0);
 			}}
 		>
+			{/* the same dashes in ink, laid over the line and grown to the step */}
 			<span
 				aria-hidden
-				className="p:a t:0 bg:ink tp:a tdu:300 ttf:out-quart @prm:tp:none"
-				style={{ left: -2, width: 2, height: fill }}
+				className="p:a t:0 c:ink tp:a tdu:700 ttf:io @prm:tp:none"
+				style={{
+					left: -2,
+					height: fill,
+					borderLeft: "2px dashed currentColor",
+				}}
 			/>
 			{childArray.map((child, i) => {
 				if (React.isValidElement<StepProps & InjectedStepProps>(child)) {
@@ -76,7 +81,7 @@ export function Step({
 			onFocus={onReach}
 		>
 			<div
-				className={`d:f p:a l:-3 ai:c jc:c w:6 h:6 br:9999 bg:surface tp:a tdu:300 ttf:out-quart @prm:tp:none ${reached ? "bw:2 bc:ink" : "bw:1 bc:border"}`}
+				className={`d:f p:a l:-3 ai:c jc:c w:6 h:6 br:9999 bg:surface tp:a tdu:500 ttf:io @prm:tp:none ${reached ? "bw:2 bc:ink" : "bw:1 bc:border"}`}
 			>
 				<span className="c:accent fs:xs">{stepNumber}</span>
 			</div>

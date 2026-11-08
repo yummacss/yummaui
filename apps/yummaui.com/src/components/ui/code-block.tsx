@@ -29,6 +29,8 @@ export default function CodeBlock({ code = "", meta, title, lang }: Props) {
 	return (
 		<div className="my:4">
 			<Block
+				shape="pill"
+				className="br:xl"
 				code={text}
 				lines={lines}
 				title={title}
