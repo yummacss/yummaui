@@ -4,6 +4,25 @@ import type { ReactNode } from "react";
 import Select from "@/registry/ui/select";
 import Switch from "@/registry/ui/switch";
 
+const SIZES: Record<string, string> = {
+	xs: "Extra Small",
+	sm: "Small",
+	md: "Medium",
+	lg: "Large",
+	xl: "Extra Large",
+};
+
+/** A prop name or value as words: `iconPosition` reads Icon Position, `sm` reads Small. */
+export function humanize(text: string) {
+	if (SIZES[text]) return SIZES[text];
+	return text
+		.replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+		.split(/[-_\s]+/)
+		.filter(Boolean)
+		.map((word) => word[0].toUpperCase() + word.slice(1))
+		.join(" ");
+}
+
 /** A select over a prop's values, for the Styling drawer. */
 export function EnumSelect({
 	name,
@@ -20,8 +39,11 @@ export function EnumSelect({
 }) {
 	return (
 		<Select
-			ariaLabel={name}
-			options={values.map((option) => ({ value: option, label: option }))}
+			ariaLabel={humanize(name)}
+			options={values.map((option) => ({
+				value: option,
+				label: humanize(option),
+			}))}
 			value={value}
 			onValueChange={(next) => next && onChange(next)}
 			size="sm"
@@ -65,10 +87,10 @@ export function SwatchSelect({
 
 	return (
 		<Select
-			ariaLabel={name}
+			ariaLabel={humanize(name)}
 			options={options.map((option) => ({
 				value: option.value,
-				label: option.value,
+				label: humanize(option.value),
 				icon: <Bars colors={option.colors} />,
 			}))}
 			value={value}
@@ -94,7 +116,7 @@ export function PropSwitch({
 }) {
 	return (
 		<Switch
-			ariaLabel={name}
+			ariaLabel={humanize(name)}
 			checked={checked}
 			onCheckedChange={onChange}
 			size="sm"

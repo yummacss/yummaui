@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/json-ld";
 import Pagination from "@/components/ui/pagination";
+import InstallCommand from "@/components/playground/install-command";
 import StylingButton from "@/components/playground/styling-button";
 import ViewMarkdown from "@/components/ui/view-markdown";
 import { pagePath, UI_ORIGIN } from "@/utils/hosts";
@@ -74,7 +75,10 @@ export default async function Page({
 						</div>
 					</div>
 					{ui.description && <p className="c:ink/70 fs:lg">{ui.description}</p>}
-					<ViewMarkdown />
+					<div className="d:f fw:w ai:c g:4 mt:4">
+						{stage && <InstallCommand />}
+						<ViewMarkdown />
+					</div>
 				</div>
 			)}
 			<div>

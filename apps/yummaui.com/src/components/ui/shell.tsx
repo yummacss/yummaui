@@ -9,8 +9,8 @@ import {
 import { ApiTable } from "@/components/playground/api";
 import ComponentPlayground from "@/components/playground/stage";
 import TableOfContents from "@/components/ui/toc";
-import { registryMeta } from "@/registry";
-import type { Primitives } from "@/utils/primitive";
+import { getRegistryTarget, registryMeta } from "@/registry";
+import { type Primitives, primitiveSlug } from "@/utils/primitive";
 
 interface Props {
 	children: ReactNode;
@@ -51,9 +51,16 @@ export default function UIShell({
 				<article className="d:f fd:c f:1 min-h:0">
 					{children}
 					{playground && (
-						<ComponentPlayground resizable={resizable.includes(playground)} />
+						<ComponentPlayground
+							resizable={resizable.includes(playground)}
+							primitive={primitiveSlug(
+								primitives,
+								getRegistryTarget(playground).component,
+								getRegistryTarget(playground).install,
+							)}
+						/>
 					)}
-					{playground && <ApiTable primitives={primitives} />}
+					{playground && <ApiTable />}
 				</article>
 			</div>
 

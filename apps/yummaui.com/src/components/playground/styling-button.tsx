@@ -28,29 +28,35 @@ export default function StylingButton() {
 				{/* the search dialog's backdrop, so every overlay on the site dims alike */}
 				<Drawer.Backdrop
 					data-chrome
-					className="tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none p:f zi:10 i:0 bg:black/60 bf-b:sm fgr:90"
+					className="tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none p:f zi:10 i:0 bg:black/30 bf-b:xs fgr:90"
 				/>
 				<Drawer.Viewport className="d:f p:f i:0 zi:20 jc:fe">
 					<Drawer.Popup
 						data-chrome
-						className="d:f fd:c g:6 h:100% w:104 max-w:100% p:6 oy:auto blr:3xl bg:page os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
+						className="d:f h:100% w:104 max-w:100% p:3 os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
 					>
-						<div className="d:f ai:c jc:sb">
-							<div className="d:f fd:c g:1">
-								<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">
-									Styling
-								</Drawer.Title>
-								<Drawer.Description className="m:0 c:ink/60 fs:sm">
-									Suit your style.
-								</Drawer.Description>
+						{/* the panel floats inside the popup's padding, so sliding the popup out takes it all the way off */}
+						<div className="d:f fd:c g:6 f:1 min-w:0 p:6 oy:auto br:xl bw:1 bc:border bg:page bs-o:pop">
+							<div className="d:f ai:c jc:sb">
+								<div className="d:f fd:c g:1">
+									<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">
+										Styling
+									</Drawer.Title>
+									<Drawer.Description className="m:0 c:ink/60 fs:sm">
+										Suit your style.
+									</Drawer.Description>
+								</div>
+								<Drawer.Close
+									aria-label="Close"
+									className={`${ROUND} w:8 bs-o:key`}
+								>
+									<Close className="w:4 h:4" />
+								</Drawer.Close>
 							</div>
-							<Drawer.Close aria-label="Close" className={`${ROUND} w:8`}>
-								<Close className="w:4 h:4" />
-							</Drawer.Close>
+							<Drawer.Content>
+								<Look />
+							</Drawer.Content>
 						</div>
-						<Drawer.Content>
-							<Look />
-						</Drawer.Content>
 					</Drawer.Popup>
 				</Drawer.Viewport>
 			</Drawer.Portal>

@@ -2,20 +2,17 @@
 
 import { Button } from "@base-ui/react/button";
 import { Collapsible } from "@base-ui/react/collapsible";
-import Link from "next/link";
 import { Fragment, useState } from "react";
-import { BaseUI } from "@/components/icons/icons";
 import { usePlayground } from "@/components/playground/context";
 import {
 	EnumSelect,
+	humanize,
 	PropSwitch,
 	SwatchSelect,
 } from "@/components/playground/control";
 import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
-import { getRegistryTarget } from "@/registry";
 import { ACCENTS, accentBars, DEFAULT_ACCENT } from "@/utils/accent";
-import { type Primitives, primitiveSlug } from "@/utils/primitive";
 import { inTableOrder, typeOf } from "@/utils/props";
 import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
 
@@ -48,40 +45,25 @@ function Summary({ text }: { text?: string }) {
 }
 
 /** A component's whole Component API, as a table below its preview. */
-export function ApiTable({ primitives }: { primitives: Primitives }) {
+export function ApiTable() {
 	const playground = usePlayground();
 	const props = inTableOrder(playground?.meta?.props ?? []);
 	if (!playground || props.length === 0) return null;
 
-	const target = getRegistryTarget(playground.id);
-	const primitive = primitiveSlug(primitives, target.component, target.install);
 	// the docs' own table, so the API reads like every other table on the site
-	const th =
-		"px:2 @md:px:4 py:2 bc:border c:ink bw:0 blw:1 fc:blw:0 ta:l fw:500";
-	const td =
-		"px:2 @md:px:4 py:2 bc:border c:ink/80 bw:0 btw:1 blw:1 fc:blw:0 va:t";
+	const th = "px:2 @md:px:4 py:2 bc:border c:ink blw:1 fc:blw:0 ta:l fw:500";
+	const td = "px:2 @md:px:4 py:2 bc:border c:ink/80 btw:1 blw:1 fc:blw:0 va:t";
 
 	return (
 		<section>
-			<div className="d:f ai:c jc:sb g:2 mt:12 mb:4">
+			<div className="mt:12 mb:4">
 				<h2 className="m:0 ff:display c:ink fs:xxl fw:400 lh:1">
 					Component API
 				</h2>
-				{primitive && (
-					<Link
-						href={`https://base-ui.com/react/components/${primitive}`}
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Base UI reference"
-						className="d:f ai:c jc:c fs:0 c:ink/70 td:none h:c:ink fv:oc:accent fv:ow:2"
-					>
-						<BaseUI className="w:4 h:4" />
-					</Link>
-				)}
 			</div>
 			<div className="ox:auto bw:1 bc:border br:xl">
-				<table className="w:100% bg:transparent bc:s bs:0">
-					<thead className="bg:surface">
+				<table className="w:100% bg:surface bc:s bs:0">
+					<thead className="bg:page">
 						<tr>
 							<th className={th}>Prop</th>
 							<th className={th}>Type</th>
@@ -175,7 +157,7 @@ export function Look() {
 				: offered[0];
 	const line = (name: string, control: React.ReactNode) => (
 		<div className="d:f fw:w ai:c jc:sb g:2 py:2 bc:border bbw:1">
-			<code className="c:code fs:xs ff:m">{name}</code>
+			<span className="c:ink fs:sm">{humanize(name)}</span>
 			{control}
 		</div>
 	);
