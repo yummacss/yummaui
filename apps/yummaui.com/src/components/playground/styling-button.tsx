@@ -6,7 +6,7 @@ import { usePlayground } from "@/components/playground/context";
 import { Close, Palette } from "@/icons";
 
 const ROUND =
-	"d:f ai:c jc:c h:8 br:9999 bc:border bg:surface h:bg:hover a:bg:press c:ink bw:1 fv:oc:ink fv:oo:2";
+	"d:f ai:c jc:c h:8 br:9999 bc:border bg:surface bs-o:key h:bg:hover a:bg:press c:ink bw:1 fv:oc:ink fv:oo:2";
 
 /** The Styling drawer's trigger, beside the page arrows on a component page. */
 export default function StylingButton() {
@@ -46,10 +46,7 @@ export default function StylingButton() {
 										Suit your style.
 									</Drawer.Description>
 								</div>
-								<Drawer.Close
-									aria-label="Close"
-									className={`${ROUND} w:8 bs-o:key`}
-								>
+								<Drawer.Close aria-label="Close" className={`${ROUND} w:8`}>
 									<Close className="w:4 h:4" />
 								</Drawer.Close>
 							</div>

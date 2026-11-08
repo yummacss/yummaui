@@ -16,13 +16,15 @@ export default function Pagination({ previous, next }: Props) {
 	}
 
 	return (
-		<div className="d:f fs:0 ai:c h:8 br:9999 bc:border bg:surface bw:1 o:h">
+		<div
+			className={`d:f fs:0 ai:c h:8 br:9999 bc:border bg:surface bs-o:key bw:1 o:h ${previous && next ? "" : "w:8"}`}
+		>
 			{previous && (
 				<Button
 					nativeButton={false}
 					render={<Link href={pagePath(previous.slug)} />}
 					aria-label={`Previous: ${previous.title}`}
-					className="d:f ai:c jc:c w:9 h:100% h:bg:hover a:bg:press c:ink fv:oc:ink fv:oo:-2 fv:ow:2"
+					className={`d:f ai:c jc:c ${previous && next ? "w:9" : "w:100%"} h:100% h:bg:hover a:bg:press c:ink fv:oc:ink fv:oo:-2 fv:ow:2`}
 				>
 					<NavArrowLeft className="w:4 h:4" />
 				</Button>
@@ -35,7 +37,7 @@ export default function Pagination({ previous, next }: Props) {
 					nativeButton={false}
 					render={<Link href={pagePath(next.slug)} />}
 					aria-label={`Next: ${next.title}`}
-					className="d:f ai:c jc:c w:9 h:100% h:bg:hover a:bg:press c:ink fv:oc:ink fv:oo:-2 fv:ow:2"
+					className={`d:f ai:c jc:c ${previous && next ? "w:9" : "w:100%"} h:100% h:bg:hover a:bg:press c:ink fv:oc:ink fv:oo:-2 fv:ow:2`}
 				>
 					<NavArrowRight className="w:4 h:4" />
 				</Button>

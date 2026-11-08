@@ -46,10 +46,10 @@ export default function Navbar({ className, menu }: NavbarProps) {
 								onFocus={preloadSearch}
 								aria-label="Search, Ctrl + K"
 								aria-keyshortcuts="Control+K Meta+K"
-								className="d:none ai:c jc:c g:2 h:8 pl:4 pr:1 br:9999 bc:border bg:surface a:bg:press c:ink bw:1 fs:sm bf-b:sm @lg:d:f fv:oc:ink fv:ow:2"
+								className="d:none ai:c jc:c g:2 h:8 pl:4 pr:1 br:9999 bc:border bg:surface bs-o:key h:bg:hover a:bg:press c:ink bw:1 fs:sm bf-b:sm @lg:d:f fv:oc:ink fv:ow:2"
 							>
 								<Search className="w:4 h:4" />
-								<kbd className="px:2 br:9999 bc:border bw:1 c:ink/70 fs:xs us:none">
+								<kbd className="px:2 br:9999 bc:border bw:1 bg:surface bs-o:key c:ink/70 fs:xs us:none">
 									Ctrl + K
 								</kbd>
 							</Button>
