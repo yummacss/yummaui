@@ -1,29 +1,55 @@
 "use client";
 
+import { Button } from "@base-ui/react/button";
 import { Field } from "@base-ui/react/field";
 import { Input } from "@base-ui/react/input";
+import { Popover } from "@base-ui/react/popover";
 import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { Slider } from "@base-ui/react/slider";
+import { IconColorPicker } from "@tabler/icons-react";
 import {
   clampChroma,
   formatHex,
+  modeHsv,
   modeOklch,
   modeRgb,
   parse,
   useMode,
 } from "culori/fn";
-import { useId, useState } from "react";
+import {
+  type KeyboardEvent,
+  type PointerEvent,
+  type ReactNode,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, FOCUS_WITHIN, RADIUS, type Shape, useShape } from "./style";
 
 const toOklch = useMode(modeOklch);
+const toHsv = useMode(modeHsv);
 useMode(modeRgb);
+
+type Variant = "inline" | "popover";
 
 // light to dark; the middle step is the one a picked hue starts on
 const LIGHTNESS = [0.96, 0.9, 0.82, 0.72, 0.6, 0.5, 0.42, 0.34, 0.26];
-const HUES =
+const OKLCH_HUES =
   "linear-gradient(to right, oklch(0.62 0.2 0), oklch(0.62 0.2 60), oklch(0.62 0.2 120), oklch(0.62 0.2 180), oklch(0.62 0.2 240), oklch(0.62 0.2 300), oklch(0.62 0.2 360))";
+const HSV_HUES =
+  "linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00)";
+const SWATCHES = [
+  "#24222a",
+  "#d7263d",
+  "#e8890c",
+  "#2f9e5b",
+  "#1a8fbf",
+  "#5b4bdb",
+  "#b14fc5",
+];
 
 function shadesOf(hue: number): string[] {
   return LIGHTNESS.map((l) =>
@@ -41,9 +67,16 @@ function read(hex: string): { hue: number; step: number } | null {
   return { hue: Math.round(h ?? 0), step };
 }
 
+function hsvOf(hex: string): { h?: number; s: number; v: number } {
+  const color = parse(hex);
+  if (!color) return { s: 0, v: 0 };
+  const { h, s, v } = toHsv(color);
+  return { h, s: s ?? 0, v: v ?? 0 };
+}
+
 const HEX = /^#?[0-9a-f]{6}$/i;
-const normal = (hex: string) =>
-  `#${hex.replace("#", "").toLowerCase()}`;
+const normal = (hex: string) => `#${hex.replace("#", "").toLowerCase()}`;
+const clamp = (n: number) => Math.min(1, Math.max(0, n));
 
 export interface ColorPickerProps {
   /** Text above the picker. */
@@ -52,12 +85,29 @@ export interface ColorPickerProps {
    * The color, as a hex like `#5b4bdb`. Controlled; pair with `onValueChange`.
    */
   value?: string;
-  /** The color it starts on when uncontrolled. Without one, the middle shade of a violet. */
+  /**
+   * The color it starts on when uncontrolled. Without one, the middle shade of
+   * a violet.
+   */
   defaultValue?: string;
   /** Called with the new hex whenever the color changes. */
   onValueChange?: (value: string) => void;
+  /**
+   * `inline` shows a hue slider, nine shades and a hex field in place.
+   * `popover` puts any color behind a swatch button: a saturation and
+   * brightness area, a hue slider, a hex field and `swatches`.
+   */
+  variant?: Variant;
+  /** Colors one press away, under the hex field. Popover only. */
+  swatches?: string[];
   /** Blocks every part of the picker & dims it. */
   disabled?: boolean;
+  /**
+   * Where the popup is rendered. Defaults to `document.body`, which is right
+   * almost always; pass an element to portal somewhere else, such as inside a
+   * frame or a container that owns its own stacking context.
+   */
+  container?: HTMLElement | null;
   /**
    * Corner radius of the shades, the field & the swatch. Inherits the nearest
    * `Shape`.
@@ -78,16 +128,204 @@ export interface ColorPickerProps {
   className?: string;
 }
 
+function HexField({
+  value,
+  onCommit,
+  outline,
+  shape,
+  disabled,
+  extra,
+}: {
+  value: string;
+  onCommit: (hex: string) => void;
+  outline: string;
+  shape: Shape;
+  disabled: boolean;
+  extra?: ReactNode;
+}) {
+  const [draft, setDraft] = useState<string | null>(null);
+  const commit = () => {
+    if (draft !== null && HEX.test(draft)) onCommit(normal(draft));
+    setDraft(null);
+  };
+
+  return (
+    <Field.Root className="d:f ai:c g:2" disabled={disabled}>
+      <span
+        aria-hidden
+        className={merge("fs:0 w:9 h:9 bw:1 bc:black/10", RADIUS.control[shape])}
+        style={{ background: value }}
+      />
+      <Field.Label className="p:a w:px h:px o:h">Hex</Field.Label>
+      <Input
+        value={draft ?? value.toUpperCase()}
+        onChange={(event) => setDraft(event.target.value)}
+        onBlur={commit}
+        onKeyDown={(event) => event.key === "Enter" && commit()}
+        spellCheck={false}
+        className={merge(
+          outline,
+          "f:1 min-w:0 h:9 px:3 bw:1 bc:rim bg:field bs-o:sunk c:label ff:m fs:sm",
+          RADIUS.control[shape],
+        )}
+      />
+      {extra}
+    </Field.Root>
+  );
+}
+
+function Hue({
+  value,
+  onChange,
+  gradient,
+  thumb,
+  disabled,
+  within,
+  labelledBy,
+}: {
+  value: number;
+  onChange: (hue: number) => void;
+  gradient: string;
+  thumb: string;
+  disabled: boolean;
+  within: string;
+  labelledBy?: string;
+}) {
+  return (
+    <Slider.Root
+      value={value}
+      onValueChange={(next) => onChange(Number(next))}
+      min={0}
+      max={360}
+      disabled={disabled}
+      aria-labelledby={labelledBy}
+    >
+      <Slider.Control className="d:f ai:c py:2 us:none ta:none">
+        <Slider.Track
+          className="p:r h:3 w:100% br:9999 bs-o:sunk"
+          style={{ background: gradient }}
+        >
+          <Slider.Thumb
+            aria-label="Hue"
+            getAriaValueText={(_, next) => `${next} degrees`}
+            className={merge("w:5 h:5 br:9999 bw:2 bc:white bs-o:key", within)}
+            style={{ background: thumb }}
+          />
+        </Slider.Track>
+      </Slider.Control>
+    </Slider.Root>
+  );
+}
+
+// a 2D control has no Base UI part: one slider thumb, left and right for saturation, up and down for brightness
+function Area({
+  hue,
+  s,
+  v,
+  color,
+  onChange,
+  disabled,
+  outline,
+  shape,
+}: {
+  hue: number;
+  s: number;
+  v: number;
+  color: string;
+  onChange: (s: number, v: number) => void;
+  disabled: boolean;
+  outline: string;
+  shape: Shape;
+}) {
+  const box = useRef<HTMLDivElement>(null);
+  const knob = useRef<HTMLDivElement>(null);
+
+  const fromPointer = (event: PointerEvent<HTMLDivElement>) => {
+    const rect = box.current?.getBoundingClientRect();
+    if (!rect) return;
+    onChange(
+      clamp((event.clientX - rect.left) / rect.width),
+      clamp(1 - (event.clientY - rect.top) / rect.height),
+    );
+  };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const step = event.shiftKey ? 0.1 : 0.01;
+    const moves: Record<string, [number, number]> = {
+      ArrowRight: [s + step, v],
+      ArrowLeft: [s - step, v],
+      ArrowUp: [s, v + step],
+      ArrowDown: [s, v - step],
+      PageUp: [s, v + 0.1],
+      PageDown: [s, v - 0.1],
+      Home: [0, v],
+      End: [1, v],
+    };
+    const next = moves[event.key];
+    if (!next || disabled) return;
+    event.preventDefault();
+    onChange(clamp(next[0]), clamp(next[1]));
+  };
+
+  const percent = (n: number) => Math.round(n * 100);
+
+  return (
+    <div
+      ref={box}
+      className={merge("p:r h:36 w:100% ta:none", RADIUS.block[shape], disabled ? "" : "c:p")}
+      style={{
+        background: `linear-gradient(to top, #000, transparent), linear-gradient(to right, #fff, hsl(${hue} 100% 50%))`,
+      }}
+      onPointerDown={(event) => {
+        if (disabled) return;
+        event.currentTarget.setPointerCapture(event.pointerId);
+        fromPointer(event);
+        knob.current?.focus();
+      }}
+      onPointerMove={(event) => {
+        if (event.currentTarget.hasPointerCapture(event.pointerId))
+          fromPointer(event);
+      }}
+    >
+      <div
+        ref={knob}
+        role="slider"
+        tabIndex={disabled ? -1 : 0}
+        aria-label="Saturation and brightness"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={percent(s)}
+        aria-valuetext={`Saturation ${percent(s)}%, brightness ${percent(v)}%`}
+        aria-disabled={disabled || undefined}
+        onKeyDown={onKeyDown}
+        className={merge(
+          outline,
+          "p:a w:5 h:5 br:9999 bw:2 bc:white bs-o:key",
+        )}
+        style={{
+          left: `${s * 100}%`,
+          top: `${(1 - v) * 100}%`,
+          translate: "-50% -50%",
+          background: color,
+        }}
+      />
+    </div>
+  );
+}
+
 /**
- * A color from a hue slider, a row of nine shades and a hex field, every part a
- * Base UI control.
+ * A color, picked inline from a hue slider, nine shades and a hex field, or
+ * from a popover with a saturation and brightness area.
  */
 export default function ColorPicker({
   label,
   value: controlled,
   defaultValue,
   onValueChange,
+  variant = "inline",
+  swatches = SWATCHES,
   disabled = false,
+  container,
   shape: shapeProp,
   focus = true,
   className,
@@ -103,31 +341,168 @@ export default function ColorPicker({
     defaultValue ? normal(defaultValue) : shadesOf(290)[4],
   );
   const value = controlled !== undefined ? normal(controlled) : own;
-  const start = read(value) ?? { hue: 290, step: 4 };
-  const [hue, setHue] = useState(start.hue);
-  const [draft, setDraft] = useState<string | null>(null);
-  const shades = shadesOf(hue);
-
   const change = (next: string) => {
     if (controlled === undefined) setOwn(next);
     onValueChange?.(next);
   };
 
+  // inline: hue in OKLCH, so the nine shades step evenly in lightness
+  const [hue, setHue] = useState(() => read(value)?.hue ?? 290);
+  const shades = shadesOf(hue);
+
+  // popover: hue in HSV, kept apart so a gray does not lose it
+  const hsv = hsvOf(value);
+  const [hsvHue, setHsvHue] = useState(() => hsv.h ?? 260);
+  const shownHue = hsv.s > 0 && hsv.v > 0 && hsv.h !== undefined ? hsv.h : hsvHue;
+  const hsvHex = (h: number, s: number, v: number) =>
+    formatHex({ mode: "hsv", h, s, v });
+
+  const [dropper, setDropper] = useState(false);
+  useEffect(() => setDropper("EyeDropper" in window), []);
+
+  const typed = (next: string) => {
+    const seen = read(next);
+    if (seen) setHue(seen.hue);
+    const h = hsvOf(next).h;
+    if (h !== undefined) setHsvHue(h);
+    change(next);
+  };
+
+  const labelId = label ? `${id}-label` : undefined;
+  const heading = label && (
+    <span id={labelId} className="fs:sm fw:500 us:none">
+      {label}
+    </span>
+  );
+
+  if (variant === "popover") {
+    const drop = async () => {
+      try {
+        const picked = await new (
+          window as unknown as {
+            EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> };
+          }
+        ).EyeDropper().open();
+        typed(normal(formatHex(picked.sRGBHex) ?? value));
+      } catch {
+        // dismissed with Esc
+      }
+    };
+
+    return (
+      <div className={merge("d:f fd:c ai:fs g:2 c:label", disabled ? "o:60 c:na" : "", className)}>
+        {heading}
+        <Popover.Root>
+          <Popover.Trigger
+            disabled={disabled}
+            aria-label={`${label ?? "Color"}, ${value.toUpperCase()}`}
+            render={
+              <Button
+                className={merge(
+                  outline,
+                  "d:if ai:c g:2 h:9 pl:2 pr:3 bw:1 bg:raised bs-o:key bc:rim c:label ff:m fs:sm us:none c:p h:bg:well",
+                  RADIUS.control[shape],
+                )}
+              />
+            }
+          >
+            <span
+              aria-hidden
+              className={merge("w:5 h:5 bw:1 bc:black/10", RADIUS.chip[shape])}
+              style={{ background: value }}
+            />
+            {value.toUpperCase()}
+          </Popover.Trigger>
+          <Popover.Portal container={container}>
+            <Popover.Positioner sideOffset={8} align="start">
+              <Popover.Popup
+                className={merge(
+                  "d:f fd:c g:3 w:68 max-w:var(--available-width) p:3 bg:raised bc:line bw:1 c:label os:none bs-o:pop",
+                  "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none",
+                  RADIUS.popup[shape],
+                )}
+              >
+                <Area
+                  hue={shownHue}
+                  s={hsv.s}
+                  v={hsv.v}
+                  color={value}
+                  onChange={(s, v) => change(hsvHex(shownHue, s, v))}
+                  disabled={disabled}
+                  outline={outline}
+                  shape={shape}
+                />
+                <Hue
+                  value={Math.round(shownHue)}
+                  onChange={(next) => {
+                    setHsvHue(next);
+                    change(hsvHex(next, hsv.s, hsv.v));
+                  }}
+                  gradient={HSV_HUES}
+                  thumb={`hsl(${shownHue} 100% 50%)`}
+                  disabled={disabled}
+                  within={within}
+                />
+                <HexField
+                  value={value}
+                  onCommit={typed}
+                  outline={outline}
+                  shape={shape}
+                  disabled={disabled}
+                  extra={
+                    dropper && (
+                      <Button
+                        onClick={drop}
+                        aria-label="Pick a color from the screen"
+                        className={merge(
+                          outline,
+                          "d:f fs:0 ai:c jc:c w:9 h:9 p:0 bw:1 bg:raised bs-o:key bc:rim c:label c:p h:bg:well",
+                          RADIUS.control[shape],
+                        )}
+                      >
+                        <IconColorPicker aria-hidden className="w:4 h:4" />
+                      </Button>
+                    )
+                  }
+                />
+                {swatches.length > 0 && (
+                  <RadioGroup
+                    aria-label="Saved colors"
+                    value={swatches.map(normal).includes(value) ? value : ""}
+                    onValueChange={(next) => typed(String(next))}
+                    disabled={disabled}
+                    className="d:f fw:w g:2"
+                  >
+                    {swatches.map((swatch) => (
+                      <Radio.Root
+                        key={swatch}
+                        value={normal(swatch)}
+                        aria-label={swatch.toUpperCase()}
+                        className={(state) =>
+                          merge(
+                            outline,
+                            "w:7 h:7 p:0 bw:1 bc:black/10 c:p",
+                            RADIUS.chip[shape],
+                            state.checked ? "ow:2 os:s oo:2 oc:label" : "",
+                          )
+                        }
+                        style={{ background: swatch }}
+                      />
+                    ))}
+                  </RadioGroup>
+                )}
+              </Popover.Popup>
+            </Popover.Positioner>
+          </Popover.Portal>
+        </Popover.Root>
+      </div>
+    );
+  }
+
   const pickHue = (next: number) => {
     setHue(next);
     const at = shades.indexOf(value);
     change(shadesOf(next)[at === -1 ? (read(value)?.step ?? 4) : at]);
-  };
-
-  const commit = () => {
-    if (draft === null) return;
-    if (HEX.test(draft)) {
-      const next = normal(draft);
-      const seen = read(next);
-      if (seen) setHue(seen.hue);
-      change(next);
-    }
-    setDraft(null);
   };
 
   return (
@@ -138,38 +513,16 @@ export default function ColorPicker({
         className,
       )}
     >
-      {label && (
-        <span id={`${id}-label`} className="fs:sm fw:500 us:none">
-          {label}
-        </span>
-      )}
-
-      <Slider.Root
+      {heading}
+      <Hue
         value={hue}
-        onValueChange={(next) => pickHue(Number(next))}
-        min={0}
-        max={360}
+        onChange={pickHue}
+        gradient={OKLCH_HUES}
+        thumb={shades[4]}
         disabled={disabled}
-        aria-labelledby={label ? `${id}-label` : undefined}
-      >
-        <Slider.Control className="d:f ai:c py:2 us:none ta:none">
-          <Slider.Track
-            className="p:r h:3 w:100% br:9999 bs-o:sunk"
-            style={{ background: HUES }}
-          >
-            <Slider.Thumb
-              aria-label="Hue"
-              getAriaValueText={(_, next) => `${next} degrees`}
-              className={merge(
-                "w:5 h:5 br:9999 bw:2 bc:white bs-o:key",
-                within,
-              )}
-              style={{ background: shades[4] }}
-            />
-          </Slider.Track>
-        </Slider.Control>
-      </Slider.Root>
-
+        within={within}
+        labelledBy={labelId}
+      />
       <RadioGroup
         aria-label="Shade"
         value={shades.includes(value) ? value : ""}
@@ -194,27 +547,13 @@ export default function ColorPicker({
           />
         ))}
       </RadioGroup>
-
-      <Field.Root className="d:f ai:c g:2" disabled={disabled}>
-        <span
-          aria-hidden
-          className={merge("fs:0 w:9 h:9 bw:1 bc:black/10", RADIUS.control[shape])}
-          style={{ background: value }}
-        />
-        <Field.Label className="p:a w:px h:px o:h">Hex</Field.Label>
-        <Input
-          value={draft ?? value.toUpperCase()}
-          onChange={(event) => setDraft(event.target.value)}
-          onBlur={commit}
-          onKeyDown={(event) => event.key === "Enter" && commit()}
-          spellCheck={false}
-          className={merge(
-            outline,
-            "f:1 min-w:0 h:9 px:3 bw:1 bc:rim bg:field bs-o:sunk c:label ff:m fs:sm",
-            RADIUS.control[shape],
-          )}
-        />
-      </Field.Root>
+      <HexField
+        value={value}
+        onCommit={typed}
+        outline={outline}
+        shape={shape}
+        disabled={disabled}
+      />
     </div>
   );
 }

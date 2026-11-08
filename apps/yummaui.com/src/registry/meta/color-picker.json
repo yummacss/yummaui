@@ -1,5 +1,5 @@
 {
-  "summary": "A color from a hue slider, a row of nine shades and a hex field, every part a Base UI control.",
+  "summary": "A color, picked inline from a hue slider, nine shades and a hex field, or from a popover with a saturation and brightness area.",
   "props": [
     {
       "name": "label",
@@ -24,6 +24,22 @@
       "type": "none",
       "typeName": "(value: string) => void",
       "description": "Called with the new hex whenever the color changes."
+    },
+    {
+      "name": "swatches",
+      "type": "none",
+      "typeName": "string[]",
+      "description": "Colors one press away, under the hex field. Popover only."
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "values": [
+        "inline",
+        "popover"
+      ],
+      "default": "inline",
+      "description": "`inline` shows a hue slider, nine shades and a hex field in place. `popover` puts any color behind a swatch button: a saturation and brightness area, a hue slider, a hex field and `swatches`."
     },
     {
       "name": "shape",
@@ -54,6 +70,12 @@
       "typeName": "boolean | string",
       "default": true,
       "description": "The focus outline. `true` draws it, `false` removes it along with the danger, error and success tints that ride with it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the popup is rendered. Defaults to `document.body`, which is right almost always; pass an element to portal somewhere else, such as inside a frame or a container that owns its own stacking context."
     }
   ],
   "scene": [
