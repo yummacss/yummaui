@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **[components]** Color Picker takes `variant="popover"`: a swatch button opens a saturation and brightness area, a hue slider, a hex field with an eyedropper, and `swatches`.
+- **[components]** Tabs takes `children`: panels of your own after the list.
 
 ## [0.10.0] - 2026-11-08
 

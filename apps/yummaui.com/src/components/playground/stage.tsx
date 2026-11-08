@@ -1,12 +1,11 @@
 "use client";
 
-import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 import { Resizable } from "re-resizable";
-import type { ComponentType, ReactNode } from "react";
+import type { ComponentType } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
-import { Tabs, TabsPanel } from "@/components/tabs";
+import { TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
 import { Code, Gear, Globe } from "@/icons";
 import {
@@ -23,6 +22,7 @@ import {
 import { schemeCss } from "@/utils/scheme";
 import { buildConfig, buildScene, type Token } from "@/utils/snippet";
 import { Shape, type Shape as ShapeName } from "@/registry/ui/style";
+import YummaTabs from "@/registry/ui/tabs";
 import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
@@ -38,11 +38,6 @@ const LANGUAGE: Record<string, string> = {
 const PHONE = 392;
 const SNAP = [768];
 const SNAP_GAP = 24;
-
-const TOOL =
-	"d:f ai:c g:2 h:9 px:3 bw:0 bg:transparent fs:xs ff:m ws:nw c:p h:c:ink fv:os:s fv:ow:2 fv:oo:-2 fv:oc:accent";
-
-const DIVIDER = <span aria-hidden className="fs:0 w:0 h:4 blw:1 bc:border" />;
 
 export default function ComponentPlayground({
 	resizable = false,
@@ -144,125 +139,111 @@ export default function ComponentPlayground({
 
 	return (
 		<div className={`d:f fd:c mt:6 bg:page ${resizable ? "h:180" : "h:150"}`}>
-			<Tabs value={active} onValueChange={setTab} className={FILL}>
-				<div className="d:f ai:c bbw:1 bc:border bg:page">
-					<BaseTabs.List className="d:f ai:c min-w:0 ox:auto">
-						<FileTab value="preview" icon={<Globe className="w:4 h:4" />}>
-							Preview
-						</FileTab>
-						{DIVIDER}
-						<FileTab value="code" icon={<Code className="w:4 h:4" />}>
-							Code
-						</FileTab>
-						{config && (
-							<>
-								{DIVIDER}
-								<FileTab value="config" icon={<Gear className="w:4 h:4" />}>
-									Configuration
-								</FileTab>
-							</>
+			<YummaTabs
+				value={active}
+				onValueChange={setTab}
+				size="sm"
+				shape="pill"
+				icon
+				items={[
+					{
+						value: "preview",
+						label: "Preview",
+						icon: <Globe className="w:4 h:4" />,
+					},
+					{ value: "code", label: "Code", icon: <Code className="w:4 h:4" /> },
+					...(config
+						? [
+								{
+									value: "config",
+									label: "Configuration",
+									icon: <Gear className="w:4 h:4" />,
+								},
+							]
+						: []),
+				]}
+				className={`${FILL} p:r w:100% pt:1 px:1 bw:1 bc:border br:xl o:h bg:page`}
+			>
+				{resizable && active === "preview" && width !== null && (
+					<span className="p:a t:2 r:3 h:7 d:f ai:c c:ink/60 fs:xs ff:m fvn:tn">
+						{width}px
+					</span>
+				)}
+				{/* the panels sit under the tab row, edge to edge */}
+				<div className={`${FILL} mt:1 mx:-1 btw:1 bc:border`}>
+					<TabsPanel
+						value="preview"
+						className={resizable ? `${FILL} p:r bg:press` : FILL}
+					>
+						{resizable ? (
+							<Resizable
+								defaultSize={{ width: "100%", height: "100%" }}
+								minWidth={PHONE}
+								maxWidth="100%"
+								enable={{ right: true }}
+								snap={{ x: SNAP }}
+								snapGap={SNAP_GAP}
+								onResizeStart={() => setResizing(true)}
+								onResize={(_event, _direction, element) => track(element)}
+								onResizeStop={(_event, _direction, element) => {
+									setResizing(false);
+									track(element);
+								}}
+								// a phone has no room to drag, so the handle is a tablet & desktop thing
+								handleClasses={{ right: "d:none @md:d:b" }}
+								// the grip alone resizes, inset from the frame's edge
+								handleStyles={{
+									right: {
+										top: "50%",
+										right: 4,
+										width: 16,
+										height: 72,
+										marginTop: -36,
+										zIndex: 20,
+									},
+								}}
+								handleComponent={{
+									// the mobile navigation sheet's handle, stood upright
+									right: (
+										<span className="d:f ai:c jc:c w:100% h:100% c:er">
+											<span
+												className={`w:1 h:14 tp:c tdu:150 ${
+													resizing ? "bg:ink/40" : "bg:border"
+												}`}
+											/>
+										</span>
+									),
+								}}
+								className={`d:f fd:c bc:border ${narrowed ? "brw:1" : ""}`}
+							>
+								<div
+									className={`d:f fd:c f:1 min-h:0 ${resizing ? "pe:none" : ""}`}
+								>
+									{frame}
+								</div>
+							</Resizable>
+						) : (
+							frame
 						)}
-					</BaseTabs.List>
-					<div className="d:f ai:c jc:fe f:1">
-						{resizable && active === "preview" && width !== null && (
-							<span className="px:2 c:ink/60 fs:xs ff:m fvn:tn">{width}px</span>
-						)}
+					</TabsPanel>
+
+					<TabsPanel value="code" className={FILL}>
+						<TokenBlock tokens={usage} className={FILL} />
+					</TabsPanel>
+
+					{config && (
+						<TabsPanel value="config" className={FILL}>
+							<TokenBlock tokens={buildConfig(config)} className={FILL} />
+						</TabsPanel>
+					)}
+
+					<div className="d:f ai:c jc:sb h:6 px:3 btw:1 bc:border bg:page c:ink/60 fs:xs ff:m us:none">
+						<span>{getRegistryTarget(id).install}</span>
+						<span>{LANGUAGE[active]}</span>
 					</div>
 				</div>
-
-				<TabsPanel
-					value="preview"
-					className={resizable ? `${FILL} p:r bg:press` : FILL}
-				>
-					{resizable ? (
-						<Resizable
-							defaultSize={{ width: "100%", height: "100%" }}
-							minWidth={PHONE}
-							maxWidth="100%"
-							enable={{ right: true }}
-							snap={{ x: SNAP }}
-							snapGap={SNAP_GAP}
-							onResizeStart={() => setResizing(true)}
-							onResize={(_event, _direction, element) => track(element)}
-							onResizeStop={(_event, _direction, element) => {
-								setResizing(false);
-								track(element);
-							}}
-							// a phone has no room to drag, so the handle is a tablet & desktop thing
-							handleClasses={{ right: "d:none @md:d:b" }}
-							// the grip alone resizes, inset from the frame's edge
-							handleStyles={{
-								right: {
-									top: "50%",
-									right: 4,
-									width: 16,
-									height: 72,
-									marginTop: -36,
-									zIndex: 20,
-								},
-							}}
-							handleComponent={{
-								// the mobile navigation sheet's handle, stood upright
-								right: (
-									<span className="d:f ai:c jc:c w:100% h:100% c:er">
-										<span
-											className={`w:1 h:14 tp:c tdu:150 ${
-												resizing ? "bg:ink/40" : "bg:border"
-											}`}
-										/>
-									</span>
-								),
-							}}
-							className={`d:f fd:c bc:border ${narrowed ? "brw:1" : ""}`}
-						>
-							<div
-								className={`d:f fd:c f:1 min-h:0 ${resizing ? "pe:none" : ""}`}
-							>
-								{frame}
-							</div>
-						</Resizable>
-					) : (
-						frame
-					)}
-				</TabsPanel>
-
-				<TabsPanel value="code" className={FILL}>
-					<TokenBlock tokens={usage} className={FILL} />
-				</TabsPanel>
-
-				{config && (
-					<TabsPanel value="config" className={FILL}>
-						<TokenBlock tokens={buildConfig(config)} className={FILL} />
-					</TabsPanel>
-				)}
-
-				<div className="d:f ai:c jc:sb h:6 px:3 btw:1 bc:border bg:page c:ink/60 fs:xs ff:m us:none">
-					<span>{getRegistryTarget(id).install}</span>
-					<span>{LANGUAGE[active]}</span>
-				</div>
-			</Tabs>
+			</YummaTabs>
 		</div>
-	);
-}
-
-function FileTab({
-	value,
-	icon,
-	children,
-}: {
-	value: string;
-	icon: ReactNode;
-	children: ReactNode;
-}) {
-	return (
-		<BaseTabs.Tab
-			value={value}
-			className={(state) => `${TOOL} ${state.active ? "c:ink" : "c:ink/60"}`}
-			style={{ fontFamily: "inherit" }}
-		>
-			{icon}
-			{children}
-		</BaseTabs.Tab>
 	);
 }
 

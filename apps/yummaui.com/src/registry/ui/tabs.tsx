@@ -82,6 +82,11 @@ export interface TabsProps {
    * back fails WCAG 2.4.7.
    */
   focus?: boolean | string;
+  /**
+   * Panels of your own, from Base UI's `Tabs.Panel`, after the list in the same
+   * tabs, for panels laid out other than as cards.
+   */
+  children?: ReactNode;
 }
 
 /**
@@ -101,6 +106,7 @@ export default function TabsBase({
   animated = true,
   className,
   focus = true,
+  children,
 }: TabsProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
@@ -215,6 +221,7 @@ export default function TabsBase({
             {item.panel}
           </Tabs.Panel>
         ))}
+      {children}
     </Tabs.Root>
   );
 }
