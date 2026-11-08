@@ -118,6 +118,9 @@ importers:
 
   .:
     devDependencies:
+      '@yummacss/lint':
+        specifier: ^4.13.0
+        version: 4.13.0
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -2024,6 +2027,10 @@ packages:
 
   '@yummacss/core@4.13.0':
     resolution: {integrity: sha512-KDiBs2YxZu9dDJ8AqUoDziVGyqTvnkOYRqjK6GaWtR4WWsjV8c+aaCAAqJavsOaW4cK8ziBXo1Lj/oxCAOrHeg==}
+
+  '@yummacss/lint@4.13.0':
+    resolution: {integrity: sha512-CWIoBtrOFSyAomfOiTTgY9C52VSDbaak6uDCDvjEIFOFU/uWLtOcyppirnRT0tu+TrH6reTES9bGyL6ILYFwQQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
 
   '@yummacss/nitro@4.13.0':
     resolution: {integrity: sha512-kQ1wuyfmUSygF7pIaobbVTBtUSSZLBF58hwF805uBWZ8pYFJLyBhLLkVVkZT8aq3LADgB99cWejS/0JO4Dq4Tg==}
@@ -4392,6 +4399,11 @@ snapshots:
   '@yuku-toolchain/types@0.19.0': {}
 
   '@yummacss/core@4.13.0': {}
+
+  '@yummacss/lint@4.13.0':
+    dependencies:
+      '@yummacss/core': 4.13.0
+      '@yummacss/nitro': 4.13.0
 
   '@yummacss/nitro@4.13.0':
     dependencies:
