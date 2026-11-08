@@ -34,6 +34,13 @@ export const COMPONENT_PAGES = [
 			"List events down a line, each on a raised marker with when it happened.",
 	},
 	{
+		slug: "alert",
+		since: "0.12",
+		title: "Alert",
+		description:
+			"Tell people what happened, with a tone, an action & a close button.",
+	},
+	{
 		slug: "alert-dialog",
 		title: "Alert Dialog",
 		description:
@@ -77,6 +84,12 @@ export const COMPONENT_PAGES = [
 		title: "Button",
 		description: "Trigger actions with a single click, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "card",
+		since: "0.12",
+		title: "Card",
+		description: "Group a heading, content & actions in a raised panel.",
 	},
 	{
 		slug: "checkbox-group",

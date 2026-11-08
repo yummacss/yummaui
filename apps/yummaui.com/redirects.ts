@@ -1,12 +1,7 @@
-import { BLOCKS, GUIDES } from "./src/config/sidebar";
+import { GUIDES } from "./src/config/sidebar";
 import { pagePath } from "./src/utils/hosts";
 
 const uiRedirects = [
-	{
-		source: "/blocks/:slug(sidebar|sign-in)",
-		destination: "/docs/installation",
-		permanent: true,
-	},
 	{
 		source: "/components/money-input",
 		destination: "/components/currency-input",
@@ -123,24 +118,21 @@ export const redirects = [
 			permanent: true,
 		},
 	]),
+	// the blocks are gone: two removed, the rest moved to /components
+	...[
+		"/blocks/:slug(sidebar|sign-in)",
+		"/blocks/:slug(sidebar|sign-in).md",
+	].map((source) => ({
+		source,
+		destination: "/docs/installation",
+		permanent: true,
+	})),
+	{ source: "/blocks", destination: "/docs/installation", permanent: true },
 	{
-		source: "/blocks",
-		destination: `/blocks/${BLOCKS[0]}`,
-		permanent: false,
+		source: "/blocks/:path*",
+		destination: "/components/:path*",
+		permanent: true,
 	},
-	// the blocks sat beside the components before they moved to /blocks
-	...BLOCKS.flatMap((slug) => [
-		{
-			source: `/components/${slug}`,
-			destination: `/blocks/${slug}`,
-			permanent: true,
-		},
-		{
-			source: `/components/${slug}.md`,
-			destination: `/blocks/${slug}.md`,
-			permanent: true,
-		},
-	]),
 	...uiRedirects,
 	...removedComponents,
 ];

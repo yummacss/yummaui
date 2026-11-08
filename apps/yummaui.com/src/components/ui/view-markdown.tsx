@@ -8,7 +8,7 @@ export default function ViewMarkdown() {
 	const pathname = usePathname();
 	let mdPath = pathname.replace(/\/$/, "");
 
-	const page = mdPath.match(/^\/(components|blocks)\/([^/]+)$/);
+	const page = mdPath.match(/^\/(components)\/([^/]+)$/);
 	if (page) {
 		mdPath = `/${page[1]}/${page[2]}.md`;
 	} else if (mdPath.startsWith("/docs/") && mdPath !== "/docs") {

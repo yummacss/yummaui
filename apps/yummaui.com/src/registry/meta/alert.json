@@ -1,0 +1,88 @@
+{
+  "summary": "A message in a raised card, its tone shown on the icon tile, with an optional action and close button.",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "example": "Storage almost full",
+      "description": "The first line, in bold."
+    },
+    {
+      "name": "description",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "More detail under the title."
+    },
+    {
+      "name": "icon",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "A glyph in the tile, in place of the tone's own icon."
+    },
+    {
+      "name": "action",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "A button at the end, such as Upgrade."
+    },
+    {
+      "name": "onDismiss",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Shows a close button, and is called when it is pressed."
+    },
+    {
+      "name": "dismissLabel",
+      "type": "string",
+      "default": "Dismiss",
+      "description": "What the close button says to a screen reader."
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "values": [
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "info",
+      "description": "What the alert means; it colors the icon tile only."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the alert & its tile. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it along with the danger, error and success tints that ride with it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Alert",
+      "props": {
+        "title": "Storage almost full",
+        "description": "92% of 10 GB used.",
+        "tone": "warning"
+      },
+      "className": "w:112 max-w:100%"
+    }
+  ]
+}

@@ -1,11 +1,9 @@
 export interface SidebarSection {
 	title: string;
 	items: string[];
-	/** Its pages are blocks, under `/blocks`. */
-	area?: "blocks";
 }
 
-/** The guides, under `/docs`; blocks are under `/blocks`; every other page is a component under `/components`. */
+/** The guides, under `/docs`; every other page is a component under `/components`. */
 export const GUIDES = ["installation", "configuration", "customization"];
 
 export const sidebarConfig: SidebarSection[] = [
@@ -42,11 +40,14 @@ export const sidebarConfig: SidebarSection[] = [
 		items: [
 			"accordion",
 			"activity-timeline",
+			"alert",
 			"avatar",
 			"avatar-stack",
 			"badge",
 			"breadcrumb",
+			"card",
 			"code-block",
+			"inline-icon-heading",
 			"kbd",
 			"meter",
 			"preview-card",
@@ -83,14 +84,4 @@ export const sidebarConfig: SidebarSection[] = [
 			"theme-switcher",
 		],
 	},
-	{
-		title: "Marketing",
-		items: ["inline-icon-heading"],
-		area: "blocks",
-	},
 ];
-
-/** Every block, under `/blocks`. */
-export const BLOCKS = sidebarConfig
-	.filter((section) => section.area === "blocks")
-	.flatMap((section) => section.items);

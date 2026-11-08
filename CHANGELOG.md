@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **[components]** Card & Alert.
+
 ### Removed
 
 - **[components]** The Sidebar & Sign In blocks.
