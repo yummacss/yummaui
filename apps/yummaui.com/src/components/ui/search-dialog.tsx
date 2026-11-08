@@ -322,7 +322,6 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 								className="f:1 min-h:0 min-w:0"
 							>
 								<Glide
-									container={listRef}
 									selector="[data-search-item][data-selected]"
 									at={`${selectedIndex} ${category?.title} ${query} ${browsing}`}
 									className="bg:hover br:lg"

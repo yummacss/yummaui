@@ -221,7 +221,10 @@ export default function CodeBlock({
     return (
       <Tabs.Root value={tab} onValueChange={(next) => setTab(String(next))} className={frame}>
         <div className={`${header} pl:2`}>
-          <Tabs.List className="d:f ai:c g:1 min-w:0 ox:auto">
+          {/* the same well and sliding key as Tabs */}
+          <Tabs.List
+            className={merge("d:f p:r min-w:0 bg:well bs-o:sunk", RADIUS.bar[shape])}
+          >
             {tabs.map((item) => (
               <Tabs.Tab
                 key={item.label}
@@ -229,15 +232,26 @@ export default function CodeBlock({
                 className={(state) =>
                   merge(
                     outline,
-                    "fs:0 h:7 px:3 bw:0 fw:500 us:none c:p",
-                    state.active ? "bg:well c:label" : "bg:transparent c:hint h:c:label",
-                    RADIUS.item[shape],
+                    "p:r zi:10 fs:0 py:1 px:2 bw:0 bg:transparent fw:500 us:none c:p",
+                    state.active ? "c:label" : "c:hint h:c:label",
+                    RADIUS.control[shape],
                   )
                 }
               >
                 <span className="fs:xs">{item.label}</span>
               </Tabs.Tab>
             ))}
+            <Tabs.Indicator
+              className={merge(
+                "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim tp:a tdu:300 ttf:out-quart @prm:tp:none",
+                RADIUS.control[shape],
+              )}
+              style={{
+                translate: "var(--active-tab-left) var(--active-tab-top)",
+                width: "var(--active-tab-width)",
+                height: "var(--active-tab-height)",
+              }}
+            />
           </Tabs.List>
           {copyButton}
         </div>

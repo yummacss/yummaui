@@ -1,6 +1,6 @@
 "use client";
 
-import { type RefObject, useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 interface Box {
 	top: number;
@@ -10,26 +10,25 @@ interface Box {
 }
 
 /**
- * A highlight that slides to the item in `container` matching `selector`, as
+ * A highlight that slides to the item matching `selector` in its parent, as
  * Tabs' indicator does. It measures again whenever `at` changes.
  */
 export default function Glide({
-	container,
 	selector,
 	at,
 	className = "",
 }: {
-	container: RefObject<HTMLElement | null>;
 	selector: string;
 	at: unknown;
 	className?: string;
 }) {
+	const self = useRef<HTMLSpanElement>(null);
 	const [box, setBox] = useState<Box | null>(null);
 	// the first placement jumps, so the highlight never flies in from a corner
 	const [ready, setReady] = useState(false);
 
 	useLayoutEffect(() => {
-		const root = container.current;
+		const root = self.current?.parentElement;
 		if (!root) return;
 		const measure = () => {
 			const target = root.querySelector<HTMLElement>(selector);
@@ -46,8 +45,10 @@ export default function Glide({
 		measure();
 		const observer = new ResizeObserver(measure);
 		observer.observe(root);
+		const target = root.querySelector(selector);
+		if (target) observer.observe(target);
 		return () => observer.disconnect();
-	}, [container, selector, at]);
+	}, [selector, at]);
 
 	useEffect(() => {
 		if (!box) return setReady(false);
@@ -56,16 +57,20 @@ export default function Glide({
 		return () => cancelAnimationFrame(frame);
 	}, [box, ready]);
 
-	if (!box) return null;
 	return (
 		<span
+			ref={self}
 			aria-hidden
-			className={`p:a t:0 l:0 pe:none ${ready ? "tp:a tdu:300 ttf:out-quart @prm:tp:none" : ""} ${className}`}
-			style={{
-				transform: `translate(${box.left}px, ${box.top}px)`,
-				width: box.width,
-				height: box.height,
-			}}
+			className={`p:a t:0 l:0 pe:none ${ready ? "tp:a tdu:300 ttf:out-quart @prm:tp:none" : ""} ${box ? className : ""}`}
+			style={
+				box
+					? {
+							transform: `translate(${box.left}px, ${box.top}px)`,
+							width: box.width,
+							height: box.height,
+						}
+					: undefined
+			}
 		/>
 	);
 }

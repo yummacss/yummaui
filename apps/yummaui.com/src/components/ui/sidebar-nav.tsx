@@ -25,7 +25,6 @@ export default function SidebarNav({ sections }: Props) {
 				viewportClassName="p:r d:f fd:c g:8 mx:-3 px:3 pb:12"
 			>
 				<Glide
-					container={viewport}
 					selector="[data-glide]"
 					at={pathname}
 					className="bg:press br:9999"

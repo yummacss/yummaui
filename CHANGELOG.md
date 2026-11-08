@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** Color Picker takes `variant="popover"`: a swatch button opens a saturation and brightness area, a hue slider, a hex field with an eyedropper, and `swatches`.
 - **[components]** Tabs takes `children`: panels of your own after the list.
 
+### Changed
+
+- **[components]** Code Block's tabs sit in a well with a sliding key, as Tabs does.
+
 ## [0.10.0] - 2026-11-08
 
 ### Added
