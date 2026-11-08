@@ -7,19 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-11-08
+
 ### Added
 
-- Color Picker, with a hue slider, a row of shades and a hex field.
-- Code Block, with a file name or tabs, a copy button and marked lines, scrolling past `maxLines` or filling its container with `fill`.
+- Components: Activity Heatmap, Activity Timeline, Code Block, Color Picker, Currency Input, Expanding Input, Gauge, Keypad, Progress Timeline & Treemap.
+- Blocks: Sidebar & Sign In.
 - Dialog, Alert Dialog & Drawer take `open` and `onOpenChange`, and `trigger` is optional.
 - Drawer takes an element as `trigger`.
 - Avatar takes the `accent` tint.
-- An icon-only Button shows its countdown as a circle around the seconds.
-- Sidebar takes `focus`.
+- Button takes `countdown`, `countdownLabel` & `onCountdown`.
 - `Shape` sets the shape of every component inside it. Components share `style.tsx`, which `add` installs with them.
-- Two blocks: Sidebar and Sign In.
 - Menu takes an element as `trigger`, such as a `Button`, which keeps its own look.
-- Sidebar has the brand and a search field on top, and its user menu holds an account switcher and Sign out.
 - Inline Icon Heading takes its sentence as `parts`.
 - Onboarding takes the `pill` shape.
 - Combobox chips fade out when removed.
@@ -28,14 +27,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Meter defaults to the `neutral` intent, which follows the accent.
-- Sidebar opens its user menu from the arrow alone.
 - Select caps its popup at 18rem.
 - Dialog, Alert Dialog, Drawer & Toast draw their buttons with Button, which `add` installs with them.
 - `style.tsx` holds the size scale controls, fields and labels share.
-- Accordion, Checkbox, Checkbox Group, Combobox, Textarea & Scroll Area take every shape but `pill`; Meter takes `square` & `pill`.
 - Button Group joins its buttons in every shape, a menu trigger included.
 - Toggle Group has no padding around its toggles.
-- Every component takes all four shapes: `square`, `rounded`, `squircle` & `pill`. The `none` shape is named `square`; `--shape none` still works.
+- The shapes are `square`, `rounded`, `squircle` & `pill`; `none` is named `square`, and `--shape none` still works. Accordion, Checkbox, Checkbox Group, Combobox, Textarea & Scroll Area take every shape but `pill`, and Meter takes `square` & `pill`.
 - Soft key: every control is a key with a lighter top edge and a small drop, on violet-leaning grays with a charcoal fill. Needs Yumma CSS 4.12 or later.
 - `init` and `add` write the `theme.boxShadow` entries the components use.
 - Every component is rounded by default, at 8px for controls and 12px for menus and cards; Avatar stays a circle.
@@ -51,7 +48,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Badge is a pill by default, and its outline tone is a gray key whose dot carries a soft halo.
 - Shortcuts in menus and tooltips are plain text.
 - Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.
-- Sidebar marks the link you pick, and `onNavigate` reports it.
 - Drawer slides in, out and with a swipe on every side.
 - The colors `init` and `add` write are `oklch()`, which needs Yumma CSS 4.9 or later.
 - Components draw their icons from Tabler, `@tabler/icons-react`, in place of Solar.
@@ -65,7 +61,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Under `pill`, a Toolbar that wraps keeps round corners instead of turning into a capsule.
 - Under `pill`, Preview Card and Navigation Menu popups, Treemap tiles and Activity Timeline quotes keep soft corners instead of turning round.
-- Sidebar's links show their whole focus outline.
 - Combobox with chips opens its popup under the whole field.
 - Expanding Input keeps its border and focus outline while it opens.
 - Checkbox, Radio and Switch marks show on the light key in the dark scheme.
@@ -74,7 +69,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - `shape` on Avatar & Avatar Stack: avatars are round.
-- Sidebar's `workspaces` and `onWorkspaceChange`.
 - Empty State's `iconShape`.
 
 ## [0.9.0] - 2026-10-29
@@ -208,7 +202,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.9.0...HEAD
+[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/yummacss/yummaui/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/yummacss/yummaui/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/yummacss/yummaui/compare/v0.7.0...v0.8.0
 [0.7.0]: https://github.com/yummacss/yummaui/compare/v0.6.0...v0.7.0
