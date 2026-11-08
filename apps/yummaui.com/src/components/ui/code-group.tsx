@@ -32,8 +32,9 @@ export default function CodeGroup({ children }: { children?: ReactNode }) {
 	});
 
 	return (
-		<div className="my:4 cs:d">
-			<Block tabs={tabs} lineNumbers={false} />
+		<div className="my:4">
+			{/* pill tabs like the preview frame's; the card keeps its own corners */}
+			<Block tabs={tabs} lineNumbers={false} shape="pill" className="br:xl" />
 		</div>
 	);
 }

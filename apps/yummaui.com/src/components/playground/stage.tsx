@@ -5,9 +5,10 @@ import type { ComponentType } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
+import { BaseUI } from "@/components/icons/icons";
 import { TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
-import { Code, Gear, Globe } from "@/icons";
+import { Code, Globe, Settings2 } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -27,12 +28,6 @@ import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
 
-const LANGUAGE: Record<string, string> = {
-	preview: "Preview",
-	code: "TSX",
-	config: "JavaScript module",
-};
-
 // a resizable frame drags narrower from its right edge, down to a phone, and
 // snaps to a tablet
 const PHONE = 392;
@@ -41,9 +36,12 @@ const SNAP_GAP = 24;
 
 export default function ComponentPlayground({
 	resizable = false,
+	primitive = null,
 }: {
 	/** The frame drags narrower, for a whole screen region rather than one control. */
 	resizable?: boolean;
+	/** The Base UI part the component is built on, linked from the tab row. */
+	primitive?: string | null;
 }) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
@@ -157,18 +155,30 @@ export default function ComponentPlayground({
 								{
 									value: "config",
 									label: "Configuration",
-									icon: <Gear className="w:4 h:4" />,
+									icon: <Settings2 className="w:4 h:4" />,
 								},
 							]
 						: []),
 				]}
 				className={`${FILL} p:r w:100% pt:1 px:1 bw:1 bc:border br:xl o:h bg:page`}
 			>
-				{resizable && active === "preview" && width !== null && (
-					<span className="p:a t:2 r:3 h:7 d:f ai:c c:ink/60 fs:xs ff:m fvn:tn">
-						{width}px
-					</span>
-				)}
+				<div className="p:a t:1 r:2 h:calc(1.625rem) d:f ai:c g:3">
+					{resizable && active === "preview" && width !== null && (
+						<span className="c:ink/60 fs:xs ff:m fvn:tn">{width}px</span>
+					)}
+					{primitive && (
+						<a
+							href={`https://base-ui.com/react/components/${primitive}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Built on Base UI"
+							className="d:f ai:c g:2 px:2 c:ink/60 fs:sm td:none h:c:ink fv:oc:ink fv:ow:2"
+						>
+							<BaseUI aria-hidden className="w:4 h:4" />
+							<span className="d:none @sm:d:i">Built on Base UI</span>
+						</a>
+					)}
+				</div>
 				{/* the panels sit under the tab row, edge to edge */}
 				<div className={`${FILL} mt:1 mx:-1 btw:1 bc:border`}>
 					<TabsPanel
@@ -236,11 +246,6 @@ export default function ComponentPlayground({
 							<TokenBlock tokens={buildConfig(config)} className={FILL} />
 						</TabsPanel>
 					)}
-
-					<div className="d:f ai:c jc:sb h:6 px:3 btw:1 bc:border bg:page c:ink/60 fs:xs ff:m us:none">
-						<span>{getRegistryTarget(id).install}</span>
-						<span>{LANGUAGE[active]}</span>
-					</div>
 				</div>
 			</YummaTabs>
 		</div>

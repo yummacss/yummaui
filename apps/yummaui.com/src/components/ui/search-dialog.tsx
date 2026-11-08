@@ -5,6 +5,7 @@ import { Dialog } from "@base-ui/react/dialog";
 import { Input } from "@base-ui/react/input";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Glide from "@/components/ui/glide";
 import Scroller from "@/components/ui/scroller";
 import {
 	LongArrowDownLeftSolid,
@@ -32,7 +33,8 @@ interface SearchDialogProps {
 	onClose: () => void;
 }
 
-const KBD = "d:if ai:c jc:c h:5 px:2 br:9999 bc:border bw:1 c:ink/60 fs:xs";
+const KBD =
+	"d:if ai:c jc:c h:5 px:2 br:9999 bc:border bw:1 bg:surface bs-o:key c:ink/60 fs:xs c:p h:bg:hover h:c:ink a:bg:press fv:oc:ink fv:ow:2";
 const LABEL = "px:3 py:1 c:ink/60 fs:xs ls:2 tt:u";
 
 /** The highlighted page's details, shown once, on the right. */
@@ -201,6 +203,16 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 		],
 	);
 
+	// the footer's keys are buttons too, pressing the key they show
+	const press = (key: string) => {
+		handleKeyDown({
+			key,
+			target: null,
+			preventDefault: () => {},
+		} as unknown as React.KeyboardEvent);
+		inputRef.current?.focus();
+	};
+
 	useEffect(() => {
 		if (listRef.current && rows.length > 0) {
 			const items = listRef.current.querySelectorAll("[data-search-item]");
@@ -210,8 +222,8 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 	}, [selectedIndex, rows.length]);
 
 	const highlighted = current;
-	const rowClass = (selected: boolean) =>
-		`d:f b:0 ai:c g:3 w:100% px:3 py:2 br:lg ta:l c:p ${selected ? "bg:hover" : "bg:transparent"}`;
+	const rowClass =
+		"p:r d:f b:0 ai:c g:3 w:100% px:3 py:2 br:lg ta:l c:p bg:transparent";
 
 	// the word set huge at the foot of the right side
 	const wash = highlighted?.title;
@@ -234,7 +246,8 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 					choose(item);
 				}}
 				onMouseEnter={() => setSelectedIndex(current)}
-				className={rowClass(selected)}
+				data-selected={selected || undefined}
+				className={rowClass}
 			>
 				<span className="d:f f:1 min-w:0 ai:b g:3">
 					<span className="fs:0 c:ink fs:md ws:nw">
@@ -256,7 +269,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 	return (
 		<Dialog.Root open={open} onOpenChange={(isOpen) => !isOpen && onClose()}>
 			<Dialog.Portal>
-				<Dialog.Backdrop className="tp:o tdu:150 ttf:eo opening:o:0 closing:o:0 @prm:tp:none p:f zi:10 t:0 l:0 r:0 b:0 bg:black/60 bf-b:sm fgr:90" />
+				<Dialog.Backdrop className="tp:o tdu:150 ttf:eo opening:o:0 closing:o:0 @prm:tp:none p:f zi:10 t:0 l:0 r:0 b:0 bg:black/30 bf-b:xs fgr:90" />
 				<div className="d:f p:f zi:10 t:0 l:0 r:0 b:0 ai:fs jc:c pe:none @md:pt:24">
 					<Dialog.Popup
 						data-chrome
@@ -296,7 +309,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 							/>
 							<Dialog.Close
 								aria-label="Close search"
-								className="d:if fs:0 ai:c jc:c h:6 px:3 br:9999 bc:border bg:transparent c:ink/60 bw:1 fs:xs fv:oc:ink fv:ow:2"
+								className="d:if fs:0 ai:c jc:c h:6 px:3 br:9999 bc:border bg:surface bs-o:key c:ink/60 bw:1 fs:xs c:p h:bg:hover h:c:ink a:bg:press fv:oc:ink fv:ow:2"
 							>
 								Esc
 							</Dialog.Close>
@@ -305,9 +318,14 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 						<div className="d:f f:1 min-h:0">
 							<Scroller
 								viewportRef={listRef}
-								viewportClassName="px:2 py:2"
+								viewportClassName="p:r px:2 py:2"
 								className="f:1 min-h:0 min-w:0"
 							>
+								<Glide
+									selector="[data-search-item][data-selected]"
+									at={`${selectedIndex} ${category?.title} ${query} ${browsing}`}
+									className="bg:hover br:lg"
+								/>
 								{browsing &&
 									categories.map((section, at) => {
 										const selected = selectedIndex === at;
@@ -321,7 +339,8 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 														enter(section);
 													}}
 													onMouseEnter={() => setSelectedIndex(at)}
-													className={rowClass(selected)}
+													data-selected={selected || undefined}
+													className={rowClass}
 												>
 													<span className="f:1 c:ink fs:md">
 														{section.title}
@@ -405,35 +424,55 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 						{/* keys to press, so only where a keyboard is likely: the navbar's Ctrl K hint shows from the same width */}
 						<div className="d:none fs:0 ai:c g:4 px:4 h:10 bc:border c:ink/60 btw:1 fs:xs @lg:d:f">
 							<span className="d:f ai:c g:1">
-								<kbd className={KBD}>
-									<NavArrowUp className="w:3 h:3" />
-								</kbd>
-								<kbd className={KBD}>
-									<NavArrowDown className="w:3 h:3" />
-								</kbd>
+								<Button
+									aria-label="Move up"
+									onClick={() => press("ArrowUp")}
+									className={KBD}
+								>
+									<NavArrowUp aria-hidden className="w:3 h:3" />
+								</Button>
+								<Button
+									aria-label="Move down"
+									onClick={() => press("ArrowDown")}
+									className={KBD}
+								>
+									<NavArrowDown aria-hidden className="w:3 h:3" />
+								</Button>
 								<span className="ml:1">to move</span>
 							</span>
 							{browsing && (
 								<span className="d:f ai:c g:1">
-									<kbd className={KBD}>
-										<NavArrowRight className="w:3 h:3" />
-									</kbd>
+									<Button
+										aria-label="Open the category"
+										onClick={() => press("ArrowRight")}
+										className={KBD}
+									>
+										<NavArrowRight aria-hidden className="w:3 h:3" />
+									</Button>
 									<span className="ml:1">to open a category</span>
 								</span>
 							)}
 							{category && !searching && (
 								<span className="d:f ai:c g:1">
-									<kbd className={KBD}>
-										<NavArrowLeft className="w:3 h:3" />
-									</kbd>
+									<Button
+										aria-label="Go back"
+										onClick={() => press("ArrowLeft")}
+										className={KBD}
+									>
+										<NavArrowLeft aria-hidden className="w:3 h:3" />
+									</Button>
 									<span className="ml:1">to go back</span>
 								</span>
 							)}
 							{!browsing && (
 								<span className="d:f ai:c g:1">
-									<kbd className={KBD}>
-										<LongArrowDownLeftSolid className="w:3 h:3" />
-									</kbd>
+									<Button
+										aria-label="Open the page"
+										onClick={() => press("Enter")}
+										className={KBD}
+									>
+										<LongArrowDownLeftSolid aria-hidden className="w:3 h:3" />
+									</Button>
 									<span className="ml:1">to open</span>
 								</span>
 							)}

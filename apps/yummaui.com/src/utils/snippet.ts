@@ -1,5 +1,6 @@
 import type { ChildExample } from "@/registry";
 import { importPath } from "@/utils/install.mjs";
+import { CHARCOAL } from "@/themes/charcoal";
 
 export type PropValue = string | boolean | number;
 
@@ -27,19 +28,22 @@ export interface Token {
 
 type Draft = Omit<Token, "id">;
 
+const tone = (role: keyof typeof CHARCOAL) =>
+	`light-dark(${CHARCOAL[role][0]}, ${CHARCOAL[role][1]})`;
+
 export const TOKEN_COLORS: Record<TokenKind, string> = {
-	command: "#F5FAFF",
-	argument: "#BEC6F2",
-	flag: "#DDA2F6",
-	keyword: "#9595E3",
-	punctuation: "#B9BED5",
-	tag: "#85B1E0",
-	attribute: "#DDA2F6",
-	operator: "#93DDFB",
-	string: "#BEC6F2",
-	brace: "#9595E3",
-	value: "#DDA2F6",
-	text: "#B9BED5",
+	command: tone("name"),
+	argument: tone("string"),
+	flag: tone("attribute"),
+	keyword: tone("keyword"),
+	punctuation: tone("muted"),
+	tag: tone("name"),
+	attribute: tone("attribute"),
+	operator: tone("muted"),
+	string: tone("string"),
+	brace: tone("keyword"),
+	value: tone("string"),
+	text: tone("text"),
 };
 
 function identify(tokens: Draft[]): Token[] {

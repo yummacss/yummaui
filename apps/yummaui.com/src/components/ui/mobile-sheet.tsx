@@ -106,7 +106,9 @@ export default function MobileSheet({ menu, isOpen, onClose }: Props) {
 								{!typed && (
 									<ProductLinks
 										heading="mb:2 px:7 c:ink/60 fs:sm fw:400"
-										link="p:r d:f ai:c g:2 h:10 px:7 fs:md us:none a:bg:surface fv:oc:ink fv:oo:-2 fv:ow:2"
+										link="p:r d:f ai:c g:2 h:10 fs:md us:none a:bg:surface fv:oc:ink fv:oo:-2 fv:ow:2"
+										idle="px:7 c:ink/80 h:td:u"
+										active="mx:3 px:4 br:9999 bg:press c:ink fw:500"
 										onNavigate={onClose}
 									/>
 								)}

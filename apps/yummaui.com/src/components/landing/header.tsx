@@ -15,7 +15,7 @@ const preloadSearch = () => {
 };
 
 const SQUARE =
-	"d:f ai:c jc:c w:9 h:9 br:9999 bc:border bg:surface a:bg:press c:ink bw:1 fv:oc:ink fv:ow:2";
+	"d:f ai:c jc:c w:9 h:9 br:9999 bc:border bg:surface bs-o:key h:bg:hover a:bg:press c:ink bw:1 fv:oc:ink fv:ow:2";
 
 /** The landing page's bar: the logo, search, GitHub and Install, with no links in between. */
 export default function LandingHeader() {

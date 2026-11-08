@@ -33,13 +33,13 @@ export default function TokenBlock({
 
 	// the panel is the frame, so the block drops its own edge
 	return (
-		<div className={`cs:d ${className}`}>
+		<div className={className}>
 			<Block
 				code={tokensToText(tokens)}
 				lines={lines}
 				lineNumbers={rows.length > 3}
 				fill
-				className="bw:0 br:0 bg:surface"
+				className="bw:0 br:0 bs-o:none bg:surface"
 			/>
 		</div>
 	);

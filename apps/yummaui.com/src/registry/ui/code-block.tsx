@@ -27,6 +27,8 @@ export interface CodeBlockProps {
   lines?: ReactNode[];
   /** A file name in the header, beside a file icon. */
   title?: string;
+  /** A glyph before `title`, in place of the file icon. */
+  icon?: ReactNode;
   /** Versions of the same snippet, one per tab, such as package managers. */
   tabs?: CodeBlockTab[];
   /** Lines to mark, counting from 1. */
@@ -154,6 +156,7 @@ export default function CodeBlock({
   code = "",
   lines,
   title,
+  icon,
   tabs,
   highlightLines,
   lineNumbers = true,
@@ -221,7 +224,10 @@ export default function CodeBlock({
     return (
       <Tabs.Root value={tab} onValueChange={(next) => setTab(String(next))} className={frame}>
         <div className={`${header} pl:2`}>
-          <Tabs.List className="d:f ai:c g:1 min-w:0 ox:auto">
+          {/* the same well and sliding key as Tabs */}
+          <Tabs.List
+            className={merge("d:f p:r min-w:0 bg:well bs-o:sunk", RADIUS.bar[shape])}
+          >
             {tabs.map((item) => (
               <Tabs.Tab
                 key={item.label}
@@ -229,15 +235,26 @@ export default function CodeBlock({
                 className={(state) =>
                   merge(
                     outline,
-                    "fs:0 h:7 px:3 bw:0 fw:500 us:none c:p",
-                    state.active ? "bg:well c:label" : "bg:transparent c:hint h:c:label",
-                    RADIUS.item[shape],
+                    "p:r zi:10 d:f ai:c fs:0 py:1 px:2 bw:0 bg:transparent fw:500 us:none c:p",
+                    state.active ? "c:label" : "c:hint h:c:label",
+                    RADIUS.control[shape],
                   )
                 }
               >
                 <span className="fs:xs">{item.label}</span>
               </Tabs.Tab>
             ))}
+            <Tabs.Indicator
+              className={merge(
+                "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim tp:a tdu:300 ttf:out-quart @prm:tp:none",
+                RADIUS.control[shape],
+              )}
+              style={{
+                translate: "var(--active-tab-left) var(--active-tab-top)",
+                width: "var(--active-tab-width)",
+                height: "var(--active-tab-height)",
+              }}
+            />
           </Tabs.List>
           {copyButton}
         </div>
@@ -265,7 +282,7 @@ export default function CodeBlock({
       {title ? (
         <div className={`${header} pl:4`}>
           <span className="d:f ai:c g:2 min-w:0 fs:sm fw:500">
-            <IconFile aria-hidden className="w:4 h:4 c:hint" />
+            {icon ?? <IconFile aria-hidden className="w:4 h:4 c:hint" />}
             <span className="o:h to:e ws:nw">{title}</span>
           </span>
           {copyButton}

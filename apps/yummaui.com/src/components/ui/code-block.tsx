@@ -1,5 +1,6 @@
 import { parseRanges } from "@/lib/code-decorate.mjs";
 import { highlightLines } from "@/lib/highlighter";
+import { YummaMark } from "@/components/icons/yumma-logo";
 import Block from "@/registry/ui/code-block";
 
 interface Props {
@@ -22,14 +23,20 @@ export function linesOf(
 	));
 }
 
-// Eclipsa is dark only, so the block stays dark until the theme has a light side
 export default function CodeBlock({ code = "", meta, title, lang }: Props) {
 	const text = code.replace(/\n$/, "");
 	const lines = linesOf(text, lang, meta, title);
 
 	return (
-		<div className="my:4 cs:d">
+		<div className="my:4">
 			<Block
+				shape="pill"
+				icon={
+					title?.startsWith("yumma") ? (
+						<YummaMark aria-hidden className="w:4 h:4" />
+					) : undefined
+				}
+				className="br:xl"
 				code={text}
 				lines={lines}
 				title={title}

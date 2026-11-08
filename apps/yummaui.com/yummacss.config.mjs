@@ -16,7 +16,7 @@ export default defineConfig({
 			"mark-back": { light: "#c9c6d2", dark: "#4a4852" },
 			"mark-front": { light: "#24222a", dark: "#e6e5ea" },
 			border: { light: "oklch(0.905 0.006 286)", dark: "oklch(0.3 0.008 290)" },
-			code: { light: "#3e4a80", dark: "#dda2f6" },
+			code: { light: "#3a3a3f", dark: "#d0d0d5" },
 			ink: { light: "#14171f", dark: "#ffffff" },
 			hover: { light: "oklch(0.955 0.004 286)", dark: "oklch(0.2 0.007 290)" },
 			page: { light: "oklch(0.982 0.002 286)", dark: "oklch(0.165 0.006 290)" },
