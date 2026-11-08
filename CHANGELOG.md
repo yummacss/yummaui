@@ -11,65 +11,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Components: Activity Heatmap, Activity Timeline, Code Block, Color Picker, Currency Input, Expanding Input, Gauge, Keypad, Progress Timeline & Treemap.
-- Blocks: Sidebar & Sign In.
-- Dialog, Alert Dialog & Drawer take `open` and `onOpenChange`, and `trigger` is optional.
-- Drawer takes an element as `trigger`.
-- Avatar takes the `accent` tint.
-- Button takes `countdown`, `countdownLabel` & `onCountdown`.
-- `Shape` sets the shape of every component inside it. Components share `style.tsx`, which `add` installs with them.
-- Menu takes an element as `trigger`, such as a `Button`, which keeps its own look.
-- Inline Icon Heading takes its sentence as `parts`.
-- Onboarding takes the `pill` shape.
-- Combobox chips fade out when removed.
-- Select takes `ariaLabel`, and an `icon` per option.
+- **[components]** Activity Heatmap, Activity Timeline, Code Block, Color Picker, Currency Input, Expanding Input, Gauge, Keypad, Progress Timeline & Treemap.
+- **[components]** Two blocks: Sidebar & Sign In.
+- **[components]** `Shape` sets the shape of every component inside it.
+- **[components]** Dialog, Alert Dialog & Drawer take `open` and `onOpenChange`, and `trigger` is optional.
+- **[components]** Drawer and Menu take an element as `trigger`, which keeps its own look.
+- **[components]** Button takes `countdown`, `countdownLabel` & `onCountdown`.
+- **[components]** Avatar takes the `accent` tint.
+- **[components]** Select takes `ariaLabel`, and an `icon` per option.
+- **[components]** Inline Icon Heading takes its sentence as `parts`.
+- **[components]** Onboarding takes the `pill` shape.
+- **[components]** Combobox chips fade out when removed.
+- **[cli]** `add` installs `style.tsx`, which every component shares, and Button with Dialog, Alert Dialog, Drawer & Toast.
 
 ### Changed
 
-- Meter defaults to the `neutral` intent, which follows the accent.
-- Select caps its popup at 18rem.
-- Dialog, Alert Dialog, Drawer & Toast draw their buttons with Button, which `add` installs with them.
-- `style.tsx` holds the size scale controls, fields and labels share.
-- Button Group joins its buttons in every shape, a menu trigger included.
-- Toggle Group has no padding around its toggles.
-- The shapes are `square`, `rounded`, `squircle` & `pill`; `none` is named `square`, and `--shape none` still works. Accordion, Checkbox, Checkbox Group, Combobox, Textarea & Scroll Area take every shape but `pill`, and Meter takes `square` & `pill`.
-- Soft key: every control is a key with a lighter top edge and a small drop, on violet-leaning grays with a charcoal fill. Needs Yumma CSS 4.12 or later.
-- `init` and `add` write the `theme.boxShadow` entries the components use.
-- Every component is rounded by default, at 8px for controls and 12px for menus and cards; Avatar stays a circle.
-- Components draw Tabler's outline icons.
-- Menus, listboxes and File Tree highlight in a soft gray.
-- Menu, Context Menu, Menubar & listbox items share one height.
-- Toast shakes as a whole on a repeated attempt.
-- Tooltips are smaller.
-- Rating draws filled stars.
-- Tabs have no padding around their items.
-- Checkbox rows in Checkbox Group follow `shape`.
-- File Tree keeps an item's icon color when it is picked.
-- Badge is a pill by default, and its outline tone is a gray key whose dot carries a soft halo.
-- Shortcuts in menus and tooltips are plain text.
-- Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.
-- Drawer slides in, out and with a swipe on every side.
-- The colors `init` and `add` write are `oklch()`, which needs Yumma CSS 4.9 or later.
-- Components draw their icons from Tabler, `@tabler/icons-react`, in place of Solar.
-- Spinners and skeletons use `aic:i`, and pressed controls `wc:s`, which need Yumma CSS 4.10 or later.
-- Pressed controls scale to 97%, focus outlines grow in, and avatars carry `bi-lg:b`, which need Yumma CSS 4.11 or later.
-- Every control is at least 24px to click: chip removes, the password toggle and breadcrumb links.
-- Combobox outlines its whole field on focus, not the input inside it.
-- `init` and `add` write `yummacss.config.mjs`, or `yumma.config.mjs` where a project already has one or an older Yumma CSS.
-
-### Fixed
-
-- Under `pill`, a Toolbar that wraps keeps round corners instead of turning into a capsule.
-- Under `pill`, Preview Card and Navigation Menu popups, Treemap tiles and Activity Timeline quotes keep soft corners instead of turning round.
-- Combobox with chips opens its popup under the whole field.
-- Expanding Input keeps its border and focus outline while it opens.
-- Checkbox, Radio and Switch marks show on the light key in the dark scheme.
-- Switch, Slider, Progress, Meter & Storage Bar tracks are visible on a white page.
+- **[components]** Soft key: every control is a key with a lighter top edge and a small drop, on violet-leaning grays with a charcoal fill. Needs Yumma CSS 4.12 or later.
+- **[components]** Every component is rounded by default, at 8px for controls and 12px for menus and cards; Avatar stays a circle.
+- **[components]** The shapes are `square`, `rounded`, `squircle` & `pill`; `none` is named `square`, and `--shape none` still works. Accordion, Checkbox, Checkbox Group, Combobox, Textarea & Scroll Area take every shape but `pill`, and Meter takes `square` & `pill`.
+- **[components]** Icons come from Tabler's outline set, `@tabler/icons-react`, in place of Solar.
+- **[components]** Dialog, Alert Dialog, Drawer & Toast draw their buttons with Button.
+- **[components]** `style.tsx` holds the size scale controls, fields and labels share.
+- **[components]** Meter defaults to the `neutral` intent, which follows the accent.
+- **[components]** Select caps its popup at 18rem.
+- **[components]** Button Group joins its buttons in every shape, a menu trigger included.
+- **[components]** Toggle Group and Tabs have no padding around their items.
+- **[components]** Menus, listboxes and File Tree highlight in a soft gray, and Menu, Context Menu, Menubar & listbox items share one height.
+- **[components]** Toast shakes as a whole on a repeated attempt.
+- **[components]** Tooltips are smaller.
+- **[components]** Rating draws filled stars.
+- **[components]** Checkbox rows in Checkbox Group follow `shape`.
+- **[components]** File Tree keeps an item's icon color when it is picked.
+- **[components]** Badge is a pill by default, and its outline tone is a gray key whose dot carries a soft halo.
+- **[components]** Shortcuts in menus and tooltips are plain text.
+- **[components]** Autocomplete and Combobox have no default `placeholder` or `emptyMessage`.
+- **[components]** Drawer slides in, out and with a swipe on every side.
+- **[components]** Spinners and skeletons use `aic:i`, and pressed controls `wc:s`, which need Yumma CSS 4.10 or later.
+- **[components]** Pressed controls scale to 97%, focus outlines grow in, and avatars carry `bi-lg:b`, which need Yumma CSS 4.11 or later.
+- **[components]** Every control is at least 24px to click: chip removes, the password toggle and breadcrumb links.
+- **[components]** Combobox outlines its whole field on focus, not the input inside it.
+- **[cli]** `init` and `add` write `yummacss.config.mjs`, or `yumma.config.mjs` where a project already has one or an older Yumma CSS.
+- **[cli]** `init` and `add` write the `theme.boxShadow` entries the components use.
+- **[cli]** The colors `init` and `add` write are `oklch()`, which needs Yumma CSS 4.9 or later.
 
 ### Removed
 
-- `shape` on Avatar & Avatar Stack: avatars are round.
-- Empty State's `iconShape`.
+- **[components]** `shape` on Avatar & Avatar Stack: avatars are round.
+- **[components]** Empty State's `iconShape`.
+
+### Fixed
+
+- **[components]** Under `pill`, Preview Card and Navigation Menu popups, Treemap tiles, Activity Timeline quotes and a Toolbar that wraps keep soft corners instead of turning into capsules.
+- **[components]** Combobox with chips opens its popup under the whole field.
+- **[components]** Expanding Input keeps its border and focus outline while it opens.
+- **[components]** Checkbox, Radio and Switch marks show on the light key in the dark scheme.
+- **[components]** Switch, Slider, Progress, Meter & Storage Bar tracks are visible on a white page.
 
 ## [0.9.0] - 2026-10-29
 
