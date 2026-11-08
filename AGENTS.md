@@ -31,6 +31,13 @@
 - The site holds its own copy in `apps/yummaui.com/tests/copywriting.test.ts`,
   run over its pages. Each package owns its rules rather than importing them.
 
+# Focus
+
+- The order of work is the notes' `docs/TODO.md`, phase by phase. Before
+  starting an idea that is not on it, say in one line which listed item it
+  pushes back, and start only on a yes.
+- A new idea goes on the list first; building it waits for its turn.
+
 # Working
 
 - PRs, never direct commits to `main`.

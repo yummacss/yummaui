@@ -12,6 +12,7 @@
 		"test": "vp run -r test"
 	},
 	"devDependencies": {
+		"@yummacss/lint": "^4.13.0",
 		"typescript": "^5.9.3",
 		"vite-plus": "catalog:"
 	},

@@ -9,8 +9,23 @@ export default defineConfig({
 		ignorePatterns: ["apps/yummaui.com/src/registry/**"],
 	},
 	lint: {
-		jsPlugins: [{ name: "vite-plus", specifier: "vite-plus/oxlint-plugin" }],
+		jsPlugins: [
+			{ name: "vite-plus", specifier: "vite-plus/oxlint-plugin" },
+			{ name: "yummacss", specifier: "@yummacss/lint" },
+		],
 		rules: { "vite-plus/prefer-vite-plus-imports": "error" },
+		overrides: [
+			{
+				files: ["apps/yummaui.com/**"],
+				rules: {
+					// the site's own stylesheet defines it
+					"yummacss/no-unknown-classes": [
+						"error",
+						{ allow: ["footer-version"] },
+					],
+				},
+			},
+		],
 		options: { typeAware: true, typeCheck: true },
 	},
 });
