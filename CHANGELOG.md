@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** Color Picker takes `variant="popover"`: a swatch button opens a saturation and brightness area, a hue slider, a hex field with an eyedropper, and `swatches`.
 - **[components]** Tabs takes `children`: panels of your own after the list.
 - **[components]** Code Block takes `icon`, a glyph before `title` in place of the file icon.
+- **[components]** Color Picker takes `opacity`: an opacity slider in the popover, with 8-digit hex below 100%.
 
 ### Changed
 

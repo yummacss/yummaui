@@ -75,6 +75,28 @@ function hsvOf(hex: string): { h?: number; s: number; v: number } {
 }
 
 const HEX = /^#?[0-9a-f]{6}$/i;
+const HEX_ALPHA = /^#?[0-9a-f]{6}([0-9a-f]{2})?$/i;
+// a checkerboard under a see-through color
+const CHECKER = "repeating-conic-gradient(#d8d8de 0 25%, #fff 0 50%) 0 0 / 8px 8px";
+
+/** The color without its opacity digits, and the opacity from 0 to 1. */
+function split(hex: string): { base: string; alpha: number } {
+  const digits = hex.replace("#", "");
+  return {
+    base: `#${digits.slice(0, 6)}`,
+    alpha: digits.length === 8 ? Number.parseInt(digits.slice(6), 16) / 255 : 1,
+  };
+}
+
+/** A hex with two opacity digits, or six when it is opaque. */
+function join(base: string, alpha: number): string {
+  if (alpha >= 1) return base;
+  return `${base}${Math.round(alpha * 255).toString(16).padStart(2, "0")}`;
+}
+
+/** A see-through color drawn over a checkerboard, so its opacity shows. */
+const fillOf = (hex: string) =>
+  split(hex).alpha < 1 ? `linear-gradient(${hex}, ${hex}), ${CHECKER}` : hex;
 const normal = (hex: string) => `#${hex.replace("#", "").toLowerCase()}`;
 const clamp = (n: number) => Math.min(1, Math.max(0, n));
 
@@ -100,6 +122,11 @@ export interface ColorPickerProps {
   variant?: Variant;
   /** Colors one press away, under the hex field. Popover only. */
   swatches?: string[];
+  /**
+   * An opacity slider under the hue slider. Below 100% the value carries two
+   * more hex digits, as in `#5b4bdb80`. Popover only.
+   */
+  opacity?: boolean;
   /** Blocks every part of the picker & dims it. */
   disabled?: boolean;
   /**
@@ -135,7 +162,9 @@ function HexField({
   shape,
   disabled,
   extra,
+  alpha = false,
 }: {
+  alpha?: boolean;
   value: string;
   onCommit: (hex: string) => void;
   outline: string;
@@ -145,7 +174,8 @@ function HexField({
 }) {
   const [draft, setDraft] = useState<string | null>(null);
   const commit = () => {
-    if (draft !== null && HEX.test(draft)) onCommit(normal(draft));
+    if (draft !== null && (alpha ? HEX_ALPHA : HEX).test(draft))
+      onCommit(normal(draft));
     setDraft(null);
   };
 
@@ -154,7 +184,7 @@ function HexField({
       <span
         aria-hidden
         className={merge("fs:0 w:9 h:9 bw:1 bc:black/10", RADIUS.control[shape])}
-        style={{ background: value }}
+        style={{ background: fillOf(value) }}
       />
       <Field.Label className="p:a w:px h:px o:h">Hex</Field.Label>
       <Input
@@ -324,6 +354,7 @@ export default function ColorPicker({
   onValueChange,
   variant = "inline",
   swatches = SWATCHES,
+  opacity = false,
   disabled = false,
   container,
   shape: shapeProp,
@@ -351,19 +382,21 @@ export default function ColorPicker({
   const shades = shadesOf(hue);
 
   // popover: hue in HSV, kept apart so a gray does not lose it
-  const hsv = hsvOf(value);
+  const { base, alpha } = split(value);
+  const hsv = hsvOf(base);
   const [hsvHue, setHsvHue] = useState(() => hsv.h ?? 260);
   const shownHue = hsv.s > 0 && hsv.v > 0 && hsv.h !== undefined ? hsv.h : hsvHue;
+  // keeps the opacity while the color moves
   const hsvHex = (h: number, s: number, v: number) =>
-    formatHex({ mode: "hsv", h, s, v });
+    join(formatHex({ mode: "hsv", h, s, v }), opacity ? alpha : 1);
 
   const [dropper, setDropper] = useState(false);
   useEffect(() => setDropper("EyeDropper" in window), []);
 
   const typed = (next: string) => {
-    const seen = read(next);
+    const seen = read(split(next).base);
     if (seen) setHue(seen.hue);
-    const h = hsvOf(next).h;
+    const h = hsvOf(split(next).base).h;
     if (h !== undefined) setHsvHue(h);
     change(next);
   };
@@ -383,7 +416,7 @@ export default function ColorPicker({
             EyeDropper: new () => { open: () => Promise<{ sRGBHex: string }> };
           }
         ).EyeDropper().open();
-        typed(normal(formatHex(picked.sRGBHex) ?? value));
+        typed(join(normal(formatHex(picked.sRGBHex) ?? base), opacity ? alpha : 1));
       } catch {
         // dismissed with Esc
       }
@@ -409,7 +442,7 @@ export default function ColorPicker({
             <span
               aria-hidden
               className={merge("w:5 h:5 bw:1 bc:black/10", RADIUS.chip[shape])}
-              style={{ background: value }}
+              style={{ background: fillOf(value) }}
             />
             {value.toUpperCase()}
           </Popover.Trigger>
@@ -426,7 +459,7 @@ export default function ColorPicker({
                   hue={shownHue}
                   s={hsv.s}
                   v={hsv.v}
-                  color={value}
+                  color={base}
                   onChange={(s, v) => change(hsvHex(shownHue, s, v))}
                   disabled={disabled}
                   outline={outline}
@@ -443,12 +476,36 @@ export default function ColorPicker({
                   disabled={disabled}
                   within={within}
                 />
+                {opacity && (
+                  <Slider.Root
+                    value={Math.round(alpha * 100)}
+                    onValueChange={(next) => change(join(base, Number(next) / 100))}
+                    min={0}
+                    max={100}
+                    disabled={disabled}
+                  >
+                    <Slider.Control className="d:f ai:c py:2 us:none ta:none">
+                      <Slider.Track
+                        className="p:r h:3 w:100% br:9999 bs-o:sunk"
+                        style={{ background: `linear-gradient(to right, transparent, ${base}), ${CHECKER}` }}
+                      >
+                        <Slider.Thumb
+                          aria-label="Opacity"
+                          getAriaValueText={(_, next) => `${next}%`}
+                          className={merge("w:5 h:5 br:9999 bw:2 bc:white bs-o:key", within)}
+                          style={{ background: fillOf(value) }}
+                        />
+                      </Slider.Track>
+                    </Slider.Control>
+                  </Slider.Root>
+                )}
                 <HexField
                   value={value}
                   onCommit={typed}
                   outline={outline}
                   shape={shape}
                   disabled={disabled}
+                  alpha={opacity}
                   extra={
                     dropper && (
                       <Button
@@ -468,8 +525,8 @@ export default function ColorPicker({
                 {swatches.length > 0 && (
                   <RadioGroup
                     aria-label="Saved colors"
-                    value={swatches.map(normal).includes(value) ? value : ""}
-                    onValueChange={(next) => typed(String(next))}
+                    value={swatches.map(normal).includes(base) ? base : ""}
+                    onValueChange={(next) => typed(join(String(next), opacity ? alpha : 1))}
                     disabled={disabled}
                     className="d:f fw:w g:2"
                   >

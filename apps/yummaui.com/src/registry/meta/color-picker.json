@@ -32,6 +32,12 @@
       "description": "Colors one press away, under the hex field. Popover only."
     },
     {
+      "name": "opacity",
+      "type": "boolean",
+      "default": false,
+      "description": "An opacity slider under the hue slider. Below 100% the value carries two more hex digits, as in `#5b4bdb80`. Popover only."
+    },
+    {
       "name": "variant",
       "type": "enum",
       "values": [
