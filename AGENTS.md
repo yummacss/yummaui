@@ -6,6 +6,11 @@
   renamed from A to B. The why goes in the notes, the private `yummacss/notes`
   repo.
 - **Commit messages**: a subject and a couple of lines. No essays.
+- **CHANGELOG entries**: one line each, saying what was added, changed or
+  fixed, and opening with what shipped it, as Yumma CSS does: `**[cli]**` for
+  what `init` and `add` do, `**[components]**` for the components and blocks.
+  The site is not released, so it has no entries. Sections run Added,
+  Changed, Removed, Fixed.
 - **Code comments**: one or two lines. A comment earns its length only where
   the code is genuinely surprising, and never by repeating the same paragraph
   in a dozen files.
