@@ -1,0 +1,63 @@
+{
+  "summary": "A group of fields with its legend and description to the left, stacking above them on a phone.",
+  "props": [
+    {
+      "name": "legend",
+      "type": "string",
+      "description": "The group's name, beside its fields."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "A line under the legend."
+    },
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The fields in the group."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Blocks every field in the group & dims it.",
+      "default": false
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Fieldset",
+      "className": "w:144 max-w:100%",
+      "props": {
+        "legend": "Profile",
+        "description": "Shown on your public profile."
+      },
+      "children": [
+        {
+          "component": "Field",
+          "props": {
+            "label": "Name",
+            "name": "name",
+            "defaultValue": "Ada Lovelace",
+            "required": true
+          }
+        },
+        {
+          "component": "Field",
+          "props": {
+            "label": "Email",
+            "name": "email",
+            "defaultValue": "ada@example.com",
+            "required": true,
+            "type": "email"
+          }
+        }
+      ]
+    }
+  ]
+}

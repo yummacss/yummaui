@@ -222,6 +222,7 @@ export default function FieldBase({
 
   return (
     <Field.Root
+      name={props.name}
       disabled={disabled}
       className={`d:f fd:c g:2 c:label fs:sm ${disabled ? "o:60 c:na" : ""}`}
     >
@@ -261,7 +262,9 @@ export default function FieldBase({
           <Field.Control
             required={required}
             type={controlType}
-            className={controlClasses}
+            className={(state) =>
+              merge(controlClasses, state.valid === false && STATUS_BORDER.error)
+            }
             {...props}
           />
           {marked !== "default" && (
@@ -281,6 +284,8 @@ export default function FieldBase({
           {message}
         </Field.Description>
       )}
+      {/* what a surrounding Form reports, by this field's name */}
+      <Field.Error className="fs:xs c:red-5" />
     </Field.Root>
   );
 }

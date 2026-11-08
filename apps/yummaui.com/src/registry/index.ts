@@ -27,8 +27,10 @@ import meta_drawer from "./meta/drawer.json";
 import meta_empty_state from "./meta/empty-state.json";
 import meta_expanding_input from "./meta/expanding-input.json";
 import meta_field from "./meta/field.json";
+import meta_fieldset from "./meta/fieldset.json";
 import meta_file_tree from "./meta/file-tree.json";
 import meta_file_upload from "./meta/file-upload.json";
+import meta_form from "./meta/form.json";
 import meta_gauge from "./meta/gauge.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
 import meta_kbd from "./meta/kbd.json";
@@ -40,6 +42,7 @@ import meta_navigation_menu from "./meta/navigation-menu.json";
 import meta_number_field from "./meta/number-field.json";
 import meta_onboarding from "./meta/onboarding.json";
 import meta_otp_field from "./meta/otp-field.json";
+import meta_pagination from "./meta/pagination.json";
 import meta_popover from "./meta/popover.json";
 import meta_preview_card from "./meta/preview-card.json";
 import meta_progress_timeline from "./meta/progress-timeline.json";
@@ -121,8 +124,10 @@ export const registryMeta = {
   "empty-state": meta_empty_state,
   "expanding-input": meta_expanding_input,
   "field": meta_field,
+  "fieldset": meta_fieldset,
   "file-tree": meta_file_tree,
   "file-upload": meta_file_upload,
+  "form": meta_form,
   "gauge": meta_gauge,
   "inline-icon-heading": meta_inline_icon_heading,
   "kbd": meta_kbd,
@@ -134,6 +139,7 @@ export const registryMeta = {
   "number-field": meta_number_field,
   "onboarding": meta_onboarding,
   "otp-field": meta_otp_field,
+  "pagination": meta_pagination,
   "popover": meta_popover,
   "preview-card": meta_preview_card,
   "progress-timeline": meta_progress_timeline,
@@ -208,8 +214,10 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "field-prefix": { component: "field", variant: "prefix", kind: "example", install: "field" },
   "field-suffix": { component: "field", variant: "suffix", kind: "example", install: "field" },
   "field": { component: "field", variant: "base", kind: "component", install: "field" },
+  "fieldset": { component: "fieldset", variant: "base", kind: "component", install: "fieldset" },
   "file-tree": { component: "file-tree", variant: "base", kind: "component", install: "file-tree" },
   "file-upload": { component: "file-upload", variant: "base", kind: "component", install: "file-upload" },
+  "form": { component: "form", variant: "base", kind: "component", install: "form" },
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
   "kbd": { component: "kbd", variant: "base", kind: "component", install: "kbd" },
@@ -221,6 +229,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "number-field": { component: "number-field", variant: "base", kind: "component", install: "number-field" },
   "onboarding": { component: "onboarding", variant: "base", kind: "component", install: "onboarding" },
   "otp-field": { component: "otp-field", variant: "base", kind: "component", install: "otp-field" },
+  "pagination": { component: "pagination", variant: "base", kind: "component", install: "pagination" },
   "popover-folder-color": { component: "popover", variant: "folder-color", kind: "example", install: "popover" },
   "popover": { component: "popover", variant: "base", kind: "component", install: "popover" },
   "preview-card": { component: "preview-card", variant: "base", kind: "component", install: "preview-card" },

@@ -23,6 +23,8 @@ export const sidebarConfig: SidebarSection[] = [
 			"expanding-input",
 			"file-upload",
 			"field",
+			"fieldset",
+			"form",
 			"keypad",
 			"number-field",
 			"otp-field",
@@ -67,7 +69,7 @@ export const sidebarConfig: SidebarSection[] = [
 	},
 	{
 		title: "Navigation",
-		items: ["file-tree", "navigation-menu", "tabs", "toolbar"],
+		items: ["file-tree", "navigation-menu", "pagination", "tabs", "toolbar"],
 	},
 	{
 		title: "Overlays",
