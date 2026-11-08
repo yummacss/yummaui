@@ -35,7 +35,6 @@ const KNOWN_UNLISTED: string[] = [
 	"progress-upload",
 	"scroll-area-files",
 	"select-grouped",
-	"sidebar-pages",
 	"skeleton-activity",
 	"skeleton-filters",
 	"skeleton-list",

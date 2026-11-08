@@ -297,20 +297,6 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
-		slug: "sidebar",
-		title: "Sidebar",
-		description:
-			"An app's sidebar with a workspace switcher, grouped links with badges & the user's menu.",
-		resizable: true,
-	},
-	{
-		slug: "sign-in",
-		title: "Sign In",
-		description:
-			"A sign-in card with email, password, an optional passkey & a form that shakes on a mistake.",
-		resizable: true,
-	},
-	{
 		slug: "skeleton",
 		title: "Skeleton",
 		description: "Show a placeholder while content loads.",
