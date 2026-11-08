@@ -11,12 +11,17 @@ export default function ProductLinks({
 	heading,
 	list,
 	link,
+	idle,
+	active,
 	onNavigate,
 }: {
 	/** Classes for the section's heading, list and each link, as in the menu around it. */
 	heading: string;
 	list?: string;
 	link: string;
+	/** Classes for a link to the other product, and for this site's, as the menu marks its pages. */
+	idle: string;
+	active: string;
 	onNavigate?: () => void;
 }) {
 	return (
@@ -31,7 +36,7 @@ export default function ProductLinks({
 								href={href}
 								onClick={onNavigate}
 								aria-current={isActive ? "page" : undefined}
-								className={`${link} ${isActive ? "c:accent td:u tds:d" : "c:ink/70 h:c:accent"}`}
+								className={`${link} ${isActive ? active : idle}`}
 							>
 								{title}
 							</Link>

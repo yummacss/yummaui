@@ -33,6 +33,8 @@ export default function SidebarNav({ sections }: Props) {
 					heading="ff:system mb:3 c:silver-8 fs:xs fw:600 ls:2 tt:u"
 					list="d:f fd:c g:2"
 					link="p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2"
+					idle="c:ink/70 h:c:accent"
+					active="px:3 py:1 my:-1 ml:-3 br:9999 bg:press c:ink fw:500"
 				/>
 				{sections.map((section) => {
 					const fresh = section.items.filter((item) => item.isNew).length;
