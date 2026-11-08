@@ -88,16 +88,6 @@ export const sidebarConfig: SidebarSection[] = [
 		items: ["inline-icon-heading"],
 		area: "blocks",
 	},
-	{
-		title: "Layout",
-		items: ["sidebar"],
-		area: "blocks",
-	},
-	{
-		title: "Authentication",
-		items: ["sign-in"],
-		area: "blocks",
-	},
 ];
 
 /** Every block, under `/blocks`. */

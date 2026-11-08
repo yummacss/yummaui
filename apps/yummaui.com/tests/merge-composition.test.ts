@@ -13,7 +13,6 @@ const EXPECTED_DROPS = [
 	"popover.tsx: bg:raised",
 	"select.tsx: bg:raised",
 	// the current link's border and ink replace the link's own
-	"sidebar.tsx: c:hint",
 	"preview-card.tsx: td:none",
 	"button.tsx: fv:bc:focus",
 	"button.tsx: oc:focus/40",

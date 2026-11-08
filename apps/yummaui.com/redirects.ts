@@ -3,6 +3,11 @@ import { pagePath } from "./src/utils/hosts";
 
 const uiRedirects = [
 	{
+		source: "/blocks/:slug(sidebar|sign-in)",
+		destination: "/docs/installation",
+		permanent: true,
+	},
+	{
 		source: "/components/money-input",
 		destination: "/components/currency-input",
 		permanent: true,
