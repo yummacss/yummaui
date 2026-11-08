@@ -268,6 +268,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "button": { states: {}, easings: {}, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "checkbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "code-block": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: {}, keyframes: {} },
+  "color-picker": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "combobox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "leave": "from { opacity: 1; scale: 1; }", "spin": "to { rotate: 360deg; }" } },
   "context-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "currency-input": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
