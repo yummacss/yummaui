@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Glide from "@/components/ui/glide";
 import Scroller from "@/components/ui/scroller";
 import { Point, Sparkles } from "@/icons";
 import { useReveal } from "@/utils/reveal";
@@ -21,8 +22,14 @@ export default function SidebarNav({ sections }: Props) {
 			<Scroller
 				viewportRef={viewport}
 				className="p:st t:20 max-h:calc(100dvh-5rem)"
-				viewportClassName="d:f fd:c g:8 mx:-3 px:3 pb:12"
+				viewportClassName="p:r d:f fd:c g:8 mx:-3 px:3 pb:12"
 			>
+				<Glide
+					container={viewport}
+					selector="[data-glide]"
+					at={pathname}
+					className="bg:press br:9999"
+				/>
 				<ProductLinks
 					heading="ff:system mb:3 c:silver-8 fs:xs fw:600 ls:2 tt:u"
 					list="d:f fd:c g:2"
@@ -52,7 +59,9 @@ export default function SidebarNav({ sections }: Props) {
 										>
 											<Link
 												href={item.href}
-												className={`p:r d:if ai:c g:3 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:ink fw:500 bg:press br:9999 px:3 py:1 my:-1 ml:-3" : "c:ink/70 h:c:accent"}`}
+												aria-current={isActive ? "page" : undefined}
+												data-glide={isActive || undefined}
+												className={`p:r d:if ai:c g:3 px:3 py:1 my:-1 ml:-3 br:9999 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:ink fw:500" : "c:ink/70 h:c:accent"}`}
 											>
 												{item.title}
 												{item.isNew && (

@@ -5,6 +5,7 @@ import { Dialog } from "@base-ui/react/dialog";
 import { Input } from "@base-ui/react/input";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Glide from "@/components/ui/glide";
 import Scroller from "@/components/ui/scroller";
 import {
 	LongArrowDownLeftSolid,
@@ -221,8 +222,8 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 	}, [selectedIndex, rows.length]);
 
 	const highlighted = current;
-	const rowClass = (selected: boolean) =>
-		`d:f b:0 ai:c g:3 w:100% px:3 py:2 br:lg ta:l c:p ${selected ? "bg:hover" : "bg:transparent"}`;
+	const rowClass =
+		"p:r d:f b:0 ai:c g:3 w:100% px:3 py:2 br:lg ta:l c:p bg:transparent";
 
 	// the word set huge at the foot of the right side
 	const wash = highlighted?.title;
@@ -245,7 +246,8 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 					choose(item);
 				}}
 				onMouseEnter={() => setSelectedIndex(current)}
-				className={rowClass(selected)}
+				data-selected={selected || undefined}
+				className={rowClass}
 			>
 				<span className="d:f f:1 min-w:0 ai:b g:3">
 					<span className="fs:0 c:ink fs:md ws:nw">
@@ -316,9 +318,15 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 						<div className="d:f f:1 min-h:0">
 							<Scroller
 								viewportRef={listRef}
-								viewportClassName="px:2 py:2"
+								viewportClassName="p:r px:2 py:2"
 								className="f:1 min-h:0 min-w:0"
 							>
+								<Glide
+									container={listRef}
+									selector="[data-search-item][data-selected]"
+									at={`${selectedIndex} ${category?.title} ${query} ${browsing}`}
+									className="bg:hover br:lg"
+								/>
 								{browsing &&
 									categories.map((section, at) => {
 										const selected = selectedIndex === at;
@@ -332,7 +340,8 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 														enter(section);
 													}}
 													onMouseEnter={() => setSelectedIndex(at)}
-													className={rowClass(selected)}
+													data-selected={selected || undefined}
+													className={rowClass}
 												>
 													<span className="f:1 c:ink fs:md">
 														{section.title}

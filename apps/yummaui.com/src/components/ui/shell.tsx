@@ -7,6 +7,7 @@ import {
 	StaticPlayground,
 } from "@/components/playground/context";
 import { ApiTable } from "@/components/playground/api";
+import Installation from "@/components/playground/install-command";
 import ComponentPlayground from "@/components/playground/stage";
 import TableOfContents from "@/components/ui/toc";
 import { getRegistryTarget, registryMeta } from "@/registry";
@@ -60,6 +61,7 @@ export default function UIShell({
 							)}
 						/>
 					)}
+					{playground && <Installation />}
 					{playground && <ApiTable />}
 				</article>
 			</div>

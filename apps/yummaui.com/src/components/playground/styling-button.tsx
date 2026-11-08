@@ -36,7 +36,7 @@ export default function StylingButton() {
 						className="d:f h:100% w:104 max-w:100% p:3 os:none ttx:var(--drawer-swipe-movement-x) opening:ttx:full closing:ttx:full tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
 					>
 						{/* the panel floats inside the popup's padding, so sliding the popup out takes it all the way off */}
-						<div className="d:f fd:c g:6 f:1 min-w:0 p:6 oy:auto br:xl bw:1 bc:border bg:page bs-o:pop">
+						<div className="d:f fd:c g:6 f:1 min-w:0 p:6 oy:auto br:3xl bw:1 bc:border bg:page">
 							<div className="d:f ai:c jc:sb">
 								<div className="d:f fd:c g:1">
 									<Drawer.Title className="m:0 ff:display fs:xxl fw:400 c:ink">

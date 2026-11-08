@@ -162,7 +162,7 @@ export default function ComponentPlayground({
 				]}
 				className={`${FILL} p:r w:100% pt:1 px:1 bw:1 bc:border br:xl o:h bg:page`}
 			>
-				<div className="p:a t:1 r:1 h:8 d:f ai:c g:3">
+				<div className="p:a t:1 r:2 h:calc(1.625rem) d:f ai:c g:3">
 					{resizable && active === "preview" && width !== null && (
 						<span className="c:ink/60 fs:xs ff:m fvn:tn">{width}px</span>
 					)}
@@ -172,7 +172,7 @@ export default function ComponentPlayground({
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Built on Base UI"
-							className="d:f ai:c g:2 h:8 px:3 br:9999 c:ink/70 fs:sm td:none h:c:ink h:bg:hover fv:oc:ink fv:ow:2"
+							className="d:f ai:c g:2 px:2 c:ink/60 fs:sm td:none h:c:ink fv:oc:ink fv:ow:2"
 						>
 							<BaseUI aria-hidden className="w:4 h:4" />
 							<span className="d:none @sm:d:i">Built on Base UI</span>
