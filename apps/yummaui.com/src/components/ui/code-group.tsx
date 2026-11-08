@@ -32,7 +32,7 @@ export default function CodeGroup({ children }: { children?: ReactNode }) {
 	});
 
 	return (
-		<div className="my:4 cs:d">
+		<div className="my:4">
 			<Block tabs={tabs} lineNumbers={false} />
 		</div>
 	);

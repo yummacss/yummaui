@@ -22,13 +22,12 @@ export function linesOf(
 	));
 }
 
-// Eclipsa is dark only, so the block stays dark until the theme has a light side
 export default function CodeBlock({ code = "", meta, title, lang }: Props) {
 	const text = code.replace(/\n$/, "");
 	const lines = linesOf(text, lang, meta, title);
 
 	return (
-		<div className="my:4 cs:d">
+		<div className="my:4">
 			<Block
 				code={text}
 				lines={lines}

@@ -4,7 +4,6 @@ import {
 	hastToHtml,
 	isPlainLang,
 	isSpecialLang,
-	type ThemeRegistrationAny,
 } from "@shikijs/core";
 import { createJavaScriptRegexEngine } from "@shikijs/engine-javascript";
 import css from "@shikijs/langs/css";
@@ -23,17 +22,17 @@ import {
 } from "@shikijs/transformers";
 import type { Element, Root } from "hast";
 import { decorateCodeHast } from "@/lib/code-decorate.mjs";
-import eclipsa from "@/themes/eclipsa.json";
+import { charcoalDark, charcoalLight } from "@/themes/charcoal";
 
-const theme = eclipsa as unknown as ThemeRegistrationAny;
-const THEME_NAME = eclipsa.name ?? "eclipsa";
+// each token's color is light-dark(), so code follows the page's scheme
+const THEMES = { light: "charcoal-light", dark: "charcoal-dark" };
 
 let highlighter: HighlighterCore | null = null;
 
 function get(): HighlighterCore {
 	if (!highlighter) {
 		highlighter = createHighlighterCoreSync({
-			themes: [theme],
+			themes: [charcoalLight, charcoalDark],
 			langs: [
 				html,
 				css,
@@ -66,7 +65,8 @@ export function highlight(
 
 	const hast: Root = shiki.codeToHast(code, {
 		lang: resolved,
-		theme: THEME_NAME,
+		themes: THEMES,
+		defaultColor: "light-dark()",
 		meta: { __raw: meta ?? "" },
 		transformers: [
 			transformerNotationDiff(),
@@ -88,10 +88,15 @@ export function highlightTokens(
 	code: string,
 	lang = "tsx",
 ): { text: string; color?: string }[][] {
-	return get()
-		.codeToTokensBase(code, { lang, theme: THEME_NAME })
-		.map((line) =>
-			line.map((token) => ({ text: token.content, color: token.color })),
+	const shiki = get();
+	const dark = shiki.codeToTokensBase(code, { lang, theme: THEMES.dark });
+	return shiki
+		.codeToTokensBase(code, { lang, theme: THEMES.light })
+		.map((line, row) =>
+			line.map((token, column) => ({
+				text: token.content,
+				color: `light-dark(${token.color}, ${dark[row]?.[column]?.color ?? token.color})`,
+			})),
 		);
 }
 
@@ -109,7 +114,8 @@ export function highlightLines(
 	}
 	const hast: Root = shiki.codeToHast(code.replace(/\n$/, ""), {
 		lang: resolved,
-		theme: THEME_NAME,
+		themes: THEMES,
+		defaultColor: "light-dark()",
 	});
 	const pre = hast.children.find(
 		(c): c is Element => c.type === "element" && c.tagName === "pre",
