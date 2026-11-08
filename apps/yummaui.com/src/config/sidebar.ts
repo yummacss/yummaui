@@ -40,10 +40,12 @@ export const sidebarConfig: SidebarSection[] = [
 		items: [
 			"accordion",
 			"activity-timeline",
+			"alert",
 			"avatar",
 			"avatar-stack",
 			"badge",
 			"breadcrumb",
+			"card",
 			"code-block",
 			"inline-icon-heading",
 			"kbd",

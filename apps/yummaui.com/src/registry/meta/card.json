@@ -1,0 +1,52 @@
+{
+  "summary": "A raised panel with a heading, content and actions.",
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "example": "Monthly revenue",
+      "description": "The heading at the top."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "example": "Across every plan, after refunds.",
+      "description": "A line under the title."
+    },
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "What the card holds, between the heading and the actions."
+    },
+    {
+      "name": "actions",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "Buttons along the bottom, right-aligned."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the card. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "CardRevenue",
+      "props": {}
+    }
+  ]
+}
