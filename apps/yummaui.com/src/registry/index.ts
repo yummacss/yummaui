@@ -11,6 +11,7 @@ import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
 import meta_avatar from "./meta/avatar.json";
 import meta_badge from "./meta/badge.json";
+import meta_bar_chart from "./meta/bar-chart.json";
 import meta_breadcrumb from "./meta/breadcrumb.json";
 import meta_button_group from "./meta/button-group.json";
 import meta_button from "./meta/button.json";
@@ -23,6 +24,7 @@ import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
 import meta_currency_input from "./meta/currency-input.json";
 import meta_dialog from "./meta/dialog.json";
+import meta_donut_chart from "./meta/donut-chart.json";
 import meta_drawer from "./meta/drawer.json";
 import meta_empty_state from "./meta/empty-state.json";
 import meta_expanding_input from "./meta/expanding-input.json";
@@ -35,6 +37,7 @@ import meta_gauge from "./meta/gauge.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
 import meta_kbd from "./meta/kbd.json";
 import meta_keypad from "./meta/keypad.json";
+import meta_line_chart from "./meta/line-chart.json";
 import meta_menu from "./meta/menu.json";
 import meta_menubar from "./meta/menubar.json";
 import meta_meter from "./meta/meter.json";
@@ -54,6 +57,8 @@ import meta_select from "./meta/select.json";
 import meta_separator from "./meta/separator.json";
 import meta_skeleton from "./meta/skeleton.json";
 import meta_slider from "./meta/slider.json";
+import meta_sparkline from "./meta/sparkline.json";
+import meta_stat from "./meta/stat.json";
 import meta_storage_bar from "./meta/storage-bar.json";
 import meta_switch from "./meta/switch.json";
 import meta_tabs from "./meta/tabs.json";
@@ -108,6 +113,7 @@ export const registryMeta = {
   "avatar-stack": meta_avatar_stack,
   "avatar": meta_avatar,
   "badge": meta_badge,
+  "bar-chart": meta_bar_chart,
   "breadcrumb": meta_breadcrumb,
   "button-group": meta_button_group,
   "button": meta_button,
@@ -120,6 +126,7 @@ export const registryMeta = {
   "context-menu": meta_context_menu,
   "currency-input": meta_currency_input,
   "dialog": meta_dialog,
+  "donut-chart": meta_donut_chart,
   "drawer": meta_drawer,
   "empty-state": meta_empty_state,
   "expanding-input": meta_expanding_input,
@@ -132,6 +139,7 @@ export const registryMeta = {
   "inline-icon-heading": meta_inline_icon_heading,
   "kbd": meta_kbd,
   "keypad": meta_keypad,
+  "line-chart": meta_line_chart,
   "menu": meta_menu,
   "menubar": meta_menubar,
   "meter": meta_meter,
@@ -151,6 +159,8 @@ export const registryMeta = {
   "separator": meta_separator,
   "skeleton": meta_skeleton,
   "slider": meta_slider,
+  "sparkline": meta_sparkline,
+  "stat": meta_stat,
   "storage-bar": meta_storage_bar,
   "switch": meta_switch,
   "tabs": meta_tabs,
@@ -193,6 +203,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "avatar-stack": { component: "avatar-stack", variant: "base", kind: "component", install: "avatar-stack" },
   "avatar": { component: "avatar", variant: "base", kind: "component", install: "avatar" },
   "badge": { component: "badge", variant: "base", kind: "component", install: "badge" },
+  "bar-chart": { component: "bar-chart", variant: "base", kind: "component", install: "bar-chart" },
   "breadcrumb": { component: "breadcrumb", variant: "base", kind: "component", install: "breadcrumb" },
   "button-group-split": { component: "button-group", variant: "split", kind: "example", install: "button-group" },
   "button-group": { component: "button-group", variant: "base", kind: "component", install: "button-group" },
@@ -208,6 +219,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "context-menu": { component: "context-menu", variant: "base", kind: "component", install: "context-menu" },
   "currency-input": { component: "currency-input", variant: "base", kind: "component", install: "currency-input" },
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
+  "donut-chart": { component: "donut-chart", variant: "base", kind: "component", install: "donut-chart" },
   "drawer": { component: "drawer", variant: "base", kind: "component", install: "drawer" },
   "empty-state": { component: "empty-state", variant: "base", kind: "component", install: "empty-state" },
   "expanding-input": { component: "expanding-input", variant: "base", kind: "component", install: "expanding-input" },
@@ -222,6 +234,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
   "kbd": { component: "kbd", variant: "base", kind: "component", install: "kbd" },
   "keypad": { component: "keypad", variant: "base", kind: "component", install: "keypad" },
+  "line-chart": { component: "line-chart", variant: "base", kind: "component", install: "line-chart" },
   "menu": { component: "menu", variant: "base", kind: "component", install: "menu" },
   "menubar": { component: "menubar", variant: "base", kind: "component", install: "menubar" },
   "meter": { component: "meter", variant: "base", kind: "component", install: "meter" },
@@ -249,6 +262,8 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "skeleton-stats": { component: "skeleton", variant: "stats", kind: "example", install: "skeleton" },
   "skeleton": { component: "skeleton", variant: "base", kind: "component", install: "skeleton" },
   "slider": { component: "slider", variant: "base", kind: "component", install: "slider" },
+  "sparkline": { component: "sparkline", variant: "base", kind: "component", install: "sparkline" },
+  "stat": { component: "stat", variant: "base", kind: "component", install: "stat" },
   "storage-bar": { component: "storage-bar", variant: "base", kind: "component", install: "storage-bar" },
   "switch": { component: "switch", variant: "base", kind: "component", install: "switch" },
   "tabs": { component: "tabs", variant: "base", kind: "component", install: "tabs" },

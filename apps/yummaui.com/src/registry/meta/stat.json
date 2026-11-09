@@ -1,0 +1,91 @@
+{
+  "summary": "A labeled number in a raised card, with its change and an optional trend line.",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "description": "What the number counts."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "The number, already formatted, such as `$58,210`."
+    },
+    {
+      "name": "change",
+      "type": "string",
+      "description": "The change, already formatted, such as `12.4%`."
+    },
+    {
+      "name": "direction",
+      "type": "enum",
+      "values": [
+        "up",
+        "down"
+      ],
+      "default": "up",
+      "description": "Which way the change went, which picks its arrow."
+    },
+    {
+      "name": "trend",
+      "type": "none",
+      "typeName": "number[]",
+      "description": "A trend line under the number, oldest value first."
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "values": [
+        "positive",
+        "negative",
+        "neutral"
+      ],
+      "default": "neutral",
+      "description": "Whether the change is good news: `positive` reads green, `negative` red. A rise in churn is `negative` though it goes up."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the card. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Stat",
+      "className": "w:64",
+      "props": {
+        "label": "Revenue",
+        "value": "$58,210",
+        "change": "12.4%",
+        "direction": "up",
+        "tone": "positive",
+        "trend": [
+          32,
+          35,
+          31,
+          38,
+          42,
+          40,
+          45,
+          48,
+          46,
+          52,
+          55,
+          58
+        ]
+      }
+    }
+  ]
+}

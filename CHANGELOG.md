@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **[components]** Bar Chart, Donut Chart, Line Chart, Sparkline & Stat.
+
 ### Fixed
 
 - **[components]** Field keeps its red border while focused after a failed submit.
