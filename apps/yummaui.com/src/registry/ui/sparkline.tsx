@@ -23,7 +23,7 @@ export interface SparklineProps {
   className?: string;
 }
 
-/** A small trend line in the text color, with no axes. */
+/** A small trend line in the fill color, with no axes. */
 export default function Sparkline({
   values,
   ariaLabel,
@@ -62,7 +62,7 @@ export default function Sparkline({
       style={{ height, width: fixed }}
     >
       {width > 0 && (
-        <svg aria-hidden width={width} height={height} className="d:b o:v">
+        <svg aria-hidden width={width} height={height} className="d:b o:v c:fill">
           <path d={d} fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
           {dot && values.length > 0 && (
             <circle cx={x(values.length - 1)} cy={y(values[values.length - 1])} r={3} fill="currentColor" />

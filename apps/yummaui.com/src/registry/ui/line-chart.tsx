@@ -14,7 +14,7 @@ export interface LineChartProps {
   /** The points along the bottom, such as months. */
   labels: string[];
   /**
-   * The lines. The first draws solid in the text color; the rest draw dashed
+   * The lines. The first draws solid in the fill color; the rest draw dashed
    * and quieter, for a comparison such as last year.
    */
   series: LineChartSeries[];
@@ -91,9 +91,9 @@ export default function LineChart({
           width={width}
           height={height}
           aria-hidden
-          className="d:b o:v"
+          className="d:b o:v us:none ta:m"
           onPointerMove={(event) => pick(event.clientX)}
-          onPointerLeave={() => setActive(null)}
+          onPointerLeave={(event) => event.pointerType === "mouse" && setActive(null)}
         >
           {ticks.map((tick) => (
             <g key={tick}>
@@ -121,13 +121,13 @@ export default function LineChart({
               <path key={s.name} d={path(s.values)} fill="none" stroke="currentColor" strokeWidth={2} strokeDasharray="4 4" strokeLinecap="round" className="c:hint" />
             ))}
           {series[0] && (
-            <path d={path(series[0].values)} fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+            <path d={path(series[0].values)} className="c:fill" fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
           )}
           {active !== null && series[0] && (
             <g>
               {/* an edge of the card's color, so the dot sits apart from the line */}
               <circle cx={x(active)} cy={y(series[0].values[active])} r={6.5} fill="currentColor" className="c:raised" />
-              <circle cx={x(active)} cy={y(series[0].values[active])} r={4.5} fill="currentColor" />
+              <circle cx={x(active)} cy={y(series[0].values[active])} r={4.5} fill="currentColor" className="c:fill" />
             </g>
           )}
           <rect x={left} y={0} width={Math.max(width - left - right, 0)} height={top + plot} fill="transparent" />
@@ -151,7 +151,7 @@ export default function LineChart({
         <div className="d:f fw:w g:4 c:hint fs:xs">
           {series.map((s, index) => (
             <span key={s.name} className="d:f ai:c g:2">
-              <span aria-hidden className={`w:4 h:0 btw:2 ${index ? "bs:d bc:hint" : "bc:label"}`} />
+              <span aria-hidden className={`w:4 h:0 btw:2 ${index ? "bs:d bc:hint" : "bc:fill"}`} />
               {s.name}
             </span>
           ))}

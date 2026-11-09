@@ -4,7 +4,7 @@ import { useState } from "react";
 import { merge } from "yummacss/merge";
 
 export interface DonutChartDatum {
-  /** The part's name, in the legend. */
+  /** The part's name, in the middle on hover. */
   label: string;
   /** The part's size. */
   value: number;
@@ -12,8 +12,9 @@ export interface DonutChartDatum {
 
 export interface DonutChartProps {
   /**
-   * The parts, in order around the circle. The first four take the chart
-   * palette; a fifth and later read in gray, so fold small parts into "Other".
+   * The parts, in order around the circle. Each draws a lighter step of the
+   * fill color, and a fifth and later share the lightest, so fold small parts
+   * into "Other".
    */
   data: DonutChartDatum[];
   /** What the chart shows, for screen readers and its table. */
@@ -27,7 +28,7 @@ export interface DonutChartProps {
   centerValue?: string;
   /** A line under the middle text. */
   centerLabel?: string;
-  /** How a value reads in the legend and the table. */
+  /** How a value reads in the middle on hover and in the table. */
   format?: (value: number) => string;
   /**
    * Extra classes. `merge` folds them in last, so one here replaces the
@@ -36,10 +37,11 @@ export interface DonutChartProps {
   className?: string;
 }
 
-// checked for color blindness side by side, in light and dark
-const PALETTE = ["c:blue-5", "c:orange-7", "c:mint-8", "c:violet-7"];
+const SHADES = ["c:fill", "c:fill/70", "c:fill/40", "c:fill/20"];
 
-/** A circle of parts with a legend, and a value in the middle. */
+/**
+ * A circle of parts with a value in the middle, which names a part on hover.
+ */
 export default function DonutChart({
   data,
   ariaLabel,
@@ -50,7 +52,8 @@ export default function DonutChart({
   className,
 }: DonutChartProps) {
   const [active, setActive] = useState<number | null>(null);
-  const size = 140;
+  const hovered = active === null ? null : data[active];
+  const size = 160;
   const band = 16;
   const radius = (size - band) / 2 - 2;
   const length = 2 * Math.PI * radius;
@@ -58,8 +61,9 @@ export default function DonutChart({
   let start = 0;
 
   return (
-    <div className={merge("d:f fw:w ai:c g:6 c:label", className)}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden className="fs:0 d:b o:v">
+    <div className={merge("p:r d:ib c:label", className)}>
+      {/* a touch has no hover, so a tap shows a part until the next tap */}
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden className="d:b o:v us:none ta:m">
         <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="currentColor" strokeWidth={band} className="c:well" />
         <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
           {data.map((datum, index) => {
@@ -79,40 +83,29 @@ export default function DonutChart({
                 strokeWidth={active === index ? band + 4 : band}
                 strokeDasharray={`${dash} ${length}`}
                 strokeDashoffset={offset}
-                className={`tp:a tdu:150 @prm:tp:none ${PALETTE[index] ?? "c:hint"}`}
+                className={`tp:a tdu:150 @prm:tp:none ${SHADES[index] ?? "c:fill/20"}`}
                 onPointerEnter={() => setActive(index)}
-                onPointerLeave={() => setActive(null)}
+                onPointerLeave={(event) => event.pointerType === "mouse" && setActive(null)}
               />
             );
           })}
         </g>
-        {(centerValue || centerLabel) && (
+        {/* the hovered part names itself in the middle, in place of the summary */}
+        {(hovered || centerValue || centerLabel) && (
           <text x={size / 2} y={size / 2} textAnchor="middle" fill="currentColor">
-            {centerValue && (
-              <tspan x={size / 2} dy={centerLabel ? 2 : 7} className="fs:xl fw:600 fvn:tn">
-                {centerValue}
+            {(hovered ? format(hovered.value) : centerValue) && (
+              <tspan x={size / 2} dy={-2} className="fs:xl fw:600 fvn:tn">
+                {hovered ? format(hovered.value) : centerValue}
               </tspan>
             )}
-            {centerLabel && (
-              <tspan x={size / 2} dy={centerValue ? 18 : 4} className="c:hint fs:xs">
-                {centerLabel}
+            {(hovered ? hovered.label : centerLabel) && (
+              <tspan x={size / 2} dy={18} className="c:hint fs:xs">
+                {hovered ? hovered.label : centerLabel}
               </tspan>
             )}
           </text>
         )}
       </svg>
-      <ul className="d:g g:2 f:1 min-w:40 m:0 p:0 lst:none fs:sm">
-        {data.map((datum, index) => (
-          <li
-            key={datum.label}
-            className={`d:f ai:c g:2 tp:o tdu:150 @prm:tp:none ${active === null || active === index ? "o:100" : "o:50"}`}
-          >
-            <span aria-hidden className={`w:3 h:3 br:sm bg:current fs:0 ${PALETTE[index] ?? "c:hint"}`} />
-            <span className="c:hint">{datum.label}</span>
-            <span className="ml:auto fvn:tn">{format(datum.value)}</span>
-          </li>
-        ))}
-      </ul>
       {/* the data as a table, for screen readers */}
       <div className="p:a w:px h:px o:h ws:nw" style={{ clipPath: "inset(50%)" }}>
         <table>

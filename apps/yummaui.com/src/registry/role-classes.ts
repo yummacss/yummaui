@@ -29,6 +29,7 @@ export const ROLE_CLASSES: string[] = [
   "c:fill/20",
   "c:fill/40",
   "c:fill/60",
+  "c:fill/70",
   "c:fill/80",
   "c:on",
   "c:on-fill",

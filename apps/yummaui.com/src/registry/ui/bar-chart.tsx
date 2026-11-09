@@ -33,7 +33,7 @@ function ceiling(max: number) {
   return Math.ceil(max / step) * step;
 }
 
-/** Bars in the text color with rounded tops, a grid and a tooltip on hover. */
+/** Bars in the fill color with rounded tops, a grid and a tooltip on hover. */
 export default function BarChart({
   data,
   ariaLabel,
@@ -69,7 +69,7 @@ export default function BarChart({
   return (
     <div ref={box} className={merge("p:r w:100% c:label", className)}>
       {width > 0 && (
-        <svg width={width} height={height} aria-hidden className="d:b o:v">
+        <svg width={width} height={height} aria-hidden className="d:b o:v us:none ta:m">
           {ticks.map((tick) => (
             <g key={tick}>
               <line x1={left} x2={width} y1={y(tick)} y2={y(tick)} className="c:line" stroke="currentColor" />
@@ -89,7 +89,7 @@ export default function BarChart({
                 <path
                   d={`M${x},${top + plot}V${peak + r}Q${x},${peak} ${x + r},${peak}H${x + w - r}Q${x + w},${peak} ${x + w},${peak + r}V${top + plot}Z`}
                   fill="currentColor"
-                  className={`tp:o tdu:150 @prm:tp:none ${active === null || active === index ? "o:100" : "o:40"}`}
+                  className={`c:fill tp:o tdu:150 @prm:tp:none ${active === null || active === index ? "o:100" : "o:40"}`}
                 />
                 {index % every === 0 && (
                   <text x={x + w / 2} y={height - 6} textAnchor="middle" className="c:hint fs:xs ff:m" fill="currentColor">
@@ -103,7 +103,7 @@ export default function BarChart({
                   height={plot}
                   fill="transparent"
                   onPointerEnter={() => setActive(index)}
-                  onPointerLeave={() => setActive(null)}
+                  onPointerLeave={(event) => event.pointerType === "mouse" && setActive(null)}
                 />
               </g>
             );

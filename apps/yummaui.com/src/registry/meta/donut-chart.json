@@ -1,11 +1,11 @@
 {
-  "summary": "A circle of parts with a legend, and a value in the middle.",
+  "summary": "A circle of parts with a value in the middle, which names a part on hover.",
   "props": [
     {
       "name": "data",
       "type": "none",
       "typeName": "DonutChartDatum[]",
-      "description": "The parts, in order around the circle. The first four take the chart palette; a fifth and later read in gray, so fold small parts into \"Other\"."
+      "description": "The parts, in order around the circle. Each draws a lighter step of the fill color, and a fifth and later share the lightest, so fold small parts into \"Other\"."
     },
     {
       "name": "ariaLabel",
@@ -31,7 +31,7 @@
       "name": "format",
       "type": "none",
       "typeName": "(value: number) => string",
-      "description": "How a value reads in the legend and the table."
+      "description": "How a value reads in the middle on hover and in the table."
     },
     {
       "name": "className",
@@ -42,7 +42,6 @@
   "scene": [
     {
       "component": "DonutChart",
-      "className": "w:96 max-w:100%",
       "props": {
         "ariaLabel": "Storage used by kind, gigabytes",
         "total": 100,

@@ -11,7 +11,7 @@
       "name": "series",
       "type": "none",
       "typeName": "LineChartSeries[]",
-      "description": "The lines. The first draws solid in the text color; the rest draw dashed and quieter, for a comparison such as last year."
+      "description": "The lines. The first draws solid in the fill color; the rest draw dashed and quieter, for a comparison such as last year."
     },
     {
       "name": "ariaLabel",
