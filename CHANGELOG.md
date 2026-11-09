@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **[components]** The Sidebar & Sign In blocks.
 
+### Fixed
+
+- **[components]** Field shows its icon and its reveal button beside a prefix or suffix.
+
 ## [0.11.0] - 2026-11-08
 
 ### Added

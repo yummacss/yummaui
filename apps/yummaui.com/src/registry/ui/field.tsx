@@ -235,6 +235,16 @@ export default function FieldBase({
 
       {hasAffix ? (
         <div className={affixBoxClasses}>
+          {showDecorativeIcon && activeSide === "leading" && (
+            <span
+              className={merge(
+                "d:f ai:c fs:0 c:hint",
+                !(iconInteractive || reveal) && "pe:none",
+              )}
+            >
+              {activeIcon}
+            </span>
+          )}
           {prefixNode && (
             <span className="d:f ai:c fs:0 c:hint">{prefixNode}</span>
           )}
@@ -245,6 +255,25 @@ export default function FieldBase({
             {...props}
           />
           {suffix && <span className="d:f ai:c fs:0 c:hint">{suffix}</span>}
+          {showDecorativeIcon && activeSide === "trailing" && (
+            <span
+              className={merge(
+                "d:f ai:c fs:0 c:hint",
+                !(iconInteractive || reveal) && "pe:none",
+              )}
+            >
+              {activeIcon}
+            </span>
+          )}
+          {marked !== "default" && (
+            <span className={`d:f ai:c fs:0 pe:none ${STATUS_ICON[marked]}`}>
+              {marked === "error" ? (
+                <IconAlertTriangle className="w:4 h:4" />
+              ) : (
+                <IconCheck className="w:4 h:4" />
+              )}
+            </span>
+          )}
         </div>
       ) : (
         <div className="d:f p:r ai:c">

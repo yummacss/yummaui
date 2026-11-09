@@ -154,7 +154,11 @@
         "title": "Delete 12 files?",
         "description": "They move to Trash and are deleted for good after 30 days.",
         "confirmLabel": "Delete",
-        "showClose": false
+        "showClose": false,
+        "triggerIcon": {
+          "$icon": "IconTrash",
+          "size": "w:4 h:4"
+        }
       }
     }
   ]

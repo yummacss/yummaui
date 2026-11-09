@@ -13,7 +13,8 @@ import {
 import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
 import { ACCENTS, accentBars, DEFAULT_ACCENT } from "@/utils/accent";
-import { inTableOrder, typeOf } from "@/utils/props";
+import { sceneIds } from "@/utils/demo";
+import { inTableOrder, lookProps, typeOf } from "@/utils/props";
 import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
@@ -124,15 +125,6 @@ const SWATCHES = ACCENTS.map((family) => ({
 	colors: accentBars(family),
 }));
 
-// props that change how the component looks; text, handlers and plumbing stay out of the drawer
-const PLUMBING = new Set([
-	"shape",
-	"focus",
-	"container",
-	"className",
-	"iconShape",
-]);
-
 /** Shape, Accent and Scheme, the preview's styling. */
 export function Look() {
 	const playground = usePlayground();
@@ -162,12 +154,9 @@ export function Look() {
 		</div>
 	);
 
-	const looks = props.filter(
-		(prop) =>
-			!prop.handler &&
-			!PLUMBING.has(prop.name) &&
-			(prop.type === "enum" || (prop.type === "boolean" && !prop.typeName)),
-	);
+	// a preview drawn by an example takes no settings from the drawer
+	const owns = sceneIds(playground.meta?.scene ?? []).includes(playground.id);
+	const looks = owns ? lookProps(props) : [];
 	const valueOf = (name: string, fallback: unknown) => {
 		const key = `all.${name}`;
 		return key in playground.sceneValues
@@ -263,7 +252,7 @@ export function Look() {
 			)}
 			<Button
 				onClick={reset}
-				className="as:fs mt:4 p:0 bw:0 bg:transparent c:ink/70 fs:xs td:u tds:d tuo:4 c:p h:c:ink fv:oc:ink fv:ow:2"
+				className="as:fs mt:4 h:8 px:4 br:9999 bw:1 bc:border bg:surface bs-o:key c:ink fs:xs c:p h:bg:hover a:bg:press fv:oc:ink fv:ow:2"
 			>
 				Reset
 			</Button>

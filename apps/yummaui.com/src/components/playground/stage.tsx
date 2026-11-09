@@ -8,7 +8,7 @@ import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { BaseUI } from "@/components/icons/icons";
 import { TabsPanel } from "@/components/tabs";
 import TokenBlock from "@/components/ui/token-block";
-import { Code, Globe, Settings2 } from "@/icons";
+import { Code, Globe, Refresh, Settings2 } from "@/icons";
 import {
 	getRegistryTarget,
 	type RegistryMeta,
@@ -24,6 +24,7 @@ import { schemeCss } from "@/utils/scheme";
 import { buildConfig, buildScene, type Token } from "@/utils/snippet";
 import { Shape, type Shape as ShapeName } from "@/registry/ui/style";
 import YummaTabs from "@/registry/ui/tabs";
+import { Button } from "@base-ui/react/button";
 import { DEFAULT_SHAPE } from "@/utils/shapes.mjs";
 
 const FILL = "d:f fd:c f:1 min-h:0";
@@ -105,6 +106,8 @@ export default function ComponentPlayground({
 			live = false;
 		};
 	}, [examples]);
+	// Restart remounts the scene, so every instance starts over
+	const [run, setRun] = useState(0);
 	const shape = playground?.shape ?? DEFAULT_SHAPE;
 	const accent = playground?.accent ?? DEFAULT_ACCENT;
 	const scheme = playground?.scheme ?? "light";
@@ -121,11 +124,11 @@ export default function ComponentPlayground({
 					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
 				>
 					<Shape value={shape as ShapeName}>
-						<Scene scene={scene} shape={shape} />
+						<Scene key={run} scene={scene} shape={shape} />
 					</Shape>
 				</PreviewFrame>
 			) : null,
-		[scene, shape, accent, scheme, resizable],
+		[scene, shape, accent, scheme, resizable, run],
 	);
 
 	if (!id || !scene) return null;
@@ -165,6 +168,18 @@ export default function ComponentPlayground({
 				<div className="p:a t:1 r:2 h:calc(1.625rem) d:f ai:c g:3">
 					{resizable && active === "preview" && width !== null && (
 						<span className="c:ink/60 fs:xs ff:m fvn:tn">{width}px</span>
+					)}
+					{active === "preview" && (
+						<Button
+							onClick={() => {
+								playground?.resetScene();
+								setRun((count) => count + 1);
+							}}
+							aria-label="Restart preview"
+							className="d:f ai:c jc:c w:8 h:100% p:0 bw:0 bg:transparent c:ink/60 c:p h:c:ink fv:oc:ink fv:ow:2"
+						>
+							<Refresh className="w:4 h:4" />
+						</Button>
 					)}
 					{primitive && (
 						<a

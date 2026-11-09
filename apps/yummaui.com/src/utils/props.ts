@@ -46,3 +46,24 @@ export function inTableOrder<T extends { name: string }>(props: T[]): T[] {
 		})
 		.map((entry) => entry.prop);
 }
+
+// props that change how the component looks; text, handlers and plumbing stay out of the drawer
+const PLUMBING = new Set([
+	"shape",
+	"focus",
+	"container",
+	"className",
+	"iconShape",
+]);
+
+/** The props the Styling drawer offers: enums and plain booleans that change the look. */
+export function lookProps<T extends RegistryProp>(props: T[]): T[] {
+	return props.filter(
+		(prop) =>
+			!prop.handler &&
+			!PLUMBING.has(prop.name) &&
+			// a default only applies when the component first renders
+			!/^default[A-Z]/.test(prop.name) &&
+			(prop.type === "enum" || (prop.type === "boolean" && !prop.typeName)),
+	);
+}

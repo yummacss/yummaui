@@ -48,6 +48,8 @@ interface Playground {
 	/** What the scene's components were changed to, by instance and prop. */
 	sceneValues: SceneValues;
 	setSceneValue: (key: string, value: unknown, fallback: unknown) => void;
+	/** Puts every instance back to its start, keeping the drawer's settings. */
+	resetScene: () => void;
 	accent: string;
 	setAccent: (family: string) => void;
 	scheme: Scheme;
@@ -144,6 +146,16 @@ export function PlaygroundProvider({
 		},
 		[setSceneQuery],
 	);
+	const resetScene = useCallback(() => {
+		void setSceneQuery((previous) => {
+			const kept = Object.fromEntries(
+				Object.entries(previous ?? {}).filter(([key]) =>
+					key.startsWith("all."),
+				),
+			);
+			return Object.keys(kept).length > 0 ? kept : null;
+		});
+	}, [setSceneQuery]);
 
 	const playground = useMemo(
 		() => ({
@@ -151,6 +163,7 @@ export function PlaygroundProvider({
 			meta,
 			sceneValues: sceneState,
 			setSceneValue,
+			resetScene,
 			accent,
 			setAccent,
 			scheme,
@@ -163,6 +176,7 @@ export function PlaygroundProvider({
 			meta,
 			sceneState,
 			setSceneValue,
+			resetScene,
 			accent,
 			setAccent,
 			scheme,
@@ -195,6 +209,7 @@ export function StaticPlayground({
 			meta,
 			sceneValues: {},
 			setSceneValue: ignore,
+			resetScene: ignore,
 			accent: DEFAULT_ACCENT,
 			setAccent: ignore,
 			scheme: "light" as Scheme,

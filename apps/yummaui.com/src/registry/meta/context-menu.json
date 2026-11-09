@@ -125,7 +125,11 @@
         },
         "items": [
           {
-            "label": "Open"
+            "label": "Open",
+            "icon": {
+              "$icon": "IconExternalLink",
+              "size": "w:4 h:4"
+            }
           },
           {
             "type": "submenu",
@@ -141,7 +145,11 @@
           },
           {
             "label": "Get info",
-            "shortcut": "Ctrl I"
+            "shortcut": "Ctrl I",
+            "icon": {
+              "$icon": "IconInfoCircle",
+              "size": "w:4 h:4"
+            }
           },
           {
             "type": "separator"
@@ -149,7 +157,11 @@
           {
             "label": "Move to Trash",
             "shortcut": "Del",
-            "destructive": true
+            "destructive": true,
+            "icon": {
+              "$icon": "IconTrash",
+              "size": "w:4 h:4"
+            }
           }
         ],
         "icon": false
