@@ -12,8 +12,9 @@ export interface DonutChartDatum {
 
 export interface DonutChartProps {
   /**
-   * The parts, in order around the circle. The first four take the chart
-   * palette; a fifth and later read in gray, so fold small parts into "Other".
+   * The parts, in order around the circle. Each draws a lighter shade of the
+   * text color, and a fifth and later share the lightest, so fold small parts
+   * into "Other".
    */
   data: DonutChartDatum[];
   /** What the chart shows, for screen readers and its table. */
@@ -36,8 +37,7 @@ export interface DonutChartProps {
   className?: string;
 }
 
-// checked for color blindness side by side, in light and dark
-const PALETTE = ["c:blue-5", "c:orange-7", "c:mint-8", "c:violet-7"];
+const SHADES = ["o:100", "o:70", "o:40", "o:20"];
 
 /**
  * A circle of parts with a value in the middle, which names a part on hover.
@@ -83,7 +83,7 @@ export default function DonutChart({
                 strokeWidth={active === index ? band + 4 : band}
                 strokeDasharray={`${dash} ${length}`}
                 strokeDashoffset={offset}
-                className={`tp:a tdu:150 @prm:tp:none ${PALETTE[index] ?? "c:hint"}`}
+                className={`tp:a tdu:150 @prm:tp:none ${SHADES[index] ?? "o:20"}`}
                 onPointerEnter={() => setActive(index)}
                 onPointerLeave={(event) => event.pointerType === "mouse" && setActive(null)}
               />
