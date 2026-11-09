@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 
 export interface BarChartDatum {
@@ -44,6 +44,7 @@ export default function BarChart({
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [active, setActive] = useState<number | null>(null);
+  const mask = useId();
 
   useEffect(() => {
     const el = box.current;
@@ -65,29 +66,41 @@ export default function BarChart({
   // fewer labels when bars get narrow
   const every = band < 32 ? Math.ceil(32 / Math.max(band, 1)) : 1;
   const shown = active === null ? null : data[active];
+  const bars = data.map((datum, index) => {
+    const x = left + index * band + gap / 2;
+    const w = Math.max(band - gap, 1);
+    const peak = y(datum.value);
+    const r = Math.min(4, w / 2, top + plot - peak);
+    // rounded at the value, square on the baseline
+    const d = `M${x},${top + plot}V${peak + r}Q${x},${peak} ${x + r},${peak}H${x + w - r}Q${x + w},${peak} ${x + w},${peak + r}V${top + plot}Z`;
+    return { x, w, d };
+  });
 
   return (
     <div ref={box} className={merge("p:r w:100% c:label", className)}>
       {width > 0 && (
         <svg width={width} height={height} aria-hidden className="d:b o:v us:none ta:m">
+          {/* the grid stops at the bars, so a dimmed bar reads solid */}
+          <mask id={mask}>
+            <rect width={width} height={height} fill="white" />
+            {bars.map((bar, index) => (
+              <path key={data[index].label} d={bar.d} fill="black" />
+            ))}
+          </mask>
           {ticks.map((tick) => (
             <g key={tick}>
-              <line x1={left} x2={width} y1={y(tick)} y2={y(tick)} className="c:line" stroke="currentColor" />
+              <line x1={left} x2={width} y1={y(tick)} y2={y(tick)} className="c:line" stroke="currentColor" mask={`url(#${mask})`} />
               <text x={left - 8} y={y(tick) + 4} textAnchor="end" className="c:hint fs:xs ff:m" fill="currentColor">
                 {format(tick)}
               </text>
             </g>
           ))}
           {data.map((datum, index) => {
-            const x = left + index * band + gap / 2;
-            const w = Math.max(band - gap, 1);
-            const peak = y(datum.value);
-            const r = Math.min(4, w / 2, top + plot - peak);
+            const { x, w, d } = bars[index];
             return (
               <g key={datum.label}>
-                {/* rounded at the value, square on the baseline */}
                 <path
-                  d={`M${x},${top + plot}V${peak + r}Q${x},${peak} ${x + r},${peak}H${x + w - r}Q${x + w},${peak} ${x + w},${peak + r}V${top + plot}Z`}
+                  d={d}
                   fill="currentColor"
                   className={`c:fill tp:o tdu:150 @prm:tp:none ${active === null || active === index ? "o:100" : "o:40"}`}
                 />
