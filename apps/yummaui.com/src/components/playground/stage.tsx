@@ -178,8 +178,9 @@ export default function ComponentPlayground({
 							aria-label="Restart preview"
 							className="d:f ai:c g:2 h:100% px:2 bw:0 bg:transparent c:ink/60 fs:sm c:p h:c:ink fv:oc:ink fv:ow:2"
 						>
+							{/* the font sits high, so the label drops a pixel to center on its icon */}
 							<Refresh aria-hidden className="w:4 h:4" />
-							<span className="d:none @sm:d:i">Restart</span>
+							<span className="d:none @sm:d:i pt:px">Restart</span>
 						</Button>
 					)}
 					{active === "preview" && primitive && (
@@ -194,7 +195,7 @@ export default function ComponentPlayground({
 							className="d:f ai:c g:2 px:2 c:ink/60 fs:sm td:none h:c:ink fv:oc:ink fv:ow:2"
 						>
 							<BaseUI aria-hidden className="w:4 h:4" />
-							<span className="d:none @sm:d:i">Built on Base UI</span>
+							<span className="d:none @sm:d:i pt:px">Built on Base UI</span>
 						</a>
 					)}
 				</div>
