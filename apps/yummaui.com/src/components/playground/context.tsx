@@ -1,7 +1,7 @@
 "use client";
 
 import { parseAsJson, parseAsStringLiteral, useQueryState } from "nuqs";
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useMediaQuery } from "usehooks-ts";
 import {
 	createContext,
 	type ReactNode,
@@ -53,7 +53,8 @@ interface Playground {
 	accent: string;
 	setAccent: (family: string) => void;
 	scheme: Scheme;
-	setScheme: (scheme: Scheme) => void;
+	/** Pins the preview's scheme, or `system` to follow the reader's own again. */
+	setScheme: (scheme: Scheme | "system") => void;
 	shape: string;
 	setShape: (shape: string) => void;
 }
@@ -80,14 +81,21 @@ export function PlaygroundProvider({
 	);
 	const accent = isAccent(storedAccent) ? storedAccent : DEFAULT_ACCENT;
 
+	// the preview follows the system until the drawer picks a scheme
 	const [storedScheme, setStoredScheme] = useLocalStorage<string>(
 		"yui:scheme",
-		"light",
+		"system",
 		STORED,
 	);
-	const scheme: Scheme = storedScheme === "dark" ? "dark" : "light";
+	const systemDark = useMediaQuery("(prefers-color-scheme: dark)");
+	const scheme: Scheme =
+		storedScheme === "dark" || storedScheme === "light"
+			? storedScheme
+			: systemDark
+				? "dark"
+				: "light";
 	const setScheme = useCallback(
-		(next: Scheme) => setStoredScheme(next),
+		(next: Scheme | "system") => setStoredScheme(next),
 		[setStoredScheme],
 	);
 

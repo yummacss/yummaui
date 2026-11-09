@@ -27,7 +27,7 @@
         "md",
         "lg"
       ],
-      "default": "sm",
+      "default": "md",
       "description": "Size of the `+N` avatar only. The avatars you pass carry their own `size`."
     },
     {

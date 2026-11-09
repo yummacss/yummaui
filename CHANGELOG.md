@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** Card, Alert, Fieldset, Form & Pagination.
 - **[components]** Field shows the error a surrounding Form reports for its `name`.
 
+### Changed
+
+- **[components]** Avatar Stack's `+N` avatar is `md` by default, the size of an Avatar.
+
 ### Removed
 
 - **[components]** The Sidebar & Sign In blocks.

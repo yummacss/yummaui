@@ -168,7 +168,7 @@ export function Look() {
 			playground.setSceneValue(`all.${prop.name}`, prop.default, prop.default);
 		playground.setShape(DEFAULT_SHAPE);
 		playground.setAccent(DEFAULT_ACCENT);
-		playground.setScheme("light");
+		playground.setScheme("system");
 	};
 
 	return (
