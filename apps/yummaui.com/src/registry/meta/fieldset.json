@@ -45,7 +45,8 @@
             "name": "name",
             "defaultValue": "Ada Lovelace",
             "required": true
-          }
+          },
+          "className": "w:100%"
         },
         {
           "component": "Field",
@@ -55,7 +56,8 @@
             "defaultValue": "ada@example.com",
             "required": true,
             "type": "email"
-          }
+          },
+          "className": "w:100%"
         }
       ]
     }
