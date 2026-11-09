@@ -25,7 +25,7 @@ export default function ScrollAreaFiles() {
   const shape = useShape(undefined, ["square", "rounded", "squircle"] as const);
   return (
     <div
-      className={`d:f fd:c w:80 max-w:100% bg:raised bw:1 bc:rim c:label o:h ${RADIUS.popup[shape]}`}
+      className={`d:f fd:c w:80 max-w:100% bg:raised bs-o:key bw:1 bc:rim c:label o:h ${RADIUS.popup[shape]}`}
     >
       <div className="d:f ai:b jc:sb px:4 pt:3 pb:2">
         <span className="fs:sm fw:500">Downloads</span>

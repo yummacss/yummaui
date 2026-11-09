@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **[components]** Kbd takes no `pill` shape; under a pill `Shape` its keycaps stay rounded.
 - **[components]** File Tree's icons take the text color, not a tint per file type.
 - **[components]** Avatar Stack's `+N` avatar is `md` by default, the size of an Avatar.
 
