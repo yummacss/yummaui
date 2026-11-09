@@ -176,10 +176,14 @@ export default function ComponentPlayground({
 								setRun((count) => count + 1);
 							}}
 							aria-label="Restart preview"
-							className="d:f ai:c jc:c w:8 h:100% p:0 bw:0 bg:transparent c:ink/60 c:p h:c:ink fv:oc:ink fv:ow:2"
+							className="d:f ai:c g:2 h:100% px:2 bw:0 bg:transparent c:ink/60 fs:sm c:p h:c:ink fv:oc:ink fv:ow:2"
 						>
-							<Refresh className="w:4 h:4" />
+							<Refresh aria-hidden className="w:4 h:4" />
+							<span className="d:none @sm:d:i">Restart</span>
 						</Button>
+					)}
+					{active === "preview" && primitive && (
+						<span aria-hidden className="w:px h:4 bg:border" />
 					)}
 					{primitive && (
 						<a

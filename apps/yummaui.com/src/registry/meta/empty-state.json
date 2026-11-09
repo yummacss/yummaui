@@ -8,7 +8,7 @@
       "description": "The glyph in the badge. No badge renders without one.",
       "example": {
         "$icon": "IconFolder",
-        "size": "w:6 h:6 c:yellow"
+        "size": "w:6 h:6 c:label"
       }
     },
     {
@@ -103,7 +103,7 @@
       "props": {
         "icon": {
           "$icon": "IconFolder",
-          "size": "w:6 h:6 c:yellow"
+          "size": "w:6 h:6 c:label"
         },
         "title": "This folder is empty",
         "description": "Drop files here, or start a new document. Everything you add syncs to your other devices.",
