@@ -292,7 +292,12 @@ export default function FieldBase({
             required={required}
             type={controlType}
             className={(state) =>
-              merge(controlClasses, state.valid === false && STATUS_BORDER.error)
+              // invalid stays red while focused, where Form leaves it after a failed submit
+              merge(
+                controlClasses,
+                state.valid === false &&
+                  merge(STATUS_BORDER.error, focus ? STATUS_OUTLINE.error : ""),
+              )
             }
             {...props}
           />
