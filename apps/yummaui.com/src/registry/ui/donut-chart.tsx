@@ -62,7 +62,8 @@ export default function DonutChart({
 
   return (
     <div className={merge("p:r d:ib c:label", className)}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden className="d:b o:v">
+      {/* a touch has no hover, so a tap shows a part until the next tap */}
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden className="d:b o:v us:none ta:m">
         <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="currentColor" strokeWidth={band} className="c:well" />
         <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
           {data.map((datum, index) => {
@@ -84,7 +85,7 @@ export default function DonutChart({
                 strokeDashoffset={offset}
                 className={`tp:a tdu:150 @prm:tp:none ${PALETTE[index] ?? "c:hint"}`}
                 onPointerEnter={() => setActive(index)}
-                onPointerLeave={() => setActive(null)}
+                onPointerLeave={(event) => event.pointerType === "mouse" && setActive(null)}
               />
             );
           })}

@@ -91,9 +91,9 @@ export default function LineChart({
           width={width}
           height={height}
           aria-hidden
-          className="d:b o:v"
+          className="d:b o:v us:none ta:m"
           onPointerMove={(event) => pick(event.clientX)}
-          onPointerLeave={() => setActive(null)}
+          onPointerLeave={(event) => event.pointerType === "mouse" && setActive(null)}
         >
           {ticks.map((tick) => (
             <g key={tick}>

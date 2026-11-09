@@ -69,7 +69,7 @@ export default function BarChart({
   return (
     <div ref={box} className={merge("p:r w:100% c:label", className)}>
       {width > 0 && (
-        <svg width={width} height={height} aria-hidden className="d:b o:v">
+        <svg width={width} height={height} aria-hidden className="d:b o:v us:none ta:m">
           {ticks.map((tick) => (
             <g key={tick}>
               <line x1={left} x2={width} y1={y(tick)} y2={y(tick)} className="c:line" stroke="currentColor" />
@@ -103,7 +103,7 @@ export default function BarChart({
                   height={plot}
                   fill="transparent"
                   onPointerEnter={() => setActive(index)}
-                  onPointerLeave={() => setActive(null)}
+                  onPointerLeave={(event) => event.pointerType === "mouse" && setActive(null)}
                 />
               </g>
             );
