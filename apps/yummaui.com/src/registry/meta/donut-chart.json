@@ -5,7 +5,7 @@
       "name": "data",
       "type": "none",
       "typeName": "DonutChartDatum[]",
-      "description": "The parts, in order around the circle. Each draws a lighter shade of the text color, and a fifth and later share the lightest, so fold small parts into \"Other\"."
+      "description": "The parts, in order around the circle. Each draws a lighter step of the fill color, and a fifth and later share the lightest, so fold small parts into \"Other\"."
     },
     {
       "name": "ariaLabel",

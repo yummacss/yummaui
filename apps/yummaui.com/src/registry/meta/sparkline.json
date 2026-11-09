@@ -1,5 +1,5 @@
 {
-  "summary": "A small trend line in the text color, with no axes.",
+  "summary": "A small trend line in the fill color, with no axes.",
   "props": [
     {
       "name": "values",

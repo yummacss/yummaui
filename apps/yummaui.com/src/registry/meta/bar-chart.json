@@ -1,5 +1,5 @@
 {
-  "summary": "Bars in the text color with rounded tops, a grid and a tooltip on hover.",
+  "summary": "Bars in the fill color with rounded tops, a grid and a tooltip on hover.",
   "props": [
     {
       "name": "data",
