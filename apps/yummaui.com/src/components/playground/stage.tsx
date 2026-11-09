@@ -3,6 +3,7 @@
 import { Resizable } from "re-resizable";
 import type { ComponentType } from "react";
 import { useEffect, useMemo, useState } from "react";
+import { useMediaQuery } from "usehooks-ts";
 import { usePlayground } from "@/components/playground/context";
 import PreviewFrame, { usePreviewContainer } from "@/components/preview-frame";
 import { BaseUI } from "@/components/icons/icons";
@@ -46,6 +47,8 @@ export default function ComponentPlayground({
 }) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
+	// on a phone only the active tab keeps its label, so the actions beside it fit
+	const narrow = useMediaQuery("(max-width: 639px)");
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
 	// at full width the panel's border is the frame's, so the frame draws its own only when narrower
@@ -151,14 +154,21 @@ export default function ComponentPlayground({
 						value: "preview",
 						label: "Preview",
 						icon: <Globe className="w:4 h:4" />,
+						iconOnly: narrow && active !== "preview",
 					},
-					{ value: "code", label: "Code", icon: <Code className="w:4 h:4" /> },
+					{
+						value: "code",
+						label: "Code",
+						icon: <Code className="w:4 h:4" />,
+						iconOnly: narrow && active !== "code",
+					},
 					...(config
 						? [
 								{
 									value: "config",
 									label: "Configuration",
 									icon: <Settings2 className="w:4 h:4" />,
+									iconOnly: narrow && active !== "config",
 								},
 							]
 						: []),
