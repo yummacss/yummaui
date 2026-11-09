@@ -59,13 +59,27 @@ export default function DonutChart({
   const length = 2 * Math.PI * radius;
   const whole = total ?? data.reduce((sum, d) => sum + d.value, 0);
   let start = 0;
+  const filled = Math.min(whole ? data.reduce((sum, d) => sum + d.value, 0) / whole : 0, 1);
 
   return (
     <div className={merge("p:r d:ib c:label", className)}>
       {/* a touch has no hover, so a tap shows a part until the next tap */}
       <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden className="d:b o:v us:none ta:m">
-        <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="currentColor" strokeWidth={band} className="c:well" />
         <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
+          {/* the track fills only what the parts leave, so a light part reads solid */}
+          {filled < 1 && (
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={radius}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={band}
+              strokeDasharray={`${Math.max((1 - filled) * length - 2, 0)} ${length}`}
+              strokeDashoffset={-filled * length}
+              className="c:well"
+            />
+          )}
           {data.map((datum, index) => {
             const share = whole ? datum.value / whole : 0;
             // a 2px gap between parts
