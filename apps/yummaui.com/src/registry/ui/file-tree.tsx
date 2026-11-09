@@ -10,21 +10,20 @@ import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 const PICKED =
   "bg:well c:label bc:transparent";
 
-// a file's icon and tint come from its extension
+// a file's icon comes from its extension
 const KINDS = [
-  { match: /\.pdf$/i, Icon: IconFileTypePdf, tint: "c:red" },
-  { match: /\.docx?$/i, Icon: IconFileTypeDoc, tint: "c:blue" },
-  { match: /\.txt$/i, Icon: IconFileTypeTxt, tint: "c:blue" },
-  { match: /\.mdx?$/i, Icon: IconMarkdown, tint: "c:blue" },
-  { match: /\.csv$/i, Icon: IconFileTypeCsv, tint: "c:mint" },
-  { match: /\.xlsx?$/i, Icon: IconFileTypeXls, tint: "c:mint" },
+  { match: /\.pdf$/i, Icon: IconFileTypePdf },
+  { match: /\.docx?$/i, Icon: IconFileTypeDoc },
+  { match: /\.txt$/i, Icon: IconFileTypeTxt },
+  { match: /\.mdx?$/i, Icon: IconMarkdown },
+  { match: /\.csv$/i, Icon: IconFileTypeCsv },
+  { match: /\.xlsx?$/i, Icon: IconFileTypeXls },
   {
     match: /\.(png|jpe?g|gif|webp|svg)$/i,
     Icon: IconPhoto,
-    tint: "c:mint",
   },
-  { match: /\.(mov|mp4|webm)$/i, Icon: IconMovie, tint: "c:red" },
-  { match: /\.(zip|gz|7z)$/i, Icon: IconFileZip, tint: "c:yellow" },
+  { match: /\.(mov|mp4|webm)$/i, Icon: IconMovie },
+  { match: /\.(zip|gz|7z)$/i, Icon: IconFileZip },
 ];
 
 interface Node {
@@ -199,7 +198,6 @@ export default function FileTree({
           ? IconFolderOpen
           : IconFolder
         : (kind?.Icon ?? IconFile);
-      const tint = node.children ? "c:yellow" : (kind?.tint ?? "c:hint");
 
       const row = (
         <div
@@ -239,7 +237,7 @@ export default function FileTree({
               />
             )}
           </span>
-          <Glyph aria-hidden className={`fs:0 w:4 h:4 ${tint}`} />
+          <Glyph aria-hidden className="fs:0 w:4 h:4 c:label" />
           <span className="f:1 min-w:0 o:h to:e ws:nw">{node.name}</span>
         </div>
       );

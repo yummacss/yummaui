@@ -1,5 +1,6 @@
 import {
 	IconArrowBackUp,
+	IconRefresh,
 	IconArrowUpRight,
 	IconBook,
 	IconBrandGithub,
@@ -69,3 +70,4 @@ export const Terminal = line(IconTerminal2);
 export const TextLayer = line(IconLetterT);
 export const Twitter = line(IconBrandX);
 export const Undo = line(IconArrowBackUp);
+export const Refresh = line(IconRefresh);

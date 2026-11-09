@@ -164,7 +164,11 @@
         "trigger": "Rename file",
         "title": "Rename file",
         "cancelLabel": "Cancel",
-        "confirmLabel": "Rename"
+        "confirmLabel": "Rename",
+        "triggerIcon": {
+          "$icon": "IconPencil",
+          "size": "w:4 h:4"
+        }
       },
       "children": [
         {

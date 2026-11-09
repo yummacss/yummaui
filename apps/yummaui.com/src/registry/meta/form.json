@@ -1,0 +1,81 @@
+{
+  "summary": "A form that checks its fields on submit and shows each error under the field it belongs to.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "Fields, fieldsets and buttons."
+    },
+    {
+      "name": "onSubmit",
+      "type": "none",
+      "typeName": "( values: Record<string, unknown>, ) => Errors | void | Promise<Errors | void>",
+      "description": "Called with every named field's value once the browser's own checks pass. Return errors by field name to show them under those fields."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Form",
+      "className": "w:144 max-w:100%",
+      "children": [
+        {
+          "component": "Fieldset",
+          "props": {
+            "legend": "Profile",
+            "description": "Shown on your public profile."
+          },
+          "children": [
+            {
+              "component": "Field",
+              "props": {
+                "label": "Name",
+                "name": "name",
+                "defaultValue": "Ada Lovelace",
+                "required": true
+              },
+              "className": "w:100%"
+            },
+            {
+              "component": "Field",
+              "props": {
+                "label": "Email",
+                "name": "email",
+                "defaultValue": "ada@",
+                "required": true,
+                "type": "email"
+              },
+              "className": "w:100%"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f jc:fe g:2",
+          "children": [
+            {
+              "component": "Button",
+              "props": {
+                "variant": "secondary",
+                "type": "reset"
+              },
+              "children": "Cancel"
+            },
+            {
+              "component": "Button",
+              "props": {
+                "type": "submit"
+              },
+              "children": "Save"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

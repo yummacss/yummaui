@@ -1,7 +1,7 @@
 "use client";
 
 import { parseAsJson, parseAsStringLiteral, useQueryState } from "nuqs";
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useMediaQuery } from "usehooks-ts";
 import {
 	createContext,
 	type ReactNode,
@@ -48,10 +48,13 @@ interface Playground {
 	/** What the scene's components were changed to, by instance and prop. */
 	sceneValues: SceneValues;
 	setSceneValue: (key: string, value: unknown, fallback: unknown) => void;
+	/** Puts every instance back to its start, keeping the drawer's settings. */
+	resetScene: () => void;
 	accent: string;
 	setAccent: (family: string) => void;
 	scheme: Scheme;
-	setScheme: (scheme: Scheme) => void;
+	/** Pins the preview's scheme, or `system` to follow the reader's own again. */
+	setScheme: (scheme: Scheme | "system") => void;
 	shape: string;
 	setShape: (shape: string) => void;
 }
@@ -78,14 +81,21 @@ export function PlaygroundProvider({
 	);
 	const accent = isAccent(storedAccent) ? storedAccent : DEFAULT_ACCENT;
 
+	// the preview follows the system until the drawer picks a scheme
 	const [storedScheme, setStoredScheme] = useLocalStorage<string>(
 		"yui:scheme",
-		"light",
+		"system",
 		STORED,
 	);
-	const scheme: Scheme = storedScheme === "dark" ? "dark" : "light";
+	const systemDark = useMediaQuery("(prefers-color-scheme: dark)");
+	const scheme: Scheme =
+		storedScheme === "dark" || storedScheme === "light"
+			? storedScheme
+			: systemDark
+				? "dark"
+				: "light";
 	const setScheme = useCallback(
-		(next: Scheme) => setStoredScheme(next),
+		(next: Scheme | "system") => setStoredScheme(next),
 		[setStoredScheme],
 	);
 
@@ -144,6 +154,16 @@ export function PlaygroundProvider({
 		},
 		[setSceneQuery],
 	);
+	const resetScene = useCallback(() => {
+		void setSceneQuery((previous) => {
+			const kept = Object.fromEntries(
+				Object.entries(previous ?? {}).filter(([key]) =>
+					key.startsWith("all."),
+				),
+			);
+			return Object.keys(kept).length > 0 ? kept : null;
+		});
+	}, [setSceneQuery]);
 
 	const playground = useMemo(
 		() => ({
@@ -151,6 +171,7 @@ export function PlaygroundProvider({
 			meta,
 			sceneValues: sceneState,
 			setSceneValue,
+			resetScene,
 			accent,
 			setAccent,
 			scheme,
@@ -163,6 +184,7 @@ export function PlaygroundProvider({
 			meta,
 			sceneState,
 			setSceneValue,
+			resetScene,
 			accent,
 			setAccent,
 			scheme,
@@ -195,6 +217,7 @@ export function StaticPlayground({
 			meta,
 			sceneValues: {},
 			setSceneValue: ignore,
+			resetScene: ignore,
 			accent: DEFAULT_ACCENT,
 			setAccent: ignore,
 			scheme: "light" as Scheme,

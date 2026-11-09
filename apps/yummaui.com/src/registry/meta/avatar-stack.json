@@ -27,7 +27,7 @@
         "md",
         "lg"
       ],
-      "default": "sm",
+      "default": "md",
       "description": "Size of the `+N` avatar only. The avatars you pass carry their own `size`."
     },
     {
@@ -79,15 +79,33 @@
             },
             {
               "component": "Avatar",
-              "className": "bc:raised bw:2",
+              "className": "bg:violet-8 bc:raised bw:2",
               "props": {
-                "fallback": "+1"
+                "name": "Watch",
+                "fallback": {
+                  "$icon": "IconDeviceWatch",
+                  "size": "w:6 h:6 c:white"
+                }
+              }
+            },
+            {
+              "component": "Avatar",
+              "className": "bg:orange-8 bc:raised bw:2",
+              "props": {
+                "name": "Desktop",
+                "fallback": {
+                  "$icon": "IconDeviceDesktop",
+                  "size": "w:6 h:6 c:white"
+                }
               }
             }
-          ]
+          ],
+          "props": {
+            "max": 3
+          }
         },
         {
-          "text": "Synced on 4 devices",
+          "text": "Synced on 5 devices",
           "className": "fs:sm c:hint"
         }
       ]

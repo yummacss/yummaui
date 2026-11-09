@@ -163,6 +163,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "fieldset",
+		since: "0.12",
+		primitive: true,
+		title: "Fieldset",
+		description: "Group related fields under a legend & a description.",
+	},
+	{
 		slug: "file-tree",
 		title: "File Tree",
 		description:
@@ -173,6 +180,13 @@ export const COMPONENT_PAGES = [
 		slug: "file-upload",
 		title: "File Upload",
 		description: "Upload files with drag & drop.",
+	},
+	{
+		slug: "form",
+		since: "0.12",
+		primitive: true,
+		title: "Form",
+		description: "Check fields on submit & show each error under its field.",
 	},
 	{
 		slug: "gauge",
@@ -252,6 +266,12 @@ export const COMPONENT_PAGES = [
 		description:
 			"Enter a one-time code one character at a time, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "pagination",
+		since: "0.12",
+		title: "Pagination",
+		description: "Move between pages with Previous, Next & page numbers.",
 	},
 	{
 		slug: "popover",

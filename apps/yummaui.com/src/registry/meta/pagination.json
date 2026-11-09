@@ -1,0 +1,86 @@
+{
+  "summary": "Previous and Next keys around the page numbers, folding to \"Page 3 of 10\" on a phone.",
+  "props": [
+    {
+      "name": "total",
+      "type": "number",
+      "description": "How many pages there are."
+    },
+    {
+      "name": "page",
+      "type": "number",
+      "description": "The current page, counting from 1. Controlled; pair with `onPageChange`.",
+      "controlled": true,
+      "handler": "onPageChange"
+    },
+    {
+      "name": "defaultPage",
+      "type": "number",
+      "default": 1,
+      "description": "The page it starts on when uncontrolled."
+    },
+    {
+      "name": "onPageChange",
+      "type": "none",
+      "typeName": "(page: number) => void",
+      "description": "Called with the new page whenever it changes."
+    },
+    {
+      "name": "siblings",
+      "type": "number",
+      "default": 1,
+      "description": "Pages shown on each side of the current one before a gap."
+    },
+    {
+      "name": "previousLabel",
+      "type": "string",
+      "default": "Previous",
+      "description": "What the button before the pages says."
+    },
+    {
+      "name": "nextLabel",
+      "type": "string",
+      "default": "Next",
+      "description": "What the button after the pages says."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": "Pagination",
+      "description": "What the landmark is called for screen readers."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the buttons. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it along with the danger, error and success tints that ride with it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Pagination",
+      "props": {
+        "total": 10,
+        "defaultPage": 3
+      }
+    }
+  ]
+}

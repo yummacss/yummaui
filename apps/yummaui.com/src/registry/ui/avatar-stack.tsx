@@ -42,7 +42,7 @@ export default function AvatarStack({
   children,
   overlap = "md",
   max,
-  size = "sm",
+  size = "md",
 }: AvatarStackProps) {
   const items = Children.toArray(children);
   const shown = max === undefined ? items : items.slice(0, max);

@@ -39,7 +39,7 @@
     {
       "name": "placeholder",
       "type": "string",
-      "default": "Select…",
+      "default": "Select\u2026",
       "description": "Shown on the trigger before anything is selected."
     },
     {
@@ -144,23 +144,43 @@
         "options": [
           {
             "value": "name",
-            "label": "Name"
+            "label": "Name",
+            "icon": {
+              "$icon": "IconAbc",
+              "size": "w:4 h:4"
+            }
           },
           {
             "value": "modified",
-            "label": "Date modified"
+            "label": "Date modified",
+            "icon": {
+              "$icon": "IconCalendar",
+              "size": "w:4 h:4"
+            }
           },
           {
             "value": "size",
-            "label": "Size"
+            "label": "Size",
+            "icon": {
+              "$icon": "IconRuler",
+              "size": "w:4 h:4"
+            }
           },
           {
             "value": "kind",
-            "label": "Kind"
+            "label": "Kind",
+            "icon": {
+              "$icon": "IconCategory",
+              "size": "w:4 h:4"
+            }
           }
         ],
         "label": "Sort by",
-        "defaultValue": "modified"
+        "defaultValue": "modified",
+        "icon": {
+          "$icon": "IconArrowsSort",
+          "size": "w:4 h:4"
+        }
       }
     }
   ]
