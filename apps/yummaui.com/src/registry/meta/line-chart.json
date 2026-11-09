@@ -1,0 +1,98 @@
+{
+  "summary": "Lines over a grid, a crosshair on hover and a legend.",
+  "props": [
+    {
+      "name": "labels",
+      "type": "none",
+      "typeName": "string[]",
+      "description": "The points along the bottom, such as months."
+    },
+    {
+      "name": "series",
+      "type": "none",
+      "typeName": "LineChartSeries[]",
+      "description": "The lines. The first draws solid in the text color; the rest draw dashed and quieter, for a comparison such as last year."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "What the chart shows, for screen readers and its table."
+    },
+    {
+      "name": "format",
+      "type": "none",
+      "typeName": "(value: number) => string",
+      "description": "How a value reads in the tooltip, the axis and the table."
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "default": 200,
+      "description": "The plot's height in pixels."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "LineChart",
+      "className": "w:120 max-w:100%",
+      "props": {
+        "ariaLabel": "Active users by month, thousands",
+        "labels": [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ],
+        "series": [
+          {
+            "name": "2026",
+            "values": [
+              32,
+              35,
+              31,
+              38,
+              42,
+              40,
+              45,
+              48,
+              46,
+              52,
+              55,
+              58
+            ]
+          },
+          {
+            "name": "2025",
+            "values": [
+              28,
+              30,
+              29,
+              33,
+              34,
+              36,
+              37,
+              39,
+              40,
+              42,
+              44,
+              47
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

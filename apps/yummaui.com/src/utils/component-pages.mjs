@@ -70,6 +70,12 @@ export const COMPONENT_PAGES = [
 		description: "Highlight status, count, or label information.",
 	},
 	{
+		slug: "bar-chart",
+		since: "0.13",
+		title: "Bar Chart",
+		description: "Compare values side by side in bars, with a tooltip on each.",
+	},
+	{
 		slug: "breadcrumb",
 		title: "Breadcrumb",
 		description: "Show navigation hierarchy & current location.",
@@ -136,6 +142,12 @@ export const COMPONENT_PAGES = [
 		description:
 			"Display modal dialogs over your application, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "donut-chart",
+		since: "0.13",
+		title: "Donut Chart",
+		description: "Show the parts of a whole as a ring, with a legend.",
 	},
 	{
 		slug: "drawer",
@@ -221,6 +233,12 @@ export const COMPONENT_PAGES = [
 		slug: "kbd",
 		title: "Kbd",
 		description: "Show a keyboard shortcut as keycaps in running text.",
+	},
+	{
+		slug: "line-chart",
+		since: "0.13",
+		title: "Line Chart",
+		description: "Follow values over time, and against a past period.",
 	},
 	{
 		slug: "menu",
@@ -339,6 +357,18 @@ export const COMPONENT_PAGES = [
 		title: "Slider",
 		description: "Select values by dragging a handle, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "sparkline",
+		since: "0.13",
+		title: "Sparkline",
+		description: "Show a trend at a glance, in a line without axes.",
+	},
+	{
+		slug: "stat",
+		since: "0.13",
+		title: "Stat",
+		description: "Show a key number with its change & trend.",
 	},
 	{
 		slug: "storage-bar",

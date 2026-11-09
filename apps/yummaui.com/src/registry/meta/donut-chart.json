@@ -1,0 +1,72 @@
+{
+  "summary": "A circle of parts with a legend, and a value in the middle.",
+  "props": [
+    {
+      "name": "data",
+      "type": "none",
+      "typeName": "DonutChartDatum[]",
+      "description": "The parts, in order around the circle. The first four take the chart palette; a fifth and later read in gray, so fold small parts into \"Other\"."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "What the chart shows, for screen readers and its table."
+    },
+    {
+      "name": "total",
+      "type": "number",
+      "description": "The whole the circle measures against. Without it, the parts fill the circle."
+    },
+    {
+      "name": "centerValue",
+      "type": "string",
+      "description": "The large text in the middle, such as a percentage."
+    },
+    {
+      "name": "centerLabel",
+      "type": "string",
+      "description": "A line under the middle text."
+    },
+    {
+      "name": "format",
+      "type": "none",
+      "typeName": "(value: number) => string",
+      "description": "How a value reads in the legend and the table."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "DonutChart",
+      "className": "w:96 max-w:100%",
+      "props": {
+        "ariaLabel": "Storage used by kind, gigabytes",
+        "total": 100,
+        "centerValue": "64%",
+        "centerLabel": "used",
+        "data": [
+          {
+            "label": "Photos",
+            "value": 28
+          },
+          {
+            "label": "Videos",
+            "value": 18
+          },
+          {
+            "label": "Documents",
+            "value": 11
+          },
+          {
+            "label": "Other",
+            "value": 7
+          }
+        ]
+      }
+    }
+  ]
+}

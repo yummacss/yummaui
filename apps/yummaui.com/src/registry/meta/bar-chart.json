@@ -1,0 +1,92 @@
+{
+  "summary": "Bars in the text color with rounded tops, a grid and a tooltip on hover.",
+  "props": [
+    {
+      "name": "data",
+      "type": "none",
+      "typeName": "BarChartDatum[]",
+      "description": "One bar per item, left to right."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "What the chart shows, for screen readers and its table."
+    },
+    {
+      "name": "format",
+      "type": "none",
+      "typeName": "(value: number) => string",
+      "description": "How a value reads in the tooltip, the axis and the table."
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "default": 200,
+      "description": "The plot's height in pixels."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "BarChart",
+      "className": "w:120 max-w:100%",
+      "props": {
+        "ariaLabel": "Revenue by month, thousands of dollars",
+        "data": [
+          {
+            "label": "Jan",
+            "value": 32
+          },
+          {
+            "label": "Feb",
+            "value": 35
+          },
+          {
+            "label": "Mar",
+            "value": 31
+          },
+          {
+            "label": "Apr",
+            "value": 38
+          },
+          {
+            "label": "May",
+            "value": 42
+          },
+          {
+            "label": "Jun",
+            "value": 40
+          },
+          {
+            "label": "Jul",
+            "value": 45
+          },
+          {
+            "label": "Aug",
+            "value": 48
+          },
+          {
+            "label": "Sep",
+            "value": 46
+          },
+          {
+            "label": "Oct",
+            "value": 52
+          },
+          {
+            "label": "Nov",
+            "value": 55
+          },
+          {
+            "label": "Dec",
+            "value": 58
+          }
+        ]
+      }
+    }
+  ]
+}

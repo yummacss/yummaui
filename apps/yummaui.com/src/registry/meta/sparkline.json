@@ -1,0 +1,71 @@
+{
+  "summary": "A small trend line in the text color, with no axes.",
+  "props": [
+    {
+      "name": "values",
+      "type": "none",
+      "typeName": "number[]",
+      "description": "The values, oldest first."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "What the line shows, for screen readers, such as \"Revenue, rising\"."
+    },
+    {
+      "name": "width",
+      "type": "number",
+      "description": "The drawing's width in pixels. Without it, the line fills its container."
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "default": 32,
+      "description": "The drawing's height in pixels."
+    },
+    {
+      "name": "dot",
+      "type": "boolean",
+      "default": true,
+      "description": "A dot on the latest value."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "d:f ai:c g:3 fs:sm",
+      "children": [
+        {
+          "text": "api",
+          "className": "c:hint ff:m w:16"
+        },
+        {
+          "component": "Sparkline",
+          "props": {
+            "ariaLabel": "API response time, rising",
+            "values": [
+              120,
+              118,
+              130,
+              125,
+              140,
+              138,
+              150,
+              142
+            ],
+            "width": 160
+          }
+        },
+        {
+          "text": "142 ms",
+          "className": "fvn:tn"
+        }
+      ]
+    }
+  ]
+}
