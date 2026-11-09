@@ -47,7 +47,7 @@ export default function ComponentPlayground({
 }) {
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
-	// on a phone the tabs keep only their icons, so the actions beside them fit
+	// on a phone only the active tab keeps its label, so the actions beside it fit
 	const narrow = useMediaQuery("(max-width: 639px)");
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
@@ -154,13 +154,13 @@ export default function ComponentPlayground({
 						value: "preview",
 						label: "Preview",
 						icon: <Globe className="w:4 h:4" />,
-						iconOnly: narrow,
+						iconOnly: narrow && active !== "preview",
 					},
 					{
 						value: "code",
 						label: "Code",
 						icon: <Code className="w:4 h:4" />,
-						iconOnly: narrow,
+						iconOnly: narrow && active !== "code",
 					},
 					...(config
 						? [
@@ -168,7 +168,7 @@ export default function ComponentPlayground({
 									value: "config",
 									label: "Configuration",
 									icon: <Settings2 className="w:4 h:4" />,
-									iconOnly: narrow,
+									iconOnly: narrow && active !== "config",
 								},
 							]
 						: []),
