@@ -3,6 +3,7 @@
 import { Menu } from "@base-ui/react/menu";
 import { IconCheck, IconLogout, IconPlus } from "@tabler/icons-react";
 import type { ReactNode } from "react";
+import { Children } from "react";
 import { merge } from "yummacss/merge";
 import Avatar from "./avatar";
 import { FOCUS, RADIUS, type Shape, useShape } from "./style";
@@ -21,8 +22,8 @@ export interface AccountMenuAction {
   label: string;
   /** A glyph before the label. */
   icon?: ReactNode;
-  /** A key hint at the row's end, such as `⌘ ,`. */
-  shortcut?: string;
+  /** A key hint at the row's end; an icon draws a modifier such as Command. */
+  shortcut?: ReactNode;
   /** Called when the row is chosen. */
   onClick?: () => void;
 }
@@ -151,7 +152,7 @@ export default function AccountMenu({
                 {action.icon && <span className="d:f o:70">{action.icon}</span>}
                 <span className="f:1">{action.label}</span>
                 {action.shortcut && (
-                  <kbd className="ml:auto pl:6 fs:xs fw:400 lh:4 ff:d o:60">{action.shortcut}</kbd>
+                  <kbd className="ml:auto pl:6 fs:xs fw:400 lh:4 ff:d o:60 d:f ai:c g:1">{Children.toArray(action.shortcut)}</kbd>
                 )}
               </Menu.Item>
             ))}

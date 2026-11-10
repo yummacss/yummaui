@@ -417,6 +417,19 @@ describe("Yumma UI registry", () => {
 		expect(wrong).toEqual([]);
 	});
 
+	it("draws modifier keys as icons, not symbols", () => {
+		const offenders: string[] = [];
+		for (const dir of ["src/registry/ui", "src/registry/meta"]) {
+			for (const file of readdirSync(join(rootDir, dir))) {
+				const source = readFileSync(join(rootDir, dir, file), "utf-8");
+				for (const hit of source.matchAll(/[⌘⌥⇧⌃]/g)) {
+					offenders.push(`${file}: ${hit[0]}`);
+				}
+			}
+		}
+		expect(offenders).toEqual([]);
+	});
+
 	it("calls the focus indicator an outline in the source too", () => {
 		const offenders: string[] = [];
 
