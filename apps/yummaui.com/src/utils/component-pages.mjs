@@ -20,6 +20,14 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "account-menu",
+		since: "0.14",
+		title: "Account Menu",
+		description:
+			"Open the signed-in account from its avatar, with actions, other accounts to switch to & Sign out, built on Base UI.",
+		primitive: "menu",
+	},
+	{
 		slug: "activity-heatmap",
 		since: "0.10",
 		title: "Activity Heatmap",
@@ -216,6 +224,13 @@ export const COMPONENT_PAGES = [
 		resizable: true,
 	},
 	{
+		slug: "kanban-board",
+		since: "0.14",
+		title: "Kanban Board",
+		description:
+			"Move cards within & across columns by dragging, with a pointer, a finger or the keyboard.",
+	},
+	{
 		slug: "keypad",
 		since: "0.10",
 		title: "Keypad",
@@ -329,6 +344,13 @@ export const COMPONENT_PAGES = [
 		description: "Capture a star rating.",
 	},
 	{
+		slug: "resizable-panels",
+		since: "0.14",
+		title: "Resizable Panels",
+		description:
+			"Split a region into panels with handles you drag or move with the arrow keys.",
+	},
+	{
 		slug: "scroll-area",
 		title: "Scroll Area",
 		description:
@@ -348,6 +370,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "signature-pad",
+		since: "0.14",
+		title: "Signature Pad",
+		description:
+			"Capture a signature with a pointer, a finger or a pen, as a transparent PNG.",
+	},
+	{
 		slug: "skeleton",
 		title: "Skeleton",
 		description: "Show a placeholder while content loads.",
@@ -357,6 +386,13 @@ export const COMPONENT_PAGES = [
 		title: "Slider",
 		description: "Select values by dragging a handle, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "sortable-list",
+		since: "0.14",
+		title: "Sortable List",
+		description:
+			"Reorder rows by dragging, with a pointer, a finger or the keyboard.",
 	},
 	{
 		slug: "sparkline",
