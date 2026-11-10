@@ -7,6 +7,7 @@ import {
 	IconBell,
 	IconBold,
 	IconBookmark,
+	IconBulb,
 	IconCalendar,
 	IconCategory,
 	IconCheck,
@@ -29,9 +30,11 @@ import {
 	IconFileArrowLeft,
 	IconFileArrowRight,
 	IconFilePlus,
+	IconFileText,
 	IconFolder,
 	IconFolderSymlink,
 	IconGitMerge,
+	IconHammer,
 	IconHome,
 	IconInfoCircle,
 	IconItalic,
@@ -40,6 +43,7 @@ import {
 	IconLayoutList,
 	IconLink,
 	IconList,
+	IconListCheck,
 	IconListNumbers,
 	IconLock,
 	IconMessage,
@@ -64,6 +68,7 @@ import {
 	IconUnderline,
 	IconUsers,
 	IconVideo,
+	IconWorld,
 } from "@tabler/icons-react";
 import { type ComponentType, Fragment, type ReactNode } from "react";
 import { type ChildExample, getRegistryMeta } from "@/registry";
@@ -83,6 +88,7 @@ export const EXAMPLE_ICONS: Record<string, IconComponent> = {
 	IconBell,
 	IconBold,
 	IconBookmark,
+	IconBulb,
 	IconCalendar,
 	IconCategory,
 	IconCheck,
@@ -105,9 +111,11 @@ export const EXAMPLE_ICONS: Record<string, IconComponent> = {
 	IconFileArrowLeft,
 	IconFileArrowRight,
 	IconFilePlus,
+	IconFileText,
 	IconFolder,
 	IconFolderSymlink,
 	IconGitMerge,
+	IconHammer,
 	IconHome,
 	IconInfoCircle,
 	IconItalic,
@@ -116,6 +124,7 @@ export const EXAMPLE_ICONS: Record<string, IconComponent> = {
 	IconLayoutList,
 	IconLink,
 	IconList,
+	IconListCheck,
 	IconListNumbers,
 	IconLock,
 	IconMessage,
@@ -140,6 +149,7 @@ export const EXAMPLE_ICONS: Record<string, IconComponent> = {
 	IconUnderline,
 	IconUsers,
 	IconVideo,
+	IconWorld,
 };
 
 function iconComponent(name: string) {

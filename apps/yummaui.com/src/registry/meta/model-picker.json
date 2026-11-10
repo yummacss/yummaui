@@ -1,0 +1,131 @@
+{
+  "summary": "The model a chat answers with, picked from a list grouped by provider, each with its mark and a line on what it is good at.",
+  "props": [
+    {
+      "name": "models",
+      "type": "none",
+      "typeName": "Model[]",
+      "description": "The models to pick from, grouped by `provider`."
+    },
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "description": "The model picked at the start."
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "Controlled pick. Pass it with `onValueChange`."
+    },
+    {
+      "name": "onValueChange",
+      "type": "none",
+      "typeName": "(id: string) => void",
+      "description": "Called with the picked model's id."
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "default": false,
+      "description": "On phones the trigger shows only the mark."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "sm",
+      "description": "Trigger and list size together."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the trigger and the list. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Blocks picking and dims the trigger."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the popup is rendered. Defaults to `document.body`; pass an element to portal somewhere else, such as inside a frame."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ModelPicker",
+      "props": {
+        "models": [
+          {
+            "id": "opus",
+            "name": "Claude Opus 5.5",
+            "description": "Most capable, for hard work",
+            "logo": "/demo/logos/claude.svg",
+            "provider": "Anthropic"
+          },
+          {
+            "id": "sonnet",
+            "name": "Claude Sonnet 5.5",
+            "description": "Fast and capable",
+            "logo": "/demo/logos/claude.svg",
+            "provider": "Anthropic"
+          },
+          {
+            "id": "haiku",
+            "name": "Claude Haiku 5.5",
+            "description": "Quickest, for light tasks",
+            "logo": "/demo/logos/claude.svg",
+            "provider": "Anthropic"
+          },
+          {
+            "id": "gpt",
+            "name": "GPT-5",
+            "description": "General purpose",
+            "logo": "/demo/logos/openai.svg",
+            "provider": "OpenAI"
+          },
+          {
+            "id": "gemini",
+            "name": "Gemini 2.5 Pro",
+            "description": "Long documents",
+            "logo": "/demo/logos/gemini.svg",
+            "provider": "Google"
+          },
+          {
+            "id": "deepseek",
+            "name": "DeepSeek V3",
+            "description": "Open weights",
+            "logo": "/demo/logos/deepseek.svg",
+            "provider": "DeepSeek"
+          },
+          {
+            "id": "mistral",
+            "name": "Mistral Large",
+            "description": "Open weights",
+            "logo": "/demo/logos/mistral.svg",
+            "provider": "Mistral"
+          }
+        ]
+      }
+    }
+  ]
+}

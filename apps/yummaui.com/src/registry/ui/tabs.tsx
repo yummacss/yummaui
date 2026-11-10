@@ -161,7 +161,7 @@ export default function TabsBase({
           const tabClasses = merge(
             outline,
             "p:r zi:10 fg:1 d:f ai:c jc:c bg:transparent us:none",
-            glyph && !iconOnly ? "g:2" : "",
+
             item.count !== undefined ? "g:2" : "",
             spec.tab,
             RADIUS.control[shape],
@@ -187,7 +187,24 @@ export default function TabsBase({
               {glyph && iconPosition === "leading" && (
                 <span className="d:f p:r zi:10">{glyph}</span>
               )}
-              {!iconOnly && <span className={labelClasses}>{item.label}</span>}
+              {glyph ? (
+                // an icon-only tab folds its label away, so the row eases as the indicator slides
+                <span
+                  aria-hidden={iconOnly || undefined}
+                  className={merge(
+                    labelClasses,
+                    "d:ib o:h ws:nw",
+                    animated ? "tp:a tdu:300 ttf:out-quart @prm:tp:none" : "",
+                    iconOnly
+                      ? "max-w:0 o:0 m:0"
+                      : merge("max-w:64 o:100", iconPosition === "leading" ? "ml:2" : "mr:2"),
+                  )}
+                >
+                  {item.label}
+                </span>
+              ) : (
+                <span className={labelClasses}>{item.label}</span>
+              )}
               {glyph && iconPosition === "trailing" && (
                 <span className="d:f p:r zi:10">{glyph}</span>
               )}

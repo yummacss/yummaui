@@ -1,0 +1,82 @@
+{
+  "summary": "The model's thinking: a shimmering line while it thinks, then how long it took, which folds open to the steps.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The steps of the thinking, shown when it is open."
+    },
+    {
+      "name": "thinking",
+      "type": "boolean",
+      "default": false,
+      "description": "Still thinking: a shimmering line, open on its steps."
+    },
+    {
+      "name": "seconds",
+      "type": "number",
+      "description": "How long it thought, for the line once it is done."
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": false,
+      "description": "Open at the start. It folds itself away when thinking ends."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the line's focus. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Reasoning",
+      "className": "w:140 max-w:100%",
+      "props": {
+        "seconds": 4,
+        "defaultOpen": true
+      },
+      "children": [
+        {
+          "tag": "p",
+          "className": "m:0 mb:2",
+          "children": [
+            {
+              "text": "The ask is about photos from a trip, so the Photos folder is the place to start."
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "className": "m:0",
+          "children": [
+            {
+              "text": "Search by the dates in trip-notes.md, then group what comes back by place."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

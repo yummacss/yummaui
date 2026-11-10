@@ -33,6 +33,7 @@ const KNOWN_INERT: Record<string, string> = {
 	"menubar.iconPosition": POPUP,
 	"onboarding.closeOnEscape": BEHAVIOR,
 	"preview-card.arrow": POPUP,
+	"streaming-text.pending": "drawn only before the first word",
 };
 // motion: transitions and keyframes, which no markup shows
 const isMotion = (name: string) => name === "animated";

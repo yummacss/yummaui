@@ -94,6 +94,13 @@ export const RADIUS = {
   textChip: { square: "", rounded: "br:calc(.25em)", squircle: "br:calc(.45em) cs:s", pill: "br:9999" },
   /** A tile inside a text chip; its chip's radius less the padding, so the corners stay concentric. */
   textTile: { square: "", rounded: "br:calc(.15em)", squircle: "br:calc(.35em) cs:s", pill: "br:9999" },
+  /** A chat bubble: every corner but the one by its sender. */
+  bubble: {
+    square: "",
+    rounded: "btlr:xl btrr:xl bblr:xl",
+    squircle: "btlr:3xl btrr:3xl bblr:3xl cs:s",
+    pill: "btlr:3xl btrr:3xl bblr:3xl",
+  },
   /** The box of a checkbox. */
   mark: { square: "", rounded: "br:sm", squircle: "br:md cs:s", pill: "br:9999" },
 } as const satisfies Record<string, Record<Shape, string>>;

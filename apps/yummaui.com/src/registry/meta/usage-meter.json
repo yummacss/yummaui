@@ -1,0 +1,79 @@
+{
+  "summary": "How much of an allowance is used and when it starts over; it warns near the end and says when it is full.",
+  "props": [
+    {
+      "name": "value",
+      "type": "number",
+      "description": "How much of the allowance is used, in percent."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "default": "This week",
+      "description": "What the allowance covers."
+    },
+    {
+      "name": "resets",
+      "type": "string",
+      "description": "When it starts over, such as `Resets Monday at 9:00`."
+    },
+    {
+      "name": "warnAt",
+      "type": "number",
+      "default": 80,
+      "description": "The percent from which it warns."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the card and the bar. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The bar's fill as it moves. Turn it off for a meter that jumps, or when the user has asked for reduced motion."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "d:g gtc:1 @sm:gtc:3 g:3 w:180 max-w:100%",
+      "children": [
+        {
+          "component": "UsageMeter",
+          "props": {
+            "value": 38,
+            "resets": "Resets Monday at 9:00"
+          }
+        },
+        {
+          "component": "UsageMeter",
+          "props": {
+            "value": 86,
+            "resets": "Resets Monday at 9:00"
+          }
+        },
+        {
+          "component": "UsageMeter",
+          "props": {
+            "value": 100,
+            "resets": "Resets in 2 hours"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "summary": "Prompts to start from, as raised keys that press in: a row of chips, or a grid of cards for an empty chat.",
+  "props": [
+    {
+      "name": "items",
+      "type": "none",
+      "typeName": "Suggestion[]",
+      "description": "The prompts to start from."
+    },
+    {
+      "name": "onSelect",
+      "type": "none",
+      "typeName": "(suggestion: Suggestion) => void",
+      "description": "Called with the picked suggestion, such as to fill the prompt."
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "values": [
+        "chips",
+        "cards"
+      ],
+      "default": "chips",
+      "description": "A row of chips that scrolls sideways, or a grid of cards for an empty chat."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the chips or cards. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Suggestions",
+      "className": "w:160 max-w:100%",
+      "props": {
+        "items": [
+          {
+            "label": "Find my trip photos",
+            "description": "From last summer, by place",
+            "icon": {
+              "$icon": "IconSearch",
+              "size": "w:4 h:4"
+            }
+          },
+          {
+            "label": "Tidy up Downloads",
+            "description": "Group what is in there by kind",
+            "icon": {
+              "$icon": "IconFolder",
+              "size": "w:4 h:4"
+            }
+          },
+          {
+            "label": "Summarize a document",
+            "description": "The key points of trip-notes.md",
+            "icon": {
+              "$icon": "IconFileText",
+              "size": "w:4 h:4"
+            }
+          },
+          {
+            "label": "Rename these files",
+            "description": "To a date and a short name",
+            "icon": {
+              "$icon": "IconPencil",
+              "size": "w:4 h:4"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

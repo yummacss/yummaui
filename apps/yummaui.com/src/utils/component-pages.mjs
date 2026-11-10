@@ -318,11 +318,26 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "message",
+		since: "0.16",
+		title: "Message",
+		description:
+			"Show one turn of a chat: the person's in a raised bubble, the assistant's as text with Copy, Retry & a thumbs up.",
+	},
+	{
 		slug: "meter",
 		title: "Meter",
 		description:
 			"Show how much of something is used, whole or split into shares, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "model-picker",
+		since: "0.16",
+		title: "Model Picker",
+		description:
+			"Pick the model a chat answers with, grouped by provider, each with its mark, built on Base UI.",
+		primitive: "select",
 	},
 	{
 		slug: "navigation-menu",
@@ -383,6 +398,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "prompt-input",
+		since: "0.16",
+		title: "Prompt Input",
+		description:
+			"Write a message with files, a Tools menu, a mic that records & a Send that turns into Stop.",
+	},
+	{
 		slug: "radio",
 		title: "Radio",
 		description: "Select a single option from a group, built on Base UI.",
@@ -392,6 +414,14 @@ export const COMPONENT_PAGES = [
 		slug: "rating",
 		title: "Rating",
 		description: "Capture a star rating.",
+	},
+	{
+		slug: "reasoning",
+		since: "0.16",
+		title: "Reasoning",
+		description:
+			"Show a model's thinking: a shimmer while it thinks, then how long it took, folding open to the steps, built on Base UI.",
+		primitive: "collapsible",
 	},
 	{
 		slug: "resizable-panels",
@@ -464,6 +494,20 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "streaming-text",
+		since: "0.16",
+		title: "Streaming Text",
+		description:
+			"Show an answer as it arrives, each new word fading in, with a caret & a waiting line.",
+	},
+	{
+		slug: "suggestions",
+		since: "0.16",
+		title: "Suggestions",
+		description:
+			"Offer prompts to start from, as a row of chips or a grid of cards.",
+	},
+	{
 		slug: "switch",
 		title: "Switch",
 		description: "Toggle between 2 states, built on Base UI.",
@@ -508,6 +552,14 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "tool-call",
+		since: "0.16",
+		title: "Tool Call",
+		description:
+			"Show a call a model made to a tool, running, done or failed, opening to its input & output, built on Base UI.",
+		primitive: "collapsible",
+	},
+	{
 		slug: "toolbar",
 		title: "Toolbar",
 		description: "Group related action buttons together, built on Base UI.",
@@ -525,6 +577,13 @@ export const COMPONENT_PAGES = [
 		title: "Treemap",
 		description:
 			"Show shares of a whole as tiles sized by value, shaded in steps of the accent.",
+	},
+	{
+		slug: "usage-meter",
+		since: "0.16",
+		title: "Usage Meter",
+		description:
+			"Show how much of an allowance is used & when it resets, warning near the end.",
 	},
 ];
 

@@ -78,6 +78,12 @@
       "description": "Which side `icon` sits on. Trailing sits just before the chevron."
     },
     {
+      "name": "compact",
+      "type": "boolean",
+      "default": false,
+      "description": "On phones the trigger shows only `icon` and the chevron."
+    },
+    {
       "name": "ariaLabel",
       "type": "string",
       "description": "The accessible name, for a select with no visible label."

@@ -56,6 +56,9 @@ export default defineConfig({
 			// to the element's own style, so a leaving element ends where it rests
 			leave: "from { opacity: 1; scale: 1; }",
 			marquee: "to { translate: calc(var(--marquee-shift) * -1) 0; }",
+			blink: "0%, 45% { opacity: 1; } 55%, 100% { opacity: 0; }",
+			reveal: "from { opacity: 0; filter: blur(4px); }",
+			shimmer: "from { mask-position: 100% 0; } to { mask-position: 0 0; }",
 			pulse: "0%, 100% { opacity: .5; } 50% { opacity: 1; }",
 			shake: "20%, 60% { translate: -8px 0; } 40%, 80% { translate: 8px 0; }",
 			slide: "from { translate: -100% 0; } to { translate: 100% 0; }",

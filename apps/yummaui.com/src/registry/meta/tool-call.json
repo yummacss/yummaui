@@ -1,0 +1,122 @@
+{
+  "summary": "One call the model made to a tool: its name, what it was asked and where it is, opening to the input and the output.",
+  "props": [
+    {
+      "name": "name",
+      "type": "string",
+      "description": "The tool's name, such as `search_files`."
+    },
+    {
+      "name": "summary",
+      "type": "string",
+      "description": "What it was asked, in a few words, beside the name."
+    },
+    {
+      "name": "state",
+      "type": "enum",
+      "values": [
+        "running",
+        "done",
+        "failed"
+      ],
+      "default": "done",
+      "description": "Where it is: running, done or failed."
+    },
+    {
+      "name": "input",
+      "type": "string",
+      "description": "What it was given, shown when the card is open."
+    },
+    {
+      "name": "output",
+      "type": "string",
+      "description": "What it gave back, or the error, shown when the card is open."
+    },
+    {
+      "name": "icon",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "A glyph for the tool."
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "default": false,
+      "description": "Open on its input and output at the start."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the card. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "d:f fd:c g:2 w:160 max-w:100%",
+      "children": [
+        {
+          "component": "ToolCall",
+          "props": {
+            "name": "search_files",
+            "summary": "Photos from 2 to 16 August",
+            "state": "running",
+            "icon": {
+              "$icon": "IconSearch",
+              "size": "w:4 h:4"
+            },
+            "input": "{ \"folder\": \"Photos\", \"from\": \"08-02\", \"to\": \"08-16\" }"
+          }
+        },
+        {
+          "component": "ToolCall",
+          "props": {
+            "name": "group_by_place",
+            "summary": "214 photos",
+            "state": "done",
+            "icon": {
+              "$icon": "IconFolder",
+              "size": "w:4 h:4"
+            },
+            "defaultOpen": true,
+            "input": "{ \"files\": 214 }",
+            "output": "{ \"Lisbon\": 96, \"Porto\": 71, \"Sintra\": 47 }"
+          }
+        },
+        {
+          "component": "ToolCall",
+          "props": {
+            "name": "move_files",
+            "summary": "into Photos/Portugal",
+            "state": "failed",
+            "icon": {
+              "$icon": "IconFolder",
+              "size": "w:4 h:4"
+            },
+            "input": "{ \"to\": \"Photos/Portugal\" }",
+            "output": "Photos/Portugal is read-only"
+          }
+        }
+      ]
+    }
+  ]
+}

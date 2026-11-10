@@ -37,6 +37,7 @@ const RESET = `
      An auto-height frame is sized *from* this element, so handing a percentage
      back would be the loop described above. */
   #root[data-fill] { height: 100%; }
+  @media (max-width: 480px) { #root { padding: 1rem; } }
   /* a block fills the frame to its edges, as it would a page */
   #root[data-bleed] { padding: 0; }
 `;
