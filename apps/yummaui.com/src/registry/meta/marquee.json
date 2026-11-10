@@ -1,0 +1,127 @@
+{
+  "summary": "An endless row that scrolls on its own, for logos or tags; it stands still when someone asks for reduced motion.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The items, such as logos or tags, repeated for as long as the row runs."
+    },
+    {
+      "name": "speed",
+      "type": "number",
+      "default": 40,
+      "description": "How fast the row moves, in pixels per second."
+    },
+    {
+      "name": "reverse",
+      "type": "boolean",
+      "default": false,
+      "description": "Runs left to right."
+    },
+    {
+      "name": "pauseOnHover",
+      "type": "boolean",
+      "default": true,
+      "description": "Stops the row while a pointer is over it."
+    },
+    {
+      "name": "fade",
+      "type": "boolean",
+      "default": true,
+      "description": "Fades the row out at both ends."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "What the row holds, read once by screen readers instead of the moving copy."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Marquee",
+      "props": {
+        "ariaLabel": "Opens Documents, Photos, Music, Spreadsheets, Notes, Archives, Code, Videos"
+      },
+      "children": [
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Documents"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Photos"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Music"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Spreadsheets"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Notes"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Archives"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Code"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Videos"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

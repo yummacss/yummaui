@@ -1,0 +1,115 @@
+{
+  "summary": "Slides one at a time, moved by swiping, dragging, the arrow keys, the buttons or the dots; slides snap into place.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The slides, one per child, such as pictures or cards."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": "Carousel",
+      "description": "Names the carousel for screen readers."
+    },
+    {
+      "name": "loop",
+      "type": "boolean",
+      "default": false,
+      "description": "Wraps from the last slide back to the first."
+    },
+    {
+      "name": "aspectRatio",
+      "type": "string",
+      "default": "16 / 10",
+      "description": "Each slide's width over its height, such as `16 / 10`."
+    },
+    {
+      "name": "dots",
+      "type": "boolean",
+      "default": true,
+      "description": "Draws the dots under the slides."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the slides and buttons. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Carousel",
+      "className": "w:140 max-w:100%",
+      "props": {
+        "ariaLabel": "Folders"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:indigo-6",
+          "children": [
+            {
+              "text": "Documents"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:mint-7",
+          "children": [
+            {
+              "text": "Photos"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:orange-6",
+          "children": [
+            {
+              "text": "Music"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:violet-6",
+          "children": [
+            {
+              "text": "Downloads"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:slate-7",
+          "children": [
+            {
+              "text": "Archive"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

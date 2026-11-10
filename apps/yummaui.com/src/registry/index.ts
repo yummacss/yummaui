@@ -12,11 +12,13 @@ import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
 import meta_avatar from "./meta/avatar.json";
 import meta_badge from "./meta/badge.json";
+import meta_banner_alert from "./meta/banner-alert.json";
 import meta_bar_chart from "./meta/bar-chart.json";
 import meta_breadcrumb from "./meta/breadcrumb.json";
 import meta_button_group from "./meta/button-group.json";
 import meta_button from "./meta/button.json";
 import meta_card from "./meta/card.json";
+import meta_carousel from "./meta/carousel.json";
 import meta_checkbox_group from "./meta/checkbox-group.json";
 import meta_checkbox from "./meta/checkbox.json";
 import meta_code_block from "./meta/code-block.json";
@@ -25,6 +27,7 @@ import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
 import meta_currency_input from "./meta/currency-input.json";
 import meta_dialog from "./meta/dialog.json";
+import meta_diff_viewer from "./meta/diff-viewer.json";
 import meta_donut_chart from "./meta/donut-chart.json";
 import meta_drawer from "./meta/drawer.json";
 import meta_empty_state from "./meta/empty-state.json";
@@ -35,11 +38,15 @@ import meta_file_tree from "./meta/file-tree.json";
 import meta_file_upload from "./meta/file-upload.json";
 import meta_form from "./meta/form.json";
 import meta_gauge from "./meta/gauge.json";
+import meta_image_compare from "./meta/image-compare.json";
+import meta_image_cropper from "./meta/image-cropper.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
 import meta_kanban_board from "./meta/kanban-board.json";
 import meta_kbd from "./meta/kbd.json";
 import meta_keypad from "./meta/keypad.json";
+import meta_lightbox from "./meta/lightbox.json";
 import meta_line_chart from "./meta/line-chart.json";
+import meta_marquee from "./meta/marquee.json";
 import meta_menu from "./meta/menu.json";
 import meta_menubar from "./meta/menubar.json";
 import meta_meter from "./meta/meter.json";
@@ -119,11 +126,13 @@ export const registryMeta = {
   "avatar-stack": meta_avatar_stack,
   "avatar": meta_avatar,
   "badge": meta_badge,
+  "banner-alert": meta_banner_alert,
   "bar-chart": meta_bar_chart,
   "breadcrumb": meta_breadcrumb,
   "button-group": meta_button_group,
   "button": meta_button,
   "card": meta_card,
+  "carousel": meta_carousel,
   "checkbox-group": meta_checkbox_group,
   "checkbox": meta_checkbox,
   "code-block": meta_code_block,
@@ -132,6 +141,7 @@ export const registryMeta = {
   "context-menu": meta_context_menu,
   "currency-input": meta_currency_input,
   "dialog": meta_dialog,
+  "diff-viewer": meta_diff_viewer,
   "donut-chart": meta_donut_chart,
   "drawer": meta_drawer,
   "empty-state": meta_empty_state,
@@ -142,11 +152,15 @@ export const registryMeta = {
   "file-upload": meta_file_upload,
   "form": meta_form,
   "gauge": meta_gauge,
+  "image-compare": meta_image_compare,
+  "image-cropper": meta_image_cropper,
   "inline-icon-heading": meta_inline_icon_heading,
   "kanban-board": meta_kanban_board,
   "kbd": meta_kbd,
   "keypad": meta_keypad,
+  "lightbox": meta_lightbox,
   "line-chart": meta_line_chart,
+  "marquee": meta_marquee,
   "menu": meta_menu,
   "menubar": meta_menubar,
   "meter": meta_meter,
@@ -214,12 +228,14 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "avatar-stack": { component: "avatar-stack", variant: "base", kind: "component", install: "avatar-stack" },
   "avatar": { component: "avatar", variant: "base", kind: "component", install: "avatar" },
   "badge": { component: "badge", variant: "base", kind: "component", install: "badge" },
+  "banner-alert": { component: "banner-alert", variant: "base", kind: "component", install: "banner-alert" },
   "bar-chart": { component: "bar-chart", variant: "base", kind: "component", install: "bar-chart" },
   "breadcrumb": { component: "breadcrumb", variant: "base", kind: "component", install: "breadcrumb" },
   "button-group-split": { component: "button-group", variant: "split", kind: "example", install: "button-group" },
   "button-group": { component: "button-group", variant: "base", kind: "component", install: "button-group" },
   "button": { component: "button", variant: "base", kind: "component", install: "button" },
   "card": { component: "card", variant: "base", kind: "component", install: "card" },
+  "carousel": { component: "carousel", variant: "base", kind: "component", install: "carousel" },
   "checkbox-group": { component: "checkbox-group", variant: "base", kind: "component", install: "checkbox-group" },
   "checkbox": { component: "checkbox", variant: "base", kind: "component", install: "checkbox" },
   "code-block": { component: "code-block", variant: "base", kind: "component", install: "code-block" },
@@ -230,6 +246,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "context-menu": { component: "context-menu", variant: "base", kind: "component", install: "context-menu" },
   "currency-input": { component: "currency-input", variant: "base", kind: "component", install: "currency-input" },
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
+  "diff-viewer": { component: "diff-viewer", variant: "base", kind: "component", install: "diff-viewer" },
   "donut-chart": { component: "donut-chart", variant: "base", kind: "component", install: "donut-chart" },
   "drawer": { component: "drawer", variant: "base", kind: "component", install: "drawer" },
   "empty-state": { component: "empty-state", variant: "base", kind: "component", install: "empty-state" },
@@ -242,11 +259,15 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "file-upload": { component: "file-upload", variant: "base", kind: "component", install: "file-upload" },
   "form": { component: "form", variant: "base", kind: "component", install: "form" },
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
+  "image-compare": { component: "image-compare", variant: "base", kind: "component", install: "image-compare" },
+  "image-cropper": { component: "image-cropper", variant: "base", kind: "component", install: "image-cropper" },
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
   "kanban-board": { component: "kanban-board", variant: "base", kind: "component", install: "kanban-board" },
   "kbd": { component: "kbd", variant: "base", kind: "component", install: "kbd" },
   "keypad": { component: "keypad", variant: "base", kind: "component", install: "keypad" },
+  "lightbox": { component: "lightbox", variant: "base", kind: "component", install: "lightbox" },
   "line-chart": { component: "line-chart", variant: "base", kind: "component", install: "line-chart" },
+  "marquee": { component: "marquee", variant: "base", kind: "component", install: "marquee" },
   "menu": { component: "menu", variant: "base", kind: "component", install: "menu" },
   "menubar": { component: "menubar", variant: "base", kind: "component", install: "menubar" },
   "meter": { component: "meter", variant: "base", kind: "component", install: "meter" },
@@ -304,6 +325,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "account-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "alert-dialog": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "autocomplete": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
+  "banner-alert": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "button": { states: {}, easings: {}, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "checkbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "code-block": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
@@ -316,6 +338,8 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "file-tree": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-upload": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
+  "lightbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: {}, keyframes: {} },
+  "marquee": { states: {}, easings: {}, keyframes: { "marquee": "to { translate: calc(var(--marquee-shift) * -1) 0; }" } },
   "menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "menubar": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "navigation-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "from-left": "[data-activation-direction=left]", "from-right": "[data-activation-direction=right]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

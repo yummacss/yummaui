@@ -21,3 +21,4 @@ minimumReleaseAgeExclude:
   - "@yummacss/*"
   - yummacss
   - geist@1.9.0
+  - react-easy-crop@6.2.5

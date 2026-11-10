@@ -1,0 +1,79 @@
+{
+  "summary": "Two pictures under one divider, dragged across or moved with the arrow keys, to show a before and an after.",
+  "props": [
+    {
+      "name": "before",
+      "type": "string",
+      "description": "The picture on the left, before the change."
+    },
+    {
+      "name": "after",
+      "type": "string",
+      "description": "The picture on the right, after it."
+    },
+    {
+      "name": "alt",
+      "type": "string",
+      "description": "What both pictures show, for screen readers."
+    },
+    {
+      "name": "beforeLabel",
+      "type": "string",
+      "default": "Before",
+      "description": "The label over the left side. `\"\"` drops it."
+    },
+    {
+      "name": "afterLabel",
+      "type": "string",
+      "default": "After",
+      "description": "The label over the right side. `\"\"` drops it."
+    },
+    {
+      "name": "defaultPosition",
+      "type": "number",
+      "default": 50,
+      "description": "Where the divider starts, in percent from the left."
+    },
+    {
+      "name": "aspectRatio",
+      "type": "string",
+      "default": "16 / 10",
+      "description": "The frame's width over its height, such as `16 / 10`."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the frame. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ImageCompare",
+      "className": "w:140 max-w:100%",
+      "props": {
+        "before": "/demo/landscape-5-gray.svg",
+        "after": "/demo/landscape-5.svg",
+        "alt": "Hills at noon"
+      }
+    }
+  ]
+}

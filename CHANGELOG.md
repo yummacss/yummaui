@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **[components]** Carousel, Diff Viewer, Image Compare, Lightbox, Marquee, Image Cropper & Banner Alert.
+
 ## [0.14.0] - 2026-11-10
 
 ### Added

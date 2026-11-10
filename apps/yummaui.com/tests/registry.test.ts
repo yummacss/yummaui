@@ -417,6 +417,24 @@ describe("Yumma UI registry", () => {
 		expect(wrong).toEqual([]);
 	});
 
+	it("builds a switch or a range from the library's own controls", () => {
+		// Toggle Group and Slider carry the tactile look; a hand-made one drifts from it
+		const ALLOWED: Record<string, string> = {
+			"popover-folder-color.tsx": "color swatches, picked one at a time",
+		};
+		const offenders: string[] = [];
+		const uiDir = join(rootDir, "src/registry/ui");
+		for (const file of readdirSync(uiDir).filter((f) => f.endsWith(".tsx"))) {
+			if (file in ALLOWED) continue;
+			const source = readFileSync(join(uiDir, file), "utf-8");
+			if (/type="range"/.test(source))
+				offenders.push(`${file}: a native range`);
+			if (/aria-pressed/.test(source))
+				offenders.push(`${file}: a hand-made toggle`);
+		}
+		expect(offenders).toEqual([]);
+	});
+
 	it("draws modifier keys as icons, not symbols", () => {
 		const offenders: string[] = [];
 		for (const dir of ["src/registry/ui", "src/registry/meta"]) {
