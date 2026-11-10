@@ -82,38 +82,44 @@
   ],
   "scene": [
     {
-      "component": "AccountMenu",
-      "props": {
-        "account": {
-          "name": "Ada Lovelace",
-          "email": "ada@acme.dev"
-        },
-        "accounts": [
-          {
-            "name": "Ada Lovelace",
-            "email": "ada@acme.dev"
-          },
-          {
-            "name": "Ada Lovelace",
-            "email": "ada@analytical.org"
-          },
-          {
-            "name": "Grace Hopper",
-            "email": "grace@navy.mil"
-          }
-        ],
-        "actions": [
-          {
-            "label": "Settings",
-            "icon": {
-              "$icon": "IconSettings",
-              "size": "w:4 h:4"
+      "tag": "div",
+      "className": "as:fs d:f jc:c w:100% pt:8",
+      "children": [
+        {
+          "component": "AccountMenu",
+          "props": {
+            "account": {
+              "name": "Ada Lovelace",
+              "email": "ada@acme.dev"
             },
-            "shortcut": "⌘ ,"
+            "accounts": [
+              {
+                "name": "Ada Lovelace",
+                "email": "ada@acme.dev"
+              },
+              {
+                "name": "Ada Lovelace",
+                "email": "ada@analytical.org"
+              },
+              {
+                "name": "Grace Hopper",
+                "email": "grace@navy.mil"
+              }
+            ],
+            "actions": [
+              {
+                "label": "Settings",
+                "icon": {
+                  "$icon": "IconSettings",
+                  "size": "w:4 h:4"
+                },
+                "shortcut": "⌘ ,"
+              }
+            ],
+            "status": "online"
           }
-        ],
-        "status": "online"
-      }
+        }
+      ]
     }
   ]
 }
