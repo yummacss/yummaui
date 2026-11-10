@@ -140,6 +140,8 @@ export interface SelectProps {
   icon?: ReactNode;
   /** Which side `icon` sits on. Trailing sits just before the chevron. */
   iconPosition?: IconSide;
+  /** On phones the trigger shows only `icon` and the chevron. */
+  compact?: boolean;
   /** Blocks interaction and dims the whole control, label included. */
   disabled?: boolean;
   /**
@@ -181,6 +183,7 @@ export default function SelectBase({
   shape: shapeProp,
   icon,
   iconPosition = "leading",
+  compact = false,
   disabled = false,
   animated = true,
   className,
@@ -208,7 +211,7 @@ export default function SelectBase({
   );
 
   const iconEl = icon && (
-    <span className="d:f ai:c c:hint" aria-hidden>
+    <span className="d:f ai:c fs:0 c:hint" aria-hidden>
       {icon}
     </span>
   );
@@ -216,7 +219,7 @@ export default function SelectBase({
   const flatOptions = flattenOptions(options);
 
   const value_ = (
-    <Select.Value>
+    <Select.Value className={compact && icon ? "d:none @sm:d:f min-w:0" : "d:f min-w:0"}>
       {(selected: string) => (
         <span className="min-w:0 o:h to:e ws:nw">
           {selected
@@ -228,7 +231,7 @@ export default function SelectBase({
   );
 
   const arrow = (
-    <Select.Icon className="d:f c:hint">
+    <Select.Icon className="d:f fs:0 c:hint">
       <IconChevronDown className="w:4 h:4" />
     </Select.Icon>
   );
@@ -255,7 +258,7 @@ export default function SelectBase({
   );
 
   return (
-    <Field.Root className={`d:f fd:c g:2 ${disabled ? "o:60 c:na" : ""}`}>
+    <Field.Root className={`d:f fd:c g:2 min-w:0 ${disabled ? "o:60 c:na" : ""}`}>
       {label && (
         <label htmlFor={id} className="c:label fs:sm fw:500 us:none">
           {label}
@@ -275,7 +278,7 @@ export default function SelectBase({
       >
         <Select.Trigger id={id} aria-label={ariaLabel} className={triggerClasses}>
           {icon && iconPosition === "leading" && (
-            <span className="d:f ai:c g:2">
+            <span className="d:f ai:c g:2 min-w:0">
               {iconEl}
               {value_}
             </span>

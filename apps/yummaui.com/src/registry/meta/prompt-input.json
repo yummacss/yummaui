@@ -197,7 +197,8 @@
                 "logo": "/demo/logos/mistral.svg",
                 "provider": "Mistral"
               }
-            ]
+            ],
+            "compact": true
           }
         }
       ]

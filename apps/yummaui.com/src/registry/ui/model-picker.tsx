@@ -28,6 +28,8 @@ export interface ModelPickerProps {
   value?: string;
   /** Called with the picked model's id. */
   onValueChange?: (id: string) => void;
+  /** On phones the trigger shows only the mark. */
+  compact?: boolean;
   /** Trigger and list size together. */
   size?: "sm" | "md" | "lg";
   /**
@@ -60,6 +62,7 @@ export default function ModelPicker({
   defaultValue,
   value,
   onValueChange,
+  compact = false,
   size = "sm",
   container,
   shape: shapeProp,
@@ -97,10 +100,11 @@ export default function ModelPicker({
         onValueChange?.(id);
       }}
       icon={current?.logo ? mark(current.logo) : undefined}
+      compact={compact}
       size={size}
       shape={shape}
       disabled={disabled}
-      className={merge("w:fc", className)}
+      className={merge("w:fc max-w:100% min-w:0", className)}
     />
   );
 }

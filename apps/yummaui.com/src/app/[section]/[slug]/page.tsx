@@ -65,7 +65,8 @@ export default async function Page({
 						<h1 className="ff:display min-w:0 c:ink fs:4xl fw:400 ow:bw">
 							{ui.title}
 						</h1>
-						<div className="d:f fs:0 ai:c g:2 mt:1">
+						{/* centered on the title's first line: (54px line - 32px buttons) / 2 */}
+						<div className="d:f fs:0 ai:c g:2 mt:3">
 							<StylingButton />
 							<Pagination
 								previous={navigation.previous}

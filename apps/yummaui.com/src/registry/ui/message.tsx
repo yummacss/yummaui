@@ -69,7 +69,7 @@ export default function Message({
   if (from === "user") {
     return (
       <div className={merge("d:f jc:fe w:100%", className)}>
-        <div className={merge("max-w:80% px:3 py:2 bw:1 bc:rim bg:raised bs-o:key c:label lh:4 ow:bw", RADIUS.popup[shape])}>
+        <div className={merge("max-w:80% px:3 py:2 bw:1 bc:rim bg:raised bs-o:key c:label lh:4 ow:bw", RADIUS.bubble[shape])}>
           {children}
         </div>
       </div>

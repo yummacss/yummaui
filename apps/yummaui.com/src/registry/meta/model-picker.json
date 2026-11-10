@@ -24,6 +24,12 @@
       "description": "Called with the picked model's id."
     },
     {
+      "name": "compact",
+      "type": "boolean",
+      "default": false,
+      "description": "On phones the trigger shows only the mark."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { merge } from "yummacss/merge";
 
 export interface StreamingTextProps {
@@ -38,14 +39,23 @@ export default function StreamingText({
   animated = true,
   className,
 }: StreamingTextProps) {
-  // words keep their place as the text grows, so only the new ones animate
+  // words keep their place as the text grows; ones that arrive together reveal one after another
   const words = text.split(/(\s+)/);
-  const fade = animated ? "an:reveal adu:500 ttf:eo @prm:an:none" : "";
-  const caret = (
-    <span
-      aria-hidden
-      className="d:ib w:2 h:4 ml:1 bg:label br:sm va:m an:blink adu:1000 aic:i @prm:an:none"
-    />
+  const delays = useRef<number[]>([]);
+  const count = words.filter((word) => word && !/\s/.test(word)).length;
+  if (count < delays.current.length) delays.current = [];
+  for (let at = delays.current.length, step = 0; at < count; at++, step++) {
+    delays.current.push(step * STEP);
+  }
+  const last = delays.current[count - 1] ?? 0;
+  const fade = animated ? "an:reveal adu:400 ttf:eo @prm:an:none" : "";
+  const caret = (delay: number) => (
+    <span aria-hidden className={fade} style={{ animationDelay: `${delay}ms`, animationFillMode: "backwards" }}>
+      <span
+        className="d:ib ml:px bg:label br:9999 an:blink adu:1000 aic:i @prm:an:none"
+        style={{ width: 2, height: "1.15em", verticalAlign: "text-bottom" }}
+      />
+    </span>
   );
 
   if (!text && streaming) {
@@ -67,26 +77,32 @@ export default function StreamingText({
             ))}
           </span>
         )}
-        {pending === "caret" && caret}
+        {pending === "caret" && caret(0)}
       </div>
     );
   }
 
   return (
     <div className={merge("lh:5 c:label ow:bw", className)} aria-live="polite">
-      {words.map((word, index) =>
-        /\s/.test(word) ? (
-          word
-        ) : (
-          <span key={index} className={fade}>
-            {word}
-          </span>
-        ),
-      )}
-      {streaming && caret}
+      {(() => {
+        let nth = 0;
+        return words.map((word, index) => {
+          if (!word || /\s/.test(word)) return word;
+          const delay = delays.current[nth++] ?? 0;
+          return (
+            <span key={index} className={fade} style={{ animationDelay: `${delay}ms`, animationFillMode: "backwards" }}>
+              {word}
+            </span>
+          );
+        });
+      })()}
+      {streaming && caret(last + 120)}
     </div>
   );
 }
+
+// milliseconds between words that arrive together
+const STEP = 45;
 
 // a brighter band that sweeps across the label
 const SHIMMER = {

@@ -379,7 +379,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "scroll-area": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: {}, keyframes: {} },
   "select": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "skeleton": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
-  "streaming-text": { states: {}, easings: {}, keyframes: { "blink": "50% { opacity: 0; }", "reveal": "from { opacity: 0; filter: blur(4px); }", "shimmer": "from { mask-position: 100% 0; } to { mask-position: 0 0; }", "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
+  "streaming-text": { states: {}, easings: {}, keyframes: { "blink": "0%, 45% { opacity: 1; } 55%, 100% { opacity: 0; }", "reveal": "from { opacity: 0; filter: blur(4px); }", "shimmer": "from { mask-position: 100% 0; } to { mask-position: 0 0; }", "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
   "switch": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "tabs": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "theme-switcher": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **[components]** Prompt Input, Message, Reasoning, Tool Call, Suggestions, Model Picker, Usage Meter & Streaming Text.
+- **[components]** `compact` on Select, which shows only the icon on phones.
+
+### Changed
+
+- **[components]** Icon-only Tabs fold the label in and out as the active tab moves.
 
 ### Fixed
 

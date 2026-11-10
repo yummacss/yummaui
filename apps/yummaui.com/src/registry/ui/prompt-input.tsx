@@ -277,8 +277,23 @@ export default function PromptInput({
           className={merge("w:100% px:2 py:1 bw:0 bg:transparent c:label lh:4 os:none ow:0 r:none", INPUT_TEXT)}
         />
       )}
+      {!recording && chips.length > 0 && (
+        <div className="d:f fw:w g:2">
+            {chips.map((chip) => (
+              <span
+                key={chip.key}
+                className={merge("d:if ai:c g:1 h:8 pl:2 pr:1 bw:1 bc:rim bg:well c:label fs:xs fw:500", RADIUS.control[shape])}
+              >
+                {chip.icon && <span className="d:f o:70">{chip.icon}</span>}
+                {chip.label}
+                <Button variant="ghost" size="sm" iconOnly aria-label={`Turn off ${chip.label}`} icon={<IconX className="w:3 h:3" />} onClick={chip.off} focus={focus} />
+              </span>
+            ))}
+        </div>
+      )}
       {!recording && (
-        <div className="d:f fw:w ai:c g:2">
+        // one row at any width: the model button gives up its name before anything wraps
+        <div className="d:f ai:c g:2">
           <input
             ref={picker}
             type="file"
@@ -297,6 +312,7 @@ export default function PromptInput({
               title="Tools"
               container={container}
               triggerLabel="Tools"
+              className="w:8 h:8 fs:0"
               shape={shape}
               focus={focus}
               trigger={<IconAdjustmentsHorizontal className="w:4 h:4" />}
@@ -328,18 +344,7 @@ export default function PromptInput({
               </div>
             </Popover>
           )}
-          {chips.map((chip) => (
-            <span
-              key={chip.key}
-              className={merge("d:if ai:c g:1 h:8 pl:2 pr:1 bw:1 bc:rim bg:well c:label fs:xs fw:500", RADIUS.control[shape])}
-            >
-              {chip.icon && <span className="d:f o:70">{chip.icon}</span>}
-              {chip.label}
-              <Button variant="ghost" size="sm" iconOnly aria-label={`Turn off ${chip.label}`} icon={<IconX className="w:3 h:3" />} onClick={chip.off} focus={focus} />
-            </span>
-          ))}
-          <span className="f:1" />
-          {children}
+          <span className="d:f jc:fe f:1 min-w:0">{children}</span>
           {dictation && (
             <Button variant="secondary" size="sm" iconOnly aria-label="Dictate" icon={<IconMicrophone className="w:4 h:4" />} onClick={() => void record()} shape={shape} disabled={disabled || streaming} focus={focus} />
           )}
