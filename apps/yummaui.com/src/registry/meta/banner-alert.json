@@ -45,7 +45,7 @@
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the dismiss button. Inherits the nearest `Shape`."
+      "description": "Corner radius of the strip and its dismiss button. Inherits the nearest `Shape`."
     },
     {
       "name": "className",

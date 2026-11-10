@@ -1,10 +1,13 @@
 "use client";
 
+import { IconLayoutColumns, IconLayoutRows } from "@tabler/icons-react";
 import { diffLines, diffWordsWithSpace } from "diff";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import Toggle from "./toggle";
+import ToggleGroup from "./toggle-group";
 
 type View = "unified" | "split";
 
@@ -174,21 +177,6 @@ export default function DiffViewer({
     );
   };
 
-  const tab = (value: View, label: string) => (
-    <button
-      type="button"
-      aria-pressed={view === value}
-      onClick={() => setView(value)}
-      className={merge(
-        outline,
-        "h:6 px:2 bw:0 fs:xs c:p",
-        RADIUS.item[shape],
-        view === value ? "bg:raised bs-o:key c:label fw:500" : "bg:transparent c:hint",
-      )}
-    >
-      {label}
-    </button>
-  );
 
   return (
     <div
@@ -206,10 +194,14 @@ export default function DiffViewer({
             <span className="c:red-6">-{removed}</span>
           </span>
         </span>
-        <span className={merge("d:f g:1 p:1 bg:well", RADIUS.control[shape])}>
-          {tab("unified", "Unified")}
-          {tab("split", "Split")}
-        </span>
+        <ToggleGroup
+          value={[view]}
+          onValueChange={(next) => next[0] && setView(next[0] as View)}
+          shape={shape}
+        >
+          <Toggle value="unified" label="Unified" size="sm" focus={focus} icon={<IconLayoutRows className="w:4 h:4" />} />
+          <Toggle value="split" label="Split" size="sm" focus={focus} icon={<IconLayoutColumns className="w:4 h:4" />} />
+        </ToggleGroup>
       </div>
       <div className="ox:auto">
         <table className="w:100% bc:c ff:m fs:xs lh:6">

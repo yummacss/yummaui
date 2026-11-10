@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Cropper, { type Area } from "react-easy-crop";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import Slider from "./slider";
+import { RADIUS, type Shape, useShape } from "./style";
 
 export interface ImageCropperProps {
   /** The picture to crop. */
@@ -61,7 +62,6 @@ export default function ImageCropper({
   focus = true,
 }: ImageCropperProps) {
   const shape = useShape(shapeProp);
-  const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1.2);
   const [area, setArea] = useState<Area | null>(null);
@@ -95,18 +95,17 @@ export default function ImageCropper({
           style={{ cropAreaStyle: { border: "2px solid white", color: "rgb(0 0 0 / .5)" } }}
         />
       </div>
-      <label className="d:f ai:c g:3 fs:sm c:hint">
-        Zoom
-        <input
-          type="range"
-          min={1}
-          max={maxZoom}
-          step={0.01}
-          value={zoom}
-          onChange={(event) => setZoom(Number(event.target.value))}
-          className={merge(outline, "f:1 ac:current c:label", RADIUS.track[shape])}
-        />
-      </label>
+      <Slider
+        label="Zoom"
+        min={1}
+        max={maxZoom}
+        step={0.01}
+        value={zoom}
+        onValueChange={(value) => setZoom(Array.isArray(value) ? value[0] : value)}
+        formatValue={(value) => `${Math.round((Array.isArray(value) ? value[0] : value) * 100)}%`}
+        shape={shape}
+        focus={focus}
+      />
     </div>
   );
 }

@@ -54,7 +54,7 @@ export default function Marquee({
       aria-label={ariaLabel}
       onPointerEnter={() => pauseOnHover && setPaused(true)}
       onPointerLeave={() => setPaused(false)}
-      className={merge("w:100% o:h c:label", className)}
+      className={merge("w:100% o:h py:2 c:label", className)}
       style={
         fade
           ? {

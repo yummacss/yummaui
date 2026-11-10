@@ -9,8 +9,8 @@ import { FOCUS, RADIUS, type Shape, useShape } from "./style";
 type Tone = "loud" | "quiet";
 
 const TONES: Record<Tone, string> = {
-  loud: "bg:fill c:on-fill",
-  quiet: "bg:well c:label bbw:1 bc:rim",
+  loud: "bg:fill c:on-fill bs-o:key-fill",
+  quiet: "bg:raised c:label bw:1 bc:rim bs-o:key",
 };
 
 export interface BannerAlertProps {
@@ -24,7 +24,10 @@ export interface BannerAlertProps {
   dismissible?: boolean;
   /** Called once the banner is dismissed, such as to remember it. */
   onDismiss?: () => void;
-  /** Corner radius of the dismiss button. Inherits the nearest `Shape`. */
+  /**
+   * Corner radius of the strip and its dismiss button. Inherits the nearest
+   * `Shape`.
+   */
   shape?: Shape;
   /**
    * The focus outline. `true` draws it, `false` removes it, and a string of
@@ -76,8 +79,9 @@ export default function BannerAlert({
       )}
       style={{ gridTemplateRows: state === "leaving" ? "0fr" : "1fr" }}
     >
-      <div className="o:h min-h:0">
-        <div className={merge("d:f fw:w ai:c g:3 py:2 pl:4 pr:2 fs:sm", TONES[tone])}>
+      {/* room for the key's shadow, which the collapsing row would clip */}
+      <div className={merge("o:h min-h:0", state === "leaving" ? "" : "px:1 pb:1")}>
+        <div className={merge("d:f fw:w ai:c g:3 py:2 pl:4 pr:2 fs:sm", TONES[tone], RADIUS.bar[shape])}>
           <div className="f:1 min-w:48">{children}</div>
           {action && <div className="fw:600">{action}</div>}
           {dismissible && (
