@@ -1,0 +1,82 @@
+{
+  "summary": "Thumbnails that open a full-screen viewer: swipe or the arrow keys move between pictures, and a double click, a pinch or the wheel zooms.",
+  "props": [
+    {
+      "name": "images",
+      "type": "none",
+      "typeName": "LightboxImage[]",
+      "description": "The pictures, as a grid of thumbnails that each open the viewer."
+    },
+    {
+      "name": "columns",
+      "type": "number",
+      "default": 4,
+      "description": "Thumbnails per row."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the thumbnails and the picture. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the viewer is rendered. Defaults to `document.body`; pass an element to portal somewhere else, such as inside a frame."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Lightbox",
+      "className": "w:140 max-w:100%",
+      "props": {
+        "columns": 3,
+        "images": [
+          {
+            "src": "/demo/landscape-1.svg",
+            "alt": "Lisbon"
+          },
+          {
+            "src": "/demo/landscape-2.svg",
+            "alt": "Kyoto"
+          },
+          {
+            "src": "/demo/landscape-3.svg",
+            "alt": "Reykjavik"
+          },
+          {
+            "src": "/demo/landscape-4.svg",
+            "alt": "Marrakesh"
+          },
+          {
+            "src": "/demo/landscape-5.svg",
+            "alt": "Patagonia"
+          },
+          {
+            "src": "/demo/landscape-6.svg",
+            "alt": "Hokkaido"
+          }
+        ]
+      }
+    }
+  ]
+}

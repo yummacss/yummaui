@@ -1,0 +1,127 @@
+{
+  "summary": "An endless row that scrolls on its own, for logos or tags; it stands still when someone asks for reduced motion.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The items, such as logos or tags, repeated for as long as the row runs."
+    },
+    {
+      "name": "duration",
+      "type": "number",
+      "default": 30,
+      "description": "Seconds for one full pass; higher is slower."
+    },
+    {
+      "name": "reverse",
+      "type": "boolean",
+      "default": false,
+      "description": "Runs left to right."
+    },
+    {
+      "name": "pauseOnHover",
+      "type": "boolean",
+      "default": true,
+      "description": "Stops the row while a pointer is over it."
+    },
+    {
+      "name": "fade",
+      "type": "boolean",
+      "default": true,
+      "description": "Fades the row out at both ends."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "What the row holds, read once by screen readers instead of the moving copy."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Marquee",
+      "props": {
+        "ariaLabel": "Trusted by Northwind, Acme, Globex, Initech, Umbrella, Hooli, Vandelay, Tyrell"
+      },
+      "children": [
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Northwind"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Acme"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Globex"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Initech"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Umbrella"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Hooli"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Vandelay"
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
+          "children": [
+            {
+              "text": "Tyrell"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

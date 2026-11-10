@@ -1,0 +1,71 @@
+{
+  "summary": "A change between two texts, one column or side by side, with the changed words marked and long unchanged runs folded away.",
+  "props": [
+    {
+      "name": "before",
+      "type": "string",
+      "description": "The text before the change."
+    },
+    {
+      "name": "after",
+      "type": "string",
+      "description": "The text after it."
+    },
+    {
+      "name": "filename",
+      "type": "string",
+      "description": "The file's name in the header."
+    },
+    {
+      "name": "defaultView",
+      "type": "enum",
+      "values": [
+        "unified",
+        "split"
+      ],
+      "default": "unified",
+      "description": "One column with removed lines over added ones, or the two sides next to each other."
+    },
+    {
+      "name": "context",
+      "type": "number",
+      "default": 2,
+      "description": "Unchanged lines kept around each change; longer runs fold behind a button."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the frame. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "DiffViewer",
+      "className": "w:200 max-w:100%",
+      "props": {
+        "filename": "src/components/button.tsx",
+        "before": "export default function Button({\n  children,\n  variant = \"solid\",\n  size = \"md\",\n  ...props\n}: ButtonProps) {\n  const shape = useShape();\n  const classes = merge(BASE, SIZES[size]);\n  if (props.disabled) return null;\n  return (\n    <BaseButton className={classes} {...props}>\n      {children}\n    </BaseButton>\n  );\n}",
+        "after": "export default function Button({\n  children,\n  variant = \"solid\",\n  size = \"md\",\n  loading = false,\n  ...props\n}: ButtonProps) {\n  const shape = useShape();\n  const classes = merge(BASE, SIZES[size], RADIUS.control[shape]);\n  return (\n    <BaseButton className={classes} disabled={loading} {...props}>\n      {loading ? <Spinner /> : children}\n    </BaseButton>\n  );\n}"
+      }
+    }
+  ]
+}

@@ -78,6 +78,13 @@ export const COMPONENT_PAGES = [
 		description: "Highlight status, count, or label information.",
 	},
 	{
+		slug: "banner-alert",
+		since: "0.15",
+		title: "Banner Alert",
+		description:
+			"Announce news or a notice in a strip across the top of a page, loud or quiet, that slides away when dismissed.",
+	},
+	{
 		slug: "bar-chart",
 		since: "0.13",
 		title: "Bar Chart",
@@ -104,6 +111,13 @@ export const COMPONENT_PAGES = [
 		since: "0.12",
 		title: "Card",
 		description: "Group a heading, content & actions in a raised panel.",
+	},
+	{
+		slug: "carousel",
+		since: "0.15",
+		title: "Carousel",
+		description:
+			"Show pictures one at a time, moved by swiping, dragging, the arrow keys or the dots.",
 	},
 	{
 		slug: "checkbox-group",
@@ -150,6 +164,13 @@ export const COMPONENT_PAGES = [
 		description:
 			"Display modal dialogs over your application, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "diff-viewer",
+		since: "0.15",
+		title: "Diff Viewer",
+		description:
+			"Show a change between two texts, unified or side by side, with changed words marked.",
 	},
 	{
 		slug: "donut-chart",
@@ -217,6 +238,20 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "image-compare",
+		since: "0.15",
+		title: "Image Compare",
+		description:
+			"Compare a before & an after under one divider, dragged across or moved with the arrow keys.",
+	},
+	{
+		slug: "image-cropper",
+		since: "0.15",
+		title: "Image Cropper",
+		description:
+			"Pan & zoom a picture inside a round or square frame, & get the crop as a PNG.",
+	},
+	{
 		slug: "inline-icon-heading",
 		title: "Inline Icon Heading",
 		description:
@@ -250,10 +285,25 @@ export const COMPONENT_PAGES = [
 		description: "Show a keyboard shortcut as keycaps in running text.",
 	},
 	{
+		slug: "lightbox",
+		since: "0.15",
+		title: "Lightbox",
+		description:
+			"Open pictures full screen from their thumbnails, with swiping & zoom, built on Base UI.",
+		primitive: "dialog",
+	},
+	{
 		slug: "line-chart",
 		since: "0.13",
 		title: "Line Chart",
 		description: "Follow values over time, and against a past period.",
+	},
+	{
+		slug: "marquee",
+		since: "0.15",
+		title: "Marquee",
+		description:
+			"Scroll a row of logos or tags endlessly, paused on hover & still for reduced motion.",
 	},
 	{
 		slug: "menu",

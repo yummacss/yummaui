@@ -1,0 +1,75 @@
+{
+  "summary": "A strip across the top of a page for news or a notice, loud or quiet, that slides away when dismissed.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The message."
+    },
+    {
+      "name": "action",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "A link or button at the message's end."
+    },
+    {
+      "name": "dismissible",
+      "type": "boolean",
+      "default": true,
+      "description": "Adds a button that slides the banner away."
+    },
+    {
+      "name": "onDismiss",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called once the banner is dismissed, such as to remember it."
+    },
+    {
+      "name": "tone",
+      "type": "enum",
+      "values": [
+        "loud",
+        "quiet"
+      ],
+      "default": "loud",
+      "description": "Filled in the fill color for news, or in the well color for a notice."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the dismiss button. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "BannerAlert",
+      "className": "w:160 max-w:100%",
+      "props": {},
+      "children": [
+        {
+          "text": "Yumma UI 0.15 is out, with Carousel, Diff Viewer and five more."
+        }
+      ]
+    }
+  ]
+}

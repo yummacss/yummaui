@@ -1,0 +1,95 @@
+{
+  "summary": "Pictures one at a time, moved by swiping, dragging, the arrow keys, the buttons or the dots; slides snap into place.",
+  "props": [
+    {
+      "name": "slides",
+      "type": "none",
+      "typeName": "CarouselSlide[]",
+      "description": "The pictures, in order."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": "Carousel",
+      "description": "Names the carousel for screen readers."
+    },
+    {
+      "name": "loop",
+      "type": "boolean",
+      "default": false,
+      "description": "Wraps from the last slide back to the first."
+    },
+    {
+      "name": "aspectRatio",
+      "type": "string",
+      "default": "16 / 10",
+      "description": "Each slide's width over its height, such as `16 / 10`."
+    },
+    {
+      "name": "dots",
+      "type": "boolean",
+      "default": true,
+      "description": "Draws the dots under the slides."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the slides and buttons. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Carousel",
+      "className": "w:140 max-w:100%",
+      "props": {
+        "ariaLabel": "Places",
+        "slides": [
+          {
+            "src": "/demo/landscape-1.svg",
+            "alt": "Hills at dusk in Lisbon",
+            "caption": "Lisbon"
+          },
+          {
+            "src": "/demo/landscape-2.svg",
+            "alt": "Hills at dusk in Kyoto",
+            "caption": "Kyoto"
+          },
+          {
+            "src": "/demo/landscape-3.svg",
+            "alt": "Hills at dusk in Reykjavik",
+            "caption": "Reykjavik"
+          },
+          {
+            "src": "/demo/landscape-4.svg",
+            "alt": "Hills at dusk in Marrakesh",
+            "caption": "Marrakesh"
+          },
+          {
+            "src": "/demo/landscape-5.svg",
+            "alt": "Hills at dusk in Patagonia",
+            "caption": "Patagonia"
+          }
+        ]
+      }
+    }
+  ]
+}

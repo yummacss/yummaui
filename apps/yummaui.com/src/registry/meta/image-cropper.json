@@ -1,0 +1,71 @@
+{
+  "summary": "A picture panned and zoomed inside a round or square frame, for an avatar or a cover; it reports the crop as a PNG.",
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "description": "The picture to crop."
+    },
+    {
+      "name": "onChange",
+      "type": "none",
+      "typeName": "(png: string) => void",
+      "description": "Called with the cropped picture as a PNG, after each pan or zoom settles."
+    },
+    {
+      "name": "crop",
+      "type": "enum",
+      "values": [
+        "circle",
+        "square"
+      ],
+      "default": "circle",
+      "description": "A round crop for avatars, or a square one."
+    },
+    {
+      "name": "maxZoom",
+      "type": "number",
+      "default": 3,
+      "description": "How far the slider zooms in."
+    },
+    {
+      "name": "size",
+      "type": "number",
+      "default": 256,
+      "description": "The cropped picture's width and height in pixels."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the frame. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ImageCropper",
+      "className": "w:80 max-w:100%",
+      "props": {
+        "src": "/demo/landscape-3.svg"
+      }
+    }
+  ]
+}
