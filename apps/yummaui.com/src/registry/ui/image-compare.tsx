@@ -1,6 +1,7 @@
 "use client";
 
 import { IconArrowsHorizontal } from "@tabler/icons-react";
+import { useEffect, useRef, useState } from "react";
 import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slider";
 import { merge } from "yummacss/merge";
 import { FOCUS_WITHIN, RADIUS, type Shape, useShape } from "./style";
@@ -54,22 +55,30 @@ export default function ImageCompare({
 }: ImageCompareProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS_WITHIN, focus === true ? "" : focus) : "";
+  const root = useRef<HTMLDivElement>(null);
+  // the window the slider is drawn in, which is not the page's inside a frame
+  const [view, setView] = useState<Window | undefined>();
+  useEffect(() => setView(root.current?.ownerDocument.defaultView ?? undefined), []);
   const label = "p:a zi:10 t:3 px:2 py:1 br:9999 bg:black/50 c:white fs:xs pe:none";
 
   return (
     <div
+      ref={root}
       className={merge("p:r w:100% o:h bw:1 bc:rim", outline, RADIUS.popup[shape], className)}
       style={{ aspectRatio }}
     >
       <ReactCompareSlider
         defaultPosition={defaultPosition}
+        browsingContext={view}
         style={{ width: "100%", height: "100%" }}
         itemOne={<ReactCompareSliderImage src={before} alt={`${alt}, before`} />}
         itemTwo={<ReactCompareSliderImage src={after} alt={`${alt}, after`} />}
         handle={
+          // the line and the knob take the pointer: on a touch screen only the handle drags
           <div className="p:r d:f jc:c h:100% w:0">
-            <span className="p:a t:0 b:0 bg:white bs-o:pop" style={{ width: 2 }} />
-            <span className="p:a t:50% d:f ai:c jc:c w:9 h:9 br:9999 bg:white c:black bs-o:pop">
+            <span className="p:a t:0 b:0 w:10 pe:auto c:cr" />
+            <span className="p:a t:0 b:0 bg:white bs-o:pop pe:none" style={{ width: 2 }} />
+            <span className="p:a t:50% d:f ai:c jc:c w:9 h:9 br:9999 bg:white c:black bs-o:pop pe:auto c:cr" style={{ translate: "0 -50%" }}>
               <IconArrowsHorizontal aria-hidden className="w:4 h:4" />
             </span>
           </div>
