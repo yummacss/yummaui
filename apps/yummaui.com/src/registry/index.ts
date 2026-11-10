@@ -3,6 +3,7 @@
  * `pnpm generate:registry` instead.
  */
 import meta_accordion from "./meta/accordion.json";
+import meta_account_menu from "./meta/account-menu.json";
 import meta_activity_heatmap from "./meta/activity-heatmap.json";
 import meta_activity_timeline from "./meta/activity-timeline.json";
 import meta_alert_dialog from "./meta/alert-dialog.json";
@@ -35,6 +36,7 @@ import meta_file_upload from "./meta/file-upload.json";
 import meta_form from "./meta/form.json";
 import meta_gauge from "./meta/gauge.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
+import meta_kanban_board from "./meta/kanban-board.json";
 import meta_kbd from "./meta/kbd.json";
 import meta_keypad from "./meta/keypad.json";
 import meta_line_chart from "./meta/line-chart.json";
@@ -52,11 +54,14 @@ import meta_progress_timeline from "./meta/progress-timeline.json";
 import meta_progress from "./meta/progress.json";
 import meta_radio from "./meta/radio.json";
 import meta_rating from "./meta/rating.json";
+import meta_resizable_panels from "./meta/resizable-panels.json";
 import meta_scroll_area from "./meta/scroll-area.json";
 import meta_select from "./meta/select.json";
 import meta_separator from "./meta/separator.json";
+import meta_signature_pad from "./meta/signature-pad.json";
 import meta_skeleton from "./meta/skeleton.json";
 import meta_slider from "./meta/slider.json";
+import meta_sortable_list from "./meta/sortable-list.json";
 import meta_sparkline from "./meta/sparkline.json";
 import meta_stat from "./meta/stat.json";
 import meta_storage_bar from "./meta/storage-bar.json";
@@ -105,6 +110,7 @@ export interface ChildExample {
 
 export const registryMeta = {
   "accordion": meta_accordion,
+  "account-menu": meta_account_menu,
   "activity-heatmap": meta_activity_heatmap,
   "activity-timeline": meta_activity_timeline,
   "alert-dialog": meta_alert_dialog,
@@ -137,6 +143,7 @@ export const registryMeta = {
   "form": meta_form,
   "gauge": meta_gauge,
   "inline-icon-heading": meta_inline_icon_heading,
+  "kanban-board": meta_kanban_board,
   "kbd": meta_kbd,
   "keypad": meta_keypad,
   "line-chart": meta_line_chart,
@@ -154,11 +161,14 @@ export const registryMeta = {
   "progress": meta_progress,
   "radio": meta_radio,
   "rating": meta_rating,
+  "resizable-panels": meta_resizable_panels,
   "scroll-area": meta_scroll_area,
   "select": meta_select,
   "separator": meta_separator,
+  "signature-pad": meta_signature_pad,
   "skeleton": meta_skeleton,
   "slider": meta_slider,
+  "sortable-list": meta_sortable_list,
   "sparkline": meta_sparkline,
   "stat": meta_stat,
   "storage-bar": meta_storage_bar,
@@ -187,6 +197,7 @@ export interface RegistryTarget {
 
 export const registryTargets: Record<string, RegistryTarget> = {
   "accordion": { component: "accordion", variant: "base", kind: "component", install: "accordion" },
+  "account-menu": { component: "account-menu", variant: "base", kind: "component", install: "account-menu" },
   "activity-heatmap-deploys": { component: "activity-heatmap", variant: "deploys", kind: "example", install: "activity-heatmap" },
   "activity-heatmap": { component: "activity-heatmap", variant: "base", kind: "component", install: "activity-heatmap" },
   "activity-timeline": { component: "activity-timeline", variant: "base", kind: "component", install: "activity-timeline" },
@@ -232,6 +243,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "form": { component: "form", variant: "base", kind: "component", install: "form" },
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
+  "kanban-board": { component: "kanban-board", variant: "base", kind: "component", install: "kanban-board" },
   "kbd": { component: "kbd", variant: "base", kind: "component", install: "kbd" },
   "keypad": { component: "keypad", variant: "base", kind: "component", install: "keypad" },
   "line-chart": { component: "line-chart", variant: "base", kind: "component", install: "line-chart" },
@@ -251,17 +263,20 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "progress": { component: "progress", variant: "base", kind: "component", install: "progress" },
   "radio": { component: "radio", variant: "base", kind: "component", install: "radio" },
   "rating": { component: "rating", variant: "base", kind: "component", install: "rating" },
+  "resizable-panels": { component: "resizable-panels", variant: "base", kind: "component", install: "resizable-panels" },
   "scroll-area-files": { component: "scroll-area", variant: "files", kind: "example", install: "scroll-area" },
   "scroll-area": { component: "scroll-area", variant: "base", kind: "component", install: "scroll-area" },
   "select-grouped": { component: "select", variant: "grouped", kind: "example", install: "select" },
   "select": { component: "select", variant: "base", kind: "component", install: "select" },
   "separator": { component: "separator", variant: "base", kind: "component", install: "separator" },
+  "signature-pad": { component: "signature-pad", variant: "base", kind: "component", install: "signature-pad" },
   "skeleton-activity": { component: "skeleton", variant: "activity", kind: "example", install: "skeleton" },
   "skeleton-filters": { component: "skeleton", variant: "filters", kind: "example", install: "skeleton" },
   "skeleton-list": { component: "skeleton", variant: "list", kind: "example", install: "skeleton" },
   "skeleton-stats": { component: "skeleton", variant: "stats", kind: "example", install: "skeleton" },
   "skeleton": { component: "skeleton", variant: "base", kind: "component", install: "skeleton" },
   "slider": { component: "slider", variant: "base", kind: "component", install: "slider" },
+  "sortable-list": { component: "sortable-list", variant: "base", kind: "component", install: "sortable-list" },
   "sparkline": { component: "sparkline", variant: "base", kind: "component", install: "sparkline" },
   "stat": { component: "stat", variant: "base", kind: "component", install: "stat" },
   "storage-bar": { component: "storage-bar", variant: "base", kind: "component", install: "storage-bar" },
@@ -286,6 +301,7 @@ export interface RegistryConfig {
 
 export const registryConfig: Record<string, RegistryConfig> = {
   "accordion": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "account-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "alert-dialog": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "autocomplete": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "button": { states: {}, easings: {}, keyframes: { "spin": "to { rotate: 360deg; }" } },
@@ -309,6 +325,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "progress": { states: {}, easings: {}, keyframes: { "slide": "from { translate: -100% 0; } to { translate: 100% 0; }" } },
   "radio": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "rating": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
+  "resizable-panels": { states: { "resizing": "[data-separator=active]" }, easings: {}, keyframes: {} },
   "scroll-area": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: {}, keyframes: {} },
   "select": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "skeleton": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },

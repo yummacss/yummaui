@@ -1,0 +1,65 @@
+{
+  "summary": "A pad to sign with a pointer, a finger or a pen; the line thins as it speeds up. Undo takes back one stroke.",
+  "props": [
+    {
+      "name": "onChange",
+      "type": "none",
+      "typeName": "(png: string | null) => void",
+      "description": "Called after each stroke, undo and clear: the signature as a transparent PNG, or `null` once empty."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": "Sign above the line",
+      "description": "The line under the pad, until someone signs."
+    },
+    {
+      "name": "height",
+      "type": "number",
+      "default": 200,
+      "description": "The pad's height in pixels."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "default": "Signature",
+      "description": "Names the pad for screen readers."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the pad and its buttons. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Turns drawing off and dims the pad."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "SignaturePad",
+      "className": "w:120 max-w:100%"
+    }
+  ]
+}

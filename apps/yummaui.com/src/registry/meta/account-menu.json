@@ -1,0 +1,119 @@
+{
+  "summary": "An avatar that opens the signed-in account: its card, a few actions, other accounts to switch to and Sign out.",
+  "props": [
+    {
+      "name": "account",
+      "type": "none",
+      "typeName": "Account",
+      "description": "Who is signed in: the avatar, and the card at the top of the menu."
+    },
+    {
+      "name": "accounts",
+      "type": "none",
+      "typeName": "Account[]",
+      "description": "Every signed-in account, the current one included, listed to switch between."
+    },
+    {
+      "name": "onSwitch",
+      "type": "none",
+      "typeName": "(account: Account) => void",
+      "description": "Called with the account picked from the list."
+    },
+    {
+      "name": "actions",
+      "type": "none",
+      "typeName": "AccountMenuAction[]",
+      "description": "Rows under the card, such as Settings."
+    },
+    {
+      "name": "onAddAccount",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called from the Add account row under the list."
+    },
+    {
+      "name": "onSignOut",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called from the Sign out row at the bottom."
+    },
+    {
+      "name": "status",
+      "type": "enum",
+      "values": [
+        "none",
+        "online",
+        "offline",
+        "busy"
+      ],
+      "default": "none",
+      "description": "A dot on the avatar for presence."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the popup and its rows. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the popup is rendered. Defaults to `document.body`; pass an element to portal somewhere else, such as inside a frame."
+    }
+  ],
+  "scene": [
+    {
+      "component": "AccountMenu",
+      "props": {
+        "account": {
+          "name": "Ada Lovelace",
+          "email": "ada@acme.dev"
+        },
+        "accounts": [
+          {
+            "name": "Ada Lovelace",
+            "email": "ada@acme.dev"
+          },
+          {
+            "name": "Ada Lovelace",
+            "email": "ada@analytical.org"
+          },
+          {
+            "name": "Grace Hopper",
+            "email": "grace@navy.mil"
+          }
+        ],
+        "actions": [
+          {
+            "label": "Settings",
+            "icon": {
+              "$icon": "IconSettings",
+              "size": "w:4 h:4"
+            },
+            "shortcut": "⌘ ,"
+          }
+        ],
+        "status": "online"
+      }
+    }
+  ]
+}

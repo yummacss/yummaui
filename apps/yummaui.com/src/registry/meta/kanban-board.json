@@ -1,0 +1,105 @@
+{
+  "summary": "Columns of cards moved by dragging, within a column or across, with a pointer, a finger or the keyboard.",
+  "props": [
+    {
+      "name": "defaultColumns",
+      "type": "none",
+      "typeName": "KanbanColumn[]",
+      "description": "The columns, left to right, each with its cards."
+    },
+    {
+      "name": "onColumnsChange",
+      "type": "none",
+      "typeName": "(columns: KanbanColumn[]) => void",
+      "description": "Called with the board after a card is dropped."
+    },
+    {
+      "name": "counts",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows how many cards each column holds."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the columns and cards. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "KanbanBoard",
+      "className": "w:100%",
+      "props": {
+        "defaultColumns": [
+          {
+            "id": "todo",
+            "title": "To do",
+            "cards": [
+              {
+                "id": "c1",
+                "title": "Date picker keyboard support",
+                "meta": "a11y"
+              },
+              {
+                "id": "c2",
+                "title": "Carousel snap points",
+                "meta": "0.15"
+              },
+              {
+                "id": "c3",
+                "title": "Diff viewer word wrap",
+                "meta": "0.15"
+              }
+            ]
+          },
+          {
+            "id": "doing",
+            "title": "In progress",
+            "cards": [
+              {
+                "id": "c4",
+                "title": "Sortable list announcements",
+                "meta": "0.14"
+              },
+              {
+                "id": "c5",
+                "title": "Signature pad export",
+                "meta": "0.14"
+              }
+            ]
+          },
+          {
+            "id": "done",
+            "title": "Done",
+            "cards": [
+              {
+                "id": "c6",
+                "title": "Bar chart solid bars",
+                "meta": "0.13"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

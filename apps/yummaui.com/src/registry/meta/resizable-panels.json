@@ -1,0 +1,168 @@
+{
+  "summary": "Panels split by handles you drag or move with the arrow keys; a double click puts a panel back to its starting size.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The panels, one per child, with a handle between each pair. A child can be another `ResizablePanels` to split the other way."
+    },
+    {
+      "name": "orientation",
+      "type": "enum",
+      "values": [
+        "horizontal",
+        "vertical"
+      ],
+      "default": "horizontal",
+      "description": "Side by side, or stacked top to bottom."
+    },
+    {
+      "name": "defaultSizes",
+      "type": "none",
+      "typeName": "number[]",
+      "description": "Each panel's starting size in percent, in order. Shares out evenly without it."
+    },
+    {
+      "name": "minSize",
+      "type": "number",
+      "default": 10,
+      "description": "The smallest a panel can get, in percent."
+    },
+    {
+      "name": "grip",
+      "type": "boolean",
+      "default": true,
+      "description": "Draws a small knob on each handle, so it reads as something to drag."
+    },
+    {
+      "name": "bordered",
+      "type": "boolean",
+      "default": true,
+      "description": "Draws the border and corners. `false` for a group inside another, which already has them."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the frame. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "ResizablePanels",
+      "className": "h:72",
+      "props": {
+        "defaultSizes": [
+          28,
+          72
+        ]
+      },
+      "children": [
+        {
+          "tag": "div",
+          "className": "d:f fd:c h:100%",
+          "children": [
+            {
+              "tag": "div",
+              "className": "d:f ai:c h:9 px:3 bbw:1 bc:line c:hint fs:xs ff:m ws:nw",
+              "children": [
+                {
+                  "text": "files"
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "className": "p:3 c:hint fs:sm",
+              "children": [
+                {
+                  "text": "button.tsx, card.tsx, dialog.tsx"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "component": "ResizablePanels",
+          "props": {
+            "orientation": "vertical",
+            "defaultSizes": [
+              62,
+              38
+            ],
+            "bordered": false
+          },
+          "children": [
+            {
+              "tag": "div",
+              "className": "d:f fd:c h:100%",
+              "children": [
+                {
+                  "tag": "div",
+                  "className": "d:f ai:c h:9 px:3 bbw:1 bc:line c:hint fs:xs ff:m ws:nw",
+                  "children": [
+                    {
+                      "text": "button.tsx"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "className": "p:3 c:hint fs:sm",
+                  "children": [
+                    {
+                      "text": "export default function Button()"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "className": "d:f fd:c h:100%",
+              "children": [
+                {
+                  "tag": "div",
+                  "className": "d:f ai:c h:9 px:3 bbw:1 bc:line c:hint fs:xs ff:m ws:nw",
+                  "children": [
+                    {
+                      "text": "terminal"
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "className": "p:3 c:hint fs:sm",
+                  "children": [
+                    {
+                      "text": "npx yummaui add button"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

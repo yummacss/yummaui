@@ -30,6 +30,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"otp-field",
 			"radio",
 			"select",
+			"signature-pad",
 			"slider",
 			"switch",
 			"textarea",
@@ -74,7 +75,17 @@ export const sidebarConfig: SidebarSection[] = [
 	},
 	{
 		title: "Interactive",
-		items: ["button", "button-group", "context-menu", "menu", "menubar"],
+		items: [
+			"account-menu",
+			"button",
+			"button-group",
+			"context-menu",
+			"kanban-board",
+			"menu",
+			"menubar",
+			"resizable-panels",
+			"sortable-list",
+		],
 	},
 	{
 		title: "Navigation",

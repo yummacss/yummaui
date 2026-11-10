@@ -1,0 +1,101 @@
+{
+  "summary": "Rows reordered by dragging, with a pointer, a finger or the keyboard: Space lifts a row, the arrows move it and Space drops it.",
+  "props": [
+    {
+      "name": "defaultItems",
+      "type": "none",
+      "typeName": "SortableListItem[]",
+      "description": "The rows, top to bottom."
+    },
+    {
+      "name": "items",
+      "type": "none",
+      "typeName": "SortableListItem[]",
+      "description": "Controlled order. Pass it with `onItemsChange`."
+    },
+    {
+      "name": "onItemsChange",
+      "type": "none",
+      "typeName": "(items: SortableListItem[]) => void",
+      "description": "Called with the new order after a drop."
+    },
+    {
+      "name": "handle",
+      "type": "boolean",
+      "default": true,
+      "description": "Drag by the grip alone, which leaves the rest of the row free for buttons and links. `false` lets the whole row drag."
+    },
+    {
+      "name": "numbered",
+      "type": "boolean",
+      "default": false,
+      "description": "Numbers each row by its place."
+    },
+    {
+      "name": "ariaLabel",
+      "type": "string",
+      "description": "Names the list for screen readers."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the list and its rows. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "SortableList",
+      "className": "w:96 max-w:100%",
+      "props": {
+        "defaultItems": [
+          {
+            "id": "changelog",
+            "label": "Write the changelog",
+            "meta": "5 min"
+          },
+          {
+            "id": "version",
+            "label": "Bump the CLI version",
+            "meta": "1 min"
+          },
+          {
+            "id": "check",
+            "label": "Run the checks",
+            "meta": "2 min"
+          },
+          {
+            "id": "publish",
+            "label": "Publish the release",
+            "meta": "1 min"
+          },
+          {
+            "id": "post",
+            "label": "Post the release image",
+            "meta": "5 min"
+          }
+        ],
+        "ariaLabel": "Release checklist",
+        "numbered": true
+      }
+    }
+  ]
+}
