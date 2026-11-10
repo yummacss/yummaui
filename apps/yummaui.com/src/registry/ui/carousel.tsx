@@ -2,22 +2,14 @@
 
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import useEmblaCarousel from "embla-carousel-react";
-import { useCallback, useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import { Children, useCallback, useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useShape } from "./style";
 
-export interface CarouselSlide {
-  /** The picture's address. */
-  src: string;
-  /** What the picture shows, for screen readers. */
-  alt: string;
-  /** A label over the picture's corner. */
-  caption?: string;
-}
-
 export interface CarouselProps {
-  /** The pictures, in order. */
-  slides: CarouselSlide[];
+  /** The slides, one per child, such as pictures or cards. */
+  children: ReactNode;
   /** Names the carousel for screen readers. */
   ariaLabel?: string;
   /** Wraps from the last slide back to the first. */
@@ -43,11 +35,11 @@ export interface CarouselProps {
 }
 
 /**
- * Pictures one at a time, moved by swiping, dragging, the arrow keys, the
- * buttons or the dots; slides snap into place.
+ * Slides one at a time, moved by swiping, dragging, the arrow keys, the buttons
+ * or the dots; slides snap into place.
  */
 export default function Carousel({
-  slides,
+  children,
   ariaLabel = "Carousel",
   loop = false,
   aspectRatio = "16 / 10",
@@ -58,6 +50,7 @@ export default function Carousel({
 }: CarouselProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
+  const slides = Children.toArray(children);
   const [viewport, api] = useEmblaCarousel({ loop });
   const [selected, setSelected] = useState(0);
   const [ends, setEnds] = useState({ prev: false, next: false });
@@ -100,36 +93,27 @@ export default function Carousel({
       >
         <div className="d:f ml:-3">
           {slides.map((slide, index) => (
-            <figure
-              key={slide.src}
+            <div
+              key={index}
               role="group"
               aria-roledescription="slide"
               aria-label={`${index + 1} of ${slides.length}`}
-              className="p:r m:0 pl:3 min-w:0"
+              className="pl:3 min-w:0"
               style={{ flex: "0 0 100%" }}
             >
-              <img
-                src={slide.src}
-                alt={slide.alt}
-                draggable={false}
-                className={merge("d:b w:100% h:auto of:c us:none", RADIUS.popup[shape])}
-                style={{ aspectRatio }}
-              />
-              {slide.caption && (
-                <figcaption className="p:a l:6 b:3 px:2 py:1 br:9999 bg:black/50 c:white fs:xs">
-                  {slide.caption}
-                </figcaption>
-              )}
-            </figure>
+              <div className={merge("o:h us:none", RADIUS.popup[shape])} style={{ aspectRatio }}>
+                {slide}
+              </div>
+            </div>
           ))}
         </div>
       </div>
       <div className="d:f ai:c jc:sb g:3">
         {dots ? (
           <div className="d:f ai:c g:1">
-            {slides.map((slide, index) => (
+            {slides.map((_, index) => (
               <button
-                key={slide.src}
+                key={index}
                 type="button"
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={index === selected}

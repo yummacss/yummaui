@@ -1,11 +1,11 @@
 {
-  "summary": "Pictures one at a time, moved by swiping, dragging, the arrow keys, the buttons or the dots; slides snap into place.",
+  "summary": "Slides one at a time, moved by swiping, dragging, the arrow keys, the buttons or the dots; slides snap into place.",
   "props": [
     {
-      "name": "slides",
+      "name": "children",
       "type": "none",
-      "typeName": "CarouselSlide[]",
-      "description": "The pictures, in order."
+      "typeName": "ReactNode",
+      "description": "The slides, one per child, such as pictures or cards."
     },
     {
       "name": "ariaLabel",
@@ -61,35 +61,55 @@
       "component": "Carousel",
       "className": "w:140 max-w:100%",
       "props": {
-        "ariaLabel": "Places",
-        "slides": [
-          {
-            "src": "/demo/landscape-1.svg",
-            "alt": "Hills at dusk in Lisbon",
-            "caption": "Lisbon"
-          },
-          {
-            "src": "/demo/landscape-2.svg",
-            "alt": "Hills at dusk in Kyoto",
-            "caption": "Kyoto"
-          },
-          {
-            "src": "/demo/landscape-3.svg",
-            "alt": "Hills at dusk in Reykjavik",
-            "caption": "Reykjavik"
-          },
-          {
-            "src": "/demo/landscape-4.svg",
-            "alt": "Hills at dusk in Marrakesh",
-            "caption": "Marrakesh"
-          },
-          {
-            "src": "/demo/landscape-5.svg",
-            "alt": "Hills at dusk in Patagonia",
-            "caption": "Patagonia"
-          }
-        ]
-      }
+        "ariaLabel": "Folders"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:indigo-6",
+          "children": [
+            {
+              "text": "Documents"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:mint-7",
+          "children": [
+            {
+              "text": "Photos"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:orange-6",
+          "children": [
+            {
+              "text": "Music"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:violet-6",
+          "children": [
+            {
+              "text": "Downloads"
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "className": "d:f ai:c jc:c w:100% h:100% c:white fs:2xl fw:600 bg:slate-7",
+          "children": [
+            {
+              "text": "Archive"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

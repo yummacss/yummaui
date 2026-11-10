@@ -8,10 +8,10 @@
       "description": "The items, such as logos or tags, repeated for as long as the row runs."
     },
     {
-      "name": "duration",
+      "name": "speed",
       "type": "number",
-      "default": 30,
-      "description": "Seconds for one full pass; higher is slower."
+      "default": 40,
+      "description": "How fast the row moves, in pixels per second."
     },
     {
       "name": "reverse",
@@ -46,7 +46,7 @@
     {
       "component": "Marquee",
       "props": {
-        "ariaLabel": "Trusted by Northwind, Acme, Globex, Initech, Umbrella, Hooli, Vandelay, Tyrell"
+        "ariaLabel": "Opens Documents, Photos, Music, Spreadsheets, Notes, Archives, Code, Videos"
       },
       "children": [
         {
@@ -54,7 +54,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Northwind"
+              "text": "Documents"
             }
           ]
         },
@@ -63,7 +63,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Acme"
+              "text": "Photos"
             }
           ]
         },
@@ -72,7 +72,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Globex"
+              "text": "Music"
             }
           ]
         },
@@ -81,7 +81,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Initech"
+              "text": "Spreadsheets"
             }
           ]
         },
@@ -90,7 +90,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Umbrella"
+              "text": "Notes"
             }
           ]
         },
@@ -99,7 +99,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Hooli"
+              "text": "Archives"
             }
           ]
         },
@@ -108,7 +108,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Vandelay"
+              "text": "Code"
             }
           ]
         },
@@ -117,7 +117,7 @@
           "className": "d:f ai:c h:10 px:4 bw:1 bc:rim br:9999 bg:raised bs-o:key fw:500 ws:nw",
           "children": [
             {
-              "text": "Tyrell"
+              "text": "Videos"
             }
           ]
         }

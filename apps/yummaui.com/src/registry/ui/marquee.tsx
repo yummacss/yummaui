@@ -1,14 +1,14 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 
 export interface MarqueeProps {
   /** The items, such as logos or tags, repeated for as long as the row runs. */
   children: ReactNode;
-  /** Seconds for one full pass; higher is slower. */
-  duration?: number;
+  /** How fast the row moves, in pixels per second. */
+  speed?: number;
   /** Runs left to right. */
   reverse?: boolean;
   /** Stops the row while a pointer is over it. */
@@ -32,24 +32,41 @@ export interface MarqueeProps {
  */
 export default function Marquee({
   children,
-  duration = 30,
+  speed = 40,
   reverse = false,
   pauseOnHover = true,
   fade = true,
   ariaLabel,
   className,
 }: MarqueeProps) {
+  const frame = useRef<HTMLDivElement>(null);
+  const first = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
+  // one copy's width, and how many copies fill the row with one to spare
+  const [measure, setMeasure] = useState({ width: 0, copies: 2 });
 
-  // two copies end to end, so moving half the width loops without a seam
-  const copy = (hidden: boolean) => (
-    <div aria-hidden={hidden || undefined} className="d:f ai:c g:4 pr:4 fs:0">
-      {children}
-    </div>
-  );
+  useEffect(() => {
+    const row = frame.current;
+    const copy = first.current;
+    if (!row || !copy) return;
+    const fit = () => {
+      const width = copy.getBoundingClientRect().width;
+      if (!width) return;
+      const copies = Math.max(2, Math.ceil(row.clientWidth / width) + 1);
+      setMeasure((now) =>
+        now.width === width && now.copies === copies ? now : { width, copies },
+      );
+    };
+    fit();
+    const observer = new ResizeObserver(fit);
+    observer.observe(row);
+    observer.observe(copy);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
+      ref={frame}
       role={ariaLabel ? "region" : undefined}
       aria-label={ariaLabel}
       onPointerEnter={() => pauseOnHover && setPaused(true)}
@@ -58,19 +75,37 @@ export default function Marquee({
       style={
         fade
           ? {
-              maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)",
+              maskImage:
+                "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)",
             }
           : undefined
       }
     >
+      {/* moving by exactly one copy lands the next copy where the first began */}
       <div
         className={merge(
-          "d:f w:max an:marquee atf:l aic:i @prm:an:none",
+          "d:f w:max",
+          measure.width ? "an:marquee atf:l aic:i @prm:an:none" : "",
         )}
-        style={{ animationDuration: `${duration}s`, animationDirection: reverse ? "reverse" : "normal", animationPlayState: paused ? "paused" : "running" }}
+        style={
+          {
+            "--marquee-shift": `${measure.width}px`,
+            animationDuration: `${measure.width / speed}s`,
+            animationDirection: reverse ? "reverse" : "normal",
+            animationPlayState: paused ? "paused" : "running",
+          } as CSSProperties
+        }
       >
-        {copy(Boolean(ariaLabel))}
-        {copy(true)}
+        {Array.from({ length: measure.copies }, (_, index) => (
+          <div
+            key={index}
+            ref={index === 0 ? first : undefined}
+            aria-hidden={index > 0 || Boolean(ariaLabel) || undefined}
+            className="d:f ai:c g:4 pr:4 fs:0"
+          >
+            {children}
+          </div>
+        ))}
       </div>
     </div>
   );

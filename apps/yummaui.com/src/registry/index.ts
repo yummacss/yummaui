@@ -339,7 +339,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "file-upload": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "lightbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: {}, keyframes: {} },
-  "marquee": { states: {}, easings: {}, keyframes: { "marquee": "to { translate: -50% 0; }" } },
+  "marquee": { states: {}, easings: {}, keyframes: { "marquee": "to { translate: calc(var(--marquee-shift) * -1) 0; }" } },
   "menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "menubar": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "navigation-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "from-left": "[data-activation-direction=left]", "from-right": "[data-activation-direction=right]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
