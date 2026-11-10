@@ -52,7 +52,7 @@ function renderOption(option: SelectOption, shape: Shape) {
       key={option.value}
       value={option.value}
       className={(state) =>
-        `d:f ai:c g:2 h:8 px:2 mx:1 bw:1 bc:transparent ${RADIUS.item[shape]} fs:sm fw:400 us:none c:p c:label ${
+        `d:f ai:c g:2 ${option.description ? "min-h:8 py:1" : "h:8"} px:2 mx:1 bw:1 bc:transparent ${RADIUS.item[shape]} fs:sm fw:400 us:none c:p c:label ${
           state.highlighted ? "bg:well" : "bg:transparent"
         }`
       }

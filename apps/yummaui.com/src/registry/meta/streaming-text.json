@@ -1,0 +1,54 @@
+{
+  "summary": "An answer as it arrives: each new word fades and sharpens in, with a caret while it streams and a waiting line before the first word.",
+  "props": [
+    {
+      "name": "text",
+      "type": "string",
+      "description": "The text so far. Each new word fades in as the text grows."
+    },
+    {
+      "name": "streaming",
+      "type": "boolean",
+      "default": false,
+      "description": "Still arriving: draws a caret after the last word, or the waiting line before the first."
+    },
+    {
+      "name": "pending",
+      "type": "enum",
+      "values": [
+        "shimmer",
+        "dots",
+        "caret"
+      ],
+      "default": "shimmer",
+      "description": "What shows before the first word arrives."
+    },
+    {
+      "name": "pendingLabel",
+      "type": "string",
+      "default": "Generating",
+      "description": "The waiting line's words, for `shimmer`."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The words' fade. Turn it off for text that appears at once, or when the user has asked for reduced motion."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "StreamingText",
+      "className": "w:140 max-w:100%",
+      "props": {
+        "streaming": true,
+        "text": "I found 214 photos from 2 to 16 August and sorted them into Lisbon, Porto and Sintra. Lisbon has the most, 96, mostly from the first week."
+      }
+    }
+  ]
+}

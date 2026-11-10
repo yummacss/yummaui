@@ -81,6 +81,19 @@ export const sidebarConfig: SidebarSection[] = [
 		],
 	},
 	{
+		title: "AI",
+		items: [
+			"message",
+			"model-picker",
+			"prompt-input",
+			"reasoning",
+			"streaming-text",
+			"suggestions",
+			"tool-call",
+			"usage-meter",
+		],
+	},
+	{
 		title: "Interactive",
 		items: [
 			"account-menu",

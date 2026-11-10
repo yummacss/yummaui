@@ -1,0 +1,206 @@
+{
+  "summary": "Where a message is written: a field that grows, attached files, a Tools menu, a mic that records, and Send that turns into Stop.",
+  "props": [
+    {
+      "name": "onSubmit",
+      "type": "none",
+      "typeName": "(submission: PromptSubmission) => void",
+      "description": "Called with the message, its files, tools and mode on Send or Enter."
+    },
+    {
+      "name": "streaming",
+      "type": "boolean",
+      "default": false,
+      "description": "An answer is arriving: Send turns into Stop."
+    },
+    {
+      "name": "onStop",
+      "type": "none",
+      "typeName": "() => void",
+      "description": "Called from Stop while `streaming`."
+    },
+    {
+      "name": "tools",
+      "type": "none",
+      "typeName": "PromptTool[]",
+      "description": "Switches in the Tools menu, such as web search; each one on shows as a chip."
+    },
+    {
+      "name": "modes",
+      "type": "none",
+      "typeName": "PromptMode[]",
+      "description": "A Plan or Build choice in the Tools menu; a mode other than the first shows as a chip."
+    },
+    {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "Drawn before the mic, such as a Model Picker."
+    },
+    {
+      "name": "dictation",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows the mic, which records and hands back the audio."
+    },
+    {
+      "name": "onRecording",
+      "type": "none",
+      "typeName": "(audio: Blob) => void",
+      "description": "Called with the recording when it is done, to turn into text."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "default": "Ask anything",
+      "description": "The empty field's hint."
+    },
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "default": "",
+      "description": "Starting text."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the field and its buttons. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Turns the whole input off."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the popup is rendered. Defaults to `document.body`; pass an element to portal somewhere else, such as inside a frame."
+    }
+  ],
+  "scene": [
+    {
+      "component": "PromptInput",
+      "className": "w:160 max-w:100%",
+      "props": {
+        "placeholder": "Ask about your files",
+        "tools": [
+          {
+            "id": "search",
+            "label": "Search the web",
+            "description": "Look things up as it answers",
+            "icon": {
+              "$icon": "IconWorld",
+              "size": "w:4 h:4"
+            }
+          },
+          {
+            "id": "think",
+            "label": "Think longer",
+            "description": "Reason before answering",
+            "icon": {
+              "$icon": "IconBulb",
+              "size": "w:4 h:4"
+            }
+          }
+        ],
+        "modes": [
+          {
+            "value": "build",
+            "label": "Build",
+            "icon": {
+              "$icon": "IconHammer",
+              "size": "w:4 h:4"
+            }
+          },
+          {
+            "value": "plan",
+            "label": "Plan",
+            "icon": {
+              "$icon": "IconListCheck",
+              "size": "w:4 h:4"
+            }
+          }
+        ]
+      },
+      "children": [
+        {
+          "component": "ModelPicker",
+          "props": {
+            "models": [
+              {
+                "id": "opus",
+                "name": "Claude Opus 5.5",
+                "description": "Most capable, for hard work",
+                "logo": "/demo/logos/claude.svg",
+                "provider": "Anthropic"
+              },
+              {
+                "id": "sonnet",
+                "name": "Claude Sonnet 5.5",
+                "description": "Fast and capable",
+                "logo": "/demo/logos/claude.svg",
+                "provider": "Anthropic"
+              },
+              {
+                "id": "haiku",
+                "name": "Claude Haiku 5.5",
+                "description": "Quickest, for light tasks",
+                "logo": "/demo/logos/claude.svg",
+                "provider": "Anthropic"
+              },
+              {
+                "id": "gpt",
+                "name": "GPT-5",
+                "description": "General purpose",
+                "logo": "/demo/logos/openai.svg",
+                "provider": "OpenAI"
+              },
+              {
+                "id": "gemini",
+                "name": "Gemini 2.5 Pro",
+                "description": "Long documents",
+                "logo": "/demo/logos/gemini.svg",
+                "provider": "Google"
+              },
+              {
+                "id": "deepseek",
+                "name": "DeepSeek V3",
+                "description": "Open weights",
+                "logo": "/demo/logos/deepseek.svg",
+                "provider": "DeepSeek"
+              },
+              {
+                "id": "mistral",
+                "name": "Mistral Large",
+                "description": "Open weights",
+                "logo": "/demo/logos/mistral.svg",
+                "provider": "Mistral"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

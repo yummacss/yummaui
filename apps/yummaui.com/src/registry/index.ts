@@ -49,7 +49,9 @@ import meta_line_chart from "./meta/line-chart.json";
 import meta_marquee from "./meta/marquee.json";
 import meta_menu from "./meta/menu.json";
 import meta_menubar from "./meta/menubar.json";
+import meta_message from "./meta/message.json";
 import meta_meter from "./meta/meter.json";
+import meta_model_picker from "./meta/model-picker.json";
 import meta_navigation_menu from "./meta/navigation-menu.json";
 import meta_number_field from "./meta/number-field.json";
 import meta_onboarding from "./meta/onboarding.json";
@@ -59,8 +61,10 @@ import meta_popover from "./meta/popover.json";
 import meta_preview_card from "./meta/preview-card.json";
 import meta_progress_timeline from "./meta/progress-timeline.json";
 import meta_progress from "./meta/progress.json";
+import meta_prompt_input from "./meta/prompt-input.json";
 import meta_radio from "./meta/radio.json";
 import meta_rating from "./meta/rating.json";
+import meta_reasoning from "./meta/reasoning.json";
 import meta_resizable_panels from "./meta/resizable-panels.json";
 import meta_scroll_area from "./meta/scroll-area.json";
 import meta_select from "./meta/select.json";
@@ -72,6 +76,8 @@ import meta_sortable_list from "./meta/sortable-list.json";
 import meta_sparkline from "./meta/sparkline.json";
 import meta_stat from "./meta/stat.json";
 import meta_storage_bar from "./meta/storage-bar.json";
+import meta_streaming_text from "./meta/streaming-text.json";
+import meta_suggestions from "./meta/suggestions.json";
 import meta_switch from "./meta/switch.json";
 import meta_tabs from "./meta/tabs.json";
 import meta_textarea from "./meta/textarea.json";
@@ -79,9 +85,11 @@ import meta_theme_switcher from "./meta/theme-switcher.json";
 import meta_toast from "./meta/toast.json";
 import meta_toggle_group from "./meta/toggle-group.json";
 import meta_toggle from "./meta/toggle.json";
+import meta_tool_call from "./meta/tool-call.json";
 import meta_toolbar from "./meta/toolbar.json";
 import meta_tooltip from "./meta/tooltip.json";
 import meta_treemap from "./meta/treemap.json";
+import meta_usage_meter from "./meta/usage-meter.json";
 
 export interface RegistryProp {
   name: string;
@@ -163,7 +171,9 @@ export const registryMeta = {
   "marquee": meta_marquee,
   "menu": meta_menu,
   "menubar": meta_menubar,
+  "message": meta_message,
   "meter": meta_meter,
+  "model-picker": meta_model_picker,
   "navigation-menu": meta_navigation_menu,
   "number-field": meta_number_field,
   "onboarding": meta_onboarding,
@@ -173,8 +183,10 @@ export const registryMeta = {
   "preview-card": meta_preview_card,
   "progress-timeline": meta_progress_timeline,
   "progress": meta_progress,
+  "prompt-input": meta_prompt_input,
   "radio": meta_radio,
   "rating": meta_rating,
+  "reasoning": meta_reasoning,
   "resizable-panels": meta_resizable_panels,
   "scroll-area": meta_scroll_area,
   "select": meta_select,
@@ -186,6 +198,8 @@ export const registryMeta = {
   "sparkline": meta_sparkline,
   "stat": meta_stat,
   "storage-bar": meta_storage_bar,
+  "streaming-text": meta_streaming_text,
+  "suggestions": meta_suggestions,
   "switch": meta_switch,
   "tabs": meta_tabs,
   "textarea": meta_textarea,
@@ -193,9 +207,11 @@ export const registryMeta = {
   "toast": meta_toast,
   "toggle-group": meta_toggle_group,
   "toggle": meta_toggle,
+  "tool-call": meta_tool_call,
   "toolbar": meta_toolbar,
   "tooltip": meta_tooltip,
   "treemap": meta_treemap,
+  "usage-meter": meta_usage_meter,
 } as unknown as Record<string, RegistryMeta>;
 
 export function getRegistryMeta(id: string): RegistryMeta | null {
@@ -270,7 +286,9 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "marquee": { component: "marquee", variant: "base", kind: "component", install: "marquee" },
   "menu": { component: "menu", variant: "base", kind: "component", install: "menu" },
   "menubar": { component: "menubar", variant: "base", kind: "component", install: "menubar" },
+  "message": { component: "message", variant: "base", kind: "component", install: "message" },
   "meter": { component: "meter", variant: "base", kind: "component", install: "meter" },
+  "model-picker": { component: "model-picker", variant: "base", kind: "component", install: "model-picker" },
   "navigation-menu": { component: "navigation-menu", variant: "base", kind: "component", install: "navigation-menu" },
   "number-field": { component: "number-field", variant: "base", kind: "component", install: "number-field" },
   "onboarding": { component: "onboarding", variant: "base", kind: "component", install: "onboarding" },
@@ -282,8 +300,10 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "progress-timeline": { component: "progress-timeline", variant: "base", kind: "component", install: "progress-timeline" },
   "progress-upload": { component: "progress", variant: "upload", kind: "example", install: "progress" },
   "progress": { component: "progress", variant: "base", kind: "component", install: "progress" },
+  "prompt-input": { component: "prompt-input", variant: "base", kind: "component", install: "prompt-input" },
   "radio": { component: "radio", variant: "base", kind: "component", install: "radio" },
   "rating": { component: "rating", variant: "base", kind: "component", install: "rating" },
+  "reasoning": { component: "reasoning", variant: "base", kind: "component", install: "reasoning" },
   "resizable-panels": { component: "resizable-panels", variant: "base", kind: "component", install: "resizable-panels" },
   "scroll-area-files": { component: "scroll-area", variant: "files", kind: "example", install: "scroll-area" },
   "scroll-area": { component: "scroll-area", variant: "base", kind: "component", install: "scroll-area" },
@@ -301,6 +321,8 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "sparkline": { component: "sparkline", variant: "base", kind: "component", install: "sparkline" },
   "stat": { component: "stat", variant: "base", kind: "component", install: "stat" },
   "storage-bar": { component: "storage-bar", variant: "base", kind: "component", install: "storage-bar" },
+  "streaming-text": { component: "streaming-text", variant: "base", kind: "component", install: "streaming-text" },
+  "suggestions": { component: "suggestions", variant: "base", kind: "component", install: "suggestions" },
   "switch": { component: "switch", variant: "base", kind: "component", install: "switch" },
   "tabs": { component: "tabs", variant: "base", kind: "component", install: "tabs" },
   "textarea": { component: "textarea", variant: "base", kind: "component", install: "textarea" },
@@ -308,10 +330,12 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "toast": { component: "toast", variant: "base", kind: "component", install: "toast" },
   "toggle-group": { component: "toggle-group", variant: "base", kind: "component", install: "toggle-group" },
   "toggle": { component: "toggle", variant: "base", kind: "component", install: "toggle" },
+  "tool-call": { component: "tool-call", variant: "base", kind: "component", install: "tool-call" },
   "toolbar": { component: "toolbar", variant: "base", kind: "component", install: "toolbar" },
   "tooltip-toolbar": { component: "tooltip", variant: "toolbar", kind: "example", install: "tooltip" },
   "tooltip": { component: "tooltip", variant: "base", kind: "component", install: "tooltip" },
   "treemap": { component: "treemap", variant: "base", kind: "component", install: "treemap" },
+  "usage-meter": { component: "usage-meter", variant: "base", kind: "component", install: "usage-meter" },
 };
 
 export interface RegistryConfig {
@@ -347,18 +371,22 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "popover": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "preview-card": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "progress": { states: {}, easings: {}, keyframes: { "slide": "from { translate: -100% 0; } to { translate: 100% 0; }" } },
+  "prompt-input": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
   "radio": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "rating": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
+  "reasoning": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "shimmer": "from { mask-position: 100% 0; } to { mask-position: 0 0; }" } },
   "resizable-panels": { states: { "resizing": "[data-separator=active]" }, easings: {}, keyframes: {} },
   "scroll-area": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: {}, keyframes: {} },
   "select": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "skeleton": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
+  "streaming-text": { states: {}, easings: {}, keyframes: { "blink": "50% { opacity: 0; }", "reveal": "from { opacity: 0; filter: blur(4px); }", "shimmer": "from { mask-position: 100% 0; } to { mask-position: 0 0; }", "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
   "switch": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "tabs": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "theme-switcher": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "toast": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "shake": "20%, 60% { translate: -8px 0; } 40%, 80% { translate: 8px 0; }" } },
   "toggle-group": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "toggle": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
+  "tool-call": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "toolbar": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "tooltip": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
 };
