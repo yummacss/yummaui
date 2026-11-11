@@ -3,6 +3,7 @@ import Field from "@/components/landing/field";
 import LandingHeader from "@/components/landing/header";
 import { CopyCommand, HotkeyLink } from "@/components/landing/keys";
 import SkipLink from "@/components/ui/skip-link";
+import { COMPONENT_PAGES } from "@/utils/component-pages.mjs";
 
 export const metadata: Metadata = {
 	alternates: { canonical: "/" },
@@ -33,8 +34,8 @@ export default function Home() {
 						Yumma UI for React.
 					</h1>
 					<p className="m:0 fs:sm lh:5 ls:3 c:ink/70">
-						48 React components on Base UI. The CLI writes each one into your
-						project as a file you can read.
+						{COMPONENT_PAGES.length} React components on Base UI. The CLI writes
+						each one into your project as a file you can read.
 					</p>
 					<div className="d:f fd:c g:2 @sm:fd:r">
 						<HotkeyLink href="/components/accordion" hotkey="B" primary>

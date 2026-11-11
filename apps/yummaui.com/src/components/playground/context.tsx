@@ -8,6 +8,7 @@ import {
 	useCallback,
 	useContext,
 	useEffect,
+	useState,
 	useMemo,
 } from "react";
 import { sidebarConfig } from "@/config/sidebar";
@@ -81,13 +82,10 @@ export function PlaygroundProvider({
 	);
 	const accent = isAccent(storedAccent) ? storedAccent : DEFAULT_ACCENT;
 
-	// the preview follows the system until the drawer picks a scheme
-	const [storedScheme, setStoredScheme] = useLocalStorage<string>(
-		"yui:scheme",
-		"system",
-		STORED,
-	);
+	// the preview follows the system; a picked scheme lasts until the system's changes
+	const [storedScheme, setStoredScheme] = useState<string>("system");
 	const systemDark = useMediaQuery("(prefers-color-scheme: dark)");
+	useEffect(() => setStoredScheme("system"), [systemDark]);
 	const scheme: Scheme =
 		storedScheme === "dark" || storedScheme === "light"
 			? storedScheme
