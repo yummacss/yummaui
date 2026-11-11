@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Field from "@/components/landing/field";
 import LandingHeader from "@/components/landing/header";
 import { CopyCommand, HotkeyLink } from "@/components/landing/keys";
+import Plane from "@/components/landing/plane";
 import SkipLink from "@/components/ui/skip-link";
 import { COMPONENT_PAGES } from "@/utils/component-pages.mjs";
 
@@ -25,7 +25,7 @@ export default function Home() {
 				className="f:1 d:f fd:c w:100% mx:auto max-w:280 blw:1 brw:1 bc:border @lg:p:r"
 			>
 				<div className="p:r h:80 bbw:1 bc:border @lg:p:a @lg:i:0 @lg:h:auto @lg:bbw:0">
-					<Field />
+					<Plane />
 				</div>
 
 				<section className="p:r zi:10 d:f fd:c jc:fe g:6 px:6 py:10 bg:page @lg:p:a @lg:b:0 @lg:l:0 @lg:w:150 @lg:h:120 @lg:px:10 @lg:py:11 @lg:btw:1 @lg:brw:1 @lg:bc:border">

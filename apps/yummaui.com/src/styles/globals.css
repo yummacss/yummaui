@@ -74,3 +74,31 @@
 [data-fold]:not([open]) > summary {
 	display: inline;
 }
+
+/* the landing's plane of cards, smaller in the phone strip */
+[data-plane] {
+	transform: translate(-30%, -46%) rotateX(52deg) rotateZ(-36deg);
+}
+
+@media (max-width: 1023px) {
+	[data-plane] {
+		transform: translate(-34%, -42%) scale(0.62) rotateX(52deg) rotateZ(-36deg);
+	}
+}
+
+/* the plane drifts along its diagonal, two copies tall so the loop has no seam */
+@keyframes plane-drift {
+	to {
+		transform: translate3d(0, -50%, 0);
+	}
+}
+
+[data-plane-lane] {
+	animation: plane-drift 60s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-plane-lane] {
+		animation: none;
+	}
+}
