@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- **[components]** Prompt Input's Tools menu, modes & mic.
+
+### Fixed
+
+- **[components]** Suggestions chips wrap instead of being cut off.
+- **[components]** A pill Select option with a description gets a rounded highlight.
+
 ## [0.16.0] - 2026-11-10
 
 ### Added

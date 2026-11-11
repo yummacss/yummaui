@@ -26,7 +26,7 @@ export interface SelectGroup {
 }
 
 const TRIGGER =
-  "d:f ai:c jc:sb bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p";
+  "d:f ai:c jc:sb g:2 bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p";
 
 const SIZES: Record<Size, string> = {
   sm: "h:8 w:56 px:3 fs:sm",
@@ -52,7 +52,7 @@ function renderOption(option: SelectOption, shape: Shape) {
       key={option.value}
       value={option.value}
       className={(state) =>
-        `d:f ai:c g:2 ${option.description ? "min-h:8 py:1" : "h:8"} px:2 mx:1 bw:1 bc:transparent ${RADIUS.item[shape]} fs:sm fw:400 us:none c:p c:label ${
+        `d:f ai:c g:2 ${option.description ? "min-h:8 py:1" : "h:8"} px:2 mx:1 bw:1 bc:transparent ${option.description && shape === "pill" ? RADIUS.popup.rounded : RADIUS.item[shape]} fs:sm fw:400 us:none c:p c:label ${
           state.highlighted ? "bg:well" : "bg:transparent"
         }`
       }

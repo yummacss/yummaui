@@ -371,7 +371,6 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "popover": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "preview-card": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "progress": { states: {}, easings: {}, keyframes: { "slide": "from { translate: -100% 0; } to { translate: 100% 0; }" } },
-  "prompt-input": { states: {}, easings: {}, keyframes: { "pulse": "0%, 100% { opacity: .5; } 50% { opacity: 1; }" } },
   "radio": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "rating": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "reasoning": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "shimmer": "from { mask-position: 100% 0; } to { mask-position: 0 0; }" } },
