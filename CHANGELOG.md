@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-11-11
+
 ### Changed
 
 - **[components]** Model Picker sets each mark on a raised tile, with one-line rows and the check on the right.
@@ -282,7 +284,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.16.0...HEAD
+[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.17.0...HEAD
+[0.17.0]: https://github.com/yummacss/yummaui/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/yummacss/yummaui/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/yummacss/yummaui/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/yummacss/yummaui/compare/v0.13.0...v0.14.0
