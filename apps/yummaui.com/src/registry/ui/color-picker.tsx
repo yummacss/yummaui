@@ -385,7 +385,17 @@ export default function ColorPicker({
   const { base, alpha } = split(value);
   const hsv = hsvOf(base);
   const [hsvHue, setHsvHue] = useState(() => hsv.h ?? 260);
-  const shownHue = hsv.s > 0 && hsv.v > 0 && hsv.h !== undefined ? hsv.h : hsvHue;
+  // where the area and hue last put the color; hex rounding would move the knob off the pointer
+  const [picked, setPicked] = useState<{ value: string; h: number; s: number; v: number } | null>(null);
+  const mine = picked?.value === value ? picked : null;
+  const shownHue = mine ? mine.h : hsv.s > 0 && hsv.v > 0 && hsv.h !== undefined ? hsv.h : hsvHue;
+  const shownS = mine ? mine.s : hsv.s;
+  const shownV = mine ? mine.v : hsv.v;
+  const pick = (h: number, s: number, v: number) => {
+    const next = hsvHex(h, s, v);
+    setPicked({ value: next, h, s, v });
+    change(next);
+  };
   // keeps the opacity while the color moves
   const hsvHex = (h: number, s: number, v: number) =>
     join(formatHex({ mode: "hsv", h, s, v }), opacity ? alpha : 1);
@@ -457,10 +467,10 @@ export default function ColorPicker({
               >
                 <Area
                   hue={shownHue}
-                  s={hsv.s}
-                  v={hsv.v}
+                  s={shownS}
+                  v={shownV}
                   color={base}
-                  onChange={(s, v) => change(hsvHex(shownHue, s, v))}
+                  onChange={(s, v) => pick(shownHue, s, v)}
                   disabled={disabled}
                   outline={outline}
                   shape={shape}
@@ -469,7 +479,7 @@ export default function ColorPicker({
                   value={Math.round(shownHue)}
                   onChange={(next) => {
                     setHsvHue(next);
-                    change(hsvHex(next, hsv.s, hsv.v));
+                    pick(next, shownS, shownV);
                   }}
                   gradient={HSV_HUES}
                   thumb={`hsl(${shownHue} 100% 50%)`}
@@ -479,7 +489,11 @@ export default function ColorPicker({
                 {opacity && (
                   <Slider.Root
                     value={Math.round(alpha * 100)}
-                    onValueChange={(next) => change(join(base, Number(next) / 100))}
+                    onValueChange={(next) => {
+                      const changed = join(base, Number(next) / 100);
+                      if (mine) setPicked({ ...mine, value: changed });
+                      change(changed);
+                    }}
                     min={0}
                     max={100}
                     disabled={disabled}

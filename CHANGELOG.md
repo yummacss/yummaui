@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **[components]** Color Picker's area knob & hue stay under the pointer while dragged.
+
 ### Added
 
 - **[components]** Pagination's current page slides, with `animated` to turn it off.
