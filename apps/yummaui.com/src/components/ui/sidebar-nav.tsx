@@ -22,7 +22,7 @@ export default function SidebarNav({ sections }: Props) {
 			<Scroller
 				viewportRef={viewport}
 				className="p:st t:20 max-h:calc(100dvh-5rem)"
-				viewportClassName="p:r d:f fd:c g:8 mx:-3 px:3 pb:12"
+				viewportClassName="p:r d:f fd:c g:8 mx:-5 px:5 pb:12"
 			>
 				<Glide
 					selector="[data-glide]"
@@ -40,7 +40,7 @@ export default function SidebarNav({ sections }: Props) {
 					const fresh = section.items.filter((item) => item.isNew).length;
 					return (
 						<div key={section.title} className="d:f fd:c g:3">
-							<h3 className="d:f ai:c g:2 ff:system c:silver-8 fs:xs fw:600 ls:2 tt:u">
+							<h3 className="d:f ai:c g:2 ff:system c:silver-8 fs:xs fw:600 ls:2 tt:u us:none">
 								{section.title}
 								{fresh > 0 && (
 									<span className="d:if ai:c g:1 c:ink/70 fw:500 ls:0 tt:none">
@@ -60,6 +60,7 @@ export default function SidebarNav({ sections }: Props) {
 										>
 											<Link
 												href={item.href}
+												draggable={false}
 												aria-current={isActive ? "page" : undefined}
 												data-glide={isActive || undefined}
 												className={`p:r d:if ai:c g:3 px:3 py:1 my:-1 ml:-3 br:9999 fs:sm fv:oc:ink fv:oo:2 fv:ow:2 ${isActive ? "c:ink fw:500" : "c:ink/70 h:c:accent"}`}
