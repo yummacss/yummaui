@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **[components]** A submenu's first item lines up with the item that opened it in Menu, Context Menu & Menubar.
+
 ## [0.18.0] - 2026-11-11
 
 ### Added

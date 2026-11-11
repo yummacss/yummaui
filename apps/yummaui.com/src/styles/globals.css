@@ -103,9 +103,10 @@
 	}
 }
 
-/* the landing's text panel frosts the plane behind it */
+/* the landing's text panel frosts the plane behind it, from a layer of its own */
 @media (min-width: 1024px) {
 	[data-frosted] {
+		z-index: -1;
 		backdrop-filter: blur(16px);
 	}
 }
