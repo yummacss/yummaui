@@ -267,7 +267,7 @@ export default function ContextMenuBase({
               <ContextMenu.Positioner
                 className="ow:0"
                 sideOffset={-4}
-                alignOffset={-4}
+                alignOffset={-5}
               >
                 <ContextMenu.Popup className={popupClasses}>
                   {renderItems(item.items, key)}

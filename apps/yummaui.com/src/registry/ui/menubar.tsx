@@ -244,7 +244,7 @@ export default function MenubarBase({
               <Menu.Positioner
                 className="ow:0"
                 sideOffset={-4}
-                alignOffset={-4}
+                alignOffset={-5}
               >
                 <Menu.Popup className={popupClasses}>
                   {renderItems(item.items, key)}
