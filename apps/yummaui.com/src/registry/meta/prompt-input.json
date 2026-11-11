@@ -1,11 +1,11 @@
 {
-  "summary": "Where a message is written: a field that grows, attached files, a Tools menu, a mic that records, and Send that turns into Stop.",
+  "summary": "Where a message is written: a field that grows, attached files, and Send that turns into Stop.",
   "props": [
     {
       "name": "onSubmit",
       "type": "none",
       "typeName": "(submission: PromptSubmission) => void",
-      "description": "Called with the message, its files, tools and mode on Send or Enter."
+      "description": "Called with the message and its files on Send or Enter."
     },
     {
       "name": "streaming",
@@ -20,34 +20,10 @@
       "description": "Called from Stop while `streaming`."
     },
     {
-      "name": "tools",
-      "type": "none",
-      "typeName": "PromptTool[]",
-      "description": "Switches in the Tools menu, such as web search; each one on shows as a chip."
-    },
-    {
-      "name": "modes",
-      "type": "none",
-      "typeName": "PromptMode[]",
-      "description": "A Plan or Build choice in the Tools menu; a mode other than the first shows as a chip."
-    },
-    {
       "name": "children",
       "type": "none",
       "typeName": "ReactNode",
-      "description": "Drawn before the mic, such as a Model Picker."
-    },
-    {
-      "name": "dictation",
-      "type": "boolean",
-      "default": true,
-      "description": "Shows the mic, which records and hands back the audio."
-    },
-    {
-      "name": "onRecording",
-      "type": "none",
-      "typeName": "(audio: Blob) => void",
-      "description": "Called with the recording when it is done, to turn into text."
+      "description": "Drawn before Send, such as a Model Picker."
     },
     {
       "name": "placeholder",
@@ -90,12 +66,6 @@
       "typeName": "boolean | string",
       "default": true,
       "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
-    },
-    {
-      "name": "container",
-      "type": "none",
-      "typeName": "HTMLElement | null",
-      "description": "Where the popup is rendered. Defaults to `document.body`; pass an element to portal somewhere else, such as inside a frame."
     }
   ],
   "scene": [
@@ -103,45 +73,7 @@
       "component": "PromptInput",
       "className": "w:160 max-w:100%",
       "props": {
-        "placeholder": "Ask about your files",
-        "tools": [
-          {
-            "id": "search",
-            "label": "Search the web",
-            "description": "Look things up as it answers",
-            "icon": {
-              "$icon": "IconWorld",
-              "size": "w:4 h:4"
-            }
-          },
-          {
-            "id": "think",
-            "label": "Think longer",
-            "description": "Reason before answering",
-            "icon": {
-              "$icon": "IconBulb",
-              "size": "w:4 h:4"
-            }
-          }
-        ],
-        "modes": [
-          {
-            "value": "build",
-            "label": "Build",
-            "icon": {
-              "$icon": "IconHammer",
-              "size": "w:4 h:4"
-            }
-          },
-          {
-            "value": "plan",
-            "label": "Plan",
-            "icon": {
-              "$icon": "IconListCheck",
-              "size": "w:4 h:4"
-            }
-          }
-        ]
+        "placeholder": "Ask about your files"
       },
       "children": [
         {

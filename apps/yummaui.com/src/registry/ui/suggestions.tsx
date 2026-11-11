@@ -18,9 +18,7 @@ export interface SuggestionsProps {
   items: Suggestion[];
   /** Called with the picked suggestion, such as to fill the prompt. */
   onSelect?: (suggestion: Suggestion) => void;
-  /**
-   * A row of chips that scrolls sideways, or a grid of cards for an empty chat.
-   */
+  /** A row of chips that wraps, or a grid of cards for an empty chat. */
   variant?: "chips" | "cards";
   /** Corner radius of the chips or cards. Inherits the nearest `Shape`. */
   shape?: Shape;
@@ -73,7 +71,7 @@ export default function Suggestions({
   }
 
   return (
-    <div className={merge("d:f g:2 w:100% ox:auto pb:1", className)} style={{ scrollbarWidth: "none" }}>
+    <div className={merge("d:f fw:w g:2 w:100%", className)}>
       {items.map((item) => (
         <button
           key={item.label}

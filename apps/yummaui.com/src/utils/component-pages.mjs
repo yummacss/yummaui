@@ -401,8 +401,7 @@ export const COMPONENT_PAGES = [
 		slug: "prompt-input",
 		since: "0.16",
 		title: "Prompt Input",
-		description:
-			"Write a message with files, a Tools menu, a mic that records & a Send that turns into Stop.",
+		description: "Write a message with files & a Send that turns into Stop.",
 	},
 	{
 		slug: "radio",

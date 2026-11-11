@@ -21,7 +21,7 @@
         "cards"
       ],
       "default": "chips",
-      "description": "A row of chips that scrolls sideways, or a grid of cards for an empty chat."
+      "description": "A row of chips that wraps, or a grid of cards for an empty chat."
     },
     {
       "name": "shape",
