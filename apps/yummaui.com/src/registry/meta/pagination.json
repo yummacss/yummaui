@@ -62,6 +62,12 @@
       "description": "Corner radius of the buttons. Inherits the nearest `Shape`."
     },
     {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "Slides the current page's key to the next. Turn it off for one that jumps, or when the user has asked for reduced motion."
+    },
+    {
       "name": "className",
       "type": "string",
       "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."

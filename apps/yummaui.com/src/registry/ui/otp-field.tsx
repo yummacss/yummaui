@@ -10,7 +10,7 @@ import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 type ValidationType = "numeric" | "alpha" | "alphanumeric";
 
 const SLOT =
-  "p:0 bw:1 bg:field bs-o:key bc:rim c:label ta:c fw:500 tp:c tdu:150 ttf:io";
+  "p:0 bw:1 bg:field bs-o:key bc:rim c:label ta:c fw:500";
 
 const SLOT_SIZES: Record<Size, string> = {
   sm: "w:8 h:9 fs:md",

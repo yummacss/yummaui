@@ -104,7 +104,7 @@ export default function SwitchBase({
 
   const trackClasses = merge(
     outline,
-    "p:r d:f ai:c fs:0 m:0 p:0 bw:2 bc:transparent tp:c tdu:300 ttf:out-quart",
+    "p:r d:f ai:c fs:0 m:0 p:0 bw:2 bc:transparent",
     track,
     RADIUS.item[shape],
     checked ? "bg:on bs-o:key-fill" : "bg:line bs-o:sunk",
@@ -137,7 +137,7 @@ export default function SwitchBase({
           className={merge(
             thumbClasses,
             checked ? travelClass : "",
-            animated ? "tp:t tdu:400 ttf:out-back @prm:tp:none" : "",
+            animated ? "tp:t tdu:200 ttf:out-back @prm:tp:none" : "",
           )}
         />
       </Switch.Root>

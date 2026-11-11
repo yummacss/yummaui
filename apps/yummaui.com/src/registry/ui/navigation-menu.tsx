@@ -87,7 +87,6 @@ export default function NavigationMenuBase({
     outline,
     "d:f ai:c g:1 h:8 px:3 bw:1 bc:transparent fs:sm fw:500 c:label td:none us:none c:p h:bg:well",
     RADIUS.item[shape],
-    animated && "tp:c tdu:150 ttf:io @prm:tp:none",
   );
 
   return (
@@ -125,7 +124,7 @@ export default function NavigationMenuBase({
                   className={merge(
                     "p:1 w:max max-w:100%",
                     animated &&
-                      `tp:ot tdu:350 ttf:out-quart ${SLIDE} @prm:tp:none`,
+                      `tp:ot tdu:250 ttf:out-quart ${SLIDE} @prm:tp:none`,
                   )}
                 >
                   <div
@@ -143,7 +142,6 @@ export default function NavigationMenuBase({
                           outline,
                           "d:f ai:s g:3 p:2 bw:1 bc:transparent c:label td:none h:bg:well",
                           RADIUS.item[shape],
-                          animated && "tp:c tdu:150 ttf:io @prm:tp:none",
                         )}
                       >
                         {link.icon && (
@@ -186,7 +184,7 @@ export default function NavigationMenuBase({
           collisionPadding={16}
           className={merge(
             "zi:50 w:var(--positioner-width) h:var(--positioner-height) max-w:var(--available-width)",
-            animated && "tp:a tdu:350 ttf:out-quart @prm:tp:none",
+            animated && "tp:a tdu:250 ttf:out-quart @prm:tp:none",
           )}
         >
           <NavigationMenu.Popup
@@ -194,7 +192,7 @@ export default function NavigationMenuBase({
               "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
               RADIUS.popup[shape],
               animated &&
-                "tp:ot tdu:350 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",
+                "tp:ot tdu:250 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",
             )}
           >
             <NavigationMenu.Viewport className="p:r w:100% h:100% o:h" />

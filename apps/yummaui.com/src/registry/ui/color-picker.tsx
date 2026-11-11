@@ -451,7 +451,7 @@ export default function ColorPicker({
               <Popover.Popup
                 className={merge(
                   "d:f fd:c g:3 w:68 max-w:var(--available-width) p:3 bg:raised bc:line bw:1 c:label os:none bs-o:pop",
-                  "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none",
+                  "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none",
                   RADIUS.popup[shape],
                 )}
               >

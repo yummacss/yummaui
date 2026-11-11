@@ -79,7 +79,7 @@ export default function ResizablePanels({
           {index > 0 && (
             <Separator
               className={merge(
-                "p:r d:f ai:c jc:c bg:line os:none tp:c tdu:150 @prm:tp:none",
+                "p:r d:f ai:c jc:c bg:line os:none",
                 "h:bg:label resizing:bg:label",
                 outline,
                 across ? "w:px c:cr" : "h:px c:rr",

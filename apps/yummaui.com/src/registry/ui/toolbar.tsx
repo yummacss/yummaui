@@ -193,7 +193,7 @@ export default function ToolbarBase({
                 <NumberField.Decrement
                   className={
                     animated
-                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:96 wc:s @prm:tp:none @prm:a:s:100`
+                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:98 wc:s @prm:tp:none @prm:a:s:100`
                       : stepClasses
                   }
                 >
@@ -209,7 +209,7 @@ export default function ToolbarBase({
                 <NumberField.Increment
                   className={
                     animated
-                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:96 wc:s @prm:tp:none @prm:a:s:100`
+                      ? `${stepClasses} tp:t tdu:200 ttf:eo a:s:98 wc:s @prm:tp:none @prm:a:s:100`
                       : stepClasses
                   }
                 >
@@ -254,7 +254,7 @@ export default function ToolbarBase({
             aria-label={button.iconOnly ? button.label : undefined}
             className={
               animated && !button.disabled
-                ? `${buttonClasses} tp:t tdu:200 ttf:eo a:s:96 wc:s @prm:tp:none @prm:a:s:100`
+                ? `${buttonClasses} tp:t tdu:200 ttf:eo a:s:98 wc:s @prm:tp:none @prm:a:s:100`
                 : buttonClasses
             }
           >
@@ -330,7 +330,7 @@ function ToolbarToggles({
               {...props}
               className={
                 animated
-                  ? `${toggleClasses(state.pressed)} tp:t tdu:200 ttf:eo a:s:96 wc:s @prm:tp:none @prm:a:s:100`
+                  ? `${toggleClasses(state.pressed)} tp:t tdu:200 ttf:eo a:s:98 wc:s @prm:tp:none @prm:a:s:100`
                   : toggleClasses(state.pressed)
               }
             >

@@ -6,7 +6,7 @@ import { Tabs } from "@base-ui/react/tabs";
 import { IconCheck, IconCopy, IconFile } from "@tabler/icons-react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, Swap, useShape } from "./style";
 
 export interface CodeBlockTab {
   /** The tab's name, such as a package manager or a file. */
@@ -197,11 +197,7 @@ export default function CodeBlock({
         RADIUS.item[shape],
       )}
     >
-      {copied ? (
-        <IconCheck aria-hidden className="w:4 h:4" />
-      ) : (
-        <IconCopy aria-hidden className="w:4 h:4" />
-      )}
+      <Swap swapped={copied} from={<IconCopy className="w:4 h:4" />} to={<IconCheck className="w:4 h:4" />} />
       <span className="fs:xs">{copied ? copiedLabel : copyLabel}</span>
     </Button>
   );

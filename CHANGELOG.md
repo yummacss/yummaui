@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **[components]** Pagination's current page slides, with `animated` to turn it off.
+- **[components]** Copy in Code Block & Message cross-fades to a check.
+
+### Changed
+
+- **[components]** Presses scale to 98%, hover colors change at once, popups grow from 97% & nothing the user starts runs past 300ms.
+
 ## [0.17.0] - 2026-11-11
 
 ### Changed

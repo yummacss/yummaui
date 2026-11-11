@@ -126,7 +126,7 @@ function Column({
     <section
       aria-label={column.title}
       className={merge(
-        "d:f fd:c g:2 p:2 min-w:48 tp:c tdu:150 @prm:tp:none",
+        "d:f fd:c g:2 p:2 min-w:48",
         RADIUS.popup[shape],
         isDropTarget ? "bg:rim" : "bg:well",
       )}
