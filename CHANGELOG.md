@@ -7,9 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
-
-- **[components]** Color Picker's area knob & hue stay under the pointer while dragged.
+## [0.18.0] - 2026-11-11
 
 ### Added
 
@@ -19,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **[components]** Presses scale to 98%, hover colors change at once, popups grow from 97% & nothing the user starts runs past 300ms.
+
+### Fixed
+
+- **[components]** Color Picker's area knob & hue stay under the pointer while dragged.
 
 ## [0.17.0] - 2026-11-11
 
@@ -297,7 +299,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial release.
 
-[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.17.0...HEAD
+[Unreleased]: https://github.com/yummacss/yummaui/compare/v0.18.0...HEAD
+[0.18.0]: https://github.com/yummacss/yummaui/compare/v0.17.0...v0.18.0
 [0.17.0]: https://github.com/yummacss/yummaui/compare/v0.16.0...v0.17.0
 [0.16.0]: https://github.com/yummacss/yummaui/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/yummacss/yummaui/compare/v0.14.0...v0.15.0
