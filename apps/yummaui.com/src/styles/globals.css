@@ -86,14 +86,14 @@
 	}
 }
 
-/* the plane drifts along its diagonal, two copies tall so the loop has no seam */
+/* the plane drifts along its diagonal; each column is four rounds tall and moves one */
 @keyframes plane-drift {
 	to {
-		transform: translate3d(0, -50%, 0);
+		transform: translate3d(0, -25%, 0);
 	}
 }
 
-[data-plane-lane] {
+[data-plane-lane][data-ready] {
 	animation: plane-drift 60s linear infinite;
 }
 
@@ -103,7 +103,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-	[data-plane-lane] {
+	[data-plane-lane][data-ready] {
 		animation: none;
 	}
 }

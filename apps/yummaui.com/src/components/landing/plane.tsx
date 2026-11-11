@@ -141,7 +141,7 @@ const CARDS = [
 	</Card>,
 ];
 
-// each column holds its cards twice, so sliding it up by half loops without a seam
+// each column holds four equal rounds and slides up by one, so the loop has no seam and no end in view
 const COLUMNS = [0, 1, 2, 3, 4].map((column) =>
 	[column, column + 5, (column + 3) % 10, (column + 8) % 10].map(
 		(at) => CARDS[at],
@@ -175,19 +175,16 @@ export default function Plane() {
 			childList: true,
 			attributeFilter: ["tabindex"],
 		});
-		const time = () => {
-			for (const column of root.querySelectorAll<HTMLElement>(
-				"[data-plane-lane]",
-			))
-				column.style.animationDuration = `${column.scrollHeight / 2 / SPEED}s`;
-		};
-		time();
-		const sizes = new ResizeObserver(time);
-		sizes.observe(root);
-		return () => {
-			watch.disconnect();
-			sizes.disconnect();
-		};
+		// one speed in every column; set once, before the drift starts, since a later change jumps it
+		for (const column of root.querySelectorAll<HTMLElement>(
+			"[data-plane-lane]",
+		)) {
+			const round = column.firstElementChild as HTMLElement | null;
+			if (!round) continue;
+			column.style.animationDuration = `${round.offsetHeight / SPEED}s`;
+			column.dataset.ready = "";
+		}
+		return () => watch.disconnect();
 	}, []);
 
 	return (
@@ -207,14 +204,16 @@ export default function Plane() {
 				style={{ left: "50%", top: "50%" }}
 			>
 				{COLUMNS.map((cards, column) => (
-					<div key={column} data-plane-lane className="d:f fd:c g:5 w:75 fs:0">
-						{[0, 1].map((round) =>
-							cards.map((card, at) => (
-								<div key={`${round}-${at}-${card.key}`} className="o:h br:xl">
-									{card}
-								</div>
-							)),
-						)}
+					<div key={column} data-plane-lane className="w:75 fs:0">
+						{[0, 1, 2, 3].map((round) => (
+							<div key={round} className="d:f fd:c g:5 pb:5">
+								{cards.map((card, at) => (
+									<div key={`${at}-${card.key}`} className="o:h br:xl">
+										{card}
+									</div>
+								))}
+							</div>
+						))}
 					</div>
 				))}
 			</div>
