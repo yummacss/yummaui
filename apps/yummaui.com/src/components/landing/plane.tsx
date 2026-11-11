@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Avatar from "@/registry/ui/avatar";
 import Badge from "@/registry/ui/badge";
 import BarChart from "@/registry/ui/bar-chart";
@@ -11,7 +12,6 @@ import Message from "@/registry/ui/message";
 import Meter from "@/registry/ui/meter";
 import OtpField from "@/registry/ui/otp-field";
 import PromptInput from "@/registry/ui/prompt-input";
-import Rating from "@/registry/ui/rating";
 import Switch from "@/registry/ui/switch";
 import Toggle from "@/registry/ui/toggle";
 import ToggleGroup from "@/registry/ui/toggle-group";
@@ -39,7 +39,7 @@ const CARDS = [
 		title="Notifications"
 		description="Choose what reaches your inbox."
 	>
-		<div className="d:f fd:c g:4">
+		<div className="d:f fd:c g:3">
 			<Switch
 				label="Mentions"
 				description="When someone tags you"
@@ -55,7 +55,6 @@ const CARDS = [
 	</Card>,
 	<Card key="shoe" title="Trail Runner 2" description="$129, in stock">
 		<div className="d:f fd:c g:3">
-			<Rating label="Reviews" defaultValue={4} readOnly />
 			<ToggleGroup label="Size" defaultValue={["41"]}>
 				{["40", "41", "42", "43"].map((size) => (
 					<Toggle key={size} value={size} label={size} />
@@ -88,22 +87,21 @@ const CARDS = [
 			}))}
 		/>
 	</Card>,
-	<div
-		key="chat"
-		className="d:f fd:c g:4 p:4 bw:1 bc:rim br:xl bg:raised bs-o:key"
-	>
-		<Message from="user">Which tickets block the release?</Message>
-		<Message name="Assistant">
-			The Safari focus bug and the Toast exit. Both sit in Review.
-		</Message>
-		<PromptInput placeholder="Ask about the board" />
-	</div>,
+	<Card key="chat" title="Assistant">
+		<div className="d:f fd:c g:3">
+			<Message from="user">Which tickets block the release?</Message>
+			<Message name="Assistant">
+				The Safari focus bug and the Toast exit.
+			</Message>
+			<PromptInput placeholder="Ask about the board" />
+		</div>
+	</Card>,
 	<Card
 		key="otp"
 		title="Verify it is you"
 		description="Enter the code sent to your phone."
 	>
-		<OtpField label="Code" defaultValue="481" />
+		<OtpField label="Code" length={4} groupSize={4} defaultValue="481" />
 	</Card>,
 	<Card key="storage" title="Storage">
 		<Meter
@@ -143,16 +141,60 @@ const CARDS = [
 	</Card>,
 ];
 
+// each column holds its cards twice, so sliding it up by half loops without a seam
+const COLUMNS = [0, 1, 2, 3, 4].map((column) =>
+	[column, column + 5, (column + 3) % 10, (column + 8) % 10].map(
+		(at) => CARDS[at],
+	),
+);
+// pixels per second, the same in every column whatever its height
+const SPEED = 14;
+
 /**
  * The landing's background: real components on a plane tilted to an isometric
- * angle, drifting slowly. It is decoration, so nothing on it can be reached.
+ * angle, drifting slowly. A pointer can use them and pauses the drift;
+ * keyboard and screen readers pass over, since every card shows several times.
  */
 export default function Plane() {
+	const plane = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const root = plane.current;
+		if (!root) return;
+		// out of the tab order, again whenever a component re-renders its own tabindex
+		const skip = () => {
+			for (const node of root.querySelectorAll<HTMLElement>(
+				"a, button, input, textarea, select, [tabindex]",
+			))
+				if (node.tabIndex !== -1) node.tabIndex = -1;
+		};
+		skip();
+		const watch = new MutationObserver(skip);
+		watch.observe(root, {
+			subtree: true,
+			childList: true,
+			attributeFilter: ["tabindex"],
+		});
+		const time = () => {
+			for (const column of root.querySelectorAll<HTMLElement>(
+				"[data-plane-lane]",
+			))
+				column.style.animationDuration = `${column.scrollHeight / 2 / SPEED}s`;
+		};
+		time();
+		const sizes = new ResizeObserver(time);
+		sizes.observe(root);
+		return () => {
+			watch.disconnect();
+			sizes.disconnect();
+		};
+	}, []);
+
 	return (
 		<div
+			ref={plane}
 			aria-hidden
-			inert
-			className="p:a i:0 o:h pe:none us:none"
+			className="p:a i:0 o:h"
 			style={{
 				maskImage:
 					"radial-gradient(ellipse at 70% 40%, #000 40%, transparent 92%), linear-gradient(to top, transparent, #000 18%)",
@@ -161,26 +203,20 @@ export default function Plane() {
 		>
 			<div
 				data-plane
-				className="p:a"
-				style={{
-					left: "50%",
-					top: "50%",
-					width: 1800,
-				}}
+				className="p:a d:f ai:fs g:5"
+				style={{ left: "50%", top: "50%" }}
 			>
-				<div
-					data-plane-lane
-					className="d:g ai:s g:7"
-					style={{ gridTemplateColumns: "repeat(5, 280px)" }}
-				>
-					{[0, 1, 2, 3].map((round) =>
-						CARDS.map((card) => (
-							<div key={`${round}-${card.key}`} className="d:f fd:c">
-								{card}
-							</div>
-						)),
-					)}
-				</div>
+				{COLUMNS.map((cards, column) => (
+					<div key={column} data-plane-lane className="d:f fd:c g:5 w:75 fs:0">
+						{[0, 1].map((round) =>
+							cards.map((card, at) => (
+								<div key={`${round}-${at}-${card.key}`} className="o:h br:xl">
+									{card}
+								</div>
+							)),
+						)}
+					</div>
+				))}
 			</div>
 		</div>
 	);

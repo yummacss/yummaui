@@ -97,8 +97,20 @@
 	animation: plane-drift 60s linear infinite;
 }
 
+/* a pointer on the plane holds it still, so its components can be used */
+[data-plane]:hover [data-plane-lane] {
+	animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	[data-plane-lane] {
 		animation: none;
+	}
+}
+
+/* the landing's text panel frosts the plane behind it */
+@media (min-width: 1024px) {
+	[data-frosted] {
+		backdrop-filter: blur(16px);
 	}
 }
