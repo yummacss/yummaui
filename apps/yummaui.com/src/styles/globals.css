@@ -97,11 +97,6 @@
 	animation: plane-drift 60s linear infinite;
 }
 
-/* a pointer on the plane holds it still, so its components can be used */
-[data-plane]:hover [data-plane-lane] {
-	animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
 	[data-plane-lane][data-ready] {
 		animation: none;

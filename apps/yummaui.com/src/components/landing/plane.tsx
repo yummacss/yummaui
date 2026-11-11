@@ -152,8 +152,8 @@ const SPEED = 14;
 
 /**
  * The landing's background: real components on a plane tilted to an isometric
- * angle, drifting slowly. A pointer can use them and pauses the drift;
- * keyboard and screen readers pass over, since every card shows several times.
+ * angle, drifting slowly. A pointer can use them; keyboard and screen readers
+ * pass over, since every card shows several times.
  */
 export default function Plane() {
 	const plane = useRef<HTMLDivElement>(null);
