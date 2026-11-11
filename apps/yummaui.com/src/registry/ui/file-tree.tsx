@@ -222,7 +222,6 @@ export default function FileTree({
             outline,
             "d:f ai:c g:2 h:8 pl:1 pr:2 bw:1 fs:sm us:none c:p",
             RADIUS.item[shape],
-            animated && "tp:c tdu:150 ttf:io @prm:tp:none",
             isPicked ? PICKED : "bc:transparent c:label h:bg:well",
           )}
         >

@@ -211,3 +211,21 @@ export function useMorph<T extends HTMLElement>(key: boolean, animated: boolean)
 
   return ref;
 }
+
+/** Two icons in one place that cross-fade, such as copy to copied. */
+export function Swap({ swapped, from, to }: { swapped: boolean; from: ReactNode; to: ReactNode }) {
+  // every property: transition-property has no name for transform and filter together
+  const piece = "d:f tp:a tdu:200 ttf:out-quart @prm:tp:o";
+  const shown = "o:100 s:100 fb:0";
+  const hidden = "o:0 s:25 fb:4";
+  return (
+    <span aria-hidden className="d:g pi:c">
+      <span className={`${piece} ${swapped ? hidden : shown}`} style={{ gridArea: "1 / 1" }}>
+        {from}
+      </span>
+      <span className={`${piece} ${swapped ? shown : hidden}`} style={{ gridArea: "1 / 1" }}>
+        {to}
+      </span>
+    </span>
+  );
+}

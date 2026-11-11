@@ -4,7 +4,7 @@ import { Button } from "@base-ui/react/button";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, useIndicator, useShape } from "./style";
 
 export interface PaginationProps {
   /** How many pages there are. */
@@ -27,6 +27,11 @@ export interface PaginationProps {
   ariaLabel?: string;
   /** Corner radius of the buttons. Inherits the nearest `Shape`. */
   shape?: Shape;
+  /**
+   * Slides the current page's key to the next. Turn it off for one that jumps,
+   * or when the user has asked for reduced motion.
+   */
+  animated?: boolean;
   /**
    * The focus outline. `true` draws it, `false` removes it along with the
    * danger, error and success tints that ride with it, and a string of Yumma
@@ -72,11 +77,13 @@ export default function Pagination({
   nextLabel = "Next",
   ariaLabel = "Pagination",
   shape: shapeProp,
+  animated = true,
   focus = true,
   className,
 }: PaginationProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
+  const indicator = useIndicator<HTMLUListElement>();
   const [own, setOwn] = useState(defaultPage);
   const page = Math.min(Math.max(controlled ?? own, 1), Math.max(total, 1));
   const go = (next: number) => {
@@ -94,8 +101,8 @@ export default function Pagination({
   const number = (current: boolean) =>
     merge(
       outline,
-      "d:if ai:c jc:c h:9 min-w:9 px:2 bw:0 fs:sm fw:500 fvn:tn us:none c:p",
-      current ? "bg:fill c:on-fill bs-o:key-fill" : "bg:transparent c:hint h:c:label h:bg:well",
+      "p:r zi:10 d:if ai:c jc:c h:9 min-w:9 px:2 bw:0 fs:sm fw:500 fvn:tn us:none c:p",
+      current ? "bg:transparent c:on-fill" : "bg:transparent c:hint h:c:label h:bg:well",
       RADIUS.control[shape],
     );
 
@@ -112,7 +119,16 @@ export default function Pagination({
           {previousLabel}
         </span>
       </Button>
-      <ul className="d:none @sm:d:f ai:c g:1 m:0 p:0 lst:none">
+      <ul ref={indicator.ref} className="p:r d:none @sm:d:f ai:c g:1 m:0 p:0 lst:none">
+        <li
+          aria-hidden
+          style={indicator.style}
+          className={merge(
+            "p:a l:0 t:0 zi:0 bg:fill bs-o:key-fill",
+            RADIUS.control[shape],
+            animated && indicator.ready && "tp:a tdu:250 ttf:out-quart @prm:tp:none",
+          )}
+        />
         {pagesOf(page, total, siblings).map((at, index) => (
           <li key={at ?? `gap-${index}`}>
             {at === null ? (
@@ -123,6 +139,7 @@ export default function Pagination({
               <Button
                 className={number(at === page)}
                 aria-current={at === page ? "page" : undefined}
+                data-pressed={at === page ? "" : undefined}
                 aria-label={`Page ${at}`}
                 onClick={() => go(at)}
               >

@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
 import Button from "./button";
-import { RADIUS, type Shape, useShape } from "./style";
+import { RADIUS, type Shape, Swap, useShape } from "./style";
 
 export interface MessageProps {
   /**
@@ -95,7 +95,7 @@ export default function Message({
               size="sm"
               iconOnly
               aria-label={copied ? "Copied" : "Copy"}
-              icon={copied ? <IconCheck className="w:4 h:4" /> : <IconCopy className="w:4 h:4" />}
+              icon={<Swap swapped={copied} from={<IconCopy className="w:4 h:4" />} to={<IconCheck className="w:4 h:4" />} />}
               onClick={() => {
                 void navigator.clipboard?.writeText(copyText).then(() => {
                   setCopied(true);

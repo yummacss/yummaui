@@ -225,7 +225,7 @@ export default function CurrencyInput({
             <Select.Portal container={container}>
               <Select.Positioner sideOffset={8} align="start" alignItemWithTrigger={false} className="zi:50">
                 <Select.Popup
-                  className={`d:f fd:c o:h py:1 w:56 bg:raised bc:line bs-o:pop bw:1 tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none ${RADIUS.popup[shape]}`}
+                  className={`d:f fd:c o:h py:1 w:56 bg:raised bc:line bs-o:pop bw:1 tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none ${RADIUS.popup[shape]}`}
                 >
                   <Select.List>
                     {currencies.map((code) => (

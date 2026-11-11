@@ -18,7 +18,7 @@ type IconSide = "leading" | "trailing";
 
 const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
 
-const MOTION = "tdu:150 ttf:io a:s:96 wc:s @prm:tp:none @prm:a:s:100";
+const MOTION = "tdu:150 ttf:out-quart a:s:98 wc:s @prm:tp:none @prm:a:s:100";
 
 const VARIANTS: Record<Variant, string> = {
   primary: "bg:fill bc:edge c:on-fill bs-o:key-fill",
@@ -249,9 +249,8 @@ export default function ButtonBase({
     outline,
     BASE,
     hold || timed ? "p:r o:h ta:none" : "",
-    // primary hovers with opacity, which tp:ct does not carry
     transition && !inactive
-      ? `${variant === "primary" ? "tp:a" : "tp:ct"} ${MOTION}`
+      ? `tp:t ${MOTION}`
       : "",
     counting ? COUNTING[variant] : VARIANTS[variant],
     inactive || counting ? "" : HOVERS[variant],

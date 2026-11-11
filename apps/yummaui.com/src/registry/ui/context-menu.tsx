@@ -322,7 +322,7 @@ export default function ContextMenuBase({
     <ContextMenu.Portal container={container} keepMounted>
       <ContextMenu.Positioner className="ow:0">
         <ContextMenu.Popup
-          className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+          className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
         >
           {renderItems(items, "item")}
         </ContextMenu.Popup>

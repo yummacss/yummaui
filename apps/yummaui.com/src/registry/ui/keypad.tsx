@@ -9,9 +9,9 @@ import { FOCUS, RADIUS, type Shape, useShape } from "./style";
 type Variant = "pin" | "amount";
 
 const KEY =
-  "d:f ai:c jc:c h:14 bw:1 bc:rim bg:raised bs-o:key c:label fs:xxl fw:500 fvn:tn us:none c:p tp:ct tdu:150 ttf:io a:s:96 a:bg:well @prm:tp:none @prm:a:s:100";
+  "d:f ai:c jc:c h:14 bw:1 bc:rim bg:raised bs-o:key c:label fs:xxl fw:500 fvn:tn us:none c:p tp:t tdu:150 ttf:out-quart a:s:98 a:bg:well @prm:tp:none @prm:a:s:100";
 const QUIET =
-  "d:f ai:c jc:c h:14 bg:transparent c:hint h:c:label us:none c:p tp:ct tdu:150 ttf:io a:s:96 @prm:tp:none @prm:a:s:100";
+  "d:f ai:c jc:c h:14 bg:transparent c:hint h:c:label us:none c:p tp:t tdu:150 ttf:out-quart a:s:98 @prm:tp:none @prm:a:s:100";
 
 export interface KeypadProps {
   /** A PIN of a fixed length, shown as dots, or an amount with its currency. */

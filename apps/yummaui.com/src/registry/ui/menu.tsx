@@ -201,7 +201,6 @@ export default function MenuBase({
     spec.trigger,
     spec.text,
     RADIUS.control[shape],
-    animated ? "tp:c tdu:150 ttf:io" : "",
     disabled ? "c:hint o:60 c:na" : "c:label c:p h:bg:well",
     className,
   );
@@ -372,7 +371,7 @@ export default function MenuBase({
     <Menu.Portal container={container} keepMounted>
       <Menu.Positioner className="ow:0" sideOffset={8}>
         <Menu.Popup
-          className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:95 closing:o:0 closing:s:95 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
+          className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
         >
           {renderItems(items, "item")}
         </Menu.Popup>

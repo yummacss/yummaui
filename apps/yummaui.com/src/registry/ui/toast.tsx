@@ -257,7 +257,7 @@ function Item({
           outline,
           "p:a r:0 b:0 w:100% bg:raised bc:line bw:1 bs-o:pop us:none",
           RADIUS.popup[shape],
-          animated ? "tp:a tdu:500 ttf:out-quart @prm:tp:none" : "",
+          animated ? "tp:a tdu:300 ttf:out-quart @prm:tp:none" : "",
           shaking ? "an:shake adu:500 atf:io @prm:an:none" : "",
           state.transitionStatus === "ending" || state.limited ? "o:0" : "",
         )

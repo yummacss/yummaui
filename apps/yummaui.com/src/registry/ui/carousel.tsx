@@ -120,7 +120,7 @@ export default function Carousel({
                 onClick={() => api?.scrollTo(index)}
                 className={merge(
                   outline,
-                  "h:2 bw:0 br:9999 c:p tp:a tdu:200 @prm:tp:none",
+                  "h:2 bw:0 br:9999 c:p tp:w tdu:200 ttf:out-quart @prm:tp:none",
                   index === selected ? "w:6 bg:fill" : "w:2 bg:rim",
                 )}
               />
