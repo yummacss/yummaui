@@ -54,6 +54,10 @@
             },
             {
               "label": "Paste",
+              "icon": {
+                "$icon": "IconCopyCheck",
+                "size": "w:4 h:4"
+              },
               "shortcut": "Ctrl V"
             },
             {
@@ -61,6 +65,10 @@
             },
             {
               "label": "Select all",
+              "icon": {
+                "$icon": "IconSelectAll",
+                "size": "w:4 h:4"
+              },
               "shortcut": "Ctrl A"
             }
           ]
@@ -214,6 +222,10 @@
               },
               {
                 "label": "Paste",
+                "icon": {
+                  "$icon": "IconCopyCheck",
+                  "size": "w:4 h:4"
+                },
                 "shortcut": "Ctrl V"
               },
               {
@@ -221,6 +233,10 @@
               },
               {
                 "label": "Select all",
+                "icon": {
+                  "$icon": "IconSelectAll",
+                  "size": "w:4 h:4"
+                },
                 "shortcut": "Ctrl A"
               }
             ]
