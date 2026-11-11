@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **[components]** Model Picker sets each mark on a raised tile, with one-line rows and the check on the right.
+
 ### Removed
 
 - **[components]** Prompt Input's Tools menu, modes & mic.

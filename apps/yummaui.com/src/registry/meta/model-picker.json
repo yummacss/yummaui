@@ -1,5 +1,5 @@
 {
-  "summary": "The model a chat answers with, picked from a list grouped by provider, each with its mark and a line on what it is good at.",
+  "summary": "The model a chat answers with, picked from a list grouped by provider, each on its mark with a line on what it is good at.",
   "props": [
     {
       "name": "models",
@@ -59,9 +59,22 @@
       "description": "Blocks picking and dims the trigger."
     },
     {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "Fades and scales the list in and out. Turn it off for a static list, or when the user has asked for reduced motion."
+    },
+    {
       "name": "className",
       "type": "string",
       "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
     },
     {
       "name": "container",
