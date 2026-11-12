@@ -270,3 +270,40 @@ export function Scroll({
     </ScrollArea.Root>
   );
 }
+
+// a damped spring: about three swings, each smaller, settling softly
+const SPRING = Array.from({ length: 31 }, (_, step) => {
+  const t = step / 30;
+  return { transform: `translateX(${(10 * Math.exp(-4.2 * t) * Math.sin(t * Math.PI * 5.5)).toFixed(2)}px)` };
+});
+
+/**
+ * Shakes elements on a damped spring, each `lag` milliseconds behind the last,
+ * so a row ripples. Stands still when the user has asked for reduced motion.
+ */
+export function shake(elements: Element | Iterable<Element> | null | undefined, lag = 0) {
+  if (!elements || typeof window === "undefined") return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const list = elements instanceof Element ? [elements] : [...elements];
+  list.forEach((element, index) =>
+    element.animate(SPRING, { duration: 460, delay: index * lag, easing: "linear" }),
+  );
+}
+
+/**
+ * Shakes the returned ref's element, or its `parts`, each time a new error
+ * arrives.
+ */
+export function useShake<T extends HTMLElement>(error: unknown, lag = 0, parts?: string) {
+  const ref = useRef<T>(null);
+  const last = useRef(error);
+  useLayoutEffect(() => {
+    const root = ref.current;
+    if (error && error !== last.current && root) shake(parts ? root.querySelectorAll(parts) : root, lag);
+    last.current = error;
+  }, [error, lag, parts]);
+  return ref;
+}
+
+/** A message arriving under a control: it fades in from a blur. Key it by its text so each new one plays. */
+export const MESSAGE_IN = "an:reveal adu:200 ttf:out-quart @prm:an:none";

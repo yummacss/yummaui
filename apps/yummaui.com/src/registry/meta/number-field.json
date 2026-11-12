@@ -14,6 +14,16 @@
       "example": "Days, then the files are deleted for good."
     },
     {
+      "name": "error",
+      "type": "string",
+      "description": "Red border & this message in place of `description`. Wins over `success` if both are set."
+    },
+    {
+      "name": "success",
+      "type": "string",
+      "description": "Green border & this message in place of `description`."
+    },
+    {
       "name": "defaultValue",
       "type": "number",
       "example": 30,

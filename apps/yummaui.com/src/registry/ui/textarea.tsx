@@ -5,7 +5,7 @@ import { IconAlertTriangle, IconCheck } from "@tabler/icons-react";
 import type { ChangeEvent, ComponentProps } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, INPUT_TEXT, RADIUS, useShape } from "./style";
+import { FOCUS, INPUT_TEXT, MESSAGE_IN, RADIUS, useShape, useShake } from "./style";
 
 // a capsule turns into a blob past one line
 const SHAPES = ["square", "rounded", "squircle"] as const;
@@ -130,6 +130,7 @@ export default function TextareaBase({
     ? merge(FOCUS, STATUS_OUTLINE[status], focus === true ? "" : focus)
     : "";
   const message = error ?? success ?? description;
+  const box = useShake<HTMLDivElement>(error);
 
   const showCounter = maxLength !== undefined && maxLength > 0;
   const remaining = showCounter ? maxLength - value.length : 0;
@@ -169,7 +170,7 @@ export default function TextareaBase({
         </div>
       )}
 
-      <div className="d:f p:r ai:s">
+      <div ref={box} data-shake className="d:f p:r ai:s">
         <Field.Control
           render={<textarea />}
           value={value}
@@ -195,7 +196,12 @@ export default function TextareaBase({
       </div>
 
       {message && (
-        <p className={`m:0 fs:xs ${STATUS_MESSAGE[status]}`}>{message}</p>
+        <p
+          key={message}
+          className={`m:0 fs:xs ${STATUS_MESSAGE[status]} ${status === "default" ? "" : MESSAGE_IN}`}
+        >
+          {message}
+        </p>
       )}
     </Field.Root>
   );

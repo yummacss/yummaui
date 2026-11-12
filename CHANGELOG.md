@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **[components]** `error` & `success` on OTP Field & Number Field.
+- **[components]** `shake`, `useShake` & `MESSAGE_IN` in the style module, for the error pattern.
 - **[components]** `Scroll` in the style module, a scrolling region with the library's scrollbar.
 
 ### Changed
 
+- **[components]** Field, Textarea, Number Field & OTP Field shake on a new error and fade its message in; Form shakes every invalid field.
 - **[components]** Menu, Context Menu, Menubar, Account Menu, Select, Model Picker, Combobox, Autocomplete, Activity Heatmap, Diff Viewer, Kanban Board, Lightbox, Resizable Panels & Tool Call scroll with the library's scrollbar instead of the browser's.
 - **[components]** Item icons in Menu, Context Menu, Menubar, Account Menu, Navigation Menu & File Tree, and option descriptions in Select, Combobox & Autocomplete, use the hint color.
 - **[components]** Skeleton, the Bar Chart & Line Chart tooltips, Diff Viewer's word highlights & Field's show-password button follow the nearest Shape.

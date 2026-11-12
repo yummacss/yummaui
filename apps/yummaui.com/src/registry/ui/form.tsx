@@ -1,8 +1,9 @@
 "use client";
 
 import { Form as BaseForm } from "@base-ui/react/form";
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { shake } from "./style";
 
 type Errors = Record<string, string | string[]>;
 
@@ -29,9 +30,20 @@ export interface FormProps {
  */
 export default function Form({ children, onSubmit, className }: FormProps) {
   const [errors, setErrors] = useState<Errors>({});
+  const form = useRef<HTMLFormElement>(null);
+  // every field that comes back invalid shakes, after the browser's checks and after onSubmit's
+  const shakeInvalid = () =>
+    requestAnimationFrame(() =>
+      shake(form.current?.querySelectorAll("[data-invalid] [data-shake]")),
+    );
+  useEffect(() => {
+    if (Object.keys(errors).length > 0) shakeInvalid();
+  }, [errors]);
 
   return (
     <BaseForm
+      ref={form}
+      onSubmitCapture={shakeInvalid}
       errors={errors}
       onFormSubmit={async (values) => setErrors((await onSubmit?.(values)) ?? {})}
       className={merge("d:f fd:c g:8", className)}

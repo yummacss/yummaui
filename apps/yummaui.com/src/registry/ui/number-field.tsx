@@ -5,7 +5,7 @@ import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ComponentProps } from "react";
 import { useId } from "react";
 import { merge } from "yummacss/merge";
-import { INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { INPUT_TEXT, MESSAGE_IN, RADIUS, type Shape, type Size, SIZE, useShape, useShake } from "./style";
 
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus fv:zi:10";
 
@@ -14,8 +14,8 @@ const BOX_FOCUS = "ow:0 oc:focus/40 fw:os:s fw:ow:3 fw:oo:0 fw:bc:focus fw:zi:10
 
 // the focused part rises above its neighbours, so no stepper covers its outline
 const STEP =
-  "p:r d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bs-o:key bc:rim c:label us:none c:p h:bg:well";
-const BOX = "p:r d:f bw:1 bg:field bs-o:key bc:rim";
+  "p:r d:f ai:c jc:c fs:0 p:0 bw:1 bg:raised bs-o:key c:label us:none c:p h:bg:well";
+const BOX = "p:r d:f bw:1 bg:field bs-o:key";
 
 const STEP_SIZES: Record<Size, string> = {
   sm: "w:8",
@@ -52,6 +52,13 @@ export interface NumberFieldProps
   /** A line under the control, for context on what the number means. */
   description?: string;
   /**
+   * Red border & this message in place of `description`. Wins over `success` if
+   * both are set.
+   */
+  error?: string;
+  /** Green border & this message in place of `description`. */
+  success?: string;
+  /**
    * Height of the buttons and the input together. The icon inside the buttons
    * grows only at `lg`.
    */
@@ -85,6 +92,8 @@ export default function NumberFieldBase({
   label,
   required = false,
   description,
+  error,
+  success,
   size = "md",
   shape: shapeProp,
   disabled = false,
@@ -100,8 +109,11 @@ export default function NumberFieldBase({
     ? merge(BOX_FOCUS, focus === true ? "" : focus.replace(/\bfv:/g, "fw:"))
     : "";
 
+  const status = error ? "bc:red-5" : success ? "bc:green-5" : "bc:rim";
+  const message = error ?? success ?? description;
+  const group = useShake<HTMLDivElement>(error);
   const stepClasses = (side: string) =>
-    merge(outline, STEP, SIZE.height[size], STEP_SIZES[size], side);
+    merge(outline, STEP, SIZE.height[size], STEP_SIZES[size], side, status);
 
   return (
     <NumberField.Root
@@ -119,13 +131,14 @@ export default function NumberFieldBase({
         </NumberField.ScrubArea>
       )}
 
-      <NumberField.Group className="d:f">
+      <NumberField.Group ref={group} data-shake className="d:f">
         <NumberField.Decrement className={stepClasses(RADIUS.controlStart[shape])}>
           <IconMinus className={ICON_SIZES[size]} />
         </NumberField.Decrement>
-        <span className={merge(BOX, "blw:0 brw:0", SIZE.height[size], boxOutline)}>
+        <span className={merge(BOX, "blw:0 brw:0", SIZE.height[size], boxOutline, status)}>
           <NumberField.Input
             required={required}
+            aria-invalid={error ? true : undefined}
             className={merge(
               "os:none p:0 bw:0 bg:transparent c:label fw:500 ta:c fvn:tn",
               INPUT_SIZES[size],
@@ -138,7 +151,15 @@ export default function NumberFieldBase({
         </NumberField.Increment>
       </NumberField.Group>
 
-      {description && <p className="m:0 c:hint fs:xs">{description}</p>}
+      {message && (
+        <p
+          key={message}
+          aria-live={error || success ? "polite" : undefined}
+          className={`m:0 fs:xs ${error ? `c:red-5 ${MESSAGE_IN}` : success ? `c:green-6 ${MESSAGE_IN}` : "c:hint"}`}
+        >
+          {message}
+        </p>
+      )}
     </NumberField.Root>
   );
 }

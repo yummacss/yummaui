@@ -5,7 +5,7 @@ import { Toggle } from "@base-ui/react/toggle";
 import { IconAlertTriangle, IconCheck, IconEye, IconEyeOff } from "@tabler/icons-react";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, FOCUS_WITHIN, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, FOCUS_WITHIN, INPUT_TEXT, MESSAGE_IN, RADIUS, type Shape, type Size, SIZE, useShape, useShake } from "./style";
 
 type IconSide = "leading" | "trailing";
 type Status = "default" | "error" | "success";
@@ -160,6 +160,7 @@ export default function FieldBase({
     ? merge(FOCUS, STATUS_OUTLINE[status], focus === true ? "" : focus)
     : "";
   const message = error ?? success ?? description;
+  const box = useShake<HTMLDivElement>(error);
   const reveal = revealable;
   const controlType = reveal && revealed ? "text" : type;
   const trailingIcon = reveal ? (
@@ -235,7 +236,7 @@ export default function FieldBase({
       )}
 
       {hasAffix ? (
-        <div className={affixBoxClasses}>
+        <div ref={box} data-shake className={affixBoxClasses}>
           {showDecorativeIcon && activeSide === "leading" && (
             <span
               className={merge(
@@ -277,7 +278,7 @@ export default function FieldBase({
           )}
         </div>
       ) : (
-        <div className="d:f p:r ai:c">
+        <div ref={box} data-shake className="d:f p:r ai:c">
           {showDecorativeIcon && (
             <span
               className={merge(
@@ -315,7 +316,10 @@ export default function FieldBase({
       )}
 
       {message && (
-        <Field.Description className={`fs:xs ${STATUS_MESSAGE[marked]}`}>
+        <Field.Description
+          key={message}
+          className={`fs:xs ${STATUS_MESSAGE[marked]} ${marked === "default" ? "" : MESSAGE_IN}`}
+        >
           {message}
         </Field.Description>
       )}

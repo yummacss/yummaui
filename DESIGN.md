@@ -129,6 +129,7 @@ and stops at once under reduced motion (`@prm:`).
 | 200ms `tdu:200` | A popup opening, an icon swapping, a small change |
 | 250ms `tdu:250` | A key sliding, a panel resizing |
 | 300ms `tdu:300` | A drawer or a toast, the most anything the user starts takes |
+| 460ms | The error shake, the one exception: the answer to a submit, not motion the hand drives |
 | 500ms `tdu:500` | Data settling: a meter or progress filling |
 
 | Curve | Use |
@@ -151,14 +152,15 @@ The patterns, each built once and reused:
 | Sliding key | One raised key slides under the pressed item (Tabs, Toggle Group, Pagination) |
 | Swap | Two icons in one place cross-fade with a little scale and blur (`Swap`) |
 | Morph | A key grows into a field, the key sliding to the field's end |
-| Error | The field shakes with a decaying amplitude, wrong characters turn red and blur out, the message replaces the hint |
-| Success | The field turns green and can fold into a confirming key |
+| Error | `useShake` or `shake`: the field shakes on a damped spring, a row of slots ripples 18ms apart, wrong characters blur away while their boxes stay, and the message fades in from a blur in the hint's place (`MESSAGE_IN`) |
+| Success | The field turns green; OTP Field's slots turn green one after another and fold into a key carrying the success text |
 | Lift | A dragged item lifts on a spring with a deeper shadow and a tilt, the rest make room |
 | Panel | A popup resizes between contents, which cross-fade with a slight blur |
 
 ## States
 
 - **Error is more than a red border:** the error pattern, the message in the
-  hint's place, and `aria-invalid`.
+  hint's place, and `aria-invalid`. A Form shakes every field that comes back
+  invalid; each field marks its shaking box with `data-shake`.
 - **Loading is the Button's**, not a separate spinner.
 - **Disabled** is `o:60` and `c:na`, and the part leaves the tab order.
