@@ -6,7 +6,7 @@ import { Select } from "@base-ui/react/select";
 import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, SIZE, useShape, Scroll } from "./style";
 
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconSide = "leading" | "trailing";
@@ -240,7 +240,7 @@ export default function SelectBase({
     <Select.Popup
       className={`d:f fd:c o:h max-h:min(var(--available-height),18rem) py:1 bg:raised bc:line bs-o:pop bw:1 ${SIZE.width[size]} ${RADIUS.popup[shape]} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
     >
-      <Select.List className="p:r min-h:0 o:auto">
+      <Scroll className="f:1" viewport="ob:c"><Select.List className="p:r">
         {options.map((entry) =>
           isGroupEntry(entry) ? (
             <Select.Group key={entry.group}>
@@ -253,7 +253,7 @@ export default function SelectBase({
             renderOption(entry, shape)
           ),
         )}
-      </Select.List>
+      </Select.List></Scroll>
     </Select.Popup>
   );
 

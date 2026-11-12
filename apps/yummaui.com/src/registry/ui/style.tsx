@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollArea } from "@base-ui/react/scroll-area";
 import {
   createContext,
   type CSSProperties,
@@ -10,6 +11,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { merge } from "yummacss/merge";
 
 /** The corner style every component shares, set app-wide with `Shape` or per component with its `shape` prop. */
 export type Shape = "square" | "rounded" | "squircle" | "pill";
@@ -227,5 +229,44 @@ export function Swap({ swapped, from, to }: { swapped: boolean; from: ReactNode;
         {to}
       </span>
     </span>
+  );
+}
+
+const BAR = "d:f o:0 tp:o tdu:200 ttf:io hovering:o:100 scrolling:o:100 scrolling:tdu:0 @prm:tp:none";
+
+/**
+ * What scrolls inside a component, with the library's thin scrollbar in place
+ * of the browser's own. Give it a bounded height, or `f:1` inside a column
+ * that has one.
+ */
+export function Scroll({
+  children,
+  axis = "y",
+  className = "",
+  viewport = "",
+}: {
+  children: ReactNode;
+  /** The directions it scrolls. */
+  axis?: "x" | "y" | "both";
+  /** Classes on the area, where its height or `f:1` goes. */
+  className?: string;
+  /** Classes on the box that scrolls, such as its padding. */
+  viewport?: string;
+}) {
+  return (
+    // every box down to the viewport needs min-h:0, or it grows to its content and never scrolls
+    <ScrollArea.Root className={merge("p:r d:f fd:c min-h:0 min-w:0", className)}>
+      <ScrollArea.Viewport className={merge("f:1 min-h:0 os:none", viewport)}>{children}</ScrollArea.Viewport>
+      {axis !== "x" && (
+        <ScrollArea.Scrollbar orientation="vertical" className={`${BAR} jc:c w:2 py:1`}>
+          <ScrollArea.Thumb className="w:1 br:9999 bg:hint/50" />
+        </ScrollArea.Scrollbar>
+      )}
+      {axis !== "y" && (
+        <ScrollArea.Scrollbar orientation="horizontal" className={`${BAR} ai:c h:2 px:1`}>
+          <ScrollArea.Thumb className="h:1 br:9999 bg:hint/50" />
+        </ScrollArea.Scrollbar>
+      )}
+    </ScrollArea.Root>
   );
 }

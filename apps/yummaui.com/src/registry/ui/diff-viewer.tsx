@@ -5,7 +5,7 @@ import { diffLines, diffWordsWithSpace } from "diff";
 import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, useShape, Scroll } from "./style";
 import Toggle from "./toggle";
 import ToggleGroup from "./toggle-group";
 
@@ -203,7 +203,7 @@ export default function DiffViewer({
           <Toggle value="split" label="Split" size="sm" focus={focus} icon={<IconLayoutColumns className="w:4 h:4" />} />
         </ToggleGroup>
       </div>
-      <div className="ox:auto">
+      <Scroll axis="x" viewport="pb:2">
         <table className="w:100% bc:c ff:m fs:xs lh:6">
           <tbody>
             {shown.map((row, index) => {
@@ -261,7 +261,7 @@ export default function DiffViewer({
             })}
           </tbody>
         </table>
-      </div>
+      </Scroll>
     </div>
   );
 }

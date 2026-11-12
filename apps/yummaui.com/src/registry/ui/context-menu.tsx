@@ -5,7 +5,7 @@ import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
-import { RADIUS, useShape, type Shape } from "./style";
+import { RADIUS, useShape, type Shape, Scroll } from "./style";
 
 type IconPosition = "leading" | "trailing";
 
@@ -162,7 +162,7 @@ export default function ContextMenuBase({
     );
 
   const popupClasses = [
-    "py:1 min-w:52 max-h:var(--available-height) oy:auto ob:c bg:raised bc:line c:label bw:1 os:none bs-o:pop",
+    "d:f fd:c min-w:52 max-h:var(--available-height) o:h bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     RADIUS.popup[shape],
   ]
     .filter(Boolean)
@@ -269,9 +269,9 @@ export default function ContextMenuBase({
                 sideOffset={-4}
                 alignOffset={-5}
               >
-                <ContextMenu.Popup className={popupClasses}>
+                <ContextMenu.Popup className={popupClasses}><Scroll className="f:1" viewport="py:1 ob:c">
                   {renderItems(item.items, key)}
-                </ContextMenu.Popup>
+                </Scroll></ContextMenu.Popup>
               </ContextMenu.Positioner>
             </ContextMenu.Portal>
           </ContextMenu.SubmenuRoot>
@@ -323,9 +323,9 @@ export default function ContextMenuBase({
       <ContextMenu.Positioner className="ow:0">
         <ContextMenu.Popup
           className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
-        >
+        ><Scroll className="f:1" viewport="py:1 ob:c">
           {renderItems(items, "item")}
-        </ContextMenu.Popup>
+        </Scroll></ContextMenu.Popup>
       </ContextMenu.Positioner>
     </ContextMenu.Portal>
   );

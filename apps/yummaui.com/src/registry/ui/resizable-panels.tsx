@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { Children, Fragment } from "react";
 import { Group, Panel, Separator } from "react-resizable-panels";
 import { merge } from "yummacss/merge";
-import { RADIUS, type Shape, useShape } from "./style";
+import { RADIUS, type Shape, useShape, Scroll } from "./style";
 
 export interface ResizablePanelsProps {
   /**
@@ -99,9 +99,11 @@ export default function ResizablePanels({
           <Panel
             defaultSize={defaultSizes?.[index]}
             minSize={minSize}
-            className="d:f fd:c h:100% o:auto"
+            className="d:f fd:c h:100% o:h"
           >
-            {panel}
+            <Scroll axis="both" className="f:1">
+              {panel}
+            </Scroll>
           </Panel>
         </Fragment>
       ))}

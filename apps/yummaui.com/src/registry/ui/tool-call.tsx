@@ -5,7 +5,7 @@ import { IconAlertTriangle, IconCheck, IconChevronRight, IconLoader2, IconTool }
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, useShape, Scroll } from "./style";
 
 type State = "running" | "done" | "failed";
 
@@ -66,7 +66,8 @@ export default function ToolCall({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const status = STATES[state];
   const [open, setOpen] = useState(defaultOpen);
-  const block = merge("m:0 px:3 py:2 bg:well bs-o:sunk ff:m fs:xs lh:4 ox:auto ws:p", RADIUS.block[shape]);
+  const block = merge("bg:well bs-o:sunk", RADIUS.block[shape]);
+  const code = "m:0 ff:m fs:xs lh:4 ws:p";
 
   return (
     <Collapsible.Root
@@ -93,13 +94,17 @@ export default function ToolCall({
           {input && (
             <>
               <span className="ff:m fs:xs c:hint">Input</span>
-              <pre className={block}>{input}</pre>
+              <Scroll axis="x" className={block} viewport="px:3 py:2">
+                <pre className={code}>{input}</pre>
+              </Scroll>
             </>
           )}
           {output && (
             <>
               <span className="ff:m fs:xs c:hint">{state === "failed" ? "Error" : "Output"}</span>
-              <pre className={block}>{output}</pre>
+              <Scroll axis="x" className={block} viewport="px:3 py:2">
+                <pre className={code}>{output}</pre>
+              </Scroll>
             </>
           )}
         </div>

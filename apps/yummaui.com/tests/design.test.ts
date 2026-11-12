@@ -23,22 +23,7 @@ const classes = (source: string) =>
 	source.match(/(?<![\w:-])(?:@[a-z]+:)?(?:[a-z]+:)?[a-z-]+:[^\s"'`{}]+/g) ??
 	[];
 
-const SCROLLS_NATIVELY = [
-	"account-menu",
-	"activity-heatmap",
-	"autocomplete",
-	"combobox",
-	"context-menu",
-	"diff-viewer",
-	"kanban-board",
-	"lightbox",
-	"menu",
-	"menubar",
-	"model-picker",
-	"resizable-panels",
-	"select",
-	"tool-call",
-];
+const SCROLLS_NATIVELY: string[] = [];
 
 const HARD_CODED_CORNERS: string[] = [];
 

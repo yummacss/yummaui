@@ -6,7 +6,7 @@ import { IconCheck, IconSelector, IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useEffect, useId, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape, Scroll } from "./style";
 
 // a field of chips grows past one line, where a capsule turns into a blob
 const SHAPES = ["square", "rounded", "squircle"] as const;
@@ -236,7 +236,7 @@ export default function ComboboxBase({
         </div>
       ) : (
         <>
-          <Combobox.List className="oy:auto ob:c py:1 max-h:72 ow:0">
+          <Scroll className="max-h:72" viewport="py:1 ob:c"><Combobox.List className="ow:0">
             {(entry: ComboboxItem | ComboboxGroup) =>
               isGroupEntry(entry) ? (
                 <Combobox.Group key={entry.group}>
@@ -249,7 +249,7 @@ export default function ComboboxBase({
                 renderItem(entry, shape)
               )
             }
-          </Combobox.List>
+          </Combobox.List></Scroll>
           {emptyMessage && (
           <Combobox.Empty className="c:hint fs:sm">
             <div className="py:4 px:4">{emptyMessage}</div>

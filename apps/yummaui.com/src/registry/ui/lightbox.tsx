@@ -4,7 +4,7 @@ import { Dialog } from "@base-ui/react/dialog";
 import { IconChevronLeft, IconChevronRight, IconX } from "@tabler/icons-react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, useShape, Scroll } from "./style";
 
 export interface LightboxImage {
   /** The picture's address. */
@@ -191,7 +191,7 @@ export default function Lightbox({
             )}
           </div>
           {images.length > 1 && (
-            <div className="d:f jc:c g:2 p:4 ox:auto">
+            <Scroll axis="x"><div className="d:f jc:c g:2 p:4 w:fc min-w:100%">
               {images.map((image, at) => (
                 <button
                   key={image.src}
@@ -209,7 +209,7 @@ export default function Lightbox({
                   <img src={image.src} alt="" className="d:b w:100% h:100% of:c" />
                 </button>
               ))}
-            </div>
+            </div></Scroll>
           )}
         </Dialog.Popup>
       </Dialog.Portal>

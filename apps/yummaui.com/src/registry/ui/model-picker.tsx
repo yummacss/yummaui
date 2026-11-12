@@ -5,7 +5,7 @@ import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, SIZE, type Size, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, SIZE, type Size, useShape, Scroll } from "./style";
 
 export interface Model {
   /** Unique; what `onValueChange` receives. */
@@ -162,7 +162,7 @@ export default function ModelPicker({
                 : "",
             )}
           >
-            <Select.List className="min-h:0 o:auto">
+            <Scroll className="f:1" viewport="ob:c"><Select.List>
               {groups.map((group) => (
                 <Select.Group key={group.provider}>
                   {group.provider && (
@@ -192,7 +192,7 @@ export default function ModelPicker({
                   ))}
                 </Select.Group>
               ))}
-            </Select.List>
+            </Select.List></Scroll>
           </Select.Popup>
         </Select.Positioner>
       </Select.Portal>
