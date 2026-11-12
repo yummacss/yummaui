@@ -149,7 +149,7 @@ export default function AccountMenu({
                 onClick={action.onClick}
                 className={item()}
               >
-                {action.icon && <span className="d:f o:70">{action.icon}</span>}
+                {action.icon && <span className="d:f c:hint">{action.icon}</span>}
                 <span className="f:1">{action.label}</span>
                 {action.shortcut && (
                   <kbd className="ml:auto pl:6 fs:xs fw:400 lh:4 ff:d o:60 d:f ai:c g:1">{Children.toArray(action.shortcut)}</kbd>
@@ -188,7 +188,7 @@ export default function AccountMenu({
               </Menu.Group>
             )}
             <Menu.Item onClick={onAddAccount} className={item()}>
-              <IconPlus aria-hidden className="w:4 h:4 o:70" />
+              <IconPlus aria-hidden className="w:4 h:4 c:hint" />
               Add account
             </Menu.Item>
             {separator}

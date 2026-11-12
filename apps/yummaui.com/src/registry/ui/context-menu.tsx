@@ -260,7 +260,7 @@ export default function ContextMenuBase({
           <ContextMenu.SubmenuRoot key={key}>
             <ContextMenu.SubmenuTrigger className={itemClasses(false, true)}>
               <span className="fg:1">{item.label}</span>
-              <IconChevronRight className="fs:0 w:4 h:4 o:70" />
+              <IconChevronRight className="fs:0 w:4 h:4 c:hint" />
             </ContextMenu.SubmenuTrigger>
 
             <ContextMenu.Portal container={container}>
@@ -293,7 +293,7 @@ export default function ContextMenuBase({
           className={itemClasses(destructive, trailing)}
         >
           {icon && action.icon && iconPosition === "leading" && (
-            <span className={`d:f fs:0 ${destructive ? "" : "o:70"}`}>
+            <span className={`d:f fs:0 ${destructive ? "" : "c:hint"}`}>
               {action.icon}
             </span>
           )}
@@ -303,7 +303,7 @@ export default function ContextMenuBase({
             action.label
           )}
           {icon && action.icon && iconPosition === "trailing" && (
-            <span className={`d:f fs:0 ${destructive ? "" : "o:70"}`}>
+            <span className={`d:f fs:0 ${destructive ? "" : "c:hint"}`}>
               {action.icon}
             </span>
           )}

@@ -197,7 +197,7 @@ export default function ToolbarBase({
                       : stepClasses
                   }
                 >
-                  <IconMinus className="w:5 h:5" />
+                  <IconMinus className="w:4 h:4" />
                 </NumberField.Decrement>
                 <Toolbar.Input
                   render={<NumberField.Input />}
@@ -213,7 +213,7 @@ export default function ToolbarBase({
                       : stepClasses
                   }
                 >
-                  <IconPlus className="w:5 h:5" />
+                  <IconPlus className="w:4 h:4" />
                 </NumberField.Increment>
               </NumberField.Group>
             </NumberField.Root>

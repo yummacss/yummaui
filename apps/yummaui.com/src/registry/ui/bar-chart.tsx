@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape } from "./style";
 
 export interface BarChartDatum {
   /** The bar's name, along the bottom. */
@@ -41,6 +42,8 @@ export default function BarChart({
   height = 200,
   className,
 }: BarChartProps) {
+  // the tooltip follows the nearest Shape
+  const shape = useShape();
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [active, setActive] = useState<number | null>(null);
@@ -126,7 +129,7 @@ export default function BarChart({
       {shown && active !== null && (
         <span
           aria-hidden
-          className="p:a d:f g:2 px:2 py:1 br:md bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none"
+          className={`p:a d:f g:2 px:2 py:1 bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none ${RADIUS.item[shape]}`}
           style={{
             left: left + active * band + band / 2,
             top: y(shown.value) - 8,

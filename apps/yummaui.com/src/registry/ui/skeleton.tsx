@@ -1,19 +1,14 @@
 "use client";
 
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape } from "./style";
 
-type Shape = "line" | "block" | "circle";
+type Kind = "line" | "block" | "circle";
 type Tone = "default" | "subtle";
 
 const PULSE = "an:pulse adu:1000 atf:io aic:i @prm:an:none";
 
-const RADII: Record<Shape, string> = {
-  line: "br:xs",
-  block: "br:lg",
-  circle: "br:9999",
-};
-
-const SIZES: Record<Shape, string> = {
+const SIZES: Record<Kind, string> = {
   line: "h:3 w:100%",
   block: "h:8 w:24",
   circle: "w:10 h:10",
@@ -29,7 +24,7 @@ export interface SkeletonProps {
    * Corner radius, plus a default size: `line` for text, `block` for a control
    * or thumbnail, `circle` for an avatar. Change the size with `dimensions`.
    */
-  shape?: Shape;
+  shape?: Kind;
   /** `subtle` is one step lighter, for the secondary line in a pair. */
   tone?: Tone;
   /**
@@ -70,8 +65,12 @@ export default function SkeletonBase({
   delay = 0,
   className,
 }: SkeletonProps) {
+  // a line rounds like a chip and a block like a control, in the nearest Shape
+  const corner = useShape();
+  const radius =
+    shape === "circle" ? "br:9999" : shape === "line" ? RADIUS.chip[corner] : RADIUS.control[corner];
   const classes = merge(
-    RADII[shape],
+    radius,
     dimensions ?? SIZES[shape],
     TONES[tone],
     className,

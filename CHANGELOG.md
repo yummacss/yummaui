@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **[components]** Item icons in Menu, Context Menu, Menubar, Account Menu, Navigation Menu & File Tree, and option descriptions in Select, Combobox & Autocomplete, use the hint color.
+- **[components]** Skeleton, the Bar Chart & Line Chart tooltips, Diff Viewer's word highlights & Field's show-password button follow the nearest Shape.
+- **[components]** Popover's close button & Toolbar's steppers use 16px icons.
+
 ### Fixed
 
 - **[components]** A submenu's first item lines up with the item that opened it in Menu, Context Menu & Menubar.

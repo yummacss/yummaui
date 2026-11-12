@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
+import { RADIUS, useShape } from "./style";
 
 export interface LineChartSeries {
   /** The series' name, in the legend and the tooltip. */
@@ -47,6 +48,8 @@ export default function LineChart({
   height = 200,
   className,
 }: LineChartProps) {
+  // the tooltip follows the nearest Shape
+  const shape = useShape();
   const box = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [active, setActive] = useState<number | null>(null);
@@ -136,7 +139,7 @@ export default function LineChart({
       {active !== null && series[0] && (
         <span
           aria-hidden
-          className="p:a d:f g:2 px:2 py:1 br:md bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none"
+          className={`p:a d:f g:2 px:2 py:1 bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none ${RADIUS.item[shape]}`}
           style={{ left: x(active), top: y(series[0].values[active]) - 10, translate: "-50% -100%" }}
         >
           <span className="c:hint">{labels[active]}</span>

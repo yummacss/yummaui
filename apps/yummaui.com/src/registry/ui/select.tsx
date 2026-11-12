@@ -82,7 +82,7 @@ function renderOption(option: SelectOption, shape: Shape) {
       <div className="d:f fd:c">
         <Select.ItemText>{option.label}</Select.ItemText>
         {option.description && (
-          <span className="fs:xs o:80">{option.description}</span>
+          <span className="fs:xs c:hint">{option.description}</span>
         )}
       </div>
     </Select.Item>

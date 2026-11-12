@@ -166,7 +166,7 @@ function renderItem(item: AutocompleteItem, shape: Shape, query: string) {
             {marked(item.label, query)}
           </span>
           {item.description && (
-            <span className="fs:xs o:80 ws:nw">{item.description}</span>
+            <span className="fs:xs c:hint ws:nw">{item.description}</span>
           )}
         </div>
       )}

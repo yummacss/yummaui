@@ -52,14 +52,14 @@ interface Row {
 const lines = (value: string) => value.replace(/\n$/, "").split("\n");
 
 // the words that changed inside a line, marked on each side
-function words(before: string, after: string): [ReactNode, ReactNode] {
+function words(before: string, after: string, shape: Shape): [ReactNode, ReactNode] {
   const parts = diffWordsWithSpace(before, after);
   const side = (keep: "added" | "removed", tint: string) =>
     parts
       .filter((part) => !part[keep === "added" ? "removed" : "added"])
       .map((part, index) =>
         part[keep] ? (
-          <mark key={index} className={`${tint} c:current br:sm`}>
+          <mark key={index} className={`${tint} c:current ${RADIUS.textChip[shape]}`}>
             {part.value}
           </mark>
         ) : (
@@ -69,7 +69,7 @@ function words(before: string, after: string): [ReactNode, ReactNode] {
   return [side("removed", "bg:red/25"), side("added", "bg:green/25")];
 }
 
-function rowsOf(before: string, after: string): Row[] {
+function rowsOf(before: string, after: string, shape: Shape): Row[] {
   const rows: Row[] = [];
   const changes = diffLines(before, after);
   let a = 1;
@@ -95,7 +95,7 @@ function rowsOf(before: string, after: string): Row[] {
       const old = removed[at];
       const neu = added[at];
       const [oldText, newText] =
-        old !== undefined && neu !== undefined ? words(old, neu) : [old, neu];
+        old !== undefined && neu !== undefined ? words(old, neu, shape) : [old, neu];
       rows.push({
         kind: "change",
         old: old !== undefined ? { line: a++, text: oldText } : undefined,
@@ -124,7 +124,7 @@ export default function DiffViewer({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [view, setView] = useState<View>(defaultView);
   const [opened, setOpened] = useState<Set<number>>(new Set());
-  const rows = useMemo(() => rowsOf(before, after), [before, after]);
+  const rows = useMemo(() => rowsOf(before, after, shape), [before, after, shape]);
   const added = rows.filter((row) => row.kind === "change" && row.new).length;
   const removed = rows.filter((row) => row.kind === "change" && row.old).length;
 

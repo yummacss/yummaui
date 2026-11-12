@@ -111,7 +111,7 @@ export default function NavigationMenuBase({
                   <NavigationMenu.Icon
                     className={(state) =>
                       merge(
-                        "d:f o:70",
+                        "d:f c:hint",
                         state.open && "ro:36",
                         animated && "tp:t tdu:200 ttf:out-quart @prm:tp:none",
                       )
