@@ -194,7 +194,7 @@ export default function PopoverBase({
             )}
             aria-label="Close"
           >
-            <IconX aria-hidden className="w:5 h:5" />
+            <IconX aria-hidden className="w:4 h:4" />
           </Popover.Close>
         )}
       </div>

@@ -307,10 +307,10 @@ export default function MenuBase({
           <Menu.SubmenuRoot key={key}>
             <Menu.SubmenuTrigger className={itemClasses(false, true)}>
               {icon && item.icon && (
-                <span className="d:f fs:0 o:70">{item.icon}</span>
+                <span className="d:f fs:0 c:hint">{item.icon}</span>
               )}
               <span className="fg:1">{item.label}</span>
-              <IconChevronRight className="fs:0 w:4 h:4 o:70" />
+              <IconChevronRight className="fs:0 w:4 h:4 c:hint" />
             </Menu.SubmenuTrigger>
 
             <Menu.Portal container={container}>
@@ -342,7 +342,7 @@ export default function MenuBase({
           className={itemClasses(destructive, trailing)}
         >
           {icon && action.icon && iconPosition === "leading" && (
-            <span className={`d:f fs:0 ${destructive ? "" : "o:70"}`}>
+            <span className={`d:f fs:0 ${destructive ? "" : "c:hint"}`}>
               {action.icon}
             </span>
           )}
@@ -352,7 +352,7 @@ export default function MenuBase({
             action.label
           )}
           {icon && action.icon && iconPosition === "trailing" && (
-            <span className={`d:f fs:0 ${destructive ? "" : "o:70"}`}>
+            <span className={`d:f fs:0 ${destructive ? "" : "c:hint"}`}>
               {action.icon}
             </span>
           )}

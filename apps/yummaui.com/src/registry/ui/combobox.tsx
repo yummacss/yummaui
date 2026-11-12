@@ -154,7 +154,7 @@ function renderItem(item: ComboboxItem, shape: Shape) {
       )}
       <span className="fg:1 min-w:0 o:h to:e ws:nw">{item.label}</span>
       {item.description && (
-        <span className="fs:0 fw:400 o:80">{item.description}</span>
+        <span className="fs:0 fw:400 c:hint">{item.description}</span>
       )}
       <Combobox.ItemIndicator className="d:f ml:auto">
         <IconCheck className="w:3 h:3" />

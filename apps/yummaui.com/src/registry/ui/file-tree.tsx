@@ -229,7 +229,7 @@ export default function FileTree({
             {node.children && (
               <IconChevronRight
                 className={merge(
-                  "w:3 h:3 o:70",
+                  "w:3 h:3 c:hint",
                   isOpen && "ro:18",
                   animated && "tp:t tdu:200 ttf:out-quart @prm:tp:none",
                 )}

@@ -40,29 +40,13 @@ const SCROLLS_NATIVELY = [
 	"tool-call",
 ];
 
-const HARD_CODED_CORNERS = [
-	"bar-chart",
-	"diff-viewer",
-	"field",
-	"line-chart",
-	"skeleton",
-];
+const HARD_CODED_CORNERS: string[] = [];
 
-const DIMS_WITH_OPACITY = [
-	"account-menu",
-	"autocomplete",
-	"banner-alert",
-	"combobox",
-	"context-menu",
-	"file-tree",
-	"menu",
-	"menubar",
-	"navigation-menu",
-	"select",
-	"treemap",
-];
+const DIMS_WITH_OPACITY: string[] = [];
+// on a tinted surface the hint gray clashes, so a secondary part dims its own color
+const ON_TINT = ["banner-alert", "treemap"];
 
-const ICON_AT_20_WITHOUT_REASON = ["popover", "toolbar"];
+const ICON_AT_20_WITHOUT_REASON: string[] = [];
 // the icon is the whole target, on an image or an empty area
 const ICON_AT_20 = ["file-upload", "lightbox"];
 // the icon is the content
@@ -98,8 +82,10 @@ describe("DESIGN.md", () => {
 
 	it("dims secondary text and icons with c:hint, opacity only for disabled", () => {
 		expect(
-			breaking((source) =>
-				classes(source).some((token) => /(?:^|\s)o:(?:70|80)$/.test(token)),
+			breaking(
+				(source, name) =>
+					!ON_TINT.includes(name) &&
+					classes(source).some((token) => /(?:^|\s)o:(?:70|80)$/.test(token)),
 			),
 		).toEqual(DIMS_WITH_OPACITY);
 	});

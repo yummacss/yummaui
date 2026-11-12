@@ -36,8 +36,6 @@ Corners come from `RADIUS`, by the part's role, never from a hard-coded
 | --- | --- |
 | `className="br:md"` on a tooltip | `RADIUS.popup[shape]` |
 
-Today: the chart tooltips in Bar Chart and Line Chart, Diff Viewer's word
-highlight, Field's show-password button and Skeleton's lines and blocks.
 
 ## Measurements
 
@@ -77,8 +75,6 @@ Tabler outline icons, never Unicode symbols: a modifier key is an icon, not
 
 Width and height are always equal.
 
-Today at 20px with no reason: Popover's close button and Toolbar's plus and
-minus.
 
 ## Color and depth
 
@@ -89,15 +85,15 @@ never names a palette color except for a meaning (red for danger).
   one, `bs-o:sunk` for a well, `bs-o:pop` for anything floating.
 - **Secondary text and icons use `c:hint`, not opacity.** Opacity is for
   disabled (`o:60` with `c:na`) and for media.
+- **On a tinted surface, a secondary part dims its own color** (`o:70` or
+  `o:80` on `c:current`), since the hint gray clashes with the tint: a Banner
+  Alert's close button, a Treemap tile's value.
 
 | Wrong | Right |
 | --- | --- |
 | `<span className="fs:xs o:80">` for a description | `<span className="fs:xs c:hint">` |
 | `<span className="o:70">{icon}</span>` in a row | `<span className="c:hint">{icon}</span>` |
 
-Today: the item icons in Menu, Context Menu, Menubar, Account Menu,
-Navigation Menu and File Tree, Banner Alert's close button, and the
-descriptions in Select, Combobox, Autocomplete and Treemap.
 
 ## Type
 
