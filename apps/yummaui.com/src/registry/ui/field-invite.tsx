@@ -1,5 +1,6 @@
 "use client";
 
+import { IconSend } from "@tabler/icons-react";
 import { useState } from "react";
 import Button from "./button";
 import Field from "./field";
@@ -10,7 +11,7 @@ export default function FieldInvite() {
 
   return (
     <Form
-      className="g:3 w:80 max-w:100%"
+      className="d:f fd:r ai:fs g:2 w:80 max-w:100%"
       onSubmit={({ email }) => {
         const address = typeof email === "string" ? email.trim() : "";
         setSuccess(undefined);
@@ -20,17 +21,25 @@ export default function FieldInvite() {
         setSuccess(`Invite sent to ${address}.`);
       }}
     >
-      <Field
-        name="email"
-        type="email"
-        label="Email"
-        defaultValue="grace@hopper"
-        description="We send the invite here."
-        success={success}
-        onChange={() => setSuccess(undefined)}
-        required
-      />
-      <Button type="submit">Send invite</Button>
+      <div className="f:1 min-w:0">
+        <Field
+          name="email"
+          type="email"
+          label="Email"
+          defaultValue="grace@hopper"
+          description="We send the invite here."
+          success={success}
+          onChange={() => setSuccess(undefined)}
+          className="w:100%"
+          required
+        />
+      </div>
+      {/* one label line and the field's gap, so the key lines up with the input */}
+      <div className="fs:sm pt:calc(1lh)">
+        <Button type="submit" icon={<IconSend className="w:4 h:4" />} iconOnly className="mt:2">
+          Send invite
+        </Button>
+      </div>
     </Form>
   );
 }
