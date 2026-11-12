@@ -5,7 +5,7 @@ import { Toggle } from "@base-ui/react/toggle";
 import { IconAlertTriangle, IconCheck, IconEye, IconEyeOff } from "@tabler/icons-react";
 import { type ComponentProps, type ReactNode, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, FOCUS_WITHIN, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, FOCUS_WITHIN, INPUT_TEXT, MESSAGE_IN, RADIUS, type Shape, type Size, SIZE, useShape, useShake } from "./style";
 
 type IconSide = "leading" | "trailing";
 type Status = "default" | "error" | "success";
@@ -160,6 +160,7 @@ export default function FieldBase({
     ? merge(FOCUS, STATUS_OUTLINE[status], focus === true ? "" : focus)
     : "";
   const message = error ?? success ?? description;
+  const box = useShake<HTMLDivElement>(error);
   const reveal = revealable;
   const controlType = reveal && revealed ? "text" : type;
   const trailingIcon = reveal ? (
@@ -204,6 +205,9 @@ export default function FieldBase({
   );
 
   // the affixes sit inside the box, so the box takes the focus outline
+  // the box around a plain input takes the width, so the status icon sits inside the input's edge
+  const widths = (className ?? "").split(/\s+/).filter((token) => /(^|:)(min-|max-)?w:/.test(token));
+  const plainBoxClasses = merge("d:f p:r ai:c", SIZE.width[size], ...widths);
   const affixBoxClasses = merge(
     focus
       ? merge(
@@ -235,7 +239,7 @@ export default function FieldBase({
       )}
 
       {hasAffix ? (
-        <div className={affixBoxClasses}>
+        <div ref={box} data-shake className={affixBoxClasses}>
           {showDecorativeIcon && activeSide === "leading" && (
             <span
               className={merge(
@@ -277,7 +281,7 @@ export default function FieldBase({
           )}
         </div>
       ) : (
-        <div className="d:f p:r ai:c">
+        <div ref={box} data-shake className={plainBoxClasses}>
           {showDecorativeIcon && (
             <span
               className={merge(
@@ -296,6 +300,7 @@ export default function FieldBase({
               // invalid stays red while focused, where Form leaves it after a failed submit
               merge(
                 controlClasses,
+                "w:100%",
                 state.valid === false &&
                   merge(STATUS_BORDER.error, focus ? STATUS_OUTLINE.error : ""),
               )
@@ -315,12 +320,18 @@ export default function FieldBase({
       )}
 
       {message && (
-        <Field.Description className={`fs:xs ${STATUS_MESSAGE[marked]}`}>
+        <Field.Description
+          key={message}
+          // a Form's error takes the description's place
+          className={(state) =>
+            `fs:xs ${STATUS_MESSAGE[marked]} ${marked === "default" ? "" : MESSAGE_IN} ${state.valid === false && marked === "default" ? "d:none" : ""}`
+          }
+        >
           {message}
         </Field.Description>
       )}
       {/* what a surrounding Form reports, by this field's name */}
-      <Field.Error className="fs:xs c:red-5" />
+      <Field.Error className={`fs:xs c:red-5 ${MESSAGE_IN}`} />
     </Field.Root>
   );
 }

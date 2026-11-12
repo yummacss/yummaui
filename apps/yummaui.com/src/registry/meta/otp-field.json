@@ -14,6 +14,16 @@
       "description": "A line under the slots, for where the code comes from."
     },
     {
+      "name": "error",
+      "type": "string",
+      "description": "The code was wrong: the slots shake, the digits clear, and this message takes the place of `description`."
+    },
+    {
+      "name": "success",
+      "type": "string",
+      "description": "The code was right: the slots turn green, then fold into a key with this text."
+    },
+    {
       "name": "length",
       "type": "number",
       "default": 6,
@@ -87,14 +97,8 @@
   ],
   "scene": [
     {
-      "component": "OtpField",
-      "props": {
-        "label": "Verification code",
-        "description": "Sent to your phone, ending in 42",
-        "length": 6,
-        "groupSize": 3,
-        "defaultValue": "4817"
-      }
+      "component": "OtpFieldVerify",
+      "props": {}
     }
   ]
 }
