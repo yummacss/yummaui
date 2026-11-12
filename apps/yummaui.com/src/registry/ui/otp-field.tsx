@@ -138,7 +138,7 @@ export default function OTPFieldBase({
   useEffect(() => {
     setFolded(false);
     if (!success) return;
-    const timer = setTimeout(() => setFolded(true), 640);
+    const timer = setTimeout(() => setFolded(true), 1400);
     return () => clearTimeout(timer);
   }, [success]);
 
