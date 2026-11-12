@@ -1,3 +1,9 @@
+# Design
+
+- Every component follows `DESIGN.md`: shape, measurements, icons, color,
+  motion, scrolling and states. `tests/design.test.ts` checks the rules a
+  script can; a component that breaks one is listed there until it is fixed.
+
 # Writing
 
 - **PR bodies**: one short block per topic under a bold heading, then the
