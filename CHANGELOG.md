@@ -23,6 +23,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **[components]** A Form's error takes the place of Field's description.
+- **[components]** Field's status icon stays inside the input when the field is wider than its default.
 - **[components]** A submenu's first item lines up with the item that opened it in Menu, Context Menu & Menubar.
 
 ## [0.18.0] - 2026-11-11

@@ -97,14 +97,8 @@
   ],
   "scene": [
     {
-      "component": "OtpField",
-      "props": {
-        "label": "Verification code",
-        "description": "Sent to your phone, ending in 42",
-        "length": 6,
-        "groupSize": 3,
-        "defaultValue": "4817"
-      }
+      "component": "OtpFieldVerify",
+      "props": {}
     }
   ]
 }

@@ -205,6 +205,9 @@ export default function FieldBase({
   );
 
   // the affixes sit inside the box, so the box takes the focus outline
+  // the box around a plain input takes the width, so the status icon sits inside the input's edge
+  const widths = (className ?? "").split(/\s+/).filter((token) => /(^|:)(min-|max-)?w:/.test(token));
+  const plainBoxClasses = merge("d:f p:r ai:c", SIZE.width[size], ...widths);
   const affixBoxClasses = merge(
     focus
       ? merge(
@@ -278,7 +281,7 @@ export default function FieldBase({
           )}
         </div>
       ) : (
-        <div ref={box} data-shake className="d:f p:r ai:c">
+        <div ref={box} data-shake className={plainBoxClasses}>
           {showDecorativeIcon && (
             <span
               className={merge(
@@ -297,6 +300,7 @@ export default function FieldBase({
               // invalid stays red while focused, where Form leaves it after a failed submit
               merge(
                 controlClasses,
+                "w:100%",
                 state.valid === false &&
                   merge(STATUS_BORDER.error, focus ? STATUS_OUTLINE.error : ""),
               )
@@ -318,13 +322,16 @@ export default function FieldBase({
       {message && (
         <Field.Description
           key={message}
-          className={`fs:xs ${STATUS_MESSAGE[marked]} ${marked === "default" ? "" : MESSAGE_IN}`}
+          // a Form's error takes the description's place
+          className={(state) =>
+            `fs:xs ${STATUS_MESSAGE[marked]} ${marked === "default" ? "" : MESSAGE_IN} ${state.valid === false && marked === "default" ? "d:none" : ""}`
+          }
         >
           {message}
         </Field.Description>
       )}
       {/* what a surrounding Form reports, by this field's name */}
-      <Field.Error className="fs:xs c:red-5" />
+      <Field.Error className={`fs:xs c:red-5 ${MESSAGE_IN}`} />
     </Field.Root>
   );
 }

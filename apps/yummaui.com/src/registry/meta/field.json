@@ -123,17 +123,8 @@
   ],
   "scene": [
     {
-      "component": "Field",
-      "props": {
-        "label": "File name",
-        "defaultValue": "quarterly-report",
-        "suffix": ".pdf",
-        "description": "Letters, numbers and dashes. No spaces.",
-        "icon": {
-          "$icon": "IconFile",
-          "size": "w:4 h:4"
-        }
-      }
+      "component": "FieldInvite",
+      "props": {}
     }
   ]
 }
