@@ -3,7 +3,7 @@
 import type { KeyboardEvent } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape } from "./style";
+import { FOCUS, RADIUS, useShape, Scroll } from "./style";
 
 // empty, then four steps of the fill, so the accent recolors every step
 const LEVELS = ["bg:line", "bg:fill/25", "bg:fill/50", "bg:fill/75", "bg:fill"];
@@ -154,7 +154,7 @@ export default function ActivityHeatmap({
         </span>
       </div>
 
-      <div className="d:f g:2 ox:auto">
+      <Scroll axis="x" viewport="pb:3"><div className="d:f g:2">
         <div aria-hidden className="d:g gtr:7 g:1 pt:5 fs:0 c:hint lh:1">
           {["Mon", "", "Wed", "", "Fri", "", ""].map((name, row) => (
             <span key={row} className={`d:f ai:c fs:xs ${SIZES[size].row}`}>
@@ -207,7 +207,7 @@ export default function ActivityHeatmap({
             )}
           </div>
         </div>
-      </div>
+      </div></Scroll>
 
       <div className="d:f fw:w ai:c jc:sb g:2 fs:xs c:hint">
         <span aria-hidden className="c:label">

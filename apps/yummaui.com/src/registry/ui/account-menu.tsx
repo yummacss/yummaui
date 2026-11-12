@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import { Children } from "react";
 import { merge } from "yummacss/merge";
 import Avatar from "./avatar";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, useShape, Scroll } from "./style";
 
 export interface Account {
   /** The person's name, which also makes the avatar's initials. */
@@ -123,11 +123,11 @@ export default function AccountMenu({
         <Menu.Positioner className="ow:0" sideOffset={8} align="end">
           <Menu.Popup
             className={merge(
-              "w:68 max-w:calc(100vw-2rem) max-h:var(--available-height) oy:auto py:1 bw:1 bc:line bg:raised bs-o:pop c:label os:none",
+              "d:f fd:c w:68 max-w:calc(100vw-2rem) max-h:var(--available-height) o:h bw:1 bc:line bg:raised bs-o:pop c:label os:none",
               "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 @prm:tp:none",
               RADIUS.popup[shape],
             )}
-          >
+          ><Scroll className="f:1" viewport="py:1 ob:c">
             <div className="d:f ai:c g:3 px:3 pt:2 pb:3">
               <Avatar
                 src={account.image}
@@ -196,7 +196,7 @@ export default function AccountMenu({
               <IconLogout aria-hidden className="w:4 h:4" />
               Sign out
             </Menu.Item>
-          </Menu.Popup>
+          </Scroll></Menu.Popup>
         </Menu.Positioner>
       </Menu.Portal>
     </Menu.Root>

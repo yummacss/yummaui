@@ -115,11 +115,8 @@ highlighted option still scrolls into view on the arrow keys.
 
 | Wrong | Right |
 | --- | --- |
-| `className="oy:auto"` on a list | The list inside `ScrollArea` |
+| `className="oy:auto"` on a list | The list inside `Scroll`, from the style module |
 
-Today: Account Menu, Activity Heatmap, Autocomplete, Combobox, Context Menu,
-Diff Viewer, Kanban Board, Lightbox, Menu, Menubar, Model Picker, Resizable
-Panels, Select and Tool Call.
 
 ## Motion
 

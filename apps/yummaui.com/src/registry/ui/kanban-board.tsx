@@ -6,7 +6,7 @@ import { useSortable } from "@dnd-kit/react/sortable";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, useShape, Scroll } from "./style";
 
 export interface KanbanCard {
   /** Stays with the card as it moves; unique across the board. */
@@ -191,9 +191,9 @@ export default function KanbanBoard({
         onColumnsChange?.(toColumns(columns, latest.current));
       }}
     >
-      <div
+<Scroll axis="x">      <div
         className={merge(
-          "d:g g:3 w:100% ox:auto pb:1",
+          "d:g g:3 w:100% pb:3",
           className,
         )}
         style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(12rem, 1fr))` }}
@@ -208,7 +208,7 @@ export default function KanbanBoard({
             outline={outline}
           />
         ))}
-      </div>
+      </div></Scroll>
     </DragDropProvider>
   );
 }

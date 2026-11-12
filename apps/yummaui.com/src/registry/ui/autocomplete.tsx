@@ -4,7 +4,7 @@ import { Autocomplete } from "@base-ui/react/autocomplete";
 import { Avatar } from "@base-ui/react/avatar";
 import { type ReactNode, useEffect, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape } from "./style";
+import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape, Scroll } from "./style";
 
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconSide = "leading" | "trailing";
@@ -238,7 +238,7 @@ export default function AutocompleteBase({
         </div>
       ) : (
         <>
-          <Autocomplete.List className="oy:auto ob:c max-h:72 py:1 ow:0">
+          <Scroll className="max-h:72" viewport="py:1 ob:c"><Autocomplete.List className="ow:0">
             {(entry: AutocompleteItem | AutocompleteGroup) =>
               isGroupEntry(entry) ? (
                 <Autocomplete.Group key={entry.group}>
@@ -251,7 +251,7 @@ export default function AutocompleteBase({
                 renderItem(entry, shape, query)
               )
             }
-          </Autocomplete.List>
+          </Autocomplete.List></Scroll>
           {emptyMessage && (
           <Autocomplete.Empty className="c:hint fs:sm">
             <div className="pt:2 pb:3 px:4 us:none">{emptyMessage}</div>

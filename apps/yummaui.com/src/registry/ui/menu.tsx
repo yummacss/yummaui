@@ -5,7 +5,7 @@ import { IconCheck, IconChevronRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { cloneElement, isValidElement, useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, type Size, useShape, Scroll } from "./style";
 
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconPosition = "leading" | "trailing";
@@ -206,7 +206,7 @@ export default function MenuBase({
   );
 
   const popupClasses = [
-    "py:1 max-h:var(--available-height) oy:auto ob:c bg:raised bc:line c:label bw:1 os:none bs-o:pop",
+    "d:f fd:c max-h:var(--available-height) o:h bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     spec.popup,
     RADIUS.popup[shape],
   ]
@@ -319,9 +319,9 @@ export default function MenuBase({
                 sideOffset={-4}
                 alignOffset={-5}
               >
-                <Menu.Popup className={popupClasses}>
+                <Menu.Popup className={popupClasses}><Scroll className="f:1" viewport="py:1 ob:c">
                   {renderItems(item.items, key)}
-                </Menu.Popup>
+                </Scroll></Menu.Popup>
               </Menu.Positioner>
             </Menu.Portal>
           </Menu.SubmenuRoot>
@@ -372,9 +372,9 @@ export default function MenuBase({
       <Menu.Positioner className="ow:0" sideOffset={8}>
         <Menu.Popup
           className={`${popupClasses} ${animated ? "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none" : ""}`}
-        >
+        ><Scroll className="f:1" viewport="py:1 ob:c">
           {renderItems(items, "item")}
-        </Menu.Popup>
+        </Scroll></Menu.Popup>
       </Menu.Positioner>
     </Menu.Portal>
   );
