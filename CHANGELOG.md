@@ -14,7 +14,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **[components]** Menu, Context Menu, Menubar, Account Menu, Select, Model Picker, Combobox, Autocomplete, Activity Heatmap, Diff Viewer, Kanban Board, Lightbox, Resizable Panels & Tool Call scroll with the library's scrollbar instead of the browser's.
-
 - **[components]** Item icons in Menu, Context Menu, Menubar, Account Menu, Navigation Menu & File Tree, and option descriptions in Select, Combobox & Autocomplete, use the hint color.
 - **[components]** Skeleton, the Bar Chart & Line Chart tooltips, Diff Viewer's word highlights & Field's show-password button follow the nearest Shape.
 - **[components]** Popover's close button & Toolbar's steppers use 16px icons.
