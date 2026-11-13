@@ -1,9 +1,9 @@
 "use client";
 
 import { Tooltip } from "@base-ui/react/tooltip";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, ReactElement, ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { asTrigger, FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Side = "top" | "right" | "bottom" | "left";
 type Tone = "light" | "dark" | "danger";
@@ -51,7 +51,14 @@ export interface TooltipProps {
    * The trigger's content, an icon usually. Pair it with `triggerLabel` when
    * there is no text.
    */
-  trigger: ReactNode;
+  trigger?: ReactNode;
+  /**
+   * Your own element as the trigger, such as a link, an avatar or a picture, in
+   * place of the default one. It takes the trigger's behavior and none of its
+   * look; the focus outline and `className` merge onto its classes. An element
+   * that cannot take focus, like an `<img>`, needs `tabIndex={0}`.
+   */
+  render?: ReactElement<{ className?: string }>;
   /**
    * The trigger's `aria-label`. An icon-only trigger has no accessible name
    * without it.
@@ -112,6 +119,7 @@ export interface TooltipProps {
  */
 export default function TooltipBase({
   trigger,
+  render,
   triggerLabel,
   content,
   shortcut,
@@ -182,9 +190,13 @@ export default function TooltipBase({
   return (
     <Tooltip.Provider delay={delay}>
       <Tooltip.Root>
-        <Tooltip.Trigger className={triggerClasses} aria-label={triggerLabel}>
-          {trigger}
-        </Tooltip.Trigger>
+        {render ? (
+          <Tooltip.Trigger render={asTrigger(render, outline, className)} aria-label={triggerLabel} />
+        ) : (
+          <Tooltip.Trigger className={triggerClasses} aria-label={triggerLabel}>
+            {trigger}
+          </Tooltip.Trigger>
+        )}
         <Tooltip.Portal container={container}>
           <Tooltip.Positioner
             side={side}

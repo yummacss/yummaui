@@ -3,11 +3,11 @@
 import { Button } from "@base-ui/react/button";
 import { Drawer } from "@base-ui/react/drawer";
 import { IconX } from "@tabler/icons-react";
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { cloneElement, isValidElement, useState } from "react";
 import { merge } from "yummacss/merge";
 import ButtonBase from "./button";
-import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
+import { asTrigger, FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type Side = "bottom" | "top" | "left" | "right";
 type IconPosition = "leading" | "trailing";
@@ -71,6 +71,13 @@ export interface DrawerProps {
    * itself and keeps its own look. Leave it out when `open` opens it from code.
    */
   trigger?: ReactNode;
+  /**
+   * Your own element as the trigger, such as a link, an avatar or a picture, in
+   * place of the default one. It takes the trigger's behavior and none of its
+   * look; the focus outline and `className` merge onto its classes. An element
+   * that cannot take focus, like an `<img>`, needs `tabIndex={0}`.
+   */
+  render?: ReactElement<{ className?: string }>;
   /**
    * Controlled open state, for opening it from code: a menu item, a keyboard
    * shortcut or a list row. Uncontrolled (the default) if omitted.
@@ -136,6 +143,7 @@ export interface DrawerProps {
  */
 export default function DrawerBase({
   trigger,
+  render,
   triggerIcon,
   triggerIconPosition = "leading",
   title,
@@ -189,7 +197,9 @@ export default function DrawerBase({
       open={open}
       onOpenChange={setOpen}
     >
-      {isValidElement<{ className?: string }>(trigger) ? (
+      {render ? (
+        <Drawer.Trigger render={asTrigger(render, outline, className)} />
+      ) : isValidElement<{ className?: string }>(trigger) ? (
         <Drawer.Trigger
           render={cloneElement(trigger, {
             className: merge(trigger.props.className, className),

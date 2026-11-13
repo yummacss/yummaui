@@ -2,10 +2,10 @@
 
 import { Menu } from "@base-ui/react/menu";
 import { IconCheck, IconChevronRight } from "@tabler/icons-react";
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { cloneElement, isValidElement, useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, type Size, useShape, Scroll } from "./style";
+import { asTrigger, FOCUS, RADIUS, type Shape, type Size, useShape, Scroll } from "./style";
 
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 type IconPosition = "leading" | "trailing";
@@ -101,7 +101,14 @@ export interface MenuProps {
    * plain string. An element, such as a `Button`, is the trigger itself and
    * keeps its own look, with `className` merged onto it.
    */
-  trigger: ReactNode;
+  trigger?: ReactNode;
+  /**
+   * Your own element as the trigger, such as a link, an avatar or a picture, in
+   * place of the default one. It takes the trigger's behavior and none of its
+   * look; the focus outline and `className` merge onto its classes. An element
+   * that cannot take focus, like an `<img>`, needs `tabIndex={0}`.
+   */
+  render?: ReactElement<{ className?: string }>;
   /**
    * A discriminated union. `{ label }` is a plain action (plus optional `icon`,
    * `shortcut`, `destructive`, `disabled`, `onClick`). `{ type: "separator" }`
@@ -164,6 +171,7 @@ export interface MenuProps {
  */
 export default function MenuBase({
   trigger,
+  render,
   items,
   size = "md",
   shape: shapeProp,
@@ -381,7 +389,9 @@ export default function MenuBase({
 
   return (
     <Menu.Root open={open} onOpenChange={handleOpenChange} disabled={disabled}>
-      {isValidElement<{ className?: string }>(trigger) ? (
+      {render ? (
+        <Menu.Trigger render={asTrigger(render, outline, className)} />
+      ) : isValidElement<{ className?: string }>(trigger) ? (
         <Menu.Trigger
           render={cloneElement(trigger, {
             className: merge(trigger.props.className, className),
