@@ -367,7 +367,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "keypad": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "lightbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: {}, keyframes: {} },
-  "marquee": { states: {}, easings: {}, keyframes: { "marquee": "to { translate: calc(var(--marquee-shift) * -1) 0; }" } },
+  "marquee": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "marquee": "to { translate: calc(var(--marquee-shift) * -1) 0; }" } },
   "menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "menubar": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "model-picker": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

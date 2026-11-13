@@ -1,5 +1,5 @@
 {
-  "summary": "An endless row that scrolls on its own, for logos or tags; it stands still when someone asks for reduced motion.",
+  "summary": "An endless row that scrolls on its own, for logos or tags, with a key that pauses it; it stands still when someone asks for reduced motion.",
   "props": [
     {
       "name": "children",
@@ -23,7 +23,26 @@
       "name": "pauseOnHover",
       "type": "boolean",
       "default": true,
-      "description": "Stops the row while a pointer is over it."
+      "description": "Stops the row while a pointer is over it or focus is inside it."
+    },
+    {
+      "name": "paused",
+      "type": "boolean",
+      "description": "Controlled pause. Pass it with `onPausedChange`.",
+      "controlled": true,
+      "handler": "onPausedChange"
+    },
+    {
+      "name": "onPausedChange",
+      "type": "none",
+      "typeName": "(paused: boolean) => void",
+      "description": "Called when the pause key is pressed, with whether the row is now paused."
+    },
+    {
+      "name": "pauseButton",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows a key at the row's end that pauses and resumes it. Turn it off only when the page has its own control, since moving content needs one."
     },
     {
       "name": "fade",
@@ -37,9 +56,28 @@
       "description": "What the row holds, read once by screen readers instead of the moving copy."
     },
     {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the pause key. Inherits the nearest `Shape`."
+    },
+    {
       "name": "className",
       "type": "string",
       "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it on every focusable part of the component, which is more than `className` reaches. Removing it outright and putting nothing back fails WCAG 2.4.7."
     }
   ],
   "scene": [
