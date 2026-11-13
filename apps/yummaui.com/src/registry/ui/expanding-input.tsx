@@ -16,7 +16,6 @@ import {
   FOCUS,
   FOCUS_WITHIN,
   INPUT_TEXT,
-  MESSAGE_IN,
   RADIUS,
   type Shape,
   type Size,
@@ -61,9 +60,8 @@ export interface ExpandingInputProps {
   /** Corner radius. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
-   * The morph between the button and the field, the button riding to the
-   * field's end as its submit. Turn it off for an instant change; reduced
-   * motion does the same.
+   * The width easing between the button and the field. Turn it off for an
+   * instant change; reduced motion does the same.
    */
   animated?: boolean;
   /**
@@ -100,33 +98,26 @@ export default function ExpandingInput({
   const [phase, setPhase] = useState<Phase>("closed");
   const [value, setValue] = useState("");
   const [busy, setBusy] = useState(false);
-  // the box's width follows the phase; the key inside rides its edge
-  const morph = useMorph<HTMLDivElement>(phase, animated);
+  const morph = useMorph<HTMLDivElement>(phase === "open", animated);
   const input = useRef<HTMLInputElement>(null);
-  const key = useRef<HTMLButtonElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
   const returning = useRef(false);
-  const open = phase === "open";
-  const done = phase === "done";
 
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const boxOutline = focus
     ? merge(FOCUS_WITHIN, focus === true ? "" : focus.replace(/\bfv:/g, "fw:"))
     : "";
-  // closing leaves on ease-out-in; opening and the success enter on out-quart
-  const motion = animated
-    ? `tp:a tdu:250 ${phase === "closed" ? "ttf:eo" : "ttf:out-quart"} @prm:tp:none`
-    : "";
 
   useEffect(() => {
-    if (open) input.current?.focus();
+    if (phase === "open") input.current?.focus();
     if (phase === "closed" && returning.current) {
       returning.current = false;
-      key.current?.focus();
+      trigger.current?.focus();
     }
-    if (!done) return;
+    if (phase !== "done") return;
     const timer = setTimeout(() => setPhase("closed"), 2400);
     return () => clearTimeout(timer);
-  }, [phase, open, done]);
+  }, [phase]);
 
   const close = (refocus: boolean) => {
     returning.current = refocus;
@@ -136,7 +127,7 @@ export default function ExpandingInput({
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!open || busy || !value.trim()) return;
+    if (busy || !value.trim()) return;
     setBusy(true);
     try {
       await onSubmit?.(value.trim());
@@ -148,86 +139,86 @@ export default function ExpandingInput({
   };
 
   const onKeyDown = (event: KeyboardEvent) => {
-    if (event.key !== "Escape" || !open) return;
+    if (event.key !== "Escape") return;
     event.preventDefault();
     close(true);
   };
 
   return (
-    <div ref={morph} className={merge("d:if", open ? SIZE.width[size] : "", className)}>
-      <form
-        onSubmit={submit}
-        onKeyDown={onKeyDown}
-        onBlur={(event) => {
-          const leaving = !event.currentTarget.contains(event.relatedTarget);
-          if (open && leaving && !value) close(false);
-        }}
-        className={merge(
-          "p:r d:f ai:c w:100% bw:1",
-          SIZE.height[size],
-          RADIUS.control[shape],
-          motion,
-          open
-            ? merge(boxOutline, "pl:3 pr:1 bg:field bc:rim bs-o:key")
-            : "p:0 bg:transparent bc:transparent",
-        )}
-      >
-        <Input
-          ref={input}
-          type={type}
-          value={value}
-          onValueChange={setValue}
-          placeholder={placeholder}
-          aria-label={placeholder ?? label}
-          tabIndex={open ? 0 : -1}
-          aria-hidden={!open || undefined}
-          className={merge(
-            "min-w:0 h:100% p:0 bw:0 bg:transparent c:label os:none",
-            INPUT_TEXT,
-            animated ? "tp:o tdu:150 ttf:out-quart @prm:tp:none" : "",
-            open ? "f:1 o:100" : "w:0 o:0 pe:none",
-          )}
-          style={{ transitionDelay: open && animated ? "100ms" : undefined }}
-        />
-        {/* one key throughout: the closed button, the submit, then the success */}
+    <div ref={morph} className={merge("d:if", className)}>
+      {phase === "closed" && (
         <Button
-          ref={key}
-          type={open ? "submit" : "button"}
-          onClick={() => phase === "closed" && setPhase("open")}
-          disabled={busy}
-          focusableWhenDisabled
-          aria-disabled={done || undefined}
+          ref={trigger}
+          onClick={() => setPhase("open")}
           className={merge(
             outline,
-            "d:if ai:c jc:c fs:0 bw:1 fw:500 ws:nw us:none c:p",
-            motion,
-            open
-              ? merge("bg:fill bc:edge c:on-fill bs-o:key-fill", SUBMIT[size], RADIUS.item[shape])
-              : merge(SIZE.height[size], PADDING[size], RADIUS.control[shape]),
-            done
-              ? "bg:green-7 bc:green-7 c:white bs-o:key-fill"
-              : open
-                ? ""
-                : "bg:raised bc:rim c:label bs-o:key h:bg:well",
-            busy && "o:60",
+            "d:if ai:c jc:c bw:1 bg:raised bs-o:key bc:rim c:label fw:500 ws:nw us:none c:p h:bg:well",
+            SIZE.height[size],
+            PADDING[size],
+            RADIUS.control[shape],
           )}
         >
-          {done ? (
-            <span key="done" className={`d:if ai:c g:2 ${animated ? MESSAGE_IN : ""}`}>
-              <IconCheck aria-hidden className="w:4 h:4" />
-              {doneLabel}
-            </span>
-          ) : (
-            <span key="label" className="d:if ai:c g:2">
-              {icon && !open && <span aria-hidden className="d:if">{icon}</span>}
-              {label}
-            </span>
-          )}
+          {icon}
+          {label}
         </Button>
-        <span role="status" className="p:a w:px h:px o:h ws:nw">
-          {done ? doneLabel : ""}
+      )}
+
+      {phase === "open" && (
+        <form
+          onSubmit={submit}
+          onKeyDown={onKeyDown}
+          onBlur={(event) => {
+            const leaving = !event.currentTarget.contains(event.relatedTarget);
+            if (leaving && !value) close(false);
+          }}
+          className={merge(
+            boxOutline,
+            "d:f ai:c g:2 pl:3 pr:1 bw:1 bg:field bs-o:key bc:rim",
+            INPUT_TEXT,
+            SIZE.height[size],
+            SIZE.width[size],
+            RADIUS.control[shape],
+          )}
+        >
+          <Input
+            ref={input}
+            type={type}
+            value={value}
+            onValueChange={setValue}
+            placeholder={placeholder}
+            aria-label={placeholder ?? label}
+            className="f:1 min-w:0 h:100% p:0 bw:0 bg:transparent c:label os:none"
+          />
+          <Button
+            type="submit"
+            disabled={busy}
+            focusableWhenDisabled
+            className={merge(
+              outline,
+              "d:if ai:c jc:c fs:0 bw:1 bg:fill bc:edge c:on-fill bs-o:key-fill fw:500 ws:nw us:none c:p",
+              SUBMIT[size],
+              RADIUS.item[shape],
+              busy && "o:60",
+            )}
+          >
+            {label}
+          </Button>
+        </form>
+      )}
+
+      {phase === "done" && (
+        <span
+          role="status"
+          className={merge(
+            "d:if ai:c jc:c c:green-7 fw:500 ws:nw",
+            SIZE.height[size],
+            PADDING[size],
+          )}
+        >
+          <IconCheck aria-hidden className="w:4 h:4" />
+          {doneLabel}
         </span>
-      </form>
+      )}
     </div>
   );
 }

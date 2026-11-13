@@ -65,7 +65,7 @@
       "name": "animated",
       "type": "boolean",
       "default": true,
-      "description": "The morph between the button and the field, the button riding to the field's end as its submit. Turn it off for an instant change; reduced motion does the same."
+      "description": "The width easing between the button and the field. Turn it off for an instant change; reduced motion does the same."
     },
     {
       "name": "className",

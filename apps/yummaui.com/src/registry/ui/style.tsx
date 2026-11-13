@@ -182,7 +182,7 @@ export function useIndicator<T extends HTMLElement>(
 }
 
 /** Eases an element's width from its old size to its new one whenever `key` changes. */
-export function useMorph<T extends HTMLElement>(key: unknown, animated: boolean) {
+export function useMorph<T extends HTMLElement>(key: boolean, animated: boolean) {
   const ref = useRef<T>(null);
   const width = useRef(0);
 
