@@ -151,7 +151,6 @@ The patterns, each built once and reused:
 | --- | --- |
 | Sliding key | One raised key slides under the pressed item (Tabs, Toggle Group, Pagination) |
 | Swap | Two icons in one place cross-fade with a little scale and blur (`Swap`) |
-| Morph | A key grows into a field, the key sliding to the field's end |
 | Error | `useShake` or `shake`: the field shakes on a damped spring, a row of slots ripples 18ms apart, wrong characters blur away while their boxes stay, and the message fades in from a blur in the hint's place (`MESSAGE_IN`) |
 | Success | The field turns green; OTP Field's slots turn green one after another and fold into a key carrying the success text |
 | Lift | A dragged item lifts on a spring with a deeper shadow and a tilt, the rest make room |

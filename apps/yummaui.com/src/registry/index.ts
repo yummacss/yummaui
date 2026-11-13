@@ -31,7 +31,6 @@ import meta_diff_viewer from "./meta/diff-viewer.json";
 import meta_donut_chart from "./meta/donut-chart.json";
 import meta_drawer from "./meta/drawer.json";
 import meta_empty_state from "./meta/empty-state.json";
-import meta_expanding_input from "./meta/expanding-input.json";
 import meta_field from "./meta/field.json";
 import meta_fieldset from "./meta/fieldset.json";
 import meta_file_tree from "./meta/file-tree.json";
@@ -153,7 +152,6 @@ export const registryMeta = {
   "donut-chart": meta_donut_chart,
   "drawer": meta_drawer,
   "empty-state": meta_empty_state,
-  "expanding-input": meta_expanding_input,
   "field": meta_field,
   "fieldset": meta_fieldset,
   "file-tree": meta_file_tree,
@@ -266,7 +264,6 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "donut-chart": { component: "donut-chart", variant: "base", kind: "component", install: "donut-chart" },
   "drawer": { component: "drawer", variant: "base", kind: "component", install: "drawer" },
   "empty-state": { component: "empty-state", variant: "base", kind: "component", install: "empty-state" },
-  "expanding-input": { component: "expanding-input", variant: "base", kind: "component", install: "expanding-input" },
   "field-invite": { component: "field", variant: "invite", kind: "example", install: "field" },
   "field-prefix": { component: "field", variant: "prefix", kind: "example", install: "field" },
   "field-suffix": { component: "field", variant: "suffix", kind: "example", install: "field" },

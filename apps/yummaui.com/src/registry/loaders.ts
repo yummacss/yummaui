@@ -44,7 +44,6 @@ export const registry = {
   "donut-chart": () => import("./ui/donut-chart"),
   "drawer": () => import("./ui/drawer"),
   "empty-state": () => import("./ui/empty-state"),
-  "expanding-input": () => import("./ui/expanding-input"),
   "field-invite": () => import("./ui/field-invite"),
   "field-prefix": () => import("./ui/field-prefix"),
   "field-suffix": () => import("./ui/field-suffix"),

@@ -20,7 +20,6 @@ export const sidebarConfig: SidebarSection[] = [
 			"color-picker",
 			"combobox",
 			"currency-input",
-			"expanding-input",
 			"file-upload",
 			"field",
 			"fieldset",
