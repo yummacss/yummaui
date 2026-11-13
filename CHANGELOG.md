@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **[components]** Marquee shows a pause key by default and pauses while focus is inside it.
+- **[components]** Expanding Input's button grows into the field and rides to its end as the submit, turning green on success.
 
 ## [0.19.0] - 2026-11-12
 
