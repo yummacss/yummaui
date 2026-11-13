@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **[components]** `paused`, `onPausedChange`, `pauseButton`, `shape` & `focus` on Marquee.
+
+### Changed
+
+- **[components]** Marquee shows a pause key by default and pauses while focus is inside it.
+
 ## [0.19.0] - 2026-11-12
 
 ### Added
