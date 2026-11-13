@@ -2,10 +2,10 @@
 
 import { Popover } from "@base-ui/react/popover";
 import { IconX } from "@tabler/icons-react";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, ReactElement, ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { asTrigger, FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Side = "top" | "right" | "bottom" | "left";
 type TriggerVariant = "icon" | "label";
@@ -38,7 +38,14 @@ export interface PopoverProps {
    * The trigger's content, an icon usually. Pair it with `triggerLabel` when
    * there is no text.
    */
-  trigger: ReactNode;
+  trigger?: ReactNode;
+  /**
+   * Your own element as the trigger, such as a link, an avatar or a picture, in
+   * place of the default one. It takes the trigger's behavior and none of its
+   * look; the focus outline and `className` merge onto its classes. An element
+   * that cannot take focus, like an `<img>`, needs `tabIndex={0}`.
+   */
+  render?: ReactElement<{ className?: string }>;
   /**
    * The trigger's `aria-label`. An icon-only trigger has no accessible name
    * without it.
@@ -118,6 +125,7 @@ export interface PopoverProps {
  */
 export default function PopoverBase({
   trigger,
+  render,
   triggerLabel,
   triggerVariant = "icon",
   title,
@@ -226,15 +234,23 @@ export default function PopoverBase({
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <Popover.Trigger
-        className={triggerClasses}
-        aria-label={triggerVariant === "icon" ? triggerLabel : undefined}
-        openOnHover={openOnHover}
-        delay={openOnHover ? delay : undefined}
-      >
-        {trigger}
-        {triggerVariant === "label" && triggerLabel}
-      </Popover.Trigger>
+      {render ? (
+        <Popover.Trigger
+          render={asTrigger(render, outline, className)}
+          openOnHover={openOnHover}
+          delay={openOnHover ? delay : undefined}
+        />
+      ) : (
+        <Popover.Trigger
+          className={triggerClasses}
+          aria-label={triggerVariant === "icon" ? triggerLabel : undefined}
+          openOnHover={openOnHover}
+          delay={openOnHover ? delay : undefined}
+        >
+          {trigger}
+          {triggerVariant === "label" && triggerLabel}
+        </Popover.Trigger>
+      )}
 
       {popup}
     </Popover.Root>

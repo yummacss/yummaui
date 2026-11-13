@@ -3,11 +3,11 @@
 import { Button } from "@base-ui/react/button";
 import { Dialog } from "@base-ui/react/dialog";
 import { IconX } from "@tabler/icons-react";
-import type { ReactNode } from "react";
+import type { ReactElement, ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import ButtonBase from "./button";
-import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
+import { asTrigger, FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type IconPosition = "leading" | "trailing";
 type TriggerTone = "neutral" | "danger";
@@ -24,6 +24,13 @@ export interface DialogProps {
    * The trigger button's label. Leave it out when `open` opens it from code.
    */
   trigger?: ReactNode;
+  /**
+   * Your own element as the trigger, such as a link, an avatar or a picture, in
+   * place of the default one. It takes the trigger's behavior and none of its
+   * look; the focus outline and `className` merge onto its classes. An element
+   * that cannot take focus, like an `<img>`, needs `tabIndex={0}`.
+   */
+  render?: ReactElement<{ className?: string }>;
   /**
    * Controlled open state, for opening it from code: a menu item, a keyboard
    * shortcut or a list row. Uncontrolled (the default) if omitted.
@@ -109,6 +116,7 @@ export interface DialogProps {
  */
 export default function DialogBase({
   trigger,
+  render,
   triggerIcon,
   triggerIconPosition = "leading",
   triggerTone = "neutral",
@@ -238,7 +246,9 @@ export default function DialogBase({
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      {trigger !== undefined && (
+      {render ? (
+        <Dialog.Trigger onClick={onTriggerClick} render={asTrigger(render, outline, className)} />
+      ) : trigger !== undefined && (
         <Dialog.Trigger
           onClick={onTriggerClick}
           render={

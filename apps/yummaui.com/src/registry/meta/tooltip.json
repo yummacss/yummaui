@@ -9,6 +9,12 @@
       "description": "The trigger's content, an icon usually. Pair it with `triggerLabel` when there is no text."
     },
     {
+      "name": "render",
+      "type": "none",
+      "typeName": "ReactElement",
+      "description": "Your own element as the trigger, such as a link, an avatar or a picture, in place of the default one. It takes the trigger's behavior and none of its look; the focus outline and `className` merge onto its classes. An element that cannot take focus, like an `<img>`, needs `tabIndex={0}`."
+    },
+    {
       "name": "triggerLabel",
       "type": "string",
       "example": "Move to Trash",

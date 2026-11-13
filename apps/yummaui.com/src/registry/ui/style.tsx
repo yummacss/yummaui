@@ -2,8 +2,10 @@
 
 import { ScrollArea } from "@base-ui/react/scroll-area";
 import {
+  cloneElement,
   createContext,
   type CSSProperties,
+  type ReactElement,
   type ReactNode,
   type RefObject,
   useContext,
@@ -307,3 +309,17 @@ export function useShake<T extends HTMLElement>(error: unknown, lag = 0, parts?:
 
 /** A message arriving under a control: it fades in from a blur. Key it by its text so each new one plays. */
 export const MESSAGE_IN = "an:reveal adu:200 ttf:out-quart @prm:an:none";
+
+/**
+ * Someone's own element as a component's trigger: the library's classes, the
+ * element's own, then `className`, merged in that order.
+ */
+export function asTrigger(
+  element: ReactElement<{ className?: string }>,
+  library: string,
+  className?: string,
+) {
+  return cloneElement(element, {
+    className: merge(library, element.props.className, className),
+  });
+}

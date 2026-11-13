@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **[components]** `paused`, `onPausedChange`, `pauseButton`, `shape` & `focus` on Marquee.
+- **[components]** `render` on Tooltip, Popover, Preview Card, Dialog, Alert Dialog, Menu & Drawer, for your own element as the trigger.
+- **[components]** `asTrigger` in the style module.
 
 ### Changed
 

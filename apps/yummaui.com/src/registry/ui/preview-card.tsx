@@ -1,9 +1,9 @@
 "use client";
 
 import { PreviewCard } from "@base-ui/react/preview-card";
-import type { CSSProperties, ReactNode } from "react";
+import type { CSSProperties, ReactElement, ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { asTrigger, FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 const ARROW_PLACEMENT: Record<string, CSSProperties> = {
   top: { bottom: -6, rotate: "180deg" },
@@ -29,7 +29,14 @@ export interface PreviewCardProps {
    */
   arrow?: boolean;
   /** The inline content that opens the card on hover or focus. */
-  trigger: ReactNode;
+  trigger?: ReactNode;
+  /**
+   * Your own element as the trigger, such as a link, an avatar or a picture, in
+   * place of the default one. It takes the trigger's behavior and none of its
+   * look; the focus outline and `className` merge onto its classes. An element
+   * that cannot take focus, like an `<img>`, needs `tabIndex={0}`.
+   */
+  render?: ReactElement<{ className?: string }>;
   /** The card's contents. */
   children: ReactNode;
   /**
@@ -71,6 +78,7 @@ export interface PreviewCardProps {
 export default function PreviewCardBase({
   arrow = true,
   trigger,
+  render,
   children,
   defaultOpen,
   open,
@@ -98,18 +106,22 @@ export default function PreviewCardBase({
       open={open}
       onOpenChange={onOpenChange}
     >
-      <PreviewCard.Trigger
-        className={(state) =>
-          merge(
-            outline,
-            "c:fill c:p fw:500 td:none h:td:u",
-            state.open ? "td:u" : "",
-            className,
-          )
-        }
-      >
-        {trigger}
-      </PreviewCard.Trigger>
+      {render ? (
+        <PreviewCard.Trigger render={asTrigger(render, outline, className)} />
+      ) : (
+        <PreviewCard.Trigger
+          className={(state) =>
+            merge(
+              outline,
+              "c:fill c:p fw:500 td:none h:td:u",
+              state.open ? "td:u" : "",
+              className,
+            )
+          }
+        >
+          {trigger}
+        </PreviewCard.Trigger>
+      )}
 
       <PreviewCard.Portal container={container}>
         <PreviewCard.Positioner sideOffset={8 + (arrow ? ARROW_HEIGHT : 0)}>
