@@ -12,10 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** `paused`, `onPausedChange`, `pauseButton`, `shape` & `focus` on Marquee.
 - **[components]** `render` on Tooltip, Popover, Preview Card, Dialog, Alert Dialog, Menu & Drawer, for your own element as the trigger.
 - **[components]** `asTrigger` in the style module.
+- **[components]** `animated` on Number Field.
+- **[components]** `Roll` in the style module, for a number that rolls when it changes.
 
 ### Changed
 
 - **[components]** Marquee shows a pause key by default and pauses while focus is inside it.
+- **[components]** Number Field rolls its value when a step changes it.
 
 ### Removed
 

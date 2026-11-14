@@ -153,6 +153,7 @@ The patterns, each built once and reused:
 | Swap | Two icons in one place cross-fade with a little scale and blur (`Swap`) |
 | Error | `useShake` or `shake`: the field shakes on a damped spring, a row of slots ripples 18ms apart, wrong characters blur away while their boxes stay, and the message fades in from a blur in the hint's place (`MESSAGE_IN`) |
 | Success | The field turns green; OTP Field's slots turn green one after another and fold into a key carrying the success text |
+| Roll | A changed number moves only the digits that differ, up when it grows and down when it shrinks, 30ms apart from the right (`Roll`) |
 | Lift | A dragged item lifts on a spring with a deeper shadow and a tilt, the rest make room |
 | Panel | A popup resizes between contents, which cross-fade with a slight blur |
 

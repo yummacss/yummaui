@@ -3,9 +3,9 @@
 import { NumberField } from "@base-ui/react/number-field";
 import { IconMinus, IconPlus } from "@tabler/icons-react";
 import type { ComponentProps } from "react";
-import { useId } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { INPUT_TEXT, MESSAGE_IN, RADIUS, type Shape, type Size, SIZE, useShape, useShake } from "./style";
+import { INPUT_TEXT, MESSAGE_IN, RADIUS, Roll, type Shape, type Size, SIZE, useShape, useShake } from "./style";
 
 const FOCUS = "ow:0 oc:focus/40 fv:os:s fv:ow:3 fv:oo:0 fv:bc:focus fv:zi:10";
 
@@ -28,6 +28,16 @@ const INPUT_SIZES: Record<Size, string> = {
   md: `w:20 ${INPUT_TEXT}`,
   lg: "w:24 fs:md",
 };
+
+const TEXT_SIZES: Record<Size, string> = {
+  sm: INPUT_TEXT,
+  md: INPUT_TEXT,
+  lg: "fs:md",
+};
+
+// a step rolls the value: a button press, an arrow key, the wheel or a scrub; typing changes it in place
+const stepped = (reason: string) =>
+  reason.endsWith("-press") || reason === "keyboard" || reason === "wheel" || reason === "scrub";
 
 const ICON_SIZES: Record<Size, string> = {
   sm: "w:3 h:3",
@@ -71,6 +81,11 @@ export interface NumberFieldProps
   shape?: Shape;
 
   /**
+   * Rolls the value when a step changes it, only the digits that differ moving.
+   * Typing changes it in place, and reduced motion does the same.
+   */
+  animated?: boolean;
+  /**
    * Extra classes. `merge` folds them in last, so one here replaces the
    * component's own class for the same utility.
    */
@@ -99,10 +114,18 @@ export default function NumberFieldBase({
   disabled = false,
   className,
   focus = true,
+  animated = true,
+  onValueChange,
   ...props
 }: NumberFieldProps) {
   const shape = useShape(shapeProp);
   const id = useId();
+  const format = (value: number | null) =>
+    value === null ? "" : new Intl.NumberFormat(props.locale, props.format).format(value);
+  const start = props.value ?? props.defaultValue ?? null;
+  const [shown, setShown] = useState({ value: start ?? 0, text: format(start), rolling: false });
+  const settle = useRef<ReturnType<typeof setTimeout>>(undefined);
+  useEffect(() => () => clearTimeout(settle.current), []);
 
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const boxOutline = focus
@@ -119,6 +142,19 @@ export default function NumberFieldBase({
     <NumberField.Root
       id={id}
       disabled={disabled}
+      onValueChange={(value, details) => {
+        onValueChange?.(value, details);
+        const text = format(value);
+        const rolling = animated && stepped(details.reason);
+        setShown({ value: value ?? 0, text, rolling });
+        clearTimeout(settle.current);
+        // the roll covers the input until every character has landed
+        if (rolling)
+          settle.current = setTimeout(
+            () => setShown((now) => ({ ...now, rolling: false })),
+            250 + text.length * 30,
+          );
+      }}
       className={`d:f fd:c ai:fs g:2 ${disabled ? "o:60 c:na" : ""}`}
       {...props}
     >
@@ -140,9 +176,20 @@ export default function NumberFieldBase({
             required={required}
             aria-invalid={error ? true : undefined}
             className={merge(
-              "os:none p:0 bw:0 bg:transparent c:label fw:500 ta:c fvn:tn",
+              "os:none p:0 bw:0 bg:transparent fw:500 ta:c fvn:tn",
+              shown.rolling ? "c:transparent" : "c:label",
               INPUT_SIZES[size],
               className,
+            )}
+          />
+          <Roll
+            value={shown.value}
+            text={shown.text}
+            still={!shown.rolling}
+            className={merge(
+              "p:a i:0 ai:c jc:c pe:none c:label fw:500",
+              TEXT_SIZES[size],
+              shown.rolling ? "" : "o:0",
             )}
           />
         </span>
