@@ -204,8 +204,8 @@ export default function SliderBase({
             RADIUS.control[shape],
           )}
         >
-          {/* the track is inset half a thumb each side, so a thumb centered on the end value stays in the well */}
-          <Slider.Track className="p:r f:1 h:100% mx:3">
+          {/* the track is inset half a thumb each side, so a thumb centered on an end value stays in the well; inline, as positions depend on it */}
+          <Slider.Track className="p:r f:1 h:100%" style={{ marginInline: "0.75rem" }}>
             {marks && marks.length > 1 &&
               marks.map((mark, index) => (
                 <span
