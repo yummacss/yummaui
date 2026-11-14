@@ -273,6 +273,13 @@ export const COMPONENT_PAGES = [
 			"Show code with a file name or tabs, a copy button & marked lines.",
 	},
 	{
+		slug: "knob",
+		since: "0.20",
+		title: "Knob",
+		description:
+			"Turn a value on a round dial by dragging, scrolling or the arrow keys.",
+	},
+	{
 		slug: "kbd",
 		title: "Kbd",
 		description: "Show a keyboard shortcut as keycaps in running text.",

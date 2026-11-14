@@ -6,11 +6,10 @@
 
 # Writing
 
-- **PR bodies**: one short block per topic under a bold heading, then the
-  checks line. Say **what changed**, and nothing else. No cause, no history,
-  no justification: a reader outside the project does not care why a thing was
-  renamed from A to B. The why goes in the notes, the private `yummacss/notes`
-  repo.
+- **PR bodies**: one sentence saying what the PR does, then the checks line.
+  `This PR adds a new **[Knob](link)** Yumma UI component.` No blocks, no
+  detail: the diff and the CHANGELOG carry it. No cause, no history, no
+  justification; the why goes in the notes, the private `yummacss/notes` repo.
 - **Commit messages**: a subject and a couple of lines. No essays.
 - **CHANGELOG entries**: one line each, saying what was added, changed or
   fixed, and opening with what shipped it, as Yumma CSS does: `**[cli]**` for
@@ -57,8 +56,8 @@
 
 ## Writing for the site
 
-- **PR bodies**: link every component you name to its page, with the link on
-  the bold heading itself. While a branch is open the link is that branch's
+- **PR bodies**: link every component you name to its page, bold, in the
+  sentence. While a branch is open the link is that branch's
   Vercel preview, taken from the Vercel bot's comment on the PR, plus
   `/components/<id>`. Never build it from the branch name: a long one is cut
   and hashed in the host. Once merged it is

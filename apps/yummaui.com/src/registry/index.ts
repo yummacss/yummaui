@@ -43,6 +43,7 @@ import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
 import meta_kanban_board from "./meta/kanban-board.json";
 import meta_kbd from "./meta/kbd.json";
 import meta_keypad from "./meta/keypad.json";
+import meta_knob from "./meta/knob.json";
 import meta_lightbox from "./meta/lightbox.json";
 import meta_line_chart from "./meta/line-chart.json";
 import meta_marquee from "./meta/marquee.json";
@@ -164,6 +165,7 @@ export const registryMeta = {
   "kanban-board": meta_kanban_board,
   "kbd": meta_kbd,
   "keypad": meta_keypad,
+  "knob": meta_knob,
   "lightbox": meta_lightbox,
   "line-chart": meta_line_chart,
   "marquee": meta_marquee,
@@ -280,6 +282,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "kanban-board": { component: "kanban-board", variant: "base", kind: "component", install: "kanban-board" },
   "kbd": { component: "kbd", variant: "base", kind: "component", install: "kbd" },
   "keypad": { component: "keypad", variant: "base", kind: "component", install: "keypad" },
+  "knob": { component: "knob", variant: "base", kind: "component", install: "knob" },
   "lightbox": { component: "lightbox", variant: "base", kind: "component", install: "lightbox" },
   "line-chart": { component: "line-chart", variant: "base", kind: "component", install: "line-chart" },
   "marquee": { component: "marquee", variant: "base", kind: "component", install: "marquee" },
@@ -367,6 +370,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "file-upload": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "keypad": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "knob": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "lightbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: {}, keyframes: {} },
   "marquee": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "marquee": "to { translate: calc(var(--marquee-shift) * -1) 0; }" } },
   "menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
