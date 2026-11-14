@@ -3,12 +3,13 @@
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { IconChevronDown } from "@tabler/icons-react";
 import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
-// a panel slides in from the side you moved from, and out the other way
+// a panel slides in from the side you moved from through a blur, and out the other way
 const SLIDE =
-  "opening:o:0 closing:o:0 opening:from-left:ttx:-12 opening:from-right:ttx:12 closing:from-left:ttx:12 closing:from-right:ttx:-12";
+  "opening:o:0 closing:o:0 opening:fb:4 closing:fb:4 opening:from-left:ttx:-24 opening:from-right:ttx:24 closing:from-left:ttx:24 closing:from-right:ttx:-24";
 
 export interface NavigationLink {
   title: string;
@@ -25,6 +26,8 @@ export interface NavigationItem {
   links?: NavigationLink[];
   /** Lay the panel's links out in two columns. */
   columns?: 1 | 2;
+  /** A block beside the links, such as a summary or a preview. */
+  aside?: ReactNode;
 }
 
 export interface NavigationMenuProps {
@@ -82,30 +85,71 @@ export default function NavigationMenuBase({
 }: NavigationMenuProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
+  const [value, setValue] = useState<string | null>(null);
+  const list = useRef<HTMLUListElement>(null);
+  const triggers = useRef(new Map<string, HTMLElement>());
+  // the raised key sits under the open trigger; it jumps there unseen when the menu first opens
+  const [key, setKey] = useState({ left: 0, width: 0, jump: true });
 
-  const item = merge(
-    outline,
-    "d:f ai:c g:1 h:8 px:3 bw:1 bc:transparent fs:sm fw:500 c:label td:none us:none c:p h:bg:well",
-    RADIUS.item[shape],
-  );
+  useLayoutEffect(() => {
+    const trigger = value ? triggers.current.get(value) : null;
+    const bar = list.current;
+    if (!trigger || !bar) return;
+    const from = bar.getBoundingClientRect();
+    const to = trigger.getBoundingClientRect();
+    setKey((now) => ({ left: to.left - from.left - bar.clientLeft, width: to.width, jump: now.width === 0 }));
+  }, [value]);
+
+  useLayoutEffect(() => {
+    if (!value) setKey((now) => ({ ...now, jump: true }));
+    else if (key.jump) {
+      const frame = requestAnimationFrame(() => setKey((now) => ({ ...now, jump: false })));
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [value, key.jump]);
+
+  const item = (open: boolean) =>
+    merge(
+      outline,
+      "p:r d:f ai:c g:1 h:8 px:3 bw:1 bc:transparent bg:transparent fs:sm fw:500 td:none us:none c:p h:c:label",
+      open ? "c:label" : "c:hint",
+      RADIUS.item[shape],
+    );
 
   return (
     <NavigationMenu.Root
+      value={value}
+      onValueChange={(next) => setValue(typeof next === "string" ? next : null)}
       aria-label={label}
       className={merge("d:f c:label", className)}
     >
       <NavigationMenu.List
+        ref={list}
         className={merge(
-          "p:r d:f ai:c g:1 m:0 p:1 bg:raised bs-o:key bw:1 bc:rim",
+          "p:r d:f ai:c g:px m:0 p:1 bg:well bs-o:sunk bw:1 bc:rim",
           RADIUS.bar[shape],
         )}
       >
+        <li
+          aria-hidden
+          className={merge(
+            "p:a t:1 h:8 lst:none bw:1 bc:rim bg:raised bs-o:key pe:none",
+            RADIUS.item[shape],
+            value ? "o:100" : "o:0",
+            !animated || key.jump ? "tp:o tdu:150 @prm:tp:none" : "tp:a tdu:250 ttf:out-quart @prm:tp:none",
+          )}
+          style={{ left: key.left, width: key.width }}
+        />
         {items.map((entry) => (
-          <NavigationMenu.Item key={entry.label}>
+          <NavigationMenu.Item key={entry.label} value={entry.label}>
             {entry.links ? (
               <>
                 <NavigationMenu.Trigger
-                  className={(state) => merge(item, state.open && "bg:well")}
+                  ref={(node: HTMLElement | null) => {
+                    if (node) triggers.current.set(entry.label, node);
+                    else triggers.current.delete(entry.label);
+                  }}
+                  className={(state) => item(state.open)}
                 >
                   {entry.label}
                   <NavigationMenu.Icon
@@ -124,14 +168,20 @@ export default function NavigationMenuBase({
                   className={merge(
                     "p:1 w:max max-w:100%",
                     animated &&
-                      `tp:ot tdu:250 ttf:out-quart ${SLIDE} @prm:tp:none`,
+                      `tp:a tdu:250 ttf:out-quart ${SLIDE} @prm:tp:none`,
                   )}
                 >
+                  <div className={entry.aside ? "d:f g:2" : "d:f"}>
+                  {entry.aside && (
+                    <div className={merge("d:f fd:c jc:fe g:2 w:48 fs:0 p:3 bw:1 bc:line bg:well bs-o:sunk", RADIUS.item[shape])}>
+                      {entry.aside}
+                    </div>
+                  )}
                   <div
                     className={
                       entry.columns === 2
-                        ? "d:g gtc:2 g:px w:112"
-                        : "d:g g:px w:64"
+                        ? "d:g gtc:2 g:px w:112 ac:s"
+                        : "d:g g:px w:72 ac:s"
                     }
                   >
                     {entry.links.map((link) => (
@@ -148,7 +198,7 @@ export default function NavigationMenuBase({
                           <span
                             aria-hidden
                             className={merge(
-                              "d:f ai:c jc:c fs:0 w:5 h:5",
+                              "d:f ai:c jc:c fs:0 w:8 h:8 bw:1 bc:rim bg:well c:label",
                               RADIUS.item[shape],
                             )}
                           >
@@ -166,10 +216,11 @@ export default function NavigationMenuBase({
                       </NavigationMenu.Link>
                     ))}
                   </div>
+                  </div>
                 </NavigationMenu.Content>
               </>
             ) : (
-              <NavigationMenu.Link href={entry.href} className={item}>
+              <NavigationMenu.Link href={entry.href} className={item(false)}>
                 {entry.label}
               </NavigationMenu.Link>
             )}
@@ -180,7 +231,7 @@ export default function NavigationMenuBase({
       <NavigationMenu.Portal container={container}>
         <NavigationMenu.Positioner
           sideOffset={8}
-          align="start"
+          align="center"
           collisionPadding={16}
           className={merge(
             "zi:50 w:var(--positioner-width) h:var(--positioner-height) max-w:var(--available-width)",
@@ -192,7 +243,7 @@ export default function NavigationMenuBase({
               "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
               RADIUS.popup[shape],
               animated &&
-                "tp:ot tdu:250 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:150 closing:ttf:in-out-cubic @prm:tp:none",
+                "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none",
             )}
           >
             <NavigationMenu.Viewport className="p:r w:100% h:100% o:h" />

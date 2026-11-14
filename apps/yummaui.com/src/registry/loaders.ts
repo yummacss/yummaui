@@ -68,6 +68,7 @@ export const registry = {
   "message": () => import("./ui/message"),
   "meter": () => import("./ui/meter"),
   "model-picker": () => import("./ui/model-picker"),
+  "navigation-menu-library": () => import("./ui/navigation-menu-library"),
   "navigation-menu": () => import("./ui/navigation-menu"),
   "number-field": () => import("./ui/number-field"),
   "onboarding": () => import("./ui/onboarding"),
