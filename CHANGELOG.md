@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** `spring` in the style module, a spring as a duration & CSS easing.
 - **[components]** `aside` on Navigation Menu's items, a block beside the links.
 - **[components]** `RADIUS.inset` in the style module, for a block set inside a popup's padding.
+- **[components]** `RADIUS.controlInset` in the style module, for a key set inside a control's padding.
 
 ### Changed
 
@@ -31,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** A dragged card in Sortable List & Kanban Board leaves a dashed slot, glides on a spring between keyboard steps & keeps its lift in another column.
 - **[components]** Navigation Menu's triggers sit in a sunk bar with a raised key that slides to the open one; its panel centers under the trigger, resizes as one box & slides its contents through a blur.
 - **[components]** Drawer, Dialog, Alert Dialog & Onboarding dim the page without blurring it.
+- **[components]** Slider is a raised key in a sunk well, with a grip line on the value; a click glides the key there & a drag follows at once.
 
 ### Removed
 

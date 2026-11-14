@@ -1,7 +1,7 @@
 "use client";
 
 import { Slider } from "@base-ui/react/slider";
-import { type FocusEvent, type ReactNode, useState } from "react";
+import { type FocusEvent, type ReactNode, useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import { RADIUS, useShape, type Shape } from "./style";
 
@@ -9,9 +9,9 @@ type Value = number | number[];
 
 const FOCUS = "os:s ow:3 oo:0 oc:focus/40";
 
-// the knob, centered on the value and overhanging the bar, as a switch thumb
-const THUMB =
-  "w:5 h:5 bg:knob bw:1 bc:rim bs-o:key";
+// the thumb is a handle the width of the key's end, holding the grip line; the key itself is the fill
+const THUMB = "d:f ai:c jc:c w:6 h:100% os:none c:g";
+const GRIP = "d:b w:px br:9999";
 
 function defaultFormat(value: Value): ReactNode {
   return Array.isArray(value) ? `${value[0]} - ${value[1]}` : `${value}%`;
@@ -106,12 +106,34 @@ export default function SliderBase({
     defaultValue ?? controlledValue ?? 0,
   );
   const [focused, setFocused] = useState(-1);
+  // the thumb a pointer holds, and whether that pointer has moved: a click glides, a drag follows at once
+  const [held, setHeld] = useState(-1);
+  const [moved, setMoved] = useState(false);
+  const control = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (held < 0) return;
+    // the slider may sit in a frame, so listen on its own window
+    const view = control.current?.ownerDocument.defaultView ?? window;
+    const release = () => {
+      setHeld(-1);
+      setMoved(false);
+    };
+    view.addEventListener("pointerup", release);
+    view.addEventListener("pointercancel", release);
+    return () => {
+      view.removeEventListener("pointerup", release);
+      view.removeEventListener("pointercancel", release);
+    };
+  }, [held]);
   const value = controlledValue ?? internalValue;
   const isRange = Array.isArray(value);
 
-  const handleChange = (next: Value) => {
+  const handleChange = (next: Value, details?: { activeThumbIndex?: number; event?: Event }) => {
     setInternalValue(next);
     onValueChange?.(next);
+    const type = details?.event?.type ?? "";
+    if (type.startsWith("pointer")) setHeld(details?.activeThumbIndex ?? 0);
+    if (type === "pointermove") setMoved(true);
   };
 
   const outline = merge(
@@ -119,8 +141,20 @@ export default function SliderBase({
     (typeof focus === "string" ? focus : "").replace(/\bfv:/g, ""),
   );
 
-  const thumbClasses = (index: number) =>
-    merge(THUMB, RADIUS.track[shape], focused === index ? outline : "");
+  // a click sends the key over 250ms; a drag follows the pointer at once
+  const glide = (dragging: boolean) => (dragging ? "" : "tp:a tdu:250 ttf:out-quart @prm:tp:none");
+  const grip = (active: boolean) =>
+    merge(GRIP, "tp:a tdu:150 ttf:out-quart @prm:tp:none", active ? "h:4 bg:label" : "h:3 bg:hint");
+  const thumb = (index: number) => (
+    <Slider.Thumb
+      key={index}
+      index={isRange ? index : undefined}
+      className={merge(THUMB, glide(moved))}
+      {...focusProps(index)}
+    >
+      <span aria-hidden className={grip(held === index || focused === index)} />
+    </Slider.Thumb>
+  );
 
   const focusProps = (index: number) => ({
     onFocus: (event: FocusEvent<HTMLInputElement>) => {
@@ -163,25 +197,36 @@ export default function SliderBase({
         disabled={disabled}
       >
         <Slider.Control
-          className={`d:f ai:c py:3 us:none ta:none ${disabled ? "c:na" : ""}`}
+          ref={control}
+          className={merge(
+            "d:f h:9 p:1 bw:1 bc:line bg:well bs-o:sunk us:none ta:none",
+            disabled ? "c:na" : "c:p",
+            RADIUS.control[shape],
+          )}
         >
-          <Slider.Track
-            className={merge("p:r h:2 w:100% bg:line bs-o:sunk", RADIUS.track[shape])}
-          >
-            <Slider.Indicator className={merge("bg:check bs-o:key-fill", RADIUS.track[shape])} />
-            {isRange ? (
-              value.map((_, index) => (
-                <Slider.Thumb
-                  // biome-ignore lint/suspicious/noArrayIndexKey: positional by design
-                  key={index}
-                  index={index}
-                  className={thumbClasses(index)}
-                  {...focusProps(index)}
+          {/* the track is inset half a thumb each side, so a thumb centered on an end value stays in the well; inline, as positions depend on it */}
+          <Slider.Track className="p:r f:1 h:100%" style={{ marginInline: "0.75rem" }}>
+            {marks && marks.length > 1 &&
+              marks.map((mark, index) => (
+                <span
+                  key={mark}
+                  aria-hidden
+                  className="p:a w:1 h:1 br:9999 bg:hint/40"
+                  style={{ left: `${(index / (marks.length - 1)) * 100}%`, top: "50%", transform: "translate(-50%, -50%)" }}
                 />
-              ))
-            ) : (
-              <Slider.Thumb className={thumbClasses(0)} {...focusProps(0)} />
-            )}
+              ))}
+            <Slider.Indicator className={merge("p:r h:100%", glide(moved))}>
+              {/* the key reaches half a thumb past each value, so the grip sits on it */}
+              <span
+                aria-hidden
+                className={merge(
+                  "p:a t:0 b:0 l:-3 r:-3 bw:1 bc:rim bg:raised bs-o:key",
+                  RADIUS.controlInset[shape],
+                  focused >= 0 ? outline : "",
+                )}
+              />
+            </Slider.Indicator>
+            {isRange ? value.map((_, index) => thumb(index)) : thumb(0)}
           </Slider.Track>
         </Slider.Control>
       </Slider.Root>
