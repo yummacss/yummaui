@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, spring, useLift, useShape, Scroll } from "./style";
 
-// the rest make room on the movement curve; the drop springs into its place
+// the rest make room on the movement curve; the drop and each keyboard step spring into place
 const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
 
 
@@ -91,7 +91,7 @@ function Card({
       ref={ref}
       className={merge(
         outline,
-        "d:f fd:c g:2 py:2 px:3 bw:1 bc:rim bg:raised c:label c:g ta:none us:none",
+        "p:r d:f fd:c g:2 py:2 px:3 bw:1 bc:rim bg:raised c:label c:g ta:none us:none",
         RADIUS.block[shape],
         "bs-o:key",
         isDragging ? "zi:10" : "",
@@ -185,7 +185,7 @@ export default function KanbanBoard({
 
   return (
     <DragDropProvider
-      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: spring(420, 34) })]}
+      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: spring(420, 34), keyboardTransition: spring(520, 30) })]}
       onDragStart={(event) => {
         before.current = cards;
         lift.onDragStart(event);

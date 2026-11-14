@@ -484,9 +484,14 @@ export function spring(stiffness: number, damping: number) {
 // a card held off the surface: its edge, then a long soft shadow under it
 const LIFTED = "0 1px 0 0 rgb(0 0 0 / 0.08), 0 14px 28px rgb(0 0 0 / 0.16), 0 4px 10px rgb(0 0 0 / 0.08)";
 
+// the outline of the empty slot, drawn over the hidden copy the drag library leaves behind
+const SLOT =
+  "position:absolute;inset:0;border-radius:inherit;border:1px dashed color-mix(in srgb, currentColor 35%, transparent);background:transparent;box-shadow:none;visibility:visible;pointer-events:none";
+
 /** What `useLift` reads from a drag event: dnd-kit's events fit it. */
 interface LiftEvent {
   to?: { x: number };
+  by?: { x: number };
   nativeEvent?: Event;
   operation: {
     source?: { element?: Element | null } | null;
@@ -510,6 +515,8 @@ export function useLift() {
     x: 0,
     time: 0,
     frame: 0,
+    watch: 0,
+    doc: null as Document | null,
     lifted: null as Animation | null,
   });
 
@@ -534,6 +541,43 @@ export function useLift() {
     }
   };
 
+  // the drag library leaves a hidden copy where the card was; a dashed outline inside it marks the slot
+  const markSlot = (element: Element) => {
+    let tries = 0;
+    const mark = () => {
+      const slot = [...(element.parentElement?.children ?? [])].find((child) => child.hasAttribute("data-dnd-placeholder"));
+      if (!slot) {
+        if (++tries < 6) requestAnimationFrame(mark);
+        return;
+      }
+      if (slot.querySelector("[data-slot]")) return;
+      const outline = element.ownerDocument.createElement("span");
+      outline.setAttribute("aria-hidden", "true");
+      outline.setAttribute("data-slot", "");
+      outline.style.cssText = SLOT;
+      slot.append(outline);
+    };
+    requestAnimationFrame(mark);
+  };
+
+  // a card moved to another list can be drawn as a new element, which keeps the lift
+  const follow = () => {
+    const s = state.current;
+    // the drag library marks whichever element is being dragged right now
+    const next = s.doc?.querySelector("[data-dnd-dragging]");
+    if (!s.element) return;
+    if (next && next !== s.element && "style" in next) {
+      s.lifted?.cancel();
+      s.element.style.rotate = "";
+      s.element = next as HTMLElement;
+      s.leaning = next as HTMLElement;
+      s.lifted = next.animate([{ scale: "1.03", boxShadow: LIFTED }], { duration: 1, fill: "forwards" });
+      markSlot(next);
+      if (!s.frame) s.frame = requestAnimationFrame(lean);
+    }
+    s.watch = requestAnimationFrame(follow);
+  };
+
   return {
     onDragStart: (event: LiftEvent) => {
       const element = event.operation.source?.element;
@@ -547,14 +591,27 @@ export function useLift() {
         ...spring(380, 18),
         fill: "forwards",
       });
+      s.doc = element.ownerDocument;
+      markSlot(element);
+      cancelAnimationFrame(s.watch);
+      s.watch = requestAnimationFrame(follow);
     },
     onDragMove: (event: LiftEvent) => {
       const s = state.current;
-      // a keyboard move jumps a whole row, which is not speed
       const cause = event.nativeEvent ?? event.operation.activatorEvent;
-      if (!s.element || !cause?.type.startsWith("pointer")) return;
+      if (!s.element || !cause) return;
       const now = performance.now();
       const x = event.to?.x ?? event.operation.position.current.x;
+      // a keyboard move jumps a whole row, which is not speed: a step to another column nudges the card instead
+      if (!cause.type.startsWith("pointer")) {
+        const step = event.by?.x ?? x - s.x;
+        s.x = x;
+        if (Math.abs(step) < 24) return;
+        s.target = Math.sign(step) * 4;
+        s.time = now + 60;
+        if (!s.frame) s.frame = requestAnimationFrame(lean);
+        return;
+      }
       const speed = (x - s.x) / Math.max(1, now - s.time);
       s.x = x;
       s.time = now;
@@ -563,6 +620,8 @@ export function useLift() {
     },
     onDragEnd: () => {
       const s = state.current;
+      cancelAnimationFrame(s.watch);
+      s.doc = null;
       const element = s.element;
       if (!element) return;
       s.target = 0;

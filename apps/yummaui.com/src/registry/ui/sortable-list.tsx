@@ -10,7 +10,7 @@ import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, spring, useLift, useShape } from "./style";
 
-// the rest make room on the movement curve; the drop springs into its place
+// the rest make room on the movement curve; the drop and each keyboard step spring into place
 const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
 
 
@@ -84,7 +84,7 @@ function Row({
     <li
       ref={ref}
       className={merge(
-        "d:f ai:c g:2 h:11 pl:1 pr:3 bw:1 bc:rim bg:raised bs-o:key c:label",
+        "p:r d:f ai:c g:2 h:11 pl:1 pr:3 bw:1 bc:rim bg:raised bs-o:key c:label",
         RADIUS.item[shape],
         handle ? "" : "c:g ta:none",
         isDragging ? "zi:10" : "",
@@ -137,7 +137,7 @@ export default function SortableList({
 
   return (
     <DragDropProvider
-      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: spring(420, 34) })]}
+      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: spring(420, 34), keyboardTransition: spring(520, 30) })]}
       onDragStart={lift.onDragStart}
       onDragMove={lift.onDragMove}
       onDragEnd={(event) => {
