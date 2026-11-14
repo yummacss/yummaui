@@ -450,6 +450,9 @@ export function Roll({
   );
 }
 
+// a card held off the surface: its edge, then a long soft shadow under it
+const LIFTED = "0 1px 0 0 rgb(0 0 0 / 0.08), 0 14px 28px rgb(0 0 0 / 0.16), 0 4px 10px rgb(0 0 0 / 0.08)";
+
 /** What `useLift` reads from a drag event: dnd-kit's events fit it. */
 interface LiftEvent {
   to?: { x: number };
@@ -487,8 +490,8 @@ export function useLift() {
     const s = state.current;
     const element = s.leaning;
     if (!element) return;
-    s.target *= 0.86;
-    s.speed += (-260 * (s.tilt - s.target) - 22 * s.speed) / 60;
+    if (performance.now() - s.time > 60) s.target *= 0.8;
+    s.speed += (-300 * (s.tilt - s.target) - 22 * s.speed) / 60;
     s.tilt += s.speed / 60;
     element.style.rotate = `${s.tilt.toFixed(2)}deg`;
     if (Math.abs(s.tilt) > 0.02 || Math.abs(s.speed) > 0.02 || Math.abs(s.target) > 0.02) {
@@ -509,7 +512,7 @@ export function useLift() {
       s.leaning = element as HTMLElement;
       s.x = event.operation.position.current.x;
       s.time = performance.now();
-      s.lifted = element.animate([{ scale: "1" }, { scale: "1.03" }], {
+      s.lifted = element.animate([{ scale: "1" }, { scale: "1.03", boxShadow: LIFTED }], {
         duration: 250,
         easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
         fill: "forwards",
@@ -525,7 +528,7 @@ export function useLift() {
       const speed = (x - s.x) / Math.max(1, now - s.time);
       s.x = x;
       s.time = now;
-      s.target = Math.max(-6, Math.min(6, speed * 8));
+      s.target = Math.max(-6, Math.min(6, speed * 10));
       if (!s.frame) s.frame = requestAnimationFrame(lean);
     },
     onDragEnd: () => {
@@ -534,9 +537,9 @@ export function useLift() {
       if (!element) return;
       s.target = 0;
       const lifted = s.lifted;
-      element.animate([{ scale: "1.03" }, { scale: "1" }], {
-        duration: 300,
-        easing: "cubic-bezier(0.25, 1, 0.5, 1)",
+      element.animate([{ scale: "1.03", boxShadow: LIFTED }, { scale: "1" }], {
+        duration: 350,
+        easing: "cubic-bezier(0.34, 1.3, 0.64, 1)",
       }).onfinish = () => lifted?.cancel();
       lifted?.pause();
       s.element = null;

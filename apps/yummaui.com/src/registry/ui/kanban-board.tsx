@@ -9,8 +9,8 @@ import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useLift, useShape, Scroll } from "./style";
 
-// the drop settles into its place on the movement curve, and the rest make room on it too
-const SETTLE = { duration: 300, easing: "cubic-bezier(0.25, 1, 0.5, 1)" };
+// the drop springs into its place with a little overshoot, and the rest make room on the movement curve
+const SETTLE = { duration: 350, easing: "cubic-bezier(0.34, 1.3, 0.64, 1)" };
 const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
 
 
@@ -94,7 +94,8 @@ function Card({
         outline,
         "d:f fd:c g:2 py:2 px:3 bw:1 bc:rim bg:raised c:label c:g ta:none us:none",
         RADIUS.block[shape],
-        isDragging ? "bs-o:pop zi:10" : "bs-o:key",
+        "bs-o:key",
+        isDragging ? "zi:10" : "",
       )}
     >
       <span className="fs:sm">{card.title}</span>
@@ -133,7 +134,7 @@ function Column({
     <section
       aria-label={column.title}
       className={merge(
-        "d:f fd:c g:2 p:2 min-w:48",
+        "d:f fd:c g:2 p:2 min-w:48 bw:1 bc:line bs-o:sunk",
         RADIUS.popup[shape],
         isDropTarget ? "bg:rim" : "bg:well",
       )}
