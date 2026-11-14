@@ -60,6 +60,7 @@ export const registry = {
   "kanban-board": () => import("./ui/kanban-board"),
   "kbd": () => import("./ui/kbd"),
   "keypad": () => import("./ui/keypad"),
+  "knob": () => import("./ui/knob"),
   "lightbox": () => import("./ui/lightbox"),
   "line-chart": () => import("./ui/line-chart"),
   "marquee": () => import("./ui/marquee"),

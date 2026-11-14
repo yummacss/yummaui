@@ -1,0 +1,148 @@
+{
+  "summary": "A value turned on a round dial: drag up or down, scroll, or use the arrow keys, and double-click to put it back.",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "example": "Volume",
+      "description": "The name above the knob, which also names it to screen readers."
+    },
+    {
+      "name": "defaultValue",
+      "type": "number",
+      "example": 64,
+      "description": "The value at the start. A double-click returns to it, or to the first `value`."
+    },
+    {
+      "name": "value",
+      "type": "number",
+      "description": "Controlled value. Pass it with `onValueChange`.",
+      "controlled": true,
+      "handler": "onValueChange"
+    },
+    {
+      "name": "onValueChange",
+      "type": "none",
+      "typeName": "(value: number) => void",
+      "description": "Called with the new value."
+    },
+    {
+      "name": "min",
+      "type": "number",
+      "default": 0,
+      "description": "The lowest value."
+    },
+    {
+      "name": "max",
+      "type": "number",
+      "default": 100,
+      "description": "The highest value."
+    },
+    {
+      "name": "step",
+      "type": "number",
+      "default": 1,
+      "description": "The amount one step moves."
+    },
+    {
+      "name": "centered",
+      "type": "boolean",
+      "default": false,
+      "description": "Fills the arc from the top, for a value with a middle, such as balance."
+    },
+    {
+      "name": "ticks",
+      "type": "boolean",
+      "default": false,
+      "description": "Draws a tick at each step, for a knob with a few settings."
+    },
+    {
+      "name": "unit",
+      "type": "string",
+      "example": "%",
+      "description": "Text after the value, such as `%`."
+    },
+    {
+      "name": "formatValue",
+      "type": "none",
+      "typeName": "(value: number) => string",
+      "description": "Writes the value under the knob, and reads it to screen readers."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Submits the value with a form under this name."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "The dial's size."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Blocks turning and dims the knob."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "A step from the keyboard or the wheel turning over 150ms, and the value rolling. Reduced motion turns both off."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "d:f fw:w jc:c g:8",
+      "children": [
+        {
+          "component": "Knob",
+          "props": {
+            "label": "Volume",
+            "defaultValue": 64,
+            "unit": "%"
+          }
+        },
+        {
+          "component": "Knob",
+          "props": {
+            "label": "Balance",
+            "min": -50,
+            "max": 50,
+            "defaultValue": 0,
+            "centered": true
+          }
+        },
+        {
+          "component": "Knob",
+          "props": {
+            "label": "Quality",
+            "min": 1,
+            "max": 5,
+            "defaultValue": 3,
+            "ticks": true
+          }
+        }
+      ]
+    }
+  ]
+}

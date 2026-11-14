@@ -26,6 +26,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"form",
 			"image-cropper",
 			"keypad",
+			"knob",
 			"number-field",
 			"otp-field",
 			"radio",
