@@ -108,6 +108,9 @@ export default function NavigationMenuBase({
     }
   }, [value, key.jump]);
 
+  // a row that wraps, or a block, is never a pill: under pill it takes rounded corners
+  const block = shape === "pill" ? RADIUS.popup.rounded : RADIUS.item[shape];
+
   const item = (open: boolean) =>
     merge(
       outline,
@@ -173,7 +176,7 @@ export default function NavigationMenuBase({
                 >
                   <div className={entry.aside ? "d:f g:2" : "d:f"}>
                   {entry.aside && (
-                    <div className={merge("d:f fd:c jc:fe g:2 w:48 fs:0 p:3 bw:1 bc:line bg:well bs-o:sunk", RADIUS.item[shape])}>
+                    <div className={merge("d:f fd:c jc:fe g:2 w:48 fs:0 p:3 bw:1 bc:line bg:well bs-o:sunk", block)}>
                       {entry.aside}
                     </div>
                   )}
@@ -191,7 +194,7 @@ export default function NavigationMenuBase({
                         className={merge(
                           outline,
                           "d:f ai:s g:3 p:2 bw:1 bc:transparent c:label td:none h:bg:well",
-                          RADIUS.item[shape],
+                          block,
                         )}
                       >
                         {link.icon && (
