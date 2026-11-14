@@ -98,6 +98,7 @@ export const registry = {
   "slider": () => import("./ui/slider"),
   "sortable-list": () => import("./ui/sortable-list"),
   "sparkline": () => import("./ui/sparkline"),
+  "stat-live": () => import("./ui/stat-live"),
   "stat": () => import("./ui/stat"),
   "storage-bar": () => import("./ui/storage-bar"),
   "streaming-text": () => import("./ui/streaming-text"),

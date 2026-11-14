@@ -3,9 +3,12 @@
 import { IconArrowDownRight, IconArrowUpRight } from "@tabler/icons-react";
 import { merge } from "yummacss/merge";
 import Sparkline from "./sparkline";
-import { RADIUS, type Shape, useShape } from "./style";
+import { RADIUS, Roll, type Shape, useShape } from "./style";
 
 type Tone = "positive" | "negative" | "neutral";
+
+// the number inside a formatted value, which sets which way it rolls
+const amount = (text: string) => Number.parseFloat(text.replace(/[^\d.-]/g, "")) || 0;
 
 const TONES: Record<Tone, string> = {
   positive: "c:green-7",
@@ -32,6 +35,11 @@ export interface StatProps {
   /** Corner radius of the card. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
+   * Rolls the value and the change when they change, only the digits that
+   * differ moving. Reduced motion changes them at once.
+   */
+  animated?: boolean;
+  /**
    * Extra classes. `merge` folds them in last, so one here replaces the
    * component's own class for the same utility.
    */
@@ -50,6 +58,7 @@ export default function Stat({
   tone = "neutral",
   trend,
   shape: shapeProp,
+  animated = true,
   className,
 }: StatProps) {
   const shape = useShape(shapeProp);
@@ -64,13 +73,19 @@ export default function Stat({
       )}
     >
       <span className="c:hint fs:sm">{label}</span>
-      <span className="fs:3xl fw:600 fvn:tn">{value}</span>
+      <span className="p:r fs:3xl fw:600 fvn:tn">
+        <span className="p:a w:px h:px o:h ws:nw">{value}</span>
+        <Roll value={amount(value)} text={value} still={!animated} />
+      </span>
       {change && (
         <span className={merge("d:f ai:c g:1 fs:sm fw:500 fvn:tn", TONES[tone])}>
           <Arrow aria-hidden className="w:4 h:4" />
-          <span>
-            <span className="p:a w:px h:px o:h">{direction === "up" ? "Up " : "Down "}</span>
-            {change}
+          <span className="p:r">
+            <span className="p:a w:px h:px o:h ws:nw">
+              {direction === "up" ? "Up " : "Down "}
+              {change}
+            </span>
+            <Roll value={amount(change)} text={change} still={!animated} />
           </span>
         </span>
       )}

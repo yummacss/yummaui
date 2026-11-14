@@ -41,6 +41,7 @@ const KNOWN_UNLISTED: string[] = [
 	"skeleton-filters",
 	"skeleton-list",
 	"skeleton-stats",
+	"stat-live",
 	"tooltip-toolbar",
 ];
 

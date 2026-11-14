@@ -318,6 +318,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "slider": { component: "slider", variant: "base", kind: "component", install: "slider" },
   "sortable-list": { component: "sortable-list", variant: "base", kind: "component", install: "sortable-list" },
   "sparkline": { component: "sparkline", variant: "base", kind: "component", install: "sparkline" },
+  "stat-live": { component: "stat", variant: "live", kind: "example", install: "stat" },
   "stat": { component: "stat", variant: "base", kind: "component", install: "stat" },
   "storage-bar": { component: "storage-bar", variant: "base", kind: "component", install: "storage-bar" },
   "streaming-text": { component: "streaming-text", variant: "base", kind: "component", install: "streaming-text" },
