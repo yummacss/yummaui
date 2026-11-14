@@ -89,6 +89,10 @@ never names a palette color except for a meaning (red for danger).
   `o:80` on `c:current`), since the hint gray clashes with the tint: a Banner
   Alert's close button, a Treemap tile's value.
 
+- **No backdrop blur.** A scrim is `bg:shadow/30` alone. Blurring the page
+  behind something that fades or moves is redrawn on every frame, and
+  without graphics acceleration that drops a quarter of them.
+
 | Wrong | Right |
 | --- | --- |
 | `<span className="fs:xs o:80">` for a description | `<span className="fs:xs c:hint">` |

@@ -92,7 +92,7 @@
       "name": "animated",
       "type": "boolean",
       "default": true,
-      "description": "The indicator's width transition as `value` changes."
+      "description": "The indicator's width transition and the value's roll as `value` changes. Reduced motion turns both off."
     }
   ],
   "scene": [

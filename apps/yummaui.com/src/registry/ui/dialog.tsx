@@ -160,7 +160,7 @@ export default function DialogBase({
   const popup = (
     <Dialog.Portal container={container} keepMounted>
       <Dialog.Backdrop
-        className={`p:f i:0 min-h:dvh bg:shadow/30 bf-b:xs ${
+        className={`p:f i:0 min-h:dvh bg:shadow/30 ${
           animated
             ? "tp:o tdu:250 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:150 closing:ttf:eo @prm:tp:none"
             : ""

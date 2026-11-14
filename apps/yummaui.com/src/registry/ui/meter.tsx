@@ -3,7 +3,7 @@
 import { Meter } from "@base-ui/react/meter";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
-import { RADIUS, useShape } from "./style";
+import { RADIUS, Roll, useShape } from "./style";
 
 // a track is either a bar or a capsule
 const SHAPES = ["square", "pill"] as const;
@@ -79,7 +79,10 @@ export interface MeterProps {
   unit?: string;
   /** Names the empty part of the track in the legend, `Free` for storage. */
   rest?: string;
-  /** The indicator's width transition as `value` changes. */
+  /**
+   * The indicator's width transition and the value's roll as `value` changes.
+   * Reduced motion turns both off.
+   */
   animated?: boolean;
   /**
    * Extra classes. `merge` folds them in last, so one here replaces the
@@ -114,14 +117,18 @@ export default function MeterBase({
   const total =
     segments?.reduce((sum, segment) => sum + segment.value, 0) ?? value ?? 0;
   const amount = (count: number) => String(Math.round(count * 10) / 10);
-  const reading = unit
-    ? (_: string, current: number) => (
-        <>
-          <span className="c:label fw:500">{amount(current)}</span> of{" "}
-          {amount(high)} {unit}
-        </>
-      )
-    : undefined;
+  // the number rolls; the meter itself carries the value for screen readers
+  const reading = (formatted: string, current: number) =>
+    unit ? (
+      <>
+        <span className="c:label fw:500">
+          <Roll value={current} text={amount(current)} still={!animated} />
+        </span>{" "}
+        of {amount(high)} {unit}
+      </>
+    ) : (
+      <Roll value={current} text={formatted} still={!animated} />
+    );
   const shade = (index: number) =>
     SEGMENTS[intent][Math.min(index, SEGMENTS[intent].length - 1)];
 

@@ -43,6 +43,7 @@ const KNOWN_UNLISTED: string[] = [
 	"skeleton-stats",
 	"stat-live",
 	"tooltip-toolbar",
+	"usage-meter-live",
 ];
 
 function referencedIds(): Set<string> {
