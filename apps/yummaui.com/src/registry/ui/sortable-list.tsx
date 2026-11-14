@@ -1,13 +1,19 @@
 "use client";
 
 import { move } from "@dnd-kit/helpers";
+import { Feedback } from "@dnd-kit/dom";
 import { DragDropProvider } from "@dnd-kit/react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import { IconGripVertical } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, useLift, useShape } from "./style";
+
+// the drop settles into its place on the movement curve, and the rest make room on it too
+const SETTLE = { duration: 300, easing: "cubic-bezier(0.25, 1, 0.5, 1)" };
+const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
+
 
 export interface SortableListItem {
   /** Stays with the item as it moves; unique within the list. */
@@ -72,6 +78,7 @@ function Row({
     id: item.id,
     index,
     handle: handle ? grip : undefined,
+    transition: ROOM,
   });
 
   return (
@@ -127,10 +134,15 @@ export default function SortableList({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [own, setOwn] = useState(defaultItems);
   const items = controlled ?? own;
+  const lift = useLift();
 
   return (
     <DragDropProvider
+      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: SETTLE })]}
+      onDragStart={lift.onDragStart}
+      onDragMove={lift.onDragMove}
       onDragEnd={(event) => {
+        lift.onDragEnd();
         if (event.canceled) return;
         const next = move(items, event);
         setOwn(next);

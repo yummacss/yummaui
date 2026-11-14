@@ -449,3 +449,99 @@ export function Roll({
     />
   );
 }
+
+/** What `useLift` reads from a drag event: dnd-kit's events fit it. */
+interface LiftEvent {
+  to?: { x: number };
+  nativeEvent?: Event;
+  operation: {
+    source?: { element?: Element | null } | null;
+    position: { current: { x: number } };
+    activatorEvent?: Event | null;
+  };
+}
+
+/**
+ * The lift of a dragged card: it grows on a spring as it is picked up, leans
+ * with the pointer's sideways speed and settles on the drop. Hand the
+ * handlers to the drag provider.
+ */
+export function useLift() {
+  const state = useRef({
+    element: null as HTMLElement | null,
+    leaning: null as HTMLElement | null,
+    tilt: 0,
+    speed: 0,
+    target: 0,
+    x: 0,
+    time: 0,
+    frame: 0,
+    lifted: null as Animation | null,
+  });
+
+  const quiet = (element: Element) =>
+    (element.ownerDocument.defaultView ?? window).matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // the lean chases its target on a spring, and the target fades so the card rights itself at rest
+  const lean = () => {
+    const s = state.current;
+    const element = s.leaning;
+    if (!element) return;
+    s.target *= 0.86;
+    s.speed += (-260 * (s.tilt - s.target) - 22 * s.speed) / 60;
+    s.tilt += s.speed / 60;
+    element.style.rotate = `${s.tilt.toFixed(2)}deg`;
+    if (Math.abs(s.tilt) > 0.02 || Math.abs(s.speed) > 0.02 || Math.abs(s.target) > 0.02) {
+      s.frame = requestAnimationFrame(lean);
+    } else {
+      element.style.rotate = "";
+      s.frame = 0;
+      s.leaning = null;
+    }
+  };
+
+  return {
+    onDragStart: (event: LiftEvent) => {
+      const element = event.operation.source?.element;
+      if (!(element && "style" in element) || quiet(element)) return;
+      const s = state.current;
+      s.element = element as HTMLElement;
+      s.leaning = element as HTMLElement;
+      s.x = event.operation.position.current.x;
+      s.time = performance.now();
+      s.lifted = element.animate([{ scale: "1" }, { scale: "1.03" }], {
+        duration: 250,
+        easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        fill: "forwards",
+      });
+    },
+    onDragMove: (event: LiftEvent) => {
+      const s = state.current;
+      // a keyboard move jumps a whole row, which is not speed
+      const cause = event.nativeEvent ?? event.operation.activatorEvent;
+      if (!s.element || !cause?.type.startsWith("pointer")) return;
+      const now = performance.now();
+      const x = event.to?.x ?? event.operation.position.current.x;
+      const speed = (x - s.x) / Math.max(1, now - s.time);
+      s.x = x;
+      s.time = now;
+      s.target = Math.max(-6, Math.min(6, speed * 8));
+      if (!s.frame) s.frame = requestAnimationFrame(lean);
+    },
+    onDragEnd: () => {
+      const s = state.current;
+      const element = s.element;
+      if (!element) return;
+      s.target = 0;
+      const lifted = s.lifted;
+      element.animate([{ scale: "1.03" }, { scale: "1" }], {
+        duration: 300,
+        easing: "cubic-bezier(0.25, 1, 0.5, 1)",
+      }).onfinish = () => lifted?.cancel();
+      lifted?.pause();
+      s.element = null;
+      s.lifted = null;
+      if (!s.frame) s.frame = requestAnimationFrame(lean);
+    },
+  };
+}
