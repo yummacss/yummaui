@@ -5,7 +5,7 @@ import { IconChevronDown } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useLayoutEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, Scroll, useShape, type Shape } from "./style";
 
 // a panel slides in from the side you moved from through a blur, and out the other way
 const SLIDE =
@@ -174,16 +174,18 @@ export default function NavigationMenuBase({
                       `tp:a tdu:250 ttf:out-quart ${SLIDE} @prm:tp:none`,
                   )}
                 >
-                  <div className={entry.aside ? "d:f g:2" : "d:f"}>
+                  {/* a panel taller than the room under the bar stops there and scrolls */}
+                  <Scroll className="max-h:var(--available-height)">
+                  <div className={entry.aside ? "d:f fd:c g:2 @sm:fd:r" : "d:f"}>
                   {entry.aside && (
-                    <div className={merge("d:f fd:c jc:fe g:2 w:48 fs:0 p:3 bw:1 bc:line bg:well bs-o:sunk", RADIUS.inset[shape])}>
+                    <div className={merge("d:f fd:c jc:fe g:2 w:100% @sm:w:48 fs:0 p:3 bw:1 bc:line bg:well bs-o:sunk", RADIUS.inset[shape])}>
                       {entry.aside}
                     </div>
                   )}
                   <div
                     className={
                       entry.columns === 2
-                        ? "d:g gtc:2 g:px w:112 ac:s"
+                        ? "d:g gtc:1 @sm:gtc:2 g:px w:72 @sm:w:112 ac:s"
                         : "d:g g:px w:72 ac:s"
                     }
                   >
@@ -220,6 +222,7 @@ export default function NavigationMenuBase({
                     ))}
                   </div>
                   </div>
+                  </Scroll>
                 </NavigationMenu.Content>
               </>
             ) : (
@@ -243,7 +246,7 @@ export default function NavigationMenuBase({
         >
           <NavigationMenu.Popup
             className={merge(
-              "p:r w:var(--popup-width) h:var(--popup-height) tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
+              "p:r w:100% h:100% tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
               RADIUS.popup[shape],
               animated &&
                 "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none",

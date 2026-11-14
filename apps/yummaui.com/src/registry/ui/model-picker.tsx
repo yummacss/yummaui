@@ -63,7 +63,7 @@ export interface ModelPickerProps {
   className?: string;
 }
 
-const LIST_WIDTH: Record<Size, string> = { sm: "w:72", md: "w:80", lg: "w:96" };
+const LIST_WIDTH: Record<Size, string> = { sm: "w:72", md: "w:80", lg: "w:96 max-w:var(--available-width)" };
 
 // every mark sits on the same raised key, so marks drawn at different sizes still line up
 function Tile({ logo, shape, small }: { logo: ReactNode; shape: Shape; small?: boolean }) {

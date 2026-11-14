@@ -36,6 +36,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **[components]** Expanding Input.
 
+### Fixed
+
+- **[components]** Navigation Menu's panel has even space above & below its content, stacks into one column on a phone & scrolls when taller than the room under the bar.
+- **[components]** File Upload, Model Picker's large list, Dialog & Alert Dialog fit a 360px screen.
+
 ## [0.19.0] - 2026-11-12
 
 ### Added
