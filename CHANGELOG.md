@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **[components]** Marquee shows a pause key by default and pauses while focus is inside it.
 
+### Removed
+
+- **[components]** Expanding Input.
+
 ## [0.19.0] - 2026-11-12
 
 ### Added
