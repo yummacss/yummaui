@@ -107,6 +107,14 @@ describe("DESIGN.md", () => {
 		).toEqual(ICON_AT_20_WITHOUT_REASON);
 	});
 
+	it("never blurs what is behind it", () => {
+		expect(
+			breaking((source) =>
+				classes(source).some((token) => /(?:^|:)bf-b:/.test(token)),
+			),
+		).toEqual([]);
+	});
+
 	it("keeps motion to the durations it names", () => {
 		for (const { name, source } of registry) {
 			for (const token of classes(source).filter((t) =>

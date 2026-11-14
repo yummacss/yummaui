@@ -16,8 +16,8 @@ export interface UsageMeterProps {
   /** Corner radius of the card and the bar. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
-   * The bar's fill as it moves. Turn it off for a meter that jumps, or when the
-   * user has asked for reduced motion.
+   * The bar's fill and the value's roll as it changes. Turn it off for a meter
+   * that jumps; reduced motion does the same.
    */
   animated?: boolean;
   /**

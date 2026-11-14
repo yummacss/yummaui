@@ -227,7 +227,7 @@ export default function DrawerBase({
 
       <Drawer.Portal container={container}>
         <Drawer.Backdrop
-          className={`p:f i:0 min-h:dvh bg:shadow/30 bf-b:xs ${
+          className={`p:f i:0 min-h:dvh bg:shadow/30 ${
             animated
               ? "tp:o tdu:300 ttf:out-quart opening:o:0 closing:o:0 closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none"
               : ""

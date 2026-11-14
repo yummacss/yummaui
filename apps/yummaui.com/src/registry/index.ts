@@ -335,6 +335,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "tooltip-toolbar": { component: "tooltip", variant: "toolbar", kind: "example", install: "tooltip" },
   "tooltip": { component: "tooltip", variant: "base", kind: "component", install: "tooltip" },
   "treemap": { component: "treemap", variant: "base", kind: "component", install: "treemap" },
+  "usage-meter-live": { component: "usage-meter", variant: "live", kind: "example", install: "usage-meter" },
   "usage-meter": { component: "usage-meter", variant: "base", kind: "component", install: "usage-meter" },
 };
 

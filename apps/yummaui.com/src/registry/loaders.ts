@@ -115,6 +115,7 @@ export const registry = {
   "tooltip-toolbar": () => import("./ui/tooltip-toolbar"),
   "tooltip": () => import("./ui/tooltip"),
   "treemap": () => import("./ui/treemap"),
+  "usage-meter-live": () => import("./ui/usage-meter-live"),
   "usage-meter": () => import("./ui/usage-meter"),
 } as const;
 
