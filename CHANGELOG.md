@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** Number Field rolls its value when a step changes it.
 - **[components]** Stat rolls its value & change when they change.
 - **[components]** Meter & Usage Meter roll their value when it changes.
+- **[components]** Gauge rolls its value & settles its arc when the value changes.
 - **[components]** Drawer, Dialog, Alert Dialog & Onboarding dim the page without blurring it.
 
 ### Removed

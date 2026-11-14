@@ -32,6 +32,7 @@ const KNOWN_UNLISTED: string[] = [
 	"field-invite",
 	"field-prefix",
 	"field-suffix",
+	"gauge-live",
 	"otp-field-verify",
 	"popover-folder-color",
 	"progress-upload",
