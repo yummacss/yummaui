@@ -1,0 +1,103 @@
+{
+  "summary": "Puts text on the clipboard and says so in place: the icon turns to a check and the word rolls to \"Copied\".",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "example": "~/Documents/Reading list.md",
+      "description": "The text a press puts on the clipboard."
+    },
+    {
+      "name": "copyLabel",
+      "type": "string",
+      "default": "Copy",
+      "description": "What the button says, and its name to screen readers when `iconOnly`."
+    },
+    {
+      "name": "copiedLabel",
+      "type": "string",
+      "default": "Copied",
+      "description": "What the button says once the text is on the clipboard."
+    },
+    {
+      "name": "failedLabel",
+      "type": "string",
+      "default": "Cannot copy",
+      "description": "What the button says when the browser will not copy."
+    },
+    {
+      "name": "iconOnly",
+      "type": "boolean",
+      "default": false,
+      "description": "Draws the icon alone, keeping `copyLabel` as the accessible name."
+    },
+    {
+      "name": "field",
+      "type": "boolean",
+      "default": false,
+      "description": "Shows `value` in a sunk field with the button at its end. When the browser will not copy, the text is selected, so the keyboard can."
+    },
+    {
+      "name": "onCopy",
+      "type": "none",
+      "typeName": "(value: string) => void",
+      "description": "Called with `value` once it is on the clipboard."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Height, padding and text size."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Blocks copying and dims the button."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The icon crossing over, the word rolling and a shake on a refusal. Reduced motion turns them off."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "CopyButton",
+      "props": {
+        "value": "~/Documents/Reading list.md",
+        "copyLabel": "Copy path"
+      }
+    }
+  ]
+}

@@ -100,6 +100,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"button",
 			"button-group",
 			"context-menu",
+			"copy-button",
 			"kanban-board",
 			"menu",
 			"menubar",

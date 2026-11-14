@@ -151,6 +151,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "copy-button",
+		since: "0.20",
+		title: "Copy Button",
+		description:
+			"Put text on the clipboard and say so in place, with a fallback when the browser refuses.",
+	},
+	{
 		slug: "currency-input",
 		since: "0.10",
 		title: "Currency Input",

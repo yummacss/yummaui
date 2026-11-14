@@ -38,6 +38,7 @@ export const registry = {
   "combobox-helper": () => import("./ui/combobox-helper"),
   "combobox": () => import("./ui/combobox"),
   "context-menu": () => import("./ui/context-menu"),
+  "copy-button": () => import("./ui/copy-button"),
   "currency-input": () => import("./ui/currency-input"),
   "dialog": () => import("./ui/dialog"),
   "diff-viewer": () => import("./ui/diff-viewer"),

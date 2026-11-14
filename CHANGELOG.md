@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **[components]** Knob.
+- **[components]** Copy Button.
 - **[components]** `paused`, `onPausedChange`, `pauseButton`, `shape` & `focus` on Marquee.
 - **[components]** `render` on Tooltip, Popover, Preview Card, Dialog, Alert Dialog, Menu & Drawer, for your own element as the trigger.
 - **[components]** `asTrigger` in the style module.
@@ -41,6 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **[components]** `shake` in the style module shakes an element from another frame.
 - **[components]** Navigation Menu's panel has even space above & below its content, stacks into one column on a phone & scrolls when taller than the room under the bar.
 - **[components]** File Upload, Model Picker's large list, Dialog & Alert Dialog fit a 360px screen.
 
