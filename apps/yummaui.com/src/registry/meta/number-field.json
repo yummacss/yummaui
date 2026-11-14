@@ -81,6 +81,12 @@
       "description": "Appends a red asterisk to the label & sets the input's native `required` attribute."
     },
     {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "Rolls the value when a step changes it, only the digits that differ moving. Typing changes it in place, and reduced motion does the same."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

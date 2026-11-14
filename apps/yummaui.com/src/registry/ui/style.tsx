@@ -323,3 +323,129 @@ export function asTrigger(
     className: merge(library, element.props.className, className),
   });
 }
+
+// each character sits in a clipped slot, so a glyph can leave by one line while the next arrives
+const ROLL_SLOT = "p:r d:ib o:h";
+const ROLL_GLYPH = "d:b";
+const ROLL_EASE = "cubic-bezier(0.25, 1, 0.5, 1)";
+
+const escape = (text: string) =>
+  text.replace(/[&<>"]/g, (ch) => `&#${ch.charCodeAt(0)};`);
+
+const rollSlots = (text: string) =>
+  text
+    .split("")
+    .map((ch) => `<span class="${ROLL_SLOT}" data-ch="${escape(ch)}"><span class="${ROLL_GLYPH}">${escape(ch)}</span></span>`)
+    .join("");
+
+// the box may live in another document, such as a frame, so nodes come from its own
+function glyph(doc: Document, ch: string) {
+  const node = doc.createElement("span");
+  node.className = ROLL_GLYPH;
+  node.textContent = ch;
+  return node;
+}
+
+function rollTo(box: HTMLElement, text: string, up: boolean) {
+  const doc = box.ownerDocument;
+  const slots = ([...box.children] as HTMLElement[]).filter((slot) => !slot.dataset.gone);
+  const chars = text.split("").reverse();
+  const from = slots.reverse();
+  const timing = (index: number) => ({ duration: 250, delay: index * 30, easing: ROLL_EASE });
+  const enter = (dir: number) =>
+    dir
+      ? [{ transform: `translateY(${dir * 100}%)`, opacity: 0, filter: "blur(2px)" }, { transform: "none", opacity: 1, filter: "none" }]
+      : [{ opacity: 0 }, { opacity: 1 }];
+  const leave = (dir: number) =>
+    dir
+      ? [{ transform: "none", opacity: 1, filter: "none" }, { transform: `translateY(${-dir * 100}%)`, opacity: 0, filter: "blur(2px)" }]
+      : [{ opacity: 1 }, { opacity: 0 }];
+  const sign = up ? 1 : -1;
+
+  chars.forEach((ch, index) => {
+    const slot = from[index];
+    if (!slot) {
+      // a new leading character opens its own width
+      const added = doc.createElement("span");
+      added.className = ROLL_SLOT;
+      added.dataset.ch = ch;
+      added.append(glyph(doc, ch));
+      box.insertBefore(added, from[index - 1] ?? box.firstChild);
+      from[index] = added;
+      const width = added.getBoundingClientRect().width;
+      added.animate([{ width: "0px" }, { width: `${width}px` }], timing(index));
+      added.firstElementChild?.animate(enter(sign), { ...timing(index), fill: "backwards" });
+      return;
+    }
+    const was = slot.dataset.ch ?? "";
+    if (was === ch) return;
+    slot.dataset.ch = ch;
+    const dir = /\d/.test(was) && /\d/.test(ch) ? sign : 0;
+    // the leaving glyph steps out of flow, so the slot takes the arriving one's width
+    for (const old of [...slot.children] as HTMLElement[]) {
+      if (old.dataset.leaving) continue;
+      old.dataset.leaving = "1";
+      old.style.cssText = "position:absolute;inset:0";
+      old.animate(leave(dir), { ...timing(index), fill: "forwards" }).onfinish = () => old.remove();
+    }
+    const next = glyph(doc, ch);
+    slot.append(next);
+    next.animate(enter(dir), { ...timing(index), fill: "backwards" });
+  });
+
+  // characters that went away close their width
+  from.slice(chars.length).forEach((slot) => {
+    slot.dataset.gone = "1";
+    const width = slot.getBoundingClientRect().width;
+    slot.animate([{ width: `${width}px` }, { width: "0px" }], { ...timing(0), fill: "forwards" }).onfinish = () => slot.remove();
+    slot.firstElementChild?.animate(leave(sign), { ...timing(0), fill: "forwards" });
+  });
+}
+
+/**
+ * A number that rolls when it changes: only the characters that differ move,
+ * up when `value` grows and down when it shrinks. Hidden from screen readers,
+ * so pair it with the value in text they can reach.
+ */
+export function Roll({
+  value,
+  text,
+  still = false,
+  className,
+}: {
+  /** The number, which sets the direction of the roll. */
+  value: number;
+  /** The number as shown, formatted. */
+  text: string;
+  /** Changes at once, without the roll. */
+  still?: boolean;
+  /** Extra classes on the row of characters. */
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  // React writes the first text once; after that the characters are moved by hand
+  const [first] = useState(() => ({ __html: rollSlots(text) }));
+  const last = useRef({ value, text });
+
+  useLayoutEffect(() => {
+    const box = ref.current;
+    const was = last.current;
+    last.current = { value, text };
+    if (!box || was.text === text) return;
+    const view = box.ownerDocument.defaultView ?? window;
+    if (still || view.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      box.innerHTML = rollSlots(text);
+      return;
+    }
+    rollTo(box, text, value >= was.value);
+  }, [value, text, still]);
+
+  return (
+    <span
+      ref={ref}
+      aria-hidden
+      className={merge("d:if ws:nw fvn:tn", className)}
+      dangerouslySetInnerHTML={first}
+    />
+  );
+}
