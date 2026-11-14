@@ -93,64 +93,11 @@
   ],
   "scene": [
     {
-      "tag": "div",
-      "className": "d:f fd:c g:6 w:100 max-w:100%",
-      "children": [
-        {
-          "tag": "div",
-          "className": "d:f ai:c jc:sb g:4",
-          "children": [
-            {
-              "text": "Reading list.md",
-              "className": "fs:sm fw:500 c:label"
-            },
-            {
-              "component": "CopyButton",
-              "props": {
-                "value": "~/Documents/Reading list.md",
-                "copyLabel": "Copy path",
-                "size": "sm"
-              }
-            }
-          ]
-        },
-        {
-          "tag": "div",
-          "className": "d:f ai:c jc:sb g:4",
-          "children": [
-            {
-              "text": "Theme accent",
-              "className": "fs:sm c:hint"
-            },
-            {
-              "tag": "div",
-              "className": "d:f ai:c g:2",
-              "children": [
-                {
-                  "text": "oklch(0.62 0.17 255)",
-                  "className": "ff:m fs:sm c:label"
-                },
-                {
-                  "component": "CopyButton",
-                  "props": {
-                    "value": "oklch(0.62 0.17 255)",
-                    "copyLabel": "Copy color",
-                    "iconOnly": true,
-                    "size": "sm"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "component": "CopyButton",
-          "props": {
-            "value": "https://files.example.com/s/reading-list",
-            "field": true
-          }
-        }
-      ]
+      "component": "CopyButton",
+      "props": {
+        "value": "~/Documents/Reading list.md",
+        "copyLabel": "Copy path"
+      }
     }
   ]
 }
