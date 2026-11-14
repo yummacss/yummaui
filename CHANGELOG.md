@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** `asTrigger` in the style module.
 - **[components]** `animated` on Number Field & Stat.
 - **[components]** `Roll` in the style module, for a number that rolls when it changes.
+- **[components]** `useLift` in the style module, for a dragged card that lifts, leans & settles.
 
 ### Changed
 
@@ -22,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** Stat rolls its value & change when they change.
 - **[components]** Meter & Usage Meter roll their value when it changes.
 - **[components]** Gauge rolls its value & settles its arc when the value changes.
+- **[components]** Sortable List & Kanban Board lift a dragged card on a spring, tilt it with the pointer's speed & settle it on drop.
 - **[components]** Drawer, Dialog, Alert Dialog & Onboarding dim the page without blurring it.
 
 ### Removed

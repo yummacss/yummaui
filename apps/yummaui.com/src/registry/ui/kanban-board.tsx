@@ -1,12 +1,18 @@
 "use client";
 
 import { move } from "@dnd-kit/helpers";
+import { Feedback } from "@dnd-kit/dom";
 import { DragDropProvider, useDroppable } from "@dnd-kit/react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape, Scroll } from "./style";
+import { FOCUS, RADIUS, type Shape, useLift, useShape, Scroll } from "./style";
+
+// the drop settles into its place on the movement curve, and the rest make room on it too
+const SETTLE = { duration: 300, easing: "cubic-bezier(0.25, 1, 0.5, 1)" };
+const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
+
 
 export interface KanbanCard {
   /** Stays with the card as it moves; unique across the board. */
@@ -78,6 +84,7 @@ function Card({
     group: column,
     type: "card",
     accept: "card",
+    transition: ROOM,
   });
 
   return (
@@ -174,16 +181,21 @@ export default function KanbanBoard({
   latest.current = cards;
   // the board before the drag, put back if it is canceled
   const before = useRef(cards);
+  const lift = useLift();
 
   return (
     <DragDropProvider
-      onDragStart={() => {
+      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: SETTLE })]}
+      onDragStart={(event) => {
         before.current = cards;
+        lift.onDragStart(event);
       }}
+      onDragMove={lift.onDragMove}
       onDragOver={(event) => {
         setCards((current) => move(current, event));
       }}
       onDragEnd={(event) => {
+        lift.onDragEnd();
         if (event.canceled) {
           setCards(before.current);
           return;

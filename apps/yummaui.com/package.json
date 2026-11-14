@@ -26,6 +26,7 @@
 	},
 	"dependencies": {
 		"@base-ui/react": "^1.9.0",
+		"@dnd-kit/dom": "0.5.3",
 		"@dnd-kit/helpers": "0.5.3",
 		"@dnd-kit/react": "0.5.3",
 		"@fontsource/ia-writer-quattro": "^5.3.0",
