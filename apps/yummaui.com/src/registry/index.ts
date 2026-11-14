@@ -25,6 +25,7 @@ import meta_code_block from "./meta/code-block.json";
 import meta_color_picker from "./meta/color-picker.json";
 import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
+import meta_copy_button from "./meta/copy-button.json";
 import meta_currency_input from "./meta/currency-input.json";
 import meta_dialog from "./meta/dialog.json";
 import meta_diff_viewer from "./meta/diff-viewer.json";
@@ -147,6 +148,7 @@ export const registryMeta = {
   "color-picker": meta_color_picker,
   "combobox": meta_combobox,
   "context-menu": meta_context_menu,
+  "copy-button": meta_copy_button,
   "currency-input": meta_currency_input,
   "dialog": meta_dialog,
   "diff-viewer": meta_diff_viewer,
@@ -260,6 +262,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "combobox-helper": { component: "combobox", variant: "helper", kind: "example", install: "combobox" },
   "combobox": { component: "combobox", variant: "base", kind: "component", install: "combobox" },
   "context-menu": { component: "context-menu", variant: "base", kind: "component", install: "context-menu" },
+  "copy-button": { component: "copy-button", variant: "base", kind: "component", install: "copy-button" },
   "currency-input": { component: "currency-input", variant: "base", kind: "component", install: "currency-input" },
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
   "diff-viewer": { component: "diff-viewer", variant: "base", kind: "component", install: "diff-viewer" },
@@ -363,6 +366,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "color-picker": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "combobox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "leave": "from { opacity: 1; scale: 1; }", "spin": "to { rotate: 360deg; }" } },
   "context-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "copy-button": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "currency-input": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "dialog": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "drawer": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "swiping": "[data-swiping]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

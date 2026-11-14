@@ -290,7 +290,8 @@ const SPRING = Array.from({ length: 31 }, (_, step) => {
 export function shake(elements: Element | Iterable<Element> | null | undefined, lag = 0) {
   if (!elements || typeof window === "undefined") return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const list = elements instanceof Element ? [elements] : [...elements];
+  // an element from another frame fails instanceof, so ask what it is
+  const list = "nodeType" in elements ? [elements as Element] : [...elements];
   list.forEach((element, index) =>
     element.animate(SPRING, { duration: 460, delay: index * lag, easing: "linear" }),
   );
