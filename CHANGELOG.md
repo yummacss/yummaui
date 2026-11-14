@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** `animated` on Number Field & Stat.
 - **[components]** `Roll` in the style module, for a number that rolls when it changes.
 - **[components]** `useLift` in the style module, for a dragged card that lifts, leans & settles.
+- **[components]** `spring` in the style module, a spring as a duration & CSS easing.
 
 ### Changed
 

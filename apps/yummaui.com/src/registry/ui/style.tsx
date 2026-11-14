@@ -450,6 +450,37 @@ export function Roll({
   );
 }
 
+const springs = new Map<string, { duration: number; easing: string }>();
+
+/**
+ * A spring as a duration and a CSS easing, for anything that takes the two,
+ * such as `element.animate` or a drag library's drop. Where `linear()` easing
+ * is missing it falls back to out-quart.
+ */
+export function spring(stiffness: number, damping: number) {
+  const key = `${stiffness}/${damping}`;
+  const cached = springs.get(key);
+  if (cached) return cached;
+  // simulate a unit step and sample it, so the curve overshoots and wobbles as the spring does
+  const dt = 1 / 240;
+  const path: number[] = [0];
+  let x = 0;
+  let v = 0;
+  while (path.length < 480 && (Math.abs(1 - x) > 0.001 || Math.abs(v) > 0.01)) {
+    v += (-stiffness * (x - 1) - damping * v) * dt;
+    x += v * dt;
+    path.push(x);
+  }
+  path.push(1);
+  const points = Array.from({ length: 41 }, (_, i) => path[Math.round((i / 40) * (path.length - 1))].toFixed(4));
+  const supported = typeof CSS !== "undefined" && CSS.supports("animation-timing-function", "linear(0, 1)");
+  const result = supported
+    ? { duration: Math.round(path.length * dt * 1000), easing: `linear(${points.join(", ")})` }
+    : { duration: 300, easing: "cubic-bezier(0.25, 1, 0.5, 1)" };
+  springs.set(key, result);
+  return result;
+}
+
 // a card held off the surface: its edge, then a long soft shadow under it
 const LIFTED = "0 1px 0 0 rgb(0 0 0 / 0.08), 0 14px 28px rgb(0 0 0 / 0.16), 0 4px 10px rgb(0 0 0 / 0.08)";
 
@@ -513,8 +544,7 @@ export function useLift() {
       s.x = event.operation.position.current.x;
       s.time = performance.now();
       s.lifted = element.animate([{ scale: "1" }, { scale: "1.03", boxShadow: LIFTED }], {
-        duration: 250,
-        easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        ...spring(380, 18),
         fill: "forwards",
       });
     },
@@ -537,10 +567,7 @@ export function useLift() {
       if (!element) return;
       s.target = 0;
       const lifted = s.lifted;
-      element.animate([{ scale: "1.03", boxShadow: LIFTED }, { scale: "1" }], {
-        duration: 350,
-        easing: "cubic-bezier(0.34, 1.3, 0.64, 1)",
-      }).onfinish = () => lifted?.cancel();
+      element.animate([{ scale: "1.03", boxShadow: LIFTED }, { scale: "1" }], spring(380, 18)).onfinish = () => lifted?.cancel();
       lifted?.pause();
       s.element = null;
       s.lifted = null;

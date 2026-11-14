@@ -8,10 +8,9 @@ import { IconGripVertical } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useLift, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, spring, useLift, useShape } from "./style";
 
-// the drop springs into its place with a little overshoot, and the rest make room on the movement curve
-const SETTLE = { duration: 350, easing: "cubic-bezier(0.34, 1.3, 0.64, 1)" };
+// the rest make room on the movement curve; the drop springs into its place
 const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
 
 
@@ -138,7 +137,7 @@ export default function SortableList({
 
   return (
     <DragDropProvider
-      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: SETTLE })]}
+      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: spring(420, 34) })]}
       onDragStart={lift.onDragStart}
       onDragMove={lift.onDragMove}
       onDragEnd={(event) => {
