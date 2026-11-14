@@ -450,9 +450,48 @@ export function Roll({
   );
 }
 
+const springs = new Map<string, { duration: number; easing: string }>();
+
+/**
+ * A spring as a duration and a CSS easing, for anything that takes the two,
+ * such as `element.animate` or a drag library's drop. Where `linear()` easing
+ * is missing it falls back to out-quart.
+ */
+export function spring(stiffness: number, damping: number) {
+  const key = `${stiffness}/${damping}`;
+  const cached = springs.get(key);
+  if (cached) return cached;
+  // simulate a unit step and sample it, so the curve overshoots and wobbles as the spring does
+  const dt = 1 / 240;
+  const path: number[] = [0];
+  let x = 0;
+  let v = 0;
+  while (path.length < 480 && (Math.abs(1 - x) > 0.001 || Math.abs(v) > 0.01)) {
+    v += (-stiffness * (x - 1) - damping * v) * dt;
+    x += v * dt;
+    path.push(x);
+  }
+  path.push(1);
+  const points = Array.from({ length: 41 }, (_, i) => path[Math.round((i / 40) * (path.length - 1))].toFixed(4));
+  const supported = typeof CSS !== "undefined" && CSS.supports("animation-timing-function", "linear(0, 1)");
+  const result = supported
+    ? { duration: Math.round(path.length * dt * 1000), easing: `linear(${points.join(", ")})` }
+    : { duration: 300, easing: "cubic-bezier(0.25, 1, 0.5, 1)" };
+  springs.set(key, result);
+  return result;
+}
+
+// a card held off the surface: its edge, then a long soft shadow under it
+const LIFTED = "0 1px 0 0 rgb(0 0 0 / 0.08), 0 14px 28px rgb(0 0 0 / 0.16), 0 4px 10px rgb(0 0 0 / 0.08)";
+
+// the outline of the empty slot, drawn over the hidden copy the drag library leaves behind
+const SLOT =
+  "position:absolute;inset:0;border-radius:inherit;border:1px dashed color-mix(in srgb, currentColor 35%, transparent);background:transparent;box-shadow:none;visibility:visible;pointer-events:none";
+
 /** What `useLift` reads from a drag event: dnd-kit's events fit it. */
 interface LiftEvent {
   to?: { x: number };
+  by?: { x: number };
   nativeEvent?: Event;
   operation: {
     source?: { element?: Element | null } | null;
@@ -476,6 +515,8 @@ export function useLift() {
     x: 0,
     time: 0,
     frame: 0,
+    watch: 0,
+    doc: null as Document | null,
     lifted: null as Animation | null,
   });
 
@@ -487,8 +528,8 @@ export function useLift() {
     const s = state.current;
     const element = s.leaning;
     if (!element) return;
-    s.target *= 0.86;
-    s.speed += (-260 * (s.tilt - s.target) - 22 * s.speed) / 60;
+    if (performance.now() - s.time > 60) s.target *= 0.8;
+    s.speed += (-300 * (s.tilt - s.target) - 22 * s.speed) / 60;
     s.tilt += s.speed / 60;
     element.style.rotate = `${s.tilt.toFixed(2)}deg`;
     if (Math.abs(s.tilt) > 0.02 || Math.abs(s.speed) > 0.02 || Math.abs(s.target) > 0.02) {
@@ -500,6 +541,43 @@ export function useLift() {
     }
   };
 
+  // the drag library leaves a hidden copy where the card was; a dashed outline inside it marks the slot
+  const markSlot = (element: Element) => {
+    let tries = 0;
+    const mark = () => {
+      const slot = [...(element.parentElement?.children ?? [])].find((child) => child.hasAttribute("data-dnd-placeholder"));
+      if (!slot) {
+        if (++tries < 6) requestAnimationFrame(mark);
+        return;
+      }
+      if (slot.querySelector("[data-slot]")) return;
+      const outline = element.ownerDocument.createElement("span");
+      outline.setAttribute("aria-hidden", "true");
+      outline.setAttribute("data-slot", "");
+      outline.style.cssText = SLOT;
+      slot.append(outline);
+    };
+    requestAnimationFrame(mark);
+  };
+
+  // a card moved to another list can be drawn as a new element, which keeps the lift
+  const follow = () => {
+    const s = state.current;
+    // the drag library marks whichever element is being dragged right now
+    const next = s.doc?.querySelector("[data-dnd-dragging]");
+    if (!s.element) return;
+    if (next && next !== s.element && "style" in next) {
+      s.lifted?.cancel();
+      s.element.style.rotate = "";
+      s.element = next as HTMLElement;
+      s.leaning = next as HTMLElement;
+      s.lifted = next.animate([{ scale: "1.03", boxShadow: LIFTED }], { duration: 1, fill: "forwards" });
+      markSlot(next);
+      if (!s.frame) s.frame = requestAnimationFrame(lean);
+    }
+    s.watch = requestAnimationFrame(follow);
+  };
+
   return {
     onDragStart: (event: LiftEvent) => {
       const element = event.operation.source?.element;
@@ -509,35 +587,46 @@ export function useLift() {
       s.leaning = element as HTMLElement;
       s.x = event.operation.position.current.x;
       s.time = performance.now();
-      s.lifted = element.animate([{ scale: "1" }, { scale: "1.03" }], {
-        duration: 250,
-        easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      s.lifted = element.animate([{ scale: "1" }, { scale: "1.03", boxShadow: LIFTED }], {
+        ...spring(380, 18),
         fill: "forwards",
       });
+      s.doc = element.ownerDocument;
+      markSlot(element);
+      cancelAnimationFrame(s.watch);
+      s.watch = requestAnimationFrame(follow);
     },
     onDragMove: (event: LiftEvent) => {
       const s = state.current;
-      // a keyboard move jumps a whole row, which is not speed
       const cause = event.nativeEvent ?? event.operation.activatorEvent;
-      if (!s.element || !cause?.type.startsWith("pointer")) return;
+      if (!s.element || !cause) return;
       const now = performance.now();
       const x = event.to?.x ?? event.operation.position.current.x;
+      // a keyboard move jumps a whole row, which is not speed: a step to another column nudges the card instead
+      if (!cause.type.startsWith("pointer")) {
+        const step = event.by?.x ?? x - s.x;
+        s.x = x;
+        if (Math.abs(step) < 24) return;
+        s.target = Math.sign(step) * 4;
+        s.time = now + 60;
+        if (!s.frame) s.frame = requestAnimationFrame(lean);
+        return;
+      }
       const speed = (x - s.x) / Math.max(1, now - s.time);
       s.x = x;
       s.time = now;
-      s.target = Math.max(-6, Math.min(6, speed * 8));
+      s.target = Math.max(-6, Math.min(6, speed * 10));
       if (!s.frame) s.frame = requestAnimationFrame(lean);
     },
     onDragEnd: () => {
       const s = state.current;
+      cancelAnimationFrame(s.watch);
+      s.doc = null;
       const element = s.element;
       if (!element) return;
       s.target = 0;
       const lifted = s.lifted;
-      element.animate([{ scale: "1.03" }, { scale: "1" }], {
-        duration: 300,
-        easing: "cubic-bezier(0.25, 1, 0.5, 1)",
-      }).onfinish = () => lifted?.cancel();
+      element.animate([{ scale: "1.03", boxShadow: LIFTED }, { scale: "1" }], spring(380, 18)).onfinish = () => lifted?.cancel();
       lifted?.pause();
       s.element = null;
       s.lifted = null;

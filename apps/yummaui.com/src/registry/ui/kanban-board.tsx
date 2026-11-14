@@ -7,10 +7,9 @@ import { useSortable } from "@dnd-kit/react/sortable";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useLift, useShape, Scroll } from "./style";
+import { FOCUS, RADIUS, type Shape, spring, useLift, useShape, Scroll } from "./style";
 
-// the drop settles into its place on the movement curve, and the rest make room on it too
-const SETTLE = { duration: 300, easing: "cubic-bezier(0.25, 1, 0.5, 1)" };
+// the rest make room on the movement curve; the drop and each keyboard step spring into place
 const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
 
 
@@ -92,9 +91,10 @@ function Card({
       ref={ref}
       className={merge(
         outline,
-        "d:f fd:c g:2 py:2 px:3 bw:1 bc:rim bg:raised c:label c:g ta:none us:none",
+        "p:r d:f fd:c g:2 py:2 px:3 bw:1 bc:rim bg:raised c:label c:g ta:none us:none",
         RADIUS.block[shape],
-        isDragging ? "bs-o:pop zi:10" : "bs-o:key",
+        "bs-o:key",
+        isDragging ? "zi:10" : "",
       )}
     >
       <span className="fs:sm">{card.title}</span>
@@ -133,7 +133,7 @@ function Column({
     <section
       aria-label={column.title}
       className={merge(
-        "d:f fd:c g:2 p:2 min-w:48",
+        "d:f fd:c g:2 p:2 min-w:48 bw:1 bc:line bs-o:sunk",
         RADIUS.popup[shape],
         isDropTarget ? "bg:rim" : "bg:well",
       )}
@@ -185,7 +185,7 @@ export default function KanbanBoard({
 
   return (
     <DragDropProvider
-      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: SETTLE })]}
+      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: spring(420, 34), keyboardTransition: spring(520, 30) })]}
       onDragStart={(event) => {
         before.current = cards;
         lift.onDragStart(event);

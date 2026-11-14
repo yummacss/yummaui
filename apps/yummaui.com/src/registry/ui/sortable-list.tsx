@@ -8,10 +8,9 @@ import { IconGripVertical } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useLift, useShape } from "./style";
+import { FOCUS, RADIUS, type Shape, spring, useLift, useShape } from "./style";
 
-// the drop settles into its place on the movement curve, and the rest make room on it too
-const SETTLE = { duration: 300, easing: "cubic-bezier(0.25, 1, 0.5, 1)" };
+// the rest make room on the movement curve; the drop and each keyboard step spring into place
 const ROOM = { duration: 250, easing: "cubic-bezier(0.25, 1, 0.5, 1)", idle: false };
 
 
@@ -85,10 +84,10 @@ function Row({
     <li
       ref={ref}
       className={merge(
-        "d:f ai:c g:2 h:11 pl:1 pr:3 bg:raised c:label",
+        "p:r d:f ai:c g:2 h:11 pl:1 pr:3 bw:1 bc:rim bg:raised bs-o:key c:label",
         RADIUS.item[shape],
         handle ? "" : "c:g ta:none",
-        isDragging ? "bs-o:pop zi:10" : "h:bg:well",
+        isDragging ? "zi:10" : "",
       )}
     >
       <button
@@ -138,7 +137,7 @@ export default function SortableList({
 
   return (
     <DragDropProvider
-      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: SETTLE })]}
+      plugins={(defaults) => [...defaults, Feedback.configure({ dropAnimation: spring(420, 34), keyboardTransition: spring(520, 30) })]}
       onDragStart={lift.onDragStart}
       onDragMove={lift.onDragMove}
       onDragEnd={(event) => {
@@ -152,7 +151,7 @@ export default function SortableList({
       <ul
         aria-label={ariaLabel}
         className={merge(
-          "d:f fd:c g:px p:1 m:0 lst:none w:100% bw:1 bc:rim bg:raised bs-o:key",
+          "d:f fd:c g:1 p:1 m:0 lst:none w:100% bw:1 bc:line bg:well bs-o:sunk",
           RADIUS.popup[shape],
           className,
         )}

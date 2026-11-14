@@ -135,6 +135,7 @@ and stops at once under reduced motion (`@prm:`).
 | 300ms `tdu:300` | A drawer or a toast, the most anything the user starts takes |
 | 460ms | The error shake, the one exception: the answer to a submit, not motion the hand drives |
 | 500ms `tdu:500` | Data settling: a meter or progress filling |
+| A spring | What the hand picks up and lets go: a dragged card's lift and drop, from `spring(stiffness, damping)` |
 
 | Curve | Use |
 | --- | --- |
@@ -158,7 +159,7 @@ The patterns, each built once and reused:
 | Error | `useShake` or `shake`: the field shakes on a damped spring, a row of slots ripples 18ms apart, wrong characters blur away while their boxes stay, and the message fades in from a blur in the hint's place (`MESSAGE_IN`) |
 | Success | The field turns green; OTP Field's slots turn green one after another and fold into a key carrying the success text |
 | Roll | A changed number moves only the digits that differ, up when it grows and down when it shrinks, 30ms apart from the right (`Roll`) |
-| Lift | A dragged item lifts to 103% on a spring with a deeper shadow, leans with the pointer's speed up to 6°, the rest make room over 250ms and the drop settles over 300ms (`useLift`) |
+| Lift | A dragged item lifts to 103% on a spring with a long soft shadow, leans with the pointer's speed up to 6° while it moves, the rest make room over 250ms and the drop springs into place (`useLift`, `spring`) |
 | Panel | A popup resizes between contents, which cross-fade with a slight blur |
 
 ## States
