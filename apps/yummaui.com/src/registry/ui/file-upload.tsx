@@ -249,7 +249,7 @@ export default function FileUploadBase({
   };
 
   return (
-    <div className="d:f fd:c g:2 w:100 min-w:0">
+    <div className="d:f fd:c g:2 w:100 max-w:100% min-w:0">
       <Fieldset.Root
         aria-label={label}
         className={zone}

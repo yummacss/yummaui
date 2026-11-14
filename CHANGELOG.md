@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** `Roll` in the style module, for a number that rolls when it changes.
 - **[components]** `useLift` in the style module, for a dragged card that lifts, leans & settles.
 - **[components]** `spring` in the style module, a spring as a duration & CSS easing.
+- **[components]** `aside` on Navigation Menu's items, a block beside the links.
+- **[components]** `RADIUS.inset` in the style module, for a block set inside a popup's padding.
 
 ### Changed
 
@@ -27,11 +29,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** Sortable List & Kanban Board lift a dragged card on a spring, tilt it with the pointer's speed & settle it on drop.
 - **[components]** Sortable List draws its rows as raised keys in a sunk well, & Kanban Board's columns are sunk.
 - **[components]** A dragged card in Sortable List & Kanban Board leaves a dashed slot, glides on a spring between keyboard steps & keeps its lift in another column.
+- **[components]** Navigation Menu's triggers sit in a sunk bar with a raised key that slides to the open one; its panel centers under the trigger, resizes as one box & slides its contents through a blur.
 - **[components]** Drawer, Dialog, Alert Dialog & Onboarding dim the page without blurring it.
 
 ### Removed
 
 - **[components]** Expanding Input.
+
+### Fixed
+
+- **[components]** Navigation Menu's panel has even space above & below its content, stacks into one column on a phone & scrolls when taller than the room under the bar.
+- **[components]** File Upload, Model Picker's large list, Dialog & Alert Dialog fit a 360px screen.
 
 ## [0.19.0] - 2026-11-12
 

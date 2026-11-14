@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@base-ui/react/button";
 import { Collapsible } from "@base-ui/react/collapsible";
 import { Fragment, useState } from "react";
 import { usePlayground } from "@/components/playground/context";
@@ -12,10 +11,10 @@ import {
 } from "@/components/playground/control";
 import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
-import { ACCENTS, accentBars, DEFAULT_ACCENT } from "@/utils/accent";
+import { ACCENTS, accentBars } from "@/utils/accent";
 import { sceneIds } from "@/utils/demo";
 import { inTableOrder, lookProps, typeOf } from "@/utils/props";
-import { DEFAULT_SHAPE, SHAPES } from "@/utils/shapes.mjs";
+import { SHAPES } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
 function Summary({ text }: { text?: string }) {
@@ -163,13 +162,6 @@ export function Look() {
 			? playground.sceneValues[key]
 			: fallback;
 	};
-	const reset = () => {
-		for (const prop of looks)
-			playground.setSceneValue(`all.${prop.name}`, prop.default, prop.default);
-		playground.setShape(DEFAULT_SHAPE);
-		playground.setAccent(DEFAULT_ACCENT);
-		playground.setScheme("system");
-	};
 
 	return (
 		<div ref={setBox} className="d:f fd:c pb:4 mb:4">
@@ -250,12 +242,6 @@ export function Look() {
 					})}
 				</>
 			)}
-			<Button
-				onClick={reset}
-				className="as:fs mt:4 h:8 px:4 br:9999 bw:1 bc:border bg:surface bs-o:key c:ink fs:xs c:p h:bg:hover a:bg:press fv:oc:ink fv:ow:2"
-			>
-				Reset
-			</Button>
 		</div>
 	);
 }

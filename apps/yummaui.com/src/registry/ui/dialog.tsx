@@ -151,7 +151,7 @@ export default function DialogBase({
   const popupRef = useRef<HTMLDivElement>(null);
 
   const popupClasses = [
-    "o:h p:r w:96 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
+    "o:h p:r w:96 max-w:calc(90vw) bg:raised bc:line c:label bw:1 os:none bs-o:pop",
     RADIUS.popup[shape],
   ]
     .filter(Boolean)
@@ -171,7 +171,6 @@ export default function DialogBase({
           ref={popupRef}
           initialFocus={(type) => type === "keyboard" || popupRef.current}
           className={`${popupClasses} ${animated ? "tp:ot tdu:250 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:150 closing:ttf:eo @prm:tp:none" : ""}`}
-          style={{ maxWidth: "90vw" }}
         >
           {showClose && (
             <Dialog.Close

@@ -129,6 +129,25 @@ describe("DESIGN.md", () => {
 		expect(offenders).toEqual([]);
 	});
 
+	it("fits a 360px phone: a wider fixed width is capped or behind @sm", () => {
+		const strings = (source: string) =>
+			[...source.matchAll(/"([^"\n]*)"|`([^`\n]*)`/g)].map(
+				([, a, b]) => a ?? b ?? "",
+			);
+		expect(
+			breaking((source) =>
+				strings(source).some(
+					(text) =>
+						[...text.matchAll(/(?<![\w:@-])w:(\d+)(?=\s|$)/g)].some(
+							([, n]) => Number(n) * 4 > 360,
+						) &&
+						!text.includes("max-w:") &&
+						!text.includes("@sm:"),
+				),
+			),
+		).toEqual([]);
+	});
+
 	it("keeps motion to the durations it names", () => {
 		for (const { name, source } of registry) {
 			for (const token of classes(source).filter((t) =>

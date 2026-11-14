@@ -19,6 +19,7 @@ Corners come from `RADIUS`, by the part's role, never from a hard-coded
 | Textarea, a field that grows | `RADIUS.box` |
 | Row in a list or popup | `RADIUS.item` |
 | Popup, dialog, card, panel | `RADIUS.popup` |
+| Block set inside a popup's padding | `RADIUS.inset` |
 | Strip of controls: toolbar, tab list | `RADIUS.bar` |
 | Badge, chip, keycap, icon tile | `RADIUS.chip` |
 | Wrapping text or data: a quote, a chart tile | `RADIUS.block` |
@@ -60,6 +61,25 @@ Sizes come in three steps, `sm`, `md` and `lg`, from `SIZE`.
 - **Type in a field is 16px on a phone** (`INPUT_TEXT`), where iOS zooms in on
   anything smaller.
 - **Digits that change or line up are tabular** (`fvn:tn`).
+
+## Layout
+
+- **Insets are even.** Content sits the same distance from every edge of its
+  box. Check it measured, top against bottom and left against right, never by
+  eye: a box sized by its library can add a pixel or two on one side.
+- **Everything fits a 360px phone.** A fixed width over 360px (`w:91` and up)
+  sits behind `@sm:` with a phone width under it, or carries a cap
+  (`max-w:`). Blocks side by side stack into one column below `@sm`. At 360px
+  nothing is cut, clipped or overlapping.
+- **Edges line up.** Things side by side share a top edge; a block beside a
+  list starts and ends on the list's lines, one spacing step away.
+- **A block inside a popup takes `RADIUS.inset`**, the popup's corner less
+  its 5px of border and padding, so the two corners stay concentric.
+
+| Wrong | Right |
+| --- | --- |
+| `className="d:g gtc:2 w:112"` in a panel | `className="d:g gtc:1 @sm:gtc:2 w:72 @sm:w:112"` |
+| A sunk block in a popup on `RADIUS.item` | `RADIUS.inset[shape]` |
 
 ## Icons
 

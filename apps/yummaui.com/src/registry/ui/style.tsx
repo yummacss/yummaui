@@ -88,6 +88,8 @@ export const RADIUS = {
   block: { square: "", rounded: "br:md", squircle: "br:xl cs:s", pill: "br:xl" },
   /** Popups, dialogs, cards & panels. */
   popup: { square: "", rounded: "br:xl", squircle: "br:3xl cs:s", pill: "br:3xl" },
+  /** A block set inside a popup's 1px border & 4px padding: the popup's corner less those 5px, so the two are concentric. */
+  inset: { square: "", rounded: "br:calc(0.4375rem)", squircle: "br:calc(1.1875rem) cs:s", pill: "br:calc(1.1875rem)" },
   /** A strip that holds controls, such as a toolbar, a tab list or a menubar. */
   bar: { square: "", rounded: "br:xl", squircle: "br:3xl cs:s", pill: "br:9999" },
   /** Small tags & tiles: badges, chips, keycaps & icon tiles. */
