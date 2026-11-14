@@ -19,6 +19,7 @@ Corners come from `RADIUS`, by the part's role, never from a hard-coded
 | Textarea, a field that grows | `RADIUS.box` |
 | Row in a list or popup | `RADIUS.item` |
 | Popup, dialog, card, panel | `RADIUS.popup` |
+| Block set inside a popup's padding | `RADIUS.inset` |
 | Strip of controls: toolbar, tab list | `RADIUS.bar` |
 | Badge, chip, keycap, icon tile | `RADIUS.chip` |
 | Wrapping text or data: a quote, a chart tile | `RADIUS.block` |

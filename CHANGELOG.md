@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** `useLift` in the style module, for a dragged card that lifts, leans & settles.
 - **[components]** `spring` in the style module, a spring as a duration & CSS easing.
 - **[components]** `aside` on Navigation Menu's items, a block beside the links.
+- **[components]** `RADIUS.inset` in the style module, for a block set inside a popup's padding.
 
 ### Changed
 
