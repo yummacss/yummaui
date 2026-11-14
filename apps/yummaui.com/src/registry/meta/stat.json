@@ -56,6 +56,12 @@
       "description": "Corner radius of the card. Inherits the nearest `Shape`."
     },
     {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "Rolls the value and the change when they change, only the digits that differ moving. Reduced motion changes them at once."
+    },
+    {
       "name": "className",
       "type": "string",
       "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
@@ -63,29 +69,7 @@
   ],
   "scene": [
     {
-      "component": "Stat",
-      "className": "w:64",
-      "props": {
-        "label": "Revenue",
-        "value": "$58,210",
-        "change": "12.4%",
-        "direction": "up",
-        "tone": "positive",
-        "trend": [
-          32,
-          35,
-          31,
-          38,
-          42,
-          40,
-          45,
-          48,
-          46,
-          52,
-          55,
-          58
-        ]
-      }
+      "component": "StatLive"
     }
   ]
 }
