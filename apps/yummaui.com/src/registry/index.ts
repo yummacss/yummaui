@@ -272,6 +272,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "file-tree": { component: "file-tree", variant: "base", kind: "component", install: "file-tree" },
   "file-upload": { component: "file-upload", variant: "base", kind: "component", install: "file-upload" },
   "form": { component: "form", variant: "base", kind: "component", install: "form" },
+  "gauge-live": { component: "gauge", variant: "live", kind: "example", install: "gauge" },
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
   "image-compare": { component: "image-compare", variant: "base", kind: "component", install: "image-compare" },
   "image-cropper": { component: "image-cropper", variant: "base", kind: "component", install: "image-cropper" },

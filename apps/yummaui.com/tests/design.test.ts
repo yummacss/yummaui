@@ -38,7 +38,7 @@ const ICON_AT_20 = ["file-upload", "lightbox"];
 const ICON_AT_24 = ["keypad", "rating"];
 
 // data settling, the one use for 500ms
-const SETTLES = ["inline-icon-heading", "meter", "progress"];
+const SETTLES = ["gauge", "inline-icon-heading", "meter", "progress"];
 
 describe("DESIGN.md", () => {
 	it("scrolls through Scroll Area, never the browser's own bar", () => {
@@ -113,6 +113,20 @@ describe("DESIGN.md", () => {
 				classes(source).some((token) => /(?:^|:)bf-b:/.test(token)),
 			),
 		).toEqual([]);
+	});
+
+	it("never blurs behind a site overlay that fades", () => {
+		const dir = join(rootDir, "src/components");
+		const offenders = readdirSync(dir, { recursive: true, encoding: "utf8" })
+			.filter((file) => file.endsWith(".tsx"))
+			.filter((file) =>
+				readFileSync(join(dir, file), "utf8")
+					.split("\n")
+					.some(
+						(line) => line.includes("bf-b:") && /opening:|closing:/.test(line),
+					),
+			);
+		expect(offenders).toEqual([]);
 	});
 
 	it("keeps motion to the durations it names", () => {

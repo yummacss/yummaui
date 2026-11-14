@@ -52,6 +52,7 @@ export const registry = {
   "file-tree": () => import("./ui/file-tree"),
   "file-upload": () => import("./ui/file-upload"),
   "form": () => import("./ui/form"),
+  "gauge-live": () => import("./ui/gauge-live"),
   "gauge": () => import("./ui/gauge"),
   "image-compare": () => import("./ui/image-compare"),
   "image-cropper": () => import("./ui/image-cropper"),

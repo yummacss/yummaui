@@ -3,6 +3,7 @@
 import { Meter } from "@base-ui/react/meter";
 import { useEffect, useState } from "react";
 import { merge } from "yummacss/merge";
+import { Roll } from "./style";
 
 const SIZES = {
   sm: { box: "w:28", value: "fs:xl", unit: "fs:xs", label: "fs:xs", stroke: 9 },
@@ -64,8 +65,9 @@ export interface GaugeProps {
   /** Width of the gauge, with the type scaled to match. */
   size?: Size;
   /**
-   * The arc sweeping in and the value counting up when it first shows. Turn it
-   * off for a gauge that is simply there; reduced motion does the same.
+   * The arc sweeping in and the value counting up when it first shows, then the
+   * arc settling and the value rolling when it changes. Turn it off for a gauge
+   * that is simply there; reduced motion does the same.
    */
   animated?: boolean;
   /**
@@ -175,14 +177,19 @@ export default function Gauge({
               stroke="currentColor"
               strokeWidth={scale.stroke}
               strokeLinecap="round"
-              strokeDasharray={`${share * 100 * progress} 100`}
-              className={tone.arc}
+              style={{ strokeDasharray: `${share * 100 * progress} 100` }}
+              // once it has arrived, a new value settles instead of jumping
+              className={merge(tone.arc, progress === 1 && animated ? "tp:a tdu:500 ttf:io @prm:tp:none" : "")}
             />
           )}
         </svg>
         <div className="p:a l:0 r:0 b:0 d:f fd:c ai:c">
           <span className={`${scale.value} fw:600 lh:1 ls:2`}>
-            {reading}
+            <Roll
+              value={Number(reading)}
+              text={reading}
+              still={!animated || progress < 1}
+            />
             <span className={`${scale.unit} c:hint fw:500`}>
               {unit ? ` ${unit}` : "%"}
             </span>
