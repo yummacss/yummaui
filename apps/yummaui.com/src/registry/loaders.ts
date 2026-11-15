@@ -11,6 +11,7 @@ export const registry = {
   "activity-timeline": () => import("./ui/activity-timeline"),
   "alert-dialog": () => import("./ui/alert-dialog"),
   "alert": () => import("./ui/alert"),
+  "announcement": () => import("./ui/announcement"),
   "autocomplete-grouped": () => import("./ui/autocomplete-grouped"),
   "autocomplete-helper": () => import("./ui/autocomplete-helper"),
   "autocomplete-icon-leading": () => import("./ui/autocomplete-icon-leading"),

@@ -67,6 +67,13 @@ export const COMPONENT_PAGES = [
 		description: "Overlap avatars into a single group.",
 	},
 	{
+		slug: "announcement",
+		since: "0.20",
+		title: "Announcement",
+		description:
+			"Show a badge & a short message in one pill, such as news above a heading.",
+	},
+	{
 		slug: "avatar",
 		title: "Avatar",
 		description: "Display user profile images & fallbacks, built on Base UI.",
