@@ -48,7 +48,10 @@ export default function ComponentPlayground({
 	const playground = usePlayground();
 	const [tab, setTab] = useState("preview");
 	// on a phone only the active tab keeps its label, so the actions beside it fit
-	const narrow = useMediaQuery("(max-width: 639px)");
+	// read after hydration, so the first client render matches the server's
+	const narrow = useMediaQuery("(max-width: 639px)", {
+		initializeWithValue: false,
+	});
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
 	// at full width the panel's border is the frame's, so the frame draws its own only when narrower
