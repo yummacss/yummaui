@@ -220,6 +220,64 @@ export function useMorph<T extends HTMLElement>(key: boolean, animated: boolean)
   return ref;
 }
 
+/**
+ * A box that eases its height to its content's whenever the content grows or
+ * shrinks, such as a popup moving between steps.
+ */
+export function Fit({
+  animated = true,
+  className,
+  children,
+}: {
+  animated?: boolean;
+  className?: string;
+  children: ReactNode;
+}) {
+  const outer = useRef<HTMLDivElement>(null);
+  const inner = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const box = outer.current;
+    const content = inner.current;
+    if (!box || !content) return;
+    let last = content.offsetHeight;
+    const settle = (event: TransitionEvent) => {
+      if (event.target !== box || event.propertyName !== "height") return;
+      box.style.transition = "";
+      box.style.height = "";
+      box.style.clipPath = "";
+    };
+    const observer = new ResizeObserver(() => {
+      const to = content.offsetHeight;
+      // mid-ease, the box is where the last ease left it, not where it began
+      const from = box.style.height ? box.offsetHeight : last;
+      last = to;
+      const still =
+        !animated || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (from === to || still) return;
+      box.style.transition = "none";
+      box.style.height = `${from}px`;
+      // the sides keep room for a focus outline; the bottom clips what has not fit yet
+      box.style.clipPath = "inset(-4px -4px 0 -4px)";
+      box.getBoundingClientRect();
+      box.style.transition = "height 250ms cubic-bezier(0.25, 1, 0.5, 1)";
+      box.style.height = `${to}px`;
+    });
+    observer.observe(content);
+    box.addEventListener("transitionend", settle);
+    return () => {
+      observer.disconnect();
+      box.removeEventListener("transitionend", settle);
+    };
+  }, [animated]);
+
+  return (
+    <div ref={outer} className={className}>
+      <div ref={inner}>{children}</div>
+    </div>
+  );
+}
+
 /** Two icons in one place that cross-fade, such as copy to copied. */
 export function Swap({ swapped, from, to }: { swapped: boolean; from: ReactNode; to: ReactNode }) {
   // every property: transition-property has no name for transform and filter together

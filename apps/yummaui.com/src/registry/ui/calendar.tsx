@@ -12,7 +12,7 @@ import {
   type Matcher,
 } from "react-day-picker";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useIndicator, useShape } from "./style";
+import { FOCUS, Fit, RADIUS, type Shape, useIndicator, useShape } from "./style";
 
 type Mode = "single" | "range";
 type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -29,6 +29,7 @@ interface LookValue {
   weekStartsOn: Weekday;
   animated: boolean;
   shown: string;
+  turn: number;
   indicator: ReturnType<typeof useIndicator<HTMLDivElement>> | null;
 }
 
@@ -39,32 +40,55 @@ const Look = createContext<LookValue>({
   weekStartsOn: 0,
   animated: true,
   shown: "",
+  turn: 0,
   indicator: null,
 });
 
 const sameDay = (a?: Date, b?: Date) => !!a && !!b && a.toDateString() === b.toDateString();
 const short = (date: Date) => date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 
+// a new month slides in from the side the reader moved toward
+const enter = (turn: number) =>
+  turn > 0
+    ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:10 @prm:tp:none"
+    : turn < 0
+      ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:-10 @prm:tp:none"
+      : "";
+
 // the key under the picked day lives beside the table, which cannot hold it
 function Grid(props: ComponentProps<"table">) {
-  const { mode, shape, animated, shown, indicator } = useContext(Look);
+  const { mode, shape, animated, shown, turn, indicator } = useContext(Look);
   return (
-    <div ref={indicator?.ref} className="p:r w:100%">
-      {mode === "single" && indicator && (
-        <span
-          aria-hidden
-          // a new month mounts a new key, so it never slides in from the corner
-          key={shown}
-          style={indicator.style}
-          className={merge(
-            "p:a l:0 t:0 zi:0 bg:fill bs-o:key-fill",
-            RADIUS.control[shape],
-            animated && indicator.ready && "tp:a tdu:250 ttf:out-quart @prm:tp:none",
+    <Fit animated={animated} className="w:100%">
+      <div ref={indicator?.ref} className="p:r">
+        {/* a new month mounts a new key, so it never slides in from the corner */}
+        <div key={shown} className={animated ? enter(turn) : ""}>
+          {mode === "single" && indicator && (
+            <span
+              aria-hidden
+              style={indicator.style}
+              className={merge(
+                "p:a l:0 t:0 zi:0 bg:fill bs-o:key-fill",
+                RADIUS.control[shape],
+                animated && indicator.ready && "tp:a tdu:250 ttf:out-quart @prm:tp:none",
+              )}
+            />
           )}
-        />
-      )}
-      <table {...props} />
-    </div>
+          <table {...props} />
+        </div>
+      </div>
+    </Fit>
+  );
+}
+
+function CaptionLabel({ children, className: _className, ...props }: ComponentProps<"span">) {
+  const { animated, shown, turn } = useContext(Look);
+  return (
+    <span {...props} className="d:b fs:sm fw:600">
+      <span key={shown} className={merge("d:b", animated && enter(turn))}>
+        {children}
+      </span>
+    </span>
   );
 }
 
@@ -230,7 +254,13 @@ export default function Calendar<M extends Mode = "single">({
 
   const single = mode === "single" ? (value as Date | undefined) : undefined;
   const range = mode === "range" ? (value as DateRange | undefined) : undefined;
-  const [month, setMonth] = useState(() => single ?? range?.from ?? new Date());
+  const [month, setShown] = useState(() => single ?? range?.from ?? new Date());
+  const [turn, setTurn] = useState(0);
+  const setMonth = (next: Date) => {
+    const months = (date: Date) => date.getFullYear() * 12 + date.getMonth();
+    setTurn(Math.sign(months(next) - months(month)));
+    setShown(next);
+  };
   const indicator = useIndicator<HTMLDivElement>(mode === "single");
 
   const today = new Date();
@@ -288,14 +318,13 @@ export default function Calendar<M extends Mode = "single">({
     showOutsideDays: true,
     navLayout: "after" as const,
     footer: footer ? line : undefined,
-    components: { Chevron, Day, DayButton, MonthGrid: Grid, PreviousMonthButton: NavButton, NextMonthButton: NavButton },
+    components: { CaptionLabel, Chevron, Day, DayButton, MonthGrid: Grid, PreviousMonthButton: NavButton, NextMonthButton: NavButton },
     styles: { month_grid: { borderCollapse: "collapse" as const } },
     classNames: {
       root: merge("d:f fd:c g:3 w:76 max-w:100% p:3 bg:raised bw:1 bc:rim c:label", RADIUS.popup[shape], className),
       months: "d:f fd:c",
       month: "d:f fw:w ai:c jc:sb rg:2",
-      month_caption: "d:f ai:c h:9 pl:2",
-      caption_label: "fs:sm fw:600",
+      month_caption: "d:f ai:c h:9 pl:2 o:h",
       nav: merge("d:f ai:s g:px p:1 bw:1 bc:line bg:well bs-o:sunk", RADIUS.control[shape]),
       month_grid: "w:100% tl:f",
       weekday: "pb:2 fs:xs fw:500 c:hint ta:c",
@@ -305,7 +334,7 @@ export default function Calendar<M extends Mode = "single">({
 
   return (
     <Look
-      value={{ mode, shape, outline, weekStartsOn, animated, indicator, shown: `${month.getFullYear()}-${month.getMonth()}` }}
+      value={{ mode, shape, outline, weekStartsOn, animated, indicator, turn, shown: `${month.getFullYear()}-${month.getMonth()}` }}
     >
       {mode === "range" ? (
         <DayPicker

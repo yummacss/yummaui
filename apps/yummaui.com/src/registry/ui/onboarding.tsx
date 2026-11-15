@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 import { useRef, useState } from "react";
 import { merge } from "yummacss/merge";
 import Action from "./button";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { Fit, FOCUS, RADIUS, type Shape, useShape } from "./style";
 
 type IconPosition = "leading" | "trailing";
 // a card cannot be a pill; under pill it takes rounded corners
@@ -211,22 +211,24 @@ export default function OnboardingBase({
               </span>
             </div>
 
-            {animated ? (
-              <div
-                key={page}
-                className={
-                  direction > 0
-                    ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:10 @prm:tp:none"
-                    : direction < 0
-                      ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:-10 @prm:tp:none"
-                      : ""
-                }
-              >
-                {slide}
-              </div>
-            ) : (
-              slide
-            )}
+            <Fit animated={animated}>
+              {animated ? (
+                <div
+                  key={page}
+                  className={
+                    direction > 0
+                      ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:10 @prm:tp:none"
+                      : direction < 0
+                        ? "tp:ot tdu:250 ttf:out-quart @st:o:0 @st:ttx:-10 @prm:tp:none"
+                        : ""
+                  }
+                >
+                  {slide}
+                </div>
+              ) : (
+                slide
+              )}
+            </Fit>
 
             <div className="d:f ai:c jc:sb g:2 pt:2">
               {isFirst ? (
