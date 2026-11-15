@@ -88,20 +88,8 @@
   ],
   "scene": [
     {
-      "tag": "div",
-      "className": "d:f fw:w jc:c ai:fs g:6",
-      "children": [
-        {
-          "component": "Calendar",
-          "props": {}
-        },
-        {
-          "component": "Calendar",
-          "props": {
-            "mode": "range"
-          }
-        }
-      ]
+      "component": "Calendar",
+      "props": {}
     }
   ]
 }
