@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **[components]** Data List.
+- **[components]** Highlight.
 - **[components]** QR Code.
 - **[components]** Knob.
 - **[components]** Copy Button.

@@ -55,9 +55,7 @@ export interface CopyButtonProps {
   copiedLabel?: string;
   /** What the button says when the browser will not copy. */
   failedLabel?: string;
-  /**
-   * Draws the icon alone, keeping `copyLabel` as the accessible name.
-   */
+  /** Draws the icon alone, keeping `copyLabel` as the accessible name. */
   iconOnly?: boolean;
   /**
    * Shows `value` in a sunk field with the button at its end. When the browser

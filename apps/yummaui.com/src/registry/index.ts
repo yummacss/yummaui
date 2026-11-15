@@ -27,6 +27,7 @@ import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
 import meta_copy_button from "./meta/copy-button.json";
 import meta_currency_input from "./meta/currency-input.json";
+import meta_data_list from "./meta/data-list.json";
 import meta_dialog from "./meta/dialog.json";
 import meta_diff_viewer from "./meta/diff-viewer.json";
 import meta_donut_chart from "./meta/donut-chart.json";
@@ -38,6 +39,7 @@ import meta_file_tree from "./meta/file-tree.json";
 import meta_file_upload from "./meta/file-upload.json";
 import meta_form from "./meta/form.json";
 import meta_gauge from "./meta/gauge.json";
+import meta_highlight from "./meta/highlight.json";
 import meta_image_compare from "./meta/image-compare.json";
 import meta_image_cropper from "./meta/image-cropper.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
@@ -151,6 +153,7 @@ export const registryMeta = {
   "context-menu": meta_context_menu,
   "copy-button": meta_copy_button,
   "currency-input": meta_currency_input,
+  "data-list": meta_data_list,
   "dialog": meta_dialog,
   "diff-viewer": meta_diff_viewer,
   "donut-chart": meta_donut_chart,
@@ -162,6 +165,7 @@ export const registryMeta = {
   "file-upload": meta_file_upload,
   "form": meta_form,
   "gauge": meta_gauge,
+  "highlight": meta_highlight,
   "image-compare": meta_image_compare,
   "image-cropper": meta_image_cropper,
   "inline-icon-heading": meta_inline_icon_heading,
@@ -266,6 +270,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "context-menu": { component: "context-menu", variant: "base", kind: "component", install: "context-menu" },
   "copy-button": { component: "copy-button", variant: "base", kind: "component", install: "copy-button" },
   "currency-input": { component: "currency-input", variant: "base", kind: "component", install: "currency-input" },
+  "data-list": { component: "data-list", variant: "base", kind: "component", install: "data-list" },
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
   "diff-viewer": { component: "diff-viewer", variant: "base", kind: "component", install: "diff-viewer" },
   "donut-chart": { component: "donut-chart", variant: "base", kind: "component", install: "donut-chart" },
@@ -281,6 +286,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "form": { component: "form", variant: "base", kind: "component", install: "form" },
   "gauge-live": { component: "gauge", variant: "live", kind: "example", install: "gauge" },
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
+  "highlight": { component: "highlight", variant: "base", kind: "component", install: "highlight" },
   "image-compare": { component: "image-compare", variant: "base", kind: "component", install: "image-compare" },
   "image-cropper": { component: "image-cropper", variant: "base", kind: "component", install: "image-cropper" },
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
@@ -375,6 +381,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "drawer": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "swiping": "[data-swiping]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-tree": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-upload": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "highlight": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "keypad": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "knob": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

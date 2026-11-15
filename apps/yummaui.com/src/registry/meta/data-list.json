@@ -1,0 +1,67 @@
+{
+  "summary": "Labels and their values down a list, such as a file's details.",
+  "props": [
+    {
+      "name": "items",
+      "type": "none",
+      "typeName": "DataListItem[]",
+      "description": "The pairs, top to bottom: each a `label` and a `value`."
+    },
+    {
+      "name": "layout",
+      "type": "enum",
+      "values": [
+        "beside",
+        "stacked"
+      ],
+      "default": "beside",
+      "description": "`beside` puts each label in a column on the left; `stacked` puts it above its value, for long values or a narrow column."
+    },
+    {
+      "name": "divided",
+      "type": "boolean",
+      "default": true,
+      "description": "A line between rows."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "w:96 max-w:100%",
+      "children": [
+        {
+          "component": "DataList",
+          "props": {
+            "items": [
+              {
+                "label": "Name",
+                "value": "Reading list.md"
+              },
+              {
+                "label": "Kind",
+                "value": "Markdown document"
+              },
+              {
+                "label": "Size",
+                "value": "2.4 KB"
+              },
+              {
+                "label": "Where",
+                "value": "~/Documents"
+              },
+              {
+                "label": "Modified",
+                "value": "Today at 09:14"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

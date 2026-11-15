@@ -173,6 +173,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "data-list",
+		since: "0.20",
+		title: "Data List",
+		description:
+			"Show labels & their values down a list, such as a file's details.",
+	},
+	{
 		slug: "diff-viewer",
 		since: "0.15",
 		title: "Diff Viewer",
@@ -236,6 +243,13 @@ export const COMPONENT_PAGES = [
 		description:
 			"Show a value on a fixed range as a half-circle arc, with thresholds, built on Base UI.",
 		primitive: true,
+	},
+	{
+		slug: "highlight",
+		since: "0.20",
+		title: "Highlight",
+		description:
+			"Mark the parts of a text that match a search, ignoring case & accents.",
 	},
 	{
 		slug: "image-compare",
