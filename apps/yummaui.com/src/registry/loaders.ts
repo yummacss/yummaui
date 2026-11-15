@@ -84,6 +84,7 @@ export const registry = {
   "progress-upload": () => import("./ui/progress-upload"),
   "progress": () => import("./ui/progress"),
   "prompt-input": () => import("./ui/prompt-input"),
+  "qr-code": () => import("./ui/qr-code"),
   "radio": () => import("./ui/radio"),
   "rating": () => import("./ui/rating"),
   "reasoning": () => import("./ui/reasoning"),

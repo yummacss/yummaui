@@ -63,6 +63,7 @@ import meta_preview_card from "./meta/preview-card.json";
 import meta_progress_timeline from "./meta/progress-timeline.json";
 import meta_progress from "./meta/progress.json";
 import meta_prompt_input from "./meta/prompt-input.json";
+import meta_qr_code from "./meta/qr-code.json";
 import meta_radio from "./meta/radio.json";
 import meta_rating from "./meta/rating.json";
 import meta_reasoning from "./meta/reasoning.json";
@@ -186,6 +187,7 @@ export const registryMeta = {
   "progress-timeline": meta_progress_timeline,
   "progress": meta_progress,
   "prompt-input": meta_prompt_input,
+  "qr-code": meta_qr_code,
   "radio": meta_radio,
   "rating": meta_rating,
   "reasoning": meta_reasoning,
@@ -308,6 +310,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "progress-upload": { component: "progress", variant: "upload", kind: "example", install: "progress" },
   "progress": { component: "progress", variant: "base", kind: "component", install: "progress" },
   "prompt-input": { component: "prompt-input", variant: "base", kind: "component", install: "prompt-input" },
+  "qr-code": { component: "qr-code", variant: "base", kind: "component", install: "qr-code" },
   "radio": { component: "radio", variant: "base", kind: "component", install: "radio" },
   "rating": { component: "rating", variant: "base", kind: "component", install: "rating" },
   "reasoning": { component: "reasoning", variant: "base", kind: "component", install: "reasoning" },

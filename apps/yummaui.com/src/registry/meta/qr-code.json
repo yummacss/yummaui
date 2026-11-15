@@ -1,0 +1,89 @@
+{
+  "summary": "Text drawn as a code a phone camera reads, dark on a white tile in either scheme.",
+  "props": [
+    {
+      "name": "value",
+      "type": "string",
+      "example": "https://www.yummaui.com",
+      "description": "The text the code holds, usually a link."
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "example": "Yumma UI website",
+      "description": "The code's name to screen readers. Without it they hear the value."
+    },
+    {
+      "name": "modules",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "dots"
+      ],
+      "default": "rounded",
+      "description": "How each module is drawn. Square reads at the smallest sizes."
+    },
+    {
+      "name": "level",
+      "type": "enum",
+      "values": [
+        "L",
+        "M",
+        "Q",
+        "H"
+      ],
+      "default": "M",
+      "description": "How much of the code can be covered and still read: `L` 7%, `M` 15%, `Q` 25%, `H` 30%. An `icon` raises it to `H`."
+    },
+    {
+      "name": "icon",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "A glyph in the middle, on a dark key, such as your app's mark."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "The tile's width: 128, 192 or 256 pixels."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the tile and the three eyes. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The modules popping in from the middle when the value changes. Reduced motion turns it off."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    }
+  ],
+  "scene": [
+    {
+      "component": "QrCode",
+      "props": {
+        "value": "https://www.yummaui.com",
+        "label": "Yumma UI website"
+      }
+    }
+  ]
+}
