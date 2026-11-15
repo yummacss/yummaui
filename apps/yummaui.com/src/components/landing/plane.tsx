@@ -141,6 +141,109 @@ const CARDS = [
 	</Card>,
 ];
 
+// what each card does by itself: real events on the real components, a few at a time
+const wait = (ms: number) => new Promise((done) => setTimeout(done, ms));
+
+function press(element: Element | null | undefined) {
+	if (!(element instanceof HTMLElement)) return;
+	element.animate([{ scale: "1" }, { scale: "0.96" }, { scale: "1" }], {
+		duration: 220,
+		easing: "ease-out",
+	});
+	element.click();
+}
+
+async function type(input: Element | null | undefined, text: string) {
+	if (
+		!(input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement)
+	)
+		return;
+	// the native setter, so React sees each letter as typed
+	const proto =
+		input instanceof HTMLInputElement
+			? HTMLInputElement.prototype
+			: HTMLTextAreaElement.prototype;
+	const field = Object.getOwnPropertyDescriptor(proto, "value");
+	for (let at = 0; at <= text.length; at++) {
+		field?.set?.call(input, text.slice(0, at));
+		input.dispatchEvent(new Event("input", { bubbles: true }));
+		await wait(60);
+	}
+}
+
+function hover(element: Element, on: boolean, from: Element) {
+	const type = on ? "pointerover" : "pointerout";
+	element.dispatchEvent(
+		new PointerEvent(type, {
+			bubbles: true,
+			pointerType: "mouse",
+			relatedTarget: from,
+		}),
+	);
+}
+
+const pick = <T,>(list: T[]) => list[Math.floor(Math.random() * list.length)];
+
+const ACTS: Record<string, (card: HTMLElement) => Promise<void>> = {
+	signup: async (card) => {
+		await type(
+			card.querySelector("input:not([type=password])"),
+			"ada@lovelace.dev",
+		);
+		await wait(300);
+		press(card.querySelector("button"));
+	},
+	notify: async (card) => {
+		press(pick([...card.querySelectorAll("[role=switch]")]));
+	},
+	shoe: async (card) => {
+		press(pick([...card.querySelectorAll("[aria-pressed=false]")]));
+		await wait(700);
+		press([...card.querySelectorAll("button")].at(-1));
+	},
+	share: async (card) => {
+		const id = Math.random().toString(16).slice(2, 6);
+		await type(card.querySelector("input"), `yummaui.com/d/${id}`);
+	},
+	revenue: async (card) => {
+		const bars = [...card.querySelectorAll("svg rect[fill=transparent]")];
+		let last: Element = card;
+		for (const bar of bars) {
+			hover(last, false, bar);
+			hover(bar, true, last);
+			last = bar;
+			await wait(350);
+		}
+		hover(last, false, card);
+	},
+	chat: async (card) => {
+		const box = card.querySelector("textarea, input");
+		await type(box, "Ship the fix today");
+		await wait(900);
+		await type(box, "");
+	},
+	otp: async (card) => {
+		const inputs = [...card.querySelectorAll("input")];
+		for (const input of inputs) await type(input, "");
+		for (const [at, input] of inputs.entries()) {
+			await type(input, String((at * 3 + 4) % 10));
+			await wait(120);
+		}
+	},
+	files: async (card) => {
+		press(
+			pick([
+				...card.querySelectorAll(
+					"[role=treeitem]:not([aria-expanded]):not([aria-selected=true])",
+				),
+			]),
+		);
+	},
+};
+// how many cards act at once, and how often a new one starts
+const AT_ONCE = 3;
+const EVERY = 900;
+
 // each column holds four equal rounds and slides up by one, so the loop has no seam and no end in view
 const COLUMNS = [0, 1, 2, 3, 4].map((column) =>
 	[column, column + 5, (column + 3) % 10, (column + 8) % 10].map(
@@ -170,6 +273,30 @@ export default function Plane() {
 			column.style.animationDuration = `${round.offsetHeight / SPEED}s`;
 			column.dataset.ready = "";
 		}
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+		// a few cards in view act at a time, so the page stays smooth
+		const busy = new Set<HTMLElement>();
+		const timer = setInterval(() => {
+			if (busy.size >= AT_ONCE || document.hidden) return;
+			const view = root.getBoundingClientRect();
+			const ready = [
+				...root.querySelectorAll<HTMLElement>("[data-act]"),
+			].filter((card) => {
+				if (busy.has(card) || !ACTS[card.dataset.act ?? ""]) return false;
+				const box = card.getBoundingClientRect();
+				return (
+					box.bottom > view.top &&
+					box.top < view.bottom &&
+					box.right > view.left &&
+					box.left < view.right
+				);
+			});
+			const card = ready.length ? pick(ready) : null;
+			if (!card) return;
+			busy.add(card);
+			void ACTS[card.dataset.act ?? ""](card).finally(() => busy.delete(card));
+		}, EVERY);
+		return () => clearInterval(timer);
 	}, []);
 
 	return (
@@ -194,7 +321,11 @@ export default function Plane() {
 						{[0, 1, 2, 3].map((round) => (
 							<div key={round} className="d:f fd:c g:5 pb:5">
 								{cards.map((card, at) => (
-									<div key={`${at}-${card.key}`} className="o:h br:xl">
+									<div
+										key={`${at}-${card.key}`}
+										data-act={String(card.key)}
+										className="o:h br:xl"
+									>
 										{card}
 									</div>
 								))}
