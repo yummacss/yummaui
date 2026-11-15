@@ -8,6 +8,7 @@ import meta_activity_heatmap from "./meta/activity-heatmap.json";
 import meta_activity_timeline from "./meta/activity-timeline.json";
 import meta_alert_dialog from "./meta/alert-dialog.json";
 import meta_alert from "./meta/alert.json";
+import meta_announcement from "./meta/announcement.json";
 import meta_autocomplete from "./meta/autocomplete.json";
 import meta_avatar_stack from "./meta/avatar-stack.json";
 import meta_avatar from "./meta/avatar.json";
@@ -134,6 +135,7 @@ export const registryMeta = {
   "activity-timeline": meta_activity_timeline,
   "alert-dialog": meta_alert_dialog,
   "alert": meta_alert,
+  "announcement": meta_announcement,
   "autocomplete": meta_autocomplete,
   "avatar-stack": meta_avatar_stack,
   "avatar": meta_avatar,
@@ -241,6 +243,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "activity-timeline": { component: "activity-timeline", variant: "base", kind: "component", install: "activity-timeline" },
   "alert-dialog": { component: "alert-dialog", variant: "base", kind: "component", install: "alert-dialog" },
   "alert": { component: "alert", variant: "base", kind: "component", install: "alert" },
+  "announcement": { component: "announcement", variant: "base", kind: "component", install: "announcement" },
   "autocomplete-grouped": { component: "autocomplete", variant: "grouped", kind: "example", install: "autocomplete" },
   "autocomplete-helper": { component: "autocomplete", variant: "helper", kind: "example", install: "autocomplete" },
   "autocomplete-icon-leading": { component: "autocomplete", variant: "icon-leading", kind: "example", install: "autocomplete" },

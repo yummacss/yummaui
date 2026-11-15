@@ -3,11 +3,11 @@ import LandingHeader from "@/components/landing/header";
 import { CopyCommand, HotkeyLink } from "@/components/landing/keys";
 import Plane from "@/components/landing/plane";
 import SkipLink from "@/components/ui/skip-link";
-import { Point } from "@/icons";
+import Announcement from "@/registry/ui/announcement";
 import { COMPONENT_PAGES, NEWEST } from "@/utils/component-pages.mjs";
 
 // the components the newest release added, as the sidebar marks them
-const FRESH = COMPONENT_PAGES.filter((page) => page.since === NEWEST).length;
+const FRESH = COMPONENT_PAGES.filter((page) => page.since === NEWEST);
 
 export const metadata: Metadata = {
 	alternates: { canonical: "/" },
@@ -39,10 +39,15 @@ export default function Home() {
 						data-frosted
 						className="d:none @lg:d:b p:a i:0 bg:page/80"
 					/>
-					<p className="m:0 as:fs d:if ai:c g:2 py:1 px:3 br:9999 bw:1 bc:border bg:page fs:xs c:ink/70">
-						<Point aria-hidden className="w:2 h:2" />
-						{FRESH} new components
-					</p>
+					<Announcement
+						label="New"
+						intent="neutral"
+						dot
+						href={`/components/${FRESH[0]?.slug ?? "accordion"}`}
+						className="as:fs"
+					>
+						{FRESH.length} components in {NEWEST}
+					</Announcement>
 					<h1 className="m:0 ff:display fw:400 fs:4xl lh:1 c:ink @sm:fs:5xl">
 						Yumma UI for React.
 					</h1>

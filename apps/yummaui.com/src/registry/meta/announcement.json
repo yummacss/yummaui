@@ -1,0 +1,111 @@
+{
+  "summary": "A badge inside a wider pill with a short message, such as news above a heading.",
+  "props": [
+    {
+      "name": "children",
+      "type": "none",
+      "example": "Folders now sync across your devices",
+      "description": "The message beside the badge.",
+      "typeName": "ReactNode"
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "example": "New",
+      "description": "The badge's word, such as \"New\"."
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "example": "#",
+      "description": "Where the announcement goes. Without it, the pill is plain text."
+    },
+    {
+      "name": "solid",
+      "type": "boolean",
+      "default": false,
+      "description": "A solid badge in place of the tinted one, for news that leads a page."
+    },
+    {
+      "name": "dot",
+      "type": "boolean",
+      "default": false,
+      "description": "A dot in the badge, before its word."
+    },
+    {
+      "name": "badgePosition",
+      "type": "enum",
+      "values": [
+        "leading",
+        "trailing"
+      ],
+      "default": "leading",
+      "description": "Which end the badge sits at."
+    },
+    {
+      "name": "arrow",
+      "type": "boolean",
+      "default": true,
+      "description": "An arrow at the end, saying the pill is a link. Shown with `href`."
+    },
+    {
+      "name": "intent",
+      "type": "enum",
+      "values": [
+        "neutral",
+        "info",
+        "success",
+        "warning",
+        "danger"
+      ],
+      "default": "info",
+      "description": "What the news means, which tints the badge."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "Padding and text size, the badge's with it."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the pill and its badge. Inherits the nearest `Shape`; under the default, a pill."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Announcement",
+      "props": {
+        "href": "#",
+        "dot": true,
+        "label": "New"
+      },
+      "children": "Folders now sync across your devices"
+    }
+  ]
+}

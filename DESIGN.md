@@ -73,6 +73,11 @@ Sizes come in three steps, `sm`, `md` and `lg`, from `SIZE`.
   nothing is cut, clipped or overlapping.
 - **Edges line up.** Things side by side share a top edge; a block beside a
   list starts and ends on the list's lines, one spacing step away.
+- **A part nested in a bar stretches, not centers.** A badge or key inside a
+  pill or bar takes the bar's height (`ai:s`, the text beside it `as:c`), so
+  the space above and below it is the bar's padding. Centered, an odd
+  difference in height leaves half a pixel that a 1x screen rounds to one
+  side.
 - **A block inside a popup takes `RADIUS.inset`**, the popup's corner less
   its 5px of border and padding, so the two corners stay concentric.
 
@@ -80,6 +85,7 @@ Sizes come in three steps, `sm`, `md` and `lg`, from `SIZE`.
 | ---------------------------------------- | ------------------------------------------------ |
 | `className="d:g gtc:2 w:112"` in a panel | `className="d:g gtc:1 @sm:gtc:2 w:72 @sm:w:112"` |
 | A sunk block in a popup on `RADIUS.item` | `RADIUS.inset[shape]`                            |
+| A badge centered in a pill with `ai:c`   | `ai:s` on the pill, `as:c` on its text           |
 
 ## Icons
 

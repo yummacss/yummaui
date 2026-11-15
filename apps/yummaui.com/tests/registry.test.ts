@@ -318,6 +318,18 @@ describe("Yumma UI registry", () => {
 		expect(wrong).toEqual([]);
 	});
 
+	it("marks every component that calls a hook as a client component", () => {
+		const uiDir = join(rootDir, "src/registry/ui");
+		const server = readdirSync(uiDir).filter((file) => {
+			const source = readFileSync(join(uiDir, file), "utf-8");
+			// a hook in a server component fails as soon as a page renders it
+			return (
+				/\buse[A-Z]\w*\(/.test(source) && !source.startsWith('"use client"')
+			);
+		});
+		expect(server).toEqual([]);
+	});
+
 	it("keeps the radio's circle round whatever the shape", () => {
 		const source = readFileSync(
 			join(rootDir, "src/registry/ui/radio.tsx"),

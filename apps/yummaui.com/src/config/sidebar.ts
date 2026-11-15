@@ -45,6 +45,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"accordion",
 			"activity-timeline",
 			"alert",
+			"announcement",
 			"avatar",
 			"avatar-stack",
 			"badge",
