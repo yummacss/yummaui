@@ -245,13 +245,6 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
-		slug: "highlight",
-		since: "0.20",
-		title: "Highlight",
-		description:
-			"Mark the parts of a text that match a search, ignoring case & accents.",
-	},
-	{
 		slug: "image-compare",
 		since: "0.15",
 		title: "Image Compare",

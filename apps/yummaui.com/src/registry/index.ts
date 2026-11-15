@@ -39,7 +39,6 @@ import meta_file_tree from "./meta/file-tree.json";
 import meta_file_upload from "./meta/file-upload.json";
 import meta_form from "./meta/form.json";
 import meta_gauge from "./meta/gauge.json";
-import meta_highlight from "./meta/highlight.json";
 import meta_image_compare from "./meta/image-compare.json";
 import meta_image_cropper from "./meta/image-cropper.json";
 import meta_inline_icon_heading from "./meta/inline-icon-heading.json";
@@ -165,7 +164,6 @@ export const registryMeta = {
   "file-upload": meta_file_upload,
   "form": meta_form,
   "gauge": meta_gauge,
-  "highlight": meta_highlight,
   "image-compare": meta_image_compare,
   "image-cropper": meta_image_cropper,
   "inline-icon-heading": meta_inline_icon_heading,
@@ -286,7 +284,6 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "form": { component: "form", variant: "base", kind: "component", install: "form" },
   "gauge-live": { component: "gauge", variant: "live", kind: "example", install: "gauge" },
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
-  "highlight": { component: "highlight", variant: "base", kind: "component", install: "highlight" },
   "image-compare": { component: "image-compare", variant: "base", kind: "component", install: "image-compare" },
   "image-cropper": { component: "image-cropper", variant: "base", kind: "component", install: "image-cropper" },
   "inline-icon-heading": { component: "inline-icon-heading", variant: "base", kind: "component", install: "inline-icon-heading" },
@@ -381,7 +378,6 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "drawer": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "swiping": "[data-swiping]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-tree": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-upload": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
-  "highlight": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "keypad": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "knob": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

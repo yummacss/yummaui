@@ -55,7 +55,6 @@ export const sidebarConfig: SidebarSection[] = [
 			"code-block",
 			"data-list",
 			"diff-viewer",
-			"highlight",
 			"image-compare",
 			"inline-icon-heading",
 			"kbd",

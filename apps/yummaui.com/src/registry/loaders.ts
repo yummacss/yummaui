@@ -56,7 +56,6 @@ export const registry = {
   "form": () => import("./ui/form"),
   "gauge-live": () => import("./ui/gauge-live"),
   "gauge": () => import("./ui/gauge"),
-  "highlight": () => import("./ui/highlight"),
   "image-compare": () => import("./ui/image-compare"),
   "image-cropper": () => import("./ui/image-cropper"),
   "inline-icon-heading": () => import("./ui/inline-icon-heading"),
