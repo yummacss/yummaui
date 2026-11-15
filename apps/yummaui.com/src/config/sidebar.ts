@@ -63,6 +63,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"preview-card",
 			"progress",
 			"progress-timeline",
+			"qr-code",
 			"scroll-area",
 			"separator",
 		],

@@ -411,6 +411,13 @@ export const COMPONENT_PAGES = [
 		description: "Write a message with files & a Send that turns into Stop.",
 	},
 	{
+		slug: "qr-code",
+		since: "0.20",
+		title: "QR Code",
+		description:
+			"Draw a link as a code a phone camera reads, dark on white in either scheme.",
+	},
+	{
 		slug: "radio",
 		title: "Radio",
 		description: "Select a single option from a group, built on Base UI.",
