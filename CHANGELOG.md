@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **[components]** Calendar.
 - **[components]** Announcement.
 - **[components]** Flowchart.
 - **[components]** `variant="card"` & `shape` on Radio, and `icon` on its options.

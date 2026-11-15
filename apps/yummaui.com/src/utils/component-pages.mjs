@@ -114,6 +114,12 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "calendar",
+		since: "0.20",
+		title: "Calendar",
+		description: "Pick a day or a range of days from a month of keys.",
+	},
+	{
 		slug: "card",
 		since: "0.12",
 		title: "Card",

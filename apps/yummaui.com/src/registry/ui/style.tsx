@@ -166,7 +166,7 @@ export function useIndicator<T extends HTMLElement>(
     measure();
     const frame = requestAnimationFrame(() => setReady(true));
     const mutations = new MutationObserver(measure);
-    mutations.observe(root, { subtree: true, attributeFilter: ["data-pressed"] });
+    mutations.observe(root, { subtree: true, childList: true, attributeFilter: ["data-pressed"] });
     const sizes = new ResizeObserver(measure);
     sizes.observe(root);
     return () => {

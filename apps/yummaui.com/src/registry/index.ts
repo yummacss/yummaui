@@ -18,6 +18,7 @@ import meta_bar_chart from "./meta/bar-chart.json";
 import meta_breadcrumb from "./meta/breadcrumb.json";
 import meta_button_group from "./meta/button-group.json";
 import meta_button from "./meta/button.json";
+import meta_calendar from "./meta/calendar.json";
 import meta_card from "./meta/card.json";
 import meta_carousel from "./meta/carousel.json";
 import meta_checkbox_group from "./meta/checkbox-group.json";
@@ -145,6 +146,7 @@ export const registryMeta = {
   "breadcrumb": meta_breadcrumb,
   "button-group": meta_button_group,
   "button": meta_button,
+  "calendar": meta_calendar,
   "card": meta_card,
   "carousel": meta_carousel,
   "checkbox-group": meta_checkbox_group,
@@ -261,6 +263,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "button-group-split": { component: "button-group", variant: "split", kind: "example", install: "button-group" },
   "button-group": { component: "button-group", variant: "base", kind: "component", install: "button-group" },
   "button": { component: "button", variant: "base", kind: "component", install: "button" },
+  "calendar": { component: "calendar", variant: "base", kind: "component", install: "calendar" },
   "card": { component: "card", variant: "base", kind: "component", install: "card" },
   "carousel": { component: "carousel", variant: "base", kind: "component", install: "carousel" },
   "checkbox-group": { component: "checkbox-group", variant: "base", kind: "component", install: "checkbox-group" },
@@ -372,6 +375,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "autocomplete": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "banner-alert": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "button": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
+  "calendar": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "carousel": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "checkbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "code-block": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
