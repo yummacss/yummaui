@@ -69,6 +69,18 @@
       "description": "The circle, the dot and the label together."
     },
     {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of a card and its icon tile. The circle stays round, since round is what says one of these. Inherits the nearest `Shape`."
+    },
+    {
       "name": "disabled",
       "type": "boolean",
       "default": false,

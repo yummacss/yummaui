@@ -156,6 +156,9 @@ export function Look() {
 	// a preview drawn by an example takes no settings from the drawer
 	const owns = sceneIds(playground.meta?.scene ?? []).includes(playground.id);
 	const looks = owns ? lookProps(props) : [];
+	const own = (playground.meta?.scene ?? []).find(
+		(node) => node.component && sceneIds([node]).includes(playground.id),
+	);
 	const valueOf = (name: string, fallback: unknown) => {
 		const key = `all.${name}`;
 		return key in playground.sceneValues
@@ -201,7 +204,9 @@ export function Look() {
 				<>
 					<h3 className="m:0 mt:6 mb:1 c:ink/60 fs:xs fw:500">Props</h3>
 					{looks.map((prop) => {
+						// what the example sets itself, else the prop's default
 						const fallback =
+							own?.props?.[prop.name] ??
 							prop.default ??
 							(prop.type === "boolean" ? false : prop.values?.[0]);
 						const current = valueOf(prop.name, fallback);

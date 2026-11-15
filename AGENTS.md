@@ -103,8 +103,9 @@ is written.
 - `pill` appears only where a smaller `rounded` also makes sense, so a
   component offering both keeps them different. Never add `pill` as a synonym.
 - Shape is not a style axis where it is the affordance. A radio is round
-  because round means _one of these_ and square means _any of these_, so it
-  has no `shape` prop at all. Ask that question before adding one.
+  because round means _one of these_ and square means _any of these_, so its
+  circle never takes a shape; Radio's `shape` reaches only its cards. Ask
+  that question before adding one.
 - `tests/registry.test.ts` holds the mechanical half.
 
 ## Look

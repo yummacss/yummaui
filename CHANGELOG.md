@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **[components]** `variant="card"` on Radio, and `icon` on its options.
+- **[components]** `variant="card"` & `shape` on Radio, and `icon` on its options.
 - **[components]** Data List.
 - **[components]** QR Code.
 - **[components]** Knob.

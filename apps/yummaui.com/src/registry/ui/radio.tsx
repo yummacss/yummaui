@@ -4,7 +4,7 @@ import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
 import { type ReactNode, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, SIZE, type Size, useShape } from "./style";
+import { FOCUS, RADIUS, SIZE, type Shape, type Size, useShape } from "./style";
 
 export interface RadioOption {
   value: string;
@@ -65,6 +65,11 @@ export interface RadioProps {
   variant?: Variant;
   /** The circle, the dot and the label together. */
   size?: Size;
+  /**
+   * Corner radius of a card and its icon tile. The circle stays round, since
+   * round is what says one of these. Inherits the nearest `Shape`.
+   */
+  shape?: Shape;
   /** Blocks interaction and dims every option. */
   disabled?: boolean;
   /**
@@ -99,6 +104,7 @@ export default function RadioBase({
   onValueChange,
   variant = "plain",
   size = "md",
+  shape: shapeProp,
   disabled = false,
   animated = true,
   className,
@@ -107,8 +113,8 @@ export default function RadioBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const labelId = useId();
-  // a card's corners follow the page's; the circle stays round whatever they are
-  const corners = useShape();
+  // a card's corners follow the shape; the circle stays round whatever it is
+  const corners = useShape(shapeProp);
   const card = variant === "card";
   // the card's circle sits outside Base UI's radio, so it reads the choice from here
   const [own, setOwn] = useState(defaultValue);

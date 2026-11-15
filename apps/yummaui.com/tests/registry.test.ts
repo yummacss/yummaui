@@ -318,19 +318,14 @@ describe("Yumma UI registry", () => {
 		expect(wrong).toEqual([]);
 	});
 
-	it("gives the radio no shape prop", () => {
-		const meta = JSON.parse(
-			readFileSync(join(rootDir, "src/registry/meta/radio.json"), "utf-8"),
-		);
+	it("keeps the radio's circle round whatever the shape", () => {
 		const source = readFileSync(
 			join(rootDir, "src/registry/ui/radio.tsx"),
 			"utf-8",
 		);
 
-		expect(meta.props.map((prop: { name: string }) => prop.name)).not.toContain(
-			"shape",
-		);
-		expect(source).not.toMatch(/shape\s*[?:=]|SHAPES|\bShape\b/);
+		// the plain circle and the card's circle both take ROUND, never a shape's radius
+		expect(source.match(/SIZE\.mark\[size\],\s*ROUND/g)?.length).toBe(2);
 	});
 
 	it("keeps an icon-only button off the type scale", () => {
