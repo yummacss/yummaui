@@ -152,8 +152,8 @@ const SPEED = 14;
 
 /**
  * The landing's background: real components on a plane tilted to an isometric
- * angle, drifting slowly. A pointer can use them; keyboard and screen readers
- * pass over, since every card shows several times.
+ * angle, drifting slowly by themselves. Nothing in it takes a pointer, the
+ * keyboard or a screen reader, since every card shows several times.
  */
 export default function Plane() {
 	const plane = useRef<HTMLDivElement>(null);
@@ -161,20 +161,6 @@ export default function Plane() {
 	useEffect(() => {
 		const root = plane.current;
 		if (!root) return;
-		// out of the tab order, again whenever a component re-renders its own tabindex
-		const skip = () => {
-			for (const node of root.querySelectorAll<HTMLElement>(
-				"a, button, input, textarea, select, [tabindex]",
-			))
-				if (node.tabIndex !== -1) node.tabIndex = -1;
-		};
-		skip();
-		const watch = new MutationObserver(skip);
-		watch.observe(root, {
-			subtree: true,
-			childList: true,
-			attributeFilter: ["tabindex"],
-		});
 		// one speed in every column; set once, before the drift starts, since a later change jumps it
 		for (const column of root.querySelectorAll<HTMLElement>(
 			"[data-plane-lane]",
@@ -184,14 +170,14 @@ export default function Plane() {
 			column.style.animationDuration = `${round.offsetHeight / SPEED}s`;
 			column.dataset.ready = "";
 		}
-		return () => watch.disconnect();
 	}, []);
 
 	return (
 		<div
 			ref={plane}
 			aria-hidden
-			className="p:a i:0 o:h"
+			inert
+			className="p:a i:0 o:h pe:none us:none"
 			style={{
 				maskImage:
 					"radial-gradient(ellipse at 70% 40%, #000 40%, transparent 92%), linear-gradient(to top, transparent, #000 18%)",
