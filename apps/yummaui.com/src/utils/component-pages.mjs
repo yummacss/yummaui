@@ -173,6 +173,13 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "data-list",
+		since: "0.20",
+		title: "Data List",
+		description:
+			"Show labels & their values down a list, such as a file's details.",
+	},
+	{
 		slug: "diff-viewer",
 		since: "0.15",
 		title: "Diff Viewer",

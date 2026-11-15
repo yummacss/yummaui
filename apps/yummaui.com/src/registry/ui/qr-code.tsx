@@ -37,8 +37,8 @@ export interface QrCodeProps {
    */
   label?: string;
   /**
-   * Writes the address under the code, so people see where it goes before
-   * they scan.
+   * Writes the address under the code, so people see where it goes before they
+   * scan.
    */
   showValue?: boolean;
   /** How each module is drawn. Square reads at the smallest sizes. */
@@ -53,8 +53,7 @@ export interface QrCodeProps {
   /** The tile's width: 128, 192 or 256 pixels. */
   size?: Size;
   /**
-   * Corner radius of the tile and the three eyes. Inherits the nearest
-   * `Shape`.
+   * Corner radius of the tile and the three eyes. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**

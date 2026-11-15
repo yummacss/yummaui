@@ -53,6 +53,7 @@ export const sidebarConfig: SidebarSection[] = [
 			"card",
 			"carousel",
 			"code-block",
+			"data-list",
 			"diff-viewer",
 			"image-compare",
 			"inline-icon-heading",

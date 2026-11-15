@@ -27,6 +27,7 @@ import meta_combobox from "./meta/combobox.json";
 import meta_context_menu from "./meta/context-menu.json";
 import meta_copy_button from "./meta/copy-button.json";
 import meta_currency_input from "./meta/currency-input.json";
+import meta_data_list from "./meta/data-list.json";
 import meta_dialog from "./meta/dialog.json";
 import meta_diff_viewer from "./meta/diff-viewer.json";
 import meta_donut_chart from "./meta/donut-chart.json";
@@ -151,6 +152,7 @@ export const registryMeta = {
   "context-menu": meta_context_menu,
   "copy-button": meta_copy_button,
   "currency-input": meta_currency_input,
+  "data-list": meta_data_list,
   "dialog": meta_dialog,
   "diff-viewer": meta_diff_viewer,
   "donut-chart": meta_donut_chart,
@@ -266,6 +268,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "context-menu": { component: "context-menu", variant: "base", kind: "component", install: "context-menu" },
   "copy-button": { component: "copy-button", variant: "base", kind: "component", install: "copy-button" },
   "currency-input": { component: "currency-input", variant: "base", kind: "component", install: "currency-input" },
+  "data-list": { component: "data-list", variant: "base", kind: "component", install: "data-list" },
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
   "diff-viewer": { component: "diff-viewer", variant: "base", kind: "component", install: "diff-viewer" },
   "donut-chart": { component: "donut-chart", variant: "base", kind: "component", install: "donut-chart" },
