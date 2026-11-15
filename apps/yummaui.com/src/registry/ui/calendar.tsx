@@ -186,8 +186,11 @@ export interface CalendarProps<M extends Mode = "single"> {
   defaultValue?: CalendarValue<M>;
   /** The picked day or range, controlled. Pair with `onValueChange`. */
   value?: CalendarValue<M>;
-  /** Called with the new day or range whenever it changes. */
-  onValueChange?: (value: CalendarValue<M> | undefined) => void;
+  /**
+   * Called with the new day or range whenever it changes, and the day that was
+   * clicked.
+   */
+  onValueChange?: (value: CalendarValue<M> | undefined, day?: Date) => void;
   /**
    * Days that cannot be picked: a date, a list of them, a range, or a function
    * of the date.
@@ -247,9 +250,9 @@ export default function Calendar<M extends Mode = "single">({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [own, setOwn] = useState(defaultValue);
   const value = controlled ?? own;
-  const pick = (next: CalendarValue<M> | undefined) => {
+  const pick = (next: CalendarValue<M> | undefined, day?: Date) => {
     if (controlled === undefined) setOwn(next);
-    onValueChange?.(next);
+    onValueChange?.(next, day);
   };
 
   const single = mode === "single" ? (value as Date | undefined) : undefined;
@@ -284,7 +287,7 @@ export default function Calendar<M extends Mode = "single">({
         <Button
           disabled={disabled}
           onClick={() => {
-            pick(today as CalendarValue<M>);
+            pick(today as CalendarValue<M>, today);
             setMonth(today);
           }}
           className={merge(
@@ -341,14 +344,14 @@ export default function Calendar<M extends Mode = "single">({
           {...common}
           mode="range"
           selected={range}
-          onSelect={(next) => pick(next as CalendarValue<M> | undefined)}
+          onSelect={(next, day) => pick(next as CalendarValue<M> | undefined, day)}
         />
       ) : (
         <DayPicker
           {...common}
           mode="single"
           selected={single}
-          onSelect={(next) => pick(next as CalendarValue<M> | undefined)}
+          onSelect={(next, day) => pick(next as CalendarValue<M> | undefined, day)}
         />
       )}
     </Look>

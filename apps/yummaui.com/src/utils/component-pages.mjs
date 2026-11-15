@@ -186,6 +186,14 @@ export const COMPONENT_PAGES = [
 		primitive: true,
 	},
 	{
+		slug: "date-picker",
+		since: "0.20",
+		title: "Date Picker",
+		description:
+			"Pick a day or a range in a field that opens a calendar, built on Base UI.",
+		primitive: "popover",
+	},
+	{
 		slug: "data-list",
 		since: "0.20",
 		title: "Data List",

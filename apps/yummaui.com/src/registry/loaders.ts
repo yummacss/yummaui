@@ -43,6 +43,7 @@ export const registry = {
   "copy-button": () => import("./ui/copy-button"),
   "currency-input": () => import("./ui/currency-input"),
   "data-list": () => import("./ui/data-list"),
+  "date-picker": () => import("./ui/date-picker"),
   "dialog": () => import("./ui/dialog"),
   "diff-viewer": () => import("./ui/diff-viewer"),
   "donut-chart": () => import("./ui/donut-chart"),

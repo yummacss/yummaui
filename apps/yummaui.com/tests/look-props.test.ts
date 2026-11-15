@@ -21,6 +21,7 @@ const KNOWN_INERT: Record<string, string> = {
 	"combobox.loading": POPUP,
 	"context-menu.icon": POPUP,
 	"context-menu.iconPosition": POPUP,
+	"date-picker.clearable": "drawn only once a day is picked",
 	"dialog.confirmTone": POPUP,
 	"dialog.showClose": POPUP,
 	"drawer.handle": POPUP,

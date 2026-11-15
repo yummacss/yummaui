@@ -28,8 +28,8 @@
     {
       "name": "onValueChange",
       "type": "none",
-      "typeName": "(value: Date | DateRange | undefined) => void",
-      "description": "Called with the new day or range whenever it changes."
+      "typeName": "(value: Date | DateRange | undefined, day?: Date) => void",
+      "description": "Called with the new day or range whenever it changes, and the day that was clicked."
     },
     {
       "name": "weekStartsOn",

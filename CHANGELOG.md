@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **[components]** Date Picker.
 - **[components]** Calendar.
 - **[components]** `Fit` in the style module, a box that eases its height to its content.
 - **[components]** Announcement.
