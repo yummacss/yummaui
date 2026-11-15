@@ -41,6 +41,16 @@ export interface DatePickerProps<M extends Mode = "single"> {
   disabledDays?: Matcher | Matcher[];
   /** The first day of the week, from 0 for Sunday to 6 for Saturday. */
   weekStartsOn?: Weekday;
+  /**
+   * The earliest month to show, and the first year in the list. 100 years back
+   * by default.
+   */
+  startMonth?: Date;
+  /**
+   * The latest month to show, and the last year in the list. 10 years ahead by
+   * default.
+   */
+  endMonth?: Date;
   /** An X in the field that empties it, shown once something is picked. */
   clearable?: boolean;
   /**
@@ -63,8 +73,8 @@ export interface DatePickerProps<M extends Mode = "single"> {
   /** Blocks opening and dims the whole control, label included. */
   disabled?: boolean;
   /**
-   * The popup's scale-in and the calendar's moving key. Turn it off for both to
-   * jump; reduced motion does the same.
+   * The popup's scale-in, the month sliding in and a day's press. Turn it off
+   * for all three; reduced motion does the same.
    */
   animated?: boolean;
   /**
@@ -94,6 +104,8 @@ export default function DatePicker<M extends Mode = "single">({
   onValueChange,
   disabledDays,
   weekStartsOn = 0,
+  startMonth,
+  endMonth,
   clearable = true,
   name,
   container,
@@ -209,6 +221,11 @@ export default function DatePicker<M extends Mode = "single">({
                 onValueChange={pick}
                 disabledDays={disabledDays}
                 weekStartsOn={weekStartsOn}
+                startMonth={startMonth}
+                endMonth={endMonth}
+                // the popup closes on the pick, before a key could slide there
+                sliding={false}
+                container={container}
                 shape={shape}
                 animated={animated}
                 focus={focus}
