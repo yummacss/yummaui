@@ -10,6 +10,11 @@ type Level = "L" | "M" | "Q" | "H";
 
 const TILE: Record<Size, string> = { sm: "w:32 p:2", md: "w:48 p:3", lg: "w:64 p:4" };
 
+const CAPTION: Record<Size, string> = { sm: "w:32", md: "w:48", lg: "w:64" };
+
+// the address as people read it, without the scheme
+const address = (value: string) => value.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
 // the eyes' outer and inner corners, in modules, for each shape
 const EYE: Record<Shape, [number, number]> = {
   square: [0, 0],
@@ -26,8 +31,16 @@ const box = (x: number, y: number, w: number, r: number) =>
 export interface QrCodeProps {
   /** The text the code holds, usually a link. */
   value: string;
-  /** The code's name to screen readers. Without it they hear the value. */
+  /**
+   * What the code opens, written under it and read to screen readers, such as
+   * "Yumma UI website".
+   */
   label?: string;
+  /**
+   * Writes the address under the code, so people see where it goes before
+   * they scan.
+   */
+  showValue?: boolean;
   /** How each module is drawn. Square reads at the smallest sizes. */
   modules?: Modules;
   /**
@@ -63,6 +76,7 @@ export interface QrCodeProps {
 export default function QrCode({
   value,
   label,
+  showValue = true,
   modules = "rounded",
   level = "M",
   icon,
@@ -124,61 +138,69 @@ export default function QrCode({
   const part = { transformBox: "fill-box", transformOrigin: "center" } as const;
 
   return (
-    <div className={merge("d:b fs:0 bg:white bw:1 bc:line", TILE[size], RADIUS.popup[shape], className)}>
-      <div className="p:r">
-        <svg
-          ref={svg}
-          role="img"
-          aria-label={label ?? value}
-          viewBox={`0 0 ${count} ${count}`}
-          fill="currentColor"
-          className="d:b w:100% h:auto c:black"
-        >
-          {cells.map(([x, y]) =>
-            modules === "dots" ? (
-              <circle key={`${x} ${y}`} data-at={`${x} ${y}`} style={part} cx={x + 0.5} cy={y + 0.5} r={0.42} />
-            ) : (
-              <rect
-                key={`${x} ${y}`}
-                data-at={`${x} ${y}`}
-                style={part}
-                x={x + 0.06}
-                y={y + 0.06}
-                width={0.88}
-                height={0.88}
-                rx={modules === "rounded" ? 0.3 : 0}
-              />
-            ),
-          )}
-          {eyes.map(([x, y]) => (
-            <g key={`${x} ${y}`} data-at={`${x} ${y}`} style={part}>
-              <path fillRule="evenodd" d={`${box(x, y, 7, outer)}${box(x + 1, y + 1, 5, Math.max(0, outer - 1))}`} />
-              <path d={box(x + 2, y + 2, 3, inner)} />
-            </g>
-          ))}
-          {hole && (
-            <rect
-              data-at={`${count / 2} ${count / 2}`}
-              style={part}
-              x={hole.at}
-              y={hole.at}
-              width={hole.width}
-              height={hole.width}
-              rx={hole.width * 0.28}
-            />
-          )}
-        </svg>
-        {hole && (
-          // the glyph over the svg, so it keeps its own size in pixels
-          <span
-            aria-hidden
-            className="p:a d:f ai:c jc:c c:white pe:none"
-            style={{ inset: `${(hole.at / count) * 100}%` }}
+    <div className={merge("d:if fd:c ai:c g:3", className)}>
+      <div className={merge("d:b fs:0 bg:white bw:1 bc:line", TILE[size], RADIUS.popup[shape])}>
+        <div className="p:r">
+          <svg
+            ref={svg}
+            role="img"
+            aria-label={label ?? value}
+            viewBox={`0 0 ${count} ${count}`}
+            fill="currentColor"
+            className="d:b w:100% h:auto c:black"
           >
-            {icon}
-          </span>
-        )}
+            {cells.map(([x, y]) =>
+              modules === "dots" ? (
+                <circle key={`${x} ${y}`} data-at={`${x} ${y}`} style={part} cx={x + 0.5} cy={y + 0.5} r={0.42} />
+              ) : (
+                <rect
+                  key={`${x} ${y}`}
+                  data-at={`${x} ${y}`}
+                  style={part}
+                  x={x + 0.06}
+                  y={y + 0.06}
+                  width={0.88}
+                  height={0.88}
+                  rx={modules === "rounded" ? 0.3 : 0}
+                />
+              ),
+            )}
+            {eyes.map(([x, y]) => (
+              <g key={`${x} ${y}`} data-at={`${x} ${y}`} style={part}>
+                <path fillRule="evenodd" d={`${box(x, y, 7, outer)}${box(x + 1, y + 1, 5, Math.max(0, outer - 1))}`} />
+                <path d={box(x + 2, y + 2, 3, inner)} />
+              </g>
+            ))}
+            {hole && (
+              <rect
+                data-at={`${count / 2} ${count / 2}`}
+                style={part}
+                x={hole.at}
+                y={hole.at}
+                width={hole.width}
+                height={hole.width}
+                rx={hole.width * 0.28}
+              />
+            )}
+          </svg>
+          {hole && (
+            // the glyph over the svg, so it keeps its own size in pixels
+            <span
+              aria-hidden
+              className="p:a d:f ai:c jc:c c:white pe:none"
+              style={{ inset: `${(hole.at / count) * 100}%` }}
+            >
+              {icon}
+            </span>
+          )}
+        </div>
       </div>
+      {(label || showValue) && (
+        <div className={merge("d:f fd:c ai:c g:1 min-w:0 ta:c", CAPTION[size])}>
+          {label && <span className="fs:sm fw:500 c:label">{label}</span>}
+          {showValue && <span className="w:100% ff:m fs:xs c:hint ws:nw o:h to:e">{address(value)}</span>}
+        </div>
+      )}
     </div>
   );
 }

@@ -11,7 +11,13 @@
       "name": "label",
       "type": "string",
       "example": "Yumma UI website",
-      "description": "The code's name to screen readers. Without it they hear the value."
+      "description": "What the code opens, written under it and read to screen readers, such as \"Yumma UI website\"."
+    },
+    {
+      "name": "showValue",
+      "type": "boolean",
+      "default": true,
+      "description": "Writes the address under the code, so people see where it goes before they scan."
     },
     {
       "name": "modules",
