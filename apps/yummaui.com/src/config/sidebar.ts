@@ -15,6 +15,7 @@ export const sidebarConfig: SidebarSection[] = [
 		title: "Forms",
 		items: [
 			"autocomplete",
+			"calendar",
 			"checkbox",
 			"checkbox-group",
 			"color-picker",

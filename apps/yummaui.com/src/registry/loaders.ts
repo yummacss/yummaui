@@ -29,6 +29,7 @@ export const registry = {
   "button-group-split": () => import("./ui/button-group-split"),
   "button-group": () => import("./ui/button-group"),
   "button": () => import("./ui/button"),
+  "calendar": () => import("./ui/calendar"),
   "card": () => import("./ui/card"),
   "carousel": () => import("./ui/carousel"),
   "checkbox-group": () => import("./ui/checkbox-group"),

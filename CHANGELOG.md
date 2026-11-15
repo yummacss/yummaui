@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **[components]** Calendar.
+- **[components]** `Fit` in the style module, a box that eases its height to its content.
 - **[components]** Announcement.
 - **[components]** Flowchart.
 - **[components]** `variant="card"` & `shape` on Radio, and `icon` on its options.
@@ -47,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **[components]** Onboarding eases its height between steps.
 - **[components]** `shake` in the style module shakes an element from another frame.
 - **[components]** Navigation Menu's panel has even space above & below its content, stacks into one column on a phone & scrolls when taller than the room under the bar.
 - **[components]** File Upload, Model Picker's large list, Dialog & Alert Dialog fit a 360px screen.
