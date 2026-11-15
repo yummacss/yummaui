@@ -1,3 +1,5 @@
+"use client";
+
 import { IconArrowRight } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
