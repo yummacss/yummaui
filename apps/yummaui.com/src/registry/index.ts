@@ -37,6 +37,7 @@ import meta_field from "./meta/field.json";
 import meta_fieldset from "./meta/fieldset.json";
 import meta_file_tree from "./meta/file-tree.json";
 import meta_file_upload from "./meta/file-upload.json";
+import meta_flowchart from "./meta/flowchart.json";
 import meta_form from "./meta/form.json";
 import meta_gauge from "./meta/gauge.json";
 import meta_image_compare from "./meta/image-compare.json";
@@ -162,6 +163,7 @@ export const registryMeta = {
   "fieldset": meta_fieldset,
   "file-tree": meta_file_tree,
   "file-upload": meta_file_upload,
+  "flowchart": meta_flowchart,
   "form": meta_form,
   "gauge": meta_gauge,
   "image-compare": meta_image_compare,
@@ -281,6 +283,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "fieldset": { component: "fieldset", variant: "base", kind: "component", install: "fieldset" },
   "file-tree": { component: "file-tree", variant: "base", kind: "component", install: "file-tree" },
   "file-upload": { component: "file-upload", variant: "base", kind: "component", install: "file-upload" },
+  "flowchart": { component: "flowchart", variant: "base", kind: "component", install: "flowchart" },
   "form": { component: "form", variant: "base", kind: "component", install: "form" },
   "gauge-live": { component: "gauge", variant: "live", kind: "example", install: "gauge" },
   "gauge": { component: "gauge", variant: "base", kind: "component", install: "gauge" },
@@ -378,6 +381,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "drawer": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "swiping": "[data-swiping]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-tree": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-upload": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "flowchart": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "inline-icon-heading": { states: {}, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "keypad": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "knob": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },

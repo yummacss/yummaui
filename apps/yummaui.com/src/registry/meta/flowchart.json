@@ -1,0 +1,160 @@
+{
+  "summary": "Steps joined by edges on a canvas you can pan and zoom, such as what happens to a file once it is saved.",
+  "props": [
+    {
+      "name": "steps",
+      "type": "none",
+      "typeName": "FlowchartStep[]",
+      "description": "The steps, each a raised node."
+    },
+    {
+      "name": "links",
+      "type": "none",
+      "typeName": "FlowchartLink[]",
+      "description": "The edges between them, from one step's foot to another's head."
+    },
+    {
+      "name": "draggable",
+      "type": "boolean",
+      "default": true,
+      "description": "Lets people drag steps to new places."
+    },
+    {
+      "name": "controls",
+      "type": "boolean",
+      "default": true,
+      "description": "The zoom bar in the corner: out, in and fit."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the canvas, the steps and the bar. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "A dragged step lifting and the running dash flowing. Reduced motion turns both off."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes on the canvas, where its height goes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    }
+  ],
+  "scene": [
+    {
+      "component": "Flowchart",
+      "props": {
+        "className": "h:110",
+        "steps": [
+          {
+            "id": "added",
+            "label": "Photo added",
+            "description": "Camera Roll",
+            "icon": {
+              "$icon": "IconPhoto",
+              "size": "w:4 h:4"
+            },
+            "status": "Done",
+            "position": {
+              "x": 160,
+              "y": 0
+            }
+          },
+          {
+            "id": "resize",
+            "label": "Resize",
+            "description": "Long side to 2048px",
+            "icon": {
+              "$icon": "IconRuler",
+              "size": "w:4 h:4"
+            },
+            "status": "Done",
+            "position": {
+              "x": 160,
+              "y": 110
+            }
+          },
+          {
+            "id": "copy",
+            "label": "Copy",
+            "description": "Pictures/2026",
+            "icon": {
+              "$icon": "IconFolder",
+              "size": "w:4 h:4"
+            },
+            "status": "Running",
+            "position": {
+              "x": 0,
+              "y": 230
+            }
+          },
+          {
+            "id": "backup",
+            "label": "Back up",
+            "description": "To the cloud",
+            "icon": {
+              "$icon": "IconCloud",
+              "size": "w:4 h:4"
+            },
+            "position": {
+              "x": 320,
+              "y": 230
+            }
+          },
+          {
+            "id": "notify",
+            "label": "Notify",
+            "description": "When both finish",
+            "icon": {
+              "$icon": "IconBell",
+              "size": "w:4 h:4"
+            },
+            "position": {
+              "x": 160,
+              "y": 350
+            }
+          }
+        ],
+        "links": [
+          {
+            "from": "added",
+            "to": "resize"
+          },
+          {
+            "from": "resize",
+            "to": "copy",
+            "running": true
+          },
+          {
+            "from": "resize",
+            "to": "backup"
+          },
+          {
+            "from": "copy",
+            "to": "notify"
+          },
+          {
+            "from": "backup",
+            "to": "notify"
+          }
+        ]
+      }
+    }
+  ]
+}

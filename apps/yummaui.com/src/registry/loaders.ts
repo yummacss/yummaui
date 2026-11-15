@@ -53,6 +53,7 @@ export const registry = {
   "fieldset": () => import("./ui/fieldset"),
   "file-tree": () => import("./ui/file-tree"),
   "file-upload": () => import("./ui/file-upload"),
+  "flowchart": () => import("./ui/flowchart"),
   "form": () => import("./ui/form"),
   "gauge-live": () => import("./ui/gauge-live"),
   "gauge": () => import("./ui/gauge"),
