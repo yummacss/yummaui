@@ -48,6 +48,16 @@
       "description": "Called with the newly selected value. Required for a controlled group."
     },
     {
+      "name": "variant",
+      "type": "enum",
+      "values": [
+        "plain",
+        "card"
+      ],
+      "default": "plain",
+      "description": "`card` draws each option as a card the whole of which picks it, with its `icon` in a tile and the circle at the end."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [
@@ -57,6 +67,18 @@
       ],
       "default": "md",
       "description": "The circle, the dot and the label together."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of a card and its icon tile. The circle stays round, since round is what says one of these. Inherits the nearest `Shape`."
     },
     {
       "name": "disabled",
@@ -88,19 +110,33 @@
           {
             "value": "keep",
             "label": "Keep both",
-            "description": "Adds a number to the new one"
+            "description": "Adds a number to the new one",
+            "icon": {
+              "$icon": "IconCopy",
+              "size": "w:4 h:4"
+            }
           },
           {
             "value": "replace",
             "label": "Replace",
-            "description": "The old file moves to Trash"
+            "description": "The old file moves to Trash",
+            "icon": {
+              "$icon": "IconTrash",
+              "size": "w:4 h:4"
+            }
           },
           {
             "value": "skip",
             "label": "Skip",
-            "description": "Leaves the old file as it is"
+            "description": "Leaves the old file as it is",
+            "icon": {
+              "$icon": "IconArrowForwardUp",
+              "size": "w:4 h:4"
+            }
           }
-        ]
+        ],
+        "variant": "card",
+        "className": "w:96 max-w:100%"
       }
     }
   ]
