@@ -3,7 +3,11 @@ import LandingHeader from "@/components/landing/header";
 import { CopyCommand, HotkeyLink } from "@/components/landing/keys";
 import Plane from "@/components/landing/plane";
 import SkipLink from "@/components/ui/skip-link";
-import { COMPONENT_PAGES } from "@/utils/component-pages.mjs";
+import { Point } from "@/icons";
+import { COMPONENT_PAGES, NEWEST } from "@/utils/component-pages.mjs";
+
+// the components the newest release added, as the sidebar marks them
+const FRESH = COMPONENT_PAGES.filter((page) => page.since === NEWEST).length;
 
 export const metadata: Metadata = {
 	alternates: { canonical: "/" },
@@ -35,13 +39,16 @@ export default function Home() {
 						data-frosted
 						className="d:none @lg:d:b p:a i:0 bg:page/80"
 					/>
-					<p className="m:0 fs:xs ls:5 tt:u c:ink/60">Base UI · Yumma CSS</p>
+					<p className="m:0 as:fs d:if ai:c g:2 py:1 px:3 br:9999 bw:1 bc:border bg:page fs:xs c:ink/70">
+						<Point aria-hidden className="w:2 h:2" />
+						{FRESH} new components
+					</p>
 					<h1 className="m:0 ff:display fw:400 fs:4xl lh:1 c:ink @sm:fs:5xl">
 						Yumma UI for React.
 					</h1>
 					<p className="m:0 fs:sm lh:5 ls:3 c:ink/70">
-						{COMPONENT_PAGES.length} React components on Base UI. The CLI writes
-						each one into your project as a file you can read.
+						{COMPONENT_PAGES.length} beautiful React components, ready for you
+						to download and use in your project.
 					</p>
 					<div className="d:f fd:c g:2 @sm:fd:r">
 						<HotkeyLink href="/components/accordion" hotkey="B" primary>

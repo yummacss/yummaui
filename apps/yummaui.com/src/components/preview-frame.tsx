@@ -43,9 +43,12 @@ const RESET = `
 `;
 
 let sheet: string | null = null;
+let counted = -1;
 
+// copied again whenever the page gains a sheet, such as a component's own stylesheet loading late
 function pageStyles(): string {
-	if (sheet !== null) return sheet;
+	if (sheet !== null && document.styleSheets.length === counted) return sheet;
+	counted = document.styleSheets.length;
 
 	const parts: string[] = [];
 	for (const style of document.styleSheets) {
@@ -126,6 +129,14 @@ export default function PreviewFrame({
 			const base = target.createElement("style");
 			base.textContent = RESET;
 			target.head.append(page, base);
+			const refresh = () => {
+				page.textContent = pageStyles();
+			};
+			watch?.disconnect();
+			watch = new MutationObserver(refresh);
+			watch.observe(document.head, { childList: true });
+			document.head.addEventListener("load", refresh, true);
+			unload = () => document.head.removeEventListener("load", refresh, true);
 
 			const accent = target.createElement("style");
 			accent.id = "accent";
@@ -172,9 +183,15 @@ export default function PreviewFrame({
 			setBody(root);
 		};
 
+		let watch: MutationObserver | undefined;
+		let unload = () => {};
 		attach();
 		element.addEventListener("load", attach);
-		return () => element.removeEventListener("load", attach);
+		return () => {
+			element.removeEventListener("load", attach);
+			watch?.disconnect();
+			unload();
+		};
 	}, [near, fill, bleed]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: `body` is the remount signal, not a value read

@@ -15,6 +15,7 @@ const KNOWN_INERT: Record<string, string> = {
 	"alert-dialog.tone": POPUP,
 	"autocomplete.autoHighlight": BEHAVIOR,
 	"carousel.loop": BEHAVIOR,
+	"flowchart.draggable": BEHAVIOR,
 	"autocomplete.loading": POPUP,
 	"color-picker.opacity": "popover variant only",
 	"combobox.loading": POPUP,

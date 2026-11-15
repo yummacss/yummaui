@@ -230,6 +230,13 @@ export const COMPONENT_PAGES = [
 		description: "Upload files with drag & drop.",
 	},
 	{
+		slug: "flowchart",
+		since: "0.20",
+		title: "Flowchart",
+		description:
+			"Show steps joined by edges on a canvas you can pan, zoom & rearrange.",
+	},
+	{
 		slug: "form",
 		since: "0.12",
 		primitive: true,
