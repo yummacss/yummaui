@@ -1,18 +1,28 @@
 "use client";
 
 import { Button } from "@base-ui/react/button";
-import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { type ComponentProps, createContext, useContext, useEffect, useRef, useState } from "react";
+import { Select } from "@base-ui/react/select";
+import { IconCheck, IconChevronDown, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
+import {
+  type ChangeEvent,
+  type ComponentProps,
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   type ChevronProps,
   type DateRange,
   DayPicker,
   type DayButtonProps,
   type DayProps,
+  type DropdownProps,
   type Matcher,
 } from "react-day-picker";
 import { merge } from "yummacss/merge";
-import { FOCUS, Fit, RADIUS, type Shape, useIndicator, useShape } from "./style";
+import { FOCUS, Fit, RADIUS, Scroll, type Shape, useIndicator, useShape } from "./style";
 
 type Mode = "single" | "range";
 type Weekday = 0 | 1 | 2 | 3 | 4 | 5 | 6;
@@ -28,6 +38,8 @@ interface LookValue {
   outline: string;
   weekStartsOn: Weekday;
   animated: boolean;
+  sliding: boolean;
+  container?: HTMLElement | null;
   shown: string;
   turn: number;
   indicator: ReturnType<typeof useIndicator<HTMLDivElement>> | null;
@@ -39,6 +51,7 @@ const Look = createContext<LookValue>({
   outline: "",
   weekStartsOn: 0,
   animated: true,
+  sliding: true,
   shown: "",
   turn: 0,
   indicator: null,
@@ -57,13 +70,13 @@ const enter = (turn: number) =>
 
 // the key under the picked day lives beside the table, which cannot hold it
 function Grid(props: ComponentProps<"table">) {
-  const { mode, shape, animated, shown, turn, indicator } = useContext(Look);
+  const { mode, shape, animated, sliding, shown, turn, indicator } = useContext(Look);
   return (
     <Fit animated={animated} className="w:100%">
       <div ref={indicator?.ref} className="p:r">
         {/* a new month mounts a new key, so it never slides in from the corner */}
         <div key={shown} className={animated ? enter(turn) : ""}>
-          {mode === "single" && indicator && (
+          {mode === "single" && sliding && indicator && (
             <span
               aria-hidden
               style={indicator.style}
@@ -81,14 +94,74 @@ function Grid(props: ComponentProps<"table">) {
   );
 }
 
-function CaptionLabel({ children, className: _className, ...props }: ComponentProps<"span">) {
-  const { animated, shown, turn } = useContext(Look);
+// the month and the year, each a list to jump to rather than many steps of the arrows
+function Dropdown({ options = [], value, onChange, disabled, "aria-label": ariaLabel }: DropdownProps) {
+  const { shape, outline, animated, container } = useContext(Look);
+  const current = Number(value);
   return (
-    <span {...props} className="d:b fs:sm fw:600">
-      <span key={shown} className={merge("d:b", animated && enter(turn))}>
-        {children}
-      </span>
-    </span>
+    <Select.Root
+      value={current}
+      disabled={disabled}
+      onValueChange={(next) =>
+        onChange?.({ target: { value: String(next) } } as unknown as ChangeEvent<HTMLSelectElement>)
+      }
+    >
+      <Select.Trigger
+        aria-label={ariaLabel}
+        className={(state) =>
+          merge(
+            outline,
+            "d:f ai:c g:1 h:7 pl:2 pr:1 bw:1 bc:transparent fs:sm fw:600 fvn:tn c:label c:p us:none h:bg:well",
+            state.open ? "bg:well" : "bg:transparent",
+            RADIUS.controlInset[shape],
+          )
+        }
+      >
+        <Select.Value>{() => options.find((option) => option.value === current)?.label}</Select.Value>
+        <Select.Icon className="d:f c:hint">
+          <IconChevronDown aria-hidden className="w:4 h:4" />
+        </Select.Icon>
+      </Select.Trigger>
+      <Select.Portal container={container}>
+        <Select.Positioner sideOffset={4} alignItemWithTrigger={false} className="zi:20 ow:0">
+          <Select.Popup
+            className={merge(
+              "d:f fd:c o:h max-h:min(var(--available-height),14rem) min-w:32 py:1 bg:raised bc:line bs-o:pop bw:1 os:none",
+              RADIUS.popup[shape],
+              animated &&
+                "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none",
+            )}
+          >
+            <Scroll className="f:1" viewport="ob:c">
+              <Select.List className="p:r">
+                {options.map((option) => (
+                  <Select.Item
+                    key={option.value}
+                    value={option.value}
+                    disabled={option.disabled}
+                    className={(state) =>
+                      merge(
+                        "d:f ai:c g:2 h:8 px:2 mx:1 bw:1 bc:transparent fs:sm fvn:tn us:none c:label",
+                        state.highlighted ? "bg:well" : "bg:transparent",
+                        option.disabled ? "o:60 c:na" : "c:p",
+                        RADIUS.item[shape],
+                      )
+                    }
+                  >
+                    <span className="d:f w:4 h:4 fs:0">
+                      <Select.ItemIndicator className="d:f">
+                        <IconCheck aria-hidden className="w:4 h:4" />
+                      </Select.ItemIndicator>
+                    </span>
+                    <Select.ItemText>{option.label}</Select.ItemText>
+                  </Select.Item>
+                ))}
+              </Select.List>
+            </Scroll>
+          </Select.Popup>
+        </Select.Positioner>
+      </Select.Portal>
+    </Select.Root>
   );
 }
 
@@ -114,7 +187,7 @@ function NavButton({ className: _className, ...props }: ComponentProps<"button">
 
 // a range sinks the days between its ends into one well; each end sits on half of it
 function Day({ day, modifiers, className: _className, children, ...props }: DayProps) {
-  const { mode, shape, weekStartsOn } = useContext(Look);
+  const { mode, shape, weekStartsOn, sliding } = useContext(Look);
   const column = (day.date.getDay() - weekStartsOn + 7) % 7;
   const { range_start: start, range_middle: middle, range_end: end } = modifiers;
   const band =
@@ -130,7 +203,7 @@ function Day({ day, modifiers, className: _className, children, ...props }: DayP
   return (
     <td
       {...props}
-      data-pressed={mode === "single" && modifiers.selected ? "" : undefined}
+      data-pressed={mode === "single" && sliding && modifiers.selected ? "" : undefined}
       className="p:r p:0"
     >
       {band && <span aria-hidden style={{ top: 1, bottom: 1 }} className={merge("p:a bg:well bs-o:sunk", band)} />}
@@ -140,14 +213,15 @@ function Day({ day, modifiers, className: _className, children, ...props }: DayP
 }
 
 function DayButton({ day: _day, modifiers, className: _className, children, ...props }: DayButtonProps) {
-  const { mode, shape, outline } = useContext(Look);
+  const { mode, shape, outline, animated, sliding } = useContext(Look);
   const ref = useRef<HTMLButtonElement>(null);
   // the grid moves focus by marking a day, so the day has to take it
   useEffect(() => {
     if (modifiers.focused) ref.current?.focus();
   }, [modifiers.focused]);
 
-  const end = mode === "range" && (modifiers.range_start || modifiers.range_end);
+  // a day fills itself where no key slides under it
+  const end = (mode === "range" && (modifiers.range_start || modifiers.range_end)) || (mode === "single" && !sliding && modifiers.selected);
   const picked = mode === "single" && modifiers.selected;
   // each state names its own colors, so no class here overrides another
   const look = modifiers.disabled
@@ -167,6 +241,7 @@ function DayButton({ day: _day, modifiers, className: _className, children, ...p
       className={merge(
         outline,
         `p:r zi:10 d:f ai:c jc:c w:100% h:9 bw:1 fs:sm fvn:tn us:none ${RADIUS.control[shape]} ${look}`,
+        animated && !modifiers.disabled && "tp:t tdu:150 ttf:out-quart a:s:98 @prm:tp:none @prm:a:s:100",
       )}
     >
       {children}
@@ -186,8 +261,11 @@ export interface CalendarProps<M extends Mode = "single"> {
   defaultValue?: CalendarValue<M>;
   /** The picked day or range, controlled. Pair with `onValueChange`. */
   value?: CalendarValue<M>;
-  /** Called with the new day or range whenever it changes. */
-  onValueChange?: (value: CalendarValue<M> | undefined) => void;
+  /**
+   * Called with the new day or range whenever it changes, and the day that was
+   * clicked.
+   */
+  onValueChange?: (value: CalendarValue<M> | undefined, day?: Date) => void;
   /**
    * Days that cannot be picked: a date, a list of them, a range, or a function
    * of the date.
@@ -195,6 +273,26 @@ export interface CalendarProps<M extends Mode = "single"> {
   disabledDays?: Matcher | Matcher[];
   /** The first day of the week, from 0 for Sunday to 6 for Saturday. */
   weekStartsOn?: Weekday;
+  /**
+   * The earliest month to show, and the first year in the list. 100 years back
+   * by default.
+   */
+  startMonth?: Date;
+  /**
+   * The latest month to show, and the last year in the list. 10 years ahead by
+   * default.
+   */
+  endMonth?: Date;
+  /**
+   * The picked day's key slides from pick to pick. Off, the picked day fills in
+   * place, as suits a popup that closes on the pick.
+   */
+  sliding?: boolean;
+  /**
+   * Where the month and year lists are rendered. Defaults to `document.body`;
+   * pass an element to portal somewhere else, such as inside a frame.
+   */
+  container?: HTMLElement | null;
   /**
    * The line under the grid: the picked day and a Today key, or the range and
    * its nights.
@@ -236,6 +334,10 @@ export default function Calendar<M extends Mode = "single">({
   disabledDays,
   disabled = false,
   weekStartsOn = 0,
+  startMonth,
+  endMonth,
+  sliding = true,
+  container,
   footer = true,
   shape: shapeProp,
   animated = true,
@@ -247,9 +349,9 @@ export default function Calendar<M extends Mode = "single">({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [own, setOwn] = useState(defaultValue);
   const value = controlled ?? own;
-  const pick = (next: CalendarValue<M> | undefined) => {
+  const pick = (next: CalendarValue<M> | undefined, day?: Date) => {
     if (controlled === undefined) setOwn(next);
-    onValueChange?.(next);
+    onValueChange?.(next, day);
   };
 
   const single = mode === "single" ? (value as Date | undefined) : undefined;
@@ -261,7 +363,7 @@ export default function Calendar<M extends Mode = "single">({
     setTurn(Math.sign(months(next) - months(month)));
     setShown(next);
   };
-  const indicator = useIndicator<HTMLDivElement>(mode === "single");
+  const indicator = useIndicator<HTMLDivElement>(mode === "single" && sliding);
 
   const today = new Date();
   const nights = range?.from && range.to ? Math.round((range.to.getTime() - range.from.getTime()) / 864e5) : 0;
@@ -284,7 +386,7 @@ export default function Calendar<M extends Mode = "single">({
         <Button
           disabled={disabled}
           onClick={() => {
-            pick(today as CalendarValue<M>);
+            pick(today as CalendarValue<M>, today);
             setMonth(today);
           }}
           className={merge(
@@ -317,14 +419,18 @@ export default function Calendar<M extends Mode = "single">({
     weekStartsOn,
     showOutsideDays: true,
     navLayout: "after" as const,
+    captionLayout: "dropdown" as const,
+    startMonth: startMonth ?? new Date(today.getFullYear() - 100, 0, 1),
+    endMonth: endMonth ?? new Date(today.getFullYear() + 10, 11, 31),
     footer: footer ? line : undefined,
-    components: { CaptionLabel, Chevron, Day, DayButton, MonthGrid: Grid, PreviousMonthButton: NavButton, NextMonthButton: NavButton },
+    components: { Chevron, Dropdown, Day, DayButton, MonthGrid: Grid, PreviousMonthButton: NavButton, NextMonthButton: NavButton },
     styles: { month_grid: { borderCollapse: "collapse" as const } },
     classNames: {
       root: merge("d:f fd:c g:3 w:76 max-w:100% p:3 bg:raised bw:1 bc:rim c:label", RADIUS.popup[shape], className),
       months: "d:f fd:c",
       month: "d:f fw:w ai:c jc:sb rg:2",
-      month_caption: "d:f ai:c h:9 pl:2 o:h",
+      month_caption: "d:f ai:c h:9",
+      dropdowns: "d:f ai:c g:px",
       nav: merge("d:f ai:s g:px p:1 bw:1 bc:line bg:well bs-o:sunk", RADIUS.control[shape]),
       month_grid: "w:100% tl:f",
       weekday: "pb:2 fs:xs fw:500 c:hint ta:c",
@@ -334,21 +440,21 @@ export default function Calendar<M extends Mode = "single">({
 
   return (
     <Look
-      value={{ mode, shape, outline, weekStartsOn, animated, indicator, turn, shown: `${month.getFullYear()}-${month.getMonth()}` }}
+      value={{ mode, shape, outline, weekStartsOn, animated, sliding, container, indicator, turn, shown: `${month.getFullYear()}-${month.getMonth()}` }}
     >
       {mode === "range" ? (
         <DayPicker
           {...common}
           mode="range"
           selected={range}
-          onSelect={(next) => pick(next as CalendarValue<M> | undefined)}
+          onSelect={(next, day) => pick(next as CalendarValue<M> | undefined, day)}
         />
       ) : (
         <DayPicker
           {...common}
           mode="single"
           selected={single}
-          onSelect={(next) => pick(next as CalendarValue<M> | undefined)}
+          onSelect={(next, day) => pick(next as CalendarValue<M> | undefined, day)}
         />
       )}
     </Look>

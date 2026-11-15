@@ -1,0 +1,155 @@
+{
+  "summary": "A field that opens a Calendar in a popover: picking a day, or a range's last day, closes it and writes the date into the field.",
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "example": "Next backup",
+      "description": "The name above the field, wired to it as its label."
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "example": "Your files back up at 2:00 that night.",
+      "description": "A hint under the field."
+    },
+    {
+      "name": "placeholder",
+      "type": "string",
+      "description": "What the field says before anything is picked."
+    },
+    {
+      "name": "mode",
+      "type": "enum",
+      "values": [
+        "single",
+        "range"
+      ],
+      "default": "single",
+      "description": "Picks one day, or a range from its first day to its last."
+    },
+    {
+      "name": "defaultValue",
+      "type": "none",
+      "typeName": "Date | DateRange",
+      "description": "The picked day or range on first render, uncontrolled."
+    },
+    {
+      "name": "value",
+      "type": "none",
+      "typeName": "Date | DateRange",
+      "description": "The picked day or range, controlled. Pair with `onValueChange`.",
+      "controlled": true,
+      "handler": "onValueChange"
+    },
+    {
+      "name": "onValueChange",
+      "type": "none",
+      "typeName": "(value: Date | DateRange | undefined, day?: Date) => void",
+      "description": "Called with the new day or range whenever it changes, and the day that was clicked."
+    },
+    {
+      "name": "disabledDays",
+      "type": "none",
+      "typeName": "Matcher | Matcher[]",
+      "description": "Days that cannot be picked: a date, a list of them, a range, or a function of the date."
+    },
+    {
+      "name": "weekStartsOn",
+      "type": "number",
+      "default": 0,
+      "description": "The first day of the week, from 0 for Sunday to 6 for Saturday."
+    },
+    {
+      "name": "startMonth",
+      "type": "none",
+      "typeName": "Date",
+      "description": "The earliest month to show, and the first year in the list. 100 years back by default."
+    },
+    {
+      "name": "endMonth",
+      "type": "none",
+      "typeName": "Date",
+      "description": "The latest month to show, and the last year in the list. 10 years ahead by default."
+    },
+    {
+      "name": "clearable",
+      "type": "boolean",
+      "default": true,
+      "description": "An X in the field that empties it, shown once something is picked."
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Submits the value with a form under this name: `2026-11-18`, or a range as `2026-11-09/2026-11-13`."
+    },
+    {
+      "name": "size",
+      "type": "enum",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ],
+      "default": "md",
+      "description": "The field's height, width and text."
+    },
+    {
+      "name": "shape",
+      "type": "enum",
+      "values": [
+        "square",
+        "rounded",
+        "squircle",
+        "pill"
+      ],
+      "default": "rounded",
+      "description": "Corner radius of the field, the popup and its day keys. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "description": "Blocks opening and dims the whole control, label included."
+    },
+    {
+      "name": "animated",
+      "type": "boolean",
+      "default": true,
+      "description": "The popup's scale-in, the month sliding in and a day's press. Turn it off for all three; reduced motion does the same."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
+      "name": "focus",
+      "type": "boolean",
+      "typeName": "boolean | string",
+      "default": true,
+      "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the popup is rendered. Defaults to `document.body`; pass an element to portal somewhere else, such as inside a frame."
+    }
+  ],
+  "scene": [
+    {
+      "tag": "div",
+      "className": "as:fs",
+      "children": [
+        {
+          "component": "DatePicker",
+          "props": {
+            "label": "Next backup",
+            "description": "Your files back up at 2:00 that night."
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -28,14 +28,32 @@
     {
       "name": "onValueChange",
       "type": "none",
-      "typeName": "(value: Date | DateRange | undefined) => void",
-      "description": "Called with the new day or range whenever it changes."
+      "typeName": "(value: Date | DateRange | undefined, day?: Date) => void",
+      "description": "Called with the new day or range whenever it changes, and the day that was clicked."
     },
     {
       "name": "weekStartsOn",
       "type": "number",
       "default": 0,
       "description": "The first day of the week, from 0 for Sunday to 6 for Saturday."
+    },
+    {
+      "name": "startMonth",
+      "type": "none",
+      "typeName": "Date",
+      "description": "The earliest month to show, and the first year in the list. 100 years back by default."
+    },
+    {
+      "name": "endMonth",
+      "type": "none",
+      "typeName": "Date",
+      "description": "The latest month to show, and the last year in the list. 10 years ahead by default."
+    },
+    {
+      "name": "sliding",
+      "type": "boolean",
+      "default": true,
+      "description": "The picked day's key slides from pick to pick. Off, the picked day fills in place, as suits a popup that closes on the pick."
     },
     {
       "name": "footer",
@@ -84,6 +102,12 @@
       "typeName": "boolean | string",
       "default": true,
       "description": "The focus outline. `true` draws it, `false` removes it, and a string of Yumma CSS utilities restyles it. Removing it outright and putting nothing back fails WCAG 2.4.7."
+    },
+    {
+      "name": "container",
+      "type": "none",
+      "typeName": "HTMLElement | null",
+      "description": "Where the month and year lists are rendered. Defaults to `document.body`; pass an element to portal somewhere else, such as inside a frame."
     }
   ],
   "scene": [

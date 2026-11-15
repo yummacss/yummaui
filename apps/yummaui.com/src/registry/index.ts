@@ -30,6 +30,7 @@ import meta_context_menu from "./meta/context-menu.json";
 import meta_copy_button from "./meta/copy-button.json";
 import meta_currency_input from "./meta/currency-input.json";
 import meta_data_list from "./meta/data-list.json";
+import meta_date_picker from "./meta/date-picker.json";
 import meta_dialog from "./meta/dialog.json";
 import meta_diff_viewer from "./meta/diff-viewer.json";
 import meta_donut_chart from "./meta/donut-chart.json";
@@ -158,6 +159,7 @@ export const registryMeta = {
   "copy-button": meta_copy_button,
   "currency-input": meta_currency_input,
   "data-list": meta_data_list,
+  "date-picker": meta_date_picker,
   "dialog": meta_dialog,
   "diff-viewer": meta_diff_viewer,
   "donut-chart": meta_donut_chart,
@@ -277,6 +279,7 @@ export const registryTargets: Record<string, RegistryTarget> = {
   "copy-button": { component: "copy-button", variant: "base", kind: "component", install: "copy-button" },
   "currency-input": { component: "currency-input", variant: "base", kind: "component", install: "currency-input" },
   "data-list": { component: "data-list", variant: "base", kind: "component", install: "data-list" },
+  "date-picker": { component: "date-picker", variant: "base", kind: "component", install: "date-picker" },
   "dialog": { component: "dialog", variant: "base", kind: "component", install: "dialog" },
   "diff-viewer": { component: "diff-viewer", variant: "base", kind: "component", install: "diff-viewer" },
   "donut-chart": { component: "donut-chart", variant: "base", kind: "component", install: "donut-chart" },
@@ -375,7 +378,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "autocomplete": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
   "banner-alert": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "button": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: { "spin": "to { rotate: 360deg; }" } },
-  "calendar": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "calendar": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "carousel": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "checkbox": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-back": "cubic-bezier(0.34, 1.56, 0.64, 1)" }, keyframes: {} },
   "code-block": { states: { "hovering": "[data-hovering]", "scrolling": "[data-scrolling]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
@@ -384,6 +387,7 @@ export const registryConfig: Record<string, RegistryConfig> = {
   "context-menu": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "copy-button": { states: {}, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "currency-input": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
+  "date-picker": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "dialog": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "drawer": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]", "swiping": "[data-swiping]" }, easings: { "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
   "file-tree": { states: { "opening": "[data-starting-style]", "closing": "[data-ending-style]" }, easings: { "in-out-cubic": "cubic-bezier(0.65, 0, 0.35, 1)", "out-quart": "cubic-bezier(0.25, 1, 0.5, 1)" }, keyframes: {} },
