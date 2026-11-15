@@ -2,15 +2,19 @@
 
 import { Radio } from "@base-ui/react/radio";
 import { RadioGroup } from "@base-ui/react/radio-group";
-import { useId } from "react";
+import { type ReactNode, useId, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, SIZE, type Size } from "./style";
+import { FOCUS, RADIUS, SIZE, type Size, useShape } from "./style";
 
 export interface RadioOption {
   value: string;
   label: string;
   description?: string;
+  /** A glyph that names the choice, drawn in a tile on a card. */
+  icon?: ReactNode;
 }
+
+type Variant = "plain" | "card";
 
 const BASE = "d:f ai:c jc:c p:0 m:0";
 
@@ -54,6 +58,11 @@ export interface RadioProps {
   value?: string;
   /** Called with the newly selected value. Required for a controlled group. */
   onValueChange?: (value: string) => void;
+  /**
+   * `card` draws each option as a card the whole of which picks it, with its
+   * `icon` in a tile and the circle at the end.
+   */
+  variant?: Variant;
   /** The circle, the dot and the label together. */
   size?: Size;
   /** Blocks interaction and dims every option. */
@@ -88,6 +97,7 @@ export default function RadioBase({
   defaultValue,
   value,
   onValueChange,
+  variant = "plain",
   size = "md",
   disabled = false,
   animated = true,
@@ -97,6 +107,12 @@ export default function RadioBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const labelId = useId();
+  // a card's corners follow the page's; the circle stays round whatever they are
+  const corners = useShape();
+  const card = variant === "card";
+  // the card's circle sits outside Base UI's radio, so it reads the choice from here
+  const [own, setOwn] = useState(defaultValue);
+  const picked = value ?? own;
 
   const dotClasses = (checked: boolean) =>
     checked
@@ -104,7 +120,7 @@ export default function RadioBase({
       : "d:none";
 
   return (
-    <div className="d:f fd:c g:2">
+    <div className="d:f fd:c g:2 max-w:100%">
       {label && (
         <div id={labelId} className="c:label fs:sm fw:500 us:none">
           {label}
@@ -115,9 +131,12 @@ export default function RadioBase({
         aria-labelledby={label ? labelId : undefined}
         defaultValue={defaultValue}
         value={value}
-        onValueChange={onValueChange}
+        onValueChange={(next: string) => {
+          setOwn(next);
+          onValueChange?.(next);
+        }}
         disabled={disabled}
-        className={merge("d:f fd:c g:2 ai:fs", className)}
+        className={merge("d:f fd:c g:2", !card && "ai:fs", className)}
       >
         {options.map((option) => {
           const rootClasses = (checked: boolean) =>
@@ -132,6 +151,41 @@ export default function RadioBase({
           const indicator = (
             <Radio.Indicator className={(state) => dotClasses(state.checked)} />
           );
+
+          if (card) {
+            return (
+              <Radio.Root
+                key={option.value}
+                value={option.value}
+                className={(state) =>
+                  merge(
+                    outline,
+                    "d:f ai:c g:3 w:100% p:3 m:0 bw:1 bg:raised bs-o:key ta:l us:none tp:c tdu:150 @prm:tp:none",
+                    RADIUS.popup[corners],
+                    state.checked ? "bc:check" : "bc:rim",
+                    disabled ? "o:60 c:na" : "c:p",
+                  )
+                }
+              >
+                {option.icon && (
+                  <span aria-hidden className={merge("d:f ai:c jc:c fs:0 w:9 h:9 bw:1 bc:line bg:well c:hint", RADIUS.chip[corners])}>
+                    {option.icon}
+                  </span>
+                )}
+                <span className="d:f fd:c f:1 min-w:0">
+                  <span className={`c:label fw:500 ${SIZE.text[size]}`}>{option.label}</span>
+                  {option.description && <span className="c:hint fs:xs">{option.description}</span>}
+                </span>
+                {/* the circle as the plain radio draws it, here only a picture of the state */}
+                <span
+                  aria-hidden
+                  className={merge(BASE, SIZE.mark[size], ROUND, "fs:0", picked === option.value ? PICKED : UNPICKED)}
+                >
+                  <Radio.Indicator className={(state) => dotClasses(state.checked)} />
+                </span>
+              </Radio.Root>
+            );
+          }
 
           return (
             <label

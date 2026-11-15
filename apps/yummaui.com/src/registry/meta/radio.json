@@ -48,6 +48,16 @@
       "description": "Called with the newly selected value. Required for a controlled group."
     },
     {
+      "name": "variant",
+      "type": "enum",
+      "values": [
+        "plain",
+        "card"
+      ],
+      "default": "plain",
+      "description": "`card` draws each option as a card the whole of which picks it, with its `icon` in a tile and the circle at the end."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [
@@ -88,19 +98,33 @@
           {
             "value": "keep",
             "label": "Keep both",
-            "description": "Adds a number to the new one"
+            "description": "Adds a number to the new one",
+            "icon": {
+              "$icon": "IconCopy",
+              "size": "w:4 h:4"
+            }
           },
           {
             "value": "replace",
             "label": "Replace",
-            "description": "The old file moves to Trash"
+            "description": "The old file moves to Trash",
+            "icon": {
+              "$icon": "IconTrash",
+              "size": "w:4 h:4"
+            }
           },
           {
             "value": "skip",
             "label": "Skip",
-            "description": "Leaves the old file as it is"
+            "description": "Leaves the old file as it is",
+            "icon": {
+              "$icon": "IconArrowForwardUp",
+              "size": "w:4 h:4"
+            }
           }
-        ]
+        ],
+        "variant": "card",
+        "className": "w:96 max-w:100%"
       }
     }
   ]
