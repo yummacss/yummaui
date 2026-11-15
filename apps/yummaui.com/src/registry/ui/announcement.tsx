@@ -86,13 +86,14 @@ export default function Announcement({
   const body = (
     <>
       {!trailing && tag}
-      <span className="min-w:0 ws:nw o:h to:e">{children}</span>
+      <span className="as:c min-w:0 ws:nw o:h to:e">{children}</span>
       {trailing && tag}
-      {href && arrow && !trailing && <IconArrowRight aria-hidden className={merge("fs:0 c:hint", spec.icon)} />}
+      {href && arrow && !trailing && <IconArrowRight aria-hidden className={merge("as:c fs:0 c:hint", spec.icon)} />}
     </>
   );
   const pill = merge(
-    "d:if ai:c g:2 max-w:100% bw:1 bc:rim bg:raised bs-o:key c:label td:none",
+    // the badge stretches to the pill's height, so the space above and below it is the padding exactly, on any font
+    "d:if ai:s g:2 max-w:100% bw:1 bc:rim bg:raised bs-o:key c:label td:none",
     spec.text,
     trailing ? spec.end : spec.start,
     RADIUS.control[shape],
