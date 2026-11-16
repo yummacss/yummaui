@@ -136,9 +136,6 @@ export default function SignaturePad({
           className={merge("p:a i:0 w:100% h:100% ta:none c:label", disabled ? "c:na" : "c:ch")}
         />
         <span aria-hidden className="p:a l:6 r:6 b:12 btw:1 bs:d bc:rim pe:none" />
-        <span aria-hidden className="p:a l:6 b:13 c:hint fs:lg pe:none">
-          ×
-        </span>
         {strokes === 0 && (
           <span className="p:a l:0 r:0 b:4 ta:c c:hint fs:xs pe:none">
             {placeholder}
