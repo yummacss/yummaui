@@ -54,6 +54,8 @@ export default function Carousel({
   const [viewport, api] = useEmblaCarousel({ loop });
   const [selected, setSelected] = useState(0);
   const [ends, setEnds] = useState({ prev: false, next: false });
+  // how far each slide is in view, 0 to 1, so the dots move with the drag
+  const [near, setNear] = useState<number[]>([]);
 
   const sync = useCallback(() => {
     if (!api) return;
@@ -69,6 +71,26 @@ export default function Carousel({
       api.off("select", sync).off("reInit", sync);
     };
   }, [api, sync]);
+
+  useEffect(() => {
+    if (!api) return;
+    const follow = () => {
+      const snaps = api.scrollSnapList();
+      const step = snaps.length > 1 ? snaps[1] - snaps[0] : 1;
+      const at = api.scrollProgress();
+      setNear(snaps.map((snap) => {
+        let gap = Math.abs(at - snap);
+        // a looping carousel wraps past its ends
+        if (loop) gap = Math.min(gap, 1 + step - gap);
+        return Math.max(0, 1 - gap / step);
+      }));
+    };
+    follow();
+    api.on("scroll", follow).on("reInit", follow);
+    return () => {
+      api.off("scroll", follow).off("reInit", follow);
+    };
+  }, [api, loop]);
 
   const button = merge(
     outline,
@@ -118,12 +140,15 @@ export default function Carousel({
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={index === selected}
                 onClick={() => api?.scrollTo(index)}
-                className={merge(
-                  outline,
-                  "h:2 bw:0 br:9999 c:p tp:w tdu:200 ttf:out-quart @prm:tp:none",
-                  index === selected ? "w:6 bg:fill" : "w:2 bg:rim",
-                )}
-              />
+                style={{ width: 8 + 16 * (near[index] ?? (index === selected ? 1 : 0)) }}
+                className={merge(outline, "p:r h:2 p:0 bw:0 br:9999 o:h bg:rim c:p")}
+              >
+                <span
+                  aria-hidden
+                  className="p:a i:0 br:9999 bg:fill"
+                  style={{ opacity: near[index] ?? (index === selected ? 1 : 0) }}
+                />
+              </button>
             ))}
           </div>
         ) : (
