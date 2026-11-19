@@ -89,21 +89,21 @@
           "component": "AccountMenu",
           "props": {
             "account": {
-              "name": "Ada Lovelace",
-              "email": "ada@acme.dev"
+              "name": "Dut",
+              "email": "dut@yummaui.com"
             },
             "accounts": [
               {
-                "name": "Ada Lovelace",
-                "email": "ada@acme.dev"
+                "name": "Dut",
+                "email": "dut@yummaui.com"
               },
               {
-                "name": "Ada Lovelace",
-                "email": "ada@analytical.org"
+                "name": "Sicilia",
+                "email": "sicilia@yummaui.com"
               },
               {
-                "name": "Grace Hopper",
-                "email": "grace@navy.mil"
+                "name": "Fionna",
+                "email": "fionna@yummaui.com"
               }
             ],
             "actions": [

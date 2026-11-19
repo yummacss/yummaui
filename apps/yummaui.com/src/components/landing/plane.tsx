@@ -17,9 +17,9 @@ import Toggle from "@/registry/ui/toggle";
 import ToggleGroup from "@/registry/ui/toggle-group";
 
 const PEOPLE = [
-	["Ada Lovelace", "Owner"],
-	["Grace Hopper", "Can edit"],
-	["Katherine Johnson", "Can view"],
+	["Dut", "Owner"],
+	["Sicilia", "Can edit"],
+	["Fionna", "Can view"],
 ];
 
 const CARDS = [
@@ -29,7 +29,7 @@ const CARDS = [
 		description="Start free; switch plans any time."
 	>
 		<div className="d:f fd:c g:3">
-			<Field label="Email" defaultValue="ada@lovelace.dev" />
+			<Field label="Email" defaultValue="dut@yummaui.com" />
 			<Field label="Password" type="password" defaultValue="analytical" />
 			<Button className="w:100%">Create account</Button>
 		</div>
@@ -188,7 +188,7 @@ const ACTS: Record<string, (card: HTMLElement) => Promise<void>> = {
 	signup: async (card) => {
 		await type(
 			card.querySelector("input:not([type=password])"),
-			"ada@lovelace.dev",
+			"dut@yummaui.com",
 		);
 		await wait(300);
 		press(card.querySelector("button"));

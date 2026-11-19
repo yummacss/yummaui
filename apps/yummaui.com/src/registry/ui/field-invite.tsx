@@ -26,7 +26,7 @@ export default function FieldInvite() {
           name="email"
           type="email"
           label="Email"
-          defaultValue="grace@hopper"
+          defaultValue="dut@yummaui"
           description="We send the invite here."
           success={success}
           onChange={() => setSuccess(undefined)}

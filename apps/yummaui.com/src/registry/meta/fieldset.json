@@ -43,7 +43,7 @@
           "props": {
             "label": "Name",
             "name": "name",
-            "defaultValue": "Ada Lovelace",
+            "defaultValue": "Dut",
             "required": true
           },
           "className": "w:100%"
@@ -53,7 +53,7 @@
           "props": {
             "label": "Email",
             "name": "email",
-            "defaultValue": "ada@example.com",
+            "defaultValue": "dut@yummaui.com",
             "required": true,
             "type": "email"
           },

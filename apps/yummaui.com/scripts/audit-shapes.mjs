@@ -24,7 +24,7 @@ const OPEN = {
 	"navigation-menu": ["hover", "button >> nth=0"],
 	popover: ["click", "button"],
 	select: ["click", "[role=combobox]"],
-	sidebar: ["click", "text=Ada Lovelace"],
+	sidebar: ["click", "text=Dut"],
 };
 
 // parts that keep one radius whatever the shape, and why

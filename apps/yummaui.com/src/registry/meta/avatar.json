@@ -10,13 +10,13 @@
     {
       "name": "name",
       "type": "string",
-      "example": "Ada Lovelace",
+      "example": "Dut",
       "description": "Alt text for the image, and the source of the initials when there is no image. Without it the fallback is a generic person icon."
     },
     {
       "name": "fallback",
       "type": "none",
-      "example": "AL",
+      "example": "D",
       "description": "What shows when there is no image, in place of the initials. Leave it empty for the initials, or for the person icon when there is no `name` either.",
       "typeName": "ReactNode"
     },
@@ -84,7 +84,7 @@
         {
           "component": "Avatar",
           "props": {
-            "name": "Ada Lovelace",
+            "name": "Dut",
             "status": "online",
             "tint": "accent"
           }
@@ -94,7 +94,7 @@
           "className": "d:g",
           "children": [
             {
-              "text": "Ada Lovelace",
+              "text": "Dut",
               "className": "fw:500"
             },
             {

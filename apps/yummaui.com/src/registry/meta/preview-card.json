@@ -11,7 +11,7 @@
       "name": "trigger",
       "type": "none",
       "typeName": "ReactNode",
-      "example": "Ada Lovelace",
+      "example": "Dut",
       "description": "The inline content that opens the card on hover or focus."
     },
     {
@@ -82,7 +82,7 @@
         {
           "component": "PreviewCard",
           "props": {
-            "trigger": "Ada Lovelace"
+            "trigger": "Dut"
           },
           "children": [
             {
@@ -92,8 +92,8 @@
                 {
                   "component": "Avatar",
                   "props": {
-                    "name": "Ada Lovelace",
-                    "fallback": "AL",
+                    "name": "Dut",
+                    "fallback": "D",
                     "tint": "accent"
                   }
                 },
@@ -102,11 +102,11 @@
                   "className": "d:g",
                   "children": [
                     {
-                      "text": "Ada Lovelace",
+                      "text": "Dut",
                       "className": "c:label fw:500"
                     },
                     {
-                      "text": "ada@yummaui.com",
+                      "text": "dut@yummaui.com",
                       "className": "c:hint fs:sm"
                     }
                   ]

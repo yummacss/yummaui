@@ -40,7 +40,7 @@
               "$icon": "IconRocket",
               "size": "w:4 h:4"
             },
-            "title": "Ada Lovelace deployed Northwind to production",
+            "title": "Dut deployed Northwind to production",
             "time": "2 min ago"
           },
           {
@@ -48,7 +48,7 @@
               "$icon": "IconMessage",
               "size": "w:4 h:4"
             },
-            "title": "Ada Lovelace commented on the release",
+            "title": "Dut commented on the release",
             "time": "1 h ago",
             "body": "The new keys read much better in light mode."
           },
@@ -57,7 +57,7 @@
               "$icon": "IconGitMerge",
               "size": "w:4 h:4"
             },
-            "title": "Ada Lovelace merged #84 into main",
+            "title": "Dut merged #84 into main",
             "time": "3 h ago"
           },
           {
