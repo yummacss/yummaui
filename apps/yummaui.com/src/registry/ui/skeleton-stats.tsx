@@ -13,7 +13,7 @@ export default function SkeletonStats() {
             delay={column * 0.15}
           />
           <Skeleton dimensions="h:6 w:16" delay={column * 0.15} />
-          <Skeleton tone="subtle" dimensions="h:3 w:12" delay={column * 0.15} />
+          <Skeleton variant="subtle" dimensions="h:3 w:12" delay={column * 0.15} />
         </div>
       ))}
     </div>

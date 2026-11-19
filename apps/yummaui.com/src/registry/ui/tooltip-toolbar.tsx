@@ -29,7 +29,7 @@ export default function TooltipToolbar({
           triggerLabel={label}
           content={label}
           shortcut={shortcut}
-          tone="dark"
+          variant="dark"
           shape={shape}
           container={container}
         />

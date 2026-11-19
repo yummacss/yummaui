@@ -46,7 +46,7 @@ export const COMPONENT_PAGES = [
 		since: "0.12",
 		title: "Alert",
 		description:
-			"Tell people what happened, with a tone, an action & a close button.",
+			"Tell people what happened, with an intent, an action & a close button.",
 	},
 	{
 		slug: "alert-dialog",

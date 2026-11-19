@@ -1,5 +1,5 @@
 {
-  "summary": "A confirmation dialog with a badge, title, description and a cancel/confirm pair, in two tones.",
+  "summary": "A confirmation dialog with a badge, title, description and a cancel/confirm pair, in two intents.",
   "props": [
     {
       "name": "trigger",
@@ -90,7 +90,7 @@
       "example": false
     },
     {
-      "name": "tone",
+      "name": "intent",
       "type": "enum",
       "values": [
         "danger",
@@ -100,14 +100,14 @@
       "description": "Colors the badge and the confirm button together."
     },
     {
-      "name": "triggerTone",
+      "name": "triggerIntent",
       "type": "enum",
       "values": [
         "danger",
         "neutral"
       ],
       "default": "danger",
-      "description": "The trigger's own color, independent of the dialog's `tone` - a neutral button can still open a destructive dialog."
+      "description": "The trigger's own color, independent of the dialog's `intent` - a neutral button can still open a destructive dialog."
     },
     {
       "name": "size",

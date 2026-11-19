@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **[components]** `tone` is `variant` where it sets the look (Badge, Banner Alert, Skeleton & Tooltip) and `intent` where it sets the meaning (Alert, Alert Dialog & Stat). `triggerTone` is `triggerIntent`, `confirmTone` is `confirmVariant` and `iconTone` is `iconVariant`.
 - **[components]** The `square` shape is named `none`; `square` still works in `--shape` and links.
 - **[components]** Badge & Announcement follow the nearest Shape, so `rounded` no longer draws a pill.
 - **[components]** OTP Field's cells are square, so `pill` draws circles.

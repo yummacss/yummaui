@@ -9,7 +9,7 @@ export default function SkeletonFilters() {
         <Skeleton shape="circle" dimensions="h:6 w:20" delay={0.1} />
         <Skeleton shape="circle" dimensions="h:6 w:14" delay={0.15} />
       </div>
-      <Skeleton tone="subtle" dimensions="h:3 w:24" delay={0.2} />
+      <Skeleton variant="subtle" dimensions="h:3 w:24" delay={0.2} />
       <div className="d:f ai:c g:4">
         <Skeleton
           shape="block"
@@ -19,7 +19,7 @@ export default function SkeletonFilters() {
         />
         <div className="d:f fd:c g:1 fg:1">
           <Skeleton dimensions="h:3 w:48" delay={0.25} />
-          <Skeleton tone="subtle" dimensions="h:2 w:32" delay={0.25} />
+          <Skeleton variant="subtle" dimensions="h:2 w:32" delay={0.25} />
         </div>
       </div>
     </div>

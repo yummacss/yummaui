@@ -12,16 +12,16 @@ import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useShape } from "./style";
 
-type Tone = "info" | "success" | "warning" | "danger";
+type Intent = "info" | "success" | "warning" | "danger";
 
-const TILES: Record<Tone, string> = {
+const TILES: Record<Intent, string> = {
   info: "bg:blue/10 bc:blue/25 c:blue-6",
   success: "bg:green/10 bc:green/25 c:green-6",
   warning: "bg:orange/10 bc:orange/25 c:orange-6",
   danger: "bg:red/10 bc:red/25 c:red-6",
 };
 
-const ICONS: Record<Tone, ReactNode> = {
+const ICONS: Record<Intent, ReactNode> = {
   info: <IconInfoCircle aria-hidden className="w:4 h:4" />,
   success: <IconCircleCheck aria-hidden className="w:4 h:4" />,
   warning: <IconAlertTriangle aria-hidden className="w:4 h:4" />,
@@ -30,12 +30,12 @@ const ICONS: Record<Tone, ReactNode> = {
 
 export interface AlertProps {
   /** What the alert means; it colors the icon tile only. */
-  tone?: Tone;
+  intent?: Intent;
   /** The first line, in bold. */
   title: string;
   /** More detail under the title. */
   description?: ReactNode;
-  /** A glyph in the tile, in place of the tone's own icon. */
+  /** A glyph in the tile, in place of the intent's own icon. */
   icon?: ReactNode;
   /** A button at the end, such as Upgrade. */
   action?: ReactNode;
@@ -61,11 +61,11 @@ export interface AlertProps {
 }
 
 /**
- * A message in a raised card, its tone shown on the icon tile, with an optional
- * action and close button.
+ * A message in a raised card, its intent shown on the icon tile, with an
+ * optional action and close button.
  */
 export default function Alert({
-  tone = "info",
+  intent = "info",
   title,
   description,
   icon,
@@ -78,7 +78,7 @@ export default function Alert({
 }: AlertProps) {
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
-  const urgent = tone === "warning" || tone === "danger";
+  const urgent = intent === "warning" || intent === "danger";
 
   return (
     <div
@@ -92,11 +92,11 @@ export default function Alert({
       <span
         className={merge(
           "d:f fs:0 ai:c jc:c w:8 h:8 bw:1",
-          TILES[tone],
+          TILES[intent],
           RADIUS.item[shape],
         )}
       >
-        {icon ?? ICONS[tone]}
+        {icon ?? ICONS[intent]}
       </span>
       <div className="d:f fd:c f:1 min-w:0">
         <span className="fs:sm fw:600">{title}</span>

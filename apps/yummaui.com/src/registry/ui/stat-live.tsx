@@ -7,7 +7,7 @@ const format = new Intl.NumberFormat("en-US");
 
 export default function StatLive({
   direction = "up",
-  tone = "positive",
+  intent = "positive",
   ...look
 }: Partial<Omit<StatProps, "label" | "value" | "change" | "trend">>) {
   const [photos, setPhotos] = useState([2840, 2911, 2967, 3012, 3088, 3140, 3196, 3248]);
@@ -30,7 +30,7 @@ export default function StatLive({
       value={format.format(latest)}
       change={`${growth.toFixed(1)}%`}
       direction={direction}
-      tone={tone}
+      intent={intent}
       {...look}
       trend={photos}
       className="w:64"

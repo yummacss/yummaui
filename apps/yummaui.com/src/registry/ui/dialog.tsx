@@ -10,8 +10,8 @@ import ButtonBase from "./button";
 import { asTrigger, FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
 type IconPosition = "leading" | "trailing";
-type TriggerTone = "neutral" | "danger";
-type ConfirmTone = "primary" | "danger";
+type TriggerIntent = "neutral" | "danger";
+type ConfirmVariant = "primary" | "danger";
 
 export interface DialogProps {
   /**
@@ -43,7 +43,7 @@ export interface DialogProps {
   /** Which end of the trigger `triggerIcon` sits at. */
   triggerIconPosition?: IconPosition;
   /** Color: `neutral` or `danger`, for a destructive confirmation. */
-  triggerTone?: TriggerTone;
+  triggerIntent?: TriggerIntent;
   /**
    * Fires when the trigger is pressed, before the dialog opens, for capturing
    * which row triggered it, say, in a dialog reused across a list.
@@ -78,7 +78,7 @@ export interface DialogProps {
    * Color of the confirm button: `primary` or `danger`, for a destructive
    * action like a delete.
    */
-  confirmTone?: ConfirmTone;
+  confirmVariant?: ConfirmVariant;
   /** The X in the corner. */
   showClose?: boolean;
   /**
@@ -119,7 +119,7 @@ export default function DialogBase({
   render,
   triggerIcon,
   triggerIconPosition = "leading",
-  triggerTone = "neutral",
+  triggerIntent = "neutral",
   size = "md",
   onTriggerClick,
   header,
@@ -129,7 +129,7 @@ export default function DialogBase({
   cancelLabel = "Cancel",
   confirmLabel,
   onConfirm,
-  confirmTone = "primary",
+  confirmVariant = "primary",
   showClose = true,
   shape: shapeProp,
   animated = true,
@@ -226,7 +226,7 @@ export default function DialogBase({
               <Dialog.Close
                 render={
                   <ButtonBase
-                    variant={confirmTone}
+                    variant={confirmVariant}
                     size={size}
                     shape={shape}
                     focus={focus}
@@ -252,7 +252,7 @@ export default function DialogBase({
           onClick={onTriggerClick}
           render={
             <ButtonBase
-              variant={triggerTone === "danger" ? "danger" : "secondary"}
+              variant={triggerIntent === "danger" ? "danger" : "secondary"}
               size={size}
               shape={shape}
               focus={focus}

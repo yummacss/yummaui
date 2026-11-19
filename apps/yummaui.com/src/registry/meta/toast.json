@@ -45,7 +45,7 @@
       "description": "How many toasts stay visible; older ones wait until there is room."
     },
     {
-      "name": "triggerTone",
+      "name": "triggerIntent",
       "type": "enum",
       "values": [
         "neutral",
@@ -100,7 +100,7 @@
         "title": "Moved 3 files to Trash",
         "description": "They stay there for 30 days.",
         "actionLabel": "Undo",
-        "triggerTone": "danger"
+        "triggerIntent": "danger"
       }
     }
   ]

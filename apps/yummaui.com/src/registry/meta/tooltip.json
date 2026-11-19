@@ -64,7 +64,7 @@
       "description": "How long a hover must rest before it opens, in ms. Set to `0` to open on contact."
     },
     {
-      "name": "tone",
+      "name": "variant",
       "type": "enum",
       "values": [
         "light",

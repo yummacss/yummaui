@@ -5,8 +5,8 @@ import { merge } from "yummacss/merge";
 import Button from "./button";
 import { useShape, type Shape } from "./style";
 
-type IconTone = "accent" | "neutral";
-const ICON_TONES: Record<IconTone, string> = {
+type IconVariant = "accent" | "neutral";
+const ICON_VARIANTS: Record<IconVariant, string> = {
   accent: "c:label",
   neutral: "c:hint",
 };
@@ -18,7 +18,7 @@ export interface EmptyStateProps {
    * `accent` for an invitation to act, `neutral` for a plain absence: nothing
    * found, nothing to do.
    */
-  iconTone?: IconTone;
+  iconVariant?: IconVariant;
   /** The heading. */
   title: string;
   /** A line under the title. */
@@ -58,7 +58,7 @@ export interface EmptyStateProps {
  */
 export default function EmptyStateBase({
   icon,
-  iconTone = "accent",
+  iconVariant = "accent",
   title,
   description,
   primaryLabel,
@@ -80,7 +80,7 @@ export default function EmptyStateBase({
 
   const badgeClasses = [
     "d:f ai:c jc:c",
-    ICON_TONES[iconTone],
+    ICON_VARIANTS[iconVariant],
   ]
     .filter(Boolean)
     .join(" ");

@@ -1,5 +1,5 @@
 {
-  "summary": "A message in a raised card, its tone shown on the icon tile, with an optional action and close button.",
+  "summary": "A message in a raised card, its intent shown on the icon tile, with an optional action and close button.",
   "props": [
     {
       "name": "title",
@@ -17,7 +17,7 @@
       "name": "icon",
       "type": "none",
       "typeName": "ReactNode",
-      "description": "A glyph in the tile, in place of the tone's own icon."
+      "description": "A glyph in the tile, in place of the intent's own icon."
     },
     {
       "name": "action",
@@ -38,7 +38,7 @@
       "description": "What the close button says to a screen reader."
     },
     {
-      "name": "tone",
+      "name": "intent",
       "type": "enum",
       "values": [
         "info",
@@ -80,7 +80,7 @@
       "props": {
         "title": "Storage almost full",
         "description": "92% of 10 GB used.",
-        "tone": "warning"
+        "intent": "warning"
       },
       "className": "w:112 max-w:100%"
     }

@@ -1,5 +1,5 @@
 {
-  "summary": "A small status label, in three tones, six colors, four shapes and three sizes, with an optional dot, icon, count or close button.",
+  "summary": "A small status label, in three variants, six colors, four shapes and three sizes, with an optional dot, icon, count or close button.",
   "props": [
     {
       "name": "icon",
@@ -38,7 +38,7 @@
       "description": "Renders a trailing close button & calls this when it is pressed. The badge itself does not track dismissed state, so remove it from whatever list renders it."
     },
     {
-      "name": "tone",
+      "name": "variant",
       "type": "enum",
       "values": [
         "outline",
@@ -59,7 +59,7 @@
         "danger"
       ],
       "default": "neutral",
-      "description": "What the badge means, not which hue it is. `tone` decides the look; `intent` tints it, including the dot, count and close button. `outline` stays neutral regardless."
+      "description": "What the badge means, not which hue it is. `variant` decides the look; `intent` tints it, including the dot, count and close button. `outline` stays neutral regardless."
     },
     {
       "name": "size",
@@ -100,7 +100,7 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "outline",
+            "variant": "outline",
             "intent": "success",
             "dot": true
           },
@@ -109,7 +109,7 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "outline",
+            "variant": "outline",
             "intent": "info",
             "icon": {
               "$icon": "IconLink",
@@ -121,7 +121,7 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "outline",
+            "variant": "outline",
             "dot": true
           },
           "children": "Draft"
@@ -129,7 +129,7 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "outline",
+            "variant": "outline",
             "intent": "danger",
             "dot": true
           },
@@ -138,7 +138,7 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "outline",
+            "variant": "outline",
             "icon": {
               "$icon": "IconStarFilled",
               "size": "w:3 h:3 c:yellow"
@@ -149,7 +149,7 @@
         {
           "component": "Badge",
           "props": {
-            "tone": "solid"
+            "variant": "solid"
           },
           "children": "3 new"
         }

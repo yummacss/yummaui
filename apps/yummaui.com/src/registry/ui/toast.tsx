@@ -9,7 +9,7 @@ import { merge } from "yummacss/merge";
 import ButtonBase from "./button";
 import { FOCUS, RADIUS, type Shape, useShake, useShape } from "./style";
 
-type TriggerTone = "neutral" | "danger";
+type TriggerIntent = "neutral" | "danger";
 
 // a collapsed toast peeks out under the one in front and shrinks with depth
 const STACK = {
@@ -69,7 +69,7 @@ export interface ToastProps {
    * The trigger's color: `danger` when the action it reports destroys
    * something.
    */
-  triggerTone?: TriggerTone;
+  triggerIntent?: TriggerIntent;
   /**
    * Corner radius of the toast and its buttons. `squircle` uses `corner-shape`,
    * which degrades to a rounded square where that is unsupported. Inherits the
@@ -109,7 +109,7 @@ export default function ToastBase({
   onAction,
   timeout = 5000,
   limit = 3,
-  triggerTone = "neutral",
+  triggerIntent = "neutral",
   shape: shapeProp,
   animated = true,
   className,
@@ -122,7 +122,7 @@ export default function ToastBase({
   return (
     <Toast.Provider timeout={timeout} limit={limit}>
       <Trigger
-        variant={triggerTone === "danger" ? "danger" : "secondary"}
+        variant={triggerIntent === "danger" ? "danger" : "secondary"}
         shape={shape}
         focus={focus}
         className={className}

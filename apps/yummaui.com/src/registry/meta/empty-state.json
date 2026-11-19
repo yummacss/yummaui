@@ -68,7 +68,7 @@
       "description": "Called when the secondary button is pressed."
     },
     {
-      "name": "iconTone",
+      "name": "iconVariant",
       "type": "enum",
       "values": [
         "accent",

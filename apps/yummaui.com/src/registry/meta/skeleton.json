@@ -1,5 +1,5 @@
 {
-  "summary": "A placeholder for content that has not arrived yet, in three shapes and two tones, with a pulse you can stagger or switch off.",
+  "summary": "A placeholder for content that has not arrived yet, in three shapes and two variants, with a pulse you can stagger or switch off.",
   "props": [
     {
       "name": "dimensions",
@@ -13,7 +13,7 @@
       "description": "Seconds to offset the pulse by. Stagger a list with `delay={index * 0.15}` so its rows do not beat in unison."
     },
     {
-      "name": "tone",
+      "name": "variant",
       "type": "enum",
       "values": [
         "default",
@@ -71,7 +71,7 @@
                 {
                   "component": "Skeleton",
                   "props": {
-                    "tone": "subtle",
+                    "variant": "subtle",
                     "dimensions": "h:2 w:20",
                     "delay": 0.0
                   }
@@ -106,7 +106,7 @@
                 {
                   "component": "Skeleton",
                   "props": {
-                    "tone": "subtle",
+                    "variant": "subtle",
                     "dimensions": "h:2 w:20",
                     "delay": 0.15
                   }
@@ -141,7 +141,7 @@
                 {
                   "component": "Skeleton",
                   "props": {
-                    "tone": "subtle",
+                    "variant": "subtle",
                     "dimensions": "h:2 w:20",
                     "delay": 0.3
                   }
@@ -176,7 +176,7 @@
                 {
                   "component": "Skeleton",
                   "props": {
-                    "tone": "subtle",
+                    "variant": "subtle",
                     "dimensions": "h:2 w:20",
                     "delay": 0.44999999999999996
                   }
