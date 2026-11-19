@@ -40,7 +40,7 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "square",
+        "none",
         "rounded",
         "squircle",
         "pill"

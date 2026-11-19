@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **[components]** The `square` shape is named `none`; `square` still works in `--shape` and links.
 - **[components]** Signature Pad has no × mark on its signing line.
 - **[components]** Marquee shows a pause key by default and pauses while focus is inside it.
 - **[components]** Number Field rolls its value when a step changes it.

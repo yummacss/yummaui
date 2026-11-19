@@ -191,9 +191,9 @@ for (const id of published) {
 		`${JSON.stringify(entry, null, 2)}\n`,
 	);
 
-	// one folder per shape, so the CLI only swaps its base URL; `none` for a CLI from before `square`
-	for (const folder of [...SHAPES, "none"]) {
-		const shape = folder === "none" ? "square" : folder;
+	// one folder per shape, so the CLI only swaps its base URL; `square` for a CLI from when `none` was named that
+	for (const folder of [...SHAPES, "square"]) {
+		const shape = folder === "square" ? "none" : folder;
 		const dir = join(outDir, folder);
 		mkdirSync(dir, { recursive: true });
 		const shaped = {

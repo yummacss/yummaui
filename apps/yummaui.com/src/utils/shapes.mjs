@@ -1,11 +1,11 @@
 // The shapes the preview offers, the same four every component takes. See `Shape` in the registry's style.tsx.
 
-export const SHAPES = ["square", "rounded", "squircle", "pill"];
+export const SHAPES = ["none", "rounded", "squircle", "pill"];
 
 export const DEFAULT_SHAPE = "rounded";
 
-// a stored or linked shape from before `square` was named
-const RENAMED = { none: "square" };
+// a stored or linked shape from when `none` was named `square`
+const RENAMED = { square: "none" };
 
 /** A shape from storage or the address, read as today's name, or null. */
 export function readShape(value) {

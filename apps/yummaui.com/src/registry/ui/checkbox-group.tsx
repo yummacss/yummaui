@@ -14,7 +14,7 @@ import Checkbox from "./checkbox";
 import { RADIUS, useShape, type Shape } from "./style";
 
 // a round box reads as a single choice, which is a radio
-const SHAPES = ["square", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded", "squircle"] as const;
 
 export interface CheckboxGroupProps {
   /** Merged with the group's own classes, so a utility you pass wins. */

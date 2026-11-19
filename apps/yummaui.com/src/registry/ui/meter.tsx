@@ -6,7 +6,7 @@ import { merge } from "yummacss/merge";
 import { RADIUS, Roll, useShape } from "./style";
 
 // a track is either a bar or a capsule
-const SHAPES = ["square", "pill"] as const;
+const SHAPES = ["none", "pill"] as const;
 
 const INTENTS = {
   neutral: "bg:fill",

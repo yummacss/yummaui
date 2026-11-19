@@ -1,4 +1,4 @@
-// Renders every component page under the square and the pill shape, popups open,
+// Renders every component page under the none and the pill shape, popups open,
 // and fails on a hover, highlight or selected background whose corners ignore the
 // shape. Run it against a built site: `pnpm build && pnpm start`, then `pnpm audit:shapes`.
 // AUDIT_URL names another address; CHROMIUM_PATH a browser when Playwright has none.
@@ -95,7 +95,7 @@ const browser = await chromium.launch({
 const found = [];
 for (const id of ids) {
 	const seen = {};
-	for (const shape of ["square", "pill"]) {
+	for (const shape of ["none", "pill"]) {
 		const context = await browser.newContext({
 			viewport: { width: 1280, height: 900 },
 		});
@@ -107,7 +107,7 @@ for (const id of ids) {
 		await context.close();
 	}
 	seen.pill.forEach((part, index) => {
-		const square = seen.square[index];
+		const square = seen.none[index];
 		if (!square || square.radius !== part.radius) return;
 		const kept = KEPT.some(
 			([component, classes]) =>
