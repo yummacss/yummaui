@@ -11,10 +11,10 @@ Detects your framework, package manager & import alias before asking where compo
 pnpm dlx yummaui init
 ```
 
-| Option      |                                    |
-| ----------- | ---------------------------------- |
-| `--force`   | Replace an existing `yummaui.json` |
-| `-y, --yes` | Skip prompts & take the defaults   |
+| Option      |                                          |
+| ----------- | ---------------------------------------- |
+| `--force`   | Replace an existing `yummaui.config.mjs` |
+| `-y, --yes` | Skip prompts & take the defaults         |
 
 ## Adding components
 
@@ -61,12 +61,12 @@ pnpm dlx yummaui prune --write
 
 ## Configuration file
 
-```json title="yummaui.json"
-{
-	"componentsDir": "src/components/ui",
-	"alias": "@/components/ui",
-	"registry": "https://yummacss.com/ui/registry"
-}
+```js title="yummaui.config.mjs"
+export default {
+	componentsDir: "src/components/ui",
+	alias: "@/components/ui",
+	registry: "https://www.yummaui.com/ui/registry",
+};
 ```
 
 | Field           | Meaning                                                                 |

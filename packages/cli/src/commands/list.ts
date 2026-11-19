@@ -1,13 +1,14 @@
 import { m } from "../messages";
-import { findProjectRoot, readConfig, runner } from "../project";
+import { findProjectRoot, runner } from "../project";
 import { DEFAULT_REGISTRY, type RegistryIndex } from "../registry";
-import { fail, intro, loadIndex, outro, say } from "../ui";
+import { fail, intro, loadConfig, loadIndex, outro, say } from "../ui";
 
 export async function list(): Promise<number> {
 	intro();
 
 	const root = findProjectRoot();
-	const registry = (root && readConfig(root)?.registry) || DEFAULT_REGISTRY;
+	const registry =
+		(root && (await loadConfig(root))?.registry) || DEFAULT_REGISTRY;
 
 	let index: RegistryIndex;
 	try {

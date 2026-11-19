@@ -1,4 +1,10 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import {
+	existsSync,
+	mkdirSync,
+	mkdtempSync,
+	rmSync,
+	writeFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vite-plus/test";
@@ -8,6 +14,7 @@ import {
 	detectPackageManager,
 	installCommand,
 	missingDependencies,
+	moveLegacyConfig,
 	readConfig,
 	runner,
 	writeConfig,
@@ -177,43 +184,74 @@ describe("detectFramework", () => {
 });
 
 describe("config", () => {
-	it("round-trips and fills defaults for missing fields", () => {
+	it("round-trips and fills defaults for missing fields", async () => {
 		const dir = project({ "package.json": {} });
 		writeConfig(dir, {
 			componentsDir: "src/ui",
 			alias: "@/ui",
 			registry: "http://localhost:3000/ui/registry",
 		});
-		expect(readConfig(dir)).toEqual({
+		expect(await readConfig(dir)).toEqual({
 			componentsDir: "src/ui",
 			alias: "@/ui",
 			registry: "http://localhost:3000/ui/registry",
 		});
 
-		const partial = project({ "package.json": {}, "yummaui.json": {} });
-		expect(readConfig(partial)?.registry).toBe(
+		const partial = project({
+			"package.json": {},
+			"yummaui.config.mjs": "export default {};\n",
+		});
+		expect((await readConfig(partial))?.registry).toBe(
 			"https://www.yummaui.com/ui/registry",
 		);
-		expect(readConfig(partial)?.componentsDir).toBe("components/ui");
+		expect((await readConfig(partial))?.componentsDir).toBe("components/ui");
 	});
 
-	it("reads a registry address on yummacss.com as the default", () => {
+	it("reads a registry address on yummacss.com as the default", async () => {
 		for (const registry of [
 			"https://yummacss.com/ui/r",
 			"https://www.yummacss.com/ui/r/",
 			"https://yummacss.com/ui/registry",
 			"https://www.yummacss.com/ui/registry/",
 		]) {
-			const dir = project({ "package.json": {}, "yummaui.json": { registry } });
-			expect(readConfig(dir)?.registry).toBe(
+			const dir = project({
+				"package.json": {},
+				"yummaui.config.mjs": `export default { registry: "${registry}" };\n`,
+			});
+			expect((await readConfig(dir))?.registry).toBe(
 				"https://www.yummaui.com/ui/registry",
 			);
 		}
 	});
 
-	it("returns null rather than throwing on a corrupt config", () => {
+	it("returns null rather than throwing on a corrupt config", async () => {
+		const dir = project({
+			"package.json": {},
+			"yummaui.config.mjs": "export default {",
+		});
+		expect(await readConfig(dir)).toBeNull();
+	});
+
+	it("moves a yummaui.json to yummaui.config.mjs", async () => {
+		const dir = project({
+			"package.json": {},
+			"yummaui.json": { componentsDir: "src/ui", shape: "pill" },
+		});
+		expect(moveLegacyConfig(dir)).toBe(true);
+		expect(existsSync(join(dir, "yummaui.json"))).toBe(false);
+		expect(await readConfig(dir)).toEqual({
+			componentsDir: "src/ui",
+			alias: null,
+			registry: "https://www.yummaui.com/ui/registry",
+			shape: "pill",
+		});
+		expect(moveLegacyConfig(dir)).toBe(false);
+	});
+
+	it("leaves a corrupt yummaui.json where it is", () => {
 		const dir = project({ "package.json": {}, "yummaui.json": "{ broken" });
-		expect(readConfig(dir)).toBeNull();
+		expect(moveLegacyConfig(dir)).toBe(false);
+		expect(existsSync(join(dir, "yummaui.json"))).toBe(true);
 	});
 });
 

@@ -22,7 +22,7 @@ const plain = (text: string) => text.replace(/`/g, "").trim();
 const heading = (line: string) => /^(#{2,4})\s+(.+?)\s*$/.exec(line);
 
 // what a row belongs to, read from its section's code: a titled block names the
-// file ("yummaui.json"), a shell block the command ("yummaui add")
+// file ("yummaui.config.mjs"), a shell block the command ("yummaui add")
 function contextOf(open: string, body: string[]): string | undefined {
 	const title = /title="([^"]+)"/.exec(open);
 	if (title) return title[1];

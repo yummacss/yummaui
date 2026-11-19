@@ -20,17 +20,19 @@ pnpm dlx yummaui add [components]
 
 ### `init`
 
-Detects your framework, package manager and import alias, then writes a `yummaui.json`:
+Detects your framework, package manager and import alias, then writes a `yummaui.config.mjs`:
 
-```json
-{
-	"componentsDir": "components/ui",
-	"alias": "@/components/ui",
-	"registry": "https://www.yummaui.com/ui/registry"
-}
+```js
+export default {
+	componentsDir: "components/ui",
+	alias: "@/components/ui",
+	registry: "https://www.yummaui.com/ui/registry",
+};
 ```
 
 Pass `--force` to replace an existing config, and `-y` to take the defaults.
+A `yummaui.json` from an earlier version moves to `yummaui.config.mjs` on the
+next run.
 
 If Yumma CSS is not set up yet, `init` and `add` offer to do it: install
 `yummacss` and `@yummacss/vite` or `@yummacss/postcss`, register the plugin,
@@ -56,7 +58,7 @@ pnpm dlx yummaui add button --shape pill
 
 With no names, `add` opens a list to search and pick from.
 
-A `shape` set in `yummaui.json` applies to every `add`; the flag wins over it.
+A `shape` set in `yummaui.config.mjs` applies to every `add`; the flag wins over it.
 A component without the shape takes the nearest it has: under `pill`, a
 textarea is rounded.
 

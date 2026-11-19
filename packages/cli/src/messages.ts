@@ -1,5 +1,11 @@
 // every sentence yummaui prints, grouped by command; copywriting.test.ts checks them
-import { CONFIG_FILE, DOCS, MARKER, UI_DOCS } from "./project";
+import {
+	CONFIG_FILE,
+	DOCS,
+	LEGACY_CONFIG_FILE,
+	MARKER,
+	UI_DOCS,
+} from "./project";
 import { c, plural } from "./ui";
 
 export const m = {
@@ -19,7 +25,7 @@ ${c.bold("yummaui")} ${c.dim(`v${version}`)}  Copies Yumma UI components into yo
 ${c.bold("Usage")}  ${run} <command> [options]
 
 ${c.bold("Commands")}
-${row("init", "Write yummaui.json and set up Yumma CSS")}
+${row("init", `Write ${CONFIG_FILE} and set up Yumma CSS`)}
 ${row("add [components]", "Copy components in, or pick from a list")}
 ${row("list", "Show every component")}
 ${row("prune", "Find components nothing uses")}
@@ -29,7 +35,7 @@ ${row("-a, --all", "add: every component")}
 ${row("--shape <name>", "add: none, rounded or pill")}
 ${row("--overwrite", "add: replace files that exist")}
 ${row("--write", "prune: delete what it finds")}
-${row("--force", "init: replace yummaui.json")}
+${row("--force", `init: replace ${CONFIG_FILE}`)}
 ${row("-y, --yes", "Skip prompts and take the defaults")}
 
 ${c.bold("Examples")}
@@ -43,6 +49,7 @@ ${c.bold("Examples")}
 		missing: "No package.json found. Run this inside a project.",
 		noConfig: (run: string) =>
 			`No ${CONFIG_FILE} found. Run ${c.accent(`${run} init`)} first.`,
+		moved: `Moved ${LEGACY_CONFIG_FILE} to ${CONFIG_FILE}`,
 	},
 
 	registry: {

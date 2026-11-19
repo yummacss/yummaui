@@ -10,13 +10,12 @@ import {
 	detectFramework,
 	detectPackageManager,
 	findProjectRoot,
-	readConfig,
 	runner,
 	writeConfig,
 } from "../project";
 import { DEFAULT_REGISTRY, fetchIndex } from "../registry";
 import { setUpStyling } from "../setup";
-import { c, cancelled, fail, gap, intro, outro, say } from "../ui";
+import { c, cancelled, fail, gap, intro, loadConfig, outro, say } from "../ui";
 
 export async function init(flags: Flags): Promise<number> {
 	intro();
@@ -25,7 +24,7 @@ export async function init(flags: Flags): Promise<number> {
 	const root = findProjectRoot();
 	if (!root) return fail(m.project.missing);
 
-	if (readConfig(root) && !flags.force) {
+	if ((await loadConfig(root)) && !flags.force) {
 		outro("next", m.init.exists());
 		return 0;
 	}

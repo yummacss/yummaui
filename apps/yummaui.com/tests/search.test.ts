@@ -15,7 +15,7 @@ describe("search reference", () => {
 		expect(entries).toContainEqual({
 			title: "componentsDir",
 			description:
-				"Where components are written, relative to the project root · yummaui.json",
+				"Where components are written, relative to the project root · yummaui.config.mjs",
 			anchor: "configuration-file",
 		});
 	});

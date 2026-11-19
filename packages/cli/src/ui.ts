@@ -2,7 +2,13 @@ import { styleText } from "node:util";
 import * as p from "@clack/prompts";
 import { version } from "../package.json";
 import { m } from "./messages";
-import { type Config, findProjectRoot, readConfig, runner } from "./project";
+import {
+	type Config,
+	findProjectRoot,
+	moveLegacyConfig,
+	readConfig,
+	runner,
+} from "./project";
 import { fetchIndex, type RegistryIndex } from "./registry";
 
 type Format = Parameters<typeof styleText>[0];
@@ -114,11 +120,19 @@ export function cancelled(): number {
 	return 1;
 }
 
-export function project(): { root: string; config: Config } | string {
+/** The project's config, moving a `yummaui.json` first. */
+export async function loadConfig(root: string): Promise<Config | null> {
+	if (moveLegacyConfig(root)) say.done("config", m.project.moved);
+	return readConfig(root);
+}
+
+export async function project(): Promise<
+	{ root: string; config: Config } | string
+> {
 	const root = findProjectRoot();
 	if (!root) return m.project.missing;
 
-	const config = readConfig(root);
+	const config = await loadConfig(root);
 	if (!config) {
 		return m.project.noConfig(runner(root));
 	}
