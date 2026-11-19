@@ -70,7 +70,7 @@ export function nearest(index: RegistryIndex, name: string): string[] {
 export async function add(names: string[], flags: Flags): Promise<number> {
 	intro();
 
-	const found = project();
+	const found = await project();
 	if (typeof found === "string") return fail(found);
 	const { root, config } = found;
 

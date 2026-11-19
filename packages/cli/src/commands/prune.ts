@@ -21,7 +21,7 @@ import {
 export async function prune(flags: Flags): Promise<number> {
 	intro();
 
-	const found = project();
+	const found = await project();
 	if (typeof found === "string") return fail(found);
 	const { root, config } = found;
 

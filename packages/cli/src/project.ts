@@ -1,8 +1,17 @@
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import {
+	existsSync,
+	readFileSync,
+	statSync,
+	unlinkSync,
+	writeFileSync,
+} from "node:fs";
 import { dirname, join, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { registryUrl } from "./registry";
 
-export const CONFIG_FILE = "yummaui.json";
+export const CONFIG_FILE = "yummaui.config.mjs";
+// the config before 1.0, moved to CONFIG_FILE on the next run
+export const LEGACY_CONFIG_FILE = "yummaui.json";
 export const CSS_CONFIG_FILE = "yummacss.config.mjs";
 // the name Yumma CSS read before 4.11, and still reads until 5.0
 export const LEGACY_CSS_CONFIG_FILE = "yumma.config.mjs";
@@ -102,24 +111,49 @@ export function configPath(root: string): string {
 	return join(root, CONFIG_FILE);
 }
 
-export function readConfig(root: string): Config | null {
+function normalize(parsed: Partial<Config>): Config {
+	return {
+		componentsDir: parsed.componentsDir ?? "components/ui",
+		alias: parsed.alias ?? null,
+		registry: registryUrl(parsed.registry),
+		...(parsed.shape ? { shape: parsed.shape } : {}),
+	};
+}
+
+/** Moves a `yummaui.json` to `yummaui.config.mjs`, and says whether it did. */
+export function moveLegacyConfig(root: string): boolean {
+	const legacy = join(root, LEGACY_CONFIG_FILE);
+	if (existsSync(configPath(root)) || !existsSync(legacy)) return false;
+	let parsed: Partial<Config>;
+	try {
+		parsed = JSON.parse(readFileSync(legacy, "utf8"));
+	} catch {
+		return false;
+	}
+	writeConfig(root, normalize(parsed));
+	unlinkSync(legacy);
+	return true;
+}
+
+export async function readConfig(root: string): Promise<Config | null> {
 	const path = configPath(root);
 	if (!existsSync(path)) return null;
 	try {
-		const parsed = JSON.parse(readFileSync(path, "utf8")) as Partial<Config>;
-		return {
-			componentsDir: parsed.componentsDir ?? "components/ui",
-			alias: parsed.alias ?? null,
-			registry: registryUrl(parsed.registry),
-			...(parsed.shape ? { shape: parsed.shape } : {}),
-		};
+		// the modified time busts the module cache, so a rewritten file is read again
+		const url = `${pathToFileURL(path).href}?v=${statSync(path).mtimeMs}`;
+		const parsed: unknown = (await import(url)).default;
+		if (typeof parsed !== "object" || parsed === null) return null;
+		return normalize(parsed as Partial<Config>);
 	} catch {
 		return null;
 	}
 }
 
 export function writeConfig(root: string, config: Config): void {
-	writeFileSync(configPath(root), `${JSON.stringify(config, null, "\t")}\n`);
+	const fields = Object.entries(config)
+		.map(([key, value]) => `\t${key}: ${JSON.stringify(value)},`)
+		.join("\n");
+	writeFileSync(configPath(root), `export default {\n${fields}\n};\n`);
 }
 
 export function missingDependencies(
