@@ -16,7 +16,7 @@ import { FOCUS, RADIUS, Roll, type Shape, type Size, useMorph, useShape } from "
 type Variant = "primary" | "secondary" | "subtle" | "ghost" | "danger" | "link";
 type IconSide = "leading" | "trailing";
 
-const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 us:none";
+const BASE = "d:if ai:c jc:c g:2 bw:1 fw:500 ws:nw us:none";
 
 const MOTION = "tdu:150 ttf:out-quart a:s:98 wc:s @prm:tp:none @prm:a:s:100";
 
@@ -213,9 +213,10 @@ export default function ButtonBase({
     >
       <path d="M12 3a9 9 0 1 0 9 9" />
     </svg>
-  ) : (
-    icon
-  );
+  ) : icon ? (
+    // an icon passed in keeps its size when the label is long
+    <span className="d:f fs:0">{icon}</span>
+  ) : null;
 
   const held = useHold(hold, onHold, transition);
   const timed = !hold && Boolean(countdown);

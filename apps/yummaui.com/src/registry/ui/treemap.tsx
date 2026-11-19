@@ -172,7 +172,9 @@ export default function Treemap({
         className={merge("p:r h:72", className)}
       >
         {laid.map((tile, index) => {
-          const roomy = tile.w >= 72 && tile.h >= 44;
+          // the padding and a name need 44px, the size under it 20px more
+          const roomy = tile.w >= 56 && tile.h >= 44;
+          const tall = tile.h >= 64;
           return (
             <button
               key={tile.label}
@@ -199,8 +201,8 @@ export default function Treemap({
             >
               {roomy && (
                 <>
-                  <span className="fs:sm fw:600 ws:nw">{tile.label}</span>
-                  <span className="fs:xs o:80 ws:nw">{amount(tile.value)}</span>
+                  <span className="max-w:100% fs:sm fw:600 ws:nw o:h to:e">{tile.label}</span>
+                  {tall && <span className="max-w:100% fs:xs o:80 ws:nw o:h to:e">{amount(tile.value)}</span>}
                 </>
               )}
             </button>

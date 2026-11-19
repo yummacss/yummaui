@@ -81,11 +81,12 @@ function Chip({
   return (
     <span className="ws:nw">
       <span
-        className={`d:if ai:c g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised bs-o:key bc:rim bw:1 c:label lh:1 ws:nw va:m ${RADIUS.textChip[shape]}`}
+        // the word sets the chip's baseline, so it sits on the heading's line; the tile centers beside it
+        className={`d:if ai:b g:calc(.2em) py:calc(.08em) pl:calc(.1em) pr:calc(.3em) bg:raised bs-o:key bc:rim bw:1 c:label lh:1 ws:nw ${RADIUS.textChip[shape]}`}
       >
         <span
           aria-hidden
-          className={`d:if ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:edge bw:1 c:on-fill bs-o:key-fill ${RADIUS.textTile[shape]} ${
+          className={`d:if as:c ai:c jc:c w:calc(1em) h:calc(1em) bg:check bc:edge bw:1 c:on-fill bs-o:key-fill ${RADIUS.textTile[shape]} ${
             animated
               ? `tp:ot tdu:500 ttf:out-back @st:s:30 @st:o:0 @st:ro:-20 @prm:tp:none ${DELAYS[index % DELAYS.length]}`
               : ""

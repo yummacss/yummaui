@@ -51,6 +51,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **[components]** Breadcrumb's chevrons & icons keep their size on a phone, and the trail wraps.
+- **[components]** Button keeps its icon & label on one line, so Empty State's buttons do not wrap.
+- **[components]** Diff Viewer's lines are as tall as Code Block's.
+- **[components]** Inline Icon Heading's chips sit on the heading's line.
+- **[components]** Treemap shows a tile's name or size only when it fits.
 - **[components]** Carousel's dots move with the slides.
 - **[components]** Button's countdown & Pagination's page numbers roll when they change.
 - **[components]** Onboarding eases its height between steps.
