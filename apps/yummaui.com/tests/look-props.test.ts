@@ -3,7 +3,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vite-plus/test";
 import { registryMeta } from "@/registry";
 import { registry } from "@/registry/loaders";
-import { type DemoProps, renderScene, sceneIds } from "@/utils/demo";
+import { type DemoProps, findOwn, renderScene, sceneIds } from "@/utils/demo";
 import { lookProps } from "@/utils/props";
 
 // a setting whose effect never reaches the markup a server renders, named with why
@@ -75,9 +75,7 @@ describe("the Styling drawer", () => {
 			// an example's preview takes no settings, and the drawer hides them
 			if (!scene || !sceneIds(scene).includes(page)) continue;
 			const loaded = await components(sceneIds(scene));
-			const own = scene.find(
-				(node) => node.component && sceneIds([node]).includes(page),
-			);
+			const own = findOwn(scene, page);
 			const base = render(page, scene, loaded, {});
 			for (const prop of lookProps(meta.props)) {
 				// what the scene sets itself, or the prop's default

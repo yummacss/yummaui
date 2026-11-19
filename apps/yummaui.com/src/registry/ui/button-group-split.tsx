@@ -8,16 +8,17 @@ import {
   IconLinkPlus,
 } from "@tabler/icons-react";
 import Button from "./button";
-import ButtonGroup from "./button-group";
+import ButtonGroup, { type ButtonGroupProps } from "./button-group";
 import Menu from "./menu";
 
 export default function ButtonGroupSplit({
   container,
-}: {
+  ...group
+}: Partial<Omit<ButtonGroupProps, "children">> & {
   container?: HTMLElement | null;
 }) {
   return (
-    <ButtonGroup>
+    <ButtonGroup {...group}>
       <Button icon={<IconDownload className="w:4 h:4" />}>Download</Button>
       <Menu
         container={container}

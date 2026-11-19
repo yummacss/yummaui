@@ -12,7 +12,7 @@ import {
 import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
 import { ACCENTS, accentBars } from "@/utils/accent";
-import { sceneIds } from "@/utils/demo";
+import { findOwn, sceneIds } from "@/utils/demo";
 import { inTableOrder, lookProps, typeOf } from "@/utils/props";
 import { SHAPES } from "@/utils/shapes.mjs";
 
@@ -156,9 +156,7 @@ export function Look() {
 	// a preview drawn by an example takes no settings from the drawer
 	const owns = sceneIds(playground.meta?.scene ?? []).includes(playground.id);
 	const looks = owns ? lookProps(props) : [];
-	const own = (playground.meta?.scene ?? []).find(
-		(node) => node.component && sceneIds([node]).includes(playground.id),
-	);
+	const own = findOwn(playground.meta?.scene ?? [], playground.id);
 	const valueOf = (name: string, fallback: unknown) => {
 		const key = `all.${name}`;
 		return key in playground.sceneValues

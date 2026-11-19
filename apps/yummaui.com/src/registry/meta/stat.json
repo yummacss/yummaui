@@ -69,7 +69,11 @@
   ],
   "scene": [
     {
-      "component": "StatLive"
+      "component": "StatLive",
+      "props": {
+        "direction": "up",
+        "tone": "positive"
+      }
     }
   ]
 }

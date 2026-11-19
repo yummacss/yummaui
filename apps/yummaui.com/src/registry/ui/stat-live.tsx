@@ -1,11 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Stat from "./stat";
+import Stat, { type StatProps } from "./stat";
 
 const format = new Intl.NumberFormat("en-US");
 
-export default function StatLive() {
+export default function StatLive({
+  direction = "up",
+  tone = "positive",
+  ...look
+}: Partial<Omit<StatProps, "label" | "value" | "change" | "trend">>) {
   const [photos, setPhotos] = useState([2840, 2911, 2967, 3012, 3088, 3140, 3196, 3248]);
 
   // a backup in progress: a few photos land every couple of seconds
@@ -25,8 +29,9 @@ export default function StatLive() {
       label="Photos backed up"
       value={format.format(latest)}
       change={`${growth.toFixed(1)}%`}
-      direction="up"
-      tone="positive"
+      direction={direction}
+      tone={tone}
+      {...look}
       trend={photos}
       className="w:64"
     />
