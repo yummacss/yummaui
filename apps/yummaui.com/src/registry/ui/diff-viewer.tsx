@@ -204,7 +204,7 @@ export default function DiffViewer({
         </ToggleGroup>
       </div>
       <Scroll axis="x" viewport="pb:2">
-        <table className="w:100% bc:c ff:m fs:xs lh:6">
+        <table className="w:100% bc:c ff:m fs:xs lh:5">
           <tbody>
             {shown.map((row, index) => {
               if ("fold" in row) {

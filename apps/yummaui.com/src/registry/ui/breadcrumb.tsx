@@ -71,7 +71,7 @@ export default function BreadcrumbBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const navClasses = merge(
-    "d:f ai:c g:2",
+    "d:f fw:w ai:c g:2",
     bordered
       ? "px:3 py:2 bg:raised bs-o:key bc:rim bw:1"
       : "",
@@ -109,7 +109,7 @@ export default function BreadcrumbBase({
                 aria-current="page"
               >
                 {item.label}
-                {item.icon}
+                {item.icon && <span className="d:f fs:0">{item.icon}</span>}
               </span>
             ) : (
               <a
@@ -117,7 +117,7 @@ export default function BreadcrumbBase({
                 className={linkClasses}
                 aria-label={item.iconOnly ? item.label : undefined}
               >
-                {item.icon}
+                {item.icon && <span className="d:f fs:0">{item.icon}</span>}
                 {!item.iconOnly && (
                   <span className={labelClasses}>{item.label}</span>
                 )}
@@ -126,7 +126,7 @@ export default function BreadcrumbBase({
             {!isLast &&
               (separator === "chevron" ? (
                 <IconChevronRight
-                  className={`c:hint ${SEPARATOR_SIZES[size]}`}
+                  className={`fs:0 c:hint ${SEPARATOR_SIZES[size]}`}
                   aria-hidden="true"
                 />
               ) : (
