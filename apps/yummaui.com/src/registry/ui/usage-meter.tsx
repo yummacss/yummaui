@@ -49,7 +49,7 @@ export default function UsageMeter({
         value={Math.min(value, 100)}
         label={label}
         intent={full ? "danger" : value >= warnAt ? "warning" : "neutral"}
-        shape={shape === "square" ? "square" : "pill"}
+        shape={shape === "none" ? "none" : "pill"}
         animated={animated}
         className="w:100%"
       />

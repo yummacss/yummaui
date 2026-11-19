@@ -8,7 +8,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, INPUT_TEXT, MESSAGE_IN, RADIUS, useShape, useShake } from "./style";
 
 // a capsule turns into a blob past one line
-const SHAPES = ["square", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded", "squircle"] as const;
 
 type Status = "default" | "error" | "success";
 

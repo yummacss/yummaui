@@ -97,21 +97,21 @@ export default function ButtonGroup({
       return cloneElement(child, {
         trigger: cloneElement(trigger, {
           className: merge(INSET, joint, trigger.props.className),
-          shape: "square",
+          shape: "none",
         }),
       } as Partial<IconProps>);
     const className = merge(INSET, joint, child.props.className);
-    if (!child.props.icon) return cloneElement(child, { className, shape: "square" });
+    if (!child.props.icon) return cloneElement(child, { className, shape: "none" });
     if (!icon)
       return cloneElement(child, {
         className,
-        shape: "square",
+        shape: "none",
         icon: undefined,
         iconOnly: false,
       });
     return cloneElement(child, {
       className,
-      shape: "square",
+      shape: "none",
       iconPosition: child.props.iconPosition ?? iconPosition,
       iconOnly: child.props.iconOnly ?? iconOnly,
     });

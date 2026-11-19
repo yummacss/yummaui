@@ -17,7 +17,7 @@ const address = (value: string) => value.replace(/^https?:\/\//, "").replace(/\/
 
 // the eyes' outer and inner corners, in modules, for each shape
 const EYE: Record<Shape, [number, number]> = {
-  square: [0, 0],
+  none: [0, 0],
   rounded: [1.6, 0.8],
   squircle: [2.4, 1.1],
   pill: [3.5, 1.5],

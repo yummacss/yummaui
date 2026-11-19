@@ -8,7 +8,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Size, SIZE, useShape } from "./style";
 
 // a round box reads as a single choice, which is a radio
-const SHAPES = ["square", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded", "squircle"] as const;
 
 const BOX = "d:f ai:c jc:c fs:0";
 

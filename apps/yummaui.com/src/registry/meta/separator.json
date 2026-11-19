@@ -47,7 +47,7 @@
       "name": "iconShape",
       "type": "enum",
       "values": [
-        "square",
+        "none",
         "rounded",
         "squircle",
         "circle"

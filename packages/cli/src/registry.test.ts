@@ -176,11 +176,11 @@ describe("shapes", () => {
 	it("names the shapes that exist", () => {
 		expect(resolveShape("glass")).toEqual({
 			error:
-				"There is no glass shape. Try one of: square, rounded, squircle, pill.",
+				"There is no glass shape. Try one of: none, rounded, squircle, pill.",
 		});
 	});
 
-	it("reads none as square", () => {
-		expect(resolveShape("none")).toEqual({ folder: "square" });
+	it("reads square as none", () => {
+		expect(resolveShape("square")).toEqual({ folder: "none" });
 	});
 });

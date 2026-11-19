@@ -54,10 +54,10 @@ const TRAVEL: Record<Side, { swipe: string; offstage: string }> = {
 
 // only the edge that faces the page is rounded
 const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
-  bottom: { square: "", rounded: "btr:xxl", squircle: "btr:3xl cs:s", pill: "btr:3xl" },
-  top: { square: "", rounded: "bbr:xxl", squircle: "bbr:3xl cs:s", pill: "bbr:3xl" },
-  left: { square: "", rounded: "brr:xxl", squircle: "brr:3xl cs:s", pill: "brr:3xl" },
-  right: { square: "", rounded: "blr:xxl", squircle: "blr:3xl cs:s", pill: "blr:3xl" },
+  bottom: { none: "", rounded: "btr:xxl", squircle: "btr:3xl cs:s", pill: "btr:3xl" },
+  top: { none: "", rounded: "bbr:xxl", squircle: "bbr:3xl cs:s", pill: "bbr:3xl" },
+  left: { none: "", rounded: "brr:xxl", squircle: "brr:3xl cs:s", pill: "brr:3xl" },
+  right: { none: "", rounded: "blr:xxl", squircle: "blr:3xl cs:s", pill: "blr:3xl" },
 };
 
 export interface DrawerProps {
@@ -187,7 +187,7 @@ export default function DrawerBase({
   const grip = vertical && handle && (
     <div
       aria-hidden
-      className={`fs:0 w:12 h:1 mx:auto bg:line ${shape === "square" ? "" : "br:9999"}`}
+      className={`fs:0 w:12 h:1 mx:auto bg:line ${shape === "none" ? "" : "br:9999"}`}
     />
   );
 

@@ -82,7 +82,7 @@
       "name": "shape",
       "type": "enum",
       "values": [
-        "square",
+        "none",
         "pill"
       ],
       "default": "pill",
