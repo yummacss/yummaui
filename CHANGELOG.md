@@ -47,10 +47,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- **[components]** The `shake` keyframe from the installation steps; `shake` in the style module replaces it.
 - **[components]** Expanding Input.
 
 ### Fixed
 
+- **[components]** Popups that scale in no longer shift their text by half a pixel when the animation ends.
+- **[components]** Toast shakes on a repeated press with the same spring as an invalid field.
 - **[components]** A vertical Separator keeps a length of its own outside a row.
 - **[components]** Sortable List without `handle` drops the grip, and its rows take focus to reorder by keyboard.
 - **[components]** Breadcrumb's chevrons & icons keep their size on a phone, and the trail wraps.

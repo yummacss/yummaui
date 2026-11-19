@@ -124,7 +124,7 @@ export default function AccountMenu({
           <Menu.Popup
             className={merge(
               "d:f fd:c w:68 max-w:calc(100vw-2rem) max-h:var(--available-height) o:h bw:1 bc:line bg:raised bs-o:pop c:label os:none",
-              "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 @prm:tp:none",
+              "tor:var(--transform-origin) tp:ot tdu:200 ttf:out-quart opening:o:0 wc:s opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 @prm:tp:none",
               RADIUS.popup[shape],
             )}
           ><Scroll className="f:1" viewport="py:1 ob:c">

@@ -4,10 +4,10 @@ import { Button } from "@base-ui/react/button";
 import { Toast } from "@base-ui/react/toast";
 import { IconX } from "@tabler/icons-react";
 import type { CSSProperties, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { merge } from "yummacss/merge";
 import ButtonBase from "./button";
-import { FOCUS, RADIUS, useShape, type Shape } from "./style";
+import { FOCUS, RADIUS, type Shape, useShake, useShape } from "./style";
 
 type TriggerTone = "neutral" | "danger";
 
@@ -234,31 +234,21 @@ function Item({
   outline: string;
 }) {
   const attempt = (toast.data as { attempt?: number } | undefined)?.attempt ?? 0;
-  const [shaking, setShaking] = useState(false);
-
-  // each new attempt shakes the whole toast, restarting a shake already running
-  useEffect(() => {
-    if (!attempt || !animated) return;
-    setShaking(false);
-    const frame = requestAnimationFrame(() => setShaking(true));
-    return () => cancelAnimationFrame(frame);
-  }, [attempt, animated]);
+  // each new attempt shakes the whole toast, as an invalid field shakes
+  const root = useShake<HTMLDivElement>(animated && attempt ? attempt : undefined);
 
   return (
     <Toast.Root
       toast={toast}
       swipeDirection={["down", "right"]}
       style={place}
-      onAnimationEnd={(event) => {
-        if (event.target === event.currentTarget) setShaking(false);
-      }}
+      ref={root}
       className={(state) =>
         merge(
           outline,
           "p:a r:0 b:0 w:100% bg:raised bc:line bw:1 bs-o:pop us:none",
           RADIUS.popup[shape],
           animated ? "tp:a tdu:300 ttf:out-quart @prm:tp:none" : "",
-          shaking ? "an:shake adu:500 atf:io @prm:an:none" : "",
           state.transitionStatus === "ending" || state.limited ? "o:0" : "",
         )
       }

@@ -187,7 +187,7 @@ export default function OnboardingBase({
             "o:h w:112 max-w:100% p:5 bg:raised bc:line c:label bw:1 os:none bs-o:pop",
             RADIUS.popup[shape],
             animated &&
-              "tp:ot tdu:250 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:150 closing:ttf:eo @prm:tp:none",
+              "tp:ot tdu:250 ttf:out-quart opening:o:0 wc:s opening:s:97 closing:o:0 closing:s:97 closing:tdu:150 closing:ttf:eo @prm:tp:none",
           )}
         >
           <div className="d:f fd:c g:4">

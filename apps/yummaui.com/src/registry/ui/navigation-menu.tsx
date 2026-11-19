@@ -249,7 +249,7 @@ export default function NavigationMenuBase({
               "p:r w:100% h:100% tor:var(--transform-origin) bg:raised c:label bw:1 bc:line bs-o:pop",
               RADIUS.popup[shape],
               animated &&
-                "tp:a tdu:250 ttf:out-quart opening:o:0 opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none",
+                "tp:a tdu:250 ttf:out-quart opening:o:0 wc:s opening:s:97 closing:o:0 closing:s:97 closing:tdu:100 closing:ttf:eo @prm:tp:none",
             )}
           >
             <NavigationMenu.Viewport className="p:r w:100% h:100% o:h" />
