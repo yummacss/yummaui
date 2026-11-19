@@ -74,7 +74,7 @@ export default function Announcement({
   const trailing = badgePosition === "trailing";
 
   const tag = (
-    <Badge tone={solid ? "solid" : "subtle"} intent={intent} dot={dot} size={size === "lg" ? "md" : "sm"} shape={shape} className="fs:0">
+    <Badge variant={solid ? "solid" : "subtle"} intent={intent} dot={dot} size={size === "lg" ? "md" : "sm"} shape={shape} className="fs:0">
       {label}
     </Badge>
   );

@@ -101,17 +101,7 @@
       "description": "The X in the corner."
     },
     {
-      "name": "triggerTone",
-      "type": "enum",
-      "values": [
-        "neutral",
-        "danger"
-      ],
-      "default": "neutral",
-      "description": "Color: `neutral` or `danger`, for a destructive confirmation."
-    },
-    {
-      "name": "confirmTone",
+      "name": "confirmVariant",
       "type": "enum",
       "values": [
         "primary",
@@ -119,6 +109,16 @@
       ],
       "default": "primary",
       "description": "Color of the confirm button: `primary` or `danger`, for a destructive action like a delete."
+    },
+    {
+      "name": "triggerIntent",
+      "type": "enum",
+      "values": [
+        "neutral",
+        "danger"
+      ],
+      "default": "neutral",
+      "description": "Color: `neutral` or `danger`, for a destructive confirmation."
     },
     {
       "name": "size",

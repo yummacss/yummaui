@@ -6,9 +6,9 @@ import { merge } from "yummacss/merge";
 import { asTrigger, FOCUS, RADIUS, useShape, type Shape } from "./style";
 
 type Side = "top" | "right" | "bottom" | "left";
-type Tone = "light" | "dark" | "danger";
+type Variant = "light" | "dark" | "danger";
 
-const TONES: Record<Tone, string> = {
+const VARIANTS: Record<Variant, string> = {
   light: "bg:raised bc:line c:label bw:1",
   dark: "bg:fill c:on-fill",
   danger: "bg:red-7 c:white",
@@ -16,13 +16,13 @@ const TONES: Record<Tone, string> = {
 
 const DANGER_OUTLINE = "oc:red-2/60 fv:bc:red-3";
 
-const TRIGGER_TONES: Record<Tone, string> = {
+const TRIGGER_VARIANTS: Record<Variant, string> = {
   light: "c:hint h:c:label",
   dark: "c:hint h:c:label",
   danger: "c:red-7 h:c:red-8",
 };
 
-const ARROW_TONES: Record<Tone, string> = {
+const ARROW_VARIANTS: Record<Variant, string> = {
   light: "f:raised s:line",
   dark: "f:fill s:fill",
   danger: "f:red-7 s:red-7",
@@ -80,7 +80,7 @@ export interface TooltipProps {
    * two neutral surfaces; `danger` reads red at both ends, for a destructive
    * action.
    */
-  tone?: Tone;
+  variant?: Variant;
   /**
    * A pointer notched into the tooltip's edge, aimed back at the trigger. It
    * re-aims itself when `side` changes.
@@ -125,7 +125,7 @@ export default function TooltipBase({
   shortcut,
   side = "top",
   sideOffset = 8,
-  tone = "light",
+  variant = "light",
   arrow = true,
   delay = 300,
   shape: shapeProp,
@@ -138,7 +138,7 @@ export default function TooltipBase({
   const outline = focus
     ? merge(
         FOCUS,
-        tone === "danger" ? DANGER_OUTLINE : "",
+        variant === "danger" ? DANGER_OUTLINE : "",
         focus === true ? "" : focus,
       )
     : "";
@@ -147,13 +147,13 @@ export default function TooltipBase({
     outline,
     "d:f ai:c jc:c w:8 h:8 bg:transparent bw:0 c:p h:bg:well",
     RADIUS.item[shape],
-    TRIGGER_TONES[tone],
+    TRIGGER_VARIANTS[variant],
     className,
   );
 
   const popupClasses = [
     "d:f ai:c g:2 px:2 py:1 fs:xs us:none",
-    TONES[tone],
+    VARIANTS[variant],
     RADIUS.item[shape],
     "bs-o:pop",
     arrow ? "p:r" : "",
@@ -161,7 +161,7 @@ export default function TooltipBase({
     .filter(Boolean)
     .join(" ");
 
-  const arrowTone = ARROW_TONES[tone];
+  const arrowVariant = ARROW_VARIANTS[variant];
 
   const popup = (
     <Tooltip.Popup
@@ -174,7 +174,7 @@ export default function TooltipBase({
         >
           <svg viewBox="0 0 10 5" width="12" height="6">
             <title>Arrow</title>
-            <path d="M0 5 L5 0 L10 5" strokeWidth="1" className={arrowTone} />
+            <path d="M0 5 L5 0 L10 5" strokeWidth="1" className={arrowVariant} />
           </svg>
         </Tooltip.Arrow>
       )}

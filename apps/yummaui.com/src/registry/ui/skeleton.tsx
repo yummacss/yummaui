@@ -4,7 +4,7 @@ import { merge } from "yummacss/merge";
 import { RADIUS, useShape } from "./style";
 
 type Kind = "line" | "block" | "circle";
-type Tone = "default" | "subtle";
+type Variant = "default" | "subtle";
 
 const PULSE = "an:pulse adu:1000 atf:io aic:i @prm:an:none";
 
@@ -14,7 +14,7 @@ const SIZES: Record<Kind, string> = {
   circle: "w:10 h:10",
 };
 
-const TONES: Record<Tone, string> = {
+const VARIANTS: Record<Variant, string> = {
   default: "bg:line",
   subtle: "bg:well",
 };
@@ -26,7 +26,7 @@ export interface SkeletonProps {
    */
   shape?: Kind;
   /** `subtle` is one step lighter, for the secondary line in a pair. */
-  tone?: Tone;
+  variant?: Variant;
   /**
    * Replaces the shape's default size, as literal width and height utilities:
    * `"w:9 h:9"`. It replaces rather than adds to them, because a second width
@@ -55,11 +55,11 @@ export interface SkeletonProps {
 
 /**
  * A placeholder for content that has not arrived yet, in three shapes and two
- * tones, with a pulse you can stagger or switch off.
+ * variants, with a pulse you can stagger or switch off.
  */
 export default function SkeletonBase({
   shape = "line",
-  tone = "default",
+  variant = "default",
   dimensions,
   animated = true,
   delay = 0,
@@ -72,7 +72,7 @@ export default function SkeletonBase({
   const classes = merge(
     radius,
     dimensions ?? SIZES[shape],
-    TONES[tone],
+    VARIANTS[variant],
     className,
   );
 

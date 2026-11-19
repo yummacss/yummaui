@@ -9,9 +9,9 @@ import { FOCUS, RADIUS, useShape } from "./style";
 // a strip that wraps past one line cannot be a capsule
 const SHAPES = ["none", "rounded", "squircle"] as const;
 
-type Tone = "loud" | "quiet";
+type Variant = "loud" | "quiet";
 
-const TONES: Record<Tone, string> = {
+const VARIANTS: Record<Variant, string> = {
   loud: "bg:fill c:on-fill bs-o:key-fill",
   quiet: "bg:raised c:label bw:1 bc:rim bs-o:key",
 };
@@ -22,7 +22,7 @@ export interface BannerAlertProps {
   /** A link or button at the message's end. */
   action?: ReactNode;
   /** Filled in the fill color for news, or in the well color for a notice. */
-  tone?: "loud" | "quiet";
+  variant?: "loud" | "quiet";
   /** Adds a button that slides the banner away. */
   dismissible?: boolean;
   /** Called once the banner is dismissed, such as to remember it. */
@@ -53,7 +53,7 @@ export interface BannerAlertProps {
 export default function BannerAlert({
   children,
   action,
-  tone = "loud",
+  variant = "loud",
   dismissible = true,
   onDismiss,
   shape: shapeProp,
@@ -84,7 +84,7 @@ export default function BannerAlert({
     >
       {/* room for the key's shadow, which the collapsing row would clip */}
       <div className={merge("o:h min-h:0", state === "leaving" ? "" : "px:1 pb:1")}>
-        <div className={merge("d:f fw:w ai:c g:3 py:2 pl:4 pr:2 fs:sm", TONES[tone], RADIUS.bar[shape])}>
+        <div className={merge("d:f fw:w ai:c g:3 py:2 pl:4 pr:2 fs:sm", VARIANTS[variant], RADIUS.bar[shape])}>
           <div className="f:1 min-w:48">{children}</div>
           {action && <div className="fw:600">{action}</div>}
           {dismissible && (

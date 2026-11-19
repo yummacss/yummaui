@@ -12,7 +12,7 @@ const BEHAVIOR = "changes behavior, not markup";
 const KNOWN_INERT: Record<string, string> = {
 	"accordion.multiple": BEHAVIOR,
 	"alert-dialog.showClose": POPUP,
-	"alert-dialog.tone": POPUP,
+	"alert-dialog.intent": POPUP,
 	"autocomplete.autoHighlight": BEHAVIOR,
 	"carousel.loop": BEHAVIOR,
 	"flowchart.draggable": BEHAVIOR,
@@ -22,7 +22,7 @@ const KNOWN_INERT: Record<string, string> = {
 	"context-menu.icon": POPUP,
 	"context-menu.iconPosition": POPUP,
 	"date-picker.clearable": "drawn only once a day is picked",
-	"dialog.confirmTone": POPUP,
+	"dialog.confirmVariant": POPUP,
 	"dialog.showClose": POPUP,
 	"drawer.handle": POPUP,
 	"drawer.showClose": POPUP,

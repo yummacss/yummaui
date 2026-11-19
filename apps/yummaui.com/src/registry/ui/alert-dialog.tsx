@@ -9,9 +9,9 @@ import { merge } from "yummacss/merge";
 import ButtonBase from "./button";
 import { asTrigger, FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
-type Tone = "danger" | "neutral";
+type Intent = "danger" | "neutral";
 type IconPosition = "leading" | "trailing";
-const TONE_BADGE: Record<Tone, string> = {
+const INTENT_BADGE: Record<Intent, string> = {
   danger: "bw:1 bg:red bc:red-9 c:white bs-o:key-fill",
   neutral: "bg:well c:hint",
 };
@@ -46,14 +46,14 @@ export interface AlertDialogProps {
   /** Which end of the trigger `triggerIcon` sits at. */
   triggerIconPosition?: IconPosition;
   /**
-   * The trigger's own color, independent of the dialog's `tone` - a neutral
+   * The trigger's own color, independent of the dialog's `intent` - a neutral
    * button can still open a destructive dialog.
    */
-  triggerTone?: Tone;
+  triggerIntent?: Intent;
   /** The glyph in the badge above the title. No badge renders without one. */
   icon?: ReactNode;
   /** Colors the badge and the confirm button together. */
-  tone?: Tone;
+  intent?: Intent;
   /** The dialog's heading, wired up by Base UI's own AlertDialog.Title. */
   title: string;
   /** The body text, wired up by Base UI's own AlertDialog.Description. */
@@ -103,16 +103,16 @@ export interface AlertDialogProps {
 
 /**
  * A confirmation dialog with a badge, title, description and a cancel/confirm
- * pair, in two tones.
+ * pair, in two intents.
  */
 export default function AlertDialogBase({
   trigger,
   render,
   triggerIcon,
   triggerIconPosition = "leading",
-  triggerTone = "danger",
+  triggerIntent = "danger",
   icon,
-  tone = "danger",
+  intent = "danger",
   title,
   description,
   cancelLabel = "Cancel",
@@ -148,15 +148,15 @@ export default function AlertDialogBase({
 
   const badgeClasses = [
     "d:f ai:c jc:c w:12 h:12",
-    TONE_BADGE[tone],
+    INTENT_BADGE[intent],
     RADIUS.control[shape],
   ]
     .filter(Boolean)
     .join(" ");
 
-  const button = (tone: Tone) => (
+  const button = (intent: Intent) => (
     <ButtonBase
-      variant={tone === "danger" ? "danger" : "secondary"}
+      variant={intent === "danger" ? "danger" : "secondary"}
       size={size}
       shape={shape}
       focus={focus}
@@ -209,7 +209,7 @@ export default function AlertDialogBase({
             <AlertDialog.Close render={button("neutral")}>
               {cancelLabel}
             </AlertDialog.Close>
-            <AlertDialog.Close render={button(tone)} onClick={onConfirm}>
+            <AlertDialog.Close render={button(intent)} onClick={onConfirm}>
               {confirmLabel}
             </AlertDialog.Close>
           </div>
@@ -226,7 +226,7 @@ export default function AlertDialogBase({
         <AlertDialog.Trigger
           render={
             <ButtonBase
-              variant={triggerTone === "danger" ? "danger" : "secondary"}
+              variant={triggerIntent === "danger" ? "danger" : "secondary"}
               size={size}
               shape={shape}
               focus={focus}

@@ -15,7 +15,7 @@ export default function SkeletonActivity() {
           />
           <div className="d:f fd:c g:1 fg:1">
             <Skeleton dimensions="h:3 w:48" delay={row * 0.15} />
-            <Skeleton tone="subtle" dimensions="h:2 w:32" delay={row * 0.15} />
+            <Skeleton variant="subtle" dimensions="h:2 w:32" delay={row * 0.15} />
           </div>
         </div>
       ))}

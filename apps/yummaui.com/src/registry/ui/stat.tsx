@@ -5,12 +5,12 @@ import { merge } from "yummacss/merge";
 import Sparkline from "./sparkline";
 import { RADIUS, Roll, type Shape, useShape } from "./style";
 
-type Tone = "positive" | "negative" | "neutral";
+type Intent = "positive" | "negative" | "neutral";
 
 // the number inside a formatted value, which sets which way it rolls
 const amount = (text: string) => Number.parseFloat(text.replace(/[^\d.-]/g, "")) || 0;
 
-const TONES: Record<Tone, string> = {
+const INTENTS: Record<Intent, string> = {
   positive: "c:green-7",
   negative: "c:red-6",
   neutral: "c:hint",
@@ -29,7 +29,7 @@ export interface StatProps {
    * Whether the change is good news: `positive` reads green, `negative` red. A
    * rise in churn is `negative` though it goes up.
    */
-  tone?: Tone;
+  intent?: Intent;
   /** A trend line under the number, oldest value first. */
   trend?: number[];
   /** Corner radius of the card. Inherits the nearest `Shape`. */
@@ -55,7 +55,7 @@ export default function Stat({
   value,
   change,
   direction = "up",
-  tone = "neutral",
+  intent = "neutral",
   trend,
   shape: shapeProp,
   animated = true,
@@ -78,7 +78,7 @@ export default function Stat({
         <Roll value={amount(value)} text={value} still={!animated} />
       </span>
       {change && (
-        <span className={merge("d:f ai:c g:1 fs:sm fw:500 fvn:tn", TONES[tone])}>
+        <span className={merge("d:f ai:c g:1 fs:sm fw:500 fvn:tn", INTENTS[intent])}>
           <Arrow aria-hidden className="w:4 h:4" />
           <span className="p:r">
             <span className="p:a w:px h:px o:h ws:nw">

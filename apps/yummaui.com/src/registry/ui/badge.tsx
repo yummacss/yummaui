@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
 
-type Tone = "outline" | "subtle" | "solid";
+type Variant = "outline" | "subtle" | "solid";
 type IconPosition = "leading" | "trailing";
 
 const SIZES: Record<Size, { pad: string; text: string; icon: string }> = {
@@ -95,9 +95,9 @@ export interface BadgeProps {
    * `solid` tint every part of the badge, including the dot, count and close
    * button, to `color`.
    */
-  tone?: Tone;
+  variant?: Variant;
   /**
-   * What the badge means, not which hue it is. `tone` decides the look;
+   * What the badge means, not which hue it is. `variant` decides the look;
    * `intent` tints it, including the dot, count and close button. `outline`
    * stays neutral regardless.
    */
@@ -149,12 +149,12 @@ export interface BadgeProps {
 }
 
 /**
- * A small status label, in three tones, six colors, four shapes and three
+ * A small status label, in three variants, six colors, four shapes and three
  * sizes, with an optional dot, icon, count or close button.
  */
 export default function BadgeBase({
   children,
-  tone = "outline",
+  variant = "outline",
   intent = "neutral",
   shape: shapeProp,
   size = "md",
@@ -175,9 +175,9 @@ export default function BadgeBase({
     "d:if ai:c g:1",
     pad,
     RADIUS.chip[shape],
-    tone === "outline"
+    variant === "outline"
       ? "bg:chip bs-o:key bc:rim bw:1"
-      : tone === "subtle"
+      : variant === "subtle"
         ? [INTENTS[intent].subtleBg, INTENTS[intent].subtleBorder, "bw:1"].join(" ")
         : [INTENTS[intent].solidBg, "bw:1 bc:black/20 bs-o:key-fill"].join(" "),
     className,
@@ -188,9 +188,9 @@ export default function BadgeBase({
   const ON_SOLID_BG = intent === "neutral" ? "bg:on-fill" : "bg:white";
 
   const contentColor =
-    tone === "outline"
+    variant === "outline"
       ? "c:label"
-      : tone === "subtle"
+      : variant === "subtle"
         ? INTENTS[intent].subtleText
         : ON_SOLID;
 
@@ -204,9 +204,9 @@ export default function BadgeBase({
 
   const dotClasses = [
     "w:2 h:2 br:9999",
-    tone === "outline"
+    variant === "outline"
       ? INTENTS[intent].dotOutline
-      : tone === "subtle"
+      : variant === "subtle"
         ? INTENTS[intent].dotSubtle
         : ON_SOLID_BG,
   ]
@@ -215,9 +215,9 @@ export default function BadgeBase({
 
   const countClasses = [
     "d:if ai:c jc:c w:4 h:4 br:9999 fs:xs fw:500 fvn:tn",
-    tone === "outline"
+    variant === "outline"
       ? "bg:red c:white"
-      : tone === "subtle"
+      : variant === "subtle"
         ? [INTENTS[intent].solidBg, "c:white"].join(" ")
         : [ON_SOLID_BG, INTENTS[intent].solidText].join(" "),
   ]
@@ -228,9 +228,9 @@ export default function BadgeBase({
     outline,
     "d:f ai:c jc:c w:4 h:4 p:0 bg:transparent br:9999",
     contentColor,
-    tone === "outline"
+    variant === "outline"
       ? "h:bg:well"
-      : tone === "subtle"
+      : variant === "subtle"
         ? INTENTS[intent].subtleHover
         : INTENTS[intent].solidHover,
   );
