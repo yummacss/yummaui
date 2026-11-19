@@ -13,7 +13,7 @@ import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
 import { ACCENTS, accentBars } from "@/utils/accent";
 import { findOwn, sceneIds } from "@/utils/demo";
-import { inTableOrder, lookProps, typeOf } from "@/utils/props";
+import { inTableOrder, isSwitch, lookProps, typeOf } from "@/utils/props";
 import { SHAPES } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
@@ -203,16 +203,18 @@ export function Look() {
 					<h3 className="m:0 mt:6 mb:1 c:ink/60 fs:xs fw:500">Props</h3>
 					{looks.map((prop) => {
 						// what the example sets itself, else the prop's default
-						const fallback =
-							own?.props?.[prop.name] ??
-							prop.default ??
-							(prop.type === "boolean" ? false : prop.values?.[0]);
+						const toggles = isSwitch(prop);
+						const fallback = toggles
+							? own?.props?.[prop.name] != null
+							: (own?.props?.[prop.name] ??
+								prop.default ??
+								(prop.type === "boolean" ? false : prop.values?.[0]));
 						const current = valueOf(prop.name, fallback);
 						return (
 							<Fragment key={prop.name}>
 								{line(
 									prop.name,
-									prop.type === "boolean" ? (
+									prop.type === "boolean" || toggles ? (
 										<PropSwitch
 											name={prop.name}
 											checked={current === true}

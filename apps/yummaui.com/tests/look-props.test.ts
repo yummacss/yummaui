@@ -4,7 +4,7 @@ import { describe, expect, it } from "vite-plus/test";
 import { registryMeta } from "@/registry";
 import { registry } from "@/registry/loaders";
 import { type DemoProps, findOwn, renderScene, sceneIds } from "@/utils/demo";
-import { lookProps } from "@/utils/props";
+import { isSwitch, lookProps } from "@/utils/props";
 
 // a setting whose effect never reaches the markup a server renders, named with why
 const POPUP = "sets a popup, which is closed on first render";
@@ -80,8 +80,9 @@ describe("the Styling drawer", () => {
 			for (const prop of lookProps(meta.props)) {
 				// what the scene sets itself, or the prop's default
 				const current = own?.props?.[prop.name] ?? prop.default;
-				const values =
-					prop.type === "boolean"
+				const values = isSwitch(prop)
+					? [own?.props?.[prop.name] == null]
+					: prop.type === "boolean"
 						? [!(current ?? false)]
 						: (prop.values ?? []).filter((value) => value !== current);
 				const changes = values.some(

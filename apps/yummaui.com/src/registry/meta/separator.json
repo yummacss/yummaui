@@ -17,7 +17,11 @@
       "typeName": "ReactNode",
       "description": "Renders as a clickable button in the middle, sized & shaped to match. Wins over `label` if both are set.",
       "exampleIcon": "IconPlus",
-      "example": null
+      "example": {
+        "$icon": "IconPlus",
+        "size": "w:4 h:4"
+      },
+      "switch": true
     },
     {
       "name": "onIconClick",
@@ -36,7 +40,8 @@
       "type": "none",
       "typeName": "ReactNode",
       "example": "or",
-      "description": "Renders as plain text in the middle. Ignored if `icon` is set."
+      "description": "Renders as plain text in the middle. Ignored if `icon` is set.",
+      "switch": true
     },
     {
       "name": "iconShape",
@@ -66,7 +71,8 @@
         {
           "component": "Separator",
           "props": {
-            "label": "Yesterday"
+            "label": "Yesterday",
+            "iconLabel": "Add a section"
           }
         }
       ]

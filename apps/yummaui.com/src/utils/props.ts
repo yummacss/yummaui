@@ -56,6 +56,10 @@ const PLUMBING = new Set([
 	"iconShape",
 ]);
 
+/** A prop the drawer turns on and off: it adds the prop, set to its example, or drops it. */
+export const isSwitch = (prop: { switch?: boolean; example?: unknown }) =>
+	prop.switch === true && prop.example !== undefined;
+
 /** The props the Styling drawer offers: enums and plain booleans that change the look. */
 export function lookProps<T extends RegistryProp>(props: T[]): T[] {
 	return props.filter(
@@ -64,6 +68,8 @@ export function lookProps<T extends RegistryProp>(props: T[]): T[] {
 			!PLUMBING.has(prop.name) &&
 			// a default only applies when the component first renders
 			!/^default[A-Z]/.test(prop.name) &&
-			(prop.type === "enum" || (prop.type === "boolean" && !prop.typeName)),
+			(prop.type === "enum" ||
+				(prop.type === "boolean" && !prop.typeName) ||
+				isSwitch(prop)),
 	);
 }

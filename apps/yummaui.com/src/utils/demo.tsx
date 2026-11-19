@@ -75,6 +75,7 @@ import {
 	getRegistryTarget,
 } from "@/registry";
 import { componentId, iconMarker } from "@/utils/snippet";
+import { isSwitch } from "@/utils/props";
 
 export type DemoProps = Record<string, unknown>;
 
@@ -252,7 +253,12 @@ export function renderScene(
 			for (const prop of meta?.props ?? []) {
 				const look = `all.${prop.name}`;
 				if (own && !prop.handler && look in state.values) {
-					out[prop.name] = state.values[look];
+					// a switch adds the prop, as the scene sets it or else its example, or drops it
+					out[prop.name] = isSwitch(prop)
+						? state.values[look]
+							? resolveIcons(props[prop.name] ?? prop.example)
+							: undefined
+						: state.values[look];
 					continue;
 				}
 				if (!prop.handler || example) continue;
