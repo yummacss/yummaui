@@ -71,9 +71,7 @@ export interface ToastProps {
    */
   triggerIntent?: TriggerIntent;
   /**
-   * Corner radius of the toast and its buttons. `squircle` uses `corner-shape`,
-   * which degrades to a rounded square where that is unsupported. Inherits the
-   * nearest `Shape`.
+   * Corner radius of the toast and its buttons. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /**

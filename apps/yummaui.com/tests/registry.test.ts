@@ -257,11 +257,6 @@ describe("Yumma UI registry", () => {
 					[...body.matchAll(/(\w+):\s*"([^"]*)"/g)].map((m) => [m[1], m[2]]),
 				);
 
-				const squircle = entries.get("squircle");
-				if (squircle !== undefined && !squircle.includes("cs:s")) {
-					wrong.push(`${file}:${name} squircle is not a squircle`);
-				}
-
 				const pill = entries.get("pill");
 				const rounded = entries.get("rounded");
 				if (pill !== undefined && rounded !== undefined && pill === rounded) {

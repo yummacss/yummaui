@@ -7,7 +7,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape } from "./style";
 
 // a strip that wraps past one line cannot be a capsule
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 type Variant = "loud" | "quiet";
 

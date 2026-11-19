@@ -84,10 +84,7 @@ export interface FieldProps
   success?: string;
   /** Height and width of the control. */
   size?: Size;
-  /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`.
-   */
+  /** Corner radius. Inherits the nearest `Shape`. */
   shape?: Shape;
 
   /**

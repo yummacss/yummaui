@@ -96,13 +96,14 @@ export function fetchItem(registry: string, id: string): Promise<RegistryItem> {
 }
 
 /** The shapes a component can be added in. */
-export const SHAPES = ["none", "rounded", "squircle", "pill"];
+export const SHAPES = ["none", "rounded", "pill"];
 
-// the registry folder for a shape, or why there is none; `square` is none's earlier name
+// the registry folder for a shape, or why there is none; older names read as today's
+const RENAMED: Record<string, string> = { square: "none", squircle: "rounded" };
 export function resolveShape(
 	shape: string,
 ): { folder: string } | { error: string } {
-	const named = shape === "square" ? "none" : shape;
+	const named = RENAMED[shape] ?? shape;
 	return SHAPES.includes(named)
 		? { folder: named }
 		: {

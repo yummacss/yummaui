@@ -19,7 +19,6 @@ const address = (value: string) => value.replace(/^https?:\/\//, "").replace(/\/
 const EYE: Record<Shape, [number, number]> = {
   none: [0, 0],
   rounded: [1.6, 0.8],
-  squircle: [2.4, 1.1],
   pill: [3.5, 1.5],
 };
 

@@ -40,8 +40,8 @@ export interface SwitchProps {
   /** Track and thumb together. */
   size?: Size;
   /**
-   * Corner radius, applied to the track and the thumb together. `squircle` uses
-   * `corner-shape`. Inherits the nearest `Shape`.
+   * Corner radius, applied to the track and the thumb together. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
   /** Blocks interaction and dims the whole control, label included. */

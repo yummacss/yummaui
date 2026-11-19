@@ -26,8 +26,8 @@ describe("install paths", () => {
 		expect(targetPath("button")).toBe("components/ui/button.tsx");
 		expect(importPath("button")).toBe("@/components/ui/button");
 		expect(addCommand("button")).toBe("yummaui add button");
-		expect(addCommand("button", "--shape squircle")).toBe(
-			"yummaui add button --shape squircle",
+		expect(addCommand("button", "--shape pill")).toBe(
+			"yummaui add button --shape pill",
 		);
 	});
 

@@ -79,8 +79,7 @@ export interface ContextMenuProps {
    */
   items: ContextMenuItem[];
   /**
-   * Corner radius on the trigger, popup and items together. `squircle` steps
-   * the popup & item radius up one and adds `corner-shape`. Inherits the
+   * Corner radius on the trigger, popup and items together. Inherits the
    * nearest `Shape`.
    */
   shape?: Shape;

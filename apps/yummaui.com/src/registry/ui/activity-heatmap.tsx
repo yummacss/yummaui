@@ -16,10 +16,10 @@ const SIZES = {
 const DAY = 86_400_000;
 
 // days stay squares: a pill would turn them into dots
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 // a chip's radius would round an 8px day into a dot
-const DAY_RADIUS = { none: "", rounded: "br:xs", squircle: "br:xs cs:s" };
+const DAY_RADIUS = { none: "", rounded: "br:xs" };
 
 export interface ActivityDay {
   /** The day, as `YYYY-MM-DD`. */

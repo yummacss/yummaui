@@ -16,7 +16,7 @@ import {
 import { merge } from "yummacss/merge";
 
 /** The corner style every component shares, set app-wide with `Shape` or per component with its `shape` prop. */
-export type Shape = "none" | "rounded" | "squircle" | "pill";
+export type Shape = "none" | "rounded" | "pill";
 
 /** The shape a component takes when neither a `Shape` above it nor its own prop sets one. */
 export const DEFAULT_SHAPE: Shape = "rounded";
@@ -34,7 +34,7 @@ export function Shape({ value, children }: ShapeProps) {
   return <ShapeContext value={value}>{children}</ShapeContext>;
 }
 
-const ALL: readonly Shape[] = ["none", "rounded", "squircle", "pill"];
+const ALL: readonly Shape[] = ["none", "rounded", "pill"];
 
 /**
  * The shape to draw: the component's own prop, else the nearest `Shape`, else
@@ -56,7 +56,7 @@ export function useShape<T extends Shape = Shape>(
 }
 
 /** The shape of a part as wide as it is tall, where a capsule is a `circle`. */
-export type Corner = "none" | "rounded" | "squircle" | "circle";
+export type Corner = "none" | "rounded" | "circle";
 
 /** Like `useShape`, for a square part: the nearest `pill` draws a circle. */
 export function useCorner(own?: Corner): Corner {
@@ -75,42 +75,41 @@ export function shapeOf(corner: Corner): Shape {
  */
 export const RADIUS = {
   /** Buttons, fields, triggers, tabs & toggles. */
-  control: { none: "", rounded: "br:lg", squircle: "br:xxl cs:s", pill: "br:9999" },
+  control: { none: "", rounded: "br:lg", pill: "br:9999" },
   /** The left end of a control split in two, such as a number field. */
-  controlStart: { none: "", rounded: "blr:lg", squircle: "blr:xxl cs:s", pill: "blr:9999" },
+  controlStart: { none: "", rounded: "blr:lg", pill: "blr:9999" },
   /** The right end of a control split in two. */
-  controlEnd: { none: "", rounded: "brr:lg", squircle: "brr:xxl cs:s", pill: "brr:9999" },
+  controlEnd: { none: "", rounded: "brr:lg", pill: "brr:9999" },
   /** A control that grows past one line: a textarea, a field of chips. */
-  box: { none: "", rounded: "br:lg", squircle: "br:xxl cs:s", pill: "br:xxl" },
+  box: { none: "", rounded: "br:lg", pill: "br:xxl" },
   /** Rows inside a list or popup: menu items, options, links & small close buttons. */
-  item: { none: "", rounded: "br:md", squircle: "br:xl cs:s", pill: "br:9999" },
+  item: { none: "", rounded: "br:md", pill: "br:9999" },
   /** Areas that hold wrapping text or data, such as a quote or a chart tile; never round enough to read as a pill. */
-  block: { none: "", rounded: "br:md", squircle: "br:xl cs:s", pill: "br:xl" },
+  block: { none: "", rounded: "br:md", pill: "br:xl" },
   /** Popups, dialogs, cards & panels. */
-  popup: { none: "", rounded: "br:xl", squircle: "br:3xl cs:s", pill: "br:3xl" },
+  popup: { none: "", rounded: "br:xl", pill: "br:3xl" },
   /** A key set inside a control's 1px border & 4px padding, such as a slider's fill in its well: the control's corner less those 5px. */
-  controlInset: { none: "", rounded: "br:calc(0.1875rem)", squircle: "br:calc(0.6875rem) cs:s", pill: "br:9999" },
+  controlInset: { none: "", rounded: "br:calc(0.1875rem)", pill: "br:9999" },
   /** A block set inside a popup's 1px border & 4px padding: the popup's corner less those 5px, so the two are concentric. */
-  inset: { none: "", rounded: "br:calc(0.4375rem)", squircle: "br:calc(1.1875rem) cs:s", pill: "br:calc(1.1875rem)" },
+  inset: { none: "", rounded: "br:calc(0.4375rem)", pill: "br:calc(1.1875rem)" },
   /** A strip that holds controls, such as a toolbar, a tab list or a menubar. */
-  bar: { none: "", rounded: "br:xl", squircle: "br:3xl cs:s", pill: "br:9999" },
+  bar: { none: "", rounded: "br:xl", pill: "br:9999" },
   /** Small tags & tiles: badges, chips, keycaps & icon tiles. */
-  chip: { none: "", rounded: "br:sm", squircle: "br:md cs:s", pill: "br:9999" },
+  chip: { none: "", rounded: "br:sm", pill: "br:9999" },
   /** Progress, slider & meter tracks. */
-  track: { none: "", rounded: "br:9999", squircle: "br:xxl cs:s", pill: "br:9999" },
+  track: { none: "", rounded: "br:9999", pill: "br:9999" },
   /** A chip inside running text, in em so it scales with the type. */
-  textChip: { none: "", rounded: "br:calc(.25em)", squircle: "br:calc(.45em) cs:s", pill: "br:9999" },
+  textChip: { none: "", rounded: "br:calc(.25em)", pill: "br:9999" },
   /** A tile inside a text chip; its chip's radius less the padding, so the corners stay concentric. */
-  textTile: { none: "", rounded: "br:calc(.15em)", squircle: "br:calc(.35em) cs:s", pill: "br:9999" },
+  textTile: { none: "", rounded: "br:calc(.15em)", pill: "br:9999" },
   /** A chat bubble: every corner but the one by its sender. */
   bubble: {
     none: "",
     rounded: "btlr:xl btrr:xl bblr:xl",
-    squircle: "btlr:3xl btrr:3xl bblr:3xl cs:s",
     pill: "btlr:3xl btrr:3xl bblr:3xl",
   },
   /** The box of a checkbox. */
-  mark: { none: "", rounded: "br:sm", squircle: "br:md cs:s", pill: "br:9999" },
+  mark: { none: "", rounded: "br:sm", pill: "br:9999" },
 } as const satisfies Record<string, Record<Shape, string>>;
 
 /** The sizes a component offers. */

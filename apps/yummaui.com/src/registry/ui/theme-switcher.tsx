@@ -59,9 +59,8 @@ export interface ThemeSwitcherProps {
   /** Height of the track and its options. */
   size?: Size;
   /**
-   * Corner radius of the track and of the key that slides on it. `squircle`
-   * uses `corner-shape`, which degrades to a rounded square where that is
-   * unsupported. Inherits the nearest `Shape`.
+   * Corner radius of the track and of the key that slides on it. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
   /** Blocks every option and dims the control. */

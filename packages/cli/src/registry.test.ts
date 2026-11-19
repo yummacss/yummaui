@@ -170,17 +170,20 @@ describe("resolveNames with --all", () => {
 
 describe("shapes", () => {
 	it("picks the folder for a shape", () => {
-		expect(resolveShape("squircle")).toEqual({ folder: "squircle" });
+		expect(resolveShape("pill")).toEqual({ folder: "pill" });
 	});
 
 	it("names the shapes that exist", () => {
 		expect(resolveShape("glass")).toEqual({
-			error:
-				"There is no glass shape. Try one of: none, rounded, squircle, pill.",
+			error: "There is no glass shape. Try one of: none, rounded, pill.",
 		});
 	});
 
 	it("reads square as none", () => {
 		expect(resolveShape("square")).toEqual({ folder: "none" });
+	});
+
+	it("reads squircle as rounded", () => {
+		expect(resolveShape("squircle")).toEqual({ folder: "rounded" });
 	});
 });

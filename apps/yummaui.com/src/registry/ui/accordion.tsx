@@ -8,7 +8,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape } from "./style";
 
 // a card reads wrong as a capsule
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 type Variant = "default" | "bordered" | "ghost" | "subtle";
 const TURN = "tp:t tdu:300 ttf:out-quart @prm:tp:none";

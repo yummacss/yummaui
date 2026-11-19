@@ -8,7 +8,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Size, SIZE, useShape } from "./style";
 
 // a round box reads as a single choice, which is a radio
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 const BOX = "d:f ai:c jc:c fs:0";
 
@@ -56,11 +56,7 @@ export interface CheckboxProps
    * aligned with the label at every size.
    */
   size?: Size;
-  /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`; under
-   * `pill`, `rounded`.
-   */
+  /** Corner radius. Inherits the nearest `Shape`; under `pill`, `rounded`. */
   shape?: (typeof SHAPES)[number];
   /**
    * The mark's transition when the box is ticked. Turn it off for a static

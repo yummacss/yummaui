@@ -6,7 +6,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape } from "./style";
 
 // a capsule cannot hold a scrolling list
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 export interface ScrollAreaProps {
   /** What scrolls. */

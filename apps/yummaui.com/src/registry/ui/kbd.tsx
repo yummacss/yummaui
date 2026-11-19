@@ -4,7 +4,7 @@ import { merge } from "yummacss/merge";
 import { RADIUS, useShape } from "./style";
 
 // a keycap is square-cornered, never round
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 export interface KbdProps {
   /** The keys to press together, each drawn as its own keycap. */

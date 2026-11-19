@@ -56,6 +56,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** Expanding Input.
 - **[components]** Accordion's `indicator`; the trigger draws a chevron.
 - **[components]** Avatar's `tint`; an avatar without a picture sits on the accent fill.
+- **[components]** The `squircle` shape; `squircle` reads as `rounded` in `--shape` and links.
 
 ### Fixed
 

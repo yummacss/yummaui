@@ -54,10 +54,10 @@ const TRAVEL: Record<Side, { swipe: string; offstage: string }> = {
 
 // only the edge that faces the page is rounded
 const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
-  bottom: { none: "", rounded: "btr:xxl", squircle: "btr:3xl cs:s", pill: "btr:3xl" },
-  top: { none: "", rounded: "bbr:xxl", squircle: "bbr:3xl cs:s", pill: "bbr:3xl" },
-  left: { none: "", rounded: "brr:xxl", squircle: "brr:3xl cs:s", pill: "brr:3xl" },
-  right: { none: "", rounded: "blr:xxl", squircle: "blr:3xl cs:s", pill: "blr:3xl" },
+  bottom: { none: "", rounded: "btr:xxl", pill: "btr:3xl" },
+  top: { none: "", rounded: "bbr:xxl", pill: "bbr:3xl" },
+  left: { none: "", rounded: "brr:xxl", pill: "brr:3xl" },
+  right: { none: "", rounded: "blr:xxl", pill: "blr:3xl" },
 };
 
 export interface DrawerProps {

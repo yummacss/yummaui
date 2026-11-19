@@ -60,8 +60,8 @@ export interface AutocompleteProps {
    */
   size?: Size;
   /**
-   * Corner radius, applied to the input and the popup together. `squircle` uses
-   * `corner-shape`. Inherits the nearest `Shape`.
+   * Corner radius, applied to the input and the popup together. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
   /**

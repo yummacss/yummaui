@@ -9,7 +9,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, INPUT_TEXT, RADIUS, type Shape, type Size, SIZE, useShape, Scroll } from "./style";
 
 // a field of chips grows past one line, where a capsule turns into a blob
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 // a popup, a row or a card cannot be a pill; under pill it takes rounded corners
 
@@ -71,9 +71,8 @@ export interface ComboboxProps {
    */
   size?: Size;
   /**
-   * Corner radius, applied to the input and the popup together. `squircle` uses
-   * `corner-shape`. Inherits the nearest `Shape`; under one it does not take,
-   * `rounded`.
+   * Corner radius, applied to the input and the popup together. Inherits the
+   * nearest `Shape`; under one it does not take, `rounded`.
    */
   shape?: (typeof SHAPES)[number];
   /**

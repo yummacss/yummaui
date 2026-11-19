@@ -44,21 +44,21 @@ pnpm dlx yummaui add button
 pnpm dlx yummaui add dialog tooltip
 pnpm dlx yummaui add --all
 pnpm dlx yummaui add
-pnpm dlx yummaui add button --shape squircle
+pnpm dlx yummaui add button --shape pill
 ```
 
-| Option           |                                         |
-| ---------------- | --------------------------------------- |
-| `-a, --all`      | Add every component                     |
-| `--shape <name>` | `none`, `rounded`, `squircle` or `pill` |
-| `--overwrite`    | Replace files that already exist        |
-| `-y, --yes`      | Skip prompts and take the defaults      |
+| Option           |                                    |
+| ---------------- | ---------------------------------- |
+| `-a, --all`      | Add every component                |
+| `--shape <name>` | `none`, `rounded` or `pill`        |
+| `--overwrite`    | Replace files that already exist   |
+| `-y, --yes`      | Skip prompts and take the defaults |
 
 With no names, `add` opens a list to search and pick from.
 
 A `shape` set in `yummaui.json` applies to every `add`; the flag wins over it.
-A component without the shape takes the nearest it has: under `pill`, a dialog
-is a squircle.
+A component without the shape takes the nearest it has: under `pill`, a
+textarea is rounded.
 
 ### `list`
 
