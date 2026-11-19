@@ -52,6 +52,10 @@ export default function ComponentPlayground({
 	const narrow = useMediaQuery("(max-width: 639px)", {
 		initializeWithValue: false,
 	});
+	// below the handle's breakpoint the frame takes the screen's width, which can be under a phone's
+	const handheld = useMediaQuery("(max-width: 767px)", {
+		initializeWithValue: false,
+	});
 	const [width, setWidth] = useState<number | null>(null);
 	const [resizing, setResizing] = useState(false);
 	// at full width the panel's border is the frame's, so the frame draws its own only when narrower
@@ -221,7 +225,7 @@ export default function ComponentPlayground({
 						{resizable ? (
 							<Resizable
 								defaultSize={{ width: "100%", height: "100%" }}
-								minWidth={PHONE}
+								minWidth={handheld ? undefined : PHONE}
 								maxWidth="100%"
 								enable={{ right: true }}
 								snap={{ x: SNAP }}
