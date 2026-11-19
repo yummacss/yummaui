@@ -89,11 +89,10 @@
       "values": [
         "none",
         "rounded",
-        "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius on the trigger, popup and items together. `squircle` steps the popup & item radius up one and adds `corner-shape`. Inherits the nearest `Shape`."
+      "description": "Corner radius on the trigger, popup and items together. Inherits the nearest `Shape`."
     },
     {
       "name": "disabled",

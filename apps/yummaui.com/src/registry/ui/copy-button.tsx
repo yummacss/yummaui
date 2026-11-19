@@ -66,10 +66,7 @@ export interface CopyButtonProps {
   onCopy?: (value: string) => void;
   /** Height, padding and text size. */
   size?: Size;
-  /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`.
-   */
+  /** Corner radius. Inherits the nearest `Shape`. */
   shape?: Shape;
   /** Blocks copying and dims the button. */
   disabled?: boolean;

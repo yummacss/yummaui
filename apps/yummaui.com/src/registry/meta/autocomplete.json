@@ -111,11 +111,10 @@
       "values": [
         "none",
         "rounded",
-        "squircle",
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius, applied to the input and the popup together. `squircle` uses `corner-shape`. Inherits the nearest `Shape`."
+      "description": "Corner radius, applied to the input and the popup together. Inherits the nearest `Shape`."
     },
     {
       "name": "disabled",

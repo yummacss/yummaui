@@ -74,11 +74,10 @@
       "type": "enum",
       "values": [
         "none",
-        "rounded",
-        "squircle"
+        "rounded"
       ],
       "default": "rounded",
-      "description": "Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded square where that is unsupported. Inherits the nearest `Shape`; under `pill`, `rounded`."
+      "description": "Corner radius. Inherits the nearest `Shape`; under `pill`, `rounded`."
     },
     {
       "name": "disabled",

@@ -129,8 +129,8 @@ export interface SelectProps {
   /** Height and width of the trigger. The popup follows it. */
   size?: Size;
   /**
-   * Corner radius, applied to the trigger and the popup together. `squircle`
-   * uses `corner-shape`. Inherits the nearest `Shape`.
+   * Corner radius, applied to the trigger and the popup together. Inherits the
+   * nearest `Shape`.
    */
   shape?: Shape;
   /**

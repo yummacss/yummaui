@@ -29,7 +29,6 @@
       "values": [
         "none",
         "rounded",
-        "squircle",
         "pill"
       ],
       "default": "rounded",

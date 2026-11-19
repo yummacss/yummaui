@@ -56,11 +56,7 @@ export interface OTPFieldProps
   mask?: boolean;
   /** Width, height and type size of every slot. */
   size?: Size;
-  /**
-   * Corner radius on each slot. `squircle` uses `corner-shape`, which degrades
-   * to a rounded square where that is unsupported. Inherits the nearest
-   * `Shape`.
-   */
+  /** Corner radius on each slot. Inherits the nearest `Shape`. */
   shape?: Shape;
   /** Blocks input and dims the whole field, label included. */
   disabled?: boolean;

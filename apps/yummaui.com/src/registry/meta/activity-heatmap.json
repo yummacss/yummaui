@@ -62,8 +62,7 @@
       "type": "enum",
       "values": [
         "none",
-        "rounded",
-        "squircle"
+        "rounded"
       ],
       "description": "Corner radius on the card and the days. Inherits the nearest `Shape`; under a pill it is rounded, so the days stay squares.",
       "default": "rounded"

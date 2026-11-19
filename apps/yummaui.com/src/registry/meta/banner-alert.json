@@ -40,8 +40,7 @@
       "type": "enum",
       "values": [
         "none",
-        "rounded",
-        "squircle"
+        "rounded"
       ],
       "default": "rounded",
       "description": "Corner radius of the strip and its dismiss button. Inherits the nearest `Shape`; under one it does not take, `rounded`."

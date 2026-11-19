@@ -86,10 +86,7 @@ export interface FileUploadProps {
    * removal.
    */
   onFilesChange?: (files: File[]) => void;
-  /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`.
-   */
+  /** Corner radius. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
    * `dashed` is the drop-zone convention and carries the extra width it needs

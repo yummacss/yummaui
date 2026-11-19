@@ -45,7 +45,7 @@ export interface SliderProps {
   step?: number;
   /**
    * Corner radius, applied to the track, the indicator and the thumb together.
-   * `squircle` uses `corner-shape`. Inherits the nearest `Shape`.
+   * Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /** Blocks interaction and dims the control. */

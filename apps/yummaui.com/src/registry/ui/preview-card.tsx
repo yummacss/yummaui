@@ -48,11 +48,7 @@ export interface PreviewCardProps {
   open?: boolean;
   /** Called with the new state. Required for a controlled preview card. */
   onOpenChange?: (open: boolean) => void;
-  /**
-   * Corner radius on the card. `squircle` uses `corner-shape`, which degrades
-   * to a rounded square where that is unsupported. Inherits the nearest
-   * `Shape`.
-   */
+  /** Corner radius on the card. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
    * The card's fade in/out. Turn it off for an instant appearance, or when the

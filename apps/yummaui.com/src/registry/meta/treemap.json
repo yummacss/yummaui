@@ -44,7 +44,6 @@
       "values": [
         "none",
         "rounded",
-        "squircle",
         "pill"
       ],
       "description": "Corner radius of the card and the tiles. Inherits the nearest `Shape`."

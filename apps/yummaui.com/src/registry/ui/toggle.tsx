@@ -58,10 +58,7 @@ export interface ToggleProps
   pressed?: boolean;
   /** Called with the new state. Required for a controlled toggle. */
   onPressedChange?: (pressed: boolean) => void;
-  /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`.
-   */
+  /** Corner radius. Inherits the nearest `Shape`. */
   shape?: Shape;
   /** The button's footprint. */
   size?: Size;

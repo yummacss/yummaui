@@ -101,10 +101,7 @@ export interface ButtonProps extends ComponentProps<typeof Button> {
    * buttons lines up.
    */
   size?: Size;
-  /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`.
-   */
+  /** Corner radius. Inherits the nearest `Shape`. */
   shape?: Shape;
   /**
    * Swaps the icon for a spinner, dims the button and blocks interaction, while

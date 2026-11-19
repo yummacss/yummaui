@@ -8,7 +8,7 @@ import { merge } from "yummacss/merge";
 import { FOCUS, INPUT_TEXT, MESSAGE_IN, RADIUS, useShape, useShake } from "./style";
 
 // a capsule turns into a blob past one line
-const SHAPES = ["none", "rounded", "squircle"] as const;
+const SHAPES = ["none", "rounded"] as const;
 
 type Status = "default" | "error" | "success";
 
@@ -72,9 +72,8 @@ export interface TextareaProps
    */
   maxLength?: number;
   /**
-   * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`; under one
-   * it does not take, `rounded`.
+   * Corner radius. Inherits the nearest `Shape`; under one it does not take,
+   * `rounded`.
    */
   shape?: (typeof SHAPES)[number];
   /** Called on every input event. */

@@ -95,7 +95,7 @@ is written.
 
 ## Shape
 
-- `none` is no radius, `squircle` is `br-xxl cs-s`, and `rounded` is the
+- `none` is no radius, and `rounded` is the
   natural round for that control: `br-sm` on a checkbox, `br-lg` on a panel,
   `br-9999` on a switch or a track, which is already a capsule at that height.
 - `rounded` is the default wherever a component has a shape. `none` is a
@@ -110,7 +110,7 @@ is written.
 
 ## Look
 
-- Flat: one border, no bevel, no gradient. Squircle is the default shape;
+- Flat: one border, no bevel, no gradient. Rounded is the default shape;
   a component can keep its own, as Avatar keeps `circle`.
 - Colors are roles, not palette shades: `raised`, `well`, `field`, `fill`,
   `on-fill`, `label`, `hint`, `rim`, `shadow`, `line`, `check`, `on`, `knob`

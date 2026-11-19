@@ -19,7 +19,6 @@
       "values": [
         "none",
         "rounded",
-        "squircle",
         "pill"
       ],
       "description": "Corner radius of the markers and quotes. Inherits the nearest `Shape`."
