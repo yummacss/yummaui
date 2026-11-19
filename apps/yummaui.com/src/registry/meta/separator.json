@@ -61,26 +61,12 @@
   "scene": [
     {
       "tag": "div",
-      "className": "d:g ji:c g:8 w:100% max-w:80",
+      "className": "d:f jc:c w:100% max-w:80",
       "children": [
-        {
-          "component": "Separator",
-          "props": {}
-        },
         {
           "component": "Separator",
           "props": {
             "label": "Yesterday"
-          }
-        },
-        {
-          "component": "Separator",
-          "props": {
-            "icon": {
-              "$icon": "IconPlus",
-              "size": "w:4 h:4"
-            },
-            "iconLabel": "Add a section"
           }
         }
       ]
