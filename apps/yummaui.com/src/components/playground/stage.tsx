@@ -149,7 +149,10 @@ export default function ComponentPlayground({
 	const active = tab === "config" && !config ? "code" : tab;
 
 	return (
-		<div className={`d:f fd:c mt:6 bg:page ${resizable ? "h:180" : "h:150"}`}>
+		// its own stacking context, so the tabs' raised keys stay under the fixed navbar
+		<div
+			className={`d:f fd:c mt:6 bg:page is:i ${resizable ? "h:180" : "h:150"}`}
+		>
 			<YummaTabs
 				value={active}
 				onValueChange={setTab}

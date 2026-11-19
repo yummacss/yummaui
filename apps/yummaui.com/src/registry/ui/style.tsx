@@ -351,7 +351,8 @@ export function shake(elements: Element | Iterable<Element> | null | undefined, 
   // an element from another frame fails instanceof, so ask what it is
   const list = "nodeType" in elements ? [elements as Element] : [...elements];
   list.forEach((element, index) =>
-    element.animate(SPRING, { duration: 460, delay: index * lag, easing: "linear" }),
+    // added onto the element's own transform, so a toast keeps its place in the stack
+    element.animate(SPRING, { duration: 460, delay: index * lag, easing: "linear", composite: "add" }),
   );
 }
 
