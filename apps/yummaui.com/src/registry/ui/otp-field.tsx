@@ -14,9 +14,9 @@ const SLOT =
   "p:0 bw:1 bs-o:key ta:c fw:500";
 
 const SLOT_SIZES: Record<Size, string> = {
-  sm: "w:8 h:9 fs:md",
-  md: "w:9 h:11 fs:lg",
-  lg: "w:11 h:13 fs:xl",
+  sm: "w:9 h:9 fs:md",
+  md: "w:11 h:11 fs:lg",
+  lg: "w:12 h:12 fs:xl",
 };
 
 export interface OTPFieldProps
