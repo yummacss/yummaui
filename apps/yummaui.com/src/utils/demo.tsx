@@ -69,8 +69,13 @@ import {
 	IconVideo,
 } from "@tabler/icons-react";
 import { type ComponentType, Fragment, type ReactNode } from "react";
-import { type ChildExample, getRegistryMeta } from "@/registry";
+import {
+	type ChildExample,
+	getRegistryMeta,
+	getRegistryTarget,
+} from "@/registry";
 import { componentId, iconMarker } from "@/utils/snippet";
+import { isSwitch } from "@/utils/props";
 
 export type DemoProps = Record<string, unknown>;
 
@@ -174,16 +179,42 @@ export function resolveIcons(value: unknown): unknown {
 }
 
 /** The registry ids a scene names, so they can load before it renders. */
+/** Examples that pass the Styling drawer's settings on to the component they show. */
+const FORWARDS = new Set(["button-group-split", "stat-live"]);
+
+/** The page a scene node belongs to: its own id, or the component a forwarding example shows. */
+export const pageOf = (id: string) =>
+	FORWARDS.has(id) ? getRegistryTarget(id).component : id;
+
 export function sceneIds(scene: ChildExample[]): string[] {
 	const ids = new Set<string>();
 	const walk = (nodes: ChildExample[]) => {
 		for (const node of nodes) {
-			if (node.component) ids.add(componentId(node.component));
+			if (node.component) {
+				ids.add(componentId(node.component));
+				ids.add(pageOf(componentId(node.component)));
+			}
 			if (Array.isArray(node.children)) walk(node.children);
 		}
 	};
 	walk(scene);
 	return [...ids];
+}
+
+/** The first node in a scene, at any depth, that draws the page's own component. */
+export function findOwn(
+	scene: ChildExample[],
+	id: string,
+): ChildExample | undefined {
+	for (const node of scene) {
+		if (node.component && pageOf(componentId(node.component)) === id)
+			return node;
+		if (Array.isArray(node.children)) {
+			const inner = findOwn(node.children, id);
+			if (inner) return inner;
+		}
+	}
+	return undefined;
 }
 
 /** The Example view, with the rail's shape on every component in it. */
@@ -213,16 +244,24 @@ export function renderScene(
 		},
 		// a prop with a handler is controlled from the address, by instance
 		wired: (component, path, props) => {
-			const meta = getRegistryMeta(componentId(component));
+			const id = componentId(component);
+			// an example of the page takes the page's settings and passes them to its component
+			const example = id !== pageOf(id);
+			const own = pageOf(id) === state.page;
+			const meta = getRegistryMeta(example && own ? pageOf(id) : id);
 			const out: DemoProps = {};
-			const own = componentId(component) === state.page;
 			for (const prop of meta?.props ?? []) {
 				const look = `all.${prop.name}`;
 				if (own && !prop.handler && look in state.values) {
-					out[prop.name] = state.values[look];
+					// a switch adds the prop, as the scene sets it or else its example, or drops it
+					out[prop.name] = isSwitch(prop)
+						? state.values[look]
+							? resolveIcons(props[prop.name] ?? prop.example)
+							: undefined
+						: state.values[look];
 					continue;
 				}
-				if (!prop.handler) continue;
+				if (!prop.handler || example) continue;
 				const initial = `default${prop.name.charAt(0).toUpperCase()}${prop.name.slice(1)}`;
 				const fallback =
 					props[prop.name] ??

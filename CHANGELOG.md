@@ -51,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **[components]** A vertical Separator keeps a length of its own outside a row.
+- **[components]** Sortable List without `handle` drops the grip, and its rows take focus to reorder by keyboard.
 - **[components]** Breadcrumb's chevrons & icons keep their size on a phone, and the trail wraps.
 - **[components]** Button keeps its icon & label on one line, so Empty State's buttons do not wrap.
 - **[components]** Diff Viewer's lines are as tall as Code Block's.

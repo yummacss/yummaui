@@ -67,8 +67,8 @@ export default function SeparatorBase({
   const vertical = orientation === "vertical";
 
   // a percentage height beats align-self: stretch, so a vertical rule in a row
-  // that sizes to its content measures zero
-  const rule = vertical ? "w:0 as:s" : "h:0 w:100%";
+  // that sizes to its content measures zero; the minimum keeps it seen in any parent
+  const rule = vertical ? "w:0 as:s min-h:6" : "h:0 w:100%";
   const line = vertical
     ? "blw:1 bc:line"
     : "btw:1 bc:line";
@@ -93,7 +93,7 @@ export default function SeparatorBase({
   return (
     <div
       className={merge(
-        `d:f ai:c g:2 ${vertical ? "fd:c h:100% as:s" : "w:100%"}`,
+        `d:f ai:c g:2 ${vertical ? "fd:c h:100% min-h:24 as:s" : "w:100%"}`,
         className,
       )}
     >

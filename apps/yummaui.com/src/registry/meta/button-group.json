@@ -55,40 +55,7 @@
   ],
   "scene": [
     {
-      "tag": "div",
-      "className": "d:g g:3 ji:c",
-      "children": [
-        {
-          "component": "ButtonGroupSplit"
-        },
-        {
-          "component": "ButtonGroup",
-          "children": [
-            {
-              "component": "Button",
-              "props": {
-                "variant": "secondary",
-                "icon": {
-                  "$icon": "IconArrowBackUp",
-                  "size": "w:4 h:4"
-                }
-              },
-              "children": "Undo"
-            },
-            {
-              "component": "Button",
-              "props": {
-                "variant": "secondary",
-                "icon": {
-                  "$icon": "IconArrowForwardUp",
-                  "size": "w:4 h:4"
-                }
-              },
-              "children": "Redo"
-            }
-          ]
-        }
-      ]
+      "component": "ButtonGroupSplit"
     }
   ]
 }

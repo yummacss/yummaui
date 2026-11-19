@@ -83,27 +83,31 @@ function Row({
   return (
     <li
       ref={ref}
+      // without a grip the whole row is what you drag, by pointer or by keyboard
+      tabIndex={handle ? undefined : 0}
+      aria-label={handle ? undefined : `Reorder ${item.label}`}
       className={merge(
-        "p:r d:f ai:c g:2 h:11 pl:1 pr:3 bw:1 bc:rim bg:raised bs-o:key c:label",
+        handle ? "" : outline,
+        "p:r d:f ai:c g:2 h:11 pr:3 bw:1 bc:rim bg:raised bs-o:key c:label",
         RADIUS.item[shape],
-        handle ? "" : "c:g ta:none",
+        handle ? "pl:1" : "pl:3 c:g ta:none",
         isDragging ? "zi:10" : "",
       )}
     >
-      <button
-        ref={grip}
-        type="button"
-        aria-label={`Reorder ${item.label}`}
-        tabIndex={handle ? 0 : -1}
-        className={merge(
-          outline,
-          "d:f ai:c jc:c w:7 h:8 bw:0 bg:transparent c:hint h:c:label ta:none",
-          handle ? "c:g" : "pe:none",
-          RADIUS.item[shape],
-        )}
-      >
-        <IconGripVertical aria-hidden className="w:4 h:4" />
-      </button>
+      {handle && (
+        <button
+          ref={grip}
+          type="button"
+          aria-label={`Reorder ${item.label}`}
+          className={merge(
+            outline,
+            "d:f ai:c jc:c w:7 h:8 bw:0 bg:transparent c:hint h:c:label ta:none c:g",
+            RADIUS.item[shape],
+          )}
+        >
+          <IconGripVertical aria-hidden className="w:4 h:4" />
+        </button>
+      )}
       {numbered && (
         <span className="w:4 c:hint fs:xs ff:m fvn:tn">{index + 1}</span>
       )}

@@ -12,8 +12,8 @@ import {
 import PropDescription from "@/components/prop-description";
 import { NavArrowDown } from "@/icons";
 import { ACCENTS, accentBars } from "@/utils/accent";
-import { sceneIds } from "@/utils/demo";
-import { inTableOrder, lookProps, typeOf } from "@/utils/props";
+import { findOwn, sceneIds } from "@/utils/demo";
+import { inTableOrder, isSwitch, lookProps, typeOf } from "@/utils/props";
 import { SHAPES } from "@/utils/shapes.mjs";
 
 /** A description's first sentence, opening on a press to the rest. */
@@ -156,9 +156,7 @@ export function Look() {
 	// a preview drawn by an example takes no settings from the drawer
 	const owns = sceneIds(playground.meta?.scene ?? []).includes(playground.id);
 	const looks = owns ? lookProps(props) : [];
-	const own = (playground.meta?.scene ?? []).find(
-		(node) => node.component && sceneIds([node]).includes(playground.id),
-	);
+	const own = findOwn(playground.meta?.scene ?? [], playground.id);
 	const valueOf = (name: string, fallback: unknown) => {
 		const key = `all.${name}`;
 		return key in playground.sceneValues
@@ -205,16 +203,18 @@ export function Look() {
 					<h3 className="m:0 mt:6 mb:1 c:ink/60 fs:xs fw:500">Props</h3>
 					{looks.map((prop) => {
 						// what the example sets itself, else the prop's default
-						const fallback =
-							own?.props?.[prop.name] ??
-							prop.default ??
-							(prop.type === "boolean" ? false : prop.values?.[0]);
+						const toggles = isSwitch(prop);
+						const fallback = toggles
+							? own?.props?.[prop.name] != null
+							: (own?.props?.[prop.name] ??
+								prop.default ??
+								(prop.type === "boolean" ? false : prop.values?.[0]));
 						const current = valueOf(prop.name, fallback);
 						return (
 							<Fragment key={prop.name}>
 								{line(
 									prop.name,
-									prop.type === "boolean" ? (
+									prop.type === "boolean" || toggles ? (
 										<PropSwitch
 											name={prop.name}
 											checked={current === true}
