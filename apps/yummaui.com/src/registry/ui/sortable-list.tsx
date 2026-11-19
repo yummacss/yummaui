@@ -89,7 +89,7 @@ function Row({
       className={merge(
         handle ? "" : outline,
         "p:r d:f ai:c g:2 h:11 pr:3 bw:1 bc:rim bg:raised bs-o:key c:label",
-        RADIUS.item[shape],
+        RADIUS.inset[shape],
         handle ? "pl:1" : "pl:3 c:g ta:none",
         isDragging ? "zi:10" : "",
       )}
