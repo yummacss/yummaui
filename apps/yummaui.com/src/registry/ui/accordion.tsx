@@ -1,7 +1,7 @@
 "use client";
 
 import { Accordion } from "@base-ui/react/accordion";
-import { IconChevronDown, IconLock, IconMinus, IconPlus } from "@tabler/icons-react";
+import { IconChevronDown, IconLock } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
@@ -13,7 +13,6 @@ const SHAPES = ["none", "rounded", "squircle"] as const;
 type Variant = "default" | "bordered" | "ghost" | "subtle";
 const TURN = "tp:t tdu:300 ttf:out-quart @prm:tp:none";
 
-type Indicator = "chevron" | "plus-minus";
 type IndicatorPosition = "leading" | "trailing";
 
 export interface AccordionItem {
@@ -46,13 +45,7 @@ export interface AccordionProps {
    * variant.
    */
   separated?: boolean;
-  /**
-   * Which built-in open/closed mark the trigger draws. `chevron` rotates one
-   * glyph 180 degrees. `plus-minus` swaps between two glyphs with a small
-   * rotation flourish.
-   */
-  indicator?: Indicator;
-  /** Which end of the trigger the indicator sits at. */
+  /** Which end of the trigger the chevron sits at. */
   indicatorPosition?: IndicatorPosition;
   /**
    * Allow more than one item open at once. Off keeps opening one item closed
@@ -97,7 +90,6 @@ export default function AccordionBase({
   variant = "default",
   shape: shapeProp,
   separated = true,
-  indicator = "chevron",
   indicatorPosition = "trailing",
   multiple = false,
   defaultValue,
@@ -219,14 +211,13 @@ export default function AccordionBase({
                   item.disabled ? "c:na o:60" : "c:p",
                 )}
               >
-                {indicator === "plus-minus" &&
-                  indicatorPosition === "leading" && (
-                    <PlusMinusGlyph
-                      isOpen={isOpen}
-                      animated={animated}
-                      className={glyphColor}
-                    />
-                  )}
+                {indicatorPosition === "leading" && (
+                  <ChevronGlyph
+                    isOpen={isOpen}
+                    animated={animated}
+                    className={glyphColor}
+                  />
+                )}
                 <div className="d:f ai:c g:3">
                   <span
                     className={["fs:sm fw:500", titleColor]
@@ -239,20 +230,12 @@ export default function AccordionBase({
                     <IconLock className="w:3 h:3 c:hint" aria-hidden />
                   )}
                 </div>
-                {indicator === "chevron" ? (
+                {indicatorPosition === "trailing" && (
                   <ChevronGlyph
                     isOpen={isOpen}
                     animated={animated}
                     className={glyphColor}
                   />
-                ) : (
-                  indicatorPosition === "trailing" && (
-                    <PlusMinusGlyph
-                      isOpen={isOpen}
-                      animated={animated}
-                      className={glyphColor}
-                    />
-                  )
                 )}
               </Accordion.Trigger>
             </Accordion.Header>
@@ -298,30 +281,5 @@ function ChevronGlyph({
         aria-hidden
       />
     </span>
-  );
-}
-
-function PlusMinusGlyph({
-  isOpen,
-  animated,
-  className,
-}: {
-  isOpen: boolean;
-  animated: boolean;
-  className: string;
-}) {
-  const glyphClasses = merge("fs:0 w:4 h:4", className);
-  const icon = isOpen ? (
-    <IconMinus className={glyphClasses} aria-hidden />
-  ) : (
-    <IconPlus className={glyphClasses} aria-hidden />
-  );
-
-  if (!animated) {
-    return icon;
-  }
-
-  return (
-    <span className={`d:f ${TURN} ${isOpen ? "ro:18" : "ro:0"}`}>{icon}</span>
   );
 }

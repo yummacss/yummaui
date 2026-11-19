@@ -1,13 +1,5 @@
-import Avatar, { type AvatarProps } from "./avatar";
+import Avatar from "./avatar";
 
 export default function AvatarIconFallback() {
-  return (
-    <div className="d:f ai:c g:4">
-      {tints.map((tint) => (
-        <Avatar key={tint} tint={tint} />
-      ))}
-    </div>
-  );
+  return <Avatar />;
 }
-
-const tints: NonNullable<AvatarProps["tint"]>[] = ["accent", "mint", "indigo"];

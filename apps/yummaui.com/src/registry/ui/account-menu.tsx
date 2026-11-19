@@ -67,14 +67,6 @@ export interface AccountMenuProps {
   className?: string;
 }
 
-// each account keeps one color wherever it shows, picked from its address
-const TINTS = ["blue", "mint", "indigo", "slate"] as const;
-const tintOf = (account: Account) => {
-  let sum = 0;
-  for (let i = 0; i < account.email.length; i++) sum += account.email.charCodeAt(i);
-  return TINTS[sum % TINTS.length];
-};
-
 /**
  * An avatar that opens the signed-in account: its card, a few actions, other
  * accounts to switch to and Sign out.
@@ -116,7 +108,6 @@ export default function AccountMenu({
           src={account.image}
           name={account.name}
           status={status}
-          tint={tintOf(account)}
         />
       </Menu.Trigger>
       <Menu.Portal container={container}>
@@ -133,7 +124,6 @@ export default function AccountMenu({
                 src={account.image}
                 name={account.name}
                 size="lg"
-                tint={tintOf(account)}
               />
               <div className="d:f fd:c min-w:0">
                 <span className="fw:600 o:h to:e ws:nw">{account.name}</span>
@@ -174,7 +164,6 @@ export default function AccountMenu({
                         src={other.image}
                         name={other.name}
                         size="sm"
-                        tint={tintOf(other)}
                       />
                       <span className="f:1 min-w:0 o:h to:e ws:nw">
                         {other.email}

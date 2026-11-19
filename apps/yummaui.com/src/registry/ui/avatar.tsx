@@ -5,17 +5,8 @@ import { merge } from "yummacss/merge";
 import type { Size } from "./style";
 
 type Status = "none" | "online" | "offline" | "busy";
-type Tint = "accent" | "blue" | "mint" | "indigo" | "slate";
 
 const ROOT = "d:if o:h ai:c jc:c va:m us:none";
-
-const TINTS: Record<Tint, { bg: string; fg: string }> = {
-  accent: { bg: "bg:fill bc:edge bs-o:key-fill", fg: "c:on-fill" },
-  blue: { bg: "bg:blue-9 bc:blue-11 bs-o:key-fill", fg: "c:white" },
-  mint: { bg: "bg:mint-8 bc:mint-10 bs-o:key-fill", fg: "c:white" },
-  indigo: { bg: "bg:indigo-8 bc:indigo-10 bs-o:key-fill", fg: "c:white" },
-  slate: { bg: "bg:slate-10 bc:slate-12 bs-o:key-fill", fg: "c:white" },
-};
 
 const SIZES: Record<Size, string> = {
   sm: "w:8 h:8",
@@ -80,11 +71,6 @@ export interface AvatarProps {
    * for the initials, or for the person icon when there is no `name` either.
    */
   fallback?: ReactNode;
-  /**
-   * Fills the fallback with a solid color and white initials or icon. It never
-   * reaches an image.
-   */
-  tint?: Tint;
   /** Drawn inside the avatar, in place of an image or initials. */
   children?: ReactNode;
   /**
@@ -107,7 +93,6 @@ export default function AvatarBase({
   badgeIcon,
   badgeLabel = "Verified",
   fallback,
-  tint,
   children,
   className,
 }: AvatarProps) {
@@ -115,7 +100,7 @@ export default function AvatarBase({
     ROOT,
     SIZES[size],
     "br:9999",
-    tint ? `${TINTS[tint].bg} bw:1` : "bg:well bc:raised bw:1 bs-o:key",
+    "bg:fill bc:edge bw:1 bs-o:key-fill",
     "bi-lg:b",
     className,
   );
@@ -123,7 +108,7 @@ export default function AvatarBase({
   const fallbackClasses = [
     "d:f ai:c jc:c w:100% h:100% fw:500",
     INITIAL_SIZES[size],
-    tint ? TINTS[tint].fg : "c:hint",
+    "c:on-fill",
   ]
     .filter(Boolean)
     .join(" ");

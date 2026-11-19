@@ -31,16 +31,6 @@
       "description": "Draws a rule between each pair of items. Only visible on the `default` variant."
     },
     {
-      "name": "indicator",
-      "type": "enum",
-      "values": [
-        "chevron",
-        "plus-minus"
-      ],
-      "default": "chevron",
-      "description": "Which built-in open/closed mark the trigger draws. `chevron` rotates one glyph 180 degrees. `plus-minus` swaps between two glyphs with a small rotation flourish."
-    },
-    {
       "name": "indicatorPosition",
       "type": "enum",
       "values": [
@@ -48,7 +38,7 @@
         "trailing"
       ],
       "default": "trailing",
-      "description": "Which end of the trigger the indicator sits at."
+      "description": "Which end of the trigger the chevron sits at."
     },
     {
       "name": "multiple",

@@ -21,18 +21,6 @@
       "typeName": "ReactNode"
     },
     {
-      "name": "tint",
-      "type": "enum",
-      "values": [
-        "accent",
-        "blue",
-        "mint",
-        "indigo",
-        "slate"
-      ],
-      "description": "Fills the fallback with a solid color and white initials or icon. It never reaches an image."
-    },
-    {
       "name": "status",
       "type": "enum",
       "values": [
@@ -85,8 +73,7 @@
           "component": "Avatar",
           "props": {
             "name": "Dut",
-            "status": "online",
-            "tint": "accent"
+            "status": "online"
           }
         },
         {

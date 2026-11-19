@@ -93,8 +93,7 @@
                   "component": "Avatar",
                   "props": {
                     "name": "Dut",
-                    "fallback": "D",
-                    "tint": "accent"
+                    "fallback": "D"
                   }
                 },
                 {
