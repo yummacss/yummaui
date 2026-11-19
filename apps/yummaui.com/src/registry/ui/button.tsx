@@ -11,7 +11,7 @@ import type {
 } from "react";
 import { useEffect, useRef, useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, type Size, useMorph, useShape } from "./style";
+import { FOCUS, RADIUS, Roll, type Shape, type Size, useMorph, useShape } from "./style";
 
 type Variant = "primary" | "secondary" | "subtle" | "ghost" | "danger" | "link";
 type IconSide = "leading" | "trailing";
@@ -231,7 +231,7 @@ export default function ButtonBase({
           BADGE[variant],
         )}
       >
-        {counter.seconds}
+        <Roll value={counter.seconds} text={String(counter.seconds)} still={!transition} />
       </span>
     </>
   ) : holdLabel ? (

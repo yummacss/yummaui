@@ -4,7 +4,7 @@ import { Button } from "@base-ui/react/button";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useIndicator, useShape } from "./style";
+import { FOCUS, RADIUS, Roll, type Shape, useIndicator, useShape } from "./style";
 
 export interface PaginationProps {
   /** How many pages there are. */
@@ -130,7 +130,9 @@ export default function Pagination({
           )}
         />
         {pagesOf(page, total, siblings).map((at, index) => (
-          <li key={at ?? `gap-${index}`}>
+          // keyed by place, so a slot rolls from one number to the next as the window moves
+          // biome-ignore lint/suspicious/noArrayIndexKey: the slots are positional
+          <li key={index}>
             {at === null ? (
               <span aria-hidden className="d:if ai:c jc:c h:9 min-w:9 c:hint fs:sm">
                 …
@@ -143,7 +145,7 @@ export default function Pagination({
                 aria-label={`Page ${at}`}
                 onClick={() => go(at)}
               >
-                {at}
+                <Roll value={at} text={String(at)} still={!animated} />
               </Button>
             )}
           </li>

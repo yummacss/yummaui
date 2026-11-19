@@ -51,6 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **[components]** Carousel's dots move with the slides.
+- **[components]** Button's countdown & Pagination's page numbers roll when they change.
 - **[components]** Onboarding eases its height between steps.
 - **[components]** `shake` in the style module shakes an element from another frame.
 - **[components]** Navigation Menu's panel has even space above & below its content, stacks into one column on a phone & scrolls when taller than the room under the bar.
