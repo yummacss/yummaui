@@ -36,8 +36,8 @@ export interface AnnouncementProps {
   /** Padding and text size, the badge's with it. */
   size?: Size;
   /**
-   * Corner radius of the pill and its badge. Inherits the nearest `Shape`;
-   * under the default, a pill.
+   * Corner radius of the announcement and its badge. Inherits the nearest
+   * `Shape`.
    */
   shape?: Shape;
   /**
@@ -53,10 +53,7 @@ export interface AnnouncementProps {
   className?: string;
 }
 
-/**
- * A badge inside a wider pill with a short message, such as news above a
- * heading.
- */
+/** A badge beside a short message, such as news above a heading. */
 export default function Announcement({
   children,
   label,
@@ -71,9 +68,7 @@ export default function Announcement({
   focus = true,
   className,
 }: AnnouncementProps) {
-  const inherited = useShape();
-  // a pill wherever the shape is the default, as a badge is
-  const shape = shapeProp ?? (inherited === "rounded" ? "pill" : inherited);
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const spec = SIZES[size];
   const trailing = badgePosition === "trailing";

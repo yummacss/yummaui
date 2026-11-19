@@ -1,5 +1,5 @@
 {
-  "summary": "A badge inside a wider pill with a short message, such as news above a heading.",
+  "summary": "A badge beside a short message, such as news above a heading.",
   "props": [
     {
       "name": "children",
@@ -82,7 +82,7 @@
         "pill"
       ],
       "default": "rounded",
-      "description": "Corner radius of the pill and its badge. Inherits the nearest `Shape`; under the default, a pill."
+      "description": "Corner radius of the announcement and its badge. Inherits the nearest `Shape`."
     },
     {
       "name": "className",
