@@ -4,7 +4,10 @@ import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { merge } from "yummacss/merge";
-import { FOCUS, RADIUS, type Shape, useShape } from "./style";
+import { FOCUS, RADIUS, useShape } from "./style";
+
+// a strip that wraps past one line cannot be a capsule
+const SHAPES = ["none", "rounded", "squircle"] as const;
 
 type Tone = "loud" | "quiet";
 
@@ -26,9 +29,9 @@ export interface BannerAlertProps {
   onDismiss?: () => void;
   /**
    * Corner radius of the strip and its dismiss button. Inherits the nearest
-   * `Shape`.
+   * `Shape`; under one it does not take, `rounded`.
    */
-  shape?: Shape;
+  shape?: (typeof SHAPES)[number];
   /**
    * The focus outline. `true` draws it, `false` removes it, and a string of
    * Yumma CSS utilities restyles it on every focusable part of the component,
@@ -57,7 +60,7 @@ export default function BannerAlert({
   className,
   focus = true,
 }: BannerAlertProps) {
-  const shape = useShape(shapeProp);
+  const shape = useShape(shapeProp, SHAPES);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [state, setState] = useState<"shown" | "leaving" | "gone">("shown");
 
