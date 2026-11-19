@@ -651,8 +651,5 @@ export function componentSource(page) {
 	].join("\n");
 }
 
-/** The newest release any row names, whose pages the sidebar marks new. */
-export const NEWEST = COMPONENT_PAGES.map((page) => page.since)
-	.filter(Boolean)
-	.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-	.at(-1);
+/** The latest published release, whose pages the sidebar marks new; bumped when one ships. */
+export const NEWEST = "0.19";

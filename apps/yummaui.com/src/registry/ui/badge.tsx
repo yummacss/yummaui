@@ -104,8 +104,7 @@ export interface BadgeProps {
   intent?: Intent;
   /**
    * Corner radius. `squircle` uses `corner-shape`, which degrades to a rounded
-   * square where that is unsupported. Inherits the nearest `Shape`; under the
-   * default, a pill.
+   * square where that is unsupported. Inherits the nearest `Shape`.
    */
   shape?: Shape;
   /** Padding, text size and icon size together. */
@@ -167,9 +166,7 @@ export default function BadgeBase({
   className,
   focus = true,
 }: BadgeProps) {
-  const inherited = useShape();
-  // a badge is a pill wherever the shape is the default
-  const shape = shapeProp ?? (inherited === "rounded" ? "pill" : inherited);
+  const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
 
   const { pad, text, icon: iconSize } = SIZES[size];

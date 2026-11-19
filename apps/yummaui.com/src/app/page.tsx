@@ -43,10 +43,16 @@ export default function Home() {
 						label="New"
 						intent="neutral"
 						dot
-						href={`/components/${FRESH[0]?.slug ?? "accordion"}`}
+						href={
+							FRESH[0]
+								? `/components/${FRESH[0].slug}`
+								: `https://github.com/yummacss/yummaui/releases/tag/v${NEWEST}.0`
+						}
 						className="as:fs"
 					>
-						{FRESH.length} components in {NEWEST}
+						{FRESH.length > 0
+							? `${FRESH.length} components in ${NEWEST}`
+							: `What's new in ${NEWEST}`}
 					</Announcement>
 					<h1 className="m:0 ff:display fw:400 fs:4xl lh:1 c:ink @sm:fs:5xl">
 						Yumma UI for React.
