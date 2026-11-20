@@ -79,7 +79,7 @@
       "name": "swipeToOpen",
       "type": "boolean",
       "default": false,
-      "description": "An invisible strip along its edge that opens it with a swipe."
+      "description": "A strip along its edge, marked with a grab bar, that opens it with a swipe."
     },
     {
       "name": "title",

@@ -29,10 +29,10 @@ const VIEWPORTS: Record<Side, string> = {
 
 // thin enough to leave the page's own edge controls alone
 const SWIPE_AREAS: Record<Side, string> = {
-  bottom: "p:f l:0 r:0 b:0 h:6 zi:10",
-  top: "p:f l:0 r:0 t:0 h:6 zi:10",
-  left: "p:f t:0 b:0 l:0 w:6 zi:10",
-  right: "p:f t:0 b:0 r:0 w:6 zi:10",
+  bottom: "p:f l:0 r:0 b:0 h:6 zi:10 d:f ai:c jc:c",
+  top: "p:f l:0 r:0 t:0 h:6 zi:10 d:f ai:c jc:c",
+  left: "p:f t:0 b:0 l:0 w:6 zi:10 d:f ai:c jc:c",
+  right: "p:f t:0 b:0 r:0 w:6 zi:10 d:f ai:c jc:c",
 };
 
 const PLACEMENTS: Record<Side, string> = {
@@ -113,7 +113,9 @@ export interface DrawerProps {
    * `trap-focus` keeps focus inside but leaves the page scrolling.
    */
   modal?: boolean | "trap-focus";
-  /** An invisible strip along its edge that opens it with a swipe. */
+  /**
+   * A strip along its edge, marked with a grab bar, that opens it with a swipe.
+   */
   swipeToOpen?: boolean;
   /** A glyph beside the trigger's label. */
   triggerIcon?: ReactNode;
@@ -247,7 +249,15 @@ export default function DrawerBase({
       onSnapPointChange={onSnapPointChange && ((next) => onSnapPointChange(next))}
       modal={modal}
     >
-      {swipeToOpen && <Drawer.SwipeArea className={SWIPE_AREAS[side]} />}
+      {swipeToOpen && (
+        <Drawer.SwipeArea className={SWIPE_AREAS[side]}>
+          {/* the strip's own grab bar, so a reader knows where to swipe */}
+          <span
+            aria-hidden
+            className={`fs:0 bg:line pe:none ${vertical ? "w:10 h:1" : "w:1 h:10"} ${shape === "none" ? "" : "br:9999"}`}
+          />
+        </Drawer.SwipeArea>
+      )}
       {render ? (
         <Drawer.Trigger render={asTrigger(render, outline, className)} />
       ) : isValidElement<{ className?: string }>(trigger) ? (
