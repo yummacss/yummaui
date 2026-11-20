@@ -198,12 +198,25 @@ export function Look() {
 					onChange={(dark) => playground.setScheme(dark ? "dark" : "light")}
 				/>,
 			)}
+			{owns &&
+				playground.meta?.wrap &&
+				line(
+					playground.meta.wrap.label,
+					<PropSwitch
+						name={playground.meta.wrap.label}
+						checked={playground.sceneValues["all.$wrap"] === true}
+						onChange={(value) =>
+							playground.setSceneValue("all.$wrap", value, false)
+						}
+					/>,
+				)}
 			{looks.length > 0 && (
 				<>
 					<h3 className="m:0 mt:6 mb:1 c:ink/60 fs:xs fw:500">Props</h3>
 					{looks.map((prop) => {
 						// what the example sets itself, else the prop's default
 						const toggles = isSwitch(prop);
+						const choices = prop.choices;
 						const fallback = toggles
 							? own?.props?.[prop.name] != null
 							: (own?.props?.[prop.name] ??
@@ -214,7 +227,21 @@ export function Look() {
 							<Fragment key={prop.name}>
 								{line(
 									prop.name,
-									prop.type === "boolean" || toggles ? (
+									choices ? (
+										<EnumSelect
+											container={box}
+											name={prop.name}
+											values={choices.map(String)}
+											value={String(current)}
+											onChange={(value) =>
+												playground.setSceneValue(
+													`all.${prop.name}`,
+													choices.find((choice) => String(choice) === value),
+													fallback,
+												)
+											}
+										/>
+									) : prop.type === "boolean" || toggles ? (
 										<PropSwitch
 											name={prop.name}
 											checked={current === true}

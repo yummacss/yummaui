@@ -69,6 +69,7 @@ export function lookProps<T extends RegistryProp>(props: T[]): T[] {
 			!/^default[A-Z]/.test(prop.name) &&
 			(prop.type === "enum" ||
 				(prop.type === "boolean" && !prop.typeName) ||
+				prop.choices !== undefined ||
 				isSwitch(prop)),
 	);
 }

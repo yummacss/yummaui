@@ -17,6 +17,7 @@ import {
 } from "@/registry";
 import { accentCss, DEFAULT_ACCENT } from "@/utils/accent";
 import { type DemoProps, renderScene, sceneIds } from "@/utils/demo";
+import { getRegistryImport } from "@/registry/loaders";
 import {
 	getCachedRegistryComponent,
 	loadRegistryComponent,
@@ -122,6 +123,11 @@ export default function ComponentPlayground({
 	const accent = playground?.accent ?? DEFAULT_ACCENT;
 	const scheme = playground?.scheme ?? "light";
 
+	// a preview wrapped in a page, such as DrawerIndent, fills the frame to its edges
+	const wrapped =
+		Boolean(playground?.meta?.wrap) &&
+		playground?.sceneValues["all.$wrap"] === true;
+
 	// a drag re-renders the stage on every move, so the frame is built once per look
 	const frame = useMemo(
 		() =>
@@ -130,7 +136,7 @@ export default function ComponentPlayground({
 					className="f:1 min-h:0 bg:page"
 					minHeight={0}
 					fill
-					bleed={resizable}
+					bleed={resizable || wrapped}
 					accentCss={[accentCss(accent), schemeCss(scheme)].join("\n")}
 				>
 					<Shape value={shape as ShapeName}>
@@ -138,7 +144,7 @@ export default function ComponentPlayground({
 					</Shape>
 				</PreviewFrame>
 			) : null,
-		[scene, shape, accent, scheme, resizable, run],
+		[scene, shape, accent, scheme, resizable, wrapped, run],
 	);
 
 	if (!id || !scene) return null;
@@ -320,9 +326,27 @@ function Scene({
 		};
 	}, [ids]);
 
+	// the page's own export the Styling drawer wraps the preview in, such as DrawerIndent
+	const wrap = playground?.meta?.wrap;
+	const wrapped =
+		Boolean(wrap) && playground?.sceneValues["all.$wrap"] === true;
+	const [Wrapper, setWrapper] = useState<ComponentType<DemoProps> | null>(null);
+	useEffect(() => {
+		const load = wrap && playground ? getRegistryImport(playground.id) : null;
+		if (!load || !wrap) return;
+		let live = true;
+		void load().then((module) => {
+			const found = (module as Record<string, unknown>)[wrap.export];
+			if (live && found) setWrapper(() => found as ComponentType<DemoProps>);
+		});
+		return () => {
+			live = false;
+		};
+	}, [wrap, playground?.id]);
+
 	// a scene draws whole or not at all, so nothing jumps in as it loads
 	if (ids.some((id) => !components[id])) return null;
-	return renderScene(
+	const drawn = renderScene(
 		scene,
 		components as Record<string, ComponentType<DemoProps>>,
 		shape,
@@ -333,5 +357,12 @@ function Scene({
 			set: playground?.setSceneValue ?? (() => {}),
 			setScheme: playground?.setScheme,
 		},
+	);
+	return wrapped && Wrapper ? (
+		<Wrapper shape={shape} className="d:f fd:c ai:c jc:c w:100%">
+			{drawn}
+		</Wrapper>
+	) : (
+		drawn
 	);
 }

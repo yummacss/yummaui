@@ -70,11 +70,11 @@ const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
   right: { none: "", rounded: "blr:xxl", pill: "blr:3xl" },
 };
 
-// the snap offset, plus the lift that leaves 20px of this drawer above a nested one
+// the snap offset, dropped while a nested drawer is open so 20px of this one peeks above it
 const LIFT: Partial<Record<Side, string>> = {
   bottom:
-    "calc(var(--drawer-snap-point-offset, 0px) + min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
-  top: "calc(var(--drawer-snap-point-offset, 0px) - min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
+    "calc(var(--drawer-snap-point-offset, 0px) * (1 - min(var(--nested-drawers, 0), 1)) + min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
+  top: "calc(var(--drawer-snap-point-offset, 0px) * (1 - min(var(--nested-drawers, 0), 1)) - min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
 };
 
 const SURFACE = "p:r d:f fd:c bg:raised bc:line c:label bw:1 bs-o:pop";
@@ -390,12 +390,12 @@ export interface DrawerIndentProps {
   className?: string;
 }
 
-/** Wraps the app so the page steps back over black while any Drawer inside it is open. */
+/** Wraps the app so the page steps back over the well while any Drawer inside it is open. */
 export function DrawerIndent({ children, shape: shapeProp, className }: DrawerIndentProps) {
   const shape = useShape(shapeProp);
   return (
     <Drawer.Provider>
-      <Drawer.IndentBackground className="p:f i:0 bg:black" />
+      <Drawer.IndentBackground className="p:f i:0 bg:well" />
       <Drawer.Indent
         className={merge(
           "p:r min-h:dvh bg:raised tor:t tp:a tdu:300 ttf:out-quart @prm:tp:none indented:s:95 indented:tty:4 indented:o:h",
