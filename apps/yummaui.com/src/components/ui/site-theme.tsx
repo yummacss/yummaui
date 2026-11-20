@@ -1,54 +1,39 @@
 "use client";
 
-import { Toggle } from "@base-ui/react/toggle";
-import { ToggleGroup } from "@base-ui/react/toggle-group";
+import { Button } from "@base-ui/react/button";
 import { Desktop, Moon, Sun } from "@/icons";
-import { useIndicator } from "@/registry/ui/style";
 import { type SiteTheme, setSiteTheme, useSiteTheme } from "@/utils/site-theme";
 
-const THEMES = [
-	{ value: "light", label: "Light", Icon: Sun },
-	{ value: "dark", label: "Dark", Icon: Moon },
-	{ value: "system", label: "System", Icon: Desktop },
-] as const;
+const THEMES: Record<
+	SiteTheme,
+	{ label: string; Icon: typeof Sun; next: SiteTheme }
+> = {
+	system: { label: "System", Icon: Desktop, next: "light" },
+	light: { label: "Light", Icon: Sun, next: "dark" },
+	dark: { label: "Dark", Icon: Moon, next: "system" },
+};
 
-/** Light, dark or system for the whole site, the previews included. */
-export default function SiteThemeSwitcher() {
+/** Light, dark or system for the whole site, the previews included: each press moves to the next. */
+export default function SiteThemeSwitcher({
+	size = "w:8 h:8",
+}: {
+	/** Width and height, to match the buttons beside it. */
+	size?: string;
+}) {
 	const theme = useSiteTheme();
-	const indicator = useIndicator<HTMLDivElement>();
+	const { label, Icon, next } = THEMES[theme];
 	return (
-		<ToggleGroup
-			ref={indicator.ref}
-			aria-label="Theme"
-			value={[theme]}
-			onValueChange={(next) => {
-				const picked = next[0] as SiteTheme | undefined;
-				if (picked) setSiteTheme(picked);
-			}}
-			className="p:r d:f ai:c g:px h:8 px:1 br:9999 bc:border bg:surface bs-o:key bw:1 bf-b:sm"
+		<Button
+			type="button"
+			onClick={() => setSiteTheme(next)}
+			aria-label={`Theme: ${label}. Switch to ${THEMES[next].label}`}
+			className={`d:f ai:c jc:c ${size} br:9999 bc:border bg:surface bs-o:key h:bg:hover a:bg:press c:ink bw:1 bf-b:sm fv:oc:ink fv:ow:2`}
 		>
-			{/* the search bar's Ctrl + K key, sliding under the picked option */}
-			<span
-				aria-hidden
-				style={indicator.style}
-				className={`p:a l:0 t:0 br:9999 bc:border bg:surface bs-o:key bw:1 ${
-					indicator.ready ? "tp:a tdu:300 ttf:out-quart @prm:tp:none" : ""
-				}`}
+			{/* re-keyed, so each theme's icon eases in */}
+			<Icon
+				key={theme}
+				className="w:4 h:4 tp:ot tdu:300 ttf:out-back @st:s:50 @st:o:0 @st:ro:-20 @prm:tp:none"
 			/>
-			{THEMES.map(({ value, label, Icon }) => (
-				<Toggle
-					key={value}
-					value={value}
-					aria-label={label}
-					className={(state) =>
-						`p:r zi:10 d:f ai:c jc:c w:8 h:6 br:9999 bw:0 bg:transparent c:p tp:c tdu:150 @prm:tp:none fv:oc:ink fv:ow:2 ${
-							state.pressed ? "c:ink" : "c:ink/60 h:c:ink"
-						}`
-					}
-				>
-					<Icon className="w:4 h:4" />
-				</Toggle>
-			))}
-		</ToggleGroup>
+		</Button>
 	);
 }

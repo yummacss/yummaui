@@ -36,7 +36,7 @@ export default function LandingHeader() {
 				</Link>
 
 				<div className="d:f ai:c g:2">
-					<SiteThemeSwitcher />
+					<SiteThemeSwitcher size="w:9 h:9" />
 					<Button
 						type="button"
 						onClick={() => setSearchOpen(true)}
