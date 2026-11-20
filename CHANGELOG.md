@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** `snapPoints` on Drawer, with `defaultSnapPoint`, `snapPoint` & `onSnapPointChange`, for a `bottom` or `top` drawer that rests at set heights.
 - **[components]** `modal` & `swipeToOpen` on Drawer; the swipe strip shows a grab bar.
 - **[components]** A `bottom` or `top` Drawer steps back when a Drawer opens inside it. It needs the `nested` state.
+- **[components]** `DrawerIndent` in Drawer, which wraps the app so the page steps back while a Drawer is open. It needs the `indented` state.
 - **[components]** Date Picker.
 - **[components]** Calendar.
 - **[components]** `Fit` in the style module, a box that eases its height to its content.

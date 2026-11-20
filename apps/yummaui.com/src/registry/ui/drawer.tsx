@@ -377,3 +377,34 @@ export default function DrawerBase({
 function Surface({ flyout, className, children }: { flyout: boolean; className: string; children: ReactNode }) {
   return flyout ? <div className={className}>{children}</div> : children;
 }
+
+export interface DrawerIndentProps {
+  /** The app, which steps back while any Drawer inside it is open. */
+  children: ReactNode;
+  /** Corner radius of the page while it is stepped back. Inherits the nearest `Shape`. */
+  shape?: Shape;
+  /**
+   * Extra classes on the page. `merge` folds them in last, so one here replaces the
+   * component's own class for the same utility.
+   */
+  className?: string;
+}
+
+/** Wraps the app so the page steps back over black while any Drawer inside it is open. */
+export function DrawerIndent({ children, shape: shapeProp, className }: DrawerIndentProps) {
+  const shape = useShape(shapeProp);
+  return (
+    <Drawer.Provider>
+      <Drawer.IndentBackground className="p:f i:0 bg:black" />
+      <Drawer.Indent
+        className={merge(
+          "p:r min-h:dvh bg:raised tor:t tp:a tdu:300 ttf:out-quart @prm:tp:none indented:s:95 indented:tty:4 indented:o:h",
+          RADIUS.indent[shape],
+          className,
+        )}
+      >
+        {children}
+      </Drawer.Indent>
+    </Drawer.Provider>
+  );
+}
