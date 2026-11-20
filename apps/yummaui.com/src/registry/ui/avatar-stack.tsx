@@ -7,9 +7,9 @@ type Overlap = "none" | "sm" | "md" | "lg";
 
 const OVERLAPS: Record<Overlap, string> = {
   none: "",
-  sm: "ml:-1",
-  md: "ml:-2",
-  lg: "ml:-3",
+  sm: "ml:-2",
+  md: "ml:-3",
+  lg: "ml:-4",
 };
 
 export interface AvatarStackProps {

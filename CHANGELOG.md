@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **[components]** The `square` shape is named `none`; `square` still works in `--shape` and links.
 - **[components]** Badge & Announcement follow the nearest Shape, so `rounded` no longer draws a pill.
 - **[components]** OTP Field's cells are square, so `pill` draws circles.
+- **[components]** Avatar Stack overlaps each avatar one step more: 8px, 12px & 16px.
 - **[components]** Banner Alert takes every shape but `pill`.
 - **[components]** Signature Pad has no × mark on its signing line.
 - **[components]** Marquee shows a pause key by default and pauses while focus is inside it.
