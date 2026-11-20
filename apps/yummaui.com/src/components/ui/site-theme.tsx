@@ -11,7 +11,7 @@ export default function SiteThemeSwitcher() {
 			value={theme}
 			onValueChange={setSiteTheme}
 			iconOnly
-			size="sm"
+			size="md"
 			shape="pill"
 		/>
 	);
