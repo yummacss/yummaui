@@ -7,11 +7,12 @@ import type { ReactElement, ReactNode } from "react";
 import { cloneElement, isValidElement, useState } from "react";
 import { merge } from "yummacss/merge";
 import ButtonBase from "./button";
-import { asTrigger, FOCUS, RADIUS, type Shape, type Size, useShape } from "./style";
+import { asTrigger, FOCUS, RADIUS, Scroll, type Shape, type Size, useShape } from "./style";
 
 type Side = "bottom" | "top" | "left" | "right";
 type IconPosition = "leading" | "trailing";
 type Variant = "edge" | "flyout";
+type SnapPoint = number | string;
 const SWIPE: Record<Side, "down" | "up" | "left" | "right"> = {
   bottom: "down",
   top: "up",
@@ -27,8 +28,8 @@ const VIEWPORTS: Record<Side, string> = {
 };
 
 const PLACEMENTS: Record<Side, string> = {
-  bottom: "w:100% max-w:sm",
-  top: "w:100% max-w:sm",
+  bottom: "w:100% max-w:sm max-h:dvh",
+  top: "w:100% max-w:sm max-h:dvh",
   left: "h:100% w:80",
   right: "h:100% w:80",
 };
@@ -88,6 +89,17 @@ export interface DrawerProps {
   open?: boolean;
   /** Called whenever it opens or closes, controlled or not. */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Heights a `bottom` or `top` drawer rests at, as a fraction of the screen or
+   * a length.
+   */
+  snapPoints?: SnapPoint[];
+  /** The snap point it opens at. The first one when omitted. */
+  defaultSnapPoint?: SnapPoint;
+  /** Controlled snap point, with `onSnapPointChange`. */
+  snapPoint?: SnapPoint | null;
+  /** Called whenever it moves to another snap point. */
+  onSnapPointChange?: (snapPoint: SnapPoint | null) => void;
   /** A glyph beside the trigger's label. */
   triggerIcon?: ReactNode;
   /** Which end of the trigger `triggerIcon` sits at. */
@@ -170,6 +182,10 @@ export default function DrawerBase({
   container,
   open: controlledOpen,
   onOpenChange,
+  snapPoints,
+  defaultSnapPoint,
+  snapPoint,
+  onSnapPointChange,
 }: DrawerProps) {
   const shape = useShape(shapeProp);
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
@@ -207,6 +223,10 @@ export default function DrawerBase({
       swipeDirection={SWIPE[side]}
       open={open}
       onOpenChange={setOpen}
+      snapPoints={snapPoints}
+      defaultSnapPoint={defaultSnapPoint ?? snapPoints?.[0]}
+      snapPoint={snapPoint}
+      onSnapPointChange={onSnapPointChange && ((next) => onSnapPointChange(next))}
     >
       {render ? (
         <Drawer.Trigger render={asTrigger(render, outline, className)} />
@@ -245,7 +265,11 @@ export default function DrawerBase({
           }`}
         />
         <Drawer.Viewport className={VIEWPORTS[side]}>
-          <Drawer.Popup className={popupClasses}>
+          <Drawer.Popup
+            className={popupClasses}
+            // the snap offset rides on translate, so it adds to the swipe's transform
+            style={vertical ? { translate: "0 var(--drawer-snap-point-offset, 0px)" } : undefined}
+          >
             <Surface flyout={flyout} className={merge(SURFACE, "f:1 min-w:0 min-h:0 o:h", RADIUS.popup[shape])}>
             {side === "bottom" && <div className="pt:3">{grip}</div>}
 
@@ -266,7 +290,8 @@ export default function DrawerBase({
               </Drawer.Close>
             )}
 
-            <Drawer.Content className="d:f fd:c g:3 p:6 f:1">
+            <Scroll className="f:1">
+            <Drawer.Content className="d:f fd:c g:3 p:6">
               <Drawer.Title className="m:0 tw:b c:label fs:md fw:500">
                 {title}
               </Drawer.Title>
@@ -295,6 +320,7 @@ export default function DrawerBase({
                 </Drawer.Close>
               )}
             </Drawer.Content>
+            </Scroll>
 
             {side === "top" && <div className="pb:3">{grip}</div>}
             </Surface>

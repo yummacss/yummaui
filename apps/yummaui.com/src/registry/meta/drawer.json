@@ -45,6 +45,30 @@
       "description": "Called whenever it opens or closes, controlled or not."
     },
     {
+      "name": "snapPoints",
+      "type": "none",
+      "typeName": "(number | string)[]",
+      "description": "Heights a `bottom` or `top` drawer rests at, as a fraction of the screen or a length."
+    },
+    {
+      "name": "defaultSnapPoint",
+      "type": "none",
+      "typeName": "number | string",
+      "description": "The snap point it opens at. The first one when omitted."
+    },
+    {
+      "name": "snapPoint",
+      "type": "none",
+      "typeName": "number | string | null",
+      "description": "Controlled snap point, with `onSnapPointChange`."
+    },
+    {
+      "name": "onSnapPointChange",
+      "type": "none",
+      "typeName": "(snapPoint: number | string | null) => void",
+      "description": "Called whenever it moves to another snap point."
+    },
+    {
       "name": "title",
       "type": "string",
       "example": "readme.md",
