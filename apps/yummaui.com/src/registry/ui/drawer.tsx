@@ -70,11 +70,11 @@ const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
   right: { none: "", rounded: "blr:xxl", pill: "blr:3xl" },
 };
 
-// the snap offset, plus the lift that leaves 20px of this drawer above a nested one
+// the snap offset, dropped while a nested drawer is open so 20px of this one peeks above it
 const LIFT: Partial<Record<Side, string>> = {
   bottom:
-    "calc(var(--drawer-snap-point-offset, 0px) + min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
-  top: "calc(var(--drawer-snap-point-offset, 0px) - min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
+    "calc(var(--drawer-snap-point-offset, 0px) * (1 - min(var(--nested-drawers, 0), 1)) + min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
+  top: "calc(var(--drawer-snap-point-offset, 0px) * (1 - min(var(--nested-drawers, 0), 1)) - min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
 };
 
 const SURFACE = "p:r d:f fd:c bg:raised bc:line c:label bw:1 bs-o:pop";

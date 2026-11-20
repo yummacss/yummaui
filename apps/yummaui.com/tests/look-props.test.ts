@@ -25,8 +25,10 @@ const KNOWN_INERT: Record<string, string> = {
 	"dialog.confirmVariant": POPUP,
 	"dialog.showClose": POPUP,
 	"drawer.handle": POPUP,
+	"drawer.modal": POPUP,
 	"drawer.showClose": POPUP,
 	"drawer.side": POPUP,
+	"drawer.snapPoints": POPUP,
 	"drawer.variant": POPUP,
 	"image-cropper.crop": "drawn once the picture has loaded",
 	"marquee.pauseOnHover": BEHAVIOR,
@@ -81,11 +83,13 @@ describe("the Styling drawer", () => {
 			for (const prop of lookProps(meta.props)) {
 				// what the scene sets itself, or the prop's default
 				const current = own?.props?.[prop.name] ?? prop.default;
-				const values = isSwitch(prop)
-					? [own?.props?.[prop.name] == null]
-					: prop.type === "boolean"
-						? [!(current ?? false)]
-						: (prop.values ?? []).filter((value) => value !== current);
+				const values = prop.choices
+					? prop.choices.filter((value) => value !== current)
+					: isSwitch(prop)
+						? [own?.props?.[prop.name] == null]
+						: prop.type === "boolean"
+							? [!(current ?? false)]
+							: (prop.values ?? []).filter((value) => value !== current);
 				const changes = values.some(
 					(value) =>
 						render(page, scene, loaded, { [`all.${prop.name}`]: value }) !==

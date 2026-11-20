@@ -98,6 +98,10 @@ export interface RegistryProp {
   handler?: string;
   controlled?: boolean;
   description?: string;
+  /** The Styling drawer turns it on, set to \`example\`, and off. */
+  switch?: boolean;
+  /** What the Styling drawer offers for a prop that mixes booleans and words. */
+  choices?: (string | boolean)[];
 }
 
 export interface RegistryMeta {
@@ -105,6 +109,8 @@ export interface RegistryMeta {
   props: RegistryProp[];
   /** The Example view: the component in use, often several times over. */
   scene: ChildExample[];
+  /** A named export of the component that the Styling drawer can wrap the preview in. */
+  wrap?: { export: string; label: string };
 }
 
 /** One node of a demo's children: a registry component, a plain element, or text. */
