@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { RADIUS, useShape } from "./style";
 
@@ -129,12 +129,11 @@ export default function BarChart({
       {shown && active !== null && (
         <span
           aria-hidden
-          className={`p:a d:f g:2 px:2 py:1 bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none ${RADIUS.item[shape]}`}
+          className={`p:a l:var(--x) t:var(--y) tr:calc(-50%) tty:-half d:f g:2 px:2 py:1 bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none ${RADIUS.item[shape]}`}
           style={{
-            left: left + active * band + band / 2,
-            top: y(shown.value) - 8,
-            translate: "-50% -100%",
-          }}
+            "--x": `${left + active * band + band / 2}px`,
+            "--y": `${y(shown.value) - 8}px`,
+          } as CSSProperties}
         >
           <span className="c:hint">{shown.label}</span>
           <span className="fw:600 fvn:tn">{format(shown.value)}</span>

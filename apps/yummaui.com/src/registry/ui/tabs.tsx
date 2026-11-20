@@ -140,7 +140,7 @@ export default function TabsBase({
   );
 
   const indicatorClasses = merge(
-    "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim",
+    "p:a l:var(--active-tab-left) t:var(--active-tab-top) w:var(--active-tab-width) h:var(--active-tab-height) zi:0 bg:raised bs-o:key bw:1 bc:rim",
     RADIUS.control[shape],
     animated && "tp:a tdu:300 ttf:out-quart @prm:tp:none",
   );
@@ -220,11 +220,6 @@ export default function TabsBase({
         {}
         <Tabs.Indicator
           className={indicatorClasses}
-          style={{
-            translate: "var(--active-tab-left) var(--active-tab-top)",
-            width: "var(--active-tab-width)",
-            height: "var(--active-tab-height)",
-          }}
         />
       </Tabs.List>
 

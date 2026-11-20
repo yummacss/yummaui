@@ -412,8 +412,7 @@ export function SearchDialog({ open, onClose }: SearchDialogProps) {
 									// the footer's version treatment: huge, dim, cut off by the edge
 									<span
 										aria-hidden="true"
-										className="p:a l:5 ff:display ws:nw us:none pe:none footer-version"
-										style={{ bottom: "-0.18em", fontSize: "9rem" }}
+										className="p:a l:5 b:calc(-0.18em) fs:calc(9rem) ff:display ws:nw us:none pe:none footer-version"
 									>
 										{wash}
 									</span>

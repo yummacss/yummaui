@@ -31,8 +31,8 @@ export default function NavigationMenuLibrary({ container }: { container?: HTMLE
             <>
               <span className="fs:sm fw:600">Storage</span>
               <span className="d:f h:2 g:px o:h bg:line br:9999" aria-hidden>
-                <span className="h:100% bg:fill" style={{ width: "44%" }} />
-                <span className="h:100% bg:fill/40" style={{ width: "19%" }} />
+                <span className="w:calc(44%) h:100% bg:fill" />
+                <span className="w:calc(19%) h:100% bg:fill/40" />
               </span>
               <span className="c:hint fs:xs fvn:tn">12.7 of 20 GB used</span>
             </>

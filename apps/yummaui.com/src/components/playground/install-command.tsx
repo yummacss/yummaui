@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { usePlayground } from "@/components/playground/context";
 import { getRegistryTarget } from "@/registry";
 import CodeBlock from "@/registry/ui/code-block";
@@ -26,8 +27,19 @@ export default function Installation() {
 				code={command}
 				lines={[
 					<span key="command">
-						<span style={{ color: tone("name") }}>{tool}</span>
-						<span style={{ color: tone("text") }}> {rest.join(" ")}</span>
+						<span
+							className="c:var(--tone)"
+							style={{ "--tone": tone("name") } as CSSProperties}
+						>
+							{tool}
+						</span>
+						<span
+							className="c:var(--tone)"
+							style={{ "--tone": tone("text") } as CSSProperties}
+						>
+							{" "}
+							{rest.join(" ")}
+						</span>
 					</span>,
 				]}
 				lineNumbers={false}

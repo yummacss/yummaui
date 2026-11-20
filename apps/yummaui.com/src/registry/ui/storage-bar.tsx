@@ -3,7 +3,7 @@
 import { Meter } from "@base-ui/react/meter";
 import { IconCircleDashed } from "@tabler/icons-react";
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { RADIUS, useShape, type Shape } from "./style";
 
@@ -133,8 +133,8 @@ export default function StorageBar({
         {categories.map((entry, index) => (
           <span
             key={entry.label}
-            className={`d:b h:100% ${tone(index).bar}`}
-            style={{ width: `${(entry.value / max) * 100 * progress}%` }}
+            className={`d:b w:var(--part) h:100% ${tone(index).bar}`}
+            style={{ "--part": `${(entry.value / max) * 100 * progress}%` } as CSSProperties}
           />
         ))}
       </Meter.Track>

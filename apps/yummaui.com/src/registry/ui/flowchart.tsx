@@ -145,6 +145,8 @@ function Link({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPo
           <path d="M1 1l8 4-8 4" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
         </marker>
       </defs>
+      {/* the flow library styles its edge path itself, so only an inline style wins */}
+      {/* oxlint-disable-next-line yummacss/no-inline-styles */}
       <BaseEdge path={path} markerEnd={`url(#${marker})`} style={{ stroke: "currentColor", strokeWidth: 1.5 }} />
     </g>
   );

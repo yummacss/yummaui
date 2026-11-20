@@ -3,7 +3,7 @@
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import useEmblaCarousel from "embla-carousel-react";
 import type { ReactNode } from "react";
-import { Children, useCallback, useEffect, useState } from "react";
+import { Children, useCallback, useEffect, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useShape } from "./style";
 
@@ -120,10 +120,9 @@ export default function Carousel({
               role="group"
               aria-roledescription="slide"
               aria-label={`${index + 1} of ${slides.length}`}
-              className="pl:3 min-w:0"
-              style={{ flex: "0 0 100%" }}
+              className="pl:3 min-w:0 fg:0 fs:0 fb:100%"
             >
-              <div className={merge("o:h us:none", RADIUS.popup[shape])} style={{ aspectRatio }}>
+              <div className={merge("o:h us:none ar:var(--ratio)", RADIUS.popup[shape])} style={{ "--ratio": aspectRatio } as CSSProperties}>
                 {slide}
               </div>
             </div>
@@ -140,13 +139,13 @@ export default function Carousel({
                 aria-label={`Go to slide ${index + 1}`}
                 aria-current={index === selected}
                 onClick={() => api?.scrollTo(index)}
-                style={{ width: 8 + 16 * (near[index] ?? (index === selected ? 1 : 0)) }}
-                className={merge(outline, "p:r h:2 p:0 bw:0 br:9999 o:h bg:rim c:p")}
+                style={{ "--dot": `${8 + 16 * (near[index] ?? (index === selected ? 1 : 0))}px` } as CSSProperties}
+                className={merge(outline, "p:r w:var(--dot) h:2 p:0 bw:0 br:9999 o:h bg:rim c:p")}
               >
                 <span
                   aria-hidden
-                  className="p:a i:0 br:9999 bg:fill"
-                  style={{ opacity: near[index] ?? (index === selected ? 1 : 0) }}
+                  className="p:a i:0 br:9999 bg:fill o:var(--lit)"
+                  style={{ "--lit": near[index] ?? (index === selected ? 1 : 0) } as CSSProperties}
                 />
               </button>
             ))}

@@ -1,7 +1,7 @@
 "use client";
 
 import { IconArrowBackUp } from "@tabler/icons-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import SignaturePadEngine from "signature_pad";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useShape } from "./style";
@@ -123,11 +123,11 @@ export default function SignaturePad({
     <div className={merge("d:f fd:c g:2 w:100% c:label", className)}>
       <div
         className={merge(
-          "p:r bw:1 bc:rim bg:raised bs-o:key o:h",
+          "p:r h:var(--pad) bw:1 bc:rim bg:raised bs-o:key o:h",
           RADIUS.popup[shape],
           disabled ? "o:60" : "",
         )}
-        style={{ height }}
+        style={{ "--pad": `${height}px` } as CSSProperties}
       >
         <canvas
           ref={canvas}

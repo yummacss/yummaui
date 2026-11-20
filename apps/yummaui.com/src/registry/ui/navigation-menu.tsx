@@ -3,7 +3,7 @@
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { IconChevronDown } from "@tabler/icons-react";
 import type { ReactNode } from "react";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, Scroll, useShape, type Shape } from "./style";
 
@@ -136,12 +136,12 @@ export default function NavigationMenuBase({
         <li
           aria-hidden
           className={merge(
-            "p:a t:1 h:8 lst:none bw:1 bc:rim bg:raised bs-o:key pe:none",
+            "p:a l:var(--key-left) t:1 w:var(--key-width) h:8 lst:none bw:1 bc:rim bg:raised bs-o:key pe:none",
             RADIUS.item[shape],
             value ? "o:100" : "o:0",
             !animated || key.jump ? "tp:o tdu:150 @prm:tp:none" : "tp:a tdu:250 ttf:out-quart @prm:tp:none",
           )}
-          style={{ left: key.left, width: key.width }}
+          style={{ "--key-left": `${key.left}px`, "--key-width": `${key.width}px` } as CSSProperties}
         />
         {items.map((entry) => (
           <NavigationMenu.Item key={entry.label} value={entry.label}>

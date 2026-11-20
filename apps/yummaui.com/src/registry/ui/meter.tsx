@@ -1,7 +1,7 @@
 "use client";
 
 import { Meter } from "@base-ui/react/meter";
-import type { ReactNode } from "react";
+import type { ReactNode, CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { RADIUS, Roll, useShape } from "./style";
 
@@ -180,10 +180,10 @@ export default function MeterBase({
           segments.map((segment, index) => (
             <span
               key={segment.label}
-              className={`d:b h:100% ${shade(index)} ${motion}`}
+              className={`d:b w:var(--part) h:100% ${shade(index)} ${motion}`}
               style={{
-                width: `${(Math.max(segment.value, 0) / (high - low)) * 100}%`,
-              }}
+                "--part": `${(Math.max(segment.value, 0) / (high - low)) * 100}%`,
+              } as CSSProperties}
             />
           ))
         ) : (

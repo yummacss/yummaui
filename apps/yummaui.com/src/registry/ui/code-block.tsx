@@ -4,7 +4,7 @@ import { Button } from "@base-ui/react/button";
 import { ScrollArea } from "@base-ui/react/scroll-area";
 import { Tabs } from "@base-ui/react/tabs";
 import { IconCheck, IconCopy, IconFile } from "@tabler/icons-react";
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, Swap, useShape } from "./style";
 
@@ -102,14 +102,14 @@ function Lines({
       {/* iOS enlarges text in wide scrolling blocks unless told not to; tabs indent two columns */}
       <ScrollArea.Viewport
         tabIndex={0}
-        className={merge(outline, "ob:c", fill && "f:1 min-h:0")}
+        // each line is 1.25rem, plus the block's 1.5rem of padding
+        className={merge(outline, "ob:c", fill ? "f:1 min-h:0" : "max-h:calc(var(--lines)*1.25rem+1.5rem)")}
         style={{
-          // each line is 1.25rem, plus the block's 1.5rem of padding
-          maxHeight: fill ? undefined : `calc(${maxLines} * 1.25rem + 1.5rem)`,
+          "--lines": maxLines,
           WebkitTextSizeAdjust: "100%",
           textSizeAdjust: "100%",
           tabSize: 2,
-        }}
+        } as CSSProperties}
       >
         <pre className="m:0 py:3">
           <code className="d:b w:fc min-w:100% ff:m fs:xs lh:5">
@@ -242,14 +242,9 @@ export default function CodeBlock({
             ))}
             <Tabs.Indicator
               className={merge(
-                "p:a l:0 t:0 zi:0 bg:raised bs-o:key bw:1 bc:rim tp:a tdu:300 ttf:out-quart @prm:tp:none",
+                "p:a l:var(--active-tab-left) t:var(--active-tab-top) w:var(--active-tab-width) h:var(--active-tab-height) zi:0 bg:raised bs-o:key bw:1 bc:rim tp:a tdu:300 ttf:out-quart @prm:tp:none",
                 RADIUS.control[shape],
               )}
-              style={{
-                translate: "var(--active-tab-left) var(--active-tab-top)",
-                width: "var(--active-tab-width)",
-                height: "var(--active-tab-height)",
-              }}
             />
           </Tabs.List>
           {copyButton}

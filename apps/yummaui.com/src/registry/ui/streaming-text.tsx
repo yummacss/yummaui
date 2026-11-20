@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 
 export interface StreamingTextProps {
@@ -50,11 +50,8 @@ export default function StreamingText({
   const last = delays.current[count - 1] ?? 0;
   const fade = animated ? "an:reveal adu:400 ttf:eo @prm:an:none" : "";
   const caret = (delay: number) => (
-    <span aria-hidden className={fade} style={{ animationDelay: `${delay}ms`, animationFillMode: "backwards" }}>
-      <span
-        className="d:ib ml:px bg:label br:9999 an:blink adu:1000 aic:i @prm:an:none"
-        style={{ width: 2, height: "1.15em", verticalAlign: "text-bottom" }}
-      />
+    <span aria-hidden className={merge(fade, "ad:var(--delay)")} style={{ "--delay": `${delay}ms`, animationFillMode: "backwards" } as CSSProperties}>
+      <span className="d:ib w:calc(2px) h:calc(1.15em) ml:px va:tb bg:label br:9999 an:blink adu:1000 aic:i @prm:an:none" />
     </span>
   );
 
@@ -71,8 +68,8 @@ export default function StreamingText({
             {[0, 150, 300].map((delay) => (
               <span
                 key={delay}
-                className="d:b w:2 h:2 br:9999 bg:hint an:pulse adu:1000 aic:i @prm:an:none"
-                style={{ animationDelay: `${delay}ms` }}
+                className="d:b w:2 h:2 br:9999 bg:hint an:pulse adu:1000 aic:i ad:var(--delay) @prm:an:none"
+                style={{ "--delay": `${delay}ms` } as CSSProperties}
               />
             ))}
           </span>
@@ -90,7 +87,7 @@ export default function StreamingText({
           if (!word || /\s/.test(word)) return word;
           const delay = delays.current[nth++] ?? 0;
           return (
-            <span key={index} className={fade} style={{ animationDelay: `${delay}ms`, animationFillMode: "backwards" }}>
+            <span key={index} className={merge(fade, "ad:var(--delay)")} style={{ "--delay": `${delay}ms`, animationFillMode: "backwards" } as CSSProperties}>
               {word}
             </span>
           );

@@ -311,11 +311,7 @@ export default function Plane() {
 				maskComposite: "intersect",
 			}}
 		>
-			<div
-				data-plane
-				className="p:a d:f ai:fs g:5"
-				style={{ left: "50%", top: "50%" }}
-			>
+			<div data-plane className="p:a l:50% t:50% d:f ai:fs g:5">
 				{COLUMNS.map((cards, column) => (
 					<div key={column} data-plane-lane className="w:75 fs:0">
 						{[0, 1, 2, 3].map((round) => (

@@ -2,7 +2,7 @@
 
 import { IconX } from "@tabler/icons-react";
 import type { ReactNode } from "react";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape } from "./style";
 
@@ -76,11 +76,11 @@ export default function BannerAlert({
         onDismiss?.();
       }}
       className={merge(
-        "d:g w:100% tp:a tdu:200 ttf:out-quart @prm:tp:none",
+        "d:g gtr:var(--rows) w:100% tp:a tdu:200 ttf:out-quart @prm:tp:none",
         state === "leaving" ? "o:0" : "o:100",
         className,
       )}
-      style={{ gridTemplateRows: state === "leaving" ? "0fr" : "1fr" }}
+      style={{ "--rows": state === "leaving" ? "0fr" : "1fr" } as CSSProperties}
     >
       {/* room for the key's shadow, which the collapsing row would clip */}
       <div className={merge("o:h min-h:0", state === "leaving" ? "" : "px:1 pb:1")}>

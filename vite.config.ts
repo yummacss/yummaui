@@ -23,7 +23,13 @@ export default defineConfig({
 						"error",
 						{ allow: ["footer-version"] },
 					],
+					"yummacss/no-inline-styles": "error",
 				},
+			},
+			{
+				// the image renderer reads inline styles only
+				files: ["apps/yummaui.com/src/components/og-image.tsx"],
+				rules: { "yummacss/no-inline-styles": "off" },
 			},
 		],
 		options: { typeAware: true, typeCheck: true },

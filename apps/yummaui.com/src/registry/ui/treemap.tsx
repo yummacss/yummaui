@@ -1,6 +1,6 @@
 "use client";
 
-import { type KeyboardEvent, useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useEffect, useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useShape } from "./style";
 
@@ -187,14 +187,14 @@ export default function Treemap({
               onFocus={() => setActive(index)}
               onPointerEnter={() => setHovered(index)}
               style={{
-                left: tile.x + 2,
-                top: tile.y + 2,
-                width: Math.max(tile.w - 4, 0),
-                height: Math.max(tile.h - 4, 0),
-              }}
+                "--x": `${tile.x + 2}px`,
+                "--y": `${tile.y + 2}px`,
+                "--w": `${Math.max(tile.w - 4, 0)}px`,
+                "--h": `${Math.max(tile.h - 4, 0)}px`,
+              } as CSSProperties}
               className={merge(
                 outline,
-                "p:a d:f fd:c ai:fs jc:fe p:3 bw:0 o:h ta:l c:p",
+                "p:a l:var(--x) t:var(--y) w:var(--w) h:var(--h) d:f fd:c ai:fs jc:fe p:3 bw:0 o:h ta:l c:p",
                 TONES[Math.min(index, TONES.length - 1)],
                 RADIUS.block[shape],
               )}

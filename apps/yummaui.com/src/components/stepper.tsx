@@ -43,10 +43,7 @@ export function Step({
 	return (
 		<li className={isLast ? "ml:8" : "mb:10 ml:8"}>
 			{/* the line is 2px left of the list, so the circle centers on it */}
-			<div
-				className="d:f p:a ai:c jc:c w:6 h:6 br:9999 bc:border bg:surface bw:1"
-				style={{ left: -13 }}
-			>
+			<div className="d:f p:a l:calc(-0.75rem-1px) ai:c jc:c w:6 h:6 br:9999 bc:border bg:surface bw:1">
 				<span className="c:accent fs:xs">{stepNumber}</span>
 			</div>
 			<div className="d:f ai:c mb:2">

@@ -6,8 +6,7 @@ import {
   useEffect,
   useId,
   useRef,
-  useState,
-} from "react";
+  useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, Roll, type Size } from "./style";
 
@@ -212,10 +211,10 @@ export default function Knob({
         >
           <span
             aria-hidden
-            className={merge("p:a i:0 br:9999", gliding && animated ? "tp:t tdu:150 ttf:out-quart @prm:tp:none" : "")}
-            style={{ transform: `rotate(${turn}deg)` }}
+            className={merge("p:a i:0 br:9999 ro:var(--turn)", gliding && animated ? "tp:t tdu:150 ttf:out-quart @prm:tp:none" : "")}
+            style={{ "--turn": `${turn}deg` } as CSSProperties}
           >
-            <span className="p:a br:9999 bg:label" style={{ left: "50%", top: "12%", width: 2, height: "22%", marginLeft: -1 }} />
+            <span className="p:a l:50% t:calc(12%) w:calc(2px) h:calc(22%) ml:-px br:9999 bg:label" />
           </span>
         </div>
       </div>
