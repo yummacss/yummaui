@@ -1,6 +1,19 @@
 /* biome-ignore lint/suspicious/noUnknownAtRules: Yumma CSS is being injected here */
 @yummacss;
 
+/* a theme picked in the navbar beats the device's; cs:ld on html follows the device */
+html[data-theme="light"] {
+	color-scheme: light;
+	--lightningcss-light: initial;
+	--lightningcss-dark: ;
+}
+
+html[data-theme="dark"] {
+	color-scheme: dark;
+	--lightningcss-light: ;
+	--lightningcss-dark: initial;
+}
+
 [data-base-ui-portal] > * {
 	z-index: 20;
 }

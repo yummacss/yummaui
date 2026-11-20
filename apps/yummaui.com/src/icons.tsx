@@ -14,12 +14,14 @@ import {
 	IconCopy,
 	IconCornerDownLeft,
 	IconCube,
+	IconDeviceDesktop,
 	IconDiamond,
 	IconFile,
 	IconFolder,
 	IconLetterT,
 	IconLogout,
 	IconMarkdown,
+	IconMoon,
 	IconPalette,
 	IconPlus,
 	IconPointFilled,
@@ -27,6 +29,7 @@ import {
 	IconSettings,
 	IconSettings2,
 	IconSparkles,
+	IconSun,
 	IconTerminal2,
 	IconWorld,
 	IconX,
@@ -46,6 +49,7 @@ export const Close = line(IconX);
 export const Code = line(IconCode);
 export const ComponentSolid = line(IconCube);
 export const Copy = line(IconCopy);
+export const Desktop = line(IconDeviceDesktop);
 export const Diamond = line(IconDiamond);
 export const FileMd = line(IconMarkdown);
 export const Folder = line(IconFolder);
@@ -53,6 +57,7 @@ export const Gear = line(IconSettings);
 export const Globe = line(IconWorld);
 export const GitHub = line(IconBrandGithub);
 export const LogOut = line(IconLogout);
+export const Moon = line(IconMoon);
 export const LongArrowDownLeftSolid = line(IconCornerDownLeft);
 export const NavArrowDown = line(IconChevronDown);
 export const NavArrowLeft = line(IconChevronLeft);
@@ -66,6 +71,7 @@ export const Point = line(IconPointFilled);
 export const Search = line(IconSearch);
 export const Settings2 = line(IconSettings2);
 export const Sparkles = line(IconSparkles);
+export const Sun = line(IconSun);
 export const Terminal = line(IconTerminal2);
 export const TextLayer = line(IconLetterT);
 export const Twitter = line(IconBrandX);

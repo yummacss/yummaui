@@ -124,7 +124,7 @@ const SWATCHES = ACCENTS.map((family) => ({
 	colors: accentBars(family),
 }));
 
-/** Shape, Accent and Scheme, the preview's styling. */
+/** Shape and Accent, the preview's styling. */
 export function Look() {
 	const playground = usePlayground();
 	// popups portal into the drawer, which sits above the page's layers
@@ -188,14 +188,6 @@ export function Look() {
 					options={SWATCHES}
 					value={playground.accent}
 					onChange={playground.setAccent}
-				/>,
-			)}
-			{line(
-				"dark",
-				<PropSwitch
-					name="dark"
-					checked={playground.scheme === "dark"}
-					onChange={(dark) => playground.setScheme(dark ? "dark" : "light")}
 				/>,
 			)}
 			{owns &&

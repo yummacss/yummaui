@@ -1,7 +1,7 @@
 "use client";
 
 import { parseAsJson, parseAsStringLiteral, useQueryState } from "nuqs";
-import { useLocalStorage, useMediaQuery } from "usehooks-ts";
+import { useLocalStorage } from "usehooks-ts";
 import {
 	createContext,
 	type ReactNode,
@@ -17,6 +17,7 @@ import { DEFAULT_ACCENT, isAccent } from "@/utils/accent";
 import { prefetchRegistry } from "@/utils/prefetch-registry";
 import type { Scheme } from "@/utils/scheme";
 import { DEFAULT_SHAPE, readShape, SHAPES } from "@/utils/shapes.mjs";
+import { useSiteScheme } from "@/utils/site-theme";
 
 const SHAPE_QUERY = parseAsStringLiteral(SHAPES as [string, ...string[]])
 	.withDefault(DEFAULT_SHAPE)
@@ -54,7 +55,7 @@ interface Playground {
 	accent: string;
 	setAccent: (family: string) => void;
 	scheme: Scheme;
-	/** Pins the preview's scheme, or `system` to follow the reader's own again. */
+	/** Pins the preview's scheme, or `system` to follow the site's again. */
 	setScheme: (scheme: Scheme | "system") => void;
 	shape: string;
 	setShape: (shape: string) => void;
@@ -82,19 +83,14 @@ export function PlaygroundProvider({
 	);
 	const accent = isAccent(storedAccent) ? storedAccent : DEFAULT_ACCENT;
 
-	// the preview follows the system; a picked scheme lasts until the system's changes
-	const [storedScheme, setStoredScheme] = useState<string>("system");
-	const systemDark = useMediaQuery("(prefers-color-scheme: dark)");
-	useEffect(() => setStoredScheme("system"), [systemDark]);
-	const scheme: Scheme =
-		storedScheme === "dark" || storedScheme === "light"
-			? storedScheme
-			: systemDark
-				? "dark"
-				: "light";
+	// the preview follows the site's theme; a Theme Switcher in it overrides that until the site's changes
+	const siteScheme = useSiteScheme();
+	const [picked, setPicked] = useState<Scheme | null>(null);
+	useEffect(() => setPicked(null), [siteScheme]);
+	const scheme: Scheme = picked ?? siteScheme;
 	const setScheme = useCallback(
-		(next: Scheme | "system") => setStoredScheme(next),
-		[setStoredScheme],
+		(next: Scheme | "system") => setPicked(next === "system" ? null : next),
+		[],
 	);
 
 	const [storedShape, setStoredShape] = useLocalStorage(
