@@ -13,16 +13,16 @@ value; the code imports it rather than repeating it.
 Corners come from `RADIUS`, by the part's role, never from a hard-coded
 `br:` class. That is what lets one `Shape` restyle a whole screen.
 
-| Part | Row |
-| --- | --- |
-| Button, field, trigger, tab, toggle | `RADIUS.control` |
-| Textarea, a field that grows | `RADIUS.box` |
-| Row in a list or popup | `RADIUS.item` |
-| Popup, dialog, card, panel | `RADIUS.popup` |
-| Strip of controls: toolbar, tab list | `RADIUS.bar` |
-| Badge, chip, keycap, icon tile | `RADIUS.chip` |
-| Wrapping text or data: a quote, a chart tile | `RADIUS.block` |
-| Track of a slider, meter or progress | `RADIUS.track` |
+| Part                                         | Row              |
+| -------------------------------------------- | ---------------- |
+| Button, field, trigger, tab, toggle          | `RADIUS.control` |
+| Textarea, a field that grows                 | `RADIUS.box`     |
+| Row in a list or popup                       | `RADIUS.item`    |
+| Popup, dialog, card, panel                   | `RADIUS.popup`   |
+| Strip of controls: toolbar, tab list         | `RADIUS.bar`     |
+| Badge, chip, keycap, icon tile               | `RADIUS.chip`    |
+| Wrapping text or data: a quote, a chart tile | `RADIUS.block`   |
+| Track of a slider, meter or progress         | `RADIUS.track`   |
 
 - **Round things stay round.** A dot, an avatar, a thumb or a status light
   is `br:9999` in every shape; that is the one literal allowed.
@@ -32,20 +32,19 @@ Corners come from `RADIUS`, by the part's role, never from a hard-coded
   description takes `RADIUS.popup.rounded`; a pill around two lines is a
   blob.
 
-| Wrong | Right |
-| --- | --- |
+| Wrong                            | Right                 |
+| -------------------------------- | --------------------- |
 | `className="br:md"` on a tooltip | `RADIUS.popup[shape]` |
-
 
 ## Measurements
 
 Sizes come in three steps, `sm`, `md` and `lg`, from `SIZE`.
 
-| | `sm` | `md` | `lg` |
-| --- | --- | --- | --- |
+|                         | `sm`       | `md`       | `lg`        |
+| ----------------------- | ---------- | ---------- | ----------- |
 | One-line control height | 32px `h:8` | 36px `h:9` | 44px `h:11` |
-| Field and list width | `w:56` | `w:64` | `w:72` |
-| Label text | `fs:xs` | `fs:sm` | `fs:md` |
+| Field and list width    | `w:56`     | `w:64`     | `w:72`      |
+| Label text              | `fs:xs`    | `fs:sm`    | `fs:md`     |
 
 - **Spacing steps by 4px.** Gaps are `g:1`, `g:2`, `g:3` or `g:4`; `g:px` only
   between keys in a segmented strip, and `g:8` only between form sections.
@@ -66,15 +65,14 @@ Sizes come in three steps, `sm`, `md` and `lg`, from `SIZE`.
 Tabler outline icons, never Unicode symbols: a modifier key is an icon, not
 `⌘`.
 
-| Size | Use |
-| --- | --- |
-| 16px `w:4 h:4` | Everywhere, by default: in buttons, rows, fields, shortcuts |
+| Size           | Use                                                            |
+| -------------- | -------------------------------------------------------------- |
+| 16px `w:4 h:4` | Everywhere, by default: in buttons, rows, fields, shortcuts    |
 | 12px `w:3 h:3` | A mark inside an indicator: an option's check, a chip's remove |
-| 20px `w:5 h:5` | The icon is the whole target, on an image or an empty area |
-| 24px `w:6 h:6` | The icon is the content: a keypad key, a rating star |
+| 20px `w:5 h:5` | The icon is the whole target, on an image or an empty area     |
+| 24px `w:6 h:6` | The icon is the content: a keypad key, a rating star           |
 
 Width and height are always equal.
-
 
 ## Color and depth
 
@@ -89,11 +87,10 @@ never names a palette color except for a meaning (red for danger).
   `o:80` on `c:current`), since the hint gray clashes with the tint: a Banner
   Alert's close button, a Treemap tile's value.
 
-| Wrong | Right |
-| --- | --- |
-| `<span className="fs:xs o:80">` for a description | `<span className="fs:xs c:hint">` |
-| `<span className="o:70">{icon}</span>` in a row | `<span className="c:hint">{icon}</span>` |
-
+| Wrong                                             | Right                                    |
+| ------------------------------------------------- | ---------------------------------------- |
+| `<span className="fs:xs o:80">` for a description | `<span className="fs:xs c:hint">`        |
+| `<span className="o:70">{icon}</span>` in a row   | `<span className="c:hint">{icon}</span>` |
 
 ## Type
 
@@ -113,31 +110,30 @@ Anything that scrolls goes through Scroll Area, never the browser's own bar,
 which on Windows draws arrows and a gray track. In a popup list, the
 highlighted option still scrolls into view on the arrow keys.
 
-| Wrong | Right |
-| --- | --- |
+| Wrong                           | Right                                           |
+| ------------------------------- | ----------------------------------------------- |
 | `className="oy:auto"` on a list | The list inside `Scroll`, from the style module |
-
 
 ## Motion
 
 Motion follows the reader's hand: it starts where the touch was, is short,
 and stops at once under reduced motion (`@prm:`).
 
-| Duration | Use |
-| --- | --- |
-| 150ms `tdu:150` | A press, a hover that moves something |
-| 200ms `tdu:200` | A popup opening, an icon swapping, a small change |
-| 250ms `tdu:250` | A key sliding, a panel resizing |
-| 300ms `tdu:300` | A drawer or a toast, the most anything the user starts takes |
-| 460ms | The error shake, the one exception: the answer to a submit, not motion the hand drives |
-| 500ms `tdu:500` | Data settling: a meter or progress filling |
+| Duration        | Use                                                                                    |
+| --------------- | -------------------------------------------------------------------------------------- |
+| 150ms `tdu:150` | A press, a hover that moves something                                                  |
+| 200ms `tdu:200` | A popup opening, an icon swapping, a small change                                      |
+| 250ms `tdu:250` | A key sliding, a panel resizing                                                        |
+| 300ms `tdu:300` | A drawer or a toast, the most anything the user starts takes                           |
+| 460ms           | The error shake, the one exception: the answer to a submit, not motion the hand drives |
+| 500ms `tdu:500` | Data settling: a meter or progress filling                                             |
 
-| Curve | Use |
-| --- | --- |
-| `ttf:out-quart` | Entering and moving: the default |
-| `ttf:eo` | Leaving |
-| `ttf:out-back` | A toggle landing: a switch thumb, a check, a radio dot |
-| `ttf:io` | Data settling |
+| Curve           | Use                                                    |
+| --------------- | ------------------------------------------------------ |
+| `ttf:out-quart` | Entering and moving: the default                       |
+| `ttf:eo`        | Leaving                                                |
+| `ttf:out-back`  | A toggle landing: a switch thumb, a check, a radio dot |
+| `ttf:io`        | Data settling                                          |
 
 - **Hover color changes at once.** Only movement animates on hover.
 - **A press scales to 98%** on transform only, and its shadow sinks at once.
@@ -147,15 +143,15 @@ and stops at once under reduced motion (`@prm:`).
 
 The patterns, each built once and reused:
 
-| Pattern | What moves |
-| --- | --- |
-| Sliding key | One raised key slides under the pressed item (Tabs, Toggle Group, Pagination) |
-| Swap | Two icons in one place cross-fade with a little scale and blur (`Swap`) |
-| Morph | A key grows into a field, the key sliding to the field's end |
-| Error | `useShake` or `shake`: the field shakes on a damped spring, a row of slots ripples 18ms apart, wrong characters blur away while their boxes stay, and the message fades in from a blur in the hint's place (`MESSAGE_IN`) |
-| Success | The field turns green; OTP Field's slots turn green one after another and fold into a key carrying the success text |
-| Lift | A dragged item lifts on a spring with a deeper shadow and a tilt, the rest make room |
-| Panel | A popup resizes between contents, which cross-fade with a slight blur |
+| Pattern     | What moves                                                                                                                                                                                                                |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sliding key | One raised key slides under the pressed item (Tabs, Toggle Group, Pagination)                                                                                                                                             |
+| Swap        | Two icons in one place cross-fade with a little scale and blur (`Swap`)                                                                                                                                                   |
+| Morph       | A key grows into a field, the key sliding to the field's end                                                                                                                                                              |
+| Error       | `useShake` or `shake`: the field shakes on a damped spring, a row of slots ripples 18ms apart, wrong characters blur away while their boxes stay, and the message fades in from a blur in the hint's place (`MESSAGE_IN`) |
+| Success     | The field turns green; OTP Field's slots turn green one after another and fold into a key carrying the success text                                                                                                       |
+| Lift        | A dragged item lifts on a spring with a deeper shadow and a tilt, the rest make room                                                                                                                                      |
+| Panel       | A popup resizes between contents, which cross-fade with a slight blur                                                                                                                                                     |
 
 ## States
 
