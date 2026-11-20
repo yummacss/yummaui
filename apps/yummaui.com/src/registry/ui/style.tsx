@@ -108,6 +108,8 @@ export const RADIUS = {
     rounded: "btlr:xl btrr:xl bblr:xl",
     pill: "btlr:3xl btrr:3xl bblr:3xl",
   },
+  /** A page stepped back behind an open drawer: the popup's corner, only while it is indented. */
+  indent: { none: "", rounded: "indented:br:xl", pill: "indented:br:3xl" },
   /** The box of a checkbox. */
   mark: { none: "", rounded: "br:sm", pill: "br:9999" },
 } as const satisfies Record<string, Record<Shape, string>>;

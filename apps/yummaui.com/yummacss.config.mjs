@@ -34,6 +34,7 @@ export default defineConfig({
 			"from-left": "[data-activation-direction=left]",
 			"from-right": "[data-activation-direction=right]",
 			hovering: "[data-hovering]",
+			indented: "[data-active]",
 			nested: "[data-nested-drawer-open]",
 			opening: "[data-starting-style]",
 			resizing: "[data-separator=active]",
