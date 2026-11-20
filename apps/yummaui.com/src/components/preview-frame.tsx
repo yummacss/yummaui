@@ -194,6 +194,13 @@ export default function PreviewFrame({
 		};
 	}, [near, fill, bleed]);
 
+	// the root is built once, so a preview that starts filling the frame later updates it here
+	useEffect(() => {
+		if (!body) return;
+		if (bleed) body.dataset.bleed = "";
+		else delete body.dataset.bleed;
+	}, [body, bleed]);
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: `body` is the remount signal, not a value read
 	useEffect(() => {
 		const style = frame.current?.contentDocument?.getElementById("accent");

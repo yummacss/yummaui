@@ -390,12 +390,12 @@ export interface DrawerIndentProps {
   className?: string;
 }
 
-/** Wraps the app so the page steps back over black while any Drawer inside it is open. */
+/** Wraps the app so the page steps back over the well while any Drawer inside it is open. */
 export function DrawerIndent({ children, shape: shapeProp, className }: DrawerIndentProps) {
   const shape = useShape(shapeProp);
   return (
     <Drawer.Provider>
-      <Drawer.IndentBackground className="p:f i:0 bg:black" />
+      <Drawer.IndentBackground className="p:f i:0 bg:well" />
       <Drawer.Indent
         className={merge(
           "p:r min-h:dvh bg:raised tor:t tp:a tdu:300 ttf:out-quart @prm:tp:none indented:s:95 indented:tty:4 indented:o:h",
