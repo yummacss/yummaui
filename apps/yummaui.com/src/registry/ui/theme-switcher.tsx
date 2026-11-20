@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@base-ui/react/button";
 import { Toggle } from "@base-ui/react/toggle";
 import { ToggleGroup } from "@base-ui/react/toggle-group";
 import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons-react";
@@ -9,6 +10,7 @@ import { FOCUS, RADIUS, useIndicator, useShape, type Shape } from "./style";
 
 type Theme = "light" | "dark" | "system";
 type Size = "sm" | "md";
+type Variant = "segmented" | "cycle";
 
 const THEMES: {
   value: Theme;
@@ -30,6 +32,14 @@ const ICON_ONLY: Record<Size, string> = {
   sm: "p:1",
   md: "p:2",
 };
+
+// one button, Button's secondary look at its icon-only sizes
+const CYCLE_SIZES: Record<Size, string> = {
+  sm: "w:8 h:8",
+  md: "w:9 h:9",
+};
+
+const NEXT: Record<Theme, Theme> = { system: "light", light: "dark", dark: "system" };
 
 // the raised key slides under the picked option, so the options draw none
 const PICKED = "c:label";
@@ -54,9 +64,17 @@ export interface ThemeSwitcherProps {
    * the next visit. Leave it out and nothing is stored.
    */
   storageKey?: string;
-  /** Draws the icons alone, keeping each label as its accessible name. */
+  /**
+   * `segmented` shows every theme on a track; `cycle` is one button that moves
+   * System, Light, Dark on each press, showing the current one.
+   */
+  variant?: Variant;
+  /**
+   * Draws the icons alone, keeping each label as its accessible name. Ignored
+   * by `cycle`.
+   */
   iconOnly?: boolean;
-  /** Height of the track and its options. */
+  /** Height of the track and its options, or of the `cycle` button. */
   size?: Size;
   /**
    * Corner radius of the track and of the key that slides on it. Inherits the
@@ -67,7 +85,7 @@ export interface ThemeSwitcherProps {
   disabled?: boolean;
   /**
    * The raised key sliding to the picked option. Turn it off for an instant
-   * jump; reduced motion does the same.
+   * jump; reduced motion does the same. On `cycle`, the new icon turning in.
    */
   animated?: boolean;
   /**
@@ -93,6 +111,7 @@ export default function ThemeSwitcher({
   defaultValue = "system",
   onValueChange,
   storageKey,
+  variant = "segmented",
   iconOnly = false,
   size = "md",
   shape: shapeProp,
@@ -101,7 +120,7 @@ export default function ThemeSwitcher({
   className,
   focus = true,
 }: ThemeSwitcherProps) {
-  const indicator = useIndicator<HTMLDivElement>();
+  const indicator = useIndicator<HTMLDivElement>(variant === "segmented");
   const shape = useShape(shapeProp);
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const [internal, setInternal] = useState<Theme>(defaultValue);
@@ -133,6 +152,36 @@ export default function ThemeSwitcher({
     }
     onValueChange?.(theme);
   };
+
+  if (variant === "cycle") {
+    const theme = THEMES.find((entry) => entry.value === current) ?? THEMES[2];
+    const next = THEMES.find((entry) => entry.value === NEXT[current]) ?? THEMES[0];
+    return (
+      <Button
+        type="button"
+        onClick={() => pick([next.value])}
+        disabled={disabled}
+        aria-label={`Theme: ${theme.label}. Switch to ${next.label}`}
+        className={merge(
+          outline,
+          "d:f ai:c jc:c bw:1 bg:raised bs-o:key bc:rim c:label us:none tp:c tdu:150 ttf:out-quart @prm:tp:none",
+          disabled ? "o:60 c:na" : "c:p h:bg:well",
+          CYCLE_SIZES[size],
+          RADIUS.control[shape],
+          className,
+        )}
+      >
+        {/* re-keyed, so each theme's icon turns in */}
+        <theme.icon
+          key={theme.value}
+          className={merge(
+            "w:4 h:4 fs:0",
+            animated && "tp:ot tdu:300 ttf:out-back @st:s:50 @st:o:0 @st:ro:-20 @prm:tp:none",
+          )}
+        />
+      </Button>
+    );
+  }
 
   return (
     <ToggleGroup

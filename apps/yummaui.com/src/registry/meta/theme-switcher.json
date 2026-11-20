@@ -40,7 +40,17 @@
       "name": "iconOnly",
       "type": "boolean",
       "default": false,
-      "description": "Draws the icons alone, keeping each label as its accessible name."
+      "description": "Draws the icons alone, keeping each label as its accessible name. Ignored by `cycle`."
+    },
+    {
+      "name": "variant",
+      "type": "enum",
+      "values": [
+        "segmented",
+        "cycle"
+      ],
+      "default": "segmented",
+      "description": "`segmented` shows every theme on a track; `cycle` is one button that moves System, Light, Dark on each press, showing the current one."
     },
     {
       "name": "size",
@@ -50,7 +60,7 @@
         "md"
       ],
       "default": "md",
-      "description": "Height of the track and its options."
+      "description": "Height of the track and its options, or of the `cycle` button."
     },
     {
       "name": "shape",
@@ -73,7 +83,7 @@
       "name": "animated",
       "type": "boolean",
       "default": true,
-      "description": "The raised key sliding to the picked option. Turn it off for an instant jump; reduced motion does the same."
+      "description": "The raised key sliding to the picked option. Turn it off for an instant jump; reduced motion does the same. On `cycle`, the new icon turning in."
     },
     {
       "name": "className",
