@@ -7,6 +7,7 @@ import { lazy, Suspense, useState } from "react";
 import { Search } from "@/icons";
 import { loadSearchIndex } from "@/utils/search-data";
 import HomeMark from "./home-mark";
+import SiteThemeSwitcher from "./site-theme";
 import type { NavSection } from "./mobile-sheet";
 import { SearchDialog } from "./search-dialog";
 
@@ -65,6 +66,7 @@ export default function Navbar({ className, menu }: NavbarProps) {
 									Navigation
 								</Button>
 							)}
+							<SiteThemeSwitcher />
 						</div>
 					</nav>
 				</div>

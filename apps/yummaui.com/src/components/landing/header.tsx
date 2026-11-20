@@ -8,6 +8,7 @@ import { GitHub, Search } from "@/icons";
 import { loadSearchIndex } from "@/utils/search-data";
 import { YummaUILogo } from "../icons/yumma-logo";
 import { SearchDialog } from "../ui/search-dialog";
+import SiteThemeSwitcher from "../ui/site-theme";
 import { HotkeyLink } from "./keys";
 
 const preloadSearch = () => {
@@ -35,6 +36,7 @@ export default function LandingHeader() {
 				</Link>
 
 				<div className="d:f ai:c g:2">
+					<SiteThemeSwitcher />
 					<Button
 						type="button"
 						onClick={() => setSearchOpen(true)}

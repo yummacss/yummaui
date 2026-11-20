@@ -7,6 +7,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import JsonLd from "@/components/json-ld";
 import "@/fonts";
 import { UI_ORIGIN } from "@/utils/hosts";
+import { THEME_SCRIPT } from "@/utils/theme-script";
 
 const description =
 	"A collection of UI components styled with Yumma CSS and Base UI.";
@@ -58,7 +59,13 @@ export default function RootLayout({
 			className={`sb:s spt:20 cs:ld s::bg:accent-dim/10 ${GeistSerifSquare.variable}`}
 			lang="en"
 			data-scroll-behavior="smooth"
+			// the theme script sets data-theme before React hydrates
+			suppressHydrationWarning
 		>
+			<head>
+				{/* biome-ignore lint/security/noDangerouslySetInnerHtml: a fixed string, run before the first paint */}
+				<script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+			</head>
 			<body className="bg:page ff:body">
 				<NuqsAdapter>{children}</NuqsAdapter>
 				<Analytics />
