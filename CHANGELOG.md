@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **[components]** `variant="cycle"` on Theme Switcher, one button that moves System, Light and Dark on each press.
 - **[components]** `variant="flyout"` on Drawer, a panel that floats clear of every edge.
 - **[components]** `snapPoints` on Drawer, with `defaultSnapPoint`, `snapPoint` & `onSnapPointChange`, for a `bottom` or `top` drawer that rests at set heights.
 - **[components]** `modal` & `swipeToOpen` on Drawer; the swipe strip shows a grab bar.
