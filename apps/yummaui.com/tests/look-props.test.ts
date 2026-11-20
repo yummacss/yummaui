@@ -27,6 +27,7 @@ const KNOWN_INERT: Record<string, string> = {
 	"drawer.handle": POPUP,
 	"drawer.showClose": POPUP,
 	"drawer.side": POPUP,
+	"drawer.variant": POPUP,
 	"image-cropper.crop": "drawn once the picture has loaded",
 	"marquee.pauseOnHover": BEHAVIOR,
 	"menu.icon": POPUP,

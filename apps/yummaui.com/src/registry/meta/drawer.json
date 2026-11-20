@@ -94,6 +94,16 @@
       "description": "An X in the corner. A swipe, a click outside and Esc close it either way."
     },
     {
+      "name": "variant",
+      "type": "enum",
+      "values": [
+        "edge",
+        "flyout"
+      ],
+      "default": "edge",
+      "description": "`edge` sits against the side it slides from; `flyout` floats 12px clear of every edge."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [

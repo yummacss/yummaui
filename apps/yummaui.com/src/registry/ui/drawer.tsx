@@ -11,6 +11,7 @@ import { asTrigger, FOCUS, RADIUS, type Shape, type Size, useShape } from "./sty
 
 type Side = "bottom" | "top" | "left" | "right";
 type IconPosition = "leading" | "trailing";
+type Variant = "edge" | "flyout";
 const SWIPE: Record<Side, "down" | "up" | "left" | "right"> = {
   bottom: "down",
   top: "up",
@@ -60,6 +61,8 @@ const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
   right: { none: "", rounded: "blr:xxl", pill: "blr:3xl" },
 };
 
+const SURFACE = "p:r d:f fd:c bg:raised bc:line c:label bw:1 bs-o:pop";
+
 export interface DrawerProps {
   /**
    * Where the drawer is rendered. Defaults to `document.body`; pass an element
@@ -102,6 +105,11 @@ export interface DrawerProps {
   closeLabel?: string;
   /** The edge it slides in from, and the direction a swipe closes it. */
   side?: Side;
+  /**
+   * `edge` sits against the side it slides from; `flyout` floats 12px clear of
+   * every edge.
+   */
+  variant?: Variant;
   /** A grab bar on the edge facing the page, for a `bottom` or `top` drawer. */
   handle?: boolean;
   /**
@@ -151,6 +159,7 @@ export default function DrawerBase({
   children,
   closeLabel,
   side = "bottom",
+  variant = "edge",
   handle = true,
   showClose = false,
   size = "md",
@@ -172,10 +181,12 @@ export default function DrawerBase({
   const outline = focus ? merge(FOCUS, focus === true ? "" : focus) : "";
   const vertical = side === "bottom" || side === "top";
 
+  const flyout = variant === "flyout";
+  // the flyout's margin is the popup's padding, so a swipe still travels its full size
   const popupClasses = [
-    "p:r d:f fd:c bg:raised bc:line c:label bw:1 os:none bs-o:pop",
+    flyout ? "d:f p:3 os:none" : `${SURFACE} os:none`,
     PLACEMENTS[side],
-    EDGE_SHAPES[side][shape],
+    flyout ? "" : EDGE_SHAPES[side][shape],
     TRAVEL[side].swipe,
     animated
       ? `${TRAVEL[side].offstage} tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none`
@@ -234,9 +245,8 @@ export default function DrawerBase({
           }`}
         />
         <Drawer.Viewport className={VIEWPORTS[side]}>
-          <Drawer.Popup
-            className={popupClasses}
-          >
+          <Drawer.Popup className={popupClasses}>
+            <Surface flyout={flyout} className={merge(SURFACE, "f:1 min-w:0 min-h:0 o:h", RADIUS.popup[shape])}>
             {side === "bottom" && <div className="pt:3">{grip}</div>}
 
             {showClose && (
@@ -287,9 +297,15 @@ export default function DrawerBase({
             </Drawer.Content>
 
             {side === "top" && <div className="pb:3">{grip}</div>}
+            </Surface>
           </Drawer.Popup>
         </Drawer.Viewport>
       </Drawer.Portal>
     </Drawer.Root>
   );
+}
+
+// the card inside a flyout's padding; an edge drawer is its own card
+function Surface({ flyout, className, children }: { flyout: boolean; className: string; children: ReactNode }) {
+  return flyout ? <div className={className}>{children}</div> : children;
 }
