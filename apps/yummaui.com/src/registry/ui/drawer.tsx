@@ -27,6 +27,14 @@ const VIEWPORTS: Record<Side, string> = {
   right: "d:f p:f i:0 jc:fe",
 };
 
+// thin enough to leave the page's own edge controls alone
+const SWIPE_AREAS: Record<Side, string> = {
+  bottom: "p:f l:0 r:0 b:0 h:6 zi:10",
+  top: "p:f l:0 r:0 t:0 h:6 zi:10",
+  left: "p:f t:0 b:0 l:0 w:6 zi:10",
+  right: "p:f t:0 b:0 r:0 w:6 zi:10",
+};
+
 const PLACEMENTS: Record<Side, string> = {
   bottom: "w:100% max-w:sm max-h:dvh",
   top: "w:100% max-w:sm max-h:dvh",
@@ -100,6 +108,13 @@ export interface DrawerProps {
   snapPoint?: SnapPoint | null;
   /** Called whenever it moves to another snap point. */
   onSnapPointChange?: (snapPoint: SnapPoint | null) => void;
+  /**
+   * `true` locks the page while it is open; `false` leaves the page usable;
+   * `trap-focus` keeps focus inside but leaves the page scrolling.
+   */
+  modal?: boolean | "trap-focus";
+  /** An invisible strip along its edge that opens it with a swipe. */
+  swipeToOpen?: boolean;
   /** A glyph beside the trigger's label. */
   triggerIcon?: ReactNode;
   /** Which end of the trigger `triggerIcon` sits at. */
@@ -186,6 +201,8 @@ export default function DrawerBase({
   defaultSnapPoint,
   snapPoint,
   onSnapPointChange,
+  modal = true,
+  swipeToOpen = false,
 }: DrawerProps) {
   const shape = useShape(shapeProp);
   const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
@@ -201,6 +218,7 @@ export default function DrawerBase({
   // the flyout's margin is the popup's padding, so a swipe still travels its full size
   const popupClasses = [
     flyout ? "d:f p:3 os:none" : `${SURFACE} os:none`,
+    modal === true ? "" : "pe:auto",
     PLACEMENTS[side],
     flyout ? "" : EDGE_SHAPES[side][shape],
     TRAVEL[side].swipe,
@@ -227,7 +245,9 @@ export default function DrawerBase({
       defaultSnapPoint={defaultSnapPoint ?? snapPoints?.[0]}
       snapPoint={snapPoint}
       onSnapPointChange={onSnapPointChange && ((next) => onSnapPointChange(next))}
+      modal={modal}
     >
+      {swipeToOpen && <Drawer.SwipeArea className={SWIPE_AREAS[side]} />}
       {render ? (
         <Drawer.Trigger render={asTrigger(render, outline, className)} />
       ) : isValidElement<{ className?: string }>(trigger) ? (
@@ -257,6 +277,7 @@ export default function DrawerBase({
       )}
 
       <Drawer.Portal container={container}>
+        {modal === true && (
         <Drawer.Backdrop
           className={`p:f i:0 min-h:dvh bg:shadow/30 ${
             animated
@@ -264,7 +285,9 @@ export default function DrawerBase({
               : ""
           }`}
         />
-        <Drawer.Viewport className={VIEWPORTS[side]}>
+        )}
+        {/* a drawer that leaves the page usable lets clicks through everywhere but itself */}
+        <Drawer.Viewport className={merge(VIEWPORTS[side], modal === true ? "" : "pe:none")}>
           <Drawer.Popup
             className={popupClasses}
             // the snap offset rides on translate, so it adds to the swipe's transform

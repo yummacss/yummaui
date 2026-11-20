@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **[components]** `variant="flyout"` on Drawer, a panel that floats clear of every edge.
 - **[components]** `snapPoints` on Drawer, with `defaultSnapPoint`, `snapPoint` & `onSnapPointChange`, for a `bottom` or `top` drawer that rests at set heights.
+- **[components]** `modal` & `swipeToOpen` on Drawer.
 - **[components]** Date Picker.
 - **[components]** Calendar.
 - **[components]** `Fit` in the style module, a box that eases its height to its content.
