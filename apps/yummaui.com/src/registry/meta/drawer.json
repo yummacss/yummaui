@@ -69,6 +69,19 @@
       "description": "Called whenever it moves to another snap point."
     },
     {
+      "name": "modal",
+      "type": "none",
+      "typeName": "boolean | \"trap-focus\"",
+      "default": true,
+      "description": "`true` locks the page while it is open; `false` leaves the page usable; `trap-focus` keeps focus inside but leaves the page scrolling."
+    },
+    {
+      "name": "swipeToOpen",
+      "type": "boolean",
+      "default": false,
+      "description": "An invisible strip along its edge that opens it with a swipe."
+    },
+    {
       "name": "title",
       "type": "string",
       "example": "readme.md",
