@@ -70,6 +70,13 @@ const EDGE_SHAPES: Record<Side, Record<Shape, string>> = {
   right: { none: "", rounded: "blr:xxl", pill: "blr:3xl" },
 };
 
+// the snap offset, plus the lift that leaves 20px of this drawer above a nested one
+const LIFT: Partial<Record<Side, string>> = {
+  bottom:
+    "calc(var(--drawer-snap-point-offset, 0px) + min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
+  top: "calc(var(--drawer-snap-point-offset, 0px) - min(var(--nested-drawers, 0), 1) * (var(--drawer-height, 0px) - var(--drawer-frontmost-height, 0px) - 1.25rem))",
+};
+
 const SURFACE = "p:r d:f fd:c bg:raised bc:line c:label bw:1 bs-o:pop";
 
 export interface DrawerProps {
@@ -224,8 +231,10 @@ export default function DrawerBase({
     PLACEMENTS[side],
     flyout ? "" : EDGE_SHAPES[side][shape],
     TRAVEL[side].swipe,
+    // with a drawer open inside it, it steps back: smaller, its edge showing above the front one
+    vertical ? `nested:s:95 ${side === "bottom" ? "tor:t" : "tor:b"}` : "",
     animated
-      ? `${TRAVEL[side].offstage} tp:t tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none`
+      ? `${TRAVEL[side].offstage} ${vertical ? "tp:a" : "tp:t"} tdu:300 ttf:out-quart closing:tdu:200 closing:ttf:eo swiping:tp:none @prm:tp:none`
       : "",
   ]
     .filter(Boolean)
@@ -300,8 +309,8 @@ export default function DrawerBase({
         <Drawer.Viewport className={merge(VIEWPORTS[side], modal === true ? "" : "pe:none")}>
           <Drawer.Popup
             className={popupClasses}
-            // the snap offset rides on translate, so it adds to the swipe's transform
-            style={vertical ? { translate: "0 var(--drawer-snap-point-offset, 0px)" } : undefined}
+            // the snap offset and the nested lift ride on translate, so they add to the swipe's transform
+            style={vertical ? { translate: `0 ${LIFT[side]}` } : undefined}
           >
             <Surface flyout={flyout} className={merge(SURFACE, "f:1 min-w:0 min-h:0 o:h", RADIUS.popup[shape])}>
             {side === "bottom" && <div className="pt:3">{grip}</div>}
