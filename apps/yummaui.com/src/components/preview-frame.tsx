@@ -7,6 +7,7 @@ import {
 	useEffect,
 	useRef,
 	useState,
+	type CSSProperties,
 } from "react";
 import { createPortal } from "react-dom";
 
@@ -221,15 +222,26 @@ export default function PreviewFrame({
 	return (
 		<div
 			ref={holder}
-			className={`${fill ? "d:f fd:c" : ""} ${className}`}
-			style={{ minHeight }}
+			className={`min-h:var(--min-h) ${fill ? "d:f fd:c" : ""} ${className}`}
+			style={
+				{
+					"--min-h":
+						typeof minHeight === "number" ? `${minHeight}px` : minHeight,
+				} as CSSProperties
+			}
 		>
 			{near && (
 				<iframe
 					ref={frame}
 					title="Component preview"
-					className={`d:b w:100% bw:0 ${fill ? "f:1 min-h:0" : ""}`}
-					style={fill ? undefined : { height: measured, minHeight }}
+					className={`d:b w:100% bw:0 ${fill ? "f:1 min-h:0" : "h:var(--frame-h) min-h:var(--min-h)"}`}
+					style={
+						fill
+							? undefined
+							: ({
+									"--frame-h": `${measured}px`,
+								} as CSSProperties)
+					}
 				/>
 			)}
 			{body &&

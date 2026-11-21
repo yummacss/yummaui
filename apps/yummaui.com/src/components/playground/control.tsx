@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { ReactNode, CSSProperties } from "react";
 import Select from "@/registry/ui/select";
 import Switch from "@/registry/ui/switch";
 
@@ -60,8 +60,8 @@ function Bars({ colors }: { colors: string[] }) {
 			{colors.map((color, at) => (
 				<span
 					key={color}
-					className={`d:b w:3 h:3 br:9999 bw:1 bc:raised ${at ? "ml:-1" : ""}`}
-					style={{ backgroundColor: color }}
+					className={`d:b w:3 h:3 br:9999 bw:1 bc:raised bg:var(--swatch) ${at ? "ml:-1" : ""}`}
+					style={{ "--swatch": color } as CSSProperties}
 				/>
 			))}
 		</span>

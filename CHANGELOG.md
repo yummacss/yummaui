@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **[components]** Values set at runtime, such as chart and slider positions, reach the page through custom properties read by classes, not inline styles.
 - **[cli]** The config is `yummaui.config.mjs`; a `yummaui.json` moves to it on the next run.
 - **[components]** `tone` is `variant` where it sets the look (Badge, Banner Alert, Skeleton & Tooltip) and `intent` where it sets the meaning (Alert, Alert Dialog & Stat). `triggerTone` is `triggerIntent`, `confirmTone` is `confirmVariant` and `iconTone` is `iconVariant`.
 - **[components]** The `square` shape is named `none`; `square` still works in `--shape` and links.

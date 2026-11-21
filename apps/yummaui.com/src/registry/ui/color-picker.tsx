@@ -24,8 +24,7 @@ import {
   useEffect,
   useId,
   useRef,
-  useState,
-} from "react";
+  useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, FOCUS_WITHIN, RADIUS, type Shape, useShape } from "./style";
 
@@ -330,14 +329,13 @@ function Area({
         onKeyDown={onKeyDown}
         className={merge(
           outline,
-          "p:a w:5 h:5 br:9999 bw:2 bc:white bs-o:key",
+          "p:a l:var(--s) t:var(--v) tr:calc(-50%) w:5 h:5 br:9999 bw:2 bc:white bs-o:key",
         )}
         style={{
-          left: `${s * 100}%`,
-          top: `${(1 - v) * 100}%`,
-          translate: "-50% -50%",
+          "--s": `${s * 100}%`,
+          "--v": `${(1 - v) * 100}%`,
           background: color,
-        }}
+        } as CSSProperties}
       />
     </div>
   );

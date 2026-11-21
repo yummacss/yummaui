@@ -193,9 +193,10 @@ export default function OTPFieldBase({
               )}
               // the digit alone blurs away: its shadow spreads as its color fades
               style={{
-                transition:
-                  "color 220ms, text-shadow 220ms, background-color 400ms, border-color 400ms",
-                transitionDelay: success ? `${index * 40}ms` : "0ms",
+                // on success the digits turn one after another
+                transition: (["color 220ms", "text-shadow 220ms", "background-color 400ms", "border-color 400ms"] as const)
+                  .map((part) => `${part} ${success ? index * 40 : 0}ms`)
+                  .join(", "),
                 ...(fading
                   ? { color: "transparent", textShadow: "0 0 10px transparent" }
                   : wrong
@@ -210,12 +211,11 @@ export default function OTPFieldBase({
           <span
             aria-hidden={!folded}
             className={merge(
-              "p:a d:if ai:c g:2 h:10 px:4 bg:green-7 c:white fw:500 fs:sm bs-o:key-fill pe:none",
+              "p:a t:50% tty:-half d:if ai:c g:2 h:10 px:4 bg:green-7 c:white fw:500 fs:sm bs-o:key-fill pe:none",
               "tp:ot tdu:250 ttf:out-quart @prm:tp:none",
               RADIUS.control[shape],
               folded ? "o:100 s:100" : "o:0 s:97",
             )}
-            style={{ top: "50%", translate: "0 -50%" }}
           >
             <IconCheck aria-hidden className="w:4 h:4" />
             {success}

@@ -5,7 +5,7 @@ import { Feedback } from "@dnd-kit/dom";
 import { DragDropProvider, useDroppable } from "@dnd-kit/react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import type { ReactNode } from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, spring, useLift, useShape, Scroll } from "./style";
 
@@ -205,10 +205,10 @@ export default function KanbanBoard({
     >
 <Scroll axis="x">      <div
         className={merge(
-          "d:g g:3 w:100% pb:3",
+          "d:g gtc:var(--columns) g:3 w:100% pb:3",
           className,
         )}
-        style={{ gridTemplateColumns: `repeat(${columns.length}, minmax(12rem, 1fr))` }}
+        style={{ "--columns": `repeat(${columns.length}, minmax(12rem, 1fr))` } as CSSProperties}
       >
         {columns.map((column) => (
           <Column

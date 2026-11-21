@@ -2,7 +2,7 @@
 
 import { Dialog } from "@base-ui/react/dialog";
 import { IconChevronLeft, IconChevronRight, IconX } from "@tabler/icons-react";
-import { useRef, useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, type Shape, useShape, Scroll } from "./style";
 
@@ -80,16 +80,15 @@ export default function Lightbox({
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <div
-        className={merge("d:g g:2 w:100%", className)}
-        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+        className={merge("d:g gtc:var(--columns) g:2 w:100%", className)}
+        style={{ "--columns": `repeat(${columns}, minmax(0, 1fr))` } as CSSProperties}
       >
         {images.map((image, at) => (
           <Dialog.Trigger
             key={image.src}
             onClick={() => show(at)}
             aria-label={`Open ${image.alt}`}
-            className={merge(outline, "d:b p:0 bw:0 o:h c:zi", RADIUS.block[shape])}
-            style={{ aspectRatio: "1" }}
+            className={merge(outline, "d:b ar:1/1 p:0 bw:0 o:h c:zi", RADIUS.block[shape])}
           >
             <img
               src={image.src}
@@ -172,11 +171,12 @@ export default function Lightbox({
                 alt={current.alt}
                 draggable={false}
                 className={merge(
-                  "us:none",
+                  "p:r l:var(--pan-x) t:var(--pan-y) s:var(--zoom) max-w:calc(92%) max-h:calc(92%) us:none",
                   RADIUS.block[shape],
-                  zoom > 1 ? "c:g" : "c:zi tp:t tdu:200 @prm:tp:none",
+                  // the pan rides on left & top, so a reset eases both back with the zoom
+                  zoom > 1 ? "c:g" : "c:zi tp:a tdu:200 @prm:tp:none",
                 )}
-                style={{ maxWidth: "92%", maxHeight: "92%", transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})` }}
+                style={{ "--pan-x": `${pan.x}px`, "--pan-y": `${pan.y}px`, "--zoom": zoom } as CSSProperties}
               />
             )}
             {images.length > 1 && (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { RADIUS, useShape } from "./style";
 
@@ -139,8 +139,8 @@ export default function LineChart({
       {active !== null && series[0] && (
         <span
           aria-hidden
-          className={`p:a d:f g:2 px:2 py:1 bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none ${RADIUS.item[shape]}`}
-          style={{ left: x(active), top: y(series[0].values[active]) - 10, translate: "-50% -100%" }}
+          className={`p:a l:var(--x) t:var(--y) tr:calc(-50%) tty:-half d:f g:2 px:2 py:1 bw:1 bc:rim bg:raised bs-o:pop fs:xs ws:nw pe:none ${RADIUS.item[shape]}`}
+          style={{ "--x": `${x(active)}px`, "--y": `${y(series[0].values[active]) - 10}px` } as CSSProperties}
         >
           <span className="c:hint">{labels[active]}</span>
           {series.map((s, index) => (

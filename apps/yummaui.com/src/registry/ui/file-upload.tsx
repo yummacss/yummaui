@@ -5,7 +5,7 @@ import { Fieldset } from "@base-ui/react/fieldset";
 import { Input } from "@base-ui/react/input";
 import { IconCheck, IconCloudUpload, IconFile, IconX } from "@tabler/icons-react";
 import type { ChangeEvent, DragEvent, ReactNode } from "react";
-import { useId, useRef, useState } from "react";
+import { useId, useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape, type Shape } from "./style";
 
@@ -334,10 +334,10 @@ export default function FileUploadBase({
             {row.progress !== undefined && !row.done ? (
               <div className="h:1 br:9999 bg:well bs-o:sunk o:h">
                 <div
-                  className="h:100% br:9999 bg:check tp:w tdu:300 ttf:out-quart"
+                  className="w:var(--done) h:100% br:9999 bg:check tp:w tdu:300 ttf:out-quart"
                   style={{
-                    width: `${Math.min(Math.max(row.progress, 0), 1) * 100}%`,
-                  }}
+                    "--done": `${Math.min(Math.max(row.progress, 0), 1) * 100}%`,
+                  } as CSSProperties}
                 />
               </div>
             ) : (

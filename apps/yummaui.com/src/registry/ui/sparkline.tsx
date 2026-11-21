@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 
 export interface SparklineProps {
@@ -58,8 +58,8 @@ export default function Sparkline({
       ref={box}
       role="img"
       aria-label={ariaLabel}
-      className={merge("d:b c:label", fixed === undefined ? "w:100%" : "", className)}
-      style={{ height, width: fixed }}
+      className={merge("d:b h:var(--spark-h) c:label", fixed === undefined ? "w:100%" : "w:var(--spark-w)", className)}
+      style={{ "--spark-h": `${height}px`, "--spark-w": fixed === undefined ? undefined : `${fixed}px` } as CSSProperties}
     >
       {width > 0 && (
         <svg aria-hidden width={width} height={height} className="d:b o:v c:fill">

@@ -206,7 +206,7 @@ function Day({ day, modifiers, className: _className, children, ...props }: DayP
       data-pressed={mode === "single" && sliding && modifiers.selected ? "" : undefined}
       className="p:r p:0"
     >
-      {band && <span aria-hidden style={{ top: 1, bottom: 1 }} className={merge("p:a bg:well bs-o:sunk", band)} />}
+      {band && <span aria-hidden className={merge("p:a t:calc(1px) b:calc(1px) bg:well bs-o:sunk", band)} />}
       {children}
     </td>
   );

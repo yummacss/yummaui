@@ -1,7 +1,7 @@
 "use client";
 
 import type { KeyboardEvent } from "react";
-import { useRef, useState } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import { merge } from "yummacss/merge";
 import { FOCUS, RADIUS, useShape, Scroll } from "./style";
 
@@ -167,8 +167,8 @@ export default function ActivityHeatmap({
             {months.map(({ column, name }) => (
               <span
                 key={column}
-                className="p:a"
-                style={{ left: `calc(${column} * (100% / ${weeks}))` }}
+                className="p:a l:var(--at)"
+                style={{ "--at": `calc(${column} * (100% / ${weeks}))` } as CSSProperties}
               >
                 {name}
               </span>

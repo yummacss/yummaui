@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, type ReactNode } from "react";
+import { Fragment, type ReactNode, type CSSProperties } from "react";
 import Block from "@/registry/ui/code-block";
 import { TOKEN_COLORS, type Token, tokensToText } from "@/utils/snippet";
 
@@ -20,7 +20,12 @@ export default function TokenBlock({
 				rows[rows.length - 1].push(
 					<span
 						key={`${token.id}-${index}`}
-						style={{ color: token.color ?? TOKEN_COLORS[token.kind] }}
+						className="c:var(--tone)"
+						style={
+							{
+								"--tone": token.color ?? TOKEN_COLORS[token.kind],
+							} as CSSProperties
+						}
 					>
 						{part}
 					</span>,

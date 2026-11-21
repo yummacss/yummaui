@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, useLayoutEffect, useMemo, useRef } from "react";
+import { type ReactNode, useLayoutEffect, useMemo, useRef, type CSSProperties } from "react";
 import { encode } from "uqr";
 import { merge } from "yummacss/merge";
 import { RADIUS, type Shape, type Size, useShape } from "./style";
@@ -185,8 +185,8 @@ export default function QrCode({
             // the glyph over the svg, so it keeps its own size in pixels
             <span
               aria-hidden
-              className="p:a d:f ai:c jc:c c:white pe:none"
-              style={{ inset: `${(hole.at / count) * 100}%` }}
+              className="p:a i:var(--hole) d:f ai:c jc:c c:white pe:none"
+              style={{ "--hole": `${(hole.at / count) * 100}%` } as CSSProperties}
             >
               {icon}
             </span>

@@ -79,7 +79,7 @@ export default function ImageCropper({
 
   return (
     <div className={merge("d:f fd:c g:3 w:100% c:label", className)}>
-      <div className={merge("p:r w:100% o:h bg:well", RADIUS.popup[shape])} style={{ aspectRatio: "1" }}>
+      <div className={merge("p:r w:100% ar:1/1 o:h bg:well", RADIUS.popup[shape])}>
         <Cropper
           image={src}
           crop={position}
