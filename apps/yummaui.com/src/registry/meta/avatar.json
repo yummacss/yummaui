@@ -2,6 +2,12 @@
   "summary": "A user's picture, in three sizes, falling back to their initials and then to an icon, with an optional presence dot and badge.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "Drawn inside the avatar, in place of an image or initials."
+    },
+    {
       "name": "src",
       "type": "string",
       "example": null,
@@ -62,6 +68,11 @@
       ],
       "default": "md",
       "description": "Diameter, and the size of the initials or icon inside it."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     }
   ],
   "scene": [

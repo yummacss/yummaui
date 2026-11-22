@@ -39,7 +39,7 @@
     {
       "name": "placeholder",
       "type": "string",
-      "default": "Select\u2026",
+      "default": "Select…",
       "description": "Shown on the trigger before anything is selected."
     },
     {
@@ -127,6 +127,11 @@
       "type": "boolean",
       "default": true,
       "description": "Fades and scales the popup in and out. Turn it off for a static popup, or when the user has asked for reduced motion."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     },
     {
       "name": "focus",

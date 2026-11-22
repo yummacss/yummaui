@@ -95,6 +95,12 @@
       "example": "No files match."
     },
     {
+      "name": "onQueryChange",
+      "type": "none",
+      "typeName": "(value: string) => void",
+      "description": "Called with the text as it is typed."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [
@@ -133,6 +139,11 @@
       "type": "boolean",
       "default": true,
       "description": "Fades the popup in and out. Turn it off for a static popup, or when the user has asked for reduced motion."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     },
     {
       "name": "focus",

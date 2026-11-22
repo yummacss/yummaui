@@ -89,6 +89,11 @@
       "description": "Corner radius of the buttons. Inherits the nearest `Shape`."
     },
     {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

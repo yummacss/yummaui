@@ -2,6 +2,12 @@
   "summary": "A set of toggles sharing one container, in four shapes and both orientations, pressing one or several at a time.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The toggles."
+    },
+    {
       "name": "label",
       "type": "string",
       "example": "View as",

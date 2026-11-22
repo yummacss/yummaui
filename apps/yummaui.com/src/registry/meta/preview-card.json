@@ -2,6 +2,12 @@
   "summary": "A hover-triggered card, in three shapes.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The card's contents."
+    },
+    {
       "name": "arrow",
       "type": "boolean",
       "default": true,
@@ -55,6 +61,11 @@
       "type": "boolean",
       "default": true,
       "description": "The card's fade in/out. Turn it off for an instant appearance, or when the user has asked for reduced motion."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     },
     {
       "name": "focus",

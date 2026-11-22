@@ -98,6 +98,11 @@
       "description": "The mark's transition when the box is ticked. Turn it off for a static form, or when the user has asked for reduced motion."
     },
     {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

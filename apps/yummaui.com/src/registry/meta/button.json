@@ -2,6 +2,12 @@
   "summary": "A primary action, in six variants, three sizes and four shapes, with loading, icon-only, hold-to-confirm and countdown states.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The button's label."
+    },
+    {
       "name": "icon",
       "type": "none",
       "typeName": "ReactNode",
@@ -115,6 +121,11 @@
       "type": "boolean",
       "default": true,
       "description": "The hover and focus transition. Turn it off for a static button, or when the user has asked for reduced motion."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     },
     {
       "name": "focus",

@@ -2,6 +2,12 @@
   "summary": "A row of related buttons sharing one border, in four shapes, with optional rules between them.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The buttons, spaced and rounded as one control."
+    },
+    {
       "name": "separated",
       "type": "boolean",
       "default": true,
