@@ -132,7 +132,11 @@ export interface DrawerProps {
   title: string;
   /** The body text, wired up by Base UI's own Drawer.Description. */
   description?: ReactNode;
-  /** The body, below the description. Style it yourself. */
+  /**
+   * The body, below the description. Style it yourself. A Drawer placed here
+   * opens on top of this one; a `bottom` or `top` drawer then steps back behind
+   * it, which needs the `nested` state.
+   */
   children?: ReactNode;
   /**
    * A full-width button at the end that closes the drawer. None renders without
@@ -183,7 +187,8 @@ export interface DrawerProps {
 
 /**
  * A panel that slides in from any edge and closes by swipe, with a title,
- * description and body.
+ * description and body. Wrap the app in `DrawerIndent` so the page steps back
+ * while one is open, which needs the `indented` state.
  */
 export default function DrawerBase({
   trigger,

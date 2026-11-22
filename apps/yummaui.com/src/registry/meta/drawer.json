@@ -1,5 +1,5 @@
 {
-  "summary": "A panel that slides in from any edge and closes by swipe, with a title, description and body.",
+  "summary": "A panel that slides in from any edge and closes by swipe, with a title, description and body. Wrap the app in `DrawerIndent` so the page steps back while one is open, which needs the `indented` state.",
   "props": [
     {
       "name": "trigger",
@@ -108,7 +108,7 @@
       "name": "children",
       "type": "none",
       "typeName": "ReactNode",
-      "description": "The body, below the description. Style it yourself."
+      "description": "The body, below the description. Style it yourself. A Drawer placed here opens on top of this one; a `bottom` or `top` drawer then steps back behind it, which needs the `nested` state."
     },
     {
       "name": "closeLabel",
