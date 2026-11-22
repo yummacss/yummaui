@@ -111,6 +111,8 @@ export interface RegistryMeta {
   scene: ChildExample[];
   /** A named export of the component that the Styling drawer can wrap the preview in. */
   wrap?: { export: string; label: string };
+  /** What the props table cannot say: behavior with no prop, and other exports. */
+  usage?: { title: string; text: string }[];
 }
 
 /** One node of a demo's children: a registry component, a plain element, or text. */

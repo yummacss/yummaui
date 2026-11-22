@@ -43,6 +43,18 @@ function buildPropsTable(meta: RegistryMeta): string[] {
 		"| Prop | Type | Default | Description |",
 		"|------|------|---------|-------------|",
 		...rows,
+		...(meta.usage?.length
+			? [
+					"",
+					"## Usage",
+					...meta.usage.flatMap((note) => [
+						"",
+						`### ${note.title}`,
+						"",
+						note.text,
+					]),
+				]
+			: []),
 	];
 }
 

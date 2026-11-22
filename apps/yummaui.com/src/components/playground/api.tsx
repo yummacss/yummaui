@@ -269,3 +269,30 @@ export function Look() {
 		</div>
 	);
 }
+
+/** What the props table cannot say, below it: behavior with no prop, and other exports. */
+export function Usage() {
+	const playground = usePlayground();
+	const usage = playground?.meta?.usage ?? [];
+	if (usage.length === 0) return null;
+
+	return (
+		<section>
+			<div className="mt:12 mb:4">
+				<h2 className="m:0 ff:display c:ink fs:xxl fw:400 lh:1">Usage</h2>
+			</div>
+			<div className="bw:1 bc:border br:xl bg:surface o:h">
+				{usage.map((note) => (
+					<div key={note.title} className="px:4 py:3 bc:border btw:1 fc:btw:0">
+						<h3 className="m:0 mb:1 c:ink fs:md fw:500">
+							<PropDescription text={note.title} />
+						</h3>
+						<p className="m:0 c:ink/80">
+							<PropDescription text={note.text} />
+						</p>
+					</div>
+				))}
+			</div>
+		</section>
+	);
+}
