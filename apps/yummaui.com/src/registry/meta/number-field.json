@@ -86,6 +86,11 @@
       "description": "Rolls the value when a step changes it, only the digits that differ moving. Typing changes it in place, and reduced motion does the same."
     },
     {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

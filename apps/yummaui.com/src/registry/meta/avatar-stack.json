@@ -2,6 +2,12 @@
   "summary": "Overlapping avatars in one row, with an optional cap that collapses the rest into a +N avatar.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The avatars. Each one overlaps the one before it."
+    },
+    {
       "name": "overlap",
       "type": "enum",
       "values": [

@@ -93,6 +93,11 @@
       "type": "boolean",
       "default": true,
       "description": "The indicator's width transition and the value's roll as `value` changes. Reduced motion turns both off."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     }
   ],
   "scene": [

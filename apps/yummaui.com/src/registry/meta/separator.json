@@ -55,6 +55,11 @@
       "description": "Corner radius on the icon button, the only part with corners. Only visible alongside `icon`. Inherits the nearest `Shape`, where `pill` draws a circle."
     },
     {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

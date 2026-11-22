@@ -36,6 +36,35 @@ Components pass your classes through [`merge`](https://www.yummacss.com/docs/cla
 	component's own classes.
 </Note>
 
+## Using `Shape`
+
+`Shape` sets the corners of every component inside it, so one wrapper shapes the whole app.
+
+```tsx "Shape"
+import { Shape } from "@/components/ui/style";
+
+export default function Layout({ children }) {
+	return <Shape value="pill">{children}</Shape>;
+}
+```
+
+A component's own `shape` prop still wins. Without either, a component draws `rounded`.
+
+### Helpers for your own components
+
+`style.tsx` installs with every component & holds what they share. Your own components can reach for it too.
+
+| Export      | What it is for                                                           |
+| ----------- | ------------------------------------------------------------------------ |
+| `useShape`  | The shape to draw: the component's prop, else the nearest `Shape`.       |
+| `RADIUS`    | The corner classes for each kind of part, by shape.                      |
+| `FOCUS`     | The focus outline every component draws.                                 |
+| `Fit`       | A box that eases its height to its content.                              |
+| `Scroll`    | A scrolling area with the library's scrollbar.                           |
+| `asTrigger` | Your own element as a popup's trigger, with the focus outline merged in. |
+
+Every export documents itself on hover.
+
 ## Using focus outline
 
 Every component draws a focus outline, and one `focus` prop styles it.

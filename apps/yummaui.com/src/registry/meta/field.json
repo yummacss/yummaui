@@ -79,6 +79,12 @@
       "description": "Adds a trailing button that shows and hides the value, for password fields. Always trailing and always interactive, so it overrides `iconPosition` and `icon`."
     },
     {
+      "name": "invalid",
+      "type": "boolean",
+      "default": false,
+      "description": "A red border with no message, such as while Form marks a failed submit. `error` also shows its text."
+    },
+    {
       "name": "size",
       "type": "enum",
       "values": [
@@ -111,6 +117,11 @@
       "type": "boolean",
       "default": false,
       "description": "Appends a red asterisk to the label & sets the control's native `required` attribute."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     },
     {
       "name": "focus",

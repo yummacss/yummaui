@@ -2,6 +2,12 @@
   "summary": "A labelled group of checkboxes, optionally led by a parent checkbox that checks and clears every one and sits indeterminate in between.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The checkboxes."
+    },
+    {
       "name": "label",
       "type": "ReactNode",
       "description": "Names the group for screen readers and is shown above it."

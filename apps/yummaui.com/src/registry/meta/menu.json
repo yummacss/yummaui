@@ -128,6 +128,11 @@
       "description": "The popup's fade and the trigger's hover transition. Turn it off for an instant menu, or when the user has asked for reduced motion."
     },
     {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",

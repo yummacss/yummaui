@@ -6,26 +6,6 @@ const rootDir = join(dirname(fileURLToPath(import.meta.url)), "..");
 const metaDir = join(rootDir, "src/registry/meta");
 const uiDir = join(rootDir, "src/registry/ui");
 
-// props the interface declares but the prop table does not, so the meta files
-// stay the docs site's list and these still document themselves on hover
-const EXTRA = {
-	className:
-		"Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility.",
-	"autocomplete.onQueryChange": "Called with the text as it is typed.",
-	"avatar.children":
-		"Drawn inside the avatar, in place of an image or initials.",
-	"avatar-stack.children": "The avatars. Each one overlaps the one before it.",
-	"badge.children": "The badge's label.",
-	"button.children": "The button's label.",
-	"button-group.children": "The buttons, spaced and rounded as one control.",
-	"checkbox-group.children": "The checkboxes.",
-	"preview-card.children": "The card's contents.",
-	"switch.ariaLabel":
-		"The accessible name, for a switch with no visible label.",
-	"textarea.onChange": "Called on every input event.",
-	"toggle-group.children": "The toggles.",
-};
-
 const MAX = 80;
 
 function block(text, indent) {
@@ -85,7 +65,7 @@ for (const file of readdirSync(metaDir).sort()) {
 	if (!match) throw new Error(`no Props interface in ${id}.tsx`);
 
 	const body = match[1].replace(/^ {2}(\w+)\??:/gm, (line, name) => {
-		const text = described.get(name) ?? EXTRA[`${id}.${name}`] ?? EXTRA[name];
+		const text = described.get(name);
 		if (!text) return line;
 		documented++;
 		return `${block(text, 2)}${line}`;

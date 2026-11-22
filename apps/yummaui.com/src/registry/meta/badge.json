@@ -2,6 +2,12 @@
   "summary": "A small status label, in three variants, six colors, four shapes and three sizes, with an optional dot, icon, count or close button.",
   "props": [
     {
+      "name": "children",
+      "type": "none",
+      "typeName": "ReactNode",
+      "description": "The badge's label."
+    },
+    {
       "name": "icon",
       "type": "none",
       "typeName": "ReactNode",
@@ -82,6 +88,11 @@
       ],
       "default": "rounded",
       "description": "Corner radius. Inherits the nearest `Shape`."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     },
     {
       "name": "focus",

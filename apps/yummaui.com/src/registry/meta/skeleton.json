@@ -38,6 +38,11 @@
       "type": "boolean",
       "default": true,
       "description": "The pulse. Turn it off for a static placeholder, or when the user has asked for reduced motion."
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
     }
   ],
   "scene": [

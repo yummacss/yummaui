@@ -78,6 +78,10 @@ export interface FieldProps
    */
   error?: string;
 
+  /**
+   * A red border with no message, such as while Form marks a failed submit.
+   * `error` also shows its text.
+   */
   invalid?: boolean;
 
   /** Green border, a check icon & this message in place of `description`. */

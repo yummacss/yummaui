@@ -96,6 +96,11 @@
       "description": "The icon's rotation & the panel's height/opacity animation. Turn it off for an instant expand/collapse, or when the user has asked for reduced motion."
     },
     {
+      "name": "className",
+      "type": "string",
+      "description": "Extra classes. `merge` folds them in last, so one here replaces the component's own class for the same utility."
+    },
+    {
       "name": "focus",
       "type": "boolean",
       "typeName": "boolean | string",
