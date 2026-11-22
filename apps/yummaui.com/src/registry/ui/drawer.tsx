@@ -319,9 +319,10 @@ export default function DrawerBase({
               <Drawer.Close
                 render={
                   <Button
+                    // above the scrolling content, which comes later and would cover it
                     className={merge(
                       outline,
-                      "d:f p:a r:4 t:4 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
+                      "d:f p:a r:4 t:4 zi:10 ai:c jc:c w:7 h:7 p:0 bw:1 bg:raised bs-o:key bc:rim c:label h:bg:well",
                       RADIUS.item[shape],
                     )}
                   />
@@ -334,7 +335,7 @@ export default function DrawerBase({
 
             <Scroll className="f:1">
             <Drawer.Content className="d:f fd:c g:3 p:6">
-              <Drawer.Title className="m:0 tw:b c:label fs:md fw:500">
+              <Drawer.Title className={`m:0 tw:b c:label fs:md fw:500 ${showClose ? "pr:10" : ""}`}>
                 {title}
               </Drawer.Title>
 
