@@ -275,5 +275,15 @@
   "wrap": {
     "export": "DrawerIndent",
     "label": "indentPage"
-  }
+  },
+  "usage": [
+    {
+      "title": "Nesting",
+      "text": "A Drawer placed in another's `children` opens on top of it. A `bottom` or `top` drawer steps back behind the new one, which needs the `nested` state."
+    },
+    {
+      "title": "DrawerIndent",
+      "text": "Wrap the app in `DrawerIndent` so the page steps back while a drawer is open. It needs the `indented` state."
+    }
+  ]
 }

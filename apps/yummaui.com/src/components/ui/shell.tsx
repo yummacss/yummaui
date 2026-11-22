@@ -6,7 +6,7 @@ import {
 	PlaygroundProvider,
 	StaticPlayground,
 } from "@/components/playground/context";
-import { ApiTable } from "@/components/playground/api";
+import { ApiTable, Usage } from "@/components/playground/api";
 import Installation from "@/components/playground/install-command";
 import ComponentPlayground from "@/components/playground/stage";
 import TableOfContents from "@/components/ui/toc";
@@ -63,6 +63,7 @@ export default function UIShell({
 					)}
 					{playground && <Installation />}
 					{playground && <ApiTable />}
+					{playground && <Usage />}
 				</article>
 			</div>
 

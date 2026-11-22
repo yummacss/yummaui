@@ -203,6 +203,8 @@ describe("shipped copy", () => {
 		const meta = JSON.parse(readFileSync(join(metaDir, file), "utf8"));
 		if (meta.summary)
 			strings.push({ where: `${file}:summary`, text: meta.summary });
+		for (const note of meta.usage ?? [])
+			strings.push({ where: `${file}:usage ${note.title}`, text: note.text });
 		for (const prop of meta.props ?? []) {
 			if (prop.description) {
 				strings.push({ where: `${file}:${prop.name}`, text: prop.description });
